@@ -94,7 +94,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #endif
 
 
-static_assert( VK_HEADER_VERSION ==  160 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  161 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -955,7 +955,7 @@ namespace VULKAN_HPP_NAMESPACE
     template <typename T = typename std::tuple_element<0, std::tuple<ChainElements...>>::type, size_t Which = 0>
     T const & get() const VULKAN_HPP_NOEXCEPT
     {
-      return std::get<ChainElementIndex<0, T, Which, void, ChainElements...>::value>( static_cast<std::tuple<ChainElements...>&>( *this ) );
+      return std::get<ChainElementIndex<0, T, Which, void, ChainElements...>::value>( static_cast<std::tuple<ChainElements...> const &>( *this ) );
     }
 
     template <typename T0, typename T1, typename... Ts>
@@ -7850,14 +7850,6 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
-  enum class SemaphoreCreateFlagBits : VkSemaphoreCreateFlags
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( SemaphoreCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   enum class SemaphoreImportFlagBits : VkSemaphoreImportFlags
   {
     eTemporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT
@@ -13078,6 +13070,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
+  enum class SemaphoreCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( SemaphoreCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using SemaphoreCreateFlags = Flags<SemaphoreCreateFlagBits>;
 
