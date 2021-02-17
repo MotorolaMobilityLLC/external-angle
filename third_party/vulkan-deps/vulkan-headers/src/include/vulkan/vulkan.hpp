@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2020 The Khronos Group Inc.
+// Copyright 2015-2021 The Khronos Group Inc.
 // 
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //     
@@ -94,7 +94,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #endif
 
 
-static_assert( VK_HEADER_VERSION ==  168 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  169 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -3818,8 +3818,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eHost = VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_KHR,
     eDevice = VK_ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE_KHR,
-    eHostOrDevice = VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_OR_DEVICE_KHR
-  };
+    eHostOrDevice = VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_OR_DEVICE_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( AccelerationStructureBuildTypeKHR value )
   {
@@ -3835,8 +3834,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class AccelerationStructureCompatibilityKHR
   {
     eCompatible = VK_ACCELERATION_STRUCTURE_COMPATIBILITY_COMPATIBLE_KHR,
-    eIncompatible = VK_ACCELERATION_STRUCTURE_COMPATIBILITY_INCOMPATIBLE_KHR
-  };
+    eIncompatible = VK_ACCELERATION_STRUCTURE_COMPATIBILITY_INCOMPATIBLE_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( AccelerationStructureCompatibilityKHR value )
   {
@@ -3850,8 +3848,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AccelerationStructureCreateFlagBitsKHR : VkAccelerationStructureCreateFlagsKHR
   {
-    eDeviceAddressCaptureReplay = VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR
-  };
+    eDeviceAddressCaptureReplay = VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( AccelerationStructureCreateFlagBitsKHR value )
   {
@@ -3866,8 +3863,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eObject = VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV,
     eBuildScratch = VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV,
-    eUpdateScratch = VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV
-  };
+    eUpdateScratch = VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV};
 
   VULKAN_HPP_INLINE std::string to_string( AccelerationStructureMemoryRequirementsTypeNV value )
   {
@@ -3884,8 +3880,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eTopLevel = VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR,
     eBottomLevel = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR,
-    eGeneric = VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR
-  };
+    eGeneric = VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR};
   using AccelerationStructureTypeNV = AccelerationStructureTypeKHR;
 
   VULKAN_HPP_INLINE std::string to_string( AccelerationStructureTypeKHR value )
@@ -3931,8 +3926,7 @@ namespace VULKAN_HPP_NAMESPACE
     eCommandPreprocessWriteNV = VK_ACCESS_COMMAND_PREPROCESS_WRITE_BIT_NV,
     eAccelerationStructureReadNV = VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_NV,
     eAccelerationStructureWriteNV = VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_NV,
-    eFragmentShadingRateAttachmentReadKHR = VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR
-  };
+    eFragmentShadingRateAttachmentReadKHR = VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( AccessFlagBits value )
   {
@@ -3980,8 +3974,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AttachmentDescriptionFlagBits : VkAttachmentDescriptionFlags
   {
-    eMayAlias = VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT
-  };
+    eMayAlias = VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( AttachmentDescriptionFlagBits value )
   {
@@ -3996,8 +3989,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eLoad = VK_ATTACHMENT_LOAD_OP_LOAD,
     eClear = VK_ATTACHMENT_LOAD_OP_CLEAR,
-    eDontCare = VK_ATTACHMENT_LOAD_OP_DONT_CARE
-  };
+    eDontCare = VK_ATTACHMENT_LOAD_OP_DONT_CARE};
 
   VULKAN_HPP_INLINE std::string to_string( AttachmentLoadOp value )
   {
@@ -4014,8 +4006,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eStore = VK_ATTACHMENT_STORE_OP_STORE,
     eDontCare = VK_ATTACHMENT_STORE_OP_DONT_CARE,
-    eNoneQCOM = VK_ATTACHMENT_STORE_OP_NONE_QCOM
-  };
+    eNoneQCOM = VK_ATTACHMENT_STORE_OP_NONE_QCOM};
 
   VULKAN_HPP_INLINE std::string to_string( AttachmentStoreOp value )
   {
@@ -4048,8 +4039,7 @@ namespace VULKAN_HPP_NAMESPACE
     eSrc1Color = VK_BLEND_FACTOR_SRC1_COLOR,
     eOneMinusSrc1Color = VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR,
     eSrc1Alpha = VK_BLEND_FACTOR_SRC1_ALPHA,
-    eOneMinusSrc1Alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
-  };
+    eOneMinusSrc1Alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA};
 
   VULKAN_HPP_INLINE std::string to_string( BlendFactor value )
   {
@@ -4130,8 +4120,7 @@ namespace VULKAN_HPP_NAMESPACE
     eInvertOvgEXT = VK_BLEND_OP_INVERT_OVG_EXT,
     eRedEXT = VK_BLEND_OP_RED_EXT,
     eGreenEXT = VK_BLEND_OP_GREEN_EXT,
-    eBlueEXT = VK_BLEND_OP_BLUE_EXT
-  };
+    eBlueEXT = VK_BLEND_OP_BLUE_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( BlendOp value )
   {
@@ -4196,8 +4185,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eUncorrelated = VK_BLEND_OVERLAP_UNCORRELATED_EXT,
     eDisjoint = VK_BLEND_OVERLAP_DISJOINT_EXT,
-    eConjoint = VK_BLEND_OVERLAP_CONJOINT_EXT
-  };
+    eConjoint = VK_BLEND_OVERLAP_CONJOINT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( BlendOverlapEXT value )
   {
@@ -4219,8 +4207,7 @@ namespace VULKAN_HPP_NAMESPACE
     eFloatOpaqueWhite = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE,
     eIntOpaqueWhite = VK_BORDER_COLOR_INT_OPAQUE_WHITE,
     eFloatCustomEXT = VK_BORDER_COLOR_FLOAT_CUSTOM_EXT,
-    eIntCustomEXT = VK_BORDER_COLOR_INT_CUSTOM_EXT
-  };
+    eIntCustomEXT = VK_BORDER_COLOR_INT_CUSTOM_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( BorderColor value )
   {
@@ -4246,8 +4233,7 @@ namespace VULKAN_HPP_NAMESPACE
     eProtected = VK_BUFFER_CREATE_PROTECTED_BIT,
     eDeviceAddressCaptureReplay = VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT,
     eDeviceAddressCaptureReplayEXT = VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT,
-    eDeviceAddressCaptureReplayKHR = VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR
-  };
+    eDeviceAddressCaptureReplayKHR = VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( BufferCreateFlagBits value )
   {
@@ -4282,8 +4268,7 @@ namespace VULKAN_HPP_NAMESPACE
     eShaderBindingTableKHR = VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR,
     eRayTracingNV = VK_BUFFER_USAGE_RAY_TRACING_BIT_NV,
     eShaderDeviceAddressEXT = VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT,
-    eShaderDeviceAddressKHR = VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR
-  };
+    eShaderDeviceAddressKHR = VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( BufferUsageFlagBits value )
   {
@@ -4315,8 +4300,7 @@ namespace VULKAN_HPP_NAMESPACE
     eAllowCompaction = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR,
     ePreferFastTrace = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR,
     ePreferFastBuild = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR,
-    eLowMemory = VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR
-  };
+    eLowMemory = VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR};
   using BuildAccelerationStructureFlagBitsNV = BuildAccelerationStructureFlagBitsKHR;
 
   VULKAN_HPP_INLINE std::string to_string( BuildAccelerationStructureFlagBitsKHR value )
@@ -4335,8 +4319,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class BuildAccelerationStructureModeKHR
   {
     eBuild = VK_BUILD_ACCELERATION_STRUCTURE_MODE_BUILD_KHR,
-    eUpdate = VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR
-  };
+    eUpdate = VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( BuildAccelerationStructureModeKHR value )
   {
@@ -4351,8 +4334,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class ChromaLocation
   {
     eCositedEven = VK_CHROMA_LOCATION_COSITED_EVEN,
-    eMidpoint = VK_CHROMA_LOCATION_MIDPOINT
-  };
+    eMidpoint = VK_CHROMA_LOCATION_MIDPOINT};
   using ChromaLocationKHR = ChromaLocation;
 
   VULKAN_HPP_INLINE std::string to_string( ChromaLocation value )
@@ -4370,8 +4352,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDefault = VK_COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV,
     eCustom = VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV,
     ePixelMajor = VK_COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV,
-    eSampleMajor = VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV
-  };
+    eSampleMajor = VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV};
 
   VULKAN_HPP_INLINE std::string to_string( CoarseSampleOrderTypeNV value )
   {
@@ -4390,8 +4371,7 @@ namespace VULKAN_HPP_NAMESPACE
     eR = VK_COLOR_COMPONENT_R_BIT,
     eG = VK_COLOR_COMPONENT_G_BIT,
     eB = VK_COLOR_COMPONENT_B_BIT,
-    eA = VK_COLOR_COMPONENT_A_BIT
-  };
+    eA = VK_COLOR_COMPONENT_A_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( ColorComponentFlagBits value )
   {
@@ -4424,8 +4404,7 @@ namespace VULKAN_HPP_NAMESPACE
     eExtendedSrgbNonlinearEXT = VK_COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT,
     eDisplayNativeAMD = VK_COLOR_SPACE_DISPLAY_NATIVE_AMD,
     eVkColorspaceSrgbNonlinear = VK_COLORSPACE_SRGB_NONLINEAR_KHR,
-    eDciP3LinearEXT = VK_COLOR_SPACE_DCI_P3_LINEAR_EXT
-  };
+    eDciP3LinearEXT = VK_COLOR_SPACE_DCI_P3_LINEAR_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( ColorSpaceKHR value )
   {
@@ -4454,8 +4433,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class CommandBufferLevel
   {
     ePrimary = VK_COMMAND_BUFFER_LEVEL_PRIMARY,
-    eSecondary = VK_COMMAND_BUFFER_LEVEL_SECONDARY
-  };
+    eSecondary = VK_COMMAND_BUFFER_LEVEL_SECONDARY};
 
   VULKAN_HPP_INLINE std::string to_string( CommandBufferLevel value )
   {
@@ -4469,8 +4447,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CommandBufferResetFlagBits : VkCommandBufferResetFlags
   {
-    eReleaseResources = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT
-  };
+    eReleaseResources = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( CommandBufferResetFlagBits value )
   {
@@ -4485,8 +4462,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eOneTimeSubmit = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
     eRenderPassContinue = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT,
-    eSimultaneousUse = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT
-  };
+    eSimultaneousUse = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( CommandBufferUsageFlagBits value )
   {
@@ -4503,8 +4479,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eTransient = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
     eResetCommandBuffer = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
-    eProtected = VK_COMMAND_POOL_CREATE_PROTECTED_BIT
-  };
+    eProtected = VK_COMMAND_POOL_CREATE_PROTECTED_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( CommandPoolCreateFlagBits value )
   {
@@ -4519,8 +4494,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CommandPoolResetFlagBits : VkCommandPoolResetFlags
   {
-    eReleaseResources = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT
-  };
+    eReleaseResources = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( CommandPoolResetFlagBits value )
   {
@@ -4540,8 +4514,7 @@ namespace VULKAN_HPP_NAMESPACE
     eGreater = VK_COMPARE_OP_GREATER,
     eNotEqual = VK_COMPARE_OP_NOT_EQUAL,
     eGreaterOrEqual = VK_COMPARE_OP_GREATER_OR_EQUAL,
-    eAlways = VK_COMPARE_OP_ALWAYS
-  };
+    eAlways = VK_COMPARE_OP_ALWAYS};
 
   VULKAN_HPP_INLINE std::string to_string( CompareOp value )
   {
@@ -4567,8 +4540,7 @@ namespace VULKAN_HPP_NAMESPACE
     eR = VK_COMPONENT_SWIZZLE_R,
     eG = VK_COMPONENT_SWIZZLE_G,
     eB = VK_COMPONENT_SWIZZLE_B,
-    eA = VK_COMPONENT_SWIZZLE_A
-  };
+    eA = VK_COMPONENT_SWIZZLE_A};
 
   VULKAN_HPP_INLINE std::string to_string( ComponentSwizzle value )
   {
@@ -4597,8 +4569,7 @@ namespace VULKAN_HPP_NAMESPACE
     eUint8 = VK_COMPONENT_TYPE_UINT8_NV,
     eUint16 = VK_COMPONENT_TYPE_UINT16_NV,
     eUint32 = VK_COMPONENT_TYPE_UINT32_NV,
-    eUint64 = VK_COMPONENT_TYPE_UINT64_NV
-  };
+    eUint64 = VK_COMPONENT_TYPE_UINT64_NV};
 
   VULKAN_HPP_INLINE std::string to_string( ComponentTypeNV value )
   {
@@ -4624,8 +4595,7 @@ namespace VULKAN_HPP_NAMESPACE
     eOpaque = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
     ePreMultiplied = VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
     ePostMultiplied = VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR,
-    eInherit = VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR
-  };
+    eInherit = VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( CompositeAlphaFlagBitsKHR value )
   {
@@ -4641,8 +4611,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ConditionalRenderingFlagBitsEXT : VkConditionalRenderingFlagsEXT
   {
-    eInverted = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT
-  };
+    eInverted = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( ConditionalRenderingFlagBitsEXT value )
   {
@@ -4657,8 +4626,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eDisabled = VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT,
     eOverestimate = VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT,
-    eUnderestimate = VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT
-  };
+    eUnderestimate = VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( ConservativeRasterizationModeEXT value )
   {
@@ -4676,8 +4644,7 @@ namespace VULKAN_HPP_NAMESPACE
     eClone = VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR,
     eCompact = VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR,
     eSerialize = VK_COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR,
-    eDeserialize = VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR
-  };
+    eDeserialize = VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR};
   using CopyAccelerationStructureModeNV = CopyAccelerationStructureModeKHR;
 
   VULKAN_HPP_INLINE std::string to_string( CopyAccelerationStructureModeKHR value )
@@ -4697,8 +4664,7 @@ namespace VULKAN_HPP_NAMESPACE
     eNone = VK_COVERAGE_MODULATION_MODE_NONE_NV,
     eRgb = VK_COVERAGE_MODULATION_MODE_RGB_NV,
     eAlpha = VK_COVERAGE_MODULATION_MODE_ALPHA_NV,
-    eRgba = VK_COVERAGE_MODULATION_MODE_RGBA_NV
-  };
+    eRgba = VK_COVERAGE_MODULATION_MODE_RGBA_NV};
 
   VULKAN_HPP_INLINE std::string to_string( CoverageModulationModeNV value )
   {
@@ -4715,8 +4681,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class CoverageReductionModeNV
   {
     eMerge = VK_COVERAGE_REDUCTION_MODE_MERGE_NV,
-    eTruncate = VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV
-  };
+    eTruncate = VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV};
 
   VULKAN_HPP_INLINE std::string to_string( CoverageReductionModeNV value )
   {
@@ -4733,8 +4698,7 @@ namespace VULKAN_HPP_NAMESPACE
     eNone = VK_CULL_MODE_NONE,
     eFront = VK_CULL_MODE_FRONT_BIT,
     eBack = VK_CULL_MODE_BACK_BIT,
-    eFrontAndBack = VK_CULL_MODE_FRONT_AND_BACK
-  };
+    eFrontAndBack = VK_CULL_MODE_FRONT_AND_BACK};
 
   VULKAN_HPP_INLINE std::string to_string( CullModeFlagBits value )
   {
@@ -4754,8 +4718,7 @@ namespace VULKAN_HPP_NAMESPACE
     eWarning = VK_DEBUG_REPORT_WARNING_BIT_EXT,
     ePerformanceWarning = VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT,
     eError = VK_DEBUG_REPORT_ERROR_BIT_EXT,
-    eDebug = VK_DEBUG_REPORT_DEBUG_BIT_EXT
-  };
+    eDebug = VK_DEBUG_REPORT_DEBUG_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DebugReportFlagBitsEXT value )
   {
@@ -4811,8 +4774,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDebugReport = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT,
     eDescriptorUpdateTemplateKHR = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT,
     eSamplerYcbcrConversionKHR = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT,
-    eValidationCache = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT
-  };
+    eValidationCache = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DebugReportObjectTypeEXT value )
   {
@@ -4863,8 +4825,7 @@ namespace VULKAN_HPP_NAMESPACE
     eVerbose = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT,
     eInfo = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT,
     eWarning = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,
-    eError = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT
-  };
+    eError = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DebugUtilsMessageSeverityFlagBitsEXT value )
   {
@@ -4882,8 +4843,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eGeneral = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT,
     eValidation = VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
-    ePerformance = VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT
-  };
+    ePerformance = VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DebugUtilsMessageTypeFlagBitsEXT value )
   {
@@ -4902,8 +4862,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDeviceGroup = VK_DEPENDENCY_DEVICE_GROUP_BIT,
     eViewLocal = VK_DEPENDENCY_VIEW_LOCAL_BIT,
     eDeviceGroupKHR = VK_DEPENDENCY_DEVICE_GROUP_BIT_KHR,
-    eViewLocalKHR = VK_DEPENDENCY_VIEW_LOCAL_BIT_KHR
-  };
+    eViewLocalKHR = VK_DEPENDENCY_VIEW_LOCAL_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( DependencyFlagBits value )
   {
@@ -4921,8 +4880,7 @@ namespace VULKAN_HPP_NAMESPACE
     eUpdateAfterBind = VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT,
     eUpdateUnusedWhilePending = VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT,
     ePartiallyBound = VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT,
-    eVariableDescriptorCount = VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT
-  };
+    eVariableDescriptorCount = VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT};
   using DescriptorBindingFlagBitsEXT = DescriptorBindingFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( DescriptorBindingFlagBits value )
@@ -4942,8 +4900,7 @@ namespace VULKAN_HPP_NAMESPACE
     eFreeDescriptorSet = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
     eUpdateAfterBind = VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT,
     eHostOnlyVALVE = VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE,
-    eUpdateAfterBindEXT = VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT
-  };
+    eUpdateAfterBindEXT = VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DescriptorPoolCreateFlagBits value )
   {
@@ -4961,8 +4918,7 @@ namespace VULKAN_HPP_NAMESPACE
     eUpdateAfterBindPool = VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT,
     ePushDescriptorKHR = VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR,
     eHostOnlyPoolVALVE = VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE,
-    eUpdateAfterBindPoolEXT = VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT
-  };
+    eUpdateAfterBindPoolEXT = VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DescriptorSetLayoutCreateFlagBits value )
   {
@@ -4991,8 +4947,7 @@ namespace VULKAN_HPP_NAMESPACE
     eInlineUniformBlockEXT = VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT,
     eAccelerationStructureKHR = VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR,
     eAccelerationStructureNV = VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV,
-    eMutableVALVE = VK_DESCRIPTOR_TYPE_MUTABLE_VALVE
-  };
+    eMutableVALVE = VK_DESCRIPTOR_TYPE_MUTABLE_VALVE};
 
   VULKAN_HPP_INLINE std::string to_string( DescriptorType value )
   {
@@ -5020,8 +4975,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class DescriptorUpdateTemplateType
   {
     eDescriptorSet = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET,
-    ePushDescriptorsKHR = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR
-  };
+    ePushDescriptorsKHR = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR};
   using DescriptorUpdateTemplateTypeKHR = DescriptorUpdateTemplateType;
 
   VULKAN_HPP_INLINE std::string to_string( DescriptorUpdateTemplateType value )
@@ -5046,8 +5000,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eEnableShaderDebugInfo = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_DEBUG_INFO_BIT_NV,
     eEnableResourceTracking = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_RESOURCE_TRACKING_BIT_NV,
-    eEnableAutomaticCheckpoints = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV
-  };
+    eEnableAutomaticCheckpoints = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV};
 
   VULKAN_HPP_INLINE std::string to_string( DeviceDiagnosticsConfigFlagBitsNV value )
   {
@@ -5062,8 +5015,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DeviceEventTypeEXT
   {
-    eDisplayHotplug = VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT
-  };
+    eDisplayHotplug = VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DeviceEventTypeEXT value )
   {
@@ -5079,8 +5031,7 @@ namespace VULKAN_HPP_NAMESPACE
     eLocal = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR,
     eRemote = VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR,
     eSum = VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR,
-    eLocalMultiDevice = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR
-  };
+    eLocalMultiDevice = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( DeviceGroupPresentModeFlagBitsKHR value )
   {
@@ -5100,8 +5051,7 @@ namespace VULKAN_HPP_NAMESPACE
     eFree = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE_EXT,
     eImport = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT,
     eUnimport = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT_EXT,
-    eAllocationFailed = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT
-  };
+    eAllocationFailed = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DeviceMemoryReportEventTypeEXT value )
   {
@@ -5118,8 +5068,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DeviceQueueCreateFlagBits : VkDeviceQueueCreateFlags
   {
-    eProtected = VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT
-  };
+    eProtected = VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( DeviceQueueCreateFlagBits value )
   {
@@ -5133,8 +5082,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class DiscardRectangleModeEXT
   {
     eInclusive = VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT,
-    eExclusive = VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT
-  };
+    eExclusive = VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DiscardRectangleModeEXT value )
   {
@@ -5148,8 +5096,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DisplayEventTypeEXT
   {
-    eFirstPixelOut = VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT
-  };
+    eFirstPixelOut = VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DisplayEventTypeEXT value )
   {
@@ -5165,8 +5112,7 @@ namespace VULKAN_HPP_NAMESPACE
     eOpaque = VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR,
     eGlobal = VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR,
     ePerPixel = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR,
-    ePerPixelPremultiplied = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR
-  };
+    ePerPixelPremultiplied = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( DisplayPlaneAlphaFlagBitsKHR value )
   {
@@ -5184,8 +5130,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eOff = VK_DISPLAY_POWER_STATE_OFF_EXT,
     eSuspend = VK_DISPLAY_POWER_STATE_SUSPEND_EXT,
-    eOn = VK_DISPLAY_POWER_STATE_ON_EXT
-  };
+    eOn = VK_DISPLAY_POWER_STATE_ON_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DisplayPowerStateEXT value )
   {
@@ -5214,8 +5159,7 @@ namespace VULKAN_HPP_NAMESPACE
     eBroadcomProprietary = VK_DRIVER_ID_BROADCOM_PROPRIETARY,
     eMesaLlvmpipe = VK_DRIVER_ID_MESA_LLVMPIPE,
     eMoltenvk = VK_DRIVER_ID_MOLTENVK,
-    eIntelOpenSourceMesa = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR
-  };
+    eIntelOpenSourceMesa = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR};
   using DriverIdKHR = DriverId;
 
   VULKAN_HPP_INLINE std::string to_string( DriverId value )
@@ -5271,8 +5215,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDepthCompareOpEXT = VK_DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT,
     eDepthBoundsTestEnableEXT = VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT,
     eStencilTestEnableEXT = VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT,
-    eStencilOpEXT = VK_DYNAMIC_STATE_STENCIL_OP_EXT
-  };
+    eStencilOpEXT = VK_DYNAMIC_STATE_STENCIL_OP_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( DynamicState value )
   {
@@ -5315,8 +5258,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class ExternalFenceFeatureFlagBits : VkExternalFenceFeatureFlags
   {
     eExportable = VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT,
-    eImportable = VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT
-  };
+    eImportable = VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT};
   using ExternalFenceFeatureFlagBitsKHR = ExternalFenceFeatureFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalFenceFeatureFlagBits value )
@@ -5334,8 +5276,7 @@ namespace VULKAN_HPP_NAMESPACE
     eOpaqueFd = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT,
     eOpaqueWin32 = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
     eOpaqueWin32Kmt = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
-    eSyncFd = VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT
-  };
+    eSyncFd = VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT};
   using ExternalFenceHandleTypeFlagBitsKHR = ExternalFenceHandleTypeFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalFenceHandleTypeFlagBits value )
@@ -5354,8 +5295,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eDedicatedOnly = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT,
     eExportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT,
-    eImportable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT
-  };
+    eImportable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT};
   using ExternalMemoryFeatureFlagBitsKHR = ExternalMemoryFeatureFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalMemoryFeatureFlagBits value )
@@ -5373,8 +5313,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eDedicatedOnly = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV,
     eExportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV,
-    eImportable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV
-  };
+    eImportable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV};
 
   VULKAN_HPP_INLINE std::string to_string( ExternalMemoryFeatureFlagBitsNV value )
   {
@@ -5397,10 +5336,11 @@ namespace VULKAN_HPP_NAMESPACE
     eD3D12Heap = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT,
     eD3D12Resource = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT,
     eDmaBufEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT,
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
     eAndroidHardwareBufferANDROID = VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID,
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
     eHostAllocationEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT,
-    eHostMappedForeignMemoryEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT
-  };
+    eHostMappedForeignMemoryEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT};
   using ExternalMemoryHandleTypeFlagBitsKHR = ExternalMemoryHandleTypeFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalMemoryHandleTypeFlagBits value )
@@ -5415,7 +5355,9 @@ namespace VULKAN_HPP_NAMESPACE
       case ExternalMemoryHandleTypeFlagBits::eD3D12Heap : return "D3D12Heap";
       case ExternalMemoryHandleTypeFlagBits::eD3D12Resource : return "D3D12Resource";
       case ExternalMemoryHandleTypeFlagBits::eDmaBufEXT : return "DmaBufEXT";
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case ExternalMemoryHandleTypeFlagBits::eAndroidHardwareBufferANDROID : return "AndroidHardwareBufferANDROID";
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
       case ExternalMemoryHandleTypeFlagBits::eHostAllocationEXT : return "HostAllocationEXT";
       case ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT : return "HostMappedForeignMemoryEXT";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
@@ -5427,8 +5369,7 @@ namespace VULKAN_HPP_NAMESPACE
     eOpaqueWin32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV,
     eOpaqueWin32Kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV,
     eD3D11Image = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV,
-    eD3D11ImageKmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV
-  };
+    eD3D11ImageKmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV};
 
   VULKAN_HPP_INLINE std::string to_string( ExternalMemoryHandleTypeFlagBitsNV value )
   {
@@ -5445,8 +5386,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class ExternalSemaphoreFeatureFlagBits : VkExternalSemaphoreFeatureFlags
   {
     eExportable = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT,
-    eImportable = VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT
-  };
+    eImportable = VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT};
   using ExternalSemaphoreFeatureFlagBitsKHR = ExternalSemaphoreFeatureFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalSemaphoreFeatureFlagBits value )
@@ -5466,8 +5406,7 @@ namespace VULKAN_HPP_NAMESPACE
     eOpaqueWin32Kmt = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
     eD3D12Fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT,
     eSyncFd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
-    eD3D11Fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT
-  };
+    eD3D11Fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT};
   using ExternalSemaphoreHandleTypeFlagBitsKHR = ExternalSemaphoreHandleTypeFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalSemaphoreHandleTypeFlagBits value )
@@ -5485,8 +5424,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class FenceCreateFlagBits : VkFenceCreateFlags
   {
-    eSignaled = VK_FENCE_CREATE_SIGNALED_BIT
-  };
+    eSignaled = VK_FENCE_CREATE_SIGNALED_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( FenceCreateFlagBits value )
   {
@@ -5499,8 +5437,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class FenceImportFlagBits : VkFenceImportFlags
   {
-    eTemporary = VK_FENCE_IMPORT_TEMPORARY_BIT
-  };
+    eTemporary = VK_FENCE_IMPORT_TEMPORARY_BIT};
   using FenceImportFlagBitsKHR = FenceImportFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( FenceImportFlagBits value )
@@ -5517,8 +5454,7 @@ namespace VULKAN_HPP_NAMESPACE
     eNearest = VK_FILTER_NEAREST,
     eLinear = VK_FILTER_LINEAR,
     eCubicIMG = VK_FILTER_CUBIC_IMG,
-    eCubicEXT = VK_FILTER_CUBIC_EXT
-  };
+    eCubicEXT = VK_FILTER_CUBIC_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( Filter value )
   {
@@ -5809,8 +5745,7 @@ namespace VULKAN_HPP_NAMESPACE
     eR10X6UnormPack16KHR = VK_FORMAT_R10X6_UNORM_PACK16_KHR,
     eR12X4G12X4B12X4A12X4Unorm4Pack16KHR = VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16_KHR,
     eR12X4G12X4Unorm2Pack16KHR = VK_FORMAT_R12X4G12X4_UNORM_2PACK16_KHR,
-    eR12X4UnormPack16KHR = VK_FORMAT_R12X4_UNORM_PACK16_KHR
-  };
+    eR12X4UnormPack16KHR = VK_FORMAT_R12X4_UNORM_PACK16_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( Format value )
   {
@@ -6102,8 +6037,7 @@ namespace VULKAN_HPP_NAMESPACE
     eSampledImageYcbcrConversionLinearFilterKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR,
     eSampledImageYcbcrConversionSeparateReconstructionFilterKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR,
     eTransferDstKHR = VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR,
-    eTransferSrcKHR = VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR
-  };
+    eTransferSrcKHR = VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( FormatFeatureFlagBits value )
   {
@@ -6146,8 +6080,7 @@ namespace VULKAN_HPP_NAMESPACE
     eReplace = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR,
     eMin = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MIN_KHR,
     eMax = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_KHR,
-    eMul = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR
-  };
+    eMul = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( FragmentShadingRateCombinerOpKHR value )
   {
@@ -6175,8 +6108,7 @@ namespace VULKAN_HPP_NAMESPACE
     e4InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_4_INVOCATIONS_PER_PIXEL_NV,
     e8InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV,
     e16InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV,
-    eNoInvocations = VK_FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV
-  };
+    eNoInvocations = VK_FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV};
 
   VULKAN_HPP_INLINE std::string to_string( FragmentShadingRateNV value )
   {
@@ -6201,8 +6133,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class FragmentShadingRateTypeNV
   {
     eFragmentSize = VK_FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV,
-    eEnums = VK_FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV
-  };
+    eEnums = VK_FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV};
 
   VULKAN_HPP_INLINE std::string to_string( FragmentShadingRateTypeNV value )
   {
@@ -6217,8 +6148,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class FramebufferCreateFlagBits : VkFramebufferCreateFlags
   {
     eImageless = VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT,
-    eImagelessKHR = VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR
-  };
+    eImagelessKHR = VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( FramebufferCreateFlagBits value )
   {
@@ -6232,8 +6162,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class FrontFace
   {
     eCounterClockwise = VK_FRONT_FACE_COUNTER_CLOCKWISE,
-    eClockwise = VK_FRONT_FACE_CLOCKWISE
-  };
+    eClockwise = VK_FRONT_FACE_CLOCKWISE};
 
   VULKAN_HPP_INLINE std::string to_string( FrontFace value )
   {
@@ -6251,8 +6180,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDefault = VK_FULL_SCREEN_EXCLUSIVE_DEFAULT_EXT,
     eAllowed = VK_FULL_SCREEN_EXCLUSIVE_ALLOWED_EXT,
     eDisallowed = VK_FULL_SCREEN_EXCLUSIVE_DISALLOWED_EXT,
-    eApplicationControlled = VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT
-  };
+    eApplicationControlled = VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( FullScreenExclusiveEXT value )
   {
@@ -6270,8 +6198,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class GeometryFlagBitsKHR : VkGeometryFlagsKHR
   {
     eOpaque = VK_GEOMETRY_OPAQUE_BIT_KHR,
-    eNoDuplicateAnyHitInvocation = VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR
-  };
+    eNoDuplicateAnyHitInvocation = VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR};
   using GeometryFlagBitsNV = GeometryFlagBitsKHR;
 
   VULKAN_HPP_INLINE std::string to_string( GeometryFlagBitsKHR value )
@@ -6290,8 +6217,7 @@ namespace VULKAN_HPP_NAMESPACE
     eTriangleFrontCounterclockwise = VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_KHR,
     eForceOpaque = VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR,
     eForceNoOpaque = VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR,
-    eTriangleCullDisable = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV
-  };
+    eTriangleCullDisable = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV};
   using GeometryInstanceFlagBitsNV = GeometryInstanceFlagBitsKHR;
 
   VULKAN_HPP_INLINE std::string to_string( GeometryInstanceFlagBitsKHR value )
@@ -6310,8 +6236,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eTriangles = VK_GEOMETRY_TYPE_TRIANGLES_KHR,
     eAabbs = VK_GEOMETRY_TYPE_AABBS_KHR,
-    eInstances = VK_GEOMETRY_TYPE_INSTANCES_KHR
-  };
+    eInstances = VK_GEOMETRY_TYPE_INSTANCES_KHR};
   using GeometryTypeNV = GeometryTypeKHR;
 
   VULKAN_HPP_INLINE std::string to_string( GeometryTypeKHR value )
@@ -6340,8 +6265,7 @@ namespace VULKAN_HPP_NAMESPACE
     eMemoryPlane3EXT = VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT,
     ePlane0KHR = VK_IMAGE_ASPECT_PLANE_0_BIT_KHR,
     ePlane1KHR = VK_IMAGE_ASPECT_PLANE_1_BIT_KHR,
-    ePlane2KHR = VK_IMAGE_ASPECT_PLANE_2_BIT_KHR
-  };
+    ePlane2KHR = VK_IMAGE_ASPECT_PLANE_2_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( ImageAspectFlagBits value )
   {
@@ -6384,8 +6308,7 @@ namespace VULKAN_HPP_NAMESPACE
     eBlockTexelViewCompatibleKHR = VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR,
     eDisjointKHR = VK_IMAGE_CREATE_DISJOINT_BIT_KHR,
     eExtendedUsageKHR = VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR,
-    eSplitInstanceBindRegionsKHR = VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR
-  };
+    eSplitInstanceBindRegionsKHR = VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( ImageCreateFlagBits value )
   {
@@ -6437,8 +6360,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDepthReadOnlyStencilAttachmentOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR,
     eFragmentShadingRateAttachmentOptimalKHR = VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR,
     eStencilAttachmentOptimalKHR = VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR,
-    eStencilReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR
-  };
+    eStencilReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( ImageLayout value )
   {
@@ -6471,8 +6393,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eOptimal = VK_IMAGE_TILING_OPTIMAL,
     eLinear = VK_IMAGE_TILING_LINEAR,
-    eDrmFormatModifierEXT = VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT
-  };
+    eDrmFormatModifierEXT = VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( ImageTiling value )
   {
@@ -6489,8 +6410,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     e1D = VK_IMAGE_TYPE_1D,
     e2D = VK_IMAGE_TYPE_2D,
-    e3D = VK_IMAGE_TYPE_3D
-  };
+    e3D = VK_IMAGE_TYPE_3D};
 
   VULKAN_HPP_INLINE std::string to_string( ImageType value )
   {
@@ -6515,8 +6435,7 @@ namespace VULKAN_HPP_NAMESPACE
     eInputAttachment = VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT,
     eShadingRateImageNV = VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV,
     eFragmentDensityMapEXT = VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT,
-    eFragmentShadingRateAttachmentKHR = VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
-  };
+    eFragmentShadingRateAttachmentKHR = VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( ImageUsageFlagBits value )
   {
@@ -6539,8 +6458,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class ImageViewCreateFlagBits : VkImageViewCreateFlags
   {
     eFragmentDensityMapDynamicEXT = VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT,
-    eFragmentDensityMapDeferredEXT = VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT
-  };
+    eFragmentDensityMapDeferredEXT = VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( ImageViewCreateFlagBits value )
   {
@@ -6560,8 +6478,7 @@ namespace VULKAN_HPP_NAMESPACE
     eCube = VK_IMAGE_VIEW_TYPE_CUBE,
     e1DArray = VK_IMAGE_VIEW_TYPE_1D_ARRAY,
     e2DArray = VK_IMAGE_VIEW_TYPE_2D_ARRAY,
-    eCubeArray = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY
-  };
+    eCubeArray = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY};
 
   VULKAN_HPP_INLINE std::string to_string( ImageViewType value )
   {
@@ -6584,8 +6501,7 @@ namespace VULKAN_HPP_NAMESPACE
     eUint32 = VK_INDEX_TYPE_UINT32,
     eNoneKHR = VK_INDEX_TYPE_NONE_KHR,
     eUint8EXT = VK_INDEX_TYPE_UINT8_EXT,
-    eNoneNV = VK_INDEX_TYPE_NONE_NV
-  };
+    eNoneNV = VK_INDEX_TYPE_NONE_NV};
 
   VULKAN_HPP_INLINE std::string to_string( IndexType value )
   {
@@ -6603,8 +6519,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eExplicitPreprocess = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EXPLICIT_PREPROCESS_BIT_NV,
     eIndexedSequences = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NV,
-    eUnorderedSequences = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NV
-  };
+    eUnorderedSequences = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NV};
 
   VULKAN_HPP_INLINE std::string to_string( IndirectCommandsLayoutUsageFlagBitsNV value )
   {
@@ -6626,8 +6541,7 @@ namespace VULKAN_HPP_NAMESPACE
     ePushConstant = VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV,
     eDrawIndexed = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NV,
     eDraw = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NV,
-    eDrawTasks = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV
-  };
+    eDrawTasks = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV};
 
   VULKAN_HPP_INLINE std::string to_string( IndirectCommandsTokenTypeNV value )
   {
@@ -6647,8 +6561,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class IndirectStateFlagBitsNV : VkIndirectStateFlagsNV
   {
-    eFlagFrontface = VK_INDIRECT_STATE_FLAG_FRONTFACE_BIT_NV
-  };
+    eFlagFrontface = VK_INDIRECT_STATE_FLAG_FRONTFACE_BIT_NV};
 
   VULKAN_HPP_INLINE std::string to_string( IndirectStateFlagBitsNV value )
   {
@@ -6669,8 +6582,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class InternalAllocationType
   {
-    eExecutable = VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE
-  };
+    eExecutable = VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE};
 
   VULKAN_HPP_INLINE std::string to_string( InternalAllocationType value )
   {
@@ -6686,8 +6598,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDefault = VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT,
     eRectangular = VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT,
     eBresenham = VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT,
-    eRectangularSmooth = VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT
-  };
+    eRectangularSmooth = VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( LineRasterizationModeEXT value )
   {
@@ -6718,8 +6629,7 @@ namespace VULKAN_HPP_NAMESPACE
     eCopyInverted = VK_LOGIC_OP_COPY_INVERTED,
     eOrInverted = VK_LOGIC_OP_OR_INVERTED,
     eNand = VK_LOGIC_OP_NAND,
-    eSet = VK_LOGIC_OP_SET
-  };
+    eSet = VK_LOGIC_OP_SET};
 
   VULKAN_HPP_INLINE std::string to_string( LogicOp value )
   {
@@ -6749,8 +6659,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eDeviceMask = VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT,
     eDeviceAddress = VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT,
-    eDeviceAddressCaptureReplay = VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT
-  };
+    eDeviceAddressCaptureReplay = VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT};
   using MemoryAllocateFlagBitsKHR = MemoryAllocateFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( MemoryAllocateFlagBits value )
@@ -6768,8 +6677,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eDeviceLocal = VK_MEMORY_HEAP_DEVICE_LOCAL_BIT,
     eMultiInstance = VK_MEMORY_HEAP_MULTI_INSTANCE_BIT,
-    eMultiInstanceKHR = VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR
-  };
+    eMultiInstanceKHR = VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( MemoryHeapFlagBits value )
   {
@@ -6785,8 +6693,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eDefault = VK_MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD,
     eAllowed = VK_MEMORY_OVERALLOCATION_BEHAVIOR_ALLOWED_AMD,
-    eDisallowed = VK_MEMORY_OVERALLOCATION_BEHAVIOR_DISALLOWED_AMD
-  };
+    eDisallowed = VK_MEMORY_OVERALLOCATION_BEHAVIOR_DISALLOWED_AMD};
 
   VULKAN_HPP_INLINE std::string to_string( MemoryOverallocationBehaviorAMD value )
   {
@@ -6808,8 +6715,7 @@ namespace VULKAN_HPP_NAMESPACE
     eLazilyAllocated = VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT,
     eProtected = VK_MEMORY_PROPERTY_PROTECTED_BIT,
     eDeviceCoherentAMD = VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD,
-    eDeviceUncachedAMD = VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD
-  };
+    eDeviceUncachedAMD = VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD};
 
   VULKAN_HPP_INLINE std::string to_string( MemoryPropertyFlagBits value )
   {
@@ -6871,8 +6777,7 @@ namespace VULKAN_HPP_NAMESPACE
     eIndirectCommandsLayoutNV = VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NV,
     ePrivateDataSlotEXT = VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT,
     eDescriptorUpdateTemplateKHR = VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR,
-    eSamplerYcbcrConversionKHR = VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR
-  };
+    eSamplerYcbcrConversionKHR = VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( ObjectType value )
   {
@@ -6932,8 +6837,7 @@ namespace VULKAN_HPP_NAMESPACE
     eCopySrc = VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT,
     eCopyDst = VK_PEER_MEMORY_FEATURE_COPY_DST_BIT,
     eGenericSrc = VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT,
-    eGenericDst = VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT
-  };
+    eGenericDst = VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT};
   using PeerMemoryFeatureFlagBitsKHR = PeerMemoryFeatureFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( PeerMemoryFeatureFlagBits value )
@@ -6950,8 +6854,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PerformanceConfigurationTypeINTEL
   {
-    eCommandQueueMetricsDiscoveryActivated = VK_PERFORMANCE_CONFIGURATION_TYPE_COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED_INTEL
-  };
+    eCommandQueueMetricsDiscoveryActivated = VK_PERFORMANCE_CONFIGURATION_TYPE_COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED_INTEL};
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceConfigurationTypeINTEL value )
   {
@@ -6965,8 +6868,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class PerformanceCounterDescriptionFlagBitsKHR : VkPerformanceCounterDescriptionFlagsKHR
   {
     ePerformanceImpacting = VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR,
-    eConcurrentlyImpacted = VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR
-  };
+    eConcurrentlyImpacted = VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceCounterDescriptionFlagBitsKHR value )
   {
@@ -6985,8 +6887,7 @@ namespace VULKAN_HPP_NAMESPACE
     eCommand = VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR,
     eVkQueryScopeCommandBuffer = VK_QUERY_SCOPE_COMMAND_BUFFER_KHR,
     eVkQueryScopeCommand = VK_QUERY_SCOPE_COMMAND_KHR,
-    eVkQueryScopeRenderPass = VK_QUERY_SCOPE_RENDER_PASS_KHR
-  };
+    eVkQueryScopeRenderPass = VK_QUERY_SCOPE_RENDER_PASS_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceCounterScopeKHR value )
   {
@@ -7006,8 +6907,7 @@ namespace VULKAN_HPP_NAMESPACE
     eUint32 = VK_PERFORMANCE_COUNTER_STORAGE_UINT32_KHR,
     eUint64 = VK_PERFORMANCE_COUNTER_STORAGE_UINT64_KHR,
     eFloat32 = VK_PERFORMANCE_COUNTER_STORAGE_FLOAT32_KHR,
-    eFloat64 = VK_PERFORMANCE_COUNTER_STORAGE_FLOAT64_KHR
-  };
+    eFloat64 = VK_PERFORMANCE_COUNTER_STORAGE_FLOAT64_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceCounterStorageKHR value )
   {
@@ -7035,8 +6935,7 @@ namespace VULKAN_HPP_NAMESPACE
     eVolts = VK_PERFORMANCE_COUNTER_UNIT_VOLTS_KHR,
     eAmps = VK_PERFORMANCE_COUNTER_UNIT_AMPS_KHR,
     eHertz = VK_PERFORMANCE_COUNTER_UNIT_HERTZ_KHR,
-    eCycles = VK_PERFORMANCE_COUNTER_UNIT_CYCLES_KHR
-  };
+    eCycles = VK_PERFORMANCE_COUNTER_UNIT_CYCLES_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceCounterUnitKHR value )
   {
@@ -7060,8 +6959,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class PerformanceOverrideTypeINTEL
   {
     eNullHardware = VK_PERFORMANCE_OVERRIDE_TYPE_NULL_HARDWARE_INTEL,
-    eFlushGpuCaches = VK_PERFORMANCE_OVERRIDE_TYPE_FLUSH_GPU_CACHES_INTEL
-  };
+    eFlushGpuCaches = VK_PERFORMANCE_OVERRIDE_TYPE_FLUSH_GPU_CACHES_INTEL};
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceOverrideTypeINTEL value )
   {
@@ -7076,8 +6974,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class PerformanceParameterTypeINTEL
   {
     eHwCountersSupported = VK_PERFORMANCE_PARAMETER_TYPE_HW_COUNTERS_SUPPORTED_INTEL,
-    eStreamMarkerValidBits = VK_PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL
-  };
+    eStreamMarkerValidBits = VK_PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL};
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceParameterTypeINTEL value )
   {
@@ -7095,8 +6992,7 @@ namespace VULKAN_HPP_NAMESPACE
     eUint64 = VK_PERFORMANCE_VALUE_TYPE_UINT64_INTEL,
     eFloat = VK_PERFORMANCE_VALUE_TYPE_FLOAT_INTEL,
     eBool = VK_PERFORMANCE_VALUE_TYPE_BOOL_INTEL,
-    eString = VK_PERFORMANCE_VALUE_TYPE_STRING_INTEL
-  };
+    eString = VK_PERFORMANCE_VALUE_TYPE_STRING_INTEL};
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceValueTypeINTEL value )
   {
@@ -7117,8 +7013,7 @@ namespace VULKAN_HPP_NAMESPACE
     eIntegratedGpu = VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU,
     eDiscreteGpu = VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU,
     eVirtualGpu = VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU,
-    eCpu = VK_PHYSICAL_DEVICE_TYPE_CPU
-  };
+    eCpu = VK_PHYSICAL_DEVICE_TYPE_CPU};
 
   VULKAN_HPP_INLINE std::string to_string( PhysicalDeviceType value )
   {
@@ -7138,8 +7033,7 @@ namespace VULKAN_HPP_NAMESPACE
     eGraphics = VK_PIPELINE_BIND_POINT_GRAPHICS,
     eCompute = VK_PIPELINE_BIND_POINT_COMPUTE,
     eRayTracingKHR = VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR,
-    eRayTracingNV = VK_PIPELINE_BIND_POINT_RAY_TRACING_NV
-  };
+    eRayTracingNV = VK_PIPELINE_BIND_POINT_RAY_TRACING_NV};
 
   VULKAN_HPP_INLINE std::string to_string( PipelineBindPoint value )
   {
@@ -7154,8 +7048,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineCacheCreateFlagBits : VkPipelineCacheCreateFlags
   {
-    eExternallySynchronizedEXT = VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT
-  };
+    eExternallySynchronizedEXT = VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCacheCreateFlagBits value )
   {
@@ -7168,8 +7061,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineCacheHeaderVersion
   {
-    eOne = VK_PIPELINE_CACHE_HEADER_VERSION_ONE
-  };
+    eOne = VK_PIPELINE_CACHE_HEADER_VERSION_ONE};
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCacheHeaderVersion value )
   {
@@ -7210,8 +7102,7 @@ namespace VULKAN_HPP_NAMESPACE
     eFailOnPipelineCompileRequiredEXT = VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT,
     eEarlyReturnOnFailureEXT = VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT,
     eDispatchBaseKHR = VK_PIPELINE_CREATE_DISPATCH_BASE_KHR,
-    eViewIndexFromDeviceIndexKHR = VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR
-  };
+    eViewIndexFromDeviceIndexKHR = VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCreateFlagBits value )
   {
@@ -7244,8 +7135,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eValid = VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT,
     eApplicationPipelineCacheHit = VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT,
-    eBasePipelineAcceleration = VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT
-  };
+    eBasePipelineAcceleration = VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCreationFeedbackFlagBitsEXT value )
   {
@@ -7263,8 +7153,7 @@ namespace VULKAN_HPP_NAMESPACE
     eBool32 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR,
     eInt64 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR,
     eUint64 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR,
-    eFloat64 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR
-  };
+    eFloat64 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( PipelineExecutableStatisticFormatKHR value )
   {
@@ -7281,8 +7170,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class PipelineShaderStageCreateFlagBits : VkPipelineShaderStageCreateFlags
   {
     eAllowVaryingSubgroupSizeEXT = VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT,
-    eRequireFullSubgroupsEXT = VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT
-  };
+    eRequireFullSubgroupsEXT = VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( PipelineShaderStageCreateFlagBits value )
   {
@@ -7324,8 +7212,7 @@ namespace VULKAN_HPP_NAMESPACE
     eCommandPreprocessNV = VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV,
     eAccelerationStructureBuildNV = VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_NV,
     eFragmentShadingRateAttachmentKHR = VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR,
-    eRayTracingShaderNV = VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV
-  };
+    eRayTracingShaderNV = VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV};
 
   VULKAN_HPP_INLINE std::string to_string( PipelineStageFlagBits value )
   {
@@ -7364,8 +7251,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class PointClippingBehavior
   {
     eAllClipPlanes = VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES,
-    eUserClipPlanesOnly = VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY
-  };
+    eUserClipPlanesOnly = VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY};
   using PointClippingBehaviorKHR = PointClippingBehavior;
 
   VULKAN_HPP_INLINE std::string to_string( PointClippingBehavior value )
@@ -7383,8 +7269,7 @@ namespace VULKAN_HPP_NAMESPACE
     eFill = VK_POLYGON_MODE_FILL,
     eLine = VK_POLYGON_MODE_LINE,
     ePoint = VK_POLYGON_MODE_POINT,
-    eFillRectangleNV = VK_POLYGON_MODE_FILL_RECTANGLE_NV
-  };
+    eFillRectangleNV = VK_POLYGON_MODE_FILL_RECTANGLE_NV};
 
   VULKAN_HPP_INLINE std::string to_string( PolygonMode value )
   {
@@ -7405,8 +7290,7 @@ namespace VULKAN_HPP_NAMESPACE
     eFifo = VK_PRESENT_MODE_FIFO_KHR,
     eFifoRelaxed = VK_PRESENT_MODE_FIFO_RELAXED_KHR,
     eSharedDemandRefresh = VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR,
-    eSharedContinuousRefresh = VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR
-  };
+    eSharedContinuousRefresh = VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( PresentModeKHR value )
   {
@@ -7434,8 +7318,7 @@ namespace VULKAN_HPP_NAMESPACE
     eLineStripWithAdjacency = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY,
     eTriangleListWithAdjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY,
     eTriangleStripWithAdjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY,
-    ePatchList = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST
-  };
+    ePatchList = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST};
 
   VULKAN_HPP_INLINE std::string to_string( PrimitiveTopology value )
   {
@@ -7466,8 +7349,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class QueryControlFlagBits : VkQueryControlFlags
   {
-    ePrecise = VK_QUERY_CONTROL_PRECISE_BIT
-  };
+    ePrecise = VK_QUERY_CONTROL_PRECISE_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( QueryControlFlagBits value )
   {
@@ -7490,8 +7372,7 @@ namespace VULKAN_HPP_NAMESPACE
     eFragmentShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT,
     eTessellationControlShaderPatches = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT,
     eTessellationEvaluationShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
-    eComputeShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT
-  };
+    eComputeShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( QueryPipelineStatisticFlagBits value )
   {
@@ -7522,8 +7403,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class QueryPoolSamplingModeINTEL
   {
-    eManual = VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL
-  };
+    eManual = VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL};
 
   VULKAN_HPP_INLINE std::string to_string( QueryPoolSamplingModeINTEL value )
   {
@@ -7539,8 +7419,7 @@ namespace VULKAN_HPP_NAMESPACE
     e64 = VK_QUERY_RESULT_64_BIT,
     eWait = VK_QUERY_RESULT_WAIT_BIT,
     eWithAvailability = VK_QUERY_RESULT_WITH_AVAILABILITY_BIT,
-    ePartial = VK_QUERY_RESULT_PARTIAL_BIT
-  };
+    ePartial = VK_QUERY_RESULT_PARTIAL_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( QueryResultFlagBits value )
   {
@@ -7564,8 +7443,7 @@ namespace VULKAN_HPP_NAMESPACE
     eAccelerationStructureCompactedSizeKHR = VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR,
     eAccelerationStructureSerializationSizeKHR = VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR,
     eAccelerationStructureCompactedSizeNV = VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV,
-    ePerformanceQueryINTEL = VK_QUERY_TYPE_PERFORMANCE_QUERY_INTEL
-  };
+    ePerformanceQueryINTEL = VK_QUERY_TYPE_PERFORMANCE_QUERY_INTEL};
 
   VULKAN_HPP_INLINE std::string to_string( QueryType value )
   {
@@ -7590,8 +7468,7 @@ namespace VULKAN_HPP_NAMESPACE
     eCompute = VK_QUEUE_COMPUTE_BIT,
     eTransfer = VK_QUEUE_TRANSFER_BIT,
     eSparseBinding = VK_QUEUE_SPARSE_BINDING_BIT,
-    eProtected = VK_QUEUE_PROTECTED_BIT
-  };
+    eProtected = VK_QUEUE_PROTECTED_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( QueueFlagBits value )
   {
@@ -7611,8 +7488,7 @@ namespace VULKAN_HPP_NAMESPACE
     eLow = VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT,
     eMedium = VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT,
     eHigh = VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT,
-    eRealtime = VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT
-  };
+    eRealtime = VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( QueueGlobalPriorityEXT value )
   {
@@ -7629,8 +7505,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class RasterizationOrderAMD
   {
     eStrict = VK_RASTERIZATION_ORDER_STRICT_AMD,
-    eRelaxed = VK_RASTERIZATION_ORDER_RELAXED_AMD
-  };
+    eRelaxed = VK_RASTERIZATION_ORDER_RELAXED_AMD};
 
   VULKAN_HPP_INLINE std::string to_string( RasterizationOrderAMD value )
   {
@@ -7646,8 +7521,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eGeneral = VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR,
     eTrianglesHitGroup = VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR,
-    eProceduralHitGroup = VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR
-  };
+    eProceduralHitGroup = VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR};
   using RayTracingShaderGroupTypeNV = RayTracingShaderGroupTypeKHR;
 
   VULKAN_HPP_INLINE std::string to_string( RayTracingShaderGroupTypeKHR value )
@@ -7663,8 +7537,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class RenderPassCreateFlagBits : VkRenderPassCreateFlags
   {
-    eTransformQCOM = VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM
-  };
+    eTransformQCOM = VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM};
 
   VULKAN_HPP_INLINE std::string to_string( RenderPassCreateFlagBits value )
   {
@@ -7681,8 +7554,7 @@ namespace VULKAN_HPP_NAMESPACE
     eSampleZero = VK_RESOLVE_MODE_SAMPLE_ZERO_BIT,
     eAverage = VK_RESOLVE_MODE_AVERAGE_BIT,
     eMin = VK_RESOLVE_MODE_MIN_BIT,
-    eMax = VK_RESOLVE_MODE_MAX_BIT
-  };
+    eMax = VK_RESOLVE_MODE_MAX_BIT};
   using ResolveModeFlagBitsKHR = ResolveModeFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ResolveModeFlagBits value )
@@ -7732,7 +7604,9 @@ namespace VULKAN_HPP_NAMESPACE
     eErrorInvalidShaderNV = VK_ERROR_INVALID_SHADER_NV,
     eErrorInvalidDrmFormatModifierPlaneLayoutEXT = VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT,
     eErrorNotPermittedEXT = VK_ERROR_NOT_PERMITTED_EXT,
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eErrorFullScreenExclusiveModeLostEXT = VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
     eThreadIdleKHR = VK_THREAD_IDLE_KHR,
     eThreadDoneKHR = VK_THREAD_DONE_KHR,
     eOperationDeferredKHR = VK_OPERATION_DEFERRED_KHR,
@@ -7743,8 +7617,7 @@ namespace VULKAN_HPP_NAMESPACE
     eErrorInvalidExternalHandleKHR = VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR,
     eErrorInvalidOpaqueCaptureAddressKHR = VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR,
     eErrorOutOfPoolMemoryKHR = VK_ERROR_OUT_OF_POOL_MEMORY_KHR,
-    eErrorPipelineCompileRequiredEXT = VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT
-  };
+    eErrorPipelineCompileRequiredEXT = VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( Result value )
   {
@@ -7782,7 +7655,9 @@ namespace VULKAN_HPP_NAMESPACE
       case Result::eErrorInvalidShaderNV : return "ErrorInvalidShaderNV";
       case Result::eErrorInvalidDrmFormatModifierPlaneLayoutEXT : return "ErrorInvalidDrmFormatModifierPlaneLayoutEXT";
       case Result::eErrorNotPermittedEXT : return "ErrorNotPermittedEXT";
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case Result::eErrorFullScreenExclusiveModeLostEXT : return "ErrorFullScreenExclusiveModeLostEXT";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case Result::eThreadIdleKHR : return "ThreadIdleKHR";
       case Result::eThreadDoneKHR : return "ThreadDoneKHR";
       case Result::eOperationDeferredKHR : return "OperationDeferredKHR";
@@ -7800,8 +7675,7 @@ namespace VULKAN_HPP_NAMESPACE
     e8 = VK_SAMPLE_COUNT_8_BIT,
     e16 = VK_SAMPLE_COUNT_16_BIT,
     e32 = VK_SAMPLE_COUNT_32_BIT,
-    e64 = VK_SAMPLE_COUNT_64_BIT
-  };
+    e64 = VK_SAMPLE_COUNT_64_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( SampleCountFlagBits value )
   {
@@ -7825,8 +7699,7 @@ namespace VULKAN_HPP_NAMESPACE
     eClampToEdge = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
     eClampToBorder = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
     eMirrorClampToEdge = VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE,
-    eMirrorClampToEdgeKHR = VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR
-  };
+    eMirrorClampToEdgeKHR = VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( SamplerAddressMode value )
   {
@@ -7844,8 +7717,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class SamplerCreateFlagBits : VkSamplerCreateFlags
   {
     eSubsampledEXT = VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT,
-    eSubsampledCoarseReconstructionEXT = VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT
-  };
+    eSubsampledCoarseReconstructionEXT = VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( SamplerCreateFlagBits value )
   {
@@ -7860,8 +7732,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class SamplerMipmapMode
   {
     eNearest = VK_SAMPLER_MIPMAP_MODE_NEAREST,
-    eLinear = VK_SAMPLER_MIPMAP_MODE_LINEAR
-  };
+    eLinear = VK_SAMPLER_MIPMAP_MODE_LINEAR};
 
   VULKAN_HPP_INLINE std::string to_string( SamplerMipmapMode value )
   {
@@ -7877,8 +7748,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eWeightedAverage = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE,
     eMin = VK_SAMPLER_REDUCTION_MODE_MIN,
-    eMax = VK_SAMPLER_REDUCTION_MODE_MAX
-  };
+    eMax = VK_SAMPLER_REDUCTION_MODE_MAX};
   using SamplerReductionModeEXT = SamplerReductionMode;
 
   VULKAN_HPP_INLINE std::string to_string( SamplerReductionMode value )
@@ -7898,8 +7768,7 @@ namespace VULKAN_HPP_NAMESPACE
     eYcbcrIdentity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY,
     eYcbcr709 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709,
     eYcbcr601 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601,
-    eYcbcr2020 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020
-  };
+    eYcbcr2020 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020};
   using SamplerYcbcrModelConversionKHR = SamplerYcbcrModelConversion;
 
   VULKAN_HPP_INLINE std::string to_string( SamplerYcbcrModelConversion value )
@@ -7918,8 +7787,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class SamplerYcbcrRange
   {
     eItuFull = VK_SAMPLER_YCBCR_RANGE_ITU_FULL,
-    eItuNarrow = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW
-  };
+    eItuNarrow = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW};
   using SamplerYcbcrRangeKHR = SamplerYcbcrRange;
 
   VULKAN_HPP_INLINE std::string to_string( SamplerYcbcrRange value )
@@ -7937,8 +7805,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDevice = VK_SCOPE_DEVICE_NV,
     eWorkgroup = VK_SCOPE_WORKGROUP_NV,
     eSubgroup = VK_SCOPE_SUBGROUP_NV,
-    eQueueFamily = VK_SCOPE_QUEUE_FAMILY_NV
-  };
+    eQueueFamily = VK_SCOPE_QUEUE_FAMILY_NV};
 
   VULKAN_HPP_INLINE std::string to_string( ScopeNV value )
   {
@@ -7954,8 +7821,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SemaphoreImportFlagBits : VkSemaphoreImportFlags
   {
-    eTemporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT
-  };
+    eTemporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT};
   using SemaphoreImportFlagBitsKHR = SemaphoreImportFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( SemaphoreImportFlagBits value )
@@ -7970,8 +7836,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class SemaphoreType
   {
     eBinary = VK_SEMAPHORE_TYPE_BINARY,
-    eTimeline = VK_SEMAPHORE_TYPE_TIMELINE
-  };
+    eTimeline = VK_SEMAPHORE_TYPE_TIMELINE};
   using SemaphoreTypeKHR = SemaphoreType;
 
   VULKAN_HPP_INLINE std::string to_string( SemaphoreType value )
@@ -7986,8 +7851,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SemaphoreWaitFlagBits : VkSemaphoreWaitFlags
   {
-    eAny = VK_SEMAPHORE_WAIT_ANY_BIT
-  };
+    eAny = VK_SEMAPHORE_WAIT_ANY_BIT};
   using SemaphoreWaitFlagBitsKHR = SemaphoreWaitFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( SemaphoreWaitFlagBits value )
@@ -8011,8 +7875,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     e32BitOnly = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY,
     eAll = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL,
-    eNone = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE
-  };
+    eNone = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE};
   using ShaderFloatControlsIndependenceKHR = ShaderFloatControlsIndependence;
 
   VULKAN_HPP_INLINE std::string to_string( ShaderFloatControlsIndependence value )
@@ -8031,8 +7894,7 @@ namespace VULKAN_HPP_NAMESPACE
     eGeneral = VK_SHADER_GROUP_SHADER_GENERAL_KHR,
     eClosestHit = VK_SHADER_GROUP_SHADER_CLOSEST_HIT_KHR,
     eAnyHit = VK_SHADER_GROUP_SHADER_ANY_HIT_KHR,
-    eIntersection = VK_SHADER_GROUP_SHADER_INTERSECTION_KHR
-  };
+    eIntersection = VK_SHADER_GROUP_SHADER_INTERSECTION_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( ShaderGroupShaderKHR value )
   {
@@ -8050,8 +7912,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eStatistics = VK_SHADER_INFO_TYPE_STATISTICS_AMD,
     eBinary = VK_SHADER_INFO_TYPE_BINARY_AMD,
-    eDisassembly = VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD
-  };
+    eDisassembly = VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD};
 
   VULKAN_HPP_INLINE std::string to_string( ShaderInfoTypeAMD value )
   {
@@ -8095,8 +7956,7 @@ namespace VULKAN_HPP_NAMESPACE
     eClosestHitNV = VK_SHADER_STAGE_CLOSEST_HIT_BIT_NV,
     eIntersectionNV = VK_SHADER_STAGE_INTERSECTION_BIT_NV,
     eMissNV = VK_SHADER_STAGE_MISS_BIT_NV,
-    eRaygenNV = VK_SHADER_STAGE_RAYGEN_BIT_NV
-  };
+    eRaygenNV = VK_SHADER_STAGE_RAYGEN_BIT_NV};
 
   VULKAN_HPP_INLINE std::string to_string( ShaderStageFlagBits value )
   {
@@ -8135,8 +7995,7 @@ namespace VULKAN_HPP_NAMESPACE
     e1InvocationPer2X2Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X2_PIXELS_NV,
     e1InvocationPer4X2Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X2_PIXELS_NV,
     e1InvocationPer2X4Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X4_PIXELS_NV,
-    e1InvocationPer4X4Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV
-  };
+    e1InvocationPer4X4Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV};
 
   VULKAN_HPP_INLINE std::string to_string( ShadingRatePaletteEntryNV value )
   {
@@ -8161,8 +8020,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class SharingMode
   {
     eExclusive = VK_SHARING_MODE_EXCLUSIVE,
-    eConcurrent = VK_SHARING_MODE_CONCURRENT
-  };
+    eConcurrent = VK_SHARING_MODE_CONCURRENT};
 
   VULKAN_HPP_INLINE std::string to_string( SharingMode value )
   {
@@ -8178,8 +8036,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eSingleMiptail = VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT,
     eAlignedMipSize = VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT,
-    eNonstandardBlockSize = VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT
-  };
+    eNonstandardBlockSize = VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( SparseImageFormatFlagBits value )
   {
@@ -8194,8 +8051,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SparseMemoryBindFlagBits : VkSparseMemoryBindFlags
   {
-    eMetadata = VK_SPARSE_MEMORY_BIND_METADATA_BIT
-  };
+    eMetadata = VK_SPARSE_MEMORY_BIND_METADATA_BIT};
 
   VULKAN_HPP_INLINE std::string to_string( SparseMemoryBindFlagBits value )
   {
@@ -8211,8 +8067,7 @@ namespace VULKAN_HPP_NAMESPACE
     eFront = VK_STENCIL_FACE_FRONT_BIT,
     eBack = VK_STENCIL_FACE_BACK_BIT,
     eFrontAndBack = VK_STENCIL_FACE_FRONT_AND_BACK,
-    eVkStencilFrontAndBack = VK_STENCIL_FRONT_AND_BACK
-  };
+    eVkStencilFrontAndBack = VK_STENCIL_FRONT_AND_BACK};
 
   VULKAN_HPP_INLINE std::string to_string( StencilFaceFlagBits value )
   {
@@ -8234,8 +8089,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDecrementAndClamp = VK_STENCIL_OP_DECREMENT_AND_CLAMP,
     eInvert = VK_STENCIL_OP_INVERT,
     eIncrementAndWrap = VK_STENCIL_OP_INCREMENT_AND_WRAP,
-    eDecrementAndWrap = VK_STENCIL_OP_DECREMENT_AND_WRAP
-  };
+    eDecrementAndWrap = VK_STENCIL_OP_DECREMENT_AND_WRAP};
 
   VULKAN_HPP_INLINE std::string to_string( StencilOp value )
   {
@@ -8430,11 +8284,21 @@ namespace VULKAN_HPP_NAMESPACE
     eDisplayModeCreateInfoKHR = VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR,
     eDisplaySurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR,
     eDisplayPresentInfoKHR = VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR,
+#ifdef VK_USE_PLATFORM_XLIB_KHR
     eXlibSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_XLIB_KHR*/
+#ifdef VK_USE_PLATFORM_XCB_KHR
     eXcbSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_XCB_KHR*/
+#ifdef VK_USE_PLATFORM_WAYLAND_KHR
     eWaylandSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
     eAndroidSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eWin32SurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
     eDebugReportCallbackCreateInfoEXT = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
     ePipelineRasterizationStateRasterizationOrderAMD = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD,
     eDebugMarkerObjectNameInfoEXT = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT,
@@ -8449,30 +8313,58 @@ namespace VULKAN_HPP_NAMESPACE
     eImageViewHandleInfoNVX = VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX,
     eImageViewAddressPropertiesNVX = VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX,
     eTextureLodGatherFormatPropertiesAMD = VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD,
+#ifdef VK_USE_PLATFORM_GGP
     eStreamDescriptorSurfaceCreateInfoGGP = VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP,
+#endif /*VK_USE_PLATFORM_GGP*/
     ePhysicalDeviceCornerSampledImageFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV,
     eExternalMemoryImageCreateInfoNV = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV,
     eExportMemoryAllocateInfoNV = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV,
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eImportMemoryWin32HandleInfoNV = VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eExportMemoryWin32HandleInfoNV = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eWin32KeyedMutexAcquireReleaseInfoNV = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
     eValidationFlagsEXT = VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT,
+#ifdef VK_USE_PLATFORM_VI_NN
     eViSurfaceCreateInfoNN = VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN,
+#endif /*VK_USE_PLATFORM_VI_NN*/
     ePhysicalDeviceTextureCompressionAstcHdrFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT,
     eImageViewAstcDecodeModeEXT = VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT,
     ePhysicalDeviceAstcDecodeFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT,
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eImportMemoryWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eExportMemoryWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eMemoryWin32HandlePropertiesKHR = VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eMemoryGetWin32HandleInfoKHR = VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
     eImportMemoryFdInfoKHR = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR,
     eMemoryFdPropertiesKHR = VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR,
     eMemoryGetFdInfoKHR = VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR,
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eWin32KeyedMutexAcquireReleaseInfoKHR = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eImportSemaphoreWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eExportSemaphoreWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eD3D12FenceSubmitInfoKHR = VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eSemaphoreGetWin32HandleInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
     eImportSemaphoreFdInfoKHR = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR,
     eSemaphoreGetFdInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR,
     ePhysicalDevicePushDescriptorPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR,
@@ -8497,9 +8389,15 @@ namespace VULKAN_HPP_NAMESPACE
     ePipelineRasterizationDepthClipStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT,
     eHdrMetadataEXT = VK_STRUCTURE_TYPE_HDR_METADATA_EXT,
     eSharedPresentSurfaceCapabilitiesKHR = VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR,
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eImportFenceWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eExportFenceWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eFenceGetWin32HandleInfoKHR = VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
     eImportFenceFdInfoKHR = VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR,
     eFenceGetFdInfoKHR = VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR,
     ePhysicalDevicePerformanceQueryFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR,
@@ -8517,19 +8415,35 @@ namespace VULKAN_HPP_NAMESPACE
     eDisplayModeProperties2KHR = VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR,
     eDisplayPlaneInfo2KHR = VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR,
     eDisplayPlaneCapabilities2KHR = VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR,
+#ifdef VK_USE_PLATFORM_IOS_MVK
     eIosSurfaceCreateInfoMVK = VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK,
+#endif /*VK_USE_PLATFORM_IOS_MVK*/
+#ifdef VK_USE_PLATFORM_MACOS_MVK
     eMacosSurfaceCreateInfoMVK = VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK,
+#endif /*VK_USE_PLATFORM_MACOS_MVK*/
     eDebugUtilsObjectNameInfoEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT,
     eDebugUtilsObjectTagInfoEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT,
     eDebugUtilsLabelEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT,
     eDebugUtilsMessengerCallbackDataEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT,
     eDebugUtilsMessengerCreateInfoEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
     eAndroidHardwareBufferUsageANDROID = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID,
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
     eAndroidHardwareBufferPropertiesANDROID = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID,
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
     eAndroidHardwareBufferFormatPropertiesANDROID = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID,
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
     eImportAndroidHardwareBufferInfoANDROID = VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID,
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
     eMemoryGetAndroidHardwareBufferInfoANDROID = VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID,
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
     eExternalFormatANDROID = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID,
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
     ePhysicalDeviceInlineUniformBlockFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,
     ePhysicalDeviceInlineUniformBlockPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,
     eWriteDescriptorSetInlineUniformBlockEXT = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT,
@@ -8574,8 +8488,12 @@ namespace VULKAN_HPP_NAMESPACE
     eImageDrmFormatModifierPropertiesEXT = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT,
     eValidationCacheCreateInfoEXT = VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT,
     eShaderModuleValidationCacheCreateInfoEXT = VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT,
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     ePhysicalDevicePortabilitySubsetFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR,
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     ePhysicalDevicePortabilitySubsetPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR,
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
     ePipelineViewportShadingRateImageStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV,
     ePhysicalDeviceShadingRateImageFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV,
     ePhysicalDeviceShadingRateImagePropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV,
@@ -8607,7 +8525,9 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceVertexAttributeDivisorPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
     ePipelineVertexInputDivisorStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT,
     ePhysicalDeviceVertexAttributeDivisorFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
+#ifdef VK_USE_PLATFORM_GGP
     ePresentFrameTokenGGP = VK_STRUCTURE_TYPE_PRESENT_FRAME_TOKEN_GGP,
+#endif /*VK_USE_PLATFORM_GGP*/
     ePipelineCreationFeedbackCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT,
     ePhysicalDeviceComputeShaderDerivativesFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV,
     ePhysicalDeviceMeshShaderFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV,
@@ -8628,9 +8548,13 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDevicePciBusInfoPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT,
     eDisplayNativeHdrSurfaceCapabilitiesAMD = VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD,
     eSwapchainDisplayNativeHdrCreateInfoAMD = VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD,
+#ifdef VK_USE_PLATFORM_FUCHSIA
     eImagepipeSurfaceCreateInfoFUCHSIA = VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA,
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
     ePhysicalDeviceShaderTerminateInvocationFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR,
+#ifdef VK_USE_PLATFORM_METAL_EXT
     eMetalSurfaceCreateInfoEXT = VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT,
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
     ePhysicalDeviceFragmentDensityMapFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT,
     ePhysicalDeviceFragmentDensityMapPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT,
     eRenderPassFragmentDensityMapCreateInfoEXT = VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT,
@@ -8662,9 +8586,15 @@ namespace VULKAN_HPP_NAMESPACE
     eFramebufferMixedSamplesCombinationNV = VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV,
     ePhysicalDeviceFragmentShaderInterlockFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT,
     ePhysicalDeviceYcbcrImageArraysFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT,
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eSurfaceFullScreenExclusiveInfoEXT = VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eSurfaceCapabilitiesFullScreenExclusiveEXT = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
     eSurfaceFullScreenExclusiveWin32InfoEXT = VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT,
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
     eHeadlessSurfaceCreateInfoEXT = VK_STRUCTURE_TYPE_HEADLESS_SURFACE_CREATE_INFO_EXT,
     ePhysicalDeviceLineRasterizationFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT,
     ePipelineRasterizationLineStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT,
@@ -8727,7 +8657,9 @@ namespace VULKAN_HPP_NAMESPACE
     eBufferImageCopy2KHR = VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR,
     eImageResolve2KHR = VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR,
     ePhysicalDevice4444FormatsFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT,
+#ifdef VK_USE_PLATFORM_DIRECTFB_EXT
     eDirectfbSurfaceCreateInfoEXT = VK_STRUCTURE_TYPE_DIRECTFB_SURFACE_CREATE_INFO_EXT,
+#endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
     ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE,
     eMutableDescriptorTypeCreateInfoVALVE = VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE,
     eAttachmentDescription2KHR = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR,
@@ -8842,8 +8774,7 @@ namespace VULKAN_HPP_NAMESPACE
     eSubpassDescription2KHR = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR,
     eSubpassDescriptionDepthStencilResolveKHR = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR,
     eSubpassEndInfoKHR = VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR,
-    eTimelineSemaphoreSubmitInfoKHR = VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR
-  };
+    eTimelineSemaphoreSubmitInfoKHR = VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( StructureType value )
   {
@@ -9024,11 +8955,21 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eDisplayModeCreateInfoKHR : return "DisplayModeCreateInfoKHR";
       case StructureType::eDisplaySurfaceCreateInfoKHR : return "DisplaySurfaceCreateInfoKHR";
       case StructureType::eDisplayPresentInfoKHR : return "DisplayPresentInfoKHR";
+#ifdef VK_USE_PLATFORM_XLIB_KHR
       case StructureType::eXlibSurfaceCreateInfoKHR : return "XlibSurfaceCreateInfoKHR";
+#endif /*VK_USE_PLATFORM_XLIB_KHR*/
+#ifdef VK_USE_PLATFORM_XCB_KHR
       case StructureType::eXcbSurfaceCreateInfoKHR : return "XcbSurfaceCreateInfoKHR";
+#endif /*VK_USE_PLATFORM_XCB_KHR*/
+#ifdef VK_USE_PLATFORM_WAYLAND_KHR
       case StructureType::eWaylandSurfaceCreateInfoKHR : return "WaylandSurfaceCreateInfoKHR";
+#endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eAndroidSurfaceCreateInfoKHR : return "AndroidSurfaceCreateInfoKHR";
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eWin32SurfaceCreateInfoKHR : return "Win32SurfaceCreateInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eDebugReportCallbackCreateInfoEXT : return "DebugReportCallbackCreateInfoEXT";
       case StructureType::ePipelineRasterizationStateRasterizationOrderAMD : return "PipelineRasterizationStateRasterizationOrderAMD";
       case StructureType::eDebugMarkerObjectNameInfoEXT : return "DebugMarkerObjectNameInfoEXT";
@@ -9043,30 +8984,58 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eImageViewHandleInfoNVX : return "ImageViewHandleInfoNVX";
       case StructureType::eImageViewAddressPropertiesNVX : return "ImageViewAddressPropertiesNVX";
       case StructureType::eTextureLodGatherFormatPropertiesAMD : return "TextureLodGatherFormatPropertiesAMD";
+#ifdef VK_USE_PLATFORM_GGP
       case StructureType::eStreamDescriptorSurfaceCreateInfoGGP : return "StreamDescriptorSurfaceCreateInfoGGP";
+#endif /*VK_USE_PLATFORM_GGP*/
       case StructureType::ePhysicalDeviceCornerSampledImageFeaturesNV : return "PhysicalDeviceCornerSampledImageFeaturesNV";
       case StructureType::eExternalMemoryImageCreateInfoNV : return "ExternalMemoryImageCreateInfoNV";
       case StructureType::eExportMemoryAllocateInfoNV : return "ExportMemoryAllocateInfoNV";
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eImportMemoryWin32HandleInfoNV : return "ImportMemoryWin32HandleInfoNV";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eExportMemoryWin32HandleInfoNV : return "ExportMemoryWin32HandleInfoNV";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eWin32KeyedMutexAcquireReleaseInfoNV : return "Win32KeyedMutexAcquireReleaseInfoNV";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eValidationFlagsEXT : return "ValidationFlagsEXT";
+#ifdef VK_USE_PLATFORM_VI_NN
       case StructureType::eViSurfaceCreateInfoNN : return "ViSurfaceCreateInfoNN";
+#endif /*VK_USE_PLATFORM_VI_NN*/
       case StructureType::ePhysicalDeviceTextureCompressionAstcHdrFeaturesEXT : return "PhysicalDeviceTextureCompressionAstcHdrFeaturesEXT";
       case StructureType::eImageViewAstcDecodeModeEXT : return "ImageViewAstcDecodeModeEXT";
       case StructureType::ePhysicalDeviceAstcDecodeFeaturesEXT : return "PhysicalDeviceAstcDecodeFeaturesEXT";
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eImportMemoryWin32HandleInfoKHR : return "ImportMemoryWin32HandleInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eExportMemoryWin32HandleInfoKHR : return "ExportMemoryWin32HandleInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eMemoryWin32HandlePropertiesKHR : return "MemoryWin32HandlePropertiesKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eMemoryGetWin32HandleInfoKHR : return "MemoryGetWin32HandleInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eImportMemoryFdInfoKHR : return "ImportMemoryFdInfoKHR";
       case StructureType::eMemoryFdPropertiesKHR : return "MemoryFdPropertiesKHR";
       case StructureType::eMemoryGetFdInfoKHR : return "MemoryGetFdInfoKHR";
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eWin32KeyedMutexAcquireReleaseInfoKHR : return "Win32KeyedMutexAcquireReleaseInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eImportSemaphoreWin32HandleInfoKHR : return "ImportSemaphoreWin32HandleInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eExportSemaphoreWin32HandleInfoKHR : return "ExportSemaphoreWin32HandleInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eD3D12FenceSubmitInfoKHR : return "D3D12FenceSubmitInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eSemaphoreGetWin32HandleInfoKHR : return "SemaphoreGetWin32HandleInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eImportSemaphoreFdInfoKHR : return "ImportSemaphoreFdInfoKHR";
       case StructureType::eSemaphoreGetFdInfoKHR : return "SemaphoreGetFdInfoKHR";
       case StructureType::ePhysicalDevicePushDescriptorPropertiesKHR : return "PhysicalDevicePushDescriptorPropertiesKHR";
@@ -9091,9 +9060,15 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePipelineRasterizationDepthClipStateCreateInfoEXT : return "PipelineRasterizationDepthClipStateCreateInfoEXT";
       case StructureType::eHdrMetadataEXT : return "HdrMetadataEXT";
       case StructureType::eSharedPresentSurfaceCapabilitiesKHR : return "SharedPresentSurfaceCapabilitiesKHR";
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eImportFenceWin32HandleInfoKHR : return "ImportFenceWin32HandleInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eExportFenceWin32HandleInfoKHR : return "ExportFenceWin32HandleInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eFenceGetWin32HandleInfoKHR : return "FenceGetWin32HandleInfoKHR";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eImportFenceFdInfoKHR : return "ImportFenceFdInfoKHR";
       case StructureType::eFenceGetFdInfoKHR : return "FenceGetFdInfoKHR";
       case StructureType::ePhysicalDevicePerformanceQueryFeaturesKHR : return "PhysicalDevicePerformanceQueryFeaturesKHR";
@@ -9111,19 +9086,35 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eDisplayModeProperties2KHR : return "DisplayModeProperties2KHR";
       case StructureType::eDisplayPlaneInfo2KHR : return "DisplayPlaneInfo2KHR";
       case StructureType::eDisplayPlaneCapabilities2KHR : return "DisplayPlaneCapabilities2KHR";
+#ifdef VK_USE_PLATFORM_IOS_MVK
       case StructureType::eIosSurfaceCreateInfoMVK : return "IosSurfaceCreateInfoMVK";
+#endif /*VK_USE_PLATFORM_IOS_MVK*/
+#ifdef VK_USE_PLATFORM_MACOS_MVK
       case StructureType::eMacosSurfaceCreateInfoMVK : return "MacosSurfaceCreateInfoMVK";
+#endif /*VK_USE_PLATFORM_MACOS_MVK*/
       case StructureType::eDebugUtilsObjectNameInfoEXT : return "DebugUtilsObjectNameInfoEXT";
       case StructureType::eDebugUtilsObjectTagInfoEXT : return "DebugUtilsObjectTagInfoEXT";
       case StructureType::eDebugUtilsLabelEXT : return "DebugUtilsLabelEXT";
       case StructureType::eDebugUtilsMessengerCallbackDataEXT : return "DebugUtilsMessengerCallbackDataEXT";
       case StructureType::eDebugUtilsMessengerCreateInfoEXT : return "DebugUtilsMessengerCreateInfoEXT";
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eAndroidHardwareBufferUsageANDROID : return "AndroidHardwareBufferUsageANDROID";
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eAndroidHardwareBufferPropertiesANDROID : return "AndroidHardwareBufferPropertiesANDROID";
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eAndroidHardwareBufferFormatPropertiesANDROID : return "AndroidHardwareBufferFormatPropertiesANDROID";
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eImportAndroidHardwareBufferInfoANDROID : return "ImportAndroidHardwareBufferInfoANDROID";
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eMemoryGetAndroidHardwareBufferInfoANDROID : return "MemoryGetAndroidHardwareBufferInfoANDROID";
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eExternalFormatANDROID : return "ExternalFormatANDROID";
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
       case StructureType::ePhysicalDeviceInlineUniformBlockFeaturesEXT : return "PhysicalDeviceInlineUniformBlockFeaturesEXT";
       case StructureType::ePhysicalDeviceInlineUniformBlockPropertiesEXT : return "PhysicalDeviceInlineUniformBlockPropertiesEXT";
       case StructureType::eWriteDescriptorSetInlineUniformBlockEXT : return "WriteDescriptorSetInlineUniformBlockEXT";
@@ -9168,8 +9159,12 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eImageDrmFormatModifierPropertiesEXT : return "ImageDrmFormatModifierPropertiesEXT";
       case StructureType::eValidationCacheCreateInfoEXT : return "ValidationCacheCreateInfoEXT";
       case StructureType::eShaderModuleValidationCacheCreateInfoEXT : return "ShaderModuleValidationCacheCreateInfoEXT";
+#ifdef VK_ENABLE_BETA_EXTENSIONS
       case StructureType::ePhysicalDevicePortabilitySubsetFeaturesKHR : return "PhysicalDevicePortabilitySubsetFeaturesKHR";
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#ifdef VK_ENABLE_BETA_EXTENSIONS
       case StructureType::ePhysicalDevicePortabilitySubsetPropertiesKHR : return "PhysicalDevicePortabilitySubsetPropertiesKHR";
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       case StructureType::ePipelineViewportShadingRateImageStateCreateInfoNV : return "PipelineViewportShadingRateImageStateCreateInfoNV";
       case StructureType::ePhysicalDeviceShadingRateImageFeaturesNV : return "PhysicalDeviceShadingRateImageFeaturesNV";
       case StructureType::ePhysicalDeviceShadingRateImagePropertiesNV : return "PhysicalDeviceShadingRateImagePropertiesNV";
@@ -9201,7 +9196,9 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceVertexAttributeDivisorPropertiesEXT : return "PhysicalDeviceVertexAttributeDivisorPropertiesEXT";
       case StructureType::ePipelineVertexInputDivisorStateCreateInfoEXT : return "PipelineVertexInputDivisorStateCreateInfoEXT";
       case StructureType::ePhysicalDeviceVertexAttributeDivisorFeaturesEXT : return "PhysicalDeviceVertexAttributeDivisorFeaturesEXT";
+#ifdef VK_USE_PLATFORM_GGP
       case StructureType::ePresentFrameTokenGGP : return "PresentFrameTokenGGP";
+#endif /*VK_USE_PLATFORM_GGP*/
       case StructureType::ePipelineCreationFeedbackCreateInfoEXT : return "PipelineCreationFeedbackCreateInfoEXT";
       case StructureType::ePhysicalDeviceComputeShaderDerivativesFeaturesNV : return "PhysicalDeviceComputeShaderDerivativesFeaturesNV";
       case StructureType::ePhysicalDeviceMeshShaderFeaturesNV : return "PhysicalDeviceMeshShaderFeaturesNV";
@@ -9222,9 +9219,13 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDevicePciBusInfoPropertiesEXT : return "PhysicalDevicePciBusInfoPropertiesEXT";
       case StructureType::eDisplayNativeHdrSurfaceCapabilitiesAMD : return "DisplayNativeHdrSurfaceCapabilitiesAMD";
       case StructureType::eSwapchainDisplayNativeHdrCreateInfoAMD : return "SwapchainDisplayNativeHdrCreateInfoAMD";
+#ifdef VK_USE_PLATFORM_FUCHSIA
       case StructureType::eImagepipeSurfaceCreateInfoFUCHSIA : return "ImagepipeSurfaceCreateInfoFUCHSIA";
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
       case StructureType::ePhysicalDeviceShaderTerminateInvocationFeaturesKHR : return "PhysicalDeviceShaderTerminateInvocationFeaturesKHR";
+#ifdef VK_USE_PLATFORM_METAL_EXT
       case StructureType::eMetalSurfaceCreateInfoEXT : return "MetalSurfaceCreateInfoEXT";
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
       case StructureType::ePhysicalDeviceFragmentDensityMapFeaturesEXT : return "PhysicalDeviceFragmentDensityMapFeaturesEXT";
       case StructureType::ePhysicalDeviceFragmentDensityMapPropertiesEXT : return "PhysicalDeviceFragmentDensityMapPropertiesEXT";
       case StructureType::eRenderPassFragmentDensityMapCreateInfoEXT : return "RenderPassFragmentDensityMapCreateInfoEXT";
@@ -9256,9 +9257,15 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eFramebufferMixedSamplesCombinationNV : return "FramebufferMixedSamplesCombinationNV";
       case StructureType::ePhysicalDeviceFragmentShaderInterlockFeaturesEXT : return "PhysicalDeviceFragmentShaderInterlockFeaturesEXT";
       case StructureType::ePhysicalDeviceYcbcrImageArraysFeaturesEXT : return "PhysicalDeviceYcbcrImageArraysFeaturesEXT";
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eSurfaceFullScreenExclusiveInfoEXT : return "SurfaceFullScreenExclusiveInfoEXT";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eSurfaceCapabilitiesFullScreenExclusiveEXT : return "SurfaceCapabilitiesFullScreenExclusiveEXT";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eSurfaceFullScreenExclusiveWin32InfoEXT : return "SurfaceFullScreenExclusiveWin32InfoEXT";
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eHeadlessSurfaceCreateInfoEXT : return "HeadlessSurfaceCreateInfoEXT";
       case StructureType::ePhysicalDeviceLineRasterizationFeaturesEXT : return "PhysicalDeviceLineRasterizationFeaturesEXT";
       case StructureType::ePipelineRasterizationLineStateCreateInfoEXT : return "PipelineRasterizationLineStateCreateInfoEXT";
@@ -9321,7 +9328,9 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eBufferImageCopy2KHR : return "BufferImageCopy2KHR";
       case StructureType::eImageResolve2KHR : return "ImageResolve2KHR";
       case StructureType::ePhysicalDevice4444FormatsFeaturesEXT : return "PhysicalDevice4444FormatsFeaturesEXT";
+#ifdef VK_USE_PLATFORM_DIRECTFB_EXT
       case StructureType::eDirectfbSurfaceCreateInfoEXT : return "DirectfbSurfaceCreateInfoEXT";
+#endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
       case StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE : return "PhysicalDeviceMutableDescriptorTypeFeaturesVALVE";
       case StructureType::eMutableDescriptorTypeCreateInfoVALVE : return "MutableDescriptorTypeCreateInfoVALVE";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
@@ -9338,8 +9347,7 @@ namespace VULKAN_HPP_NAMESPACE
     eShuffleRelative = VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT,
     eClustered = VK_SUBGROUP_FEATURE_CLUSTERED_BIT,
     eQuad = VK_SUBGROUP_FEATURE_QUAD_BIT,
-    ePartitionedNV = VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV
-  };
+    ePartitionedNV = VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV};
 
   VULKAN_HPP_INLINE std::string to_string( SubgroupFeatureFlagBits value )
   {
@@ -9361,8 +9369,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class SubpassContents
   {
     eInline = VK_SUBPASS_CONTENTS_INLINE,
-    eSecondaryCommandBuffers = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS
-  };
+    eSecondaryCommandBuffers = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS};
 
   VULKAN_HPP_INLINE std::string to_string( SubpassContents value )
   {
@@ -9379,8 +9386,7 @@ namespace VULKAN_HPP_NAMESPACE
     ePerViewAttributesNVX = VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX,
     ePerViewPositionXOnlyNVX = VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX,
     eFragmentRegionQCOM = VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM,
-    eShaderResolveQCOM = VK_SUBPASS_DESCRIPTION_SHADER_RESOLVE_BIT_QCOM
-  };
+    eShaderResolveQCOM = VK_SUBPASS_DESCRIPTION_SHADER_RESOLVE_BIT_QCOM};
 
   VULKAN_HPP_INLINE std::string to_string( SubpassDescriptionFlagBits value )
   {
@@ -9396,8 +9402,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SurfaceCounterFlagBitsEXT : VkSurfaceCounterFlagsEXT
   {
-    eVblank = VK_SURFACE_COUNTER_VBLANK_BIT_EXT
-  };
+    eVblank = VK_SURFACE_COUNTER_VBLANK_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( SurfaceCounterFlagBitsEXT value )
   {
@@ -9418,8 +9423,7 @@ namespace VULKAN_HPP_NAMESPACE
     eHorizontalMirrorRotate90 = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR,
     eHorizontalMirrorRotate180 = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR,
     eHorizontalMirrorRotate270 = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR,
-    eInherit = VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR
-  };
+    eInherit = VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( SurfaceTransformFlagBitsKHR value )
   {
@@ -9442,8 +9446,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eSplitInstanceBindRegions = VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR,
     eProtected = VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR,
-    eMutableFormat = VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR
-  };
+    eMutableFormat = VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR};
 
   VULKAN_HPP_INLINE std::string to_string( SwapchainCreateFlagBitsKHR value )
   {
@@ -9462,8 +9465,7 @@ namespace VULKAN_HPP_NAMESPACE
     eObject = VK_SYSTEM_ALLOCATION_SCOPE_OBJECT,
     eCache = VK_SYSTEM_ALLOCATION_SCOPE_CACHE,
     eDevice = VK_SYSTEM_ALLOCATION_SCOPE_DEVICE,
-    eInstance = VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE
-  };
+    eInstance = VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE};
 
   VULKAN_HPP_INLINE std::string to_string( SystemAllocationScope value )
   {
@@ -9481,8 +9483,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class TessellationDomainOrigin
   {
     eUpperLeft = VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT,
-    eLowerLeft = VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT
-  };
+    eLowerLeft = VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT};
   using TessellationDomainOriginKHR = TessellationDomainOrigin;
 
   VULKAN_HPP_INLINE std::string to_string( TessellationDomainOrigin value )
@@ -9500,8 +9501,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDevice = VK_TIME_DOMAIN_DEVICE_EXT,
     eClockMonotonic = VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT,
     eClockMonotonicRaw = VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT,
-    eQueryPerformanceCounter = VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT
-  };
+    eQueryPerformanceCounter = VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( TimeDomainEXT value )
   {
@@ -9523,8 +9523,7 @@ namespace VULKAN_HPP_NAMESPACE
     eAdditionalFeatures = VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT,
     eModifyingFeatures = VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT,
     eDebugReporting = VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT,
-    eDebugMarkers = VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT
-  };
+    eDebugMarkers = VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( ToolPurposeFlagBitsEXT value )
   {
@@ -9543,8 +9542,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ValidationCacheHeaderVersionEXT
   {
-    eOne = VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT
-  };
+    eOne = VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( ValidationCacheHeaderVersionEXT value )
   {
@@ -9558,8 +9556,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class ValidationCheckEXT
   {
     eAll = VK_VALIDATION_CHECK_ALL_EXT,
-    eShaders = VK_VALIDATION_CHECK_SHADERS_EXT
-  };
+    eShaders = VK_VALIDATION_CHECK_SHADERS_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( ValidationCheckEXT value )
   {
@@ -9579,8 +9576,7 @@ namespace VULKAN_HPP_NAMESPACE
     eApiParameters = VK_VALIDATION_FEATURE_DISABLE_API_PARAMETERS_EXT,
     eObjectLifetimes = VK_VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT,
     eCoreChecks = VK_VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT,
-    eUniqueHandles = VK_VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT
-  };
+    eUniqueHandles = VK_VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( ValidationFeatureDisableEXT value )
   {
@@ -9603,8 +9599,7 @@ namespace VULKAN_HPP_NAMESPACE
     eGpuAssistedReserveBindingSlot = VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT,
     eBestPractices = VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT,
     eDebugPrintf = VK_VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT,
-    eSynchronizationValidation = VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT
-  };
+    eSynchronizationValidation = VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT};
 
   VULKAN_HPP_INLINE std::string to_string( ValidationFeatureEnableEXT value )
   {
@@ -9626,8 +9621,7 @@ namespace VULKAN_HPP_NAMESPACE
     eKazan = VK_VENDOR_ID_KAZAN,
     eCodeplay = VK_VENDOR_ID_CODEPLAY,
     eMESA = VK_VENDOR_ID_MESA,
-    ePocl = VK_VENDOR_ID_POCL
-  };
+    ePocl = VK_VENDOR_ID_POCL};
 
   VULKAN_HPP_INLINE std::string to_string( VendorId value )
   {
@@ -9646,8 +9640,7 @@ namespace VULKAN_HPP_NAMESPACE
   enum class VertexInputRate
   {
     eVertex = VK_VERTEX_INPUT_RATE_VERTEX,
-    eInstance = VK_VERTEX_INPUT_RATE_INSTANCE
-  };
+    eInstance = VK_VERTEX_INPUT_RATE_INSTANCE};
 
   VULKAN_HPP_INLINE std::string to_string( VertexInputRate value )
   {
@@ -9668,8 +9661,7 @@ namespace VULKAN_HPP_NAMESPACE
     ePositiveZ = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV,
     eNegativeZ = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV,
     ePositiveW = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV,
-    eNegativeW = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV
-  };
+    eNegativeW = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV};
 
   VULKAN_HPP_INLINE std::string to_string( ViewportCoordinateSwizzleNV value )
   {
@@ -9775,7 +9767,34 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(AccessFlagBits::eIndirectCommandRead) | VkFlags(AccessFlagBits::eIndexRead) | VkFlags(AccessFlagBits::eVertexAttributeRead) | VkFlags(AccessFlagBits::eUniformRead) | VkFlags(AccessFlagBits::eInputAttachmentRead) | VkFlags(AccessFlagBits::eShaderRead) | VkFlags(AccessFlagBits::eShaderWrite) | VkFlags(AccessFlagBits::eColorAttachmentRead) | VkFlags(AccessFlagBits::eColorAttachmentWrite) | VkFlags(AccessFlagBits::eDepthStencilAttachmentRead) | VkFlags(AccessFlagBits::eDepthStencilAttachmentWrite) | VkFlags(AccessFlagBits::eTransferRead) | VkFlags(AccessFlagBits::eTransferWrite) | VkFlags(AccessFlagBits::eHostRead) | VkFlags(AccessFlagBits::eHostWrite) | VkFlags(AccessFlagBits::eMemoryRead) | VkFlags(AccessFlagBits::eMemoryWrite) | VkFlags(AccessFlagBits::eTransformFeedbackWriteEXT) | VkFlags(AccessFlagBits::eTransformFeedbackCounterReadEXT) | VkFlags(AccessFlagBits::eTransformFeedbackCounterWriteEXT) | VkFlags(AccessFlagBits::eConditionalRenderingReadEXT) | VkFlags(AccessFlagBits::eColorAttachmentReadNoncoherentEXT) | VkFlags(AccessFlagBits::eAccelerationStructureReadKHR) | VkFlags(AccessFlagBits::eAccelerationStructureWriteKHR) | VkFlags(AccessFlagBits::eShadingRateImageReadNV) | VkFlags(AccessFlagBits::eFragmentDensityMapReadEXT) | VkFlags(AccessFlagBits::eCommandPreprocessReadNV) | VkFlags(AccessFlagBits::eCommandPreprocessWriteNV)
+      allFlags = VkFlags(AccessFlagBits::eIndirectCommandRead) |
+VkFlags(AccessFlagBits::eIndexRead) |
+VkFlags(AccessFlagBits::eVertexAttributeRead) |
+VkFlags(AccessFlagBits::eUniformRead) |
+VkFlags(AccessFlagBits::eInputAttachmentRead) |
+VkFlags(AccessFlagBits::eShaderRead) |
+VkFlags(AccessFlagBits::eShaderWrite) |
+VkFlags(AccessFlagBits::eColorAttachmentRead) |
+VkFlags(AccessFlagBits::eColorAttachmentWrite) |
+VkFlags(AccessFlagBits::eDepthStencilAttachmentRead) |
+VkFlags(AccessFlagBits::eDepthStencilAttachmentWrite) |
+VkFlags(AccessFlagBits::eTransferRead) |
+VkFlags(AccessFlagBits::eTransferWrite) |
+VkFlags(AccessFlagBits::eHostRead) |
+VkFlags(AccessFlagBits::eHostWrite) |
+VkFlags(AccessFlagBits::eMemoryRead) |
+VkFlags(AccessFlagBits::eMemoryWrite) |
+VkFlags(AccessFlagBits::eTransformFeedbackWriteEXT) |
+VkFlags(AccessFlagBits::eTransformFeedbackCounterReadEXT) |
+VkFlags(AccessFlagBits::eTransformFeedbackCounterWriteEXT) |
+VkFlags(AccessFlagBits::eConditionalRenderingReadEXT) |
+VkFlags(AccessFlagBits::eColorAttachmentReadNoncoherentEXT) |
+VkFlags(AccessFlagBits::eAccelerationStructureReadKHR) |
+VkFlags(AccessFlagBits::eAccelerationStructureWriteKHR) |
+VkFlags(AccessFlagBits::eShadingRateImageReadNV) |
+VkFlags(AccessFlagBits::eFragmentDensityMapReadEXT) |
+VkFlags(AccessFlagBits::eCommandPreprocessReadNV) |
+VkFlags(AccessFlagBits::eCommandPreprocessWriteNV)
     };
   };
 
@@ -9911,7 +9930,11 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(BufferCreateFlagBits::eSparseBinding) | VkFlags(BufferCreateFlagBits::eSparseResidency) | VkFlags(BufferCreateFlagBits::eSparseAliased) | VkFlags(BufferCreateFlagBits::eProtected) | VkFlags(BufferCreateFlagBits::eDeviceAddressCaptureReplay)
+      allFlags = VkFlags(BufferCreateFlagBits::eSparseBinding) |
+VkFlags(BufferCreateFlagBits::eSparseResidency) |
+VkFlags(BufferCreateFlagBits::eSparseAliased) |
+VkFlags(BufferCreateFlagBits::eProtected) |
+VkFlags(BufferCreateFlagBits::eDeviceAddressCaptureReplay)
     };
   };
 
@@ -9956,7 +9979,22 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(BufferUsageFlagBits::eTransferSrc) | VkFlags(BufferUsageFlagBits::eTransferDst) | VkFlags(BufferUsageFlagBits::eUniformTexelBuffer) | VkFlags(BufferUsageFlagBits::eStorageTexelBuffer) | VkFlags(BufferUsageFlagBits::eUniformBuffer) | VkFlags(BufferUsageFlagBits::eStorageBuffer) | VkFlags(BufferUsageFlagBits::eIndexBuffer) | VkFlags(BufferUsageFlagBits::eVertexBuffer) | VkFlags(BufferUsageFlagBits::eIndirectBuffer) | VkFlags(BufferUsageFlagBits::eShaderDeviceAddress) | VkFlags(BufferUsageFlagBits::eTransformFeedbackBufferEXT) | VkFlags(BufferUsageFlagBits::eTransformFeedbackCounterBufferEXT) | VkFlags(BufferUsageFlagBits::eConditionalRenderingEXT) | VkFlags(BufferUsageFlagBits::eAccelerationStructureBuildInputReadOnlyKHR) | VkFlags(BufferUsageFlagBits::eAccelerationStructureStorageKHR) | VkFlags(BufferUsageFlagBits::eShaderBindingTableKHR)
+      allFlags = VkFlags(BufferUsageFlagBits::eTransferSrc) |
+VkFlags(BufferUsageFlagBits::eTransferDst) |
+VkFlags(BufferUsageFlagBits::eUniformTexelBuffer) |
+VkFlags(BufferUsageFlagBits::eStorageTexelBuffer) |
+VkFlags(BufferUsageFlagBits::eUniformBuffer) |
+VkFlags(BufferUsageFlagBits::eStorageBuffer) |
+VkFlags(BufferUsageFlagBits::eIndexBuffer) |
+VkFlags(BufferUsageFlagBits::eVertexBuffer) |
+VkFlags(BufferUsageFlagBits::eIndirectBuffer) |
+VkFlags(BufferUsageFlagBits::eShaderDeviceAddress) |
+VkFlags(BufferUsageFlagBits::eTransformFeedbackBufferEXT) |
+VkFlags(BufferUsageFlagBits::eTransformFeedbackCounterBufferEXT) |
+VkFlags(BufferUsageFlagBits::eConditionalRenderingEXT) |
+VkFlags(BufferUsageFlagBits::eAccelerationStructureBuildInputReadOnlyKHR) |
+VkFlags(BufferUsageFlagBits::eAccelerationStructureStorageKHR) |
+VkFlags(BufferUsageFlagBits::eShaderBindingTableKHR)
     };
   };
 
@@ -10028,7 +10066,11 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(BuildAccelerationStructureFlagBitsKHR::eAllowUpdate) | VkFlags(BuildAccelerationStructureFlagBitsKHR::eAllowCompaction) | VkFlags(BuildAccelerationStructureFlagBitsKHR::ePreferFastTrace) | VkFlags(BuildAccelerationStructureFlagBitsKHR::ePreferFastBuild) | VkFlags(BuildAccelerationStructureFlagBitsKHR::eLowMemory)
+      allFlags = VkFlags(BuildAccelerationStructureFlagBitsKHR::eAllowUpdate) |
+VkFlags(BuildAccelerationStructureFlagBitsKHR::eAllowCompaction) |
+VkFlags(BuildAccelerationStructureFlagBitsKHR::ePreferFastTrace) |
+VkFlags(BuildAccelerationStructureFlagBitsKHR::ePreferFastBuild) |
+VkFlags(BuildAccelerationStructureFlagBitsKHR::eLowMemory)
     };
   };
 
@@ -10075,7 +10117,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ColorComponentFlagBits::eR) | VkFlags(ColorComponentFlagBits::eG) | VkFlags(ColorComponentFlagBits::eB) | VkFlags(ColorComponentFlagBits::eA)
+      allFlags = VkFlags(ColorComponentFlagBits::eR) |
+VkFlags(ColorComponentFlagBits::eG) |
+VkFlags(ColorComponentFlagBits::eB) |
+VkFlags(ColorComponentFlagBits::eA)
     };
   };
 
@@ -10160,7 +10205,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(CommandBufferUsageFlagBits::eOneTimeSubmit) | VkFlags(CommandBufferUsageFlagBits::eRenderPassContinue) | VkFlags(CommandBufferUsageFlagBits::eSimultaneousUse)
+      allFlags = VkFlags(CommandBufferUsageFlagBits::eOneTimeSubmit) |
+VkFlags(CommandBufferUsageFlagBits::eRenderPassContinue) |
+VkFlags(CommandBufferUsageFlagBits::eSimultaneousUse)
     };
   };
 
@@ -10203,7 +10250,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(CommandPoolCreateFlagBits::eTransient) | VkFlags(CommandPoolCreateFlagBits::eResetCommandBuffer) | VkFlags(CommandPoolCreateFlagBits::eProtected)
+      allFlags = VkFlags(CommandPoolCreateFlagBits::eTransient) |
+VkFlags(CommandPoolCreateFlagBits::eResetCommandBuffer) |
+VkFlags(CommandPoolCreateFlagBits::eProtected)
     };
   };
 
@@ -10305,7 +10354,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(CompositeAlphaFlagBitsKHR::eOpaque) | VkFlags(CompositeAlphaFlagBitsKHR::ePreMultiplied) | VkFlags(CompositeAlphaFlagBitsKHR::ePostMultiplied) | VkFlags(CompositeAlphaFlagBitsKHR::eInherit)
+      allFlags = VkFlags(CompositeAlphaFlagBitsKHR::eOpaque) |
+VkFlags(CompositeAlphaFlagBitsKHR::ePreMultiplied) |
+VkFlags(CompositeAlphaFlagBitsKHR::ePostMultiplied) |
+VkFlags(CompositeAlphaFlagBitsKHR::eInherit)
     };
   };
 
@@ -10390,7 +10442,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(CullModeFlagBits::eNone) | VkFlags(CullModeFlagBits::eFront) | VkFlags(CullModeFlagBits::eBack) | VkFlags(CullModeFlagBits::eFrontAndBack)
+      allFlags = VkFlags(CullModeFlagBits::eNone) |
+VkFlags(CullModeFlagBits::eFront) |
+VkFlags(CullModeFlagBits::eBack) |
+VkFlags(CullModeFlagBits::eFrontAndBack)
     };
   };
 
@@ -10432,7 +10487,11 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DebugReportFlagBitsEXT::eInformation) | VkFlags(DebugReportFlagBitsEXT::eWarning) | VkFlags(DebugReportFlagBitsEXT::ePerformanceWarning) | VkFlags(DebugReportFlagBitsEXT::eError) | VkFlags(DebugReportFlagBitsEXT::eDebug)
+      allFlags = VkFlags(DebugReportFlagBitsEXT::eInformation) |
+VkFlags(DebugReportFlagBitsEXT::eWarning) |
+VkFlags(DebugReportFlagBitsEXT::ePerformanceWarning) |
+VkFlags(DebugReportFlagBitsEXT::eError) |
+VkFlags(DebugReportFlagBitsEXT::eDebug)
     };
   };
 
@@ -10477,7 +10536,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eVerbose) | VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eInfo) | VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eWarning) | VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eError)
+      allFlags = VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eVerbose) |
+VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eInfo) |
+VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eWarning) |
+VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eError)
     };
   };
 
@@ -10521,7 +10583,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DebugUtilsMessageTypeFlagBitsEXT::eGeneral) | VkFlags(DebugUtilsMessageTypeFlagBitsEXT::eValidation) | VkFlags(DebugUtilsMessageTypeFlagBitsEXT::ePerformance)
+      allFlags = VkFlags(DebugUtilsMessageTypeFlagBitsEXT::eGeneral) |
+VkFlags(DebugUtilsMessageTypeFlagBitsEXT::eValidation) |
+VkFlags(DebugUtilsMessageTypeFlagBitsEXT::ePerformance)
     };
   };
 
@@ -10596,7 +10660,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DependencyFlagBits::eByRegion) | VkFlags(DependencyFlagBits::eDeviceGroup) | VkFlags(DependencyFlagBits::eViewLocal)
+      allFlags = VkFlags(DependencyFlagBits::eByRegion) |
+VkFlags(DependencyFlagBits::eDeviceGroup) |
+VkFlags(DependencyFlagBits::eViewLocal)
     };
   };
 
@@ -10639,7 +10705,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DescriptorBindingFlagBits::eUpdateAfterBind) | VkFlags(DescriptorBindingFlagBits::eUpdateUnusedWhilePending) | VkFlags(DescriptorBindingFlagBits::ePartiallyBound) | VkFlags(DescriptorBindingFlagBits::eVariableDescriptorCount)
+      allFlags = VkFlags(DescriptorBindingFlagBits::eUpdateAfterBind) |
+VkFlags(DescriptorBindingFlagBits::eUpdateUnusedWhilePending) |
+VkFlags(DescriptorBindingFlagBits::ePartiallyBound) |
+VkFlags(DescriptorBindingFlagBits::eVariableDescriptorCount)
     };
   };
 
@@ -10685,7 +10754,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DescriptorPoolCreateFlagBits::eFreeDescriptorSet) | VkFlags(DescriptorPoolCreateFlagBits::eUpdateAfterBind) | VkFlags(DescriptorPoolCreateFlagBits::eHostOnlyVALVE)
+      allFlags = VkFlags(DescriptorPoolCreateFlagBits::eFreeDescriptorSet) |
+VkFlags(DescriptorPoolCreateFlagBits::eUpdateAfterBind) |
+VkFlags(DescriptorPoolCreateFlagBits::eHostOnlyVALVE)
     };
   };
 
@@ -10744,7 +10815,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DescriptorSetLayoutCreateFlagBits::eUpdateAfterBindPool) | VkFlags(DescriptorSetLayoutCreateFlagBits::ePushDescriptorKHR) | VkFlags(DescriptorSetLayoutCreateFlagBits::eHostOnlyPoolVALVE)
+      allFlags = VkFlags(DescriptorSetLayoutCreateFlagBits::eUpdateAfterBindPool) |
+VkFlags(DescriptorSetLayoutCreateFlagBits::ePushDescriptorKHR) |
+VkFlags(DescriptorSetLayoutCreateFlagBits::eHostOnlyPoolVALVE)
     };
   };
 
@@ -10814,7 +10887,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DeviceDiagnosticsConfigFlagBitsNV::eEnableShaderDebugInfo) | VkFlags(DeviceDiagnosticsConfigFlagBitsNV::eEnableResourceTracking) | VkFlags(DeviceDiagnosticsConfigFlagBitsNV::eEnableAutomaticCheckpoints)
+      allFlags = VkFlags(DeviceDiagnosticsConfigFlagBitsNV::eEnableShaderDebugInfo) |
+VkFlags(DeviceDiagnosticsConfigFlagBitsNV::eEnableResourceTracking) |
+VkFlags(DeviceDiagnosticsConfigFlagBitsNV::eEnableAutomaticCheckpoints)
     };
   };
 
@@ -10857,7 +10932,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DeviceGroupPresentModeFlagBitsKHR::eLocal) | VkFlags(DeviceGroupPresentModeFlagBitsKHR::eRemote) | VkFlags(DeviceGroupPresentModeFlagBitsKHR::eSum) | VkFlags(DeviceGroupPresentModeFlagBitsKHR::eLocalMultiDevice)
+      allFlags = VkFlags(DeviceGroupPresentModeFlagBitsKHR::eLocal) |
+VkFlags(DeviceGroupPresentModeFlagBitsKHR::eRemote) |
+VkFlags(DeviceGroupPresentModeFlagBitsKHR::eSum) |
+VkFlags(DeviceGroupPresentModeFlagBitsKHR::eLocalMultiDevice)
     };
   };
 
@@ -10992,7 +11070,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DisplayPlaneAlphaFlagBitsKHR::eOpaque) | VkFlags(DisplayPlaneAlphaFlagBitsKHR::eGlobal) | VkFlags(DisplayPlaneAlphaFlagBitsKHR::ePerPixel) | VkFlags(DisplayPlaneAlphaFlagBitsKHR::ePerPixelPremultiplied)
+      allFlags = VkFlags(DisplayPlaneAlphaFlagBitsKHR::eOpaque) |
+VkFlags(DisplayPlaneAlphaFlagBitsKHR::eGlobal) |
+VkFlags(DisplayPlaneAlphaFlagBitsKHR::ePerPixel) |
+VkFlags(DisplayPlaneAlphaFlagBitsKHR::ePerPixelPremultiplied)
     };
   };
 
@@ -11068,7 +11149,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalFenceFeatureFlagBits::eExportable) | VkFlags(ExternalFenceFeatureFlagBits::eImportable)
+      allFlags = VkFlags(ExternalFenceFeatureFlagBits::eExportable) |
+VkFlags(ExternalFenceFeatureFlagBits::eImportable)
     };
   };
 
@@ -11112,7 +11194,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalFenceHandleTypeFlagBits::eOpaqueFd) | VkFlags(ExternalFenceHandleTypeFlagBits::eOpaqueWin32) | VkFlags(ExternalFenceHandleTypeFlagBits::eOpaqueWin32Kmt) | VkFlags(ExternalFenceHandleTypeFlagBits::eSyncFd)
+      allFlags = VkFlags(ExternalFenceHandleTypeFlagBits::eOpaqueFd) |
+VkFlags(ExternalFenceHandleTypeFlagBits::eOpaqueWin32) |
+VkFlags(ExternalFenceHandleTypeFlagBits::eOpaqueWin32Kmt) |
+VkFlags(ExternalFenceHandleTypeFlagBits::eSyncFd)
     };
   };
 
@@ -11158,7 +11243,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalMemoryFeatureFlagBits::eDedicatedOnly) | VkFlags(ExternalMemoryFeatureFlagBits::eExportable) | VkFlags(ExternalMemoryFeatureFlagBits::eImportable)
+      allFlags = VkFlags(ExternalMemoryFeatureFlagBits::eDedicatedOnly) |
+VkFlags(ExternalMemoryFeatureFlagBits::eExportable) |
+VkFlags(ExternalMemoryFeatureFlagBits::eImportable)
     };
   };
 
@@ -11203,7 +11290,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalMemoryFeatureFlagBitsNV::eDedicatedOnly) | VkFlags(ExternalMemoryFeatureFlagBitsNV::eExportable) | VkFlags(ExternalMemoryFeatureFlagBitsNV::eImportable)
+      allFlags = VkFlags(ExternalMemoryFeatureFlagBitsNV::eDedicatedOnly) |
+VkFlags(ExternalMemoryFeatureFlagBitsNV::eExportable) |
+VkFlags(ExternalMemoryFeatureFlagBitsNV::eImportable)
     };
   };
 
@@ -11246,7 +11335,19 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalMemoryHandleTypeFlagBits::eOpaqueFd) | VkFlags(ExternalMemoryHandleTypeFlagBits::eOpaqueWin32) | VkFlags(ExternalMemoryHandleTypeFlagBits::eOpaqueWin32Kmt) | VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D11Texture) | VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D11TextureKmt) | VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D12Heap) | VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D12Resource) | VkFlags(ExternalMemoryHandleTypeFlagBits::eDmaBufEXT) | VkFlags(ExternalMemoryHandleTypeFlagBits::eAndroidHardwareBufferANDROID) | VkFlags(ExternalMemoryHandleTypeFlagBits::eHostAllocationEXT) | VkFlags(ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT)
+      allFlags = VkFlags(ExternalMemoryHandleTypeFlagBits::eOpaqueFd) |
+VkFlags(ExternalMemoryHandleTypeFlagBits::eOpaqueWin32) |
+VkFlags(ExternalMemoryHandleTypeFlagBits::eOpaqueWin32Kmt) |
+VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D11Texture) |
+VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D11TextureKmt) |
+VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D12Heap) |
+VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D12Resource) |
+VkFlags(ExternalMemoryHandleTypeFlagBits::eDmaBufEXT) |
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
+VkFlags(ExternalMemoryHandleTypeFlagBits::eAndroidHardwareBufferANDROID) |
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+VkFlags(ExternalMemoryHandleTypeFlagBits::eHostAllocationEXT) |
+VkFlags(ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT)
     };
   };
 
@@ -11286,7 +11387,9 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ExternalMemoryHandleTypeFlagBits::eD3D12Heap ) result += "D3D12Heap | ";
     if ( value & ExternalMemoryHandleTypeFlagBits::eD3D12Resource ) result += "D3D12Resource | ";
     if ( value & ExternalMemoryHandleTypeFlagBits::eDmaBufEXT ) result += "DmaBufEXT | ";
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
     if ( value & ExternalMemoryHandleTypeFlagBits::eAndroidHardwareBufferANDROID ) result += "AndroidHardwareBufferANDROID | ";
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
     if ( value & ExternalMemoryHandleTypeFlagBits::eHostAllocationEXT ) result += "HostAllocationEXT | ";
     if ( value & ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT ) result += "HostMappedForeignMemoryEXT | ";
     return "{ " + result.substr(0, result.size() - 3) + " }";
@@ -11299,7 +11402,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32) | VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32Kmt) | VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eD3D11Image) | VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eD3D11ImageKmt)
+      allFlags = VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32) |
+VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32Kmt) |
+VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eD3D11Image) |
+VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eD3D11ImageKmt)
     };
   };
 
@@ -11343,7 +11449,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalSemaphoreFeatureFlagBits::eExportable) | VkFlags(ExternalSemaphoreFeatureFlagBits::eImportable)
+      allFlags = VkFlags(ExternalSemaphoreFeatureFlagBits::eExportable) |
+VkFlags(ExternalSemaphoreFeatureFlagBits::eImportable)
     };
   };
 
@@ -11387,7 +11494,11 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd) | VkFlags(ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32) | VkFlags(ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32Kmt) | VkFlags(ExternalSemaphoreHandleTypeFlagBits::eD3D12Fence) | VkFlags(ExternalSemaphoreHandleTypeFlagBits::eSyncFd)
+      allFlags = VkFlags(ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd) |
+VkFlags(ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32) |
+VkFlags(ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32Kmt) |
+VkFlags(ExternalSemaphoreHandleTypeFlagBits::eD3D12Fence) |
+VkFlags(ExternalSemaphoreHandleTypeFlagBits::eSyncFd)
     };
   };
 
@@ -11518,7 +11629,33 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(FormatFeatureFlagBits::eSampledImage) | VkFlags(FormatFeatureFlagBits::eStorageImage) | VkFlags(FormatFeatureFlagBits::eStorageImageAtomic) | VkFlags(FormatFeatureFlagBits::eUniformTexelBuffer) | VkFlags(FormatFeatureFlagBits::eStorageTexelBuffer) | VkFlags(FormatFeatureFlagBits::eStorageTexelBufferAtomic) | VkFlags(FormatFeatureFlagBits::eVertexBuffer) | VkFlags(FormatFeatureFlagBits::eColorAttachment) | VkFlags(FormatFeatureFlagBits::eColorAttachmentBlend) | VkFlags(FormatFeatureFlagBits::eDepthStencilAttachment) | VkFlags(FormatFeatureFlagBits::eBlitSrc) | VkFlags(FormatFeatureFlagBits::eBlitDst) | VkFlags(FormatFeatureFlagBits::eSampledImageFilterLinear) | VkFlags(FormatFeatureFlagBits::eTransferSrc) | VkFlags(FormatFeatureFlagBits::eTransferDst) | VkFlags(FormatFeatureFlagBits::eMidpointChromaSamples) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionLinearFilter) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionSeparateReconstructionFilter) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicit) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicitForceable) | VkFlags(FormatFeatureFlagBits::eDisjoint) | VkFlags(FormatFeatureFlagBits::eCositedChromaSamples) | VkFlags(FormatFeatureFlagBits::eSampledImageFilterMinmax) | VkFlags(FormatFeatureFlagBits::eSampledImageFilterCubicIMG) | VkFlags(FormatFeatureFlagBits::eAccelerationStructureVertexBufferKHR) | VkFlags(FormatFeatureFlagBits::eFragmentDensityMapEXT) | VkFlags(FormatFeatureFlagBits::eFragmentShadingRateAttachmentKHR)
+      allFlags = VkFlags(FormatFeatureFlagBits::eSampledImage) |
+VkFlags(FormatFeatureFlagBits::eStorageImage) |
+VkFlags(FormatFeatureFlagBits::eStorageImageAtomic) |
+VkFlags(FormatFeatureFlagBits::eUniformTexelBuffer) |
+VkFlags(FormatFeatureFlagBits::eStorageTexelBuffer) |
+VkFlags(FormatFeatureFlagBits::eStorageTexelBufferAtomic) |
+VkFlags(FormatFeatureFlagBits::eVertexBuffer) |
+VkFlags(FormatFeatureFlagBits::eColorAttachment) |
+VkFlags(FormatFeatureFlagBits::eColorAttachmentBlend) |
+VkFlags(FormatFeatureFlagBits::eDepthStencilAttachment) |
+VkFlags(FormatFeatureFlagBits::eBlitSrc) |
+VkFlags(FormatFeatureFlagBits::eBlitDst) |
+VkFlags(FormatFeatureFlagBits::eSampledImageFilterLinear) |
+VkFlags(FormatFeatureFlagBits::eTransferSrc) |
+VkFlags(FormatFeatureFlagBits::eTransferDst) |
+VkFlags(FormatFeatureFlagBits::eMidpointChromaSamples) |
+VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionLinearFilter) |
+VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionSeparateReconstructionFilter) |
+VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicit) |
+VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicitForceable) |
+VkFlags(FormatFeatureFlagBits::eDisjoint) |
+VkFlags(FormatFeatureFlagBits::eCositedChromaSamples) |
+VkFlags(FormatFeatureFlagBits::eSampledImageFilterMinmax) |
+VkFlags(FormatFeatureFlagBits::eSampledImageFilterCubicIMG) |
+VkFlags(FormatFeatureFlagBits::eAccelerationStructureVertexBufferKHR) |
+VkFlags(FormatFeatureFlagBits::eFragmentDensityMapEXT) |
+VkFlags(FormatFeatureFlagBits::eFragmentShadingRateAttachmentKHR)
     };
   };
 
@@ -11626,7 +11763,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(GeometryFlagBitsKHR::eOpaque) | VkFlags(GeometryFlagBitsKHR::eNoDuplicateAnyHitInvocation)
+      allFlags = VkFlags(GeometryFlagBitsKHR::eOpaque) |
+VkFlags(GeometryFlagBitsKHR::eNoDuplicateAnyHitInvocation)
     };
   };
 
@@ -11670,7 +11808,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(GeometryInstanceFlagBitsKHR::eTriangleFacingCullDisable) | VkFlags(GeometryInstanceFlagBitsKHR::eTriangleFrontCounterclockwise) | VkFlags(GeometryInstanceFlagBitsKHR::eForceOpaque) | VkFlags(GeometryInstanceFlagBitsKHR::eForceNoOpaque)
+      allFlags = VkFlags(GeometryInstanceFlagBitsKHR::eTriangleFacingCullDisable) |
+VkFlags(GeometryInstanceFlagBitsKHR::eTriangleFrontCounterclockwise) |
+VkFlags(GeometryInstanceFlagBitsKHR::eForceOpaque) |
+VkFlags(GeometryInstanceFlagBitsKHR::eForceNoOpaque)
     };
   };
 
@@ -11750,7 +11891,17 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ImageAspectFlagBits::eColor) | VkFlags(ImageAspectFlagBits::eDepth) | VkFlags(ImageAspectFlagBits::eStencil) | VkFlags(ImageAspectFlagBits::eMetadata) | VkFlags(ImageAspectFlagBits::ePlane0) | VkFlags(ImageAspectFlagBits::ePlane1) | VkFlags(ImageAspectFlagBits::ePlane2) | VkFlags(ImageAspectFlagBits::eMemoryPlane0EXT) | VkFlags(ImageAspectFlagBits::eMemoryPlane1EXT) | VkFlags(ImageAspectFlagBits::eMemoryPlane2EXT) | VkFlags(ImageAspectFlagBits::eMemoryPlane3EXT)
+      allFlags = VkFlags(ImageAspectFlagBits::eColor) |
+VkFlags(ImageAspectFlagBits::eDepth) |
+VkFlags(ImageAspectFlagBits::eStencil) |
+VkFlags(ImageAspectFlagBits::eMetadata) |
+VkFlags(ImageAspectFlagBits::ePlane0) |
+VkFlags(ImageAspectFlagBits::ePlane1) |
+VkFlags(ImageAspectFlagBits::ePlane2) |
+VkFlags(ImageAspectFlagBits::eMemoryPlane0EXT) |
+VkFlags(ImageAspectFlagBits::eMemoryPlane1EXT) |
+VkFlags(ImageAspectFlagBits::eMemoryPlane2EXT) |
+VkFlags(ImageAspectFlagBits::eMemoryPlane3EXT)
     };
   };
 
@@ -11801,7 +11952,21 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ImageCreateFlagBits::eSparseBinding) | VkFlags(ImageCreateFlagBits::eSparseResidency) | VkFlags(ImageCreateFlagBits::eSparseAliased) | VkFlags(ImageCreateFlagBits::eMutableFormat) | VkFlags(ImageCreateFlagBits::eCubeCompatible) | VkFlags(ImageCreateFlagBits::eAlias) | VkFlags(ImageCreateFlagBits::eSplitInstanceBindRegions) | VkFlags(ImageCreateFlagBits::e2DArrayCompatible) | VkFlags(ImageCreateFlagBits::eBlockTexelViewCompatible) | VkFlags(ImageCreateFlagBits::eExtendedUsage) | VkFlags(ImageCreateFlagBits::eProtected) | VkFlags(ImageCreateFlagBits::eDisjoint) | VkFlags(ImageCreateFlagBits::eCornerSampledNV) | VkFlags(ImageCreateFlagBits::eSampleLocationsCompatibleDepthEXT) | VkFlags(ImageCreateFlagBits::eSubsampledEXT)
+      allFlags = VkFlags(ImageCreateFlagBits::eSparseBinding) |
+VkFlags(ImageCreateFlagBits::eSparseResidency) |
+VkFlags(ImageCreateFlagBits::eSparseAliased) |
+VkFlags(ImageCreateFlagBits::eMutableFormat) |
+VkFlags(ImageCreateFlagBits::eCubeCompatible) |
+VkFlags(ImageCreateFlagBits::eAlias) |
+VkFlags(ImageCreateFlagBits::eSplitInstanceBindRegions) |
+VkFlags(ImageCreateFlagBits::e2DArrayCompatible) |
+VkFlags(ImageCreateFlagBits::eBlockTexelViewCompatible) |
+VkFlags(ImageCreateFlagBits::eExtendedUsage) |
+VkFlags(ImageCreateFlagBits::eProtected) |
+VkFlags(ImageCreateFlagBits::eDisjoint) |
+VkFlags(ImageCreateFlagBits::eCornerSampledNV) |
+VkFlags(ImageCreateFlagBits::eSampleLocationsCompatibleDepthEXT) |
+VkFlags(ImageCreateFlagBits::eSubsampledEXT)
     };
   };
 
@@ -11874,7 +12039,16 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ImageUsageFlagBits::eTransferSrc) | VkFlags(ImageUsageFlagBits::eTransferDst) | VkFlags(ImageUsageFlagBits::eSampled) | VkFlags(ImageUsageFlagBits::eStorage) | VkFlags(ImageUsageFlagBits::eColorAttachment) | VkFlags(ImageUsageFlagBits::eDepthStencilAttachment) | VkFlags(ImageUsageFlagBits::eTransientAttachment) | VkFlags(ImageUsageFlagBits::eInputAttachment) | VkFlags(ImageUsageFlagBits::eShadingRateImageNV) | VkFlags(ImageUsageFlagBits::eFragmentDensityMapEXT)
+      allFlags = VkFlags(ImageUsageFlagBits::eTransferSrc) |
+VkFlags(ImageUsageFlagBits::eTransferDst) |
+VkFlags(ImageUsageFlagBits::eSampled) |
+VkFlags(ImageUsageFlagBits::eStorage) |
+VkFlags(ImageUsageFlagBits::eColorAttachment) |
+VkFlags(ImageUsageFlagBits::eDepthStencilAttachment) |
+VkFlags(ImageUsageFlagBits::eTransientAttachment) |
+VkFlags(ImageUsageFlagBits::eInputAttachment) |
+VkFlags(ImageUsageFlagBits::eShadingRateImageNV) |
+VkFlags(ImageUsageFlagBits::eFragmentDensityMapEXT)
     };
   };
 
@@ -11924,7 +12098,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ImageViewCreateFlagBits::eFragmentDensityMapDynamicEXT) | VkFlags(ImageViewCreateFlagBits::eFragmentDensityMapDeferredEXT)
+      allFlags = VkFlags(ImageViewCreateFlagBits::eFragmentDensityMapDynamicEXT) |
+VkFlags(ImageViewCreateFlagBits::eFragmentDensityMapDeferredEXT)
     };
   };
 
@@ -11966,7 +12141,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eExplicitPreprocess) | VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eIndexedSequences) | VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eUnorderedSequences)
+      allFlags = VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eExplicitPreprocess) |
+VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eIndexedSequences) |
+VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eUnorderedSequences)
     };
   };
 
@@ -12077,7 +12254,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(MemoryAllocateFlagBits::eDeviceMask) | VkFlags(MemoryAllocateFlagBits::eDeviceAddress) | VkFlags(MemoryAllocateFlagBits::eDeviceAddressCaptureReplay)
+      allFlags = VkFlags(MemoryAllocateFlagBits::eDeviceMask) |
+VkFlags(MemoryAllocateFlagBits::eDeviceAddress) |
+VkFlags(MemoryAllocateFlagBits::eDeviceAddressCaptureReplay)
     };
   };
 
@@ -12122,7 +12301,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(MemoryHeapFlagBits::eDeviceLocal) | VkFlags(MemoryHeapFlagBits::eMultiInstance)
+      allFlags = VkFlags(MemoryHeapFlagBits::eDeviceLocal) |
+VkFlags(MemoryHeapFlagBits::eMultiInstance)
     };
   };
 
@@ -12180,7 +12360,14 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(MemoryPropertyFlagBits::eDeviceLocal) | VkFlags(MemoryPropertyFlagBits::eHostVisible) | VkFlags(MemoryPropertyFlagBits::eHostCoherent) | VkFlags(MemoryPropertyFlagBits::eHostCached) | VkFlags(MemoryPropertyFlagBits::eLazilyAllocated) | VkFlags(MemoryPropertyFlagBits::eProtected) | VkFlags(MemoryPropertyFlagBits::eDeviceCoherentAMD) | VkFlags(MemoryPropertyFlagBits::eDeviceUncachedAMD)
+      allFlags = VkFlags(MemoryPropertyFlagBits::eDeviceLocal) |
+VkFlags(MemoryPropertyFlagBits::eHostVisible) |
+VkFlags(MemoryPropertyFlagBits::eHostCoherent) |
+VkFlags(MemoryPropertyFlagBits::eHostCached) |
+VkFlags(MemoryPropertyFlagBits::eLazilyAllocated) |
+VkFlags(MemoryPropertyFlagBits::eProtected) |
+VkFlags(MemoryPropertyFlagBits::eDeviceCoherentAMD) |
+VkFlags(MemoryPropertyFlagBits::eDeviceUncachedAMD)
     };
   };
 
@@ -12246,7 +12433,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PeerMemoryFeatureFlagBits::eCopySrc) | VkFlags(PeerMemoryFeatureFlagBits::eCopyDst) | VkFlags(PeerMemoryFeatureFlagBits::eGenericSrc) | VkFlags(PeerMemoryFeatureFlagBits::eGenericDst)
+      allFlags = VkFlags(PeerMemoryFeatureFlagBits::eCopySrc) |
+VkFlags(PeerMemoryFeatureFlagBits::eCopyDst) |
+VkFlags(PeerMemoryFeatureFlagBits::eGenericSrc) |
+VkFlags(PeerMemoryFeatureFlagBits::eGenericDst)
     };
   };
 
@@ -12292,7 +12482,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PerformanceCounterDescriptionFlagBitsKHR::ePerformanceImpacting) | VkFlags(PerformanceCounterDescriptionFlagBitsKHR::eConcurrentlyImpacted)
+      allFlags = VkFlags(PerformanceCounterDescriptionFlagBitsKHR::ePerformanceImpacting) |
+VkFlags(PerformanceCounterDescriptionFlagBitsKHR::eConcurrentlyImpacted)
     };
   };
 
@@ -12448,7 +12639,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PipelineCreateFlagBits::eDisableOptimization) | VkFlags(PipelineCreateFlagBits::eAllowDerivatives) | VkFlags(PipelineCreateFlagBits::eDerivative) | VkFlags(PipelineCreateFlagBits::eViewIndexFromDeviceIndex) | VkFlags(PipelineCreateFlagBits::eDispatchBase) | VkFlags(PipelineCreateFlagBits::eRayTracingNoNullAnyHitShadersKHR) | VkFlags(PipelineCreateFlagBits::eRayTracingNoNullClosestHitShadersKHR) | VkFlags(PipelineCreateFlagBits::eRayTracingNoNullMissShadersKHR) | VkFlags(PipelineCreateFlagBits::eRayTracingNoNullIntersectionShadersKHR) | VkFlags(PipelineCreateFlagBits::eRayTracingSkipTrianglesKHR) | VkFlags(PipelineCreateFlagBits::eRayTracingSkipAabbsKHR) | VkFlags(PipelineCreateFlagBits::eRayTracingShaderGroupHandleCaptureReplayKHR) | VkFlags(PipelineCreateFlagBits::eDeferCompileNV) | VkFlags(PipelineCreateFlagBits::eCaptureStatisticsKHR) | VkFlags(PipelineCreateFlagBits::eCaptureInternalRepresentationsKHR) | VkFlags(PipelineCreateFlagBits::eIndirectBindableNV) | VkFlags(PipelineCreateFlagBits::eLibraryKHR) | VkFlags(PipelineCreateFlagBits::eFailOnPipelineCompileRequiredEXT) | VkFlags(PipelineCreateFlagBits::eEarlyReturnOnFailureEXT)
+      allFlags = VkFlags(PipelineCreateFlagBits::eDisableOptimization) |
+VkFlags(PipelineCreateFlagBits::eAllowDerivatives) |
+VkFlags(PipelineCreateFlagBits::eDerivative) |
+VkFlags(PipelineCreateFlagBits::eViewIndexFromDeviceIndex) |
+VkFlags(PipelineCreateFlagBits::eDispatchBase) |
+VkFlags(PipelineCreateFlagBits::eRayTracingNoNullAnyHitShadersKHR) |
+VkFlags(PipelineCreateFlagBits::eRayTracingNoNullClosestHitShadersKHR) |
+VkFlags(PipelineCreateFlagBits::eRayTracingNoNullMissShadersKHR) |
+VkFlags(PipelineCreateFlagBits::eRayTracingNoNullIntersectionShadersKHR) |
+VkFlags(PipelineCreateFlagBits::eRayTracingSkipTrianglesKHR) |
+VkFlags(PipelineCreateFlagBits::eRayTracingSkipAabbsKHR) |
+VkFlags(PipelineCreateFlagBits::eRayTracingShaderGroupHandleCaptureReplayKHR) |
+VkFlags(PipelineCreateFlagBits::eDeferCompileNV) |
+VkFlags(PipelineCreateFlagBits::eCaptureStatisticsKHR) |
+VkFlags(PipelineCreateFlagBits::eCaptureInternalRepresentationsKHR) |
+VkFlags(PipelineCreateFlagBits::eIndirectBindableNV) |
+VkFlags(PipelineCreateFlagBits::eLibraryKHR) |
+VkFlags(PipelineCreateFlagBits::eFailOnPipelineCompileRequiredEXT) |
+VkFlags(PipelineCreateFlagBits::eEarlyReturnOnFailureEXT)
     };
   };
 
@@ -12507,7 +12716,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PipelineCreationFeedbackFlagBitsEXT::eValid) | VkFlags(PipelineCreationFeedbackFlagBitsEXT::eApplicationPipelineCacheHit) | VkFlags(PipelineCreationFeedbackFlagBitsEXT::eBasePipelineAcceleration)
+      allFlags = VkFlags(PipelineCreationFeedbackFlagBitsEXT::eValid) |
+VkFlags(PipelineCreationFeedbackFlagBitsEXT::eApplicationPipelineCacheHit) |
+VkFlags(PipelineCreationFeedbackFlagBitsEXT::eBasePipelineAcceleration)
     };
   };
 
@@ -12710,7 +12921,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PipelineShaderStageCreateFlagBits::eAllowVaryingSubgroupSizeEXT) | VkFlags(PipelineShaderStageCreateFlagBits::eRequireFullSubgroupsEXT)
+      allFlags = VkFlags(PipelineShaderStageCreateFlagBits::eAllowVaryingSubgroupSizeEXT) |
+VkFlags(PipelineShaderStageCreateFlagBits::eRequireFullSubgroupsEXT)
     };
   };
 
@@ -12752,7 +12964,32 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PipelineStageFlagBits::eTopOfPipe) | VkFlags(PipelineStageFlagBits::eDrawIndirect) | VkFlags(PipelineStageFlagBits::eVertexInput) | VkFlags(PipelineStageFlagBits::eVertexShader) | VkFlags(PipelineStageFlagBits::eTessellationControlShader) | VkFlags(PipelineStageFlagBits::eTessellationEvaluationShader) | VkFlags(PipelineStageFlagBits::eGeometryShader) | VkFlags(PipelineStageFlagBits::eFragmentShader) | VkFlags(PipelineStageFlagBits::eEarlyFragmentTests) | VkFlags(PipelineStageFlagBits::eLateFragmentTests) | VkFlags(PipelineStageFlagBits::eColorAttachmentOutput) | VkFlags(PipelineStageFlagBits::eComputeShader) | VkFlags(PipelineStageFlagBits::eTransfer) | VkFlags(PipelineStageFlagBits::eBottomOfPipe) | VkFlags(PipelineStageFlagBits::eHost) | VkFlags(PipelineStageFlagBits::eAllGraphics) | VkFlags(PipelineStageFlagBits::eAllCommands) | VkFlags(PipelineStageFlagBits::eTransformFeedbackEXT) | VkFlags(PipelineStageFlagBits::eConditionalRenderingEXT) | VkFlags(PipelineStageFlagBits::eAccelerationStructureBuildKHR) | VkFlags(PipelineStageFlagBits::eRayTracingShaderKHR) | VkFlags(PipelineStageFlagBits::eShadingRateImageNV) | VkFlags(PipelineStageFlagBits::eTaskShaderNV) | VkFlags(PipelineStageFlagBits::eMeshShaderNV) | VkFlags(PipelineStageFlagBits::eFragmentDensityProcessEXT) | VkFlags(PipelineStageFlagBits::eCommandPreprocessNV)
+      allFlags = VkFlags(PipelineStageFlagBits::eTopOfPipe) |
+VkFlags(PipelineStageFlagBits::eDrawIndirect) |
+VkFlags(PipelineStageFlagBits::eVertexInput) |
+VkFlags(PipelineStageFlagBits::eVertexShader) |
+VkFlags(PipelineStageFlagBits::eTessellationControlShader) |
+VkFlags(PipelineStageFlagBits::eTessellationEvaluationShader) |
+VkFlags(PipelineStageFlagBits::eGeometryShader) |
+VkFlags(PipelineStageFlagBits::eFragmentShader) |
+VkFlags(PipelineStageFlagBits::eEarlyFragmentTests) |
+VkFlags(PipelineStageFlagBits::eLateFragmentTests) |
+VkFlags(PipelineStageFlagBits::eColorAttachmentOutput) |
+VkFlags(PipelineStageFlagBits::eComputeShader) |
+VkFlags(PipelineStageFlagBits::eTransfer) |
+VkFlags(PipelineStageFlagBits::eBottomOfPipe) |
+VkFlags(PipelineStageFlagBits::eHost) |
+VkFlags(PipelineStageFlagBits::eAllGraphics) |
+VkFlags(PipelineStageFlagBits::eAllCommands) |
+VkFlags(PipelineStageFlagBits::eTransformFeedbackEXT) |
+VkFlags(PipelineStageFlagBits::eConditionalRenderingEXT) |
+VkFlags(PipelineStageFlagBits::eAccelerationStructureBuildKHR) |
+VkFlags(PipelineStageFlagBits::eRayTracingShaderKHR) |
+VkFlags(PipelineStageFlagBits::eShadingRateImageNV) |
+VkFlags(PipelineStageFlagBits::eTaskShaderNV) |
+VkFlags(PipelineStageFlagBits::eMeshShaderNV) |
+VkFlags(PipelineStageFlagBits::eFragmentDensityProcessEXT) |
+VkFlags(PipelineStageFlagBits::eCommandPreprocessNV)
     };
   };
 
@@ -12932,7 +13169,17 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(QueryPipelineStatisticFlagBits::eInputAssemblyVertices) | VkFlags(QueryPipelineStatisticFlagBits::eInputAssemblyPrimitives) | VkFlags(QueryPipelineStatisticFlagBits::eVertexShaderInvocations) | VkFlags(QueryPipelineStatisticFlagBits::eGeometryShaderInvocations) | VkFlags(QueryPipelineStatisticFlagBits::eGeometryShaderPrimitives) | VkFlags(QueryPipelineStatisticFlagBits::eClippingInvocations) | VkFlags(QueryPipelineStatisticFlagBits::eClippingPrimitives) | VkFlags(QueryPipelineStatisticFlagBits::eFragmentShaderInvocations) | VkFlags(QueryPipelineStatisticFlagBits::eTessellationControlShaderPatches) | VkFlags(QueryPipelineStatisticFlagBits::eTessellationEvaluationShaderInvocations) | VkFlags(QueryPipelineStatisticFlagBits::eComputeShaderInvocations)
+      allFlags = VkFlags(QueryPipelineStatisticFlagBits::eInputAssemblyVertices) |
+VkFlags(QueryPipelineStatisticFlagBits::eInputAssemblyPrimitives) |
+VkFlags(QueryPipelineStatisticFlagBits::eVertexShaderInvocations) |
+VkFlags(QueryPipelineStatisticFlagBits::eGeometryShaderInvocations) |
+VkFlags(QueryPipelineStatisticFlagBits::eGeometryShaderPrimitives) |
+VkFlags(QueryPipelineStatisticFlagBits::eClippingInvocations) |
+VkFlags(QueryPipelineStatisticFlagBits::eClippingPrimitives) |
+VkFlags(QueryPipelineStatisticFlagBits::eFragmentShaderInvocations) |
+VkFlags(QueryPipelineStatisticFlagBits::eTessellationControlShaderPatches) |
+VkFlags(QueryPipelineStatisticFlagBits::eTessellationEvaluationShaderInvocations) |
+VkFlags(QueryPipelineStatisticFlagBits::eComputeShaderInvocations)
     };
   };
 
@@ -12992,7 +13239,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(QueryResultFlagBits::e64) | VkFlags(QueryResultFlagBits::eWait) | VkFlags(QueryResultFlagBits::eWithAvailability) | VkFlags(QueryResultFlagBits::ePartial)
+      allFlags = VkFlags(QueryResultFlagBits::e64) |
+VkFlags(QueryResultFlagBits::eWait) |
+VkFlags(QueryResultFlagBits::eWithAvailability) |
+VkFlags(QueryResultFlagBits::ePartial)
     };
   };
 
@@ -13036,7 +13286,11 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(QueueFlagBits::eGraphics) | VkFlags(QueueFlagBits::eCompute) | VkFlags(QueueFlagBits::eTransfer) | VkFlags(QueueFlagBits::eSparseBinding) | VkFlags(QueueFlagBits::eProtected)
+      allFlags = VkFlags(QueueFlagBits::eGraphics) |
+VkFlags(QueueFlagBits::eCompute) |
+VkFlags(QueueFlagBits::eTransfer) |
+VkFlags(QueueFlagBits::eSparseBinding) |
+VkFlags(QueueFlagBits::eProtected)
     };
   };
 
@@ -13122,7 +13376,11 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ResolveModeFlagBits::eNone) | VkFlags(ResolveModeFlagBits::eSampleZero) | VkFlags(ResolveModeFlagBits::eAverage) | VkFlags(ResolveModeFlagBits::eMin) | VkFlags(ResolveModeFlagBits::eMax)
+      allFlags = VkFlags(ResolveModeFlagBits::eNone) |
+VkFlags(ResolveModeFlagBits::eSampleZero) |
+VkFlags(ResolveModeFlagBits::eAverage) |
+VkFlags(ResolveModeFlagBits::eMin) |
+VkFlags(ResolveModeFlagBits::eMax)
     };
   };
 
@@ -13168,7 +13426,13 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SampleCountFlagBits::e1) | VkFlags(SampleCountFlagBits::e2) | VkFlags(SampleCountFlagBits::e4) | VkFlags(SampleCountFlagBits::e8) | VkFlags(SampleCountFlagBits::e16) | VkFlags(SampleCountFlagBits::e32) | VkFlags(SampleCountFlagBits::e64)
+      allFlags = VkFlags(SampleCountFlagBits::e1) |
+VkFlags(SampleCountFlagBits::e2) |
+VkFlags(SampleCountFlagBits::e4) |
+VkFlags(SampleCountFlagBits::e8) |
+VkFlags(SampleCountFlagBits::e16) |
+VkFlags(SampleCountFlagBits::e32) |
+VkFlags(SampleCountFlagBits::e64)
     };
   };
 
@@ -13215,7 +13479,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SamplerCreateFlagBits::eSubsampledEXT) | VkFlags(SamplerCreateFlagBits::eSubsampledCoarseReconstructionEXT)
+      allFlags = VkFlags(SamplerCreateFlagBits::eSubsampledEXT) |
+VkFlags(SamplerCreateFlagBits::eSubsampledCoarseReconstructionEXT)
     };
   };
 
@@ -13377,7 +13642,22 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ShaderStageFlagBits::eVertex) | VkFlags(ShaderStageFlagBits::eTessellationControl) | VkFlags(ShaderStageFlagBits::eTessellationEvaluation) | VkFlags(ShaderStageFlagBits::eGeometry) | VkFlags(ShaderStageFlagBits::eFragment) | VkFlags(ShaderStageFlagBits::eCompute) | VkFlags(ShaderStageFlagBits::eAllGraphics) | VkFlags(ShaderStageFlagBits::eAll) | VkFlags(ShaderStageFlagBits::eRaygenKHR) | VkFlags(ShaderStageFlagBits::eAnyHitKHR) | VkFlags(ShaderStageFlagBits::eClosestHitKHR) | VkFlags(ShaderStageFlagBits::eMissKHR) | VkFlags(ShaderStageFlagBits::eIntersectionKHR) | VkFlags(ShaderStageFlagBits::eCallableKHR) | VkFlags(ShaderStageFlagBits::eTaskNV) | VkFlags(ShaderStageFlagBits::eMeshNV)
+      allFlags = VkFlags(ShaderStageFlagBits::eVertex) |
+VkFlags(ShaderStageFlagBits::eTessellationControl) |
+VkFlags(ShaderStageFlagBits::eTessellationEvaluation) |
+VkFlags(ShaderStageFlagBits::eGeometry) |
+VkFlags(ShaderStageFlagBits::eFragment) |
+VkFlags(ShaderStageFlagBits::eCompute) |
+VkFlags(ShaderStageFlagBits::eAllGraphics) |
+VkFlags(ShaderStageFlagBits::eAll) |
+VkFlags(ShaderStageFlagBits::eRaygenKHR) |
+VkFlags(ShaderStageFlagBits::eAnyHitKHR) |
+VkFlags(ShaderStageFlagBits::eClosestHitKHR) |
+VkFlags(ShaderStageFlagBits::eMissKHR) |
+VkFlags(ShaderStageFlagBits::eIntersectionKHR) |
+VkFlags(ShaderStageFlagBits::eCallableKHR) |
+VkFlags(ShaderStageFlagBits::eTaskNV) |
+VkFlags(ShaderStageFlagBits::eMeshNV)
     };
   };
 
@@ -13431,7 +13711,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SparseImageFormatFlagBits::eSingleMiptail) | VkFlags(SparseImageFormatFlagBits::eAlignedMipSize) | VkFlags(SparseImageFormatFlagBits::eNonstandardBlockSize)
+      allFlags = VkFlags(SparseImageFormatFlagBits::eSingleMiptail) |
+VkFlags(SparseImageFormatFlagBits::eAlignedMipSize) |
+VkFlags(SparseImageFormatFlagBits::eNonstandardBlockSize)
     };
   };
 
@@ -13515,7 +13797,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(StencilFaceFlagBits::eFront) | VkFlags(StencilFaceFlagBits::eBack) | VkFlags(StencilFaceFlagBits::eFrontAndBack)
+      allFlags = VkFlags(StencilFaceFlagBits::eFront) |
+VkFlags(StencilFaceFlagBits::eBack) |
+VkFlags(StencilFaceFlagBits::eFrontAndBack)
     };
   };
 
@@ -13575,7 +13859,15 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SubgroupFeatureFlagBits::eBasic) | VkFlags(SubgroupFeatureFlagBits::eVote) | VkFlags(SubgroupFeatureFlagBits::eArithmetic) | VkFlags(SubgroupFeatureFlagBits::eBallot) | VkFlags(SubgroupFeatureFlagBits::eShuffle) | VkFlags(SubgroupFeatureFlagBits::eShuffleRelative) | VkFlags(SubgroupFeatureFlagBits::eClustered) | VkFlags(SubgroupFeatureFlagBits::eQuad) | VkFlags(SubgroupFeatureFlagBits::ePartitionedNV)
+      allFlags = VkFlags(SubgroupFeatureFlagBits::eBasic) |
+VkFlags(SubgroupFeatureFlagBits::eVote) |
+VkFlags(SubgroupFeatureFlagBits::eArithmetic) |
+VkFlags(SubgroupFeatureFlagBits::eBallot) |
+VkFlags(SubgroupFeatureFlagBits::eShuffle) |
+VkFlags(SubgroupFeatureFlagBits::eShuffleRelative) |
+VkFlags(SubgroupFeatureFlagBits::eClustered) |
+VkFlags(SubgroupFeatureFlagBits::eQuad) |
+VkFlags(SubgroupFeatureFlagBits::ePartitionedNV)
     };
   };
 
@@ -13624,7 +13916,10 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SubpassDescriptionFlagBits::ePerViewAttributesNVX) | VkFlags(SubpassDescriptionFlagBits::ePerViewPositionXOnlyNVX) | VkFlags(SubpassDescriptionFlagBits::eFragmentRegionQCOM) | VkFlags(SubpassDescriptionFlagBits::eShaderResolveQCOM)
+      allFlags = VkFlags(SubpassDescriptionFlagBits::ePerViewAttributesNVX) |
+VkFlags(SubpassDescriptionFlagBits::ePerViewPositionXOnlyNVX) |
+VkFlags(SubpassDescriptionFlagBits::eFragmentRegionQCOM) |
+VkFlags(SubpassDescriptionFlagBits::eShaderResolveQCOM)
     };
   };
 
@@ -13709,7 +14004,15 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SurfaceTransformFlagBitsKHR::eIdentity) | VkFlags(SurfaceTransformFlagBitsKHR::eRotate90) | VkFlags(SurfaceTransformFlagBitsKHR::eRotate180) | VkFlags(SurfaceTransformFlagBitsKHR::eRotate270) | VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirror) | VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate90) | VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate180) | VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate270) | VkFlags(SurfaceTransformFlagBitsKHR::eInherit)
+      allFlags = VkFlags(SurfaceTransformFlagBitsKHR::eIdentity) |
+VkFlags(SurfaceTransformFlagBitsKHR::eRotate90) |
+VkFlags(SurfaceTransformFlagBitsKHR::eRotate180) |
+VkFlags(SurfaceTransformFlagBitsKHR::eRotate270) |
+VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirror) |
+VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate90) |
+VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate180) |
+VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate270) |
+VkFlags(SurfaceTransformFlagBitsKHR::eInherit)
     };
   };
 
@@ -13758,7 +14061,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SwapchainCreateFlagBitsKHR::eSplitInstanceBindRegions) | VkFlags(SwapchainCreateFlagBitsKHR::eProtected) | VkFlags(SwapchainCreateFlagBitsKHR::eMutableFormat)
+      allFlags = VkFlags(SwapchainCreateFlagBitsKHR::eSplitInstanceBindRegions) |
+VkFlags(SwapchainCreateFlagBitsKHR::eProtected) |
+VkFlags(SwapchainCreateFlagBitsKHR::eMutableFormat)
     };
   };
 
@@ -13801,7 +14106,13 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ToolPurposeFlagBitsEXT::eValidation) | VkFlags(ToolPurposeFlagBitsEXT::eProfiling) | VkFlags(ToolPurposeFlagBitsEXT::eTracing) | VkFlags(ToolPurposeFlagBitsEXT::eAdditionalFeatures) | VkFlags(ToolPurposeFlagBitsEXT::eModifyingFeatures) | VkFlags(ToolPurposeFlagBitsEXT::eDebugReporting) | VkFlags(ToolPurposeFlagBitsEXT::eDebugMarkers)
+      allFlags = VkFlags(ToolPurposeFlagBitsEXT::eValidation) |
+VkFlags(ToolPurposeFlagBitsEXT::eProfiling) |
+VkFlags(ToolPurposeFlagBitsEXT::eTracing) |
+VkFlags(ToolPurposeFlagBitsEXT::eAdditionalFeatures) |
+VkFlags(ToolPurposeFlagBitsEXT::eModifyingFeatures) |
+VkFlags(ToolPurposeFlagBitsEXT::eDebugReporting) |
+VkFlags(ToolPurposeFlagBitsEXT::eDebugMarkers)
     };
   };
 
@@ -14248,6 +14559,7 @@ namespace VULKAN_HPP_NAMESPACE
       : SystemError( make_error_code( Result::eErrorNotPermittedEXT ), message ) {}
   };
 
+#ifdef VK_USE_PLATFORM_WIN32_KHR
   class FullScreenExclusiveModeLostEXTError : public SystemError
   {
   public:
@@ -14256,7 +14568,7 @@ namespace VULKAN_HPP_NAMESPACE
     FullScreenExclusiveModeLostEXTError( char const * message )
       : SystemError( make_error_code( Result::eErrorFullScreenExclusiveModeLostEXT ), message ) {}
   };
-
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   [[noreturn]] static void throwResultException( Result result, char const * message )
   {
@@ -14287,7 +14599,9 @@ namespace VULKAN_HPP_NAMESPACE
       case Result::eErrorInvalidShaderNV: throw InvalidShaderNVError( message );
       case Result::eErrorInvalidDrmFormatModifierPlaneLayoutEXT: throw InvalidDrmFormatModifierPlaneLayoutEXTError( message );
       case Result::eErrorNotPermittedEXT: throw NotPermittedEXTError( message );
+#ifdef VK_USE_PLATFORM_WIN32_KHR
       case Result::eErrorFullScreenExclusiveModeLostEXT: throw FullScreenExclusiveModeLostEXTError( message );
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
       default: throw SystemError( make_error_code( result ) );
     }
   }
