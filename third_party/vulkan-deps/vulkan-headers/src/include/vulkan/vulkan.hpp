@@ -94,7 +94,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #endif
 
 
-static_assert( VK_HEADER_VERSION ==  171 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  172 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -3870,9 +3870,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AccelerationStructureBuildTypeKHR
   {
-    eHost = VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_KHR,
-    eDevice = VK_ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE_KHR,
-    eHostOrDevice = VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_OR_DEVICE_KHR};
+      eHost = VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_KHR
+    , eDevice = VK_ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE_KHR
+    , eHostOrDevice = VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_OR_DEVICE_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( AccelerationStructureBuildTypeKHR value )
   {
@@ -3887,8 +3888,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AccelerationStructureCompatibilityKHR
   {
-    eCompatible = VK_ACCELERATION_STRUCTURE_COMPATIBILITY_COMPATIBLE_KHR,
-    eIncompatible = VK_ACCELERATION_STRUCTURE_COMPATIBILITY_INCOMPATIBLE_KHR};
+      eCompatible = VK_ACCELERATION_STRUCTURE_COMPATIBILITY_COMPATIBLE_KHR
+    , eIncompatible = VK_ACCELERATION_STRUCTURE_COMPATIBILITY_INCOMPATIBLE_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( AccelerationStructureCompatibilityKHR value )
   {
@@ -3902,7 +3904,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AccelerationStructureCreateFlagBitsKHR : VkAccelerationStructureCreateFlagsKHR
   {
-    eDeviceAddressCaptureReplay = VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR};
+      eDeviceAddressCaptureReplay = VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( AccelerationStructureCreateFlagBitsKHR value )
   {
@@ -3915,9 +3918,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AccelerationStructureMemoryRequirementsTypeNV
   {
-    eObject = VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV,
-    eBuildScratch = VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV,
-    eUpdateScratch = VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV};
+      eObject = VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV
+    , eBuildScratch = VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV
+    , eUpdateScratch = VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( AccelerationStructureMemoryRequirementsTypeNV value )
   {
@@ -3932,9 +3936,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AccelerationStructureTypeKHR
   {
-    eTopLevel = VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR,
-    eBottomLevel = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR,
-    eGeneric = VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR};
+      eTopLevel = VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR
+    , eBottomLevel = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR
+    , eGeneric = VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR
+  };
   using AccelerationStructureTypeNV = AccelerationStructureTypeKHR;
 
   VULKAN_HPP_INLINE std::string to_string( AccelerationStructureTypeKHR value )
@@ -3950,38 +3955,39 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AccessFlagBits : VkAccessFlags
   {
-    eIndirectCommandRead = VK_ACCESS_INDIRECT_COMMAND_READ_BIT,
-    eIndexRead = VK_ACCESS_INDEX_READ_BIT,
-    eVertexAttributeRead = VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT,
-    eUniformRead = VK_ACCESS_UNIFORM_READ_BIT,
-    eInputAttachmentRead = VK_ACCESS_INPUT_ATTACHMENT_READ_BIT,
-    eShaderRead = VK_ACCESS_SHADER_READ_BIT,
-    eShaderWrite = VK_ACCESS_SHADER_WRITE_BIT,
-    eColorAttachmentRead = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT,
-    eColorAttachmentWrite = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
-    eDepthStencilAttachmentRead = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT,
-    eDepthStencilAttachmentWrite = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,
-    eTransferRead = VK_ACCESS_TRANSFER_READ_BIT,
-    eTransferWrite = VK_ACCESS_TRANSFER_WRITE_BIT,
-    eHostRead = VK_ACCESS_HOST_READ_BIT,
-    eHostWrite = VK_ACCESS_HOST_WRITE_BIT,
-    eMemoryRead = VK_ACCESS_MEMORY_READ_BIT,
-    eMemoryWrite = VK_ACCESS_MEMORY_WRITE_BIT,
-    eTransformFeedbackWriteEXT = VK_ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT,
-    eTransformFeedbackCounterReadEXT = VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT,
-    eTransformFeedbackCounterWriteEXT = VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT,
-    eConditionalRenderingReadEXT = VK_ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT,
-    eColorAttachmentReadNoncoherentEXT = VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT,
-    eAccelerationStructureReadKHR = VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR,
-    eAccelerationStructureWriteKHR = VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR,
-    eShadingRateImageReadNV = VK_ACCESS_SHADING_RATE_IMAGE_READ_BIT_NV,
-    eFragmentDensityMapReadEXT = VK_ACCESS_FRAGMENT_DENSITY_MAP_READ_BIT_EXT,
-    eCommandPreprocessReadNV = VK_ACCESS_COMMAND_PREPROCESS_READ_BIT_NV,
-    eCommandPreprocessWriteNV = VK_ACCESS_COMMAND_PREPROCESS_WRITE_BIT_NV,
-    eNoneKHR = VK_ACCESS_NONE_KHR,
-    eAccelerationStructureReadNV = VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_NV,
-    eAccelerationStructureWriteNV = VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_NV,
-    eFragmentShadingRateAttachmentReadKHR = VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR};
+      eIndirectCommandRead = VK_ACCESS_INDIRECT_COMMAND_READ_BIT
+    , eIndexRead = VK_ACCESS_INDEX_READ_BIT
+    , eVertexAttributeRead = VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT
+    , eUniformRead = VK_ACCESS_UNIFORM_READ_BIT
+    , eInputAttachmentRead = VK_ACCESS_INPUT_ATTACHMENT_READ_BIT
+    , eShaderRead = VK_ACCESS_SHADER_READ_BIT
+    , eShaderWrite = VK_ACCESS_SHADER_WRITE_BIT
+    , eColorAttachmentRead = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT
+    , eColorAttachmentWrite = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT
+    , eDepthStencilAttachmentRead = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT
+    , eDepthStencilAttachmentWrite = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT
+    , eTransferRead = VK_ACCESS_TRANSFER_READ_BIT
+    , eTransferWrite = VK_ACCESS_TRANSFER_WRITE_BIT
+    , eHostRead = VK_ACCESS_HOST_READ_BIT
+    , eHostWrite = VK_ACCESS_HOST_WRITE_BIT
+    , eMemoryRead = VK_ACCESS_MEMORY_READ_BIT
+    , eMemoryWrite = VK_ACCESS_MEMORY_WRITE_BIT
+    , eTransformFeedbackWriteEXT = VK_ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT
+    , eTransformFeedbackCounterReadEXT = VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT
+    , eTransformFeedbackCounterWriteEXT = VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT
+    , eConditionalRenderingReadEXT = VK_ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT
+    , eColorAttachmentReadNoncoherentEXT = VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT
+    , eAccelerationStructureReadKHR = VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR
+    , eAccelerationStructureWriteKHR = VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR
+    , eShadingRateImageReadNV = VK_ACCESS_SHADING_RATE_IMAGE_READ_BIT_NV
+    , eFragmentDensityMapReadEXT = VK_ACCESS_FRAGMENT_DENSITY_MAP_READ_BIT_EXT
+    , eCommandPreprocessReadNV = VK_ACCESS_COMMAND_PREPROCESS_READ_BIT_NV
+    , eCommandPreprocessWriteNV = VK_ACCESS_COMMAND_PREPROCESS_WRITE_BIT_NV
+    , eNoneKHR = VK_ACCESS_NONE_KHR
+    , eAccelerationStructureReadNV = VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_NV
+    , eAccelerationStructureWriteNV = VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_NV
+    , eFragmentShadingRateAttachmentReadKHR = VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( AccessFlagBits value )
   {
@@ -4022,41 +4028,42 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AccessFlagBits2KHR : VkAccessFlags2KHR
   {
-    e2None = VK_ACCESS_2_NONE_KHR,
-    e2IndirectCommandRead = VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT_KHR,
-    e2IndexRead = VK_ACCESS_2_INDEX_READ_BIT_KHR,
-    e2VertexAttributeRead = VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT_KHR,
-    e2UniformRead = VK_ACCESS_2_UNIFORM_READ_BIT_KHR,
-    e2InputAttachmentRead = VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT_KHR,
-    e2ShaderRead = VK_ACCESS_2_SHADER_READ_BIT_KHR,
-    e2ShaderWrite = VK_ACCESS_2_SHADER_WRITE_BIT_KHR,
-    e2ColorAttachmentRead = VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT_KHR,
-    e2ColorAttachmentWrite = VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT_KHR,
-    e2DepthStencilAttachmentRead = VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT_KHR,
-    e2DepthStencilAttachmentWrite = VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR,
-    e2TransferRead = VK_ACCESS_2_TRANSFER_READ_BIT_KHR,
-    e2TransferWrite = VK_ACCESS_2_TRANSFER_WRITE_BIT_KHR,
-    e2HostRead = VK_ACCESS_2_HOST_READ_BIT_KHR,
-    e2HostWrite = VK_ACCESS_2_HOST_WRITE_BIT_KHR,
-    e2MemoryRead = VK_ACCESS_2_MEMORY_READ_BIT_KHR,
-    e2MemoryWrite = VK_ACCESS_2_MEMORY_WRITE_BIT_KHR,
-    e2ShaderSampledRead = VK_ACCESS_2_SHADER_SAMPLED_READ_BIT_KHR,
-    e2ShaderStorageRead = VK_ACCESS_2_SHADER_STORAGE_READ_BIT_KHR,
-    e2ShaderStorageWrite = VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT_KHR,
-    e2TransformFeedbackWriteExt = VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT,
-    e2TransformFeedbackCounterReadExt = VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT,
-    e2TransformFeedbackCounterWriteExt = VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT,
-    e2ConditionalRenderingReadExt = VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT,
-    e2CommandPreprocessReadNv = VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV,
-    e2CommandPreprocessWriteNv = VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV,
-    e2FragmentShadingRateAttachmentRead = VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR,
-    e2AccelerationStructureRead = VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR,
-    e2AccelerationStructureWrite = VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR,
-    e2FragmentDensityMapReadExt = VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT,
-    e2ColorAttachmentReadNoncoherentExt = VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT,
-    e2AccelerationStructureReadNv = VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_NV,
-    e2AccelerationStructureWriteNv = VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV,
-    e2ShadingRateImageReadNv = VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV};
+      e2None = VK_ACCESS_2_NONE_KHR
+    , e2IndirectCommandRead = VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT_KHR
+    , e2IndexRead = VK_ACCESS_2_INDEX_READ_BIT_KHR
+    , e2VertexAttributeRead = VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT_KHR
+    , e2UniformRead = VK_ACCESS_2_UNIFORM_READ_BIT_KHR
+    , e2InputAttachmentRead = VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT_KHR
+    , e2ShaderRead = VK_ACCESS_2_SHADER_READ_BIT_KHR
+    , e2ShaderWrite = VK_ACCESS_2_SHADER_WRITE_BIT_KHR
+    , e2ColorAttachmentRead = VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT_KHR
+    , e2ColorAttachmentWrite = VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT_KHR
+    , e2DepthStencilAttachmentRead = VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT_KHR
+    , e2DepthStencilAttachmentWrite = VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR
+    , e2TransferRead = VK_ACCESS_2_TRANSFER_READ_BIT_KHR
+    , e2TransferWrite = VK_ACCESS_2_TRANSFER_WRITE_BIT_KHR
+    , e2HostRead = VK_ACCESS_2_HOST_READ_BIT_KHR
+    , e2HostWrite = VK_ACCESS_2_HOST_WRITE_BIT_KHR
+    , e2MemoryRead = VK_ACCESS_2_MEMORY_READ_BIT_KHR
+    , e2MemoryWrite = VK_ACCESS_2_MEMORY_WRITE_BIT_KHR
+    , e2ShaderSampledRead = VK_ACCESS_2_SHADER_SAMPLED_READ_BIT_KHR
+    , e2ShaderStorageRead = VK_ACCESS_2_SHADER_STORAGE_READ_BIT_KHR
+    , e2ShaderStorageWrite = VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT_KHR
+    , e2TransformFeedbackWriteExt = VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT
+    , e2TransformFeedbackCounterReadExt = VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT
+    , e2TransformFeedbackCounterWriteExt = VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT
+    , e2ConditionalRenderingReadExt = VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT
+    , e2CommandPreprocessReadNv = VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV
+    , e2CommandPreprocessWriteNv = VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV
+    , e2FragmentShadingRateAttachmentRead = VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR
+    , e2AccelerationStructureRead = VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR
+    , e2AccelerationStructureWrite = VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR
+    , e2FragmentDensityMapReadExt = VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT
+    , e2ColorAttachmentReadNoncoherentExt = VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT
+    , e2AccelerationStructureReadNv = VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_NV
+    , e2AccelerationStructureWriteNv = VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV
+    , e2ShadingRateImageReadNv = VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( AccessFlagBits2KHR value )
   {
@@ -4099,7 +4106,8 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   enum class AcquireProfilingLockFlagBitsKHR : VkAcquireProfilingLockFlagsKHR
-  {};
+  {
+  };
 
   VULKAN_HPP_INLINE std::string to_string( AcquireProfilingLockFlagBitsKHR )
   {
@@ -4108,7 +4116,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AttachmentDescriptionFlagBits : VkAttachmentDescriptionFlags
   {
-    eMayAlias = VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT};
+      eMayAlias = VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( AttachmentDescriptionFlagBits value )
   {
@@ -4121,9 +4130,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AttachmentLoadOp
   {
-    eLoad = VK_ATTACHMENT_LOAD_OP_LOAD,
-    eClear = VK_ATTACHMENT_LOAD_OP_CLEAR,
-    eDontCare = VK_ATTACHMENT_LOAD_OP_DONT_CARE};
+      eLoad = VK_ATTACHMENT_LOAD_OP_LOAD
+    , eClear = VK_ATTACHMENT_LOAD_OP_CLEAR
+    , eDontCare = VK_ATTACHMENT_LOAD_OP_DONT_CARE
+  };
 
   VULKAN_HPP_INLINE std::string to_string( AttachmentLoadOp value )
   {
@@ -4138,9 +4148,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class AttachmentStoreOp
   {
-    eStore = VK_ATTACHMENT_STORE_OP_STORE,
-    eDontCare = VK_ATTACHMENT_STORE_OP_DONT_CARE,
-    eNoneQCOM = VK_ATTACHMENT_STORE_OP_NONE_QCOM};
+      eStore = VK_ATTACHMENT_STORE_OP_STORE
+    , eDontCare = VK_ATTACHMENT_STORE_OP_DONT_CARE
+    , eNoneQCOM = VK_ATTACHMENT_STORE_OP_NONE_QCOM
+  };
 
   VULKAN_HPP_INLINE std::string to_string( AttachmentStoreOp value )
   {
@@ -4155,25 +4166,26 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class BlendFactor
   {
-    eZero = VK_BLEND_FACTOR_ZERO,
-    eOne = VK_BLEND_FACTOR_ONE,
-    eSrcColor = VK_BLEND_FACTOR_SRC_COLOR,
-    eOneMinusSrcColor = VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR,
-    eDstColor = VK_BLEND_FACTOR_DST_COLOR,
-    eOneMinusDstColor = VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR,
-    eSrcAlpha = VK_BLEND_FACTOR_SRC_ALPHA,
-    eOneMinusSrcAlpha = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA,
-    eDstAlpha = VK_BLEND_FACTOR_DST_ALPHA,
-    eOneMinusDstAlpha = VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA,
-    eConstantColor = VK_BLEND_FACTOR_CONSTANT_COLOR,
-    eOneMinusConstantColor = VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR,
-    eConstantAlpha = VK_BLEND_FACTOR_CONSTANT_ALPHA,
-    eOneMinusConstantAlpha = VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA,
-    eSrcAlphaSaturate = VK_BLEND_FACTOR_SRC_ALPHA_SATURATE,
-    eSrc1Color = VK_BLEND_FACTOR_SRC1_COLOR,
-    eOneMinusSrc1Color = VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR,
-    eSrc1Alpha = VK_BLEND_FACTOR_SRC1_ALPHA,
-    eOneMinusSrc1Alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA};
+      eZero = VK_BLEND_FACTOR_ZERO
+    , eOne = VK_BLEND_FACTOR_ONE
+    , eSrcColor = VK_BLEND_FACTOR_SRC_COLOR
+    , eOneMinusSrcColor = VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR
+    , eDstColor = VK_BLEND_FACTOR_DST_COLOR
+    , eOneMinusDstColor = VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR
+    , eSrcAlpha = VK_BLEND_FACTOR_SRC_ALPHA
+    , eOneMinusSrcAlpha = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA
+    , eDstAlpha = VK_BLEND_FACTOR_DST_ALPHA
+    , eOneMinusDstAlpha = VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA
+    , eConstantColor = VK_BLEND_FACTOR_CONSTANT_COLOR
+    , eOneMinusConstantColor = VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR
+    , eConstantAlpha = VK_BLEND_FACTOR_CONSTANT_ALPHA
+    , eOneMinusConstantAlpha = VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA
+    , eSrcAlphaSaturate = VK_BLEND_FACTOR_SRC_ALPHA_SATURATE
+    , eSrc1Color = VK_BLEND_FACTOR_SRC1_COLOR
+    , eOneMinusSrc1Color = VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR
+    , eSrc1Alpha = VK_BLEND_FACTOR_SRC1_ALPHA
+    , eOneMinusSrc1Alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
+  };
 
   VULKAN_HPP_INLINE std::string to_string( BlendFactor value )
   {
@@ -4204,57 +4216,58 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class BlendOp
   {
-    eAdd = VK_BLEND_OP_ADD,
-    eSubtract = VK_BLEND_OP_SUBTRACT,
-    eReverseSubtract = VK_BLEND_OP_REVERSE_SUBTRACT,
-    eMin = VK_BLEND_OP_MIN,
-    eMax = VK_BLEND_OP_MAX,
-    eZeroEXT = VK_BLEND_OP_ZERO_EXT,
-    eSrcEXT = VK_BLEND_OP_SRC_EXT,
-    eDstEXT = VK_BLEND_OP_DST_EXT,
-    eSrcOverEXT = VK_BLEND_OP_SRC_OVER_EXT,
-    eDstOverEXT = VK_BLEND_OP_DST_OVER_EXT,
-    eSrcInEXT = VK_BLEND_OP_SRC_IN_EXT,
-    eDstInEXT = VK_BLEND_OP_DST_IN_EXT,
-    eSrcOutEXT = VK_BLEND_OP_SRC_OUT_EXT,
-    eDstOutEXT = VK_BLEND_OP_DST_OUT_EXT,
-    eSrcAtopEXT = VK_BLEND_OP_SRC_ATOP_EXT,
-    eDstAtopEXT = VK_BLEND_OP_DST_ATOP_EXT,
-    eXorEXT = VK_BLEND_OP_XOR_EXT,
-    eMultiplyEXT = VK_BLEND_OP_MULTIPLY_EXT,
-    eScreenEXT = VK_BLEND_OP_SCREEN_EXT,
-    eOverlayEXT = VK_BLEND_OP_OVERLAY_EXT,
-    eDarkenEXT = VK_BLEND_OP_DARKEN_EXT,
-    eLightenEXT = VK_BLEND_OP_LIGHTEN_EXT,
-    eColordodgeEXT = VK_BLEND_OP_COLORDODGE_EXT,
-    eColorburnEXT = VK_BLEND_OP_COLORBURN_EXT,
-    eHardlightEXT = VK_BLEND_OP_HARDLIGHT_EXT,
-    eSoftlightEXT = VK_BLEND_OP_SOFTLIGHT_EXT,
-    eDifferenceEXT = VK_BLEND_OP_DIFFERENCE_EXT,
-    eExclusionEXT = VK_BLEND_OP_EXCLUSION_EXT,
-    eInvertEXT = VK_BLEND_OP_INVERT_EXT,
-    eInvertRgbEXT = VK_BLEND_OP_INVERT_RGB_EXT,
-    eLineardodgeEXT = VK_BLEND_OP_LINEARDODGE_EXT,
-    eLinearburnEXT = VK_BLEND_OP_LINEARBURN_EXT,
-    eVividlightEXT = VK_BLEND_OP_VIVIDLIGHT_EXT,
-    eLinearlightEXT = VK_BLEND_OP_LINEARLIGHT_EXT,
-    ePinlightEXT = VK_BLEND_OP_PINLIGHT_EXT,
-    eHardmixEXT = VK_BLEND_OP_HARDMIX_EXT,
-    eHslHueEXT = VK_BLEND_OP_HSL_HUE_EXT,
-    eHslSaturationEXT = VK_BLEND_OP_HSL_SATURATION_EXT,
-    eHslColorEXT = VK_BLEND_OP_HSL_COLOR_EXT,
-    eHslLuminosityEXT = VK_BLEND_OP_HSL_LUMINOSITY_EXT,
-    ePlusEXT = VK_BLEND_OP_PLUS_EXT,
-    ePlusClampedEXT = VK_BLEND_OP_PLUS_CLAMPED_EXT,
-    ePlusClampedAlphaEXT = VK_BLEND_OP_PLUS_CLAMPED_ALPHA_EXT,
-    ePlusDarkerEXT = VK_BLEND_OP_PLUS_DARKER_EXT,
-    eMinusEXT = VK_BLEND_OP_MINUS_EXT,
-    eMinusClampedEXT = VK_BLEND_OP_MINUS_CLAMPED_EXT,
-    eContrastEXT = VK_BLEND_OP_CONTRAST_EXT,
-    eInvertOvgEXT = VK_BLEND_OP_INVERT_OVG_EXT,
-    eRedEXT = VK_BLEND_OP_RED_EXT,
-    eGreenEXT = VK_BLEND_OP_GREEN_EXT,
-    eBlueEXT = VK_BLEND_OP_BLUE_EXT};
+      eAdd = VK_BLEND_OP_ADD
+    , eSubtract = VK_BLEND_OP_SUBTRACT
+    , eReverseSubtract = VK_BLEND_OP_REVERSE_SUBTRACT
+    , eMin = VK_BLEND_OP_MIN
+    , eMax = VK_BLEND_OP_MAX
+    , eZeroEXT = VK_BLEND_OP_ZERO_EXT
+    , eSrcEXT = VK_BLEND_OP_SRC_EXT
+    , eDstEXT = VK_BLEND_OP_DST_EXT
+    , eSrcOverEXT = VK_BLEND_OP_SRC_OVER_EXT
+    , eDstOverEXT = VK_BLEND_OP_DST_OVER_EXT
+    , eSrcInEXT = VK_BLEND_OP_SRC_IN_EXT
+    , eDstInEXT = VK_BLEND_OP_DST_IN_EXT
+    , eSrcOutEXT = VK_BLEND_OP_SRC_OUT_EXT
+    , eDstOutEXT = VK_BLEND_OP_DST_OUT_EXT
+    , eSrcAtopEXT = VK_BLEND_OP_SRC_ATOP_EXT
+    , eDstAtopEXT = VK_BLEND_OP_DST_ATOP_EXT
+    , eXorEXT = VK_BLEND_OP_XOR_EXT
+    , eMultiplyEXT = VK_BLEND_OP_MULTIPLY_EXT
+    , eScreenEXT = VK_BLEND_OP_SCREEN_EXT
+    , eOverlayEXT = VK_BLEND_OP_OVERLAY_EXT
+    , eDarkenEXT = VK_BLEND_OP_DARKEN_EXT
+    , eLightenEXT = VK_BLEND_OP_LIGHTEN_EXT
+    , eColordodgeEXT = VK_BLEND_OP_COLORDODGE_EXT
+    , eColorburnEXT = VK_BLEND_OP_COLORBURN_EXT
+    , eHardlightEXT = VK_BLEND_OP_HARDLIGHT_EXT
+    , eSoftlightEXT = VK_BLEND_OP_SOFTLIGHT_EXT
+    , eDifferenceEXT = VK_BLEND_OP_DIFFERENCE_EXT
+    , eExclusionEXT = VK_BLEND_OP_EXCLUSION_EXT
+    , eInvertEXT = VK_BLEND_OP_INVERT_EXT
+    , eInvertRgbEXT = VK_BLEND_OP_INVERT_RGB_EXT
+    , eLineardodgeEXT = VK_BLEND_OP_LINEARDODGE_EXT
+    , eLinearburnEXT = VK_BLEND_OP_LINEARBURN_EXT
+    , eVividlightEXT = VK_BLEND_OP_VIVIDLIGHT_EXT
+    , eLinearlightEXT = VK_BLEND_OP_LINEARLIGHT_EXT
+    , ePinlightEXT = VK_BLEND_OP_PINLIGHT_EXT
+    , eHardmixEXT = VK_BLEND_OP_HARDMIX_EXT
+    , eHslHueEXT = VK_BLEND_OP_HSL_HUE_EXT
+    , eHslSaturationEXT = VK_BLEND_OP_HSL_SATURATION_EXT
+    , eHslColorEXT = VK_BLEND_OP_HSL_COLOR_EXT
+    , eHslLuminosityEXT = VK_BLEND_OP_HSL_LUMINOSITY_EXT
+    , ePlusEXT = VK_BLEND_OP_PLUS_EXT
+    , ePlusClampedEXT = VK_BLEND_OP_PLUS_CLAMPED_EXT
+    , ePlusClampedAlphaEXT = VK_BLEND_OP_PLUS_CLAMPED_ALPHA_EXT
+    , ePlusDarkerEXT = VK_BLEND_OP_PLUS_DARKER_EXT
+    , eMinusEXT = VK_BLEND_OP_MINUS_EXT
+    , eMinusClampedEXT = VK_BLEND_OP_MINUS_CLAMPED_EXT
+    , eContrastEXT = VK_BLEND_OP_CONTRAST_EXT
+    , eInvertOvgEXT = VK_BLEND_OP_INVERT_OVG_EXT
+    , eRedEXT = VK_BLEND_OP_RED_EXT
+    , eGreenEXT = VK_BLEND_OP_GREEN_EXT
+    , eBlueEXT = VK_BLEND_OP_BLUE_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( BlendOp value )
   {
@@ -4317,9 +4330,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class BlendOverlapEXT
   {
-    eUncorrelated = VK_BLEND_OVERLAP_UNCORRELATED_EXT,
-    eDisjoint = VK_BLEND_OVERLAP_DISJOINT_EXT,
-    eConjoint = VK_BLEND_OVERLAP_CONJOINT_EXT};
+      eUncorrelated = VK_BLEND_OVERLAP_UNCORRELATED_EXT
+    , eDisjoint = VK_BLEND_OVERLAP_DISJOINT_EXT
+    , eConjoint = VK_BLEND_OVERLAP_CONJOINT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( BlendOverlapEXT value )
   {
@@ -4334,14 +4348,15 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class BorderColor
   {
-    eFloatTransparentBlack = VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK,
-    eIntTransparentBlack = VK_BORDER_COLOR_INT_TRANSPARENT_BLACK,
-    eFloatOpaqueBlack = VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
-    eIntOpaqueBlack = VK_BORDER_COLOR_INT_OPAQUE_BLACK,
-    eFloatOpaqueWhite = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE,
-    eIntOpaqueWhite = VK_BORDER_COLOR_INT_OPAQUE_WHITE,
-    eFloatCustomEXT = VK_BORDER_COLOR_FLOAT_CUSTOM_EXT,
-    eIntCustomEXT = VK_BORDER_COLOR_INT_CUSTOM_EXT};
+      eFloatTransparentBlack = VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK
+    , eIntTransparentBlack = VK_BORDER_COLOR_INT_TRANSPARENT_BLACK
+    , eFloatOpaqueBlack = VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK
+    , eIntOpaqueBlack = VK_BORDER_COLOR_INT_OPAQUE_BLACK
+    , eFloatOpaqueWhite = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE
+    , eIntOpaqueWhite = VK_BORDER_COLOR_INT_OPAQUE_WHITE
+    , eFloatCustomEXT = VK_BORDER_COLOR_FLOAT_CUSTOM_EXT
+    , eIntCustomEXT = VK_BORDER_COLOR_INT_CUSTOM_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( BorderColor value )
   {
@@ -4361,13 +4376,14 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class BufferCreateFlagBits : VkBufferCreateFlags
   {
-    eSparseBinding = VK_BUFFER_CREATE_SPARSE_BINDING_BIT,
-    eSparseResidency = VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT,
-    eSparseAliased = VK_BUFFER_CREATE_SPARSE_ALIASED_BIT,
-    eProtected = VK_BUFFER_CREATE_PROTECTED_BIT,
-    eDeviceAddressCaptureReplay = VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT,
-    eDeviceAddressCaptureReplayEXT = VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT,
-    eDeviceAddressCaptureReplayKHR = VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR};
+      eSparseBinding = VK_BUFFER_CREATE_SPARSE_BINDING_BIT
+    , eSparseResidency = VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT
+    , eSparseAliased = VK_BUFFER_CREATE_SPARSE_ALIASED_BIT
+    , eProtected = VK_BUFFER_CREATE_PROTECTED_BIT
+    , eDeviceAddressCaptureReplay = VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT
+    , eDeviceAddressCaptureReplayEXT = VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT
+    , eDeviceAddressCaptureReplayKHR = VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( BufferCreateFlagBits value )
   {
@@ -4384,25 +4400,26 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class BufferUsageFlagBits : VkBufferUsageFlags
   {
-    eTransferSrc = VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-    eTransferDst = VK_BUFFER_USAGE_TRANSFER_DST_BIT,
-    eUniformTexelBuffer = VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT,
-    eStorageTexelBuffer = VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT,
-    eUniformBuffer = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-    eStorageBuffer = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-    eIndexBuffer = VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-    eVertexBuffer = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-    eIndirectBuffer = VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
-    eShaderDeviceAddress = VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT,
-    eTransformFeedbackBufferEXT = VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT,
-    eTransformFeedbackCounterBufferEXT = VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT,
-    eConditionalRenderingEXT = VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT,
-    eAccelerationStructureBuildInputReadOnlyKHR = VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR,
-    eAccelerationStructureStorageKHR = VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR,
-    eShaderBindingTableKHR = VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR,
-    eRayTracingNV = VK_BUFFER_USAGE_RAY_TRACING_BIT_NV,
-    eShaderDeviceAddressEXT = VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT,
-    eShaderDeviceAddressKHR = VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR};
+      eTransferSrc = VK_BUFFER_USAGE_TRANSFER_SRC_BIT
+    , eTransferDst = VK_BUFFER_USAGE_TRANSFER_DST_BIT
+    , eUniformTexelBuffer = VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT
+    , eStorageTexelBuffer = VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT
+    , eUniformBuffer = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT
+    , eStorageBuffer = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT
+    , eIndexBuffer = VK_BUFFER_USAGE_INDEX_BUFFER_BIT
+    , eVertexBuffer = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT
+    , eIndirectBuffer = VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT
+    , eShaderDeviceAddress = VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT
+    , eTransformFeedbackBufferEXT = VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT
+    , eTransformFeedbackCounterBufferEXT = VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT
+    , eConditionalRenderingEXT = VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT
+    , eAccelerationStructureBuildInputReadOnlyKHR = VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR
+    , eAccelerationStructureStorageKHR = VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR
+    , eShaderBindingTableKHR = VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR
+    , eRayTracingNV = VK_BUFFER_USAGE_RAY_TRACING_BIT_NV
+    , eShaderDeviceAddressEXT = VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT
+    , eShaderDeviceAddressKHR = VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( BufferUsageFlagBits value )
   {
@@ -4430,11 +4447,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class BuildAccelerationStructureFlagBitsKHR : VkBuildAccelerationStructureFlagsKHR
   {
-    eAllowUpdate = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR,
-    eAllowCompaction = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR,
-    ePreferFastTrace = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR,
-    ePreferFastBuild = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR,
-    eLowMemory = VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR};
+      eAllowUpdate = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR
+    , eAllowCompaction = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR
+    , ePreferFastTrace = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR
+    , ePreferFastBuild = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR
+    , eLowMemory = VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR
+  };
   using BuildAccelerationStructureFlagBitsNV = BuildAccelerationStructureFlagBitsKHR;
 
   VULKAN_HPP_INLINE std::string to_string( BuildAccelerationStructureFlagBitsKHR value )
@@ -4452,8 +4470,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class BuildAccelerationStructureModeKHR
   {
-    eBuild = VK_BUILD_ACCELERATION_STRUCTURE_MODE_BUILD_KHR,
-    eUpdate = VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR};
+      eBuild = VK_BUILD_ACCELERATION_STRUCTURE_MODE_BUILD_KHR
+    , eUpdate = VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( BuildAccelerationStructureModeKHR value )
   {
@@ -4467,8 +4486,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ChromaLocation
   {
-    eCositedEven = VK_CHROMA_LOCATION_COSITED_EVEN,
-    eMidpoint = VK_CHROMA_LOCATION_MIDPOINT};
+      eCositedEven = VK_CHROMA_LOCATION_COSITED_EVEN
+    , eMidpoint = VK_CHROMA_LOCATION_MIDPOINT
+  };
   using ChromaLocationKHR = ChromaLocation;
 
   VULKAN_HPP_INLINE std::string to_string( ChromaLocation value )
@@ -4483,10 +4503,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CoarseSampleOrderTypeNV
   {
-    eDefault = VK_COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV,
-    eCustom = VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV,
-    ePixelMajor = VK_COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV,
-    eSampleMajor = VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV};
+      eDefault = VK_COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV
+    , eCustom = VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV
+    , ePixelMajor = VK_COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV
+    , eSampleMajor = VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CoarseSampleOrderTypeNV value )
   {
@@ -4502,10 +4523,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ColorComponentFlagBits : VkColorComponentFlags
   {
-    eR = VK_COLOR_COMPONENT_R_BIT,
-    eG = VK_COLOR_COMPONENT_G_BIT,
-    eB = VK_COLOR_COMPONENT_B_BIT,
-    eA = VK_COLOR_COMPONENT_A_BIT};
+      eR = VK_COLOR_COMPONENT_R_BIT
+    , eG = VK_COLOR_COMPONENT_G_BIT
+    , eB = VK_COLOR_COMPONENT_B_BIT
+    , eA = VK_COLOR_COMPONENT_A_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ColorComponentFlagBits value )
   {
@@ -4521,24 +4543,25 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ColorSpaceKHR
   {
-    eSrgbNonlinear = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
-    eDisplayP3NonlinearEXT = VK_COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT,
-    eExtendedSrgbLinearEXT = VK_COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT,
-    eDisplayP3LinearEXT = VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT,
-    eDciP3NonlinearEXT = VK_COLOR_SPACE_DCI_P3_NONLINEAR_EXT,
-    eBt709LinearEXT = VK_COLOR_SPACE_BT709_LINEAR_EXT,
-    eBt709NonlinearEXT = VK_COLOR_SPACE_BT709_NONLINEAR_EXT,
-    eBt2020LinearEXT = VK_COLOR_SPACE_BT2020_LINEAR_EXT,
-    eHdr10St2084EXT = VK_COLOR_SPACE_HDR10_ST2084_EXT,
-    eDolbyvisionEXT = VK_COLOR_SPACE_DOLBYVISION_EXT,
-    eHdr10HlgEXT = VK_COLOR_SPACE_HDR10_HLG_EXT,
-    eAdobergbLinearEXT = VK_COLOR_SPACE_ADOBERGB_LINEAR_EXT,
-    eAdobergbNonlinearEXT = VK_COLOR_SPACE_ADOBERGB_NONLINEAR_EXT,
-    ePassThroughEXT = VK_COLOR_SPACE_PASS_THROUGH_EXT,
-    eExtendedSrgbNonlinearEXT = VK_COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT,
-    eDisplayNativeAMD = VK_COLOR_SPACE_DISPLAY_NATIVE_AMD,
-    eVkColorspaceSrgbNonlinear = VK_COLORSPACE_SRGB_NONLINEAR_KHR,
-    eDciP3LinearEXT = VK_COLOR_SPACE_DCI_P3_LINEAR_EXT};
+      eSrgbNonlinear = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR
+    , eDisplayP3NonlinearEXT = VK_COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT
+    , eExtendedSrgbLinearEXT = VK_COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT
+    , eDisplayP3LinearEXT = VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT
+    , eDciP3NonlinearEXT = VK_COLOR_SPACE_DCI_P3_NONLINEAR_EXT
+    , eBt709LinearEXT = VK_COLOR_SPACE_BT709_LINEAR_EXT
+    , eBt709NonlinearEXT = VK_COLOR_SPACE_BT709_NONLINEAR_EXT
+    , eBt2020LinearEXT = VK_COLOR_SPACE_BT2020_LINEAR_EXT
+    , eHdr10St2084EXT = VK_COLOR_SPACE_HDR10_ST2084_EXT
+    , eDolbyvisionEXT = VK_COLOR_SPACE_DOLBYVISION_EXT
+    , eHdr10HlgEXT = VK_COLOR_SPACE_HDR10_HLG_EXT
+    , eAdobergbLinearEXT = VK_COLOR_SPACE_ADOBERGB_LINEAR_EXT
+    , eAdobergbNonlinearEXT = VK_COLOR_SPACE_ADOBERGB_NONLINEAR_EXT
+    , ePassThroughEXT = VK_COLOR_SPACE_PASS_THROUGH_EXT
+    , eExtendedSrgbNonlinearEXT = VK_COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT
+    , eDisplayNativeAMD = VK_COLOR_SPACE_DISPLAY_NATIVE_AMD
+    , eVkColorspaceSrgbNonlinear = VK_COLORSPACE_SRGB_NONLINEAR_KHR
+    , eDciP3LinearEXT = VK_COLOR_SPACE_DCI_P3_LINEAR_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ColorSpaceKHR value )
   {
@@ -4566,8 +4589,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CommandBufferLevel
   {
-    ePrimary = VK_COMMAND_BUFFER_LEVEL_PRIMARY,
-    eSecondary = VK_COMMAND_BUFFER_LEVEL_SECONDARY};
+      ePrimary = VK_COMMAND_BUFFER_LEVEL_PRIMARY
+    , eSecondary = VK_COMMAND_BUFFER_LEVEL_SECONDARY
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CommandBufferLevel value )
   {
@@ -4581,7 +4605,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CommandBufferResetFlagBits : VkCommandBufferResetFlags
   {
-    eReleaseResources = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT};
+      eReleaseResources = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CommandBufferResetFlagBits value )
   {
@@ -4594,9 +4619,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CommandBufferUsageFlagBits : VkCommandBufferUsageFlags
   {
-    eOneTimeSubmit = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
-    eRenderPassContinue = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT,
-    eSimultaneousUse = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT};
+      eOneTimeSubmit = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT
+    , eRenderPassContinue = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT
+    , eSimultaneousUse = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CommandBufferUsageFlagBits value )
   {
@@ -4611,9 +4637,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CommandPoolCreateFlagBits : VkCommandPoolCreateFlags
   {
-    eTransient = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
-    eResetCommandBuffer = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
-    eProtected = VK_COMMAND_POOL_CREATE_PROTECTED_BIT};
+      eTransient = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT
+    , eResetCommandBuffer = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT
+    , eProtected = VK_COMMAND_POOL_CREATE_PROTECTED_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CommandPoolCreateFlagBits value )
   {
@@ -4628,7 +4655,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CommandPoolResetFlagBits : VkCommandPoolResetFlags
   {
-    eReleaseResources = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT};
+      eReleaseResources = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CommandPoolResetFlagBits value )
   {
@@ -4641,14 +4669,15 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CompareOp
   {
-    eNever = VK_COMPARE_OP_NEVER,
-    eLess = VK_COMPARE_OP_LESS,
-    eEqual = VK_COMPARE_OP_EQUAL,
-    eLessOrEqual = VK_COMPARE_OP_LESS_OR_EQUAL,
-    eGreater = VK_COMPARE_OP_GREATER,
-    eNotEqual = VK_COMPARE_OP_NOT_EQUAL,
-    eGreaterOrEqual = VK_COMPARE_OP_GREATER_OR_EQUAL,
-    eAlways = VK_COMPARE_OP_ALWAYS};
+      eNever = VK_COMPARE_OP_NEVER
+    , eLess = VK_COMPARE_OP_LESS
+    , eEqual = VK_COMPARE_OP_EQUAL
+    , eLessOrEqual = VK_COMPARE_OP_LESS_OR_EQUAL
+    , eGreater = VK_COMPARE_OP_GREATER
+    , eNotEqual = VK_COMPARE_OP_NOT_EQUAL
+    , eGreaterOrEqual = VK_COMPARE_OP_GREATER_OR_EQUAL
+    , eAlways = VK_COMPARE_OP_ALWAYS
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CompareOp value )
   {
@@ -4668,13 +4697,14 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ComponentSwizzle
   {
-    eIdentity = VK_COMPONENT_SWIZZLE_IDENTITY,
-    eZero = VK_COMPONENT_SWIZZLE_ZERO,
-    eOne = VK_COMPONENT_SWIZZLE_ONE,
-    eR = VK_COMPONENT_SWIZZLE_R,
-    eG = VK_COMPONENT_SWIZZLE_G,
-    eB = VK_COMPONENT_SWIZZLE_B,
-    eA = VK_COMPONENT_SWIZZLE_A};
+      eIdentity = VK_COMPONENT_SWIZZLE_IDENTITY
+    , eZero = VK_COMPONENT_SWIZZLE_ZERO
+    , eOne = VK_COMPONENT_SWIZZLE_ONE
+    , eR = VK_COMPONENT_SWIZZLE_R
+    , eG = VK_COMPONENT_SWIZZLE_G
+    , eB = VK_COMPONENT_SWIZZLE_B
+    , eA = VK_COMPONENT_SWIZZLE_A
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ComponentSwizzle value )
   {
@@ -4693,17 +4723,18 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ComponentTypeNV
   {
-    eFloat16 = VK_COMPONENT_TYPE_FLOAT16_NV,
-    eFloat32 = VK_COMPONENT_TYPE_FLOAT32_NV,
-    eFloat64 = VK_COMPONENT_TYPE_FLOAT64_NV,
-    eSint8 = VK_COMPONENT_TYPE_SINT8_NV,
-    eSint16 = VK_COMPONENT_TYPE_SINT16_NV,
-    eSint32 = VK_COMPONENT_TYPE_SINT32_NV,
-    eSint64 = VK_COMPONENT_TYPE_SINT64_NV,
-    eUint8 = VK_COMPONENT_TYPE_UINT8_NV,
-    eUint16 = VK_COMPONENT_TYPE_UINT16_NV,
-    eUint32 = VK_COMPONENT_TYPE_UINT32_NV,
-    eUint64 = VK_COMPONENT_TYPE_UINT64_NV};
+      eFloat16 = VK_COMPONENT_TYPE_FLOAT16_NV
+    , eFloat32 = VK_COMPONENT_TYPE_FLOAT32_NV
+    , eFloat64 = VK_COMPONENT_TYPE_FLOAT64_NV
+    , eSint8 = VK_COMPONENT_TYPE_SINT8_NV
+    , eSint16 = VK_COMPONENT_TYPE_SINT16_NV
+    , eSint32 = VK_COMPONENT_TYPE_SINT32_NV
+    , eSint64 = VK_COMPONENT_TYPE_SINT64_NV
+    , eUint8 = VK_COMPONENT_TYPE_UINT8_NV
+    , eUint16 = VK_COMPONENT_TYPE_UINT16_NV
+    , eUint32 = VK_COMPONENT_TYPE_UINT32_NV
+    , eUint64 = VK_COMPONENT_TYPE_UINT64_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ComponentTypeNV value )
   {
@@ -4726,10 +4757,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CompositeAlphaFlagBitsKHR : VkCompositeAlphaFlagsKHR
   {
-    eOpaque = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
-    ePreMultiplied = VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
-    ePostMultiplied = VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR,
-    eInherit = VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR};
+      eOpaque = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
+    , ePreMultiplied = VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR
+    , ePostMultiplied = VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR
+    , eInherit = VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CompositeAlphaFlagBitsKHR value )
   {
@@ -4745,7 +4777,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ConditionalRenderingFlagBitsEXT : VkConditionalRenderingFlagsEXT
   {
-    eInverted = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT};
+      eInverted = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ConditionalRenderingFlagBitsEXT value )
   {
@@ -4758,9 +4791,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ConservativeRasterizationModeEXT
   {
-    eDisabled = VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT,
-    eOverestimate = VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT,
-    eUnderestimate = VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT};
+      eDisabled = VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT
+    , eOverestimate = VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT
+    , eUnderestimate = VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ConservativeRasterizationModeEXT value )
   {
@@ -4775,10 +4809,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CopyAccelerationStructureModeKHR
   {
-    eClone = VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR,
-    eCompact = VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR,
-    eSerialize = VK_COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR,
-    eDeserialize = VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR};
+      eClone = VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR
+    , eCompact = VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR
+    , eSerialize = VK_COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR
+    , eDeserialize = VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR
+  };
   using CopyAccelerationStructureModeNV = CopyAccelerationStructureModeKHR;
 
   VULKAN_HPP_INLINE std::string to_string( CopyAccelerationStructureModeKHR value )
@@ -4795,10 +4830,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CoverageModulationModeNV
   {
-    eNone = VK_COVERAGE_MODULATION_MODE_NONE_NV,
-    eRgb = VK_COVERAGE_MODULATION_MODE_RGB_NV,
-    eAlpha = VK_COVERAGE_MODULATION_MODE_ALPHA_NV,
-    eRgba = VK_COVERAGE_MODULATION_MODE_RGBA_NV};
+      eNone = VK_COVERAGE_MODULATION_MODE_NONE_NV
+    , eRgb = VK_COVERAGE_MODULATION_MODE_RGB_NV
+    , eAlpha = VK_COVERAGE_MODULATION_MODE_ALPHA_NV
+    , eRgba = VK_COVERAGE_MODULATION_MODE_RGBA_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CoverageModulationModeNV value )
   {
@@ -4814,8 +4850,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CoverageReductionModeNV
   {
-    eMerge = VK_COVERAGE_REDUCTION_MODE_MERGE_NV,
-    eTruncate = VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV};
+      eMerge = VK_COVERAGE_REDUCTION_MODE_MERGE_NV
+    , eTruncate = VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CoverageReductionModeNV value )
   {
@@ -4829,10 +4866,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class CullModeFlagBits : VkCullModeFlags
   {
-    eNone = VK_CULL_MODE_NONE,
-    eFront = VK_CULL_MODE_FRONT_BIT,
-    eBack = VK_CULL_MODE_BACK_BIT,
-    eFrontAndBack = VK_CULL_MODE_FRONT_AND_BACK};
+      eNone = VK_CULL_MODE_NONE
+    , eFront = VK_CULL_MODE_FRONT_BIT
+    , eBack = VK_CULL_MODE_BACK_BIT
+    , eFrontAndBack = VK_CULL_MODE_FRONT_AND_BACK
+  };
 
   VULKAN_HPP_INLINE std::string to_string( CullModeFlagBits value )
   {
@@ -4848,11 +4886,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DebugReportFlagBitsEXT : VkDebugReportFlagsEXT
   {
-    eInformation = VK_DEBUG_REPORT_INFORMATION_BIT_EXT,
-    eWarning = VK_DEBUG_REPORT_WARNING_BIT_EXT,
-    ePerformanceWarning = VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT,
-    eError = VK_DEBUG_REPORT_ERROR_BIT_EXT,
-    eDebug = VK_DEBUG_REPORT_DEBUG_BIT_EXT};
+      eInformation = VK_DEBUG_REPORT_INFORMATION_BIT_EXT
+    , eWarning = VK_DEBUG_REPORT_WARNING_BIT_EXT
+    , ePerformanceWarning = VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT
+    , eError = VK_DEBUG_REPORT_ERROR_BIT_EXT
+    , eDebug = VK_DEBUG_REPORT_DEBUG_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DebugReportFlagBitsEXT value )
   {
@@ -4869,46 +4908,47 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DebugReportObjectTypeEXT
   {
-    eUnknown = VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT,
-    eInstance = VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT,
-    ePhysicalDevice = VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT,
-    eDevice = VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT,
-    eQueue = VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT,
-    eSemaphore = VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT,
-    eCommandBuffer = VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT,
-    eFence = VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT,
-    eDeviceMemory = VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT,
-    eBuffer = VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT,
-    eImage = VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT,
-    eEvent = VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT,
-    eQueryPool = VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT,
-    eBufferView = VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT,
-    eImageView = VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT,
-    eShaderModule = VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT,
-    ePipelineCache = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT,
-    ePipelineLayout = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT,
-    eRenderPass = VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT,
-    ePipeline = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT,
-    eDescriptorSetLayout = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT,
-    eSampler = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT,
-    eDescriptorPool = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT,
-    eDescriptorSet = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT,
-    eFramebuffer = VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT,
-    eCommandPool = VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT,
-    eSurfaceKHR = VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT,
-    eSwapchainKHR = VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT,
-    eDebugReportCallbackEXT = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT,
-    eDisplayKHR = VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT,
-    eDisplayModeKHR = VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT,
-    eValidationCacheEXT = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT,
-    eSamplerYcbcrConversion = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT,
-    eDescriptorUpdateTemplate = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT,
-    eAccelerationStructureKHR = VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR_EXT,
-    eAccelerationStructureNV = VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV_EXT,
-    eDebugReport = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT,
-    eDescriptorUpdateTemplateKHR = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT,
-    eSamplerYcbcrConversionKHR = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT,
-    eValidationCache = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT};
+      eUnknown = VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT
+    , eInstance = VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT
+    , ePhysicalDevice = VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT
+    , eDevice = VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT
+    , eQueue = VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT
+    , eSemaphore = VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT
+    , eCommandBuffer = VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT
+    , eFence = VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT
+    , eDeviceMemory = VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT
+    , eBuffer = VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT
+    , eImage = VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT
+    , eEvent = VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT
+    , eQueryPool = VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT
+    , eBufferView = VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT
+    , eImageView = VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT
+    , eShaderModule = VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT
+    , ePipelineCache = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT
+    , ePipelineLayout = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT
+    , eRenderPass = VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT
+    , ePipeline = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT
+    , eDescriptorSetLayout = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT
+    , eSampler = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT
+    , eDescriptorPool = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT
+    , eDescriptorSet = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT
+    , eFramebuffer = VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT
+    , eCommandPool = VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT
+    , eSurfaceKHR = VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT
+    , eSwapchainKHR = VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT
+    , eDebugReportCallbackEXT = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT
+    , eDisplayKHR = VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT
+    , eDisplayModeKHR = VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT
+    , eValidationCacheEXT = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT
+    , eSamplerYcbcrConversion = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT
+    , eDescriptorUpdateTemplate = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT
+    , eAccelerationStructureKHR = VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR_EXT
+    , eAccelerationStructureNV = VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV_EXT
+    , eDebugReport = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT
+    , eDescriptorUpdateTemplateKHR = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT
+    , eSamplerYcbcrConversionKHR = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT
+    , eValidationCache = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DebugReportObjectTypeEXT value )
   {
@@ -4956,10 +4996,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DebugUtilsMessageSeverityFlagBitsEXT : VkDebugUtilsMessageSeverityFlagsEXT
   {
-    eVerbose = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT,
-    eInfo = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT,
-    eWarning = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,
-    eError = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT};
+      eVerbose = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
+    , eInfo = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT
+    , eWarning = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
+    , eError = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DebugUtilsMessageSeverityFlagBitsEXT value )
   {
@@ -4975,9 +5016,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DebugUtilsMessageTypeFlagBitsEXT : VkDebugUtilsMessageTypeFlagsEXT
   {
-    eGeneral = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT,
-    eValidation = VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
-    ePerformance = VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT};
+      eGeneral = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
+    , eValidation = VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
+    , ePerformance = VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DebugUtilsMessageTypeFlagBitsEXT value )
   {
@@ -4992,11 +5034,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DependencyFlagBits : VkDependencyFlags
   {
-    eByRegion = VK_DEPENDENCY_BY_REGION_BIT,
-    eDeviceGroup = VK_DEPENDENCY_DEVICE_GROUP_BIT,
-    eViewLocal = VK_DEPENDENCY_VIEW_LOCAL_BIT,
-    eDeviceGroupKHR = VK_DEPENDENCY_DEVICE_GROUP_BIT_KHR,
-    eViewLocalKHR = VK_DEPENDENCY_VIEW_LOCAL_BIT_KHR};
+      eByRegion = VK_DEPENDENCY_BY_REGION_BIT
+    , eDeviceGroup = VK_DEPENDENCY_DEVICE_GROUP_BIT
+    , eViewLocal = VK_DEPENDENCY_VIEW_LOCAL_BIT
+    , eDeviceGroupKHR = VK_DEPENDENCY_DEVICE_GROUP_BIT_KHR
+    , eViewLocalKHR = VK_DEPENDENCY_VIEW_LOCAL_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DependencyFlagBits value )
   {
@@ -5011,10 +5054,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DescriptorBindingFlagBits : VkDescriptorBindingFlags
   {
-    eUpdateAfterBind = VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT,
-    eUpdateUnusedWhilePending = VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT,
-    ePartiallyBound = VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT,
-    eVariableDescriptorCount = VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT};
+      eUpdateAfterBind = VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT
+    , eUpdateUnusedWhilePending = VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT
+    , ePartiallyBound = VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT
+    , eVariableDescriptorCount = VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT
+  };
   using DescriptorBindingFlagBitsEXT = DescriptorBindingFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( DescriptorBindingFlagBits value )
@@ -5031,10 +5075,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DescriptorPoolCreateFlagBits : VkDescriptorPoolCreateFlags
   {
-    eFreeDescriptorSet = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
-    eUpdateAfterBind = VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT,
-    eHostOnlyVALVE = VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE,
-    eUpdateAfterBindEXT = VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT};
+      eFreeDescriptorSet = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT
+    , eUpdateAfterBind = VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT
+    , eHostOnlyVALVE = VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE
+    , eUpdateAfterBindEXT = VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DescriptorPoolCreateFlagBits value )
   {
@@ -5049,10 +5094,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DescriptorSetLayoutCreateFlagBits : VkDescriptorSetLayoutCreateFlags
   {
-    eUpdateAfterBindPool = VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT,
-    ePushDescriptorKHR = VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR,
-    eHostOnlyPoolVALVE = VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE,
-    eUpdateAfterBindPoolEXT = VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT};
+      eUpdateAfterBindPool = VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT
+    , ePushDescriptorKHR = VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR
+    , eHostOnlyPoolVALVE = VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE
+    , eUpdateAfterBindPoolEXT = VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DescriptorSetLayoutCreateFlagBits value )
   {
@@ -5067,21 +5113,22 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DescriptorType
   {
-    eSampler = VK_DESCRIPTOR_TYPE_SAMPLER,
-    eCombinedImageSampler = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-    eSampledImage = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
-    eStorageImage = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,
-    eUniformTexelBuffer = VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER,
-    eStorageTexelBuffer = VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER,
-    eUniformBuffer = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
-    eStorageBuffer = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-    eUniformBufferDynamic = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC,
-    eStorageBufferDynamic = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC,
-    eInputAttachment = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,
-    eInlineUniformBlockEXT = VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT,
-    eAccelerationStructureKHR = VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR,
-    eAccelerationStructureNV = VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV,
-    eMutableVALVE = VK_DESCRIPTOR_TYPE_MUTABLE_VALVE};
+      eSampler = VK_DESCRIPTOR_TYPE_SAMPLER
+    , eCombinedImageSampler = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER
+    , eSampledImage = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE
+    , eStorageImage = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE
+    , eUniformTexelBuffer = VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER
+    , eStorageTexelBuffer = VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER
+    , eUniformBuffer = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER
+    , eStorageBuffer = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER
+    , eUniformBufferDynamic = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC
+    , eStorageBufferDynamic = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC
+    , eInputAttachment = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT
+    , eInlineUniformBlockEXT = VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT
+    , eAccelerationStructureKHR = VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR
+    , eAccelerationStructureNV = VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV
+    , eMutableVALVE = VK_DESCRIPTOR_TYPE_MUTABLE_VALVE
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DescriptorType value )
   {
@@ -5108,8 +5155,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DescriptorUpdateTemplateType
   {
-    eDescriptorSet = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET,
-    ePushDescriptorsKHR = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR};
+      eDescriptorSet = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET
+    , ePushDescriptorsKHR = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR
+  };
   using DescriptorUpdateTemplateTypeKHR = DescriptorUpdateTemplateType;
 
   VULKAN_HPP_INLINE std::string to_string( DescriptorUpdateTemplateType value )
@@ -5123,7 +5171,8 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   enum class DeviceCreateFlagBits
-  {};
+  {
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DeviceCreateFlagBits )
   {
@@ -5132,9 +5181,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DeviceDiagnosticsConfigFlagBitsNV : VkDeviceDiagnosticsConfigFlagsNV
   {
-    eEnableShaderDebugInfo = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_DEBUG_INFO_BIT_NV,
-    eEnableResourceTracking = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_RESOURCE_TRACKING_BIT_NV,
-    eEnableAutomaticCheckpoints = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV};
+      eEnableShaderDebugInfo = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_DEBUG_INFO_BIT_NV
+    , eEnableResourceTracking = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_RESOURCE_TRACKING_BIT_NV
+    , eEnableAutomaticCheckpoints = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DeviceDiagnosticsConfigFlagBitsNV value )
   {
@@ -5149,7 +5199,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DeviceEventTypeEXT
   {
-    eDisplayHotplug = VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT};
+      eDisplayHotplug = VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DeviceEventTypeEXT value )
   {
@@ -5162,10 +5213,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DeviceGroupPresentModeFlagBitsKHR : VkDeviceGroupPresentModeFlagsKHR
   {
-    eLocal = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR,
-    eRemote = VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR,
-    eSum = VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR,
-    eLocalMultiDevice = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR};
+      eLocal = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR
+    , eRemote = VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR
+    , eSum = VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR
+    , eLocalMultiDevice = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DeviceGroupPresentModeFlagBitsKHR value )
   {
@@ -5181,11 +5233,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DeviceMemoryReportEventTypeEXT
   {
-    eAllocate = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT,
-    eFree = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE_EXT,
-    eImport = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT,
-    eUnimport = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT_EXT,
-    eAllocationFailed = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT};
+      eAllocate = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT
+    , eFree = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE_EXT
+    , eImport = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT
+    , eUnimport = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT_EXT
+    , eAllocationFailed = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DeviceMemoryReportEventTypeEXT value )
   {
@@ -5202,7 +5255,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DeviceQueueCreateFlagBits : VkDeviceQueueCreateFlags
   {
-    eProtected = VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT};
+      eProtected = VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DeviceQueueCreateFlagBits value )
   {
@@ -5215,8 +5269,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DiscardRectangleModeEXT
   {
-    eInclusive = VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT,
-    eExclusive = VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT};
+      eInclusive = VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT
+    , eExclusive = VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DiscardRectangleModeEXT value )
   {
@@ -5230,7 +5285,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DisplayEventTypeEXT
   {
-    eFirstPixelOut = VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT};
+      eFirstPixelOut = VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DisplayEventTypeEXT value )
   {
@@ -5243,10 +5299,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DisplayPlaneAlphaFlagBitsKHR : VkDisplayPlaneAlphaFlagsKHR
   {
-    eOpaque = VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR,
-    eGlobal = VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR,
-    ePerPixel = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR,
-    ePerPixelPremultiplied = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR};
+      eOpaque = VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR
+    , eGlobal = VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR
+    , ePerPixel = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR
+    , ePerPixelPremultiplied = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DisplayPlaneAlphaFlagBitsKHR value )
   {
@@ -5262,9 +5319,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DisplayPowerStateEXT
   {
-    eOff = VK_DISPLAY_POWER_STATE_OFF_EXT,
-    eSuspend = VK_DISPLAY_POWER_STATE_SUSPEND_EXT,
-    eOn = VK_DISPLAY_POWER_STATE_ON_EXT};
+      eOff = VK_DISPLAY_POWER_STATE_OFF_EXT
+    , eSuspend = VK_DISPLAY_POWER_STATE_SUSPEND_EXT
+    , eOn = VK_DISPLAY_POWER_STATE_ON_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DisplayPowerStateEXT value )
   {
@@ -5279,21 +5337,22 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DriverId
   {
-    eAmdProprietary = VK_DRIVER_ID_AMD_PROPRIETARY,
-    eAmdOpenSource = VK_DRIVER_ID_AMD_OPEN_SOURCE,
-    eMesaRadv = VK_DRIVER_ID_MESA_RADV,
-    eNvidiaProprietary = VK_DRIVER_ID_NVIDIA_PROPRIETARY,
-    eIntelProprietaryWindows = VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS,
-    eIntelOpenSourceMESA = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA,
-    eImaginationProprietary = VK_DRIVER_ID_IMAGINATION_PROPRIETARY,
-    eQualcommProprietary = VK_DRIVER_ID_QUALCOMM_PROPRIETARY,
-    eArmProprietary = VK_DRIVER_ID_ARM_PROPRIETARY,
-    eGoogleSwiftshader = VK_DRIVER_ID_GOOGLE_SWIFTSHADER,
-    eGgpProprietary = VK_DRIVER_ID_GGP_PROPRIETARY,
-    eBroadcomProprietary = VK_DRIVER_ID_BROADCOM_PROPRIETARY,
-    eMesaLlvmpipe = VK_DRIVER_ID_MESA_LLVMPIPE,
-    eMoltenvk = VK_DRIVER_ID_MOLTENVK,
-    eIntelOpenSourceMesa = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR};
+      eAmdProprietary = VK_DRIVER_ID_AMD_PROPRIETARY
+    , eAmdOpenSource = VK_DRIVER_ID_AMD_OPEN_SOURCE
+    , eMesaRadv = VK_DRIVER_ID_MESA_RADV
+    , eNvidiaProprietary = VK_DRIVER_ID_NVIDIA_PROPRIETARY
+    , eIntelProprietaryWindows = VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS
+    , eIntelOpenSourceMESA = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA
+    , eImaginationProprietary = VK_DRIVER_ID_IMAGINATION_PROPRIETARY
+    , eQualcommProprietary = VK_DRIVER_ID_QUALCOMM_PROPRIETARY
+    , eArmProprietary = VK_DRIVER_ID_ARM_PROPRIETARY
+    , eGoogleSwiftshader = VK_DRIVER_ID_GOOGLE_SWIFTSHADER
+    , eGgpProprietary = VK_DRIVER_ID_GGP_PROPRIETARY
+    , eBroadcomProprietary = VK_DRIVER_ID_BROADCOM_PROPRIETARY
+    , eMesaLlvmpipe = VK_DRIVER_ID_MESA_LLVMPIPE
+    , eMoltenvk = VK_DRIVER_ID_MOLTENVK
+    , eIntelOpenSourceMesa = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR
+  };
   using DriverIdKHR = DriverId;
 
   VULKAN_HPP_INLINE std::string to_string( DriverId value )
@@ -5320,36 +5379,37 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class DynamicState
   {
-    eViewport = VK_DYNAMIC_STATE_VIEWPORT,
-    eScissor = VK_DYNAMIC_STATE_SCISSOR,
-    eLineWidth = VK_DYNAMIC_STATE_LINE_WIDTH,
-    eDepthBias = VK_DYNAMIC_STATE_DEPTH_BIAS,
-    eBlendConstants = VK_DYNAMIC_STATE_BLEND_CONSTANTS,
-    eDepthBounds = VK_DYNAMIC_STATE_DEPTH_BOUNDS,
-    eStencilCompareMask = VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK,
-    eStencilWriteMask = VK_DYNAMIC_STATE_STENCIL_WRITE_MASK,
-    eStencilReference = VK_DYNAMIC_STATE_STENCIL_REFERENCE,
-    eViewportWScalingNV = VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV,
-    eDiscardRectangleEXT = VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT,
-    eSampleLocationsEXT = VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT,
-    eRayTracingPipelineStackSizeKHR = VK_DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR,
-    eViewportShadingRatePaletteNV = VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV,
-    eViewportCoarseSampleOrderNV = VK_DYNAMIC_STATE_VIEWPORT_COARSE_SAMPLE_ORDER_NV,
-    eExclusiveScissorNV = VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV,
-    eFragmentShadingRateKHR = VK_DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR,
-    eLineStippleEXT = VK_DYNAMIC_STATE_LINE_STIPPLE_EXT,
-    eCullModeEXT = VK_DYNAMIC_STATE_CULL_MODE_EXT,
-    eFrontFaceEXT = VK_DYNAMIC_STATE_FRONT_FACE_EXT,
-    ePrimitiveTopologyEXT = VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT,
-    eViewportWithCountEXT = VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT,
-    eScissorWithCountEXT = VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT,
-    eVertexInputBindingStrideEXT = VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT,
-    eDepthTestEnableEXT = VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT,
-    eDepthWriteEnableEXT = VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT,
-    eDepthCompareOpEXT = VK_DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT,
-    eDepthBoundsTestEnableEXT = VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT,
-    eStencilTestEnableEXT = VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT,
-    eStencilOpEXT = VK_DYNAMIC_STATE_STENCIL_OP_EXT};
+      eViewport = VK_DYNAMIC_STATE_VIEWPORT
+    , eScissor = VK_DYNAMIC_STATE_SCISSOR
+    , eLineWidth = VK_DYNAMIC_STATE_LINE_WIDTH
+    , eDepthBias = VK_DYNAMIC_STATE_DEPTH_BIAS
+    , eBlendConstants = VK_DYNAMIC_STATE_BLEND_CONSTANTS
+    , eDepthBounds = VK_DYNAMIC_STATE_DEPTH_BOUNDS
+    , eStencilCompareMask = VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK
+    , eStencilWriteMask = VK_DYNAMIC_STATE_STENCIL_WRITE_MASK
+    , eStencilReference = VK_DYNAMIC_STATE_STENCIL_REFERENCE
+    , eViewportWScalingNV = VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV
+    , eDiscardRectangleEXT = VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT
+    , eSampleLocationsEXT = VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT
+    , eRayTracingPipelineStackSizeKHR = VK_DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR
+    , eViewportShadingRatePaletteNV = VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV
+    , eViewportCoarseSampleOrderNV = VK_DYNAMIC_STATE_VIEWPORT_COARSE_SAMPLE_ORDER_NV
+    , eExclusiveScissorNV = VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV
+    , eFragmentShadingRateKHR = VK_DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR
+    , eLineStippleEXT = VK_DYNAMIC_STATE_LINE_STIPPLE_EXT
+    , eCullModeEXT = VK_DYNAMIC_STATE_CULL_MODE_EXT
+    , eFrontFaceEXT = VK_DYNAMIC_STATE_FRONT_FACE_EXT
+    , ePrimitiveTopologyEXT = VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT
+    , eViewportWithCountEXT = VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT
+    , eScissorWithCountEXT = VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT
+    , eVertexInputBindingStrideEXT = VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT
+    , eDepthTestEnableEXT = VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT
+    , eDepthWriteEnableEXT = VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT
+    , eDepthCompareOpEXT = VK_DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT
+    , eDepthBoundsTestEnableEXT = VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT
+    , eStencilTestEnableEXT = VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT
+    , eStencilOpEXT = VK_DYNAMIC_STATE_STENCIL_OP_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( DynamicState value )
   {
@@ -5391,7 +5451,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class EventCreateFlagBits : VkEventCreateFlags
   {
-    eDeviceOnlyKHR = VK_EVENT_CREATE_DEVICE_ONLY_BIT_KHR};
+      eDeviceOnlyKHR = VK_EVENT_CREATE_DEVICE_ONLY_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( EventCreateFlagBits value )
   {
@@ -5404,8 +5465,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ExternalFenceFeatureFlagBits : VkExternalFenceFeatureFlags
   {
-    eExportable = VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT,
-    eImportable = VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT};
+      eExportable = VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT
+    , eImportable = VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT
+  };
   using ExternalFenceFeatureFlagBitsKHR = ExternalFenceFeatureFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalFenceFeatureFlagBits value )
@@ -5420,10 +5482,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ExternalFenceHandleTypeFlagBits : VkExternalFenceHandleTypeFlags
   {
-    eOpaqueFd = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT,
-    eOpaqueWin32 = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
-    eOpaqueWin32Kmt = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
-    eSyncFd = VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT};
+      eOpaqueFd = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT
+    , eOpaqueWin32 = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT
+    , eOpaqueWin32Kmt = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT
+    , eSyncFd = VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT
+  };
   using ExternalFenceHandleTypeFlagBitsKHR = ExternalFenceHandleTypeFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalFenceHandleTypeFlagBits value )
@@ -5440,9 +5503,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ExternalMemoryFeatureFlagBits : VkExternalMemoryFeatureFlags
   {
-    eDedicatedOnly = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT,
-    eExportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT,
-    eImportable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT};
+      eDedicatedOnly = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT
+    , eExportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT
+    , eImportable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT
+  };
   using ExternalMemoryFeatureFlagBitsKHR = ExternalMemoryFeatureFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalMemoryFeatureFlagBits value )
@@ -5458,9 +5522,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ExternalMemoryFeatureFlagBitsNV : VkExternalMemoryFeatureFlagsNV
   {
-    eDedicatedOnly = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV,
-    eExportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV,
-    eImportable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV};
+      eDedicatedOnly = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV
+    , eExportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV
+    , eImportable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ExternalMemoryFeatureFlagBitsNV value )
   {
@@ -5475,19 +5540,22 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ExternalMemoryHandleTypeFlagBits : VkExternalMemoryHandleTypeFlags
   {
-    eOpaqueFd = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT,
-    eOpaqueWin32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT,
-    eOpaqueWin32Kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
-    eD3D11Texture = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT,
-    eD3D11TextureKmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT,
-    eD3D12Heap = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT,
-    eD3D12Resource = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT,
-    eDmaBufEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT,
+    // clang-format off
+      eOpaqueFd = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT
+    , eOpaqueWin32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT
+    , eOpaqueWin32Kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT
+    , eD3D11Texture = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT
+    , eD3D11TextureKmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT
+    , eD3D12Heap = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT
+    , eD3D12Resource = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT
+    , eDmaBufEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-    eAndroidHardwareBufferANDROID = VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID,
+    , eAndroidHardwareBufferANDROID = VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-    eHostAllocationEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT,
-    eHostMappedForeignMemoryEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT};
+    , eHostAllocationEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT
+    , eHostMappedForeignMemoryEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT
+    // clang-format on
+  };
   using ExternalMemoryHandleTypeFlagBitsKHR = ExternalMemoryHandleTypeFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalMemoryHandleTypeFlagBits value )
@@ -5513,10 +5581,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ExternalMemoryHandleTypeFlagBitsNV : VkExternalMemoryHandleTypeFlagsNV
   {
-    eOpaqueWin32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV,
-    eOpaqueWin32Kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV,
-    eD3D11Image = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV,
-    eD3D11ImageKmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV};
+      eOpaqueWin32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV
+    , eOpaqueWin32Kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV
+    , eD3D11Image = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV
+    , eD3D11ImageKmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ExternalMemoryHandleTypeFlagBitsNV value )
   {
@@ -5532,8 +5601,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ExternalSemaphoreFeatureFlagBits : VkExternalSemaphoreFeatureFlags
   {
-    eExportable = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT,
-    eImportable = VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT};
+      eExportable = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT
+    , eImportable = VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT
+  };
   using ExternalSemaphoreFeatureFlagBitsKHR = ExternalSemaphoreFeatureFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalSemaphoreFeatureFlagBits value )
@@ -5548,12 +5618,13 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ExternalSemaphoreHandleTypeFlagBits : VkExternalSemaphoreHandleTypeFlags
   {
-    eOpaqueFd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT,
-    eOpaqueWin32 = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
-    eOpaqueWin32Kmt = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
-    eD3D12Fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT,
-    eSyncFd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
-    eD3D11Fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT};
+      eOpaqueFd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT
+    , eOpaqueWin32 = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT
+    , eOpaqueWin32Kmt = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT
+    , eD3D12Fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT
+    , eSyncFd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT
+    , eD3D11Fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT
+  };
   using ExternalSemaphoreHandleTypeFlagBitsKHR = ExternalSemaphoreHandleTypeFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ExternalSemaphoreHandleTypeFlagBits value )
@@ -5571,7 +5642,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class FenceCreateFlagBits : VkFenceCreateFlags
   {
-    eSignaled = VK_FENCE_CREATE_SIGNALED_BIT};
+      eSignaled = VK_FENCE_CREATE_SIGNALED_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( FenceCreateFlagBits value )
   {
@@ -5584,7 +5656,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class FenceImportFlagBits : VkFenceImportFlags
   {
-    eTemporary = VK_FENCE_IMPORT_TEMPORARY_BIT};
+      eTemporary = VK_FENCE_IMPORT_TEMPORARY_BIT
+  };
   using FenceImportFlagBitsKHR = FenceImportFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( FenceImportFlagBits value )
@@ -5598,10 +5671,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class Filter
   {
-    eNearest = VK_FILTER_NEAREST,
-    eLinear = VK_FILTER_LINEAR,
-    eCubicIMG = VK_FILTER_CUBIC_IMG,
-    eCubicEXT = VK_FILTER_CUBIC_EXT};
+      eNearest = VK_FILTER_NEAREST
+    , eLinear = VK_FILTER_LINEAR
+    , eCubicIMG = VK_FILTER_CUBIC_IMG
+    , eCubicEXT = VK_FILTER_CUBIC_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( Filter value )
   {
@@ -5616,283 +5690,284 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class Format
   {
-    eUndefined = VK_FORMAT_UNDEFINED,
-    eR4G4UnormPack8 = VK_FORMAT_R4G4_UNORM_PACK8,
-    eR4G4B4A4UnormPack16 = VK_FORMAT_R4G4B4A4_UNORM_PACK16,
-    eB4G4R4A4UnormPack16 = VK_FORMAT_B4G4R4A4_UNORM_PACK16,
-    eR5G6B5UnormPack16 = VK_FORMAT_R5G6B5_UNORM_PACK16,
-    eB5G6R5UnormPack16 = VK_FORMAT_B5G6R5_UNORM_PACK16,
-    eR5G5B5A1UnormPack16 = VK_FORMAT_R5G5B5A1_UNORM_PACK16,
-    eB5G5R5A1UnormPack16 = VK_FORMAT_B5G5R5A1_UNORM_PACK16,
-    eA1R5G5B5UnormPack16 = VK_FORMAT_A1R5G5B5_UNORM_PACK16,
-    eR8Unorm = VK_FORMAT_R8_UNORM,
-    eR8Snorm = VK_FORMAT_R8_SNORM,
-    eR8Uscaled = VK_FORMAT_R8_USCALED,
-    eR8Sscaled = VK_FORMAT_R8_SSCALED,
-    eR8Uint = VK_FORMAT_R8_UINT,
-    eR8Sint = VK_FORMAT_R8_SINT,
-    eR8Srgb = VK_FORMAT_R8_SRGB,
-    eR8G8Unorm = VK_FORMAT_R8G8_UNORM,
-    eR8G8Snorm = VK_FORMAT_R8G8_SNORM,
-    eR8G8Uscaled = VK_FORMAT_R8G8_USCALED,
-    eR8G8Sscaled = VK_FORMAT_R8G8_SSCALED,
-    eR8G8Uint = VK_FORMAT_R8G8_UINT,
-    eR8G8Sint = VK_FORMAT_R8G8_SINT,
-    eR8G8Srgb = VK_FORMAT_R8G8_SRGB,
-    eR8G8B8Unorm = VK_FORMAT_R8G8B8_UNORM,
-    eR8G8B8Snorm = VK_FORMAT_R8G8B8_SNORM,
-    eR8G8B8Uscaled = VK_FORMAT_R8G8B8_USCALED,
-    eR8G8B8Sscaled = VK_FORMAT_R8G8B8_SSCALED,
-    eR8G8B8Uint = VK_FORMAT_R8G8B8_UINT,
-    eR8G8B8Sint = VK_FORMAT_R8G8B8_SINT,
-    eR8G8B8Srgb = VK_FORMAT_R8G8B8_SRGB,
-    eB8G8R8Unorm = VK_FORMAT_B8G8R8_UNORM,
-    eB8G8R8Snorm = VK_FORMAT_B8G8R8_SNORM,
-    eB8G8R8Uscaled = VK_FORMAT_B8G8R8_USCALED,
-    eB8G8R8Sscaled = VK_FORMAT_B8G8R8_SSCALED,
-    eB8G8R8Uint = VK_FORMAT_B8G8R8_UINT,
-    eB8G8R8Sint = VK_FORMAT_B8G8R8_SINT,
-    eB8G8R8Srgb = VK_FORMAT_B8G8R8_SRGB,
-    eR8G8B8A8Unorm = VK_FORMAT_R8G8B8A8_UNORM,
-    eR8G8B8A8Snorm = VK_FORMAT_R8G8B8A8_SNORM,
-    eR8G8B8A8Uscaled = VK_FORMAT_R8G8B8A8_USCALED,
-    eR8G8B8A8Sscaled = VK_FORMAT_R8G8B8A8_SSCALED,
-    eR8G8B8A8Uint = VK_FORMAT_R8G8B8A8_UINT,
-    eR8G8B8A8Sint = VK_FORMAT_R8G8B8A8_SINT,
-    eR8G8B8A8Srgb = VK_FORMAT_R8G8B8A8_SRGB,
-    eB8G8R8A8Unorm = VK_FORMAT_B8G8R8A8_UNORM,
-    eB8G8R8A8Snorm = VK_FORMAT_B8G8R8A8_SNORM,
-    eB8G8R8A8Uscaled = VK_FORMAT_B8G8R8A8_USCALED,
-    eB8G8R8A8Sscaled = VK_FORMAT_B8G8R8A8_SSCALED,
-    eB8G8R8A8Uint = VK_FORMAT_B8G8R8A8_UINT,
-    eB8G8R8A8Sint = VK_FORMAT_B8G8R8A8_SINT,
-    eB8G8R8A8Srgb = VK_FORMAT_B8G8R8A8_SRGB,
-    eA8B8G8R8UnormPack32 = VK_FORMAT_A8B8G8R8_UNORM_PACK32,
-    eA8B8G8R8SnormPack32 = VK_FORMAT_A8B8G8R8_SNORM_PACK32,
-    eA8B8G8R8UscaledPack32 = VK_FORMAT_A8B8G8R8_USCALED_PACK32,
-    eA8B8G8R8SscaledPack32 = VK_FORMAT_A8B8G8R8_SSCALED_PACK32,
-    eA8B8G8R8UintPack32 = VK_FORMAT_A8B8G8R8_UINT_PACK32,
-    eA8B8G8R8SintPack32 = VK_FORMAT_A8B8G8R8_SINT_PACK32,
-    eA8B8G8R8SrgbPack32 = VK_FORMAT_A8B8G8R8_SRGB_PACK32,
-    eA2R10G10B10UnormPack32 = VK_FORMAT_A2R10G10B10_UNORM_PACK32,
-    eA2R10G10B10SnormPack32 = VK_FORMAT_A2R10G10B10_SNORM_PACK32,
-    eA2R10G10B10UscaledPack32 = VK_FORMAT_A2R10G10B10_USCALED_PACK32,
-    eA2R10G10B10SscaledPack32 = VK_FORMAT_A2R10G10B10_SSCALED_PACK32,
-    eA2R10G10B10UintPack32 = VK_FORMAT_A2R10G10B10_UINT_PACK32,
-    eA2R10G10B10SintPack32 = VK_FORMAT_A2R10G10B10_SINT_PACK32,
-    eA2B10G10R10UnormPack32 = VK_FORMAT_A2B10G10R10_UNORM_PACK32,
-    eA2B10G10R10SnormPack32 = VK_FORMAT_A2B10G10R10_SNORM_PACK32,
-    eA2B10G10R10UscaledPack32 = VK_FORMAT_A2B10G10R10_USCALED_PACK32,
-    eA2B10G10R10SscaledPack32 = VK_FORMAT_A2B10G10R10_SSCALED_PACK32,
-    eA2B10G10R10UintPack32 = VK_FORMAT_A2B10G10R10_UINT_PACK32,
-    eA2B10G10R10SintPack32 = VK_FORMAT_A2B10G10R10_SINT_PACK32,
-    eR16Unorm = VK_FORMAT_R16_UNORM,
-    eR16Snorm = VK_FORMAT_R16_SNORM,
-    eR16Uscaled = VK_FORMAT_R16_USCALED,
-    eR16Sscaled = VK_FORMAT_R16_SSCALED,
-    eR16Uint = VK_FORMAT_R16_UINT,
-    eR16Sint = VK_FORMAT_R16_SINT,
-    eR16Sfloat = VK_FORMAT_R16_SFLOAT,
-    eR16G16Unorm = VK_FORMAT_R16G16_UNORM,
-    eR16G16Snorm = VK_FORMAT_R16G16_SNORM,
-    eR16G16Uscaled = VK_FORMAT_R16G16_USCALED,
-    eR16G16Sscaled = VK_FORMAT_R16G16_SSCALED,
-    eR16G16Uint = VK_FORMAT_R16G16_UINT,
-    eR16G16Sint = VK_FORMAT_R16G16_SINT,
-    eR16G16Sfloat = VK_FORMAT_R16G16_SFLOAT,
-    eR16G16B16Unorm = VK_FORMAT_R16G16B16_UNORM,
-    eR16G16B16Snorm = VK_FORMAT_R16G16B16_SNORM,
-    eR16G16B16Uscaled = VK_FORMAT_R16G16B16_USCALED,
-    eR16G16B16Sscaled = VK_FORMAT_R16G16B16_SSCALED,
-    eR16G16B16Uint = VK_FORMAT_R16G16B16_UINT,
-    eR16G16B16Sint = VK_FORMAT_R16G16B16_SINT,
-    eR16G16B16Sfloat = VK_FORMAT_R16G16B16_SFLOAT,
-    eR16G16B16A16Unorm = VK_FORMAT_R16G16B16A16_UNORM,
-    eR16G16B16A16Snorm = VK_FORMAT_R16G16B16A16_SNORM,
-    eR16G16B16A16Uscaled = VK_FORMAT_R16G16B16A16_USCALED,
-    eR16G16B16A16Sscaled = VK_FORMAT_R16G16B16A16_SSCALED,
-    eR16G16B16A16Uint = VK_FORMAT_R16G16B16A16_UINT,
-    eR16G16B16A16Sint = VK_FORMAT_R16G16B16A16_SINT,
-    eR16G16B16A16Sfloat = VK_FORMAT_R16G16B16A16_SFLOAT,
-    eR32Uint = VK_FORMAT_R32_UINT,
-    eR32Sint = VK_FORMAT_R32_SINT,
-    eR32Sfloat = VK_FORMAT_R32_SFLOAT,
-    eR32G32Uint = VK_FORMAT_R32G32_UINT,
-    eR32G32Sint = VK_FORMAT_R32G32_SINT,
-    eR32G32Sfloat = VK_FORMAT_R32G32_SFLOAT,
-    eR32G32B32Uint = VK_FORMAT_R32G32B32_UINT,
-    eR32G32B32Sint = VK_FORMAT_R32G32B32_SINT,
-    eR32G32B32Sfloat = VK_FORMAT_R32G32B32_SFLOAT,
-    eR32G32B32A32Uint = VK_FORMAT_R32G32B32A32_UINT,
-    eR32G32B32A32Sint = VK_FORMAT_R32G32B32A32_SINT,
-    eR32G32B32A32Sfloat = VK_FORMAT_R32G32B32A32_SFLOAT,
-    eR64Uint = VK_FORMAT_R64_UINT,
-    eR64Sint = VK_FORMAT_R64_SINT,
-    eR64Sfloat = VK_FORMAT_R64_SFLOAT,
-    eR64G64Uint = VK_FORMAT_R64G64_UINT,
-    eR64G64Sint = VK_FORMAT_R64G64_SINT,
-    eR64G64Sfloat = VK_FORMAT_R64G64_SFLOAT,
-    eR64G64B64Uint = VK_FORMAT_R64G64B64_UINT,
-    eR64G64B64Sint = VK_FORMAT_R64G64B64_SINT,
-    eR64G64B64Sfloat = VK_FORMAT_R64G64B64_SFLOAT,
-    eR64G64B64A64Uint = VK_FORMAT_R64G64B64A64_UINT,
-    eR64G64B64A64Sint = VK_FORMAT_R64G64B64A64_SINT,
-    eR64G64B64A64Sfloat = VK_FORMAT_R64G64B64A64_SFLOAT,
-    eB10G11R11UfloatPack32 = VK_FORMAT_B10G11R11_UFLOAT_PACK32,
-    eE5B9G9R9UfloatPack32 = VK_FORMAT_E5B9G9R9_UFLOAT_PACK32,
-    eD16Unorm = VK_FORMAT_D16_UNORM,
-    eX8D24UnormPack32 = VK_FORMAT_X8_D24_UNORM_PACK32,
-    eD32Sfloat = VK_FORMAT_D32_SFLOAT,
-    eS8Uint = VK_FORMAT_S8_UINT,
-    eD16UnormS8Uint = VK_FORMAT_D16_UNORM_S8_UINT,
-    eD24UnormS8Uint = VK_FORMAT_D24_UNORM_S8_UINT,
-    eD32SfloatS8Uint = VK_FORMAT_D32_SFLOAT_S8_UINT,
-    eBc1RgbUnormBlock = VK_FORMAT_BC1_RGB_UNORM_BLOCK,
-    eBc1RgbSrgbBlock = VK_FORMAT_BC1_RGB_SRGB_BLOCK,
-    eBc1RgbaUnormBlock = VK_FORMAT_BC1_RGBA_UNORM_BLOCK,
-    eBc1RgbaSrgbBlock = VK_FORMAT_BC1_RGBA_SRGB_BLOCK,
-    eBc2UnormBlock = VK_FORMAT_BC2_UNORM_BLOCK,
-    eBc2SrgbBlock = VK_FORMAT_BC2_SRGB_BLOCK,
-    eBc3UnormBlock = VK_FORMAT_BC3_UNORM_BLOCK,
-    eBc3SrgbBlock = VK_FORMAT_BC3_SRGB_BLOCK,
-    eBc4UnormBlock = VK_FORMAT_BC4_UNORM_BLOCK,
-    eBc4SnormBlock = VK_FORMAT_BC4_SNORM_BLOCK,
-    eBc5UnormBlock = VK_FORMAT_BC5_UNORM_BLOCK,
-    eBc5SnormBlock = VK_FORMAT_BC5_SNORM_BLOCK,
-    eBc6HUfloatBlock = VK_FORMAT_BC6H_UFLOAT_BLOCK,
-    eBc6HSfloatBlock = VK_FORMAT_BC6H_SFLOAT_BLOCK,
-    eBc7UnormBlock = VK_FORMAT_BC7_UNORM_BLOCK,
-    eBc7SrgbBlock = VK_FORMAT_BC7_SRGB_BLOCK,
-    eEtc2R8G8B8UnormBlock = VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK,
-    eEtc2R8G8B8SrgbBlock = VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK,
-    eEtc2R8G8B8A1UnormBlock = VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK,
-    eEtc2R8G8B8A1SrgbBlock = VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK,
-    eEtc2R8G8B8A8UnormBlock = VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK,
-    eEtc2R8G8B8A8SrgbBlock = VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK,
-    eEacR11UnormBlock = VK_FORMAT_EAC_R11_UNORM_BLOCK,
-    eEacR11SnormBlock = VK_FORMAT_EAC_R11_SNORM_BLOCK,
-    eEacR11G11UnormBlock = VK_FORMAT_EAC_R11G11_UNORM_BLOCK,
-    eEacR11G11SnormBlock = VK_FORMAT_EAC_R11G11_SNORM_BLOCK,
-    eAstc4x4UnormBlock = VK_FORMAT_ASTC_4x4_UNORM_BLOCK,
-    eAstc4x4SrgbBlock = VK_FORMAT_ASTC_4x4_SRGB_BLOCK,
-    eAstc5x4UnormBlock = VK_FORMAT_ASTC_5x4_UNORM_BLOCK,
-    eAstc5x4SrgbBlock = VK_FORMAT_ASTC_5x4_SRGB_BLOCK,
-    eAstc5x5UnormBlock = VK_FORMAT_ASTC_5x5_UNORM_BLOCK,
-    eAstc5x5SrgbBlock = VK_FORMAT_ASTC_5x5_SRGB_BLOCK,
-    eAstc6x5UnormBlock = VK_FORMAT_ASTC_6x5_UNORM_BLOCK,
-    eAstc6x5SrgbBlock = VK_FORMAT_ASTC_6x5_SRGB_BLOCK,
-    eAstc6x6UnormBlock = VK_FORMAT_ASTC_6x6_UNORM_BLOCK,
-    eAstc6x6SrgbBlock = VK_FORMAT_ASTC_6x6_SRGB_BLOCK,
-    eAstc8x5UnormBlock = VK_FORMAT_ASTC_8x5_UNORM_BLOCK,
-    eAstc8x5SrgbBlock = VK_FORMAT_ASTC_8x5_SRGB_BLOCK,
-    eAstc8x6UnormBlock = VK_FORMAT_ASTC_8x6_UNORM_BLOCK,
-    eAstc8x6SrgbBlock = VK_FORMAT_ASTC_8x6_SRGB_BLOCK,
-    eAstc8x8UnormBlock = VK_FORMAT_ASTC_8x8_UNORM_BLOCK,
-    eAstc8x8SrgbBlock = VK_FORMAT_ASTC_8x8_SRGB_BLOCK,
-    eAstc10x5UnormBlock = VK_FORMAT_ASTC_10x5_UNORM_BLOCK,
-    eAstc10x5SrgbBlock = VK_FORMAT_ASTC_10x5_SRGB_BLOCK,
-    eAstc10x6UnormBlock = VK_FORMAT_ASTC_10x6_UNORM_BLOCK,
-    eAstc10x6SrgbBlock = VK_FORMAT_ASTC_10x6_SRGB_BLOCK,
-    eAstc10x8UnormBlock = VK_FORMAT_ASTC_10x8_UNORM_BLOCK,
-    eAstc10x8SrgbBlock = VK_FORMAT_ASTC_10x8_SRGB_BLOCK,
-    eAstc10x10UnormBlock = VK_FORMAT_ASTC_10x10_UNORM_BLOCK,
-    eAstc10x10SrgbBlock = VK_FORMAT_ASTC_10x10_SRGB_BLOCK,
-    eAstc12x10UnormBlock = VK_FORMAT_ASTC_12x10_UNORM_BLOCK,
-    eAstc12x10SrgbBlock = VK_FORMAT_ASTC_12x10_SRGB_BLOCK,
-    eAstc12x12UnormBlock = VK_FORMAT_ASTC_12x12_UNORM_BLOCK,
-    eAstc12x12SrgbBlock = VK_FORMAT_ASTC_12x12_SRGB_BLOCK,
-    eG8B8G8R8422Unorm = VK_FORMAT_G8B8G8R8_422_UNORM,
-    eB8G8R8G8422Unorm = VK_FORMAT_B8G8R8G8_422_UNORM,
-    eG8B8R83Plane420Unorm = VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM,
-    eG8B8R82Plane420Unorm = VK_FORMAT_G8_B8R8_2PLANE_420_UNORM,
-    eG8B8R83Plane422Unorm = VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM,
-    eG8B8R82Plane422Unorm = VK_FORMAT_G8_B8R8_2PLANE_422_UNORM,
-    eG8B8R83Plane444Unorm = VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM,
-    eR10X6UnormPack16 = VK_FORMAT_R10X6_UNORM_PACK16,
-    eR10X6G10X6Unorm2Pack16 = VK_FORMAT_R10X6G10X6_UNORM_2PACK16,
-    eR10X6G10X6B10X6A10X6Unorm4Pack16 = VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16,
-    eG10X6B10X6G10X6R10X6422Unorm4Pack16 = VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16,
-    eB10X6G10X6R10X6G10X6422Unorm4Pack16 = VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16,
-    eG10X6B10X6R10X63Plane420Unorm3Pack16 = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16,
-    eG10X6B10X6R10X62Plane420Unorm3Pack16 = VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16,
-    eG10X6B10X6R10X63Plane422Unorm3Pack16 = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16,
-    eG10X6B10X6R10X62Plane422Unorm3Pack16 = VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16,
-    eG10X6B10X6R10X63Plane444Unorm3Pack16 = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16,
-    eR12X4UnormPack16 = VK_FORMAT_R12X4_UNORM_PACK16,
-    eR12X4G12X4Unorm2Pack16 = VK_FORMAT_R12X4G12X4_UNORM_2PACK16,
-    eR12X4G12X4B12X4A12X4Unorm4Pack16 = VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16,
-    eG12X4B12X4G12X4R12X4422Unorm4Pack16 = VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16,
-    eB12X4G12X4R12X4G12X4422Unorm4Pack16 = VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16,
-    eG12X4B12X4R12X43Plane420Unorm3Pack16 = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16,
-    eG12X4B12X4R12X42Plane420Unorm3Pack16 = VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16,
-    eG12X4B12X4R12X43Plane422Unorm3Pack16 = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16,
-    eG12X4B12X4R12X42Plane422Unorm3Pack16 = VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16,
-    eG12X4B12X4R12X43Plane444Unorm3Pack16 = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16,
-    eG16B16G16R16422Unorm = VK_FORMAT_G16B16G16R16_422_UNORM,
-    eB16G16R16G16422Unorm = VK_FORMAT_B16G16R16G16_422_UNORM,
-    eG16B16R163Plane420Unorm = VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM,
-    eG16B16R162Plane420Unorm = VK_FORMAT_G16_B16R16_2PLANE_420_UNORM,
-    eG16B16R163Plane422Unorm = VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM,
-    eG16B16R162Plane422Unorm = VK_FORMAT_G16_B16R16_2PLANE_422_UNORM,
-    eG16B16R163Plane444Unorm = VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM,
-    ePvrtc12BppUnormBlockIMG = VK_FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG,
-    ePvrtc14BppUnormBlockIMG = VK_FORMAT_PVRTC1_4BPP_UNORM_BLOCK_IMG,
-    ePvrtc22BppUnormBlockIMG = VK_FORMAT_PVRTC2_2BPP_UNORM_BLOCK_IMG,
-    ePvrtc24BppUnormBlockIMG = VK_FORMAT_PVRTC2_4BPP_UNORM_BLOCK_IMG,
-    ePvrtc12BppSrgbBlockIMG = VK_FORMAT_PVRTC1_2BPP_SRGB_BLOCK_IMG,
-    ePvrtc14BppSrgbBlockIMG = VK_FORMAT_PVRTC1_4BPP_SRGB_BLOCK_IMG,
-    ePvrtc22BppSrgbBlockIMG = VK_FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG,
-    ePvrtc24BppSrgbBlockIMG = VK_FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG,
-    eAstc4x4SfloatBlockEXT = VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT,
-    eAstc5x4SfloatBlockEXT = VK_FORMAT_ASTC_5x4_SFLOAT_BLOCK_EXT,
-    eAstc5x5SfloatBlockEXT = VK_FORMAT_ASTC_5x5_SFLOAT_BLOCK_EXT,
-    eAstc6x5SfloatBlockEXT = VK_FORMAT_ASTC_6x5_SFLOAT_BLOCK_EXT,
-    eAstc6x6SfloatBlockEXT = VK_FORMAT_ASTC_6x6_SFLOAT_BLOCK_EXT,
-    eAstc8x5SfloatBlockEXT = VK_FORMAT_ASTC_8x5_SFLOAT_BLOCK_EXT,
-    eAstc8x6SfloatBlockEXT = VK_FORMAT_ASTC_8x6_SFLOAT_BLOCK_EXT,
-    eAstc8x8SfloatBlockEXT = VK_FORMAT_ASTC_8x8_SFLOAT_BLOCK_EXT,
-    eAstc10x5SfloatBlockEXT = VK_FORMAT_ASTC_10x5_SFLOAT_BLOCK_EXT,
-    eAstc10x6SfloatBlockEXT = VK_FORMAT_ASTC_10x6_SFLOAT_BLOCK_EXT,
-    eAstc10x8SfloatBlockEXT = VK_FORMAT_ASTC_10x8_SFLOAT_BLOCK_EXT,
-    eAstc10x10SfloatBlockEXT = VK_FORMAT_ASTC_10x10_SFLOAT_BLOCK_EXT,
-    eAstc12x10SfloatBlockEXT = VK_FORMAT_ASTC_12x10_SFLOAT_BLOCK_EXT,
-    eAstc12x12SfloatBlockEXT = VK_FORMAT_ASTC_12x12_SFLOAT_BLOCK_EXT,
-    eA4R4G4B4UnormPack16EXT = VK_FORMAT_A4R4G4B4_UNORM_PACK16_EXT,
-    eA4B4G4R4UnormPack16EXT = VK_FORMAT_A4B4G4R4_UNORM_PACK16_EXT,
-    eB10X6G10X6R10X6G10X6422Unorm4Pack16KHR = VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16_KHR,
-    eB12X4G12X4R12X4G12X4422Unorm4Pack16KHR = VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16_KHR,
-    eB16G16R16G16422UnormKHR = VK_FORMAT_B16G16R16G16_422_UNORM_KHR,
-    eB8G8R8G8422UnormKHR = VK_FORMAT_B8G8R8G8_422_UNORM_KHR,
-    eG10X6B10X6G10X6R10X6422Unorm4Pack16KHR = VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16_KHR,
-    eG10X6B10X6R10X62Plane420Unorm3Pack16KHR = VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16_KHR,
-    eG10X6B10X6R10X62Plane422Unorm3Pack16KHR = VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16_KHR,
-    eG10X6B10X6R10X63Plane420Unorm3Pack16KHR = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16_KHR,
-    eG10X6B10X6R10X63Plane422Unorm3Pack16KHR = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16_KHR,
-    eG10X6B10X6R10X63Plane444Unorm3Pack16KHR = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16_KHR,
-    eG12X4B12X4G12X4R12X4422Unorm4Pack16KHR = VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16_KHR,
-    eG12X4B12X4R12X42Plane420Unorm3Pack16KHR = VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16_KHR,
-    eG12X4B12X4R12X42Plane422Unorm3Pack16KHR = VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16_KHR,
-    eG12X4B12X4R12X43Plane420Unorm3Pack16KHR = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16_KHR,
-    eG12X4B12X4R12X43Plane422Unorm3Pack16KHR = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16_KHR,
-    eG12X4B12X4R12X43Plane444Unorm3Pack16KHR = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16_KHR,
-    eG16B16G16R16422UnormKHR = VK_FORMAT_G16B16G16R16_422_UNORM_KHR,
-    eG16B16R162Plane420UnormKHR = VK_FORMAT_G16_B16R16_2PLANE_420_UNORM_KHR,
-    eG16B16R162Plane422UnormKHR = VK_FORMAT_G16_B16R16_2PLANE_422_UNORM_KHR,
-    eG16B16R163Plane420UnormKHR = VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM_KHR,
-    eG16B16R163Plane422UnormKHR = VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM_KHR,
-    eG16B16R163Plane444UnormKHR = VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM_KHR,
-    eG8B8G8R8422UnormKHR = VK_FORMAT_G8B8G8R8_422_UNORM_KHR,
-    eG8B8R82Plane420UnormKHR = VK_FORMAT_G8_B8R8_2PLANE_420_UNORM_KHR,
-    eG8B8R82Plane422UnormKHR = VK_FORMAT_G8_B8R8_2PLANE_422_UNORM_KHR,
-    eG8B8R83Plane420UnormKHR = VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM_KHR,
-    eG8B8R83Plane422UnormKHR = VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM_KHR,
-    eG8B8R83Plane444UnormKHR = VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM_KHR,
-    eR10X6G10X6B10X6A10X6Unorm4Pack16KHR = VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16_KHR,
-    eR10X6G10X6Unorm2Pack16KHR = VK_FORMAT_R10X6G10X6_UNORM_2PACK16_KHR,
-    eR10X6UnormPack16KHR = VK_FORMAT_R10X6_UNORM_PACK16_KHR,
-    eR12X4G12X4B12X4A12X4Unorm4Pack16KHR = VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16_KHR,
-    eR12X4G12X4Unorm2Pack16KHR = VK_FORMAT_R12X4G12X4_UNORM_2PACK16_KHR,
-    eR12X4UnormPack16KHR = VK_FORMAT_R12X4_UNORM_PACK16_KHR};
+      eUndefined = VK_FORMAT_UNDEFINED
+    , eR4G4UnormPack8 = VK_FORMAT_R4G4_UNORM_PACK8
+    , eR4G4B4A4UnormPack16 = VK_FORMAT_R4G4B4A4_UNORM_PACK16
+    , eB4G4R4A4UnormPack16 = VK_FORMAT_B4G4R4A4_UNORM_PACK16
+    , eR5G6B5UnormPack16 = VK_FORMAT_R5G6B5_UNORM_PACK16
+    , eB5G6R5UnormPack16 = VK_FORMAT_B5G6R5_UNORM_PACK16
+    , eR5G5B5A1UnormPack16 = VK_FORMAT_R5G5B5A1_UNORM_PACK16
+    , eB5G5R5A1UnormPack16 = VK_FORMAT_B5G5R5A1_UNORM_PACK16
+    , eA1R5G5B5UnormPack16 = VK_FORMAT_A1R5G5B5_UNORM_PACK16
+    , eR8Unorm = VK_FORMAT_R8_UNORM
+    , eR8Snorm = VK_FORMAT_R8_SNORM
+    , eR8Uscaled = VK_FORMAT_R8_USCALED
+    , eR8Sscaled = VK_FORMAT_R8_SSCALED
+    , eR8Uint = VK_FORMAT_R8_UINT
+    , eR8Sint = VK_FORMAT_R8_SINT
+    , eR8Srgb = VK_FORMAT_R8_SRGB
+    , eR8G8Unorm = VK_FORMAT_R8G8_UNORM
+    , eR8G8Snorm = VK_FORMAT_R8G8_SNORM
+    , eR8G8Uscaled = VK_FORMAT_R8G8_USCALED
+    , eR8G8Sscaled = VK_FORMAT_R8G8_SSCALED
+    , eR8G8Uint = VK_FORMAT_R8G8_UINT
+    , eR8G8Sint = VK_FORMAT_R8G8_SINT
+    , eR8G8Srgb = VK_FORMAT_R8G8_SRGB
+    , eR8G8B8Unorm = VK_FORMAT_R8G8B8_UNORM
+    , eR8G8B8Snorm = VK_FORMAT_R8G8B8_SNORM
+    , eR8G8B8Uscaled = VK_FORMAT_R8G8B8_USCALED
+    , eR8G8B8Sscaled = VK_FORMAT_R8G8B8_SSCALED
+    , eR8G8B8Uint = VK_FORMAT_R8G8B8_UINT
+    , eR8G8B8Sint = VK_FORMAT_R8G8B8_SINT
+    , eR8G8B8Srgb = VK_FORMAT_R8G8B8_SRGB
+    , eB8G8R8Unorm = VK_FORMAT_B8G8R8_UNORM
+    , eB8G8R8Snorm = VK_FORMAT_B8G8R8_SNORM
+    , eB8G8R8Uscaled = VK_FORMAT_B8G8R8_USCALED
+    , eB8G8R8Sscaled = VK_FORMAT_B8G8R8_SSCALED
+    , eB8G8R8Uint = VK_FORMAT_B8G8R8_UINT
+    , eB8G8R8Sint = VK_FORMAT_B8G8R8_SINT
+    , eB8G8R8Srgb = VK_FORMAT_B8G8R8_SRGB
+    , eR8G8B8A8Unorm = VK_FORMAT_R8G8B8A8_UNORM
+    , eR8G8B8A8Snorm = VK_FORMAT_R8G8B8A8_SNORM
+    , eR8G8B8A8Uscaled = VK_FORMAT_R8G8B8A8_USCALED
+    , eR8G8B8A8Sscaled = VK_FORMAT_R8G8B8A8_SSCALED
+    , eR8G8B8A8Uint = VK_FORMAT_R8G8B8A8_UINT
+    , eR8G8B8A8Sint = VK_FORMAT_R8G8B8A8_SINT
+    , eR8G8B8A8Srgb = VK_FORMAT_R8G8B8A8_SRGB
+    , eB8G8R8A8Unorm = VK_FORMAT_B8G8R8A8_UNORM
+    , eB8G8R8A8Snorm = VK_FORMAT_B8G8R8A8_SNORM
+    , eB8G8R8A8Uscaled = VK_FORMAT_B8G8R8A8_USCALED
+    , eB8G8R8A8Sscaled = VK_FORMAT_B8G8R8A8_SSCALED
+    , eB8G8R8A8Uint = VK_FORMAT_B8G8R8A8_UINT
+    , eB8G8R8A8Sint = VK_FORMAT_B8G8R8A8_SINT
+    , eB8G8R8A8Srgb = VK_FORMAT_B8G8R8A8_SRGB
+    , eA8B8G8R8UnormPack32 = VK_FORMAT_A8B8G8R8_UNORM_PACK32
+    , eA8B8G8R8SnormPack32 = VK_FORMAT_A8B8G8R8_SNORM_PACK32
+    , eA8B8G8R8UscaledPack32 = VK_FORMAT_A8B8G8R8_USCALED_PACK32
+    , eA8B8G8R8SscaledPack32 = VK_FORMAT_A8B8G8R8_SSCALED_PACK32
+    , eA8B8G8R8UintPack32 = VK_FORMAT_A8B8G8R8_UINT_PACK32
+    , eA8B8G8R8SintPack32 = VK_FORMAT_A8B8G8R8_SINT_PACK32
+    , eA8B8G8R8SrgbPack32 = VK_FORMAT_A8B8G8R8_SRGB_PACK32
+    , eA2R10G10B10UnormPack32 = VK_FORMAT_A2R10G10B10_UNORM_PACK32
+    , eA2R10G10B10SnormPack32 = VK_FORMAT_A2R10G10B10_SNORM_PACK32
+    , eA2R10G10B10UscaledPack32 = VK_FORMAT_A2R10G10B10_USCALED_PACK32
+    , eA2R10G10B10SscaledPack32 = VK_FORMAT_A2R10G10B10_SSCALED_PACK32
+    , eA2R10G10B10UintPack32 = VK_FORMAT_A2R10G10B10_UINT_PACK32
+    , eA2R10G10B10SintPack32 = VK_FORMAT_A2R10G10B10_SINT_PACK32
+    , eA2B10G10R10UnormPack32 = VK_FORMAT_A2B10G10R10_UNORM_PACK32
+    , eA2B10G10R10SnormPack32 = VK_FORMAT_A2B10G10R10_SNORM_PACK32
+    , eA2B10G10R10UscaledPack32 = VK_FORMAT_A2B10G10R10_USCALED_PACK32
+    , eA2B10G10R10SscaledPack32 = VK_FORMAT_A2B10G10R10_SSCALED_PACK32
+    , eA2B10G10R10UintPack32 = VK_FORMAT_A2B10G10R10_UINT_PACK32
+    , eA2B10G10R10SintPack32 = VK_FORMAT_A2B10G10R10_SINT_PACK32
+    , eR16Unorm = VK_FORMAT_R16_UNORM
+    , eR16Snorm = VK_FORMAT_R16_SNORM
+    , eR16Uscaled = VK_FORMAT_R16_USCALED
+    , eR16Sscaled = VK_FORMAT_R16_SSCALED
+    , eR16Uint = VK_FORMAT_R16_UINT
+    , eR16Sint = VK_FORMAT_R16_SINT
+    , eR16Sfloat = VK_FORMAT_R16_SFLOAT
+    , eR16G16Unorm = VK_FORMAT_R16G16_UNORM
+    , eR16G16Snorm = VK_FORMAT_R16G16_SNORM
+    , eR16G16Uscaled = VK_FORMAT_R16G16_USCALED
+    , eR16G16Sscaled = VK_FORMAT_R16G16_SSCALED
+    , eR16G16Uint = VK_FORMAT_R16G16_UINT
+    , eR16G16Sint = VK_FORMAT_R16G16_SINT
+    , eR16G16Sfloat = VK_FORMAT_R16G16_SFLOAT
+    , eR16G16B16Unorm = VK_FORMAT_R16G16B16_UNORM
+    , eR16G16B16Snorm = VK_FORMAT_R16G16B16_SNORM
+    , eR16G16B16Uscaled = VK_FORMAT_R16G16B16_USCALED
+    , eR16G16B16Sscaled = VK_FORMAT_R16G16B16_SSCALED
+    , eR16G16B16Uint = VK_FORMAT_R16G16B16_UINT
+    , eR16G16B16Sint = VK_FORMAT_R16G16B16_SINT
+    , eR16G16B16Sfloat = VK_FORMAT_R16G16B16_SFLOAT
+    , eR16G16B16A16Unorm = VK_FORMAT_R16G16B16A16_UNORM
+    , eR16G16B16A16Snorm = VK_FORMAT_R16G16B16A16_SNORM
+    , eR16G16B16A16Uscaled = VK_FORMAT_R16G16B16A16_USCALED
+    , eR16G16B16A16Sscaled = VK_FORMAT_R16G16B16A16_SSCALED
+    , eR16G16B16A16Uint = VK_FORMAT_R16G16B16A16_UINT
+    , eR16G16B16A16Sint = VK_FORMAT_R16G16B16A16_SINT
+    , eR16G16B16A16Sfloat = VK_FORMAT_R16G16B16A16_SFLOAT
+    , eR32Uint = VK_FORMAT_R32_UINT
+    , eR32Sint = VK_FORMAT_R32_SINT
+    , eR32Sfloat = VK_FORMAT_R32_SFLOAT
+    , eR32G32Uint = VK_FORMAT_R32G32_UINT
+    , eR32G32Sint = VK_FORMAT_R32G32_SINT
+    , eR32G32Sfloat = VK_FORMAT_R32G32_SFLOAT
+    , eR32G32B32Uint = VK_FORMAT_R32G32B32_UINT
+    , eR32G32B32Sint = VK_FORMAT_R32G32B32_SINT
+    , eR32G32B32Sfloat = VK_FORMAT_R32G32B32_SFLOAT
+    , eR32G32B32A32Uint = VK_FORMAT_R32G32B32A32_UINT
+    , eR32G32B32A32Sint = VK_FORMAT_R32G32B32A32_SINT
+    , eR32G32B32A32Sfloat = VK_FORMAT_R32G32B32A32_SFLOAT
+    , eR64Uint = VK_FORMAT_R64_UINT
+    , eR64Sint = VK_FORMAT_R64_SINT
+    , eR64Sfloat = VK_FORMAT_R64_SFLOAT
+    , eR64G64Uint = VK_FORMAT_R64G64_UINT
+    , eR64G64Sint = VK_FORMAT_R64G64_SINT
+    , eR64G64Sfloat = VK_FORMAT_R64G64_SFLOAT
+    , eR64G64B64Uint = VK_FORMAT_R64G64B64_UINT
+    , eR64G64B64Sint = VK_FORMAT_R64G64B64_SINT
+    , eR64G64B64Sfloat = VK_FORMAT_R64G64B64_SFLOAT
+    , eR64G64B64A64Uint = VK_FORMAT_R64G64B64A64_UINT
+    , eR64G64B64A64Sint = VK_FORMAT_R64G64B64A64_SINT
+    , eR64G64B64A64Sfloat = VK_FORMAT_R64G64B64A64_SFLOAT
+    , eB10G11R11UfloatPack32 = VK_FORMAT_B10G11R11_UFLOAT_PACK32
+    , eE5B9G9R9UfloatPack32 = VK_FORMAT_E5B9G9R9_UFLOAT_PACK32
+    , eD16Unorm = VK_FORMAT_D16_UNORM
+    , eX8D24UnormPack32 = VK_FORMAT_X8_D24_UNORM_PACK32
+    , eD32Sfloat = VK_FORMAT_D32_SFLOAT
+    , eS8Uint = VK_FORMAT_S8_UINT
+    , eD16UnormS8Uint = VK_FORMAT_D16_UNORM_S8_UINT
+    , eD24UnormS8Uint = VK_FORMAT_D24_UNORM_S8_UINT
+    , eD32SfloatS8Uint = VK_FORMAT_D32_SFLOAT_S8_UINT
+    , eBc1RgbUnormBlock = VK_FORMAT_BC1_RGB_UNORM_BLOCK
+    , eBc1RgbSrgbBlock = VK_FORMAT_BC1_RGB_SRGB_BLOCK
+    , eBc1RgbaUnormBlock = VK_FORMAT_BC1_RGBA_UNORM_BLOCK
+    , eBc1RgbaSrgbBlock = VK_FORMAT_BC1_RGBA_SRGB_BLOCK
+    , eBc2UnormBlock = VK_FORMAT_BC2_UNORM_BLOCK
+    , eBc2SrgbBlock = VK_FORMAT_BC2_SRGB_BLOCK
+    , eBc3UnormBlock = VK_FORMAT_BC3_UNORM_BLOCK
+    , eBc3SrgbBlock = VK_FORMAT_BC3_SRGB_BLOCK
+    , eBc4UnormBlock = VK_FORMAT_BC4_UNORM_BLOCK
+    , eBc4SnormBlock = VK_FORMAT_BC4_SNORM_BLOCK
+    , eBc5UnormBlock = VK_FORMAT_BC5_UNORM_BLOCK
+    , eBc5SnormBlock = VK_FORMAT_BC5_SNORM_BLOCK
+    , eBc6HUfloatBlock = VK_FORMAT_BC6H_UFLOAT_BLOCK
+    , eBc6HSfloatBlock = VK_FORMAT_BC6H_SFLOAT_BLOCK
+    , eBc7UnormBlock = VK_FORMAT_BC7_UNORM_BLOCK
+    , eBc7SrgbBlock = VK_FORMAT_BC7_SRGB_BLOCK
+    , eEtc2R8G8B8UnormBlock = VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK
+    , eEtc2R8G8B8SrgbBlock = VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK
+    , eEtc2R8G8B8A1UnormBlock = VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK
+    , eEtc2R8G8B8A1SrgbBlock = VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK
+    , eEtc2R8G8B8A8UnormBlock = VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK
+    , eEtc2R8G8B8A8SrgbBlock = VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK
+    , eEacR11UnormBlock = VK_FORMAT_EAC_R11_UNORM_BLOCK
+    , eEacR11SnormBlock = VK_FORMAT_EAC_R11_SNORM_BLOCK
+    , eEacR11G11UnormBlock = VK_FORMAT_EAC_R11G11_UNORM_BLOCK
+    , eEacR11G11SnormBlock = VK_FORMAT_EAC_R11G11_SNORM_BLOCK
+    , eAstc4x4UnormBlock = VK_FORMAT_ASTC_4x4_UNORM_BLOCK
+    , eAstc4x4SrgbBlock = VK_FORMAT_ASTC_4x4_SRGB_BLOCK
+    , eAstc5x4UnormBlock = VK_FORMAT_ASTC_5x4_UNORM_BLOCK
+    , eAstc5x4SrgbBlock = VK_FORMAT_ASTC_5x4_SRGB_BLOCK
+    , eAstc5x5UnormBlock = VK_FORMAT_ASTC_5x5_UNORM_BLOCK
+    , eAstc5x5SrgbBlock = VK_FORMAT_ASTC_5x5_SRGB_BLOCK
+    , eAstc6x5UnormBlock = VK_FORMAT_ASTC_6x5_UNORM_BLOCK
+    , eAstc6x5SrgbBlock = VK_FORMAT_ASTC_6x5_SRGB_BLOCK
+    , eAstc6x6UnormBlock = VK_FORMAT_ASTC_6x6_UNORM_BLOCK
+    , eAstc6x6SrgbBlock = VK_FORMAT_ASTC_6x6_SRGB_BLOCK
+    , eAstc8x5UnormBlock = VK_FORMAT_ASTC_8x5_UNORM_BLOCK
+    , eAstc8x5SrgbBlock = VK_FORMAT_ASTC_8x5_SRGB_BLOCK
+    , eAstc8x6UnormBlock = VK_FORMAT_ASTC_8x6_UNORM_BLOCK
+    , eAstc8x6SrgbBlock = VK_FORMAT_ASTC_8x6_SRGB_BLOCK
+    , eAstc8x8UnormBlock = VK_FORMAT_ASTC_8x8_UNORM_BLOCK
+    , eAstc8x8SrgbBlock = VK_FORMAT_ASTC_8x8_SRGB_BLOCK
+    , eAstc10x5UnormBlock = VK_FORMAT_ASTC_10x5_UNORM_BLOCK
+    , eAstc10x5SrgbBlock = VK_FORMAT_ASTC_10x5_SRGB_BLOCK
+    , eAstc10x6UnormBlock = VK_FORMAT_ASTC_10x6_UNORM_BLOCK
+    , eAstc10x6SrgbBlock = VK_FORMAT_ASTC_10x6_SRGB_BLOCK
+    , eAstc10x8UnormBlock = VK_FORMAT_ASTC_10x8_UNORM_BLOCK
+    , eAstc10x8SrgbBlock = VK_FORMAT_ASTC_10x8_SRGB_BLOCK
+    , eAstc10x10UnormBlock = VK_FORMAT_ASTC_10x10_UNORM_BLOCK
+    , eAstc10x10SrgbBlock = VK_FORMAT_ASTC_10x10_SRGB_BLOCK
+    , eAstc12x10UnormBlock = VK_FORMAT_ASTC_12x10_UNORM_BLOCK
+    , eAstc12x10SrgbBlock = VK_FORMAT_ASTC_12x10_SRGB_BLOCK
+    , eAstc12x12UnormBlock = VK_FORMAT_ASTC_12x12_UNORM_BLOCK
+    , eAstc12x12SrgbBlock = VK_FORMAT_ASTC_12x12_SRGB_BLOCK
+    , eG8B8G8R8422Unorm = VK_FORMAT_G8B8G8R8_422_UNORM
+    , eB8G8R8G8422Unorm = VK_FORMAT_B8G8R8G8_422_UNORM
+    , eG8B8R83Plane420Unorm = VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM
+    , eG8B8R82Plane420Unorm = VK_FORMAT_G8_B8R8_2PLANE_420_UNORM
+    , eG8B8R83Plane422Unorm = VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM
+    , eG8B8R82Plane422Unorm = VK_FORMAT_G8_B8R8_2PLANE_422_UNORM
+    , eG8B8R83Plane444Unorm = VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM
+    , eR10X6UnormPack16 = VK_FORMAT_R10X6_UNORM_PACK16
+    , eR10X6G10X6Unorm2Pack16 = VK_FORMAT_R10X6G10X6_UNORM_2PACK16
+    , eR10X6G10X6B10X6A10X6Unorm4Pack16 = VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16
+    , eG10X6B10X6G10X6R10X6422Unorm4Pack16 = VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16
+    , eB10X6G10X6R10X6G10X6422Unorm4Pack16 = VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16
+    , eG10X6B10X6R10X63Plane420Unorm3Pack16 = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16
+    , eG10X6B10X6R10X62Plane420Unorm3Pack16 = VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16
+    , eG10X6B10X6R10X63Plane422Unorm3Pack16 = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16
+    , eG10X6B10X6R10X62Plane422Unorm3Pack16 = VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16
+    , eG10X6B10X6R10X63Plane444Unorm3Pack16 = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16
+    , eR12X4UnormPack16 = VK_FORMAT_R12X4_UNORM_PACK16
+    , eR12X4G12X4Unorm2Pack16 = VK_FORMAT_R12X4G12X4_UNORM_2PACK16
+    , eR12X4G12X4B12X4A12X4Unorm4Pack16 = VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16
+    , eG12X4B12X4G12X4R12X4422Unorm4Pack16 = VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16
+    , eB12X4G12X4R12X4G12X4422Unorm4Pack16 = VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16
+    , eG12X4B12X4R12X43Plane420Unorm3Pack16 = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16
+    , eG12X4B12X4R12X42Plane420Unorm3Pack16 = VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16
+    , eG12X4B12X4R12X43Plane422Unorm3Pack16 = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16
+    , eG12X4B12X4R12X42Plane422Unorm3Pack16 = VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16
+    , eG12X4B12X4R12X43Plane444Unorm3Pack16 = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16
+    , eG16B16G16R16422Unorm = VK_FORMAT_G16B16G16R16_422_UNORM
+    , eB16G16R16G16422Unorm = VK_FORMAT_B16G16R16G16_422_UNORM
+    , eG16B16R163Plane420Unorm = VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM
+    , eG16B16R162Plane420Unorm = VK_FORMAT_G16_B16R16_2PLANE_420_UNORM
+    , eG16B16R163Plane422Unorm = VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM
+    , eG16B16R162Plane422Unorm = VK_FORMAT_G16_B16R16_2PLANE_422_UNORM
+    , eG16B16R163Plane444Unorm = VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM
+    , ePvrtc12BppUnormBlockIMG = VK_FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG
+    , ePvrtc14BppUnormBlockIMG = VK_FORMAT_PVRTC1_4BPP_UNORM_BLOCK_IMG
+    , ePvrtc22BppUnormBlockIMG = VK_FORMAT_PVRTC2_2BPP_UNORM_BLOCK_IMG
+    , ePvrtc24BppUnormBlockIMG = VK_FORMAT_PVRTC2_4BPP_UNORM_BLOCK_IMG
+    , ePvrtc12BppSrgbBlockIMG = VK_FORMAT_PVRTC1_2BPP_SRGB_BLOCK_IMG
+    , ePvrtc14BppSrgbBlockIMG = VK_FORMAT_PVRTC1_4BPP_SRGB_BLOCK_IMG
+    , ePvrtc22BppSrgbBlockIMG = VK_FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG
+    , ePvrtc24BppSrgbBlockIMG = VK_FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG
+    , eAstc4x4SfloatBlockEXT = VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT
+    , eAstc5x4SfloatBlockEXT = VK_FORMAT_ASTC_5x4_SFLOAT_BLOCK_EXT
+    , eAstc5x5SfloatBlockEXT = VK_FORMAT_ASTC_5x5_SFLOAT_BLOCK_EXT
+    , eAstc6x5SfloatBlockEXT = VK_FORMAT_ASTC_6x5_SFLOAT_BLOCK_EXT
+    , eAstc6x6SfloatBlockEXT = VK_FORMAT_ASTC_6x6_SFLOAT_BLOCK_EXT
+    , eAstc8x5SfloatBlockEXT = VK_FORMAT_ASTC_8x5_SFLOAT_BLOCK_EXT
+    , eAstc8x6SfloatBlockEXT = VK_FORMAT_ASTC_8x6_SFLOAT_BLOCK_EXT
+    , eAstc8x8SfloatBlockEXT = VK_FORMAT_ASTC_8x8_SFLOAT_BLOCK_EXT
+    , eAstc10x5SfloatBlockEXT = VK_FORMAT_ASTC_10x5_SFLOAT_BLOCK_EXT
+    , eAstc10x6SfloatBlockEXT = VK_FORMAT_ASTC_10x6_SFLOAT_BLOCK_EXT
+    , eAstc10x8SfloatBlockEXT = VK_FORMAT_ASTC_10x8_SFLOAT_BLOCK_EXT
+    , eAstc10x10SfloatBlockEXT = VK_FORMAT_ASTC_10x10_SFLOAT_BLOCK_EXT
+    , eAstc12x10SfloatBlockEXT = VK_FORMAT_ASTC_12x10_SFLOAT_BLOCK_EXT
+    , eAstc12x12SfloatBlockEXT = VK_FORMAT_ASTC_12x12_SFLOAT_BLOCK_EXT
+    , eA4R4G4B4UnormPack16EXT = VK_FORMAT_A4R4G4B4_UNORM_PACK16_EXT
+    , eA4B4G4R4UnormPack16EXT = VK_FORMAT_A4B4G4R4_UNORM_PACK16_EXT
+    , eB10X6G10X6R10X6G10X6422Unorm4Pack16KHR = VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16_KHR
+    , eB12X4G12X4R12X4G12X4422Unorm4Pack16KHR = VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16_KHR
+    , eB16G16R16G16422UnormKHR = VK_FORMAT_B16G16R16G16_422_UNORM_KHR
+    , eB8G8R8G8422UnormKHR = VK_FORMAT_B8G8R8G8_422_UNORM_KHR
+    , eG10X6B10X6G10X6R10X6422Unorm4Pack16KHR = VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16_KHR
+    , eG10X6B10X6R10X62Plane420Unorm3Pack16KHR = VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16_KHR
+    , eG10X6B10X6R10X62Plane422Unorm3Pack16KHR = VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16_KHR
+    , eG10X6B10X6R10X63Plane420Unorm3Pack16KHR = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16_KHR
+    , eG10X6B10X6R10X63Plane422Unorm3Pack16KHR = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16_KHR
+    , eG10X6B10X6R10X63Plane444Unorm3Pack16KHR = VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16_KHR
+    , eG12X4B12X4G12X4R12X4422Unorm4Pack16KHR = VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16_KHR
+    , eG12X4B12X4R12X42Plane420Unorm3Pack16KHR = VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16_KHR
+    , eG12X4B12X4R12X42Plane422Unorm3Pack16KHR = VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16_KHR
+    , eG12X4B12X4R12X43Plane420Unorm3Pack16KHR = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16_KHR
+    , eG12X4B12X4R12X43Plane422Unorm3Pack16KHR = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16_KHR
+    , eG12X4B12X4R12X43Plane444Unorm3Pack16KHR = VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16_KHR
+    , eG16B16G16R16422UnormKHR = VK_FORMAT_G16B16G16R16_422_UNORM_KHR
+    , eG16B16R162Plane420UnormKHR = VK_FORMAT_G16_B16R16_2PLANE_420_UNORM_KHR
+    , eG16B16R162Plane422UnormKHR = VK_FORMAT_G16_B16R16_2PLANE_422_UNORM_KHR
+    , eG16B16R163Plane420UnormKHR = VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM_KHR
+    , eG16B16R163Plane422UnormKHR = VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM_KHR
+    , eG16B16R163Plane444UnormKHR = VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM_KHR
+    , eG8B8G8R8422UnormKHR = VK_FORMAT_G8B8G8R8_422_UNORM_KHR
+    , eG8B8R82Plane420UnormKHR = VK_FORMAT_G8_B8R8_2PLANE_420_UNORM_KHR
+    , eG8B8R82Plane422UnormKHR = VK_FORMAT_G8_B8R8_2PLANE_422_UNORM_KHR
+    , eG8B8R83Plane420UnormKHR = VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM_KHR
+    , eG8B8R83Plane422UnormKHR = VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM_KHR
+    , eG8B8R83Plane444UnormKHR = VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM_KHR
+    , eR10X6G10X6B10X6A10X6Unorm4Pack16KHR = VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16_KHR
+    , eR10X6G10X6Unorm2Pack16KHR = VK_FORMAT_R10X6G10X6_UNORM_2PACK16_KHR
+    , eR10X6UnormPack16KHR = VK_FORMAT_R10X6_UNORM_PACK16_KHR
+    , eR12X4G12X4B12X4A12X4Unorm4Pack16KHR = VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16_KHR
+    , eR12X4G12X4Unorm2Pack16KHR = VK_FORMAT_R12X4G12X4_UNORM_2PACK16_KHR
+    , eR12X4UnormPack16KHR = VK_FORMAT_R12X4_UNORM_PACK16_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( Format value )
   {
@@ -6147,44 +6222,45 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class FormatFeatureFlagBits : VkFormatFeatureFlags
   {
-    eSampledImage = VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT,
-    eStorageImage = VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT,
-    eStorageImageAtomic = VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT,
-    eUniformTexelBuffer = VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT,
-    eStorageTexelBuffer = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT,
-    eStorageTexelBufferAtomic = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT,
-    eVertexBuffer = VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT,
-    eColorAttachment = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT,
-    eColorAttachmentBlend = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT,
-    eDepthStencilAttachment = VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT,
-    eBlitSrc = VK_FORMAT_FEATURE_BLIT_SRC_BIT,
-    eBlitDst = VK_FORMAT_FEATURE_BLIT_DST_BIT,
-    eSampledImageFilterLinear = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT,
-    eTransferSrc = VK_FORMAT_FEATURE_TRANSFER_SRC_BIT,
-    eTransferDst = VK_FORMAT_FEATURE_TRANSFER_DST_BIT,
-    eMidpointChromaSamples = VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT,
-    eSampledImageYcbcrConversionLinearFilter = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT,
-    eSampledImageYcbcrConversionSeparateReconstructionFilter = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT,
-    eSampledImageYcbcrConversionChromaReconstructionExplicit = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT,
-    eSampledImageYcbcrConversionChromaReconstructionExplicitForceable = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT,
-    eDisjoint = VK_FORMAT_FEATURE_DISJOINT_BIT,
-    eCositedChromaSamples = VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT,
-    eSampledImageFilterMinmax = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT,
-    eSampledImageFilterCubicIMG = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG,
-    eAccelerationStructureVertexBufferKHR = VK_FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR,
-    eFragmentDensityMapEXT = VK_FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT_EXT,
-    eFragmentShadingRateAttachmentKHR = VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR,
-    eCositedChromaSamplesKHR = VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR,
-    eDisjointKHR = VK_FORMAT_FEATURE_DISJOINT_BIT_KHR,
-    eMidpointChromaSamplesKHR = VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR,
-    eSampledImageFilterCubicEXT = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT,
-    eSampledImageFilterMinmaxEXT = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT,
-    eSampledImageYcbcrConversionChromaReconstructionExplicitKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR,
-    eSampledImageYcbcrConversionChromaReconstructionExplicitForceableKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR,
-    eSampledImageYcbcrConversionLinearFilterKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR,
-    eSampledImageYcbcrConversionSeparateReconstructionFilterKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR,
-    eTransferDstKHR = VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR,
-    eTransferSrcKHR = VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR};
+      eSampledImage = VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT
+    , eStorageImage = VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT
+    , eStorageImageAtomic = VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT
+    , eUniformTexelBuffer = VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT
+    , eStorageTexelBuffer = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT
+    , eStorageTexelBufferAtomic = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT
+    , eVertexBuffer = VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT
+    , eColorAttachment = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT
+    , eColorAttachmentBlend = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT
+    , eDepthStencilAttachment = VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+    , eBlitSrc = VK_FORMAT_FEATURE_BLIT_SRC_BIT
+    , eBlitDst = VK_FORMAT_FEATURE_BLIT_DST_BIT
+    , eSampledImageFilterLinear = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT
+    , eTransferSrc = VK_FORMAT_FEATURE_TRANSFER_SRC_BIT
+    , eTransferDst = VK_FORMAT_FEATURE_TRANSFER_DST_BIT
+    , eMidpointChromaSamples = VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT
+    , eSampledImageYcbcrConversionLinearFilter = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT
+    , eSampledImageYcbcrConversionSeparateReconstructionFilter = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT
+    , eSampledImageYcbcrConversionChromaReconstructionExplicit = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT
+    , eSampledImageYcbcrConversionChromaReconstructionExplicitForceable = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT
+    , eDisjoint = VK_FORMAT_FEATURE_DISJOINT_BIT
+    , eCositedChromaSamples = VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT
+    , eSampledImageFilterMinmax = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT
+    , eSampledImageFilterCubicIMG = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG
+    , eAccelerationStructureVertexBufferKHR = VK_FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR
+    , eFragmentDensityMapEXT = VK_FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT_EXT
+    , eFragmentShadingRateAttachmentKHR = VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+    , eCositedChromaSamplesKHR = VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR
+    , eDisjointKHR = VK_FORMAT_FEATURE_DISJOINT_BIT_KHR
+    , eMidpointChromaSamplesKHR = VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR
+    , eSampledImageFilterCubicEXT = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT
+    , eSampledImageFilterMinmaxEXT = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT
+    , eSampledImageYcbcrConversionChromaReconstructionExplicitKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR
+    , eSampledImageYcbcrConversionChromaReconstructionExplicitForceableKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR
+    , eSampledImageYcbcrConversionLinearFilterKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR
+    , eSampledImageYcbcrConversionSeparateReconstructionFilterKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR
+    , eTransferDstKHR = VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR
+    , eTransferSrcKHR = VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( FormatFeatureFlagBits value )
   {
@@ -6223,11 +6299,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class FragmentShadingRateCombinerOpKHR
   {
-    eKeep = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR,
-    eReplace = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR,
-    eMin = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MIN_KHR,
-    eMax = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_KHR,
-    eMul = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR};
+      eKeep = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR
+    , eReplace = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR
+    , eMin = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MIN_KHR
+    , eMax = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_KHR
+    , eMul = VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( FragmentShadingRateCombinerOpKHR value )
   {
@@ -6244,18 +6321,19 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class FragmentShadingRateNV
   {
-    e1InvocationPerPixel = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV,
-    e1InvocationPer1X2Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_1X2_PIXELS_NV,
-    e1InvocationPer2X1Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X1_PIXELS_NV,
-    e1InvocationPer2X2Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X2_PIXELS_NV,
-    e1InvocationPer2X4Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X4_PIXELS_NV,
-    e1InvocationPer4X2Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_4X2_PIXELS_NV,
-    e1InvocationPer4X4Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_4X4_PIXELS_NV,
-    e2InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_2_INVOCATIONS_PER_PIXEL_NV,
-    e4InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_4_INVOCATIONS_PER_PIXEL_NV,
-    e8InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV,
-    e16InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV,
-    eNoInvocations = VK_FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV};
+      e1InvocationPerPixel = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV
+    , e1InvocationPer1X2Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_1X2_PIXELS_NV
+    , e1InvocationPer2X1Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X1_PIXELS_NV
+    , e1InvocationPer2X2Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X2_PIXELS_NV
+    , e1InvocationPer2X4Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X4_PIXELS_NV
+    , e1InvocationPer4X2Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_4X2_PIXELS_NV
+    , e1InvocationPer4X4Pixels = VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_4X4_PIXELS_NV
+    , e2InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_2_INVOCATIONS_PER_PIXEL_NV
+    , e4InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_4_INVOCATIONS_PER_PIXEL_NV
+    , e8InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV
+    , e16InvocationsPerPixel = VK_FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV
+    , eNoInvocations = VK_FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( FragmentShadingRateNV value )
   {
@@ -6279,8 +6357,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class FragmentShadingRateTypeNV
   {
-    eFragmentSize = VK_FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV,
-    eEnums = VK_FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV};
+      eFragmentSize = VK_FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV
+    , eEnums = VK_FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( FragmentShadingRateTypeNV value )
   {
@@ -6294,8 +6373,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class FramebufferCreateFlagBits : VkFramebufferCreateFlags
   {
-    eImageless = VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT,
-    eImagelessKHR = VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR};
+      eImageless = VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT
+    , eImagelessKHR = VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( FramebufferCreateFlagBits value )
   {
@@ -6308,8 +6388,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class FrontFace
   {
-    eCounterClockwise = VK_FRONT_FACE_COUNTER_CLOCKWISE,
-    eClockwise = VK_FRONT_FACE_CLOCKWISE};
+      eCounterClockwise = VK_FRONT_FACE_COUNTER_CLOCKWISE
+    , eClockwise = VK_FRONT_FACE_CLOCKWISE
+  };
 
   VULKAN_HPP_INLINE std::string to_string( FrontFace value )
   {
@@ -6324,10 +6405,11 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   enum class FullScreenExclusiveEXT
   {
-    eDefault = VK_FULL_SCREEN_EXCLUSIVE_DEFAULT_EXT,
-    eAllowed = VK_FULL_SCREEN_EXCLUSIVE_ALLOWED_EXT,
-    eDisallowed = VK_FULL_SCREEN_EXCLUSIVE_DISALLOWED_EXT,
-    eApplicationControlled = VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT};
+      eDefault = VK_FULL_SCREEN_EXCLUSIVE_DEFAULT_EXT
+    , eAllowed = VK_FULL_SCREEN_EXCLUSIVE_ALLOWED_EXT
+    , eDisallowed = VK_FULL_SCREEN_EXCLUSIVE_DISALLOWED_EXT
+    , eApplicationControlled = VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( FullScreenExclusiveEXT value )
   {
@@ -6344,8 +6426,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class GeometryFlagBitsKHR : VkGeometryFlagsKHR
   {
-    eOpaque = VK_GEOMETRY_OPAQUE_BIT_KHR,
-    eNoDuplicateAnyHitInvocation = VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR};
+      eOpaque = VK_GEOMETRY_OPAQUE_BIT_KHR
+    , eNoDuplicateAnyHitInvocation = VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR
+  };
   using GeometryFlagBitsNV = GeometryFlagBitsKHR;
 
   VULKAN_HPP_INLINE std::string to_string( GeometryFlagBitsKHR value )
@@ -6360,11 +6443,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class GeometryInstanceFlagBitsKHR : VkGeometryInstanceFlagsKHR
   {
-    eTriangleFacingCullDisable = VK_GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR,
-    eTriangleFrontCounterclockwise = VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_KHR,
-    eForceOpaque = VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR,
-    eForceNoOpaque = VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR,
-    eTriangleCullDisable = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV};
+      eTriangleFacingCullDisable = VK_GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR
+    , eTriangleFrontCounterclockwise = VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_KHR
+    , eForceOpaque = VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR
+    , eForceNoOpaque = VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR
+    , eTriangleCullDisable = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV
+  };
   using GeometryInstanceFlagBitsNV = GeometryInstanceFlagBitsKHR;
 
   VULKAN_HPP_INLINE std::string to_string( GeometryInstanceFlagBitsKHR value )
@@ -6381,9 +6465,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class GeometryTypeKHR
   {
-    eTriangles = VK_GEOMETRY_TYPE_TRIANGLES_KHR,
-    eAabbs = VK_GEOMETRY_TYPE_AABBS_KHR,
-    eInstances = VK_GEOMETRY_TYPE_INSTANCES_KHR};
+      eTriangles = VK_GEOMETRY_TYPE_TRIANGLES_KHR
+    , eAabbs = VK_GEOMETRY_TYPE_AABBS_KHR
+    , eInstances = VK_GEOMETRY_TYPE_INSTANCES_KHR
+  };
   using GeometryTypeNV = GeometryTypeKHR;
 
   VULKAN_HPP_INLINE std::string to_string( GeometryTypeKHR value )
@@ -6399,20 +6484,21 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ImageAspectFlagBits : VkImageAspectFlags
   {
-    eColor = VK_IMAGE_ASPECT_COLOR_BIT,
-    eDepth = VK_IMAGE_ASPECT_DEPTH_BIT,
-    eStencil = VK_IMAGE_ASPECT_STENCIL_BIT,
-    eMetadata = VK_IMAGE_ASPECT_METADATA_BIT,
-    ePlane0 = VK_IMAGE_ASPECT_PLANE_0_BIT,
-    ePlane1 = VK_IMAGE_ASPECT_PLANE_1_BIT,
-    ePlane2 = VK_IMAGE_ASPECT_PLANE_2_BIT,
-    eMemoryPlane0EXT = VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT,
-    eMemoryPlane1EXT = VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT,
-    eMemoryPlane2EXT = VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT,
-    eMemoryPlane3EXT = VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT,
-    ePlane0KHR = VK_IMAGE_ASPECT_PLANE_0_BIT_KHR,
-    ePlane1KHR = VK_IMAGE_ASPECT_PLANE_1_BIT_KHR,
-    ePlane2KHR = VK_IMAGE_ASPECT_PLANE_2_BIT_KHR};
+      eColor = VK_IMAGE_ASPECT_COLOR_BIT
+    , eDepth = VK_IMAGE_ASPECT_DEPTH_BIT
+    , eStencil = VK_IMAGE_ASPECT_STENCIL_BIT
+    , eMetadata = VK_IMAGE_ASPECT_METADATA_BIT
+    , ePlane0 = VK_IMAGE_ASPECT_PLANE_0_BIT
+    , ePlane1 = VK_IMAGE_ASPECT_PLANE_1_BIT
+    , ePlane2 = VK_IMAGE_ASPECT_PLANE_2_BIT
+    , eMemoryPlane0EXT = VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT
+    , eMemoryPlane1EXT = VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT
+    , eMemoryPlane2EXT = VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT
+    , eMemoryPlane3EXT = VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT
+    , ePlane0KHR = VK_IMAGE_ASPECT_PLANE_0_BIT_KHR
+    , ePlane1KHR = VK_IMAGE_ASPECT_PLANE_1_BIT_KHR
+    , ePlane2KHR = VK_IMAGE_ASPECT_PLANE_2_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ImageAspectFlagBits value )
   {
@@ -6435,27 +6521,28 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ImageCreateFlagBits : VkImageCreateFlags
   {
-    eSparseBinding = VK_IMAGE_CREATE_SPARSE_BINDING_BIT,
-    eSparseResidency = VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT,
-    eSparseAliased = VK_IMAGE_CREATE_SPARSE_ALIASED_BIT,
-    eMutableFormat = VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT,
-    eCubeCompatible = VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT,
-    eAlias = VK_IMAGE_CREATE_ALIAS_BIT,
-    eSplitInstanceBindRegions = VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT,
-    e2DArrayCompatible = VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT,
-    eBlockTexelViewCompatible = VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT,
-    eExtendedUsage = VK_IMAGE_CREATE_EXTENDED_USAGE_BIT,
-    eProtected = VK_IMAGE_CREATE_PROTECTED_BIT,
-    eDisjoint = VK_IMAGE_CREATE_DISJOINT_BIT,
-    eCornerSampledNV = VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV,
-    eSampleLocationsCompatibleDepthEXT = VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT,
-    eSubsampledEXT = VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT,
-    e2DArrayCompatibleKHR = VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR,
-    eAliasKHR = VK_IMAGE_CREATE_ALIAS_BIT_KHR,
-    eBlockTexelViewCompatibleKHR = VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR,
-    eDisjointKHR = VK_IMAGE_CREATE_DISJOINT_BIT_KHR,
-    eExtendedUsageKHR = VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR,
-    eSplitInstanceBindRegionsKHR = VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR};
+      eSparseBinding = VK_IMAGE_CREATE_SPARSE_BINDING_BIT
+    , eSparseResidency = VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT
+    , eSparseAliased = VK_IMAGE_CREATE_SPARSE_ALIASED_BIT
+    , eMutableFormat = VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT
+    , eCubeCompatible = VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT
+    , eAlias = VK_IMAGE_CREATE_ALIAS_BIT
+    , eSplitInstanceBindRegions = VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
+    , e2DArrayCompatible = VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT
+    , eBlockTexelViewCompatible = VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT
+    , eExtendedUsage = VK_IMAGE_CREATE_EXTENDED_USAGE_BIT
+    , eProtected = VK_IMAGE_CREATE_PROTECTED_BIT
+    , eDisjoint = VK_IMAGE_CREATE_DISJOINT_BIT
+    , eCornerSampledNV = VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV
+    , eSampleLocationsCompatibleDepthEXT = VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT
+    , eSubsampledEXT = VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT
+    , e2DArrayCompatibleKHR = VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR
+    , eAliasKHR = VK_IMAGE_CREATE_ALIAS_BIT_KHR
+    , eBlockTexelViewCompatibleKHR = VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR
+    , eDisjointKHR = VK_IMAGE_CREATE_DISJOINT_BIT_KHR
+    , eExtendedUsageKHR = VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR
+    , eSplitInstanceBindRegionsKHR = VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ImageCreateFlagBits value )
   {
@@ -6482,34 +6569,35 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ImageLayout
   {
-    eUndefined = VK_IMAGE_LAYOUT_UNDEFINED,
-    eGeneral = VK_IMAGE_LAYOUT_GENERAL,
-    eColorAttachmentOptimal = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,
-    eDepthStencilAttachmentOptimal = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,
-    eDepthStencilReadOnlyOptimal = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,
-    eShaderReadOnlyOptimal = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
-    eTransferSrcOptimal = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
-    eTransferDstOptimal = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-    ePreinitialized = VK_IMAGE_LAYOUT_PREINITIALIZED,
-    eDepthReadOnlyStencilAttachmentOptimal = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL,
-    eDepthAttachmentStencilReadOnlyOptimal = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL,
-    eDepthAttachmentOptimal = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL,
-    eDepthReadOnlyOptimal = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL,
-    eStencilAttachmentOptimal = VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL,
-    eStencilReadOnlyOptimal = VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL,
-    ePresentSrcKHR = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
-    eSharedPresentKHR = VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR,
-    eShadingRateOptimalNV = VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV,
-    eFragmentDensityMapOptimalEXT = VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT,
-    eReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR,
-    eAttachmentOptimalKHR = VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR,
-    eDepthAttachmentOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR,
-    eDepthAttachmentStencilReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR,
-    eDepthReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR,
-    eDepthReadOnlyStencilAttachmentOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR,
-    eFragmentShadingRateAttachmentOptimalKHR = VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR,
-    eStencilAttachmentOptimalKHR = VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR,
-    eStencilReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR};
+      eUndefined = VK_IMAGE_LAYOUT_UNDEFINED
+    , eGeneral = VK_IMAGE_LAYOUT_GENERAL
+    , eColorAttachmentOptimal = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL
+    , eDepthStencilAttachmentOptimal = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL
+    , eDepthStencilReadOnlyOptimal = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL
+    , eShaderReadOnlyOptimal = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL
+    , eTransferSrcOptimal = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL
+    , eTransferDstOptimal = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL
+    , ePreinitialized = VK_IMAGE_LAYOUT_PREINITIALIZED
+    , eDepthReadOnlyStencilAttachmentOptimal = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL
+    , eDepthAttachmentStencilReadOnlyOptimal = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL
+    , eDepthAttachmentOptimal = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL
+    , eDepthReadOnlyOptimal = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL
+    , eStencilAttachmentOptimal = VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL
+    , eStencilReadOnlyOptimal = VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL
+    , ePresentSrcKHR = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR
+    , eSharedPresentKHR = VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR
+    , eShadingRateOptimalNV = VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV
+    , eFragmentDensityMapOptimalEXT = VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT
+    , eReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR
+    , eAttachmentOptimalKHR = VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR
+    , eDepthAttachmentOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR
+    , eDepthAttachmentStencilReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR
+    , eDepthReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR
+    , eDepthReadOnlyStencilAttachmentOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR
+    , eFragmentShadingRateAttachmentOptimalKHR = VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR
+    , eStencilAttachmentOptimalKHR = VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR
+    , eStencilReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ImageLayout value )
   {
@@ -6542,9 +6630,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ImageTiling
   {
-    eOptimal = VK_IMAGE_TILING_OPTIMAL,
-    eLinear = VK_IMAGE_TILING_LINEAR,
-    eDrmFormatModifierEXT = VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT};
+      eOptimal = VK_IMAGE_TILING_OPTIMAL
+    , eLinear = VK_IMAGE_TILING_LINEAR
+    , eDrmFormatModifierEXT = VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ImageTiling value )
   {
@@ -6559,9 +6648,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ImageType
   {
-    e1D = VK_IMAGE_TYPE_1D,
-    e2D = VK_IMAGE_TYPE_2D,
-    e3D = VK_IMAGE_TYPE_3D};
+      e1D = VK_IMAGE_TYPE_1D
+    , e2D = VK_IMAGE_TYPE_2D
+    , e3D = VK_IMAGE_TYPE_3D
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ImageType value )
   {
@@ -6576,17 +6666,18 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ImageUsageFlagBits : VkImageUsageFlags
   {
-    eTransferSrc = VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
-    eTransferDst = VK_IMAGE_USAGE_TRANSFER_DST_BIT,
-    eSampled = VK_IMAGE_USAGE_SAMPLED_BIT,
-    eStorage = VK_IMAGE_USAGE_STORAGE_BIT,
-    eColorAttachment = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
-    eDepthStencilAttachment = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
-    eTransientAttachment = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT,
-    eInputAttachment = VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT,
-    eShadingRateImageNV = VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV,
-    eFragmentDensityMapEXT = VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT,
-    eFragmentShadingRateAttachmentKHR = VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR};
+      eTransferSrc = VK_IMAGE_USAGE_TRANSFER_SRC_BIT
+    , eTransferDst = VK_IMAGE_USAGE_TRANSFER_DST_BIT
+    , eSampled = VK_IMAGE_USAGE_SAMPLED_BIT
+    , eStorage = VK_IMAGE_USAGE_STORAGE_BIT
+    , eColorAttachment = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
+    , eDepthStencilAttachment = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
+    , eTransientAttachment = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT
+    , eInputAttachment = VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT
+    , eShadingRateImageNV = VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV
+    , eFragmentDensityMapEXT = VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT
+    , eFragmentShadingRateAttachmentKHR = VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ImageUsageFlagBits value )
   {
@@ -6608,8 +6699,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ImageViewCreateFlagBits : VkImageViewCreateFlags
   {
-    eFragmentDensityMapDynamicEXT = VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT,
-    eFragmentDensityMapDeferredEXT = VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT};
+      eFragmentDensityMapDynamicEXT = VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT
+    , eFragmentDensityMapDeferredEXT = VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ImageViewCreateFlagBits value )
   {
@@ -6623,13 +6715,14 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ImageViewType
   {
-    e1D = VK_IMAGE_VIEW_TYPE_1D,
-    e2D = VK_IMAGE_VIEW_TYPE_2D,
-    e3D = VK_IMAGE_VIEW_TYPE_3D,
-    eCube = VK_IMAGE_VIEW_TYPE_CUBE,
-    e1DArray = VK_IMAGE_VIEW_TYPE_1D_ARRAY,
-    e2DArray = VK_IMAGE_VIEW_TYPE_2D_ARRAY,
-    eCubeArray = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY};
+      e1D = VK_IMAGE_VIEW_TYPE_1D
+    , e2D = VK_IMAGE_VIEW_TYPE_2D
+    , e3D = VK_IMAGE_VIEW_TYPE_3D
+    , eCube = VK_IMAGE_VIEW_TYPE_CUBE
+    , e1DArray = VK_IMAGE_VIEW_TYPE_1D_ARRAY
+    , e2DArray = VK_IMAGE_VIEW_TYPE_2D_ARRAY
+    , eCubeArray = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ImageViewType value )
   {
@@ -6648,11 +6741,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class IndexType
   {
-    eUint16 = VK_INDEX_TYPE_UINT16,
-    eUint32 = VK_INDEX_TYPE_UINT32,
-    eNoneKHR = VK_INDEX_TYPE_NONE_KHR,
-    eUint8EXT = VK_INDEX_TYPE_UINT8_EXT,
-    eNoneNV = VK_INDEX_TYPE_NONE_NV};
+      eUint16 = VK_INDEX_TYPE_UINT16
+    , eUint32 = VK_INDEX_TYPE_UINT32
+    , eNoneKHR = VK_INDEX_TYPE_NONE_KHR
+    , eUint8EXT = VK_INDEX_TYPE_UINT8_EXT
+    , eNoneNV = VK_INDEX_TYPE_NONE_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( IndexType value )
   {
@@ -6668,9 +6762,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class IndirectCommandsLayoutUsageFlagBitsNV : VkIndirectCommandsLayoutUsageFlagsNV
   {
-    eExplicitPreprocess = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EXPLICIT_PREPROCESS_BIT_NV,
-    eIndexedSequences = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NV,
-    eUnorderedSequences = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NV};
+      eExplicitPreprocess = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EXPLICIT_PREPROCESS_BIT_NV
+    , eIndexedSequences = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NV
+    , eUnorderedSequences = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( IndirectCommandsLayoutUsageFlagBitsNV value )
   {
@@ -6685,14 +6780,15 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class IndirectCommandsTokenTypeNV
   {
-    eShaderGroup = VK_INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV,
-    eStateFlags = VK_INDIRECT_COMMANDS_TOKEN_TYPE_STATE_FLAGS_NV,
-    eIndexBuffer = VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NV,
-    eVertexBuffer = VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NV,
-    ePushConstant = VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV,
-    eDrawIndexed = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NV,
-    eDraw = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NV,
-    eDrawTasks = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV};
+      eShaderGroup = VK_INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV
+    , eStateFlags = VK_INDIRECT_COMMANDS_TOKEN_TYPE_STATE_FLAGS_NV
+    , eIndexBuffer = VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NV
+    , eVertexBuffer = VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NV
+    , ePushConstant = VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV
+    , eDrawIndexed = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NV
+    , eDraw = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NV
+    , eDrawTasks = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( IndirectCommandsTokenTypeNV value )
   {
@@ -6712,7 +6808,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class IndirectStateFlagBitsNV : VkIndirectStateFlagsNV
   {
-    eFlagFrontface = VK_INDIRECT_STATE_FLAG_FRONTFACE_BIT_NV};
+      eFlagFrontface = VK_INDIRECT_STATE_FLAG_FRONTFACE_BIT_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( IndirectStateFlagBitsNV value )
   {
@@ -6724,7 +6821,8 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   enum class InstanceCreateFlagBits
-  {};
+  {
+  };
 
   VULKAN_HPP_INLINE std::string to_string( InstanceCreateFlagBits )
   {
@@ -6733,7 +6831,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class InternalAllocationType
   {
-    eExecutable = VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE};
+      eExecutable = VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE
+  };
 
   VULKAN_HPP_INLINE std::string to_string( InternalAllocationType value )
   {
@@ -6746,10 +6845,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class LineRasterizationModeEXT
   {
-    eDefault = VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT,
-    eRectangular = VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT,
-    eBresenham = VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT,
-    eRectangularSmooth = VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT};
+      eDefault = VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT
+    , eRectangular = VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT
+    , eBresenham = VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT
+    , eRectangularSmooth = VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( LineRasterizationModeEXT value )
   {
@@ -6765,22 +6865,23 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class LogicOp
   {
-    eClear = VK_LOGIC_OP_CLEAR,
-    eAnd = VK_LOGIC_OP_AND,
-    eAndReverse = VK_LOGIC_OP_AND_REVERSE,
-    eCopy = VK_LOGIC_OP_COPY,
-    eAndInverted = VK_LOGIC_OP_AND_INVERTED,
-    eNoOp = VK_LOGIC_OP_NO_OP,
-    eXor = VK_LOGIC_OP_XOR,
-    eOr = VK_LOGIC_OP_OR,
-    eNor = VK_LOGIC_OP_NOR,
-    eEquivalent = VK_LOGIC_OP_EQUIVALENT,
-    eInvert = VK_LOGIC_OP_INVERT,
-    eOrReverse = VK_LOGIC_OP_OR_REVERSE,
-    eCopyInverted = VK_LOGIC_OP_COPY_INVERTED,
-    eOrInverted = VK_LOGIC_OP_OR_INVERTED,
-    eNand = VK_LOGIC_OP_NAND,
-    eSet = VK_LOGIC_OP_SET};
+      eClear = VK_LOGIC_OP_CLEAR
+    , eAnd = VK_LOGIC_OP_AND
+    , eAndReverse = VK_LOGIC_OP_AND_REVERSE
+    , eCopy = VK_LOGIC_OP_COPY
+    , eAndInverted = VK_LOGIC_OP_AND_INVERTED
+    , eNoOp = VK_LOGIC_OP_NO_OP
+    , eXor = VK_LOGIC_OP_XOR
+    , eOr = VK_LOGIC_OP_OR
+    , eNor = VK_LOGIC_OP_NOR
+    , eEquivalent = VK_LOGIC_OP_EQUIVALENT
+    , eInvert = VK_LOGIC_OP_INVERT
+    , eOrReverse = VK_LOGIC_OP_OR_REVERSE
+    , eCopyInverted = VK_LOGIC_OP_COPY_INVERTED
+    , eOrInverted = VK_LOGIC_OP_OR_INVERTED
+    , eNand = VK_LOGIC_OP_NAND
+    , eSet = VK_LOGIC_OP_SET
+  };
 
   VULKAN_HPP_INLINE std::string to_string( LogicOp value )
   {
@@ -6808,9 +6909,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class MemoryAllocateFlagBits : VkMemoryAllocateFlags
   {
-    eDeviceMask = VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT,
-    eDeviceAddress = VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT,
-    eDeviceAddressCaptureReplay = VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT};
+      eDeviceMask = VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT
+    , eDeviceAddress = VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT
+    , eDeviceAddressCaptureReplay = VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT
+  };
   using MemoryAllocateFlagBitsKHR = MemoryAllocateFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( MemoryAllocateFlagBits value )
@@ -6826,9 +6928,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class MemoryHeapFlagBits : VkMemoryHeapFlags
   {
-    eDeviceLocal = VK_MEMORY_HEAP_DEVICE_LOCAL_BIT,
-    eMultiInstance = VK_MEMORY_HEAP_MULTI_INSTANCE_BIT,
-    eMultiInstanceKHR = VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR};
+      eDeviceLocal = VK_MEMORY_HEAP_DEVICE_LOCAL_BIT
+    , eMultiInstance = VK_MEMORY_HEAP_MULTI_INSTANCE_BIT
+    , eMultiInstanceKHR = VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( MemoryHeapFlagBits value )
   {
@@ -6842,9 +6945,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class MemoryOverallocationBehaviorAMD
   {
-    eDefault = VK_MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD,
-    eAllowed = VK_MEMORY_OVERALLOCATION_BEHAVIOR_ALLOWED_AMD,
-    eDisallowed = VK_MEMORY_OVERALLOCATION_BEHAVIOR_DISALLOWED_AMD};
+      eDefault = VK_MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD
+    , eAllowed = VK_MEMORY_OVERALLOCATION_BEHAVIOR_ALLOWED_AMD
+    , eDisallowed = VK_MEMORY_OVERALLOCATION_BEHAVIOR_DISALLOWED_AMD
+  };
 
   VULKAN_HPP_INLINE std::string to_string( MemoryOverallocationBehaviorAMD value )
   {
@@ -6859,14 +6963,15 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class MemoryPropertyFlagBits : VkMemoryPropertyFlags
   {
-    eDeviceLocal = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
-    eHostVisible = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
-    eHostCoherent = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-    eHostCached = VK_MEMORY_PROPERTY_HOST_CACHED_BIT,
-    eLazilyAllocated = VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT,
-    eProtected = VK_MEMORY_PROPERTY_PROTECTED_BIT,
-    eDeviceCoherentAMD = VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD,
-    eDeviceUncachedAMD = VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD};
+      eDeviceLocal = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+    , eHostVisible = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
+    , eHostCoherent = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
+    , eHostCached = VK_MEMORY_PROPERTY_HOST_CACHED_BIT
+    , eLazilyAllocated = VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT
+    , eProtected = VK_MEMORY_PROPERTY_PROTECTED_BIT
+    , eDeviceCoherentAMD = VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD
+    , eDeviceUncachedAMD = VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD
+  };
 
   VULKAN_HPP_INLINE std::string to_string( MemoryPropertyFlagBits value )
   {
@@ -6886,49 +6991,50 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ObjectType
   {
-    eUnknown = VK_OBJECT_TYPE_UNKNOWN,
-    eInstance = VK_OBJECT_TYPE_INSTANCE,
-    ePhysicalDevice = VK_OBJECT_TYPE_PHYSICAL_DEVICE,
-    eDevice = VK_OBJECT_TYPE_DEVICE,
-    eQueue = VK_OBJECT_TYPE_QUEUE,
-    eSemaphore = VK_OBJECT_TYPE_SEMAPHORE,
-    eCommandBuffer = VK_OBJECT_TYPE_COMMAND_BUFFER,
-    eFence = VK_OBJECT_TYPE_FENCE,
-    eDeviceMemory = VK_OBJECT_TYPE_DEVICE_MEMORY,
-    eBuffer = VK_OBJECT_TYPE_BUFFER,
-    eImage = VK_OBJECT_TYPE_IMAGE,
-    eEvent = VK_OBJECT_TYPE_EVENT,
-    eQueryPool = VK_OBJECT_TYPE_QUERY_POOL,
-    eBufferView = VK_OBJECT_TYPE_BUFFER_VIEW,
-    eImageView = VK_OBJECT_TYPE_IMAGE_VIEW,
-    eShaderModule = VK_OBJECT_TYPE_SHADER_MODULE,
-    ePipelineCache = VK_OBJECT_TYPE_PIPELINE_CACHE,
-    ePipelineLayout = VK_OBJECT_TYPE_PIPELINE_LAYOUT,
-    eRenderPass = VK_OBJECT_TYPE_RENDER_PASS,
-    ePipeline = VK_OBJECT_TYPE_PIPELINE,
-    eDescriptorSetLayout = VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT,
-    eSampler = VK_OBJECT_TYPE_SAMPLER,
-    eDescriptorPool = VK_OBJECT_TYPE_DESCRIPTOR_POOL,
-    eDescriptorSet = VK_OBJECT_TYPE_DESCRIPTOR_SET,
-    eFramebuffer = VK_OBJECT_TYPE_FRAMEBUFFER,
-    eCommandPool = VK_OBJECT_TYPE_COMMAND_POOL,
-    eSamplerYcbcrConversion = VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION,
-    eDescriptorUpdateTemplate = VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE,
-    eSurfaceKHR = VK_OBJECT_TYPE_SURFACE_KHR,
-    eSwapchainKHR = VK_OBJECT_TYPE_SWAPCHAIN_KHR,
-    eDisplayKHR = VK_OBJECT_TYPE_DISPLAY_KHR,
-    eDisplayModeKHR = VK_OBJECT_TYPE_DISPLAY_MODE_KHR,
-    eDebugReportCallbackEXT = VK_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT,
-    eDebugUtilsMessengerEXT = VK_OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT,
-    eAccelerationStructureKHR = VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR,
-    eValidationCacheEXT = VK_OBJECT_TYPE_VALIDATION_CACHE_EXT,
-    eAccelerationStructureNV = VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV,
-    ePerformanceConfigurationINTEL = VK_OBJECT_TYPE_PERFORMANCE_CONFIGURATION_INTEL,
-    eDeferredOperationKHR = VK_OBJECT_TYPE_DEFERRED_OPERATION_KHR,
-    eIndirectCommandsLayoutNV = VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NV,
-    ePrivateDataSlotEXT = VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT,
-    eDescriptorUpdateTemplateKHR = VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR,
-    eSamplerYcbcrConversionKHR = VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR};
+      eUnknown = VK_OBJECT_TYPE_UNKNOWN
+    , eInstance = VK_OBJECT_TYPE_INSTANCE
+    , ePhysicalDevice = VK_OBJECT_TYPE_PHYSICAL_DEVICE
+    , eDevice = VK_OBJECT_TYPE_DEVICE
+    , eQueue = VK_OBJECT_TYPE_QUEUE
+    , eSemaphore = VK_OBJECT_TYPE_SEMAPHORE
+    , eCommandBuffer = VK_OBJECT_TYPE_COMMAND_BUFFER
+    , eFence = VK_OBJECT_TYPE_FENCE
+    , eDeviceMemory = VK_OBJECT_TYPE_DEVICE_MEMORY
+    , eBuffer = VK_OBJECT_TYPE_BUFFER
+    , eImage = VK_OBJECT_TYPE_IMAGE
+    , eEvent = VK_OBJECT_TYPE_EVENT
+    , eQueryPool = VK_OBJECT_TYPE_QUERY_POOL
+    , eBufferView = VK_OBJECT_TYPE_BUFFER_VIEW
+    , eImageView = VK_OBJECT_TYPE_IMAGE_VIEW
+    , eShaderModule = VK_OBJECT_TYPE_SHADER_MODULE
+    , ePipelineCache = VK_OBJECT_TYPE_PIPELINE_CACHE
+    , ePipelineLayout = VK_OBJECT_TYPE_PIPELINE_LAYOUT
+    , eRenderPass = VK_OBJECT_TYPE_RENDER_PASS
+    , ePipeline = VK_OBJECT_TYPE_PIPELINE
+    , eDescriptorSetLayout = VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT
+    , eSampler = VK_OBJECT_TYPE_SAMPLER
+    , eDescriptorPool = VK_OBJECT_TYPE_DESCRIPTOR_POOL
+    , eDescriptorSet = VK_OBJECT_TYPE_DESCRIPTOR_SET
+    , eFramebuffer = VK_OBJECT_TYPE_FRAMEBUFFER
+    , eCommandPool = VK_OBJECT_TYPE_COMMAND_POOL
+    , eSamplerYcbcrConversion = VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION
+    , eDescriptorUpdateTemplate = VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE
+    , eSurfaceKHR = VK_OBJECT_TYPE_SURFACE_KHR
+    , eSwapchainKHR = VK_OBJECT_TYPE_SWAPCHAIN_KHR
+    , eDisplayKHR = VK_OBJECT_TYPE_DISPLAY_KHR
+    , eDisplayModeKHR = VK_OBJECT_TYPE_DISPLAY_MODE_KHR
+    , eDebugReportCallbackEXT = VK_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT
+    , eDebugUtilsMessengerEXT = VK_OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT
+    , eAccelerationStructureKHR = VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR
+    , eValidationCacheEXT = VK_OBJECT_TYPE_VALIDATION_CACHE_EXT
+    , eAccelerationStructureNV = VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV
+    , ePerformanceConfigurationINTEL = VK_OBJECT_TYPE_PERFORMANCE_CONFIGURATION_INTEL
+    , eDeferredOperationKHR = VK_OBJECT_TYPE_DEFERRED_OPERATION_KHR
+    , eIndirectCommandsLayoutNV = VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NV
+    , ePrivateDataSlotEXT = VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT
+    , eDescriptorUpdateTemplateKHR = VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR
+    , eSamplerYcbcrConversionKHR = VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ObjectType value )
   {
@@ -6985,10 +7091,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PeerMemoryFeatureFlagBits : VkPeerMemoryFeatureFlags
   {
-    eCopySrc = VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT,
-    eCopyDst = VK_PEER_MEMORY_FEATURE_COPY_DST_BIT,
-    eGenericSrc = VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT,
-    eGenericDst = VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT};
+      eCopySrc = VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT
+    , eCopyDst = VK_PEER_MEMORY_FEATURE_COPY_DST_BIT
+    , eGenericSrc = VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT
+    , eGenericDst = VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT
+  };
   using PeerMemoryFeatureFlagBitsKHR = PeerMemoryFeatureFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( PeerMemoryFeatureFlagBits value )
@@ -7005,7 +7112,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PerformanceConfigurationTypeINTEL
   {
-    eCommandQueueMetricsDiscoveryActivated = VK_PERFORMANCE_CONFIGURATION_TYPE_COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED_INTEL};
+      eCommandQueueMetricsDiscoveryActivated = VK_PERFORMANCE_CONFIGURATION_TYPE_COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED_INTEL
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceConfigurationTypeINTEL value )
   {
@@ -7018,8 +7126,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PerformanceCounterDescriptionFlagBitsKHR : VkPerformanceCounterDescriptionFlagsKHR
   {
-    ePerformanceImpacting = VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR,
-    eConcurrentlyImpacted = VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR};
+      ePerformanceImpacting = VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR
+    , eConcurrentlyImpacted = VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceCounterDescriptionFlagBitsKHR value )
   {
@@ -7033,12 +7142,13 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PerformanceCounterScopeKHR
   {
-    eCommandBuffer = VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR,
-    eRenderPass = VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR,
-    eCommand = VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR,
-    eVkQueryScopeCommandBuffer = VK_QUERY_SCOPE_COMMAND_BUFFER_KHR,
-    eVkQueryScopeCommand = VK_QUERY_SCOPE_COMMAND_KHR,
-    eVkQueryScopeRenderPass = VK_QUERY_SCOPE_RENDER_PASS_KHR};
+      eCommandBuffer = VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR
+    , eRenderPass = VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR
+    , eCommand = VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR
+    , eVkQueryScopeCommandBuffer = VK_QUERY_SCOPE_COMMAND_BUFFER_KHR
+    , eVkQueryScopeCommand = VK_QUERY_SCOPE_COMMAND_KHR
+    , eVkQueryScopeRenderPass = VK_QUERY_SCOPE_RENDER_PASS_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceCounterScopeKHR value )
   {
@@ -7053,12 +7163,13 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PerformanceCounterStorageKHR
   {
-    eInt32 = VK_PERFORMANCE_COUNTER_STORAGE_INT32_KHR,
-    eInt64 = VK_PERFORMANCE_COUNTER_STORAGE_INT64_KHR,
-    eUint32 = VK_PERFORMANCE_COUNTER_STORAGE_UINT32_KHR,
-    eUint64 = VK_PERFORMANCE_COUNTER_STORAGE_UINT64_KHR,
-    eFloat32 = VK_PERFORMANCE_COUNTER_STORAGE_FLOAT32_KHR,
-    eFloat64 = VK_PERFORMANCE_COUNTER_STORAGE_FLOAT64_KHR};
+      eInt32 = VK_PERFORMANCE_COUNTER_STORAGE_INT32_KHR
+    , eInt64 = VK_PERFORMANCE_COUNTER_STORAGE_INT64_KHR
+    , eUint32 = VK_PERFORMANCE_COUNTER_STORAGE_UINT32_KHR
+    , eUint64 = VK_PERFORMANCE_COUNTER_STORAGE_UINT64_KHR
+    , eFloat32 = VK_PERFORMANCE_COUNTER_STORAGE_FLOAT32_KHR
+    , eFloat64 = VK_PERFORMANCE_COUNTER_STORAGE_FLOAT64_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceCounterStorageKHR value )
   {
@@ -7076,17 +7187,18 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PerformanceCounterUnitKHR
   {
-    eGeneric = VK_PERFORMANCE_COUNTER_UNIT_GENERIC_KHR,
-    ePercentage = VK_PERFORMANCE_COUNTER_UNIT_PERCENTAGE_KHR,
-    eNanoseconds = VK_PERFORMANCE_COUNTER_UNIT_NANOSECONDS_KHR,
-    eBytes = VK_PERFORMANCE_COUNTER_UNIT_BYTES_KHR,
-    eBytesPerSecond = VK_PERFORMANCE_COUNTER_UNIT_BYTES_PER_SECOND_KHR,
-    eKelvin = VK_PERFORMANCE_COUNTER_UNIT_KELVIN_KHR,
-    eWatts = VK_PERFORMANCE_COUNTER_UNIT_WATTS_KHR,
-    eVolts = VK_PERFORMANCE_COUNTER_UNIT_VOLTS_KHR,
-    eAmps = VK_PERFORMANCE_COUNTER_UNIT_AMPS_KHR,
-    eHertz = VK_PERFORMANCE_COUNTER_UNIT_HERTZ_KHR,
-    eCycles = VK_PERFORMANCE_COUNTER_UNIT_CYCLES_KHR};
+      eGeneric = VK_PERFORMANCE_COUNTER_UNIT_GENERIC_KHR
+    , ePercentage = VK_PERFORMANCE_COUNTER_UNIT_PERCENTAGE_KHR
+    , eNanoseconds = VK_PERFORMANCE_COUNTER_UNIT_NANOSECONDS_KHR
+    , eBytes = VK_PERFORMANCE_COUNTER_UNIT_BYTES_KHR
+    , eBytesPerSecond = VK_PERFORMANCE_COUNTER_UNIT_BYTES_PER_SECOND_KHR
+    , eKelvin = VK_PERFORMANCE_COUNTER_UNIT_KELVIN_KHR
+    , eWatts = VK_PERFORMANCE_COUNTER_UNIT_WATTS_KHR
+    , eVolts = VK_PERFORMANCE_COUNTER_UNIT_VOLTS_KHR
+    , eAmps = VK_PERFORMANCE_COUNTER_UNIT_AMPS_KHR
+    , eHertz = VK_PERFORMANCE_COUNTER_UNIT_HERTZ_KHR
+    , eCycles = VK_PERFORMANCE_COUNTER_UNIT_CYCLES_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceCounterUnitKHR value )
   {
@@ -7109,8 +7221,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PerformanceOverrideTypeINTEL
   {
-    eNullHardware = VK_PERFORMANCE_OVERRIDE_TYPE_NULL_HARDWARE_INTEL,
-    eFlushGpuCaches = VK_PERFORMANCE_OVERRIDE_TYPE_FLUSH_GPU_CACHES_INTEL};
+      eNullHardware = VK_PERFORMANCE_OVERRIDE_TYPE_NULL_HARDWARE_INTEL
+    , eFlushGpuCaches = VK_PERFORMANCE_OVERRIDE_TYPE_FLUSH_GPU_CACHES_INTEL
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceOverrideTypeINTEL value )
   {
@@ -7124,8 +7237,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PerformanceParameterTypeINTEL
   {
-    eHwCountersSupported = VK_PERFORMANCE_PARAMETER_TYPE_HW_COUNTERS_SUPPORTED_INTEL,
-    eStreamMarkerValidBits = VK_PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL};
+      eHwCountersSupported = VK_PERFORMANCE_PARAMETER_TYPE_HW_COUNTERS_SUPPORTED_INTEL
+    , eStreamMarkerValidBits = VK_PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceParameterTypeINTEL value )
   {
@@ -7139,11 +7253,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PerformanceValueTypeINTEL
   {
-    eUint32 = VK_PERFORMANCE_VALUE_TYPE_UINT32_INTEL,
-    eUint64 = VK_PERFORMANCE_VALUE_TYPE_UINT64_INTEL,
-    eFloat = VK_PERFORMANCE_VALUE_TYPE_FLOAT_INTEL,
-    eBool = VK_PERFORMANCE_VALUE_TYPE_BOOL_INTEL,
-    eString = VK_PERFORMANCE_VALUE_TYPE_STRING_INTEL};
+      eUint32 = VK_PERFORMANCE_VALUE_TYPE_UINT32_INTEL
+    , eUint64 = VK_PERFORMANCE_VALUE_TYPE_UINT64_INTEL
+    , eFloat = VK_PERFORMANCE_VALUE_TYPE_FLOAT_INTEL
+    , eBool = VK_PERFORMANCE_VALUE_TYPE_BOOL_INTEL
+    , eString = VK_PERFORMANCE_VALUE_TYPE_STRING_INTEL
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PerformanceValueTypeINTEL value )
   {
@@ -7160,11 +7275,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PhysicalDeviceType
   {
-    eOther = VK_PHYSICAL_DEVICE_TYPE_OTHER,
-    eIntegratedGpu = VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU,
-    eDiscreteGpu = VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU,
-    eVirtualGpu = VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU,
-    eCpu = VK_PHYSICAL_DEVICE_TYPE_CPU};
+      eOther = VK_PHYSICAL_DEVICE_TYPE_OTHER
+    , eIntegratedGpu = VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU
+    , eDiscreteGpu = VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU
+    , eVirtualGpu = VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU
+    , eCpu = VK_PHYSICAL_DEVICE_TYPE_CPU
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PhysicalDeviceType value )
   {
@@ -7181,10 +7297,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineBindPoint
   {
-    eGraphics = VK_PIPELINE_BIND_POINT_GRAPHICS,
-    eCompute = VK_PIPELINE_BIND_POINT_COMPUTE,
-    eRayTracingKHR = VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR,
-    eRayTracingNV = VK_PIPELINE_BIND_POINT_RAY_TRACING_NV};
+      eGraphics = VK_PIPELINE_BIND_POINT_GRAPHICS
+    , eCompute = VK_PIPELINE_BIND_POINT_COMPUTE
+    , eRayTracingKHR = VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR
+    , eRayTracingNV = VK_PIPELINE_BIND_POINT_RAY_TRACING_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineBindPoint value )
   {
@@ -7199,7 +7316,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineCacheCreateFlagBits : VkPipelineCacheCreateFlags
   {
-    eExternallySynchronizedEXT = VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT};
+      eExternallySynchronizedEXT = VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCacheCreateFlagBits value )
   {
@@ -7212,7 +7330,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineCacheHeaderVersion
   {
-    eOne = VK_PIPELINE_CACHE_HEADER_VERSION_ONE};
+      eOne = VK_PIPELINE_CACHE_HEADER_VERSION_ONE
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCacheHeaderVersion value )
   {
@@ -7224,7 +7343,8 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   enum class PipelineCompilerControlFlagBitsAMD : VkPipelineCompilerControlFlagsAMD
-  {};
+  {
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCompilerControlFlagBitsAMD )
   {
@@ -7233,27 +7353,28 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineCreateFlagBits : VkPipelineCreateFlags
   {
-    eDisableOptimization = VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT,
-    eAllowDerivatives = VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT,
-    eDerivative = VK_PIPELINE_CREATE_DERIVATIVE_BIT,
-    eViewIndexFromDeviceIndex = VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT,
-    eDispatchBase = VK_PIPELINE_CREATE_DISPATCH_BASE_BIT,
-    eRayTracingNoNullAnyHitShadersKHR = VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR,
-    eRayTracingNoNullClosestHitShadersKHR = VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR,
-    eRayTracingNoNullMissShadersKHR = VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR,
-    eRayTracingNoNullIntersectionShadersKHR = VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR,
-    eRayTracingSkipTrianglesKHR = VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR,
-    eRayTracingSkipAabbsKHR = VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR,
-    eRayTracingShaderGroupHandleCaptureReplayKHR = VK_PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR,
-    eDeferCompileNV = VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NV,
-    eCaptureStatisticsKHR = VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR,
-    eCaptureInternalRepresentationsKHR = VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR,
-    eIndirectBindableNV = VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV,
-    eLibraryKHR = VK_PIPELINE_CREATE_LIBRARY_BIT_KHR,
-    eFailOnPipelineCompileRequiredEXT = VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT,
-    eEarlyReturnOnFailureEXT = VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT,
-    eDispatchBaseKHR = VK_PIPELINE_CREATE_DISPATCH_BASE_KHR,
-    eViewIndexFromDeviceIndexKHR = VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR};
+      eDisableOptimization = VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT
+    , eAllowDerivatives = VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT
+    , eDerivative = VK_PIPELINE_CREATE_DERIVATIVE_BIT
+    , eViewIndexFromDeviceIndex = VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT
+    , eDispatchBase = VK_PIPELINE_CREATE_DISPATCH_BASE_BIT
+    , eRayTracingNoNullAnyHitShadersKHR = VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR
+    , eRayTracingNoNullClosestHitShadersKHR = VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR
+    , eRayTracingNoNullMissShadersKHR = VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR
+    , eRayTracingNoNullIntersectionShadersKHR = VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR
+    , eRayTracingSkipTrianglesKHR = VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR
+    , eRayTracingSkipAabbsKHR = VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR
+    , eRayTracingShaderGroupHandleCaptureReplayKHR = VK_PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR
+    , eDeferCompileNV = VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NV
+    , eCaptureStatisticsKHR = VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR
+    , eCaptureInternalRepresentationsKHR = VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR
+    , eIndirectBindableNV = VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV
+    , eLibraryKHR = VK_PIPELINE_CREATE_LIBRARY_BIT_KHR
+    , eFailOnPipelineCompileRequiredEXT = VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT
+    , eEarlyReturnOnFailureEXT = VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT
+    , eDispatchBaseKHR = VK_PIPELINE_CREATE_DISPATCH_BASE_KHR
+    , eViewIndexFromDeviceIndexKHR = VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCreateFlagBits value )
   {
@@ -7284,9 +7405,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineCreationFeedbackFlagBitsEXT : VkPipelineCreationFeedbackFlagsEXT
   {
-    eValid = VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT,
-    eApplicationPipelineCacheHit = VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT,
-    eBasePipelineAcceleration = VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT};
+      eValid = VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT
+    , eApplicationPipelineCacheHit = VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT
+    , eBasePipelineAcceleration = VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCreationFeedbackFlagBitsEXT value )
   {
@@ -7301,10 +7423,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineExecutableStatisticFormatKHR
   {
-    eBool32 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR,
-    eInt64 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR,
-    eUint64 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR,
-    eFloat64 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR};
+      eBool32 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR
+    , eInt64 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR
+    , eUint64 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR
+    , eFloat64 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineExecutableStatisticFormatKHR value )
   {
@@ -7320,8 +7443,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineShaderStageCreateFlagBits : VkPipelineShaderStageCreateFlags
   {
-    eAllowVaryingSubgroupSizeEXT = VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT,
-    eRequireFullSubgroupsEXT = VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT};
+      eAllowVaryingSubgroupSizeEXT = VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT
+    , eRequireFullSubgroupsEXT = VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineShaderStageCreateFlagBits value )
   {
@@ -7335,36 +7459,37 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineStageFlagBits : VkPipelineStageFlags
   {
-    eTopOfPipe = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
-    eDrawIndirect = VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,
-    eVertexInput = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,
-    eVertexShader = VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,
-    eTessellationControlShader = VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT,
-    eTessellationEvaluationShader = VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,
-    eGeometryShader = VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT,
-    eFragmentShader = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
-    eEarlyFragmentTests = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT,
-    eLateFragmentTests = VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,
-    eColorAttachmentOutput = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-    eComputeShader = VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-    eTransfer = VK_PIPELINE_STAGE_TRANSFER_BIT,
-    eBottomOfPipe = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
-    eHost = VK_PIPELINE_STAGE_HOST_BIT,
-    eAllGraphics = VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT,
-    eAllCommands = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
-    eTransformFeedbackEXT = VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT,
-    eConditionalRenderingEXT = VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT,
-    eAccelerationStructureBuildKHR = VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR,
-    eRayTracingShaderKHR = VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR,
-    eShadingRateImageNV = VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV,
-    eTaskShaderNV = VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV,
-    eMeshShaderNV = VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV,
-    eFragmentDensityProcessEXT = VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT,
-    eCommandPreprocessNV = VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV,
-    eNoneKHR = VK_PIPELINE_STAGE_NONE_KHR,
-    eAccelerationStructureBuildNV = VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_NV,
-    eFragmentShadingRateAttachmentKHR = VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR,
-    eRayTracingShaderNV = VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV};
+      eTopOfPipe = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT
+    , eDrawIndirect = VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT
+    , eVertexInput = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT
+    , eVertexShader = VK_PIPELINE_STAGE_VERTEX_SHADER_BIT
+    , eTessellationControlShader = VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT
+    , eTessellationEvaluationShader = VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
+    , eGeometryShader = VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT
+    , eFragmentShader = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT
+    , eEarlyFragmentTests = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT
+    , eLateFragmentTests = VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT
+    , eColorAttachmentOutput = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT
+    , eComputeShader = VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT
+    , eTransfer = VK_PIPELINE_STAGE_TRANSFER_BIT
+    , eBottomOfPipe = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT
+    , eHost = VK_PIPELINE_STAGE_HOST_BIT
+    , eAllGraphics = VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT
+    , eAllCommands = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT
+    , eTransformFeedbackEXT = VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT
+    , eConditionalRenderingEXT = VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT
+    , eAccelerationStructureBuildKHR = VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR
+    , eRayTracingShaderKHR = VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR
+    , eShadingRateImageNV = VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV
+    , eTaskShaderNV = VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV
+    , eMeshShaderNV = VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV
+    , eFragmentDensityProcessEXT = VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT
+    , eCommandPreprocessNV = VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV
+    , eNoneKHR = VK_PIPELINE_STAGE_NONE_KHR
+    , eAccelerationStructureBuildNV = VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_NV
+    , eFragmentShadingRateAttachmentKHR = VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+    , eRayTracingShaderNV = VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineStageFlagBits value )
   {
@@ -7403,44 +7528,45 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PipelineStageFlagBits2KHR : VkPipelineStageFlags2KHR
   {
-    e2None = VK_PIPELINE_STAGE_2_NONE_KHR,
-    e2TopOfPipe = VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT_KHR,
-    e2DrawIndirect = VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR,
-    e2VertexInput = VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT_KHR,
-    e2VertexShader = VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT_KHR,
-    e2TessellationControlShader = VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR,
-    e2TessellationEvaluationShader = VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR,
-    e2GeometryShader = VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR,
-    e2FragmentShader = VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR,
-    e2EarlyFragmentTests = VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR,
-    e2LateFragmentTests = VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR,
-    e2ColorAttachmentOutput = VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT_KHR,
-    e2ComputeShader = VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT_KHR,
-    e2AllTransfer = VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT_KHR,
-    e2BottomOfPipe = VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT_KHR,
-    e2Host = VK_PIPELINE_STAGE_2_HOST_BIT_KHR,
-    e2AllGraphics = VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR,
-    e2AllCommands = VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR,
-    e2Copy = VK_PIPELINE_STAGE_2_COPY_BIT_KHR,
-    e2Resolve = VK_PIPELINE_STAGE_2_RESOLVE_BIT_KHR,
-    e2Blit = VK_PIPELINE_STAGE_2_BLIT_BIT_KHR,
-    e2Clear = VK_PIPELINE_STAGE_2_CLEAR_BIT_KHR,
-    e2IndexInput = VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT_KHR,
-    e2VertexAttributeInput = VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT_KHR,
-    e2PreRasterizationShaders = VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT_KHR,
-    e2TransformFeedbackExt = VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT,
-    e2ConditionalRenderingExt = VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT,
-    e2CommandPreprocessNv = VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV,
-    e2FragmentShadingRateAttachment = VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR,
-    e2AccelerationStructureBuild = VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR,
-    e2RayTracingShader = VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR,
-    e2FragmentDensityProcessExt = VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT,
-    e2TaskShaderNv = VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV,
-    e2MeshShaderNv = VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV,
-    e2AccelerationStructureBuildNv = VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV,
-    e2RayTracingShaderNv = VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_NV,
-    e2ShadingRateImageNv = VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV,
-    e2Transfer = VK_PIPELINE_STAGE_2_TRANSFER_BIT_KHR};
+      e2None = VK_PIPELINE_STAGE_2_NONE_KHR
+    , e2TopOfPipe = VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT_KHR
+    , e2DrawIndirect = VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR
+    , e2VertexInput = VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT_KHR
+    , e2VertexShader = VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT_KHR
+    , e2TessellationControlShader = VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR
+    , e2TessellationEvaluationShader = VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR
+    , e2GeometryShader = VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR
+    , e2FragmentShader = VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR
+    , e2EarlyFragmentTests = VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR
+    , e2LateFragmentTests = VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR
+    , e2ColorAttachmentOutput = VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT_KHR
+    , e2ComputeShader = VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT_KHR
+    , e2AllTransfer = VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT_KHR
+    , e2BottomOfPipe = VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT_KHR
+    , e2Host = VK_PIPELINE_STAGE_2_HOST_BIT_KHR
+    , e2AllGraphics = VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR
+    , e2AllCommands = VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR
+    , e2Copy = VK_PIPELINE_STAGE_2_COPY_BIT_KHR
+    , e2Resolve = VK_PIPELINE_STAGE_2_RESOLVE_BIT_KHR
+    , e2Blit = VK_PIPELINE_STAGE_2_BLIT_BIT_KHR
+    , e2Clear = VK_PIPELINE_STAGE_2_CLEAR_BIT_KHR
+    , e2IndexInput = VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT_KHR
+    , e2VertexAttributeInput = VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT_KHR
+    , e2PreRasterizationShaders = VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT_KHR
+    , e2TransformFeedbackExt = VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT
+    , e2ConditionalRenderingExt = VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT
+    , e2CommandPreprocessNv = VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV
+    , e2FragmentShadingRateAttachment = VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+    , e2AccelerationStructureBuild = VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR
+    , e2RayTracingShader = VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR
+    , e2FragmentDensityProcessExt = VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT
+    , e2TaskShaderNv = VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV
+    , e2MeshShaderNv = VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV
+    , e2AccelerationStructureBuildNv = VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV
+    , e2RayTracingShaderNv = VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_NV
+    , e2ShadingRateImageNv = VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV
+    , e2Transfer = VK_PIPELINE_STAGE_2_TRANSFER_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineStageFlagBits2KHR value )
   {
@@ -7486,8 +7612,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PointClippingBehavior
   {
-    eAllClipPlanes = VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES,
-    eUserClipPlanesOnly = VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY};
+      eAllClipPlanes = VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES
+    , eUserClipPlanesOnly = VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY
+  };
   using PointClippingBehaviorKHR = PointClippingBehavior;
 
   VULKAN_HPP_INLINE std::string to_string( PointClippingBehavior value )
@@ -7502,10 +7629,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PolygonMode
   {
-    eFill = VK_POLYGON_MODE_FILL,
-    eLine = VK_POLYGON_MODE_LINE,
-    ePoint = VK_POLYGON_MODE_POINT,
-    eFillRectangleNV = VK_POLYGON_MODE_FILL_RECTANGLE_NV};
+      eFill = VK_POLYGON_MODE_FILL
+    , eLine = VK_POLYGON_MODE_LINE
+    , ePoint = VK_POLYGON_MODE_POINT
+    , eFillRectangleNV = VK_POLYGON_MODE_FILL_RECTANGLE_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PolygonMode value )
   {
@@ -7521,12 +7649,13 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PresentModeKHR
   {
-    eImmediate = VK_PRESENT_MODE_IMMEDIATE_KHR,
-    eMailbox = VK_PRESENT_MODE_MAILBOX_KHR,
-    eFifo = VK_PRESENT_MODE_FIFO_KHR,
-    eFifoRelaxed = VK_PRESENT_MODE_FIFO_RELAXED_KHR,
-    eSharedDemandRefresh = VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR,
-    eSharedContinuousRefresh = VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR};
+      eImmediate = VK_PRESENT_MODE_IMMEDIATE_KHR
+    , eMailbox = VK_PRESENT_MODE_MAILBOX_KHR
+    , eFifo = VK_PRESENT_MODE_FIFO_KHR
+    , eFifoRelaxed = VK_PRESENT_MODE_FIFO_RELAXED_KHR
+    , eSharedDemandRefresh = VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR
+    , eSharedContinuousRefresh = VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PresentModeKHR value )
   {
@@ -7544,17 +7673,18 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class PrimitiveTopology
   {
-    ePointList = VK_PRIMITIVE_TOPOLOGY_POINT_LIST,
-    eLineList = VK_PRIMITIVE_TOPOLOGY_LINE_LIST,
-    eLineStrip = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP,
-    eTriangleList = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST,
-    eTriangleStrip = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP,
-    eTriangleFan = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN,
-    eLineListWithAdjacency = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY,
-    eLineStripWithAdjacency = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY,
-    eTriangleListWithAdjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY,
-    eTriangleStripWithAdjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY,
-    ePatchList = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST};
+      ePointList = VK_PRIMITIVE_TOPOLOGY_POINT_LIST
+    , eLineList = VK_PRIMITIVE_TOPOLOGY_LINE_LIST
+    , eLineStrip = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP
+    , eTriangleList = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST
+    , eTriangleStrip = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP
+    , eTriangleFan = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN
+    , eLineListWithAdjacency = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY
+    , eLineStripWithAdjacency = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY
+    , eTriangleListWithAdjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY
+    , eTriangleStripWithAdjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY
+    , ePatchList = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PrimitiveTopology value )
   {
@@ -7576,7 +7706,8 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   enum class PrivateDataSlotCreateFlagBitsEXT : VkPrivateDataSlotCreateFlagsEXT
-  {};
+  {
+  };
 
   VULKAN_HPP_INLINE std::string to_string( PrivateDataSlotCreateFlagBitsEXT )
   {
@@ -7585,7 +7716,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class QueryControlFlagBits : VkQueryControlFlags
   {
-    ePrecise = VK_QUERY_CONTROL_PRECISE_BIT};
+      ePrecise = VK_QUERY_CONTROL_PRECISE_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( QueryControlFlagBits value )
   {
@@ -7598,17 +7730,18 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class QueryPipelineStatisticFlagBits : VkQueryPipelineStatisticFlags
   {
-    eInputAssemblyVertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT,
-    eInputAssemblyPrimitives = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT,
-    eVertexShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT,
-    eGeometryShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT,
-    eGeometryShaderPrimitives = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT,
-    eClippingInvocations = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT,
-    eClippingPrimitives = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT,
-    eFragmentShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT,
-    eTessellationControlShaderPatches = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT,
-    eTessellationEvaluationShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
-    eComputeShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT};
+      eInputAssemblyVertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT
+    , eInputAssemblyPrimitives = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT
+    , eVertexShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT
+    , eGeometryShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT
+    , eGeometryShaderPrimitives = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT
+    , eClippingInvocations = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT
+    , eClippingPrimitives = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT
+    , eFragmentShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT
+    , eTessellationControlShaderPatches = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT
+    , eTessellationEvaluationShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT
+    , eComputeShaderInvocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( QueryPipelineStatisticFlagBits value )
   {
@@ -7630,7 +7763,8 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   enum class QueryPoolCreateFlagBits
-  {};
+  {
+  };
 
   VULKAN_HPP_INLINE std::string to_string( QueryPoolCreateFlagBits )
   {
@@ -7639,7 +7773,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class QueryPoolSamplingModeINTEL
   {
-    eManual = VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL};
+      eManual = VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL
+  };
 
   VULKAN_HPP_INLINE std::string to_string( QueryPoolSamplingModeINTEL value )
   {
@@ -7652,10 +7787,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class QueryResultFlagBits : VkQueryResultFlags
   {
-    e64 = VK_QUERY_RESULT_64_BIT,
-    eWait = VK_QUERY_RESULT_WAIT_BIT,
-    eWithAvailability = VK_QUERY_RESULT_WITH_AVAILABILITY_BIT,
-    ePartial = VK_QUERY_RESULT_PARTIAL_BIT};
+      e64 = VK_QUERY_RESULT_64_BIT
+    , eWait = VK_QUERY_RESULT_WAIT_BIT
+    , eWithAvailability = VK_QUERY_RESULT_WITH_AVAILABILITY_BIT
+    , ePartial = VK_QUERY_RESULT_PARTIAL_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( QueryResultFlagBits value )
   {
@@ -7671,15 +7807,16 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class QueryType
   {
-    eOcclusion = VK_QUERY_TYPE_OCCLUSION,
-    ePipelineStatistics = VK_QUERY_TYPE_PIPELINE_STATISTICS,
-    eTimestamp = VK_QUERY_TYPE_TIMESTAMP,
-    eTransformFeedbackStreamEXT = VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT,
-    ePerformanceQueryKHR = VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR,
-    eAccelerationStructureCompactedSizeKHR = VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR,
-    eAccelerationStructureSerializationSizeKHR = VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR,
-    eAccelerationStructureCompactedSizeNV = VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV,
-    ePerformanceQueryINTEL = VK_QUERY_TYPE_PERFORMANCE_QUERY_INTEL};
+      eOcclusion = VK_QUERY_TYPE_OCCLUSION
+    , ePipelineStatistics = VK_QUERY_TYPE_PIPELINE_STATISTICS
+    , eTimestamp = VK_QUERY_TYPE_TIMESTAMP
+    , eTransformFeedbackStreamEXT = VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT
+    , ePerformanceQueryKHR = VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR
+    , eAccelerationStructureCompactedSizeKHR = VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR
+    , eAccelerationStructureSerializationSizeKHR = VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR
+    , eAccelerationStructureCompactedSizeNV = VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV
+    , ePerformanceQueryINTEL = VK_QUERY_TYPE_PERFORMANCE_QUERY_INTEL
+  };
 
   VULKAN_HPP_INLINE std::string to_string( QueryType value )
   {
@@ -7700,11 +7837,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class QueueFlagBits : VkQueueFlags
   {
-    eGraphics = VK_QUEUE_GRAPHICS_BIT,
-    eCompute = VK_QUEUE_COMPUTE_BIT,
-    eTransfer = VK_QUEUE_TRANSFER_BIT,
-    eSparseBinding = VK_QUEUE_SPARSE_BINDING_BIT,
-    eProtected = VK_QUEUE_PROTECTED_BIT};
+      eGraphics = VK_QUEUE_GRAPHICS_BIT
+    , eCompute = VK_QUEUE_COMPUTE_BIT
+    , eTransfer = VK_QUEUE_TRANSFER_BIT
+    , eSparseBinding = VK_QUEUE_SPARSE_BINDING_BIT
+    , eProtected = VK_QUEUE_PROTECTED_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( QueueFlagBits value )
   {
@@ -7721,10 +7859,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class QueueGlobalPriorityEXT
   {
-    eLow = VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT,
-    eMedium = VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT,
-    eHigh = VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT,
-    eRealtime = VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT};
+      eLow = VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT
+    , eMedium = VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT
+    , eHigh = VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT
+    , eRealtime = VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( QueueGlobalPriorityEXT value )
   {
@@ -7740,8 +7879,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class RasterizationOrderAMD
   {
-    eStrict = VK_RASTERIZATION_ORDER_STRICT_AMD,
-    eRelaxed = VK_RASTERIZATION_ORDER_RELAXED_AMD};
+      eStrict = VK_RASTERIZATION_ORDER_STRICT_AMD
+    , eRelaxed = VK_RASTERIZATION_ORDER_RELAXED_AMD
+  };
 
   VULKAN_HPP_INLINE std::string to_string( RasterizationOrderAMD value )
   {
@@ -7755,9 +7895,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class RayTracingShaderGroupTypeKHR
   {
-    eGeneral = VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR,
-    eTrianglesHitGroup = VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR,
-    eProceduralHitGroup = VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR};
+      eGeneral = VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR
+    , eTrianglesHitGroup = VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR
+    , eProceduralHitGroup = VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR
+  };
   using RayTracingShaderGroupTypeNV = RayTracingShaderGroupTypeKHR;
 
   VULKAN_HPP_INLINE std::string to_string( RayTracingShaderGroupTypeKHR value )
@@ -7773,7 +7914,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class RenderPassCreateFlagBits : VkRenderPassCreateFlags
   {
-    eTransformQCOM = VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM};
+      eTransformQCOM = VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM
+  };
 
   VULKAN_HPP_INLINE std::string to_string( RenderPassCreateFlagBits value )
   {
@@ -7786,11 +7928,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ResolveModeFlagBits : VkResolveModeFlags
   {
-    eNone = VK_RESOLVE_MODE_NONE,
-    eSampleZero = VK_RESOLVE_MODE_SAMPLE_ZERO_BIT,
-    eAverage = VK_RESOLVE_MODE_AVERAGE_BIT,
-    eMin = VK_RESOLVE_MODE_MIN_BIT,
-    eMax = VK_RESOLVE_MODE_MAX_BIT};
+      eNone = VK_RESOLVE_MODE_NONE
+    , eSampleZero = VK_RESOLVE_MODE_SAMPLE_ZERO_BIT
+    , eAverage = VK_RESOLVE_MODE_AVERAGE_BIT
+    , eMin = VK_RESOLVE_MODE_MIN_BIT
+    , eMax = VK_RESOLVE_MODE_MAX_BIT
+  };
   using ResolveModeFlagBitsKHR = ResolveModeFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( ResolveModeFlagBits value )
@@ -7808,52 +7951,55 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class Result
   {
-    eSuccess = VK_SUCCESS,
-    eNotReady = VK_NOT_READY,
-    eTimeout = VK_TIMEOUT,
-    eEventSet = VK_EVENT_SET,
-    eEventReset = VK_EVENT_RESET,
-    eIncomplete = VK_INCOMPLETE,
-    eErrorOutOfHostMemory = VK_ERROR_OUT_OF_HOST_MEMORY,
-    eErrorOutOfDeviceMemory = VK_ERROR_OUT_OF_DEVICE_MEMORY,
-    eErrorInitializationFailed = VK_ERROR_INITIALIZATION_FAILED,
-    eErrorDeviceLost = VK_ERROR_DEVICE_LOST,
-    eErrorMemoryMapFailed = VK_ERROR_MEMORY_MAP_FAILED,
-    eErrorLayerNotPresent = VK_ERROR_LAYER_NOT_PRESENT,
-    eErrorExtensionNotPresent = VK_ERROR_EXTENSION_NOT_PRESENT,
-    eErrorFeatureNotPresent = VK_ERROR_FEATURE_NOT_PRESENT,
-    eErrorIncompatibleDriver = VK_ERROR_INCOMPATIBLE_DRIVER,
-    eErrorTooManyObjects = VK_ERROR_TOO_MANY_OBJECTS,
-    eErrorFormatNotSupported = VK_ERROR_FORMAT_NOT_SUPPORTED,
-    eErrorFragmentedPool = VK_ERROR_FRAGMENTED_POOL,
-    eErrorUnknown = VK_ERROR_UNKNOWN,
-    eErrorOutOfPoolMemory = VK_ERROR_OUT_OF_POOL_MEMORY,
-    eErrorInvalidExternalHandle = VK_ERROR_INVALID_EXTERNAL_HANDLE,
-    eErrorFragmentation = VK_ERROR_FRAGMENTATION,
-    eErrorInvalidOpaqueCaptureAddress = VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS,
-    eErrorSurfaceLostKHR = VK_ERROR_SURFACE_LOST_KHR,
-    eErrorNativeWindowInUseKHR = VK_ERROR_NATIVE_WINDOW_IN_USE_KHR,
-    eSuboptimalKHR = VK_SUBOPTIMAL_KHR,
-    eErrorOutOfDateKHR = VK_ERROR_OUT_OF_DATE_KHR,
-    eErrorIncompatibleDisplayKHR = VK_ERROR_INCOMPATIBLE_DISPLAY_KHR,
-    eErrorValidationFailedEXT = VK_ERROR_VALIDATION_FAILED_EXT,
-    eErrorInvalidShaderNV = VK_ERROR_INVALID_SHADER_NV,
-    eErrorInvalidDrmFormatModifierPlaneLayoutEXT = VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT,
-    eErrorNotPermittedEXT = VK_ERROR_NOT_PERMITTED_EXT,
+    // clang-format off
+      eSuccess = VK_SUCCESS
+    , eNotReady = VK_NOT_READY
+    , eTimeout = VK_TIMEOUT
+    , eEventSet = VK_EVENT_SET
+    , eEventReset = VK_EVENT_RESET
+    , eIncomplete = VK_INCOMPLETE
+    , eErrorOutOfHostMemory = VK_ERROR_OUT_OF_HOST_MEMORY
+    , eErrorOutOfDeviceMemory = VK_ERROR_OUT_OF_DEVICE_MEMORY
+    , eErrorInitializationFailed = VK_ERROR_INITIALIZATION_FAILED
+    , eErrorDeviceLost = VK_ERROR_DEVICE_LOST
+    , eErrorMemoryMapFailed = VK_ERROR_MEMORY_MAP_FAILED
+    , eErrorLayerNotPresent = VK_ERROR_LAYER_NOT_PRESENT
+    , eErrorExtensionNotPresent = VK_ERROR_EXTENSION_NOT_PRESENT
+    , eErrorFeatureNotPresent = VK_ERROR_FEATURE_NOT_PRESENT
+    , eErrorIncompatibleDriver = VK_ERROR_INCOMPATIBLE_DRIVER
+    , eErrorTooManyObjects = VK_ERROR_TOO_MANY_OBJECTS
+    , eErrorFormatNotSupported = VK_ERROR_FORMAT_NOT_SUPPORTED
+    , eErrorFragmentedPool = VK_ERROR_FRAGMENTED_POOL
+    , eErrorUnknown = VK_ERROR_UNKNOWN
+    , eErrorOutOfPoolMemory = VK_ERROR_OUT_OF_POOL_MEMORY
+    , eErrorInvalidExternalHandle = VK_ERROR_INVALID_EXTERNAL_HANDLE
+    , eErrorFragmentation = VK_ERROR_FRAGMENTATION
+    , eErrorInvalidOpaqueCaptureAddress = VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS
+    , eErrorSurfaceLostKHR = VK_ERROR_SURFACE_LOST_KHR
+    , eErrorNativeWindowInUseKHR = VK_ERROR_NATIVE_WINDOW_IN_USE_KHR
+    , eSuboptimalKHR = VK_SUBOPTIMAL_KHR
+    , eErrorOutOfDateKHR = VK_ERROR_OUT_OF_DATE_KHR
+    , eErrorIncompatibleDisplayKHR = VK_ERROR_INCOMPATIBLE_DISPLAY_KHR
+    , eErrorValidationFailedEXT = VK_ERROR_VALIDATION_FAILED_EXT
+    , eErrorInvalidShaderNV = VK_ERROR_INVALID_SHADER_NV
+    , eErrorInvalidDrmFormatModifierPlaneLayoutEXT = VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT
+    , eErrorNotPermittedEXT = VK_ERROR_NOT_PERMITTED_EXT
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-    eErrorFullScreenExclusiveModeLostEXT = VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT,
+    , eErrorFullScreenExclusiveModeLostEXT = VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-    eThreadIdleKHR = VK_THREAD_IDLE_KHR,
-    eThreadDoneKHR = VK_THREAD_DONE_KHR,
-    eOperationDeferredKHR = VK_OPERATION_DEFERRED_KHR,
-    eOperationNotDeferredKHR = VK_OPERATION_NOT_DEFERRED_KHR,
-    ePipelineCompileRequiredEXT = VK_PIPELINE_COMPILE_REQUIRED_EXT,
-    eErrorFragmentationEXT = VK_ERROR_FRAGMENTATION_EXT,
-    eErrorInvalidDeviceAddressEXT = VK_ERROR_INVALID_DEVICE_ADDRESS_EXT,
-    eErrorInvalidExternalHandleKHR = VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR,
-    eErrorInvalidOpaqueCaptureAddressKHR = VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR,
-    eErrorOutOfPoolMemoryKHR = VK_ERROR_OUT_OF_POOL_MEMORY_KHR,
-    eErrorPipelineCompileRequiredEXT = VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT};
+    , eThreadIdleKHR = VK_THREAD_IDLE_KHR
+    , eThreadDoneKHR = VK_THREAD_DONE_KHR
+    , eOperationDeferredKHR = VK_OPERATION_DEFERRED_KHR
+    , eOperationNotDeferredKHR = VK_OPERATION_NOT_DEFERRED_KHR
+    , ePipelineCompileRequiredEXT = VK_PIPELINE_COMPILE_REQUIRED_EXT
+    , eErrorFragmentationEXT = VK_ERROR_FRAGMENTATION_EXT
+    , eErrorInvalidDeviceAddressEXT = VK_ERROR_INVALID_DEVICE_ADDRESS_EXT
+    , eErrorInvalidExternalHandleKHR = VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR
+    , eErrorInvalidOpaqueCaptureAddressKHR = VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR
+    , eErrorOutOfPoolMemoryKHR = VK_ERROR_OUT_OF_POOL_MEMORY_KHR
+    , eErrorPipelineCompileRequiredEXT = VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT
+    // clang-format on
+  };
 
   VULKAN_HPP_INLINE std::string to_string( Result value )
   {
@@ -7905,13 +8051,14 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SampleCountFlagBits : VkSampleCountFlags
   {
-    e1 = VK_SAMPLE_COUNT_1_BIT,
-    e2 = VK_SAMPLE_COUNT_2_BIT,
-    e4 = VK_SAMPLE_COUNT_4_BIT,
-    e8 = VK_SAMPLE_COUNT_8_BIT,
-    e16 = VK_SAMPLE_COUNT_16_BIT,
-    e32 = VK_SAMPLE_COUNT_32_BIT,
-    e64 = VK_SAMPLE_COUNT_64_BIT};
+      e1 = VK_SAMPLE_COUNT_1_BIT
+    , e2 = VK_SAMPLE_COUNT_2_BIT
+    , e4 = VK_SAMPLE_COUNT_4_BIT
+    , e8 = VK_SAMPLE_COUNT_8_BIT
+    , e16 = VK_SAMPLE_COUNT_16_BIT
+    , e32 = VK_SAMPLE_COUNT_32_BIT
+    , e64 = VK_SAMPLE_COUNT_64_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SampleCountFlagBits value )
   {
@@ -7930,12 +8077,13 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SamplerAddressMode
   {
-    eRepeat = VK_SAMPLER_ADDRESS_MODE_REPEAT,
-    eMirroredRepeat = VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT,
-    eClampToEdge = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
-    eClampToBorder = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
-    eMirrorClampToEdge = VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE,
-    eMirrorClampToEdgeKHR = VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR};
+      eRepeat = VK_SAMPLER_ADDRESS_MODE_REPEAT
+    , eMirroredRepeat = VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT
+    , eClampToEdge = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE
+    , eClampToBorder = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER
+    , eMirrorClampToEdge = VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE
+    , eMirrorClampToEdgeKHR = VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SamplerAddressMode value )
   {
@@ -7952,8 +8100,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SamplerCreateFlagBits : VkSamplerCreateFlags
   {
-    eSubsampledEXT = VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT,
-    eSubsampledCoarseReconstructionEXT = VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT};
+      eSubsampledEXT = VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT
+    , eSubsampledCoarseReconstructionEXT = VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SamplerCreateFlagBits value )
   {
@@ -7967,8 +8116,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SamplerMipmapMode
   {
-    eNearest = VK_SAMPLER_MIPMAP_MODE_NEAREST,
-    eLinear = VK_SAMPLER_MIPMAP_MODE_LINEAR};
+      eNearest = VK_SAMPLER_MIPMAP_MODE_NEAREST
+    , eLinear = VK_SAMPLER_MIPMAP_MODE_LINEAR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SamplerMipmapMode value )
   {
@@ -7982,9 +8132,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SamplerReductionMode
   {
-    eWeightedAverage = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE,
-    eMin = VK_SAMPLER_REDUCTION_MODE_MIN,
-    eMax = VK_SAMPLER_REDUCTION_MODE_MAX};
+      eWeightedAverage = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE
+    , eMin = VK_SAMPLER_REDUCTION_MODE_MIN
+    , eMax = VK_SAMPLER_REDUCTION_MODE_MAX
+  };
   using SamplerReductionModeEXT = SamplerReductionMode;
 
   VULKAN_HPP_INLINE std::string to_string( SamplerReductionMode value )
@@ -8000,11 +8151,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SamplerYcbcrModelConversion
   {
-    eRgbIdentity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY,
-    eYcbcrIdentity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY,
-    eYcbcr709 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709,
-    eYcbcr601 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601,
-    eYcbcr2020 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020};
+      eRgbIdentity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY
+    , eYcbcrIdentity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY
+    , eYcbcr709 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709
+    , eYcbcr601 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601
+    , eYcbcr2020 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020
+  };
   using SamplerYcbcrModelConversionKHR = SamplerYcbcrModelConversion;
 
   VULKAN_HPP_INLINE std::string to_string( SamplerYcbcrModelConversion value )
@@ -8022,8 +8174,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SamplerYcbcrRange
   {
-    eItuFull = VK_SAMPLER_YCBCR_RANGE_ITU_FULL,
-    eItuNarrow = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW};
+      eItuFull = VK_SAMPLER_YCBCR_RANGE_ITU_FULL
+    , eItuNarrow = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW
+  };
   using SamplerYcbcrRangeKHR = SamplerYcbcrRange;
 
   VULKAN_HPP_INLINE std::string to_string( SamplerYcbcrRange value )
@@ -8038,10 +8191,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ScopeNV
   {
-    eDevice = VK_SCOPE_DEVICE_NV,
-    eWorkgroup = VK_SCOPE_WORKGROUP_NV,
-    eSubgroup = VK_SCOPE_SUBGROUP_NV,
-    eQueueFamily = VK_SCOPE_QUEUE_FAMILY_NV};
+      eDevice = VK_SCOPE_DEVICE_NV
+    , eWorkgroup = VK_SCOPE_WORKGROUP_NV
+    , eSubgroup = VK_SCOPE_SUBGROUP_NV
+    , eQueueFamily = VK_SCOPE_QUEUE_FAMILY_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ScopeNV value )
   {
@@ -8057,7 +8211,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SemaphoreImportFlagBits : VkSemaphoreImportFlags
   {
-    eTemporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT};
+      eTemporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT
+  };
   using SemaphoreImportFlagBitsKHR = SemaphoreImportFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( SemaphoreImportFlagBits value )
@@ -8071,8 +8226,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SemaphoreType
   {
-    eBinary = VK_SEMAPHORE_TYPE_BINARY,
-    eTimeline = VK_SEMAPHORE_TYPE_TIMELINE};
+      eBinary = VK_SEMAPHORE_TYPE_BINARY
+    , eTimeline = VK_SEMAPHORE_TYPE_TIMELINE
+  };
   using SemaphoreTypeKHR = SemaphoreType;
 
   VULKAN_HPP_INLINE std::string to_string( SemaphoreType value )
@@ -8087,7 +8243,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SemaphoreWaitFlagBits : VkSemaphoreWaitFlags
   {
-    eAny = VK_SEMAPHORE_WAIT_ANY_BIT};
+      eAny = VK_SEMAPHORE_WAIT_ANY_BIT
+  };
   using SemaphoreWaitFlagBitsKHR = SemaphoreWaitFlagBits;
 
   VULKAN_HPP_INLINE std::string to_string( SemaphoreWaitFlagBits value )
@@ -8100,7 +8257,8 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   enum class ShaderCorePropertiesFlagBitsAMD : VkShaderCorePropertiesFlagsAMD
-  {};
+  {
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ShaderCorePropertiesFlagBitsAMD )
   {
@@ -8109,9 +8267,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ShaderFloatControlsIndependence
   {
-    e32BitOnly = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY,
-    eAll = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL,
-    eNone = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE};
+      e32BitOnly = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY
+    , eAll = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL
+    , eNone = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE
+  };
   using ShaderFloatControlsIndependenceKHR = ShaderFloatControlsIndependence;
 
   VULKAN_HPP_INLINE std::string to_string( ShaderFloatControlsIndependence value )
@@ -8127,10 +8286,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ShaderGroupShaderKHR
   {
-    eGeneral = VK_SHADER_GROUP_SHADER_GENERAL_KHR,
-    eClosestHit = VK_SHADER_GROUP_SHADER_CLOSEST_HIT_KHR,
-    eAnyHit = VK_SHADER_GROUP_SHADER_ANY_HIT_KHR,
-    eIntersection = VK_SHADER_GROUP_SHADER_INTERSECTION_KHR};
+      eGeneral = VK_SHADER_GROUP_SHADER_GENERAL_KHR
+    , eClosestHit = VK_SHADER_GROUP_SHADER_CLOSEST_HIT_KHR
+    , eAnyHit = VK_SHADER_GROUP_SHADER_ANY_HIT_KHR
+    , eIntersection = VK_SHADER_GROUP_SHADER_INTERSECTION_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ShaderGroupShaderKHR value )
   {
@@ -8146,9 +8306,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ShaderInfoTypeAMD
   {
-    eStatistics = VK_SHADER_INFO_TYPE_STATISTICS_AMD,
-    eBinary = VK_SHADER_INFO_TYPE_BINARY_AMD,
-    eDisassembly = VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD};
+      eStatistics = VK_SHADER_INFO_TYPE_STATISTICS_AMD
+    , eBinary = VK_SHADER_INFO_TYPE_BINARY_AMD
+    , eDisassembly = VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ShaderInfoTypeAMD value )
   {
@@ -8162,7 +8323,8 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   enum class ShaderModuleCreateFlagBits : VkShaderModuleCreateFlags
-  {};
+  {
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ShaderModuleCreateFlagBits )
   {
@@ -8171,28 +8333,29 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ShaderStageFlagBits : VkShaderStageFlags
   {
-    eVertex = VK_SHADER_STAGE_VERTEX_BIT,
-    eTessellationControl = VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,
-    eTessellationEvaluation = VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,
-    eGeometry = VK_SHADER_STAGE_GEOMETRY_BIT,
-    eFragment = VK_SHADER_STAGE_FRAGMENT_BIT,
-    eCompute = VK_SHADER_STAGE_COMPUTE_BIT,
-    eAllGraphics = VK_SHADER_STAGE_ALL_GRAPHICS,
-    eAll = VK_SHADER_STAGE_ALL,
-    eRaygenKHR = VK_SHADER_STAGE_RAYGEN_BIT_KHR,
-    eAnyHitKHR = VK_SHADER_STAGE_ANY_HIT_BIT_KHR,
-    eClosestHitKHR = VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR,
-    eMissKHR = VK_SHADER_STAGE_MISS_BIT_KHR,
-    eIntersectionKHR = VK_SHADER_STAGE_INTERSECTION_BIT_KHR,
-    eCallableKHR = VK_SHADER_STAGE_CALLABLE_BIT_KHR,
-    eTaskNV = VK_SHADER_STAGE_TASK_BIT_NV,
-    eMeshNV = VK_SHADER_STAGE_MESH_BIT_NV,
-    eAnyHitNV = VK_SHADER_STAGE_ANY_HIT_BIT_NV,
-    eCallableNV = VK_SHADER_STAGE_CALLABLE_BIT_NV,
-    eClosestHitNV = VK_SHADER_STAGE_CLOSEST_HIT_BIT_NV,
-    eIntersectionNV = VK_SHADER_STAGE_INTERSECTION_BIT_NV,
-    eMissNV = VK_SHADER_STAGE_MISS_BIT_NV,
-    eRaygenNV = VK_SHADER_STAGE_RAYGEN_BIT_NV};
+      eVertex = VK_SHADER_STAGE_VERTEX_BIT
+    , eTessellationControl = VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT
+    , eTessellationEvaluation = VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT
+    , eGeometry = VK_SHADER_STAGE_GEOMETRY_BIT
+    , eFragment = VK_SHADER_STAGE_FRAGMENT_BIT
+    , eCompute = VK_SHADER_STAGE_COMPUTE_BIT
+    , eAllGraphics = VK_SHADER_STAGE_ALL_GRAPHICS
+    , eAll = VK_SHADER_STAGE_ALL
+    , eRaygenKHR = VK_SHADER_STAGE_RAYGEN_BIT_KHR
+    , eAnyHitKHR = VK_SHADER_STAGE_ANY_HIT_BIT_KHR
+    , eClosestHitKHR = VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR
+    , eMissKHR = VK_SHADER_STAGE_MISS_BIT_KHR
+    , eIntersectionKHR = VK_SHADER_STAGE_INTERSECTION_BIT_KHR
+    , eCallableKHR = VK_SHADER_STAGE_CALLABLE_BIT_KHR
+    , eTaskNV = VK_SHADER_STAGE_TASK_BIT_NV
+    , eMeshNV = VK_SHADER_STAGE_MESH_BIT_NV
+    , eAnyHitNV = VK_SHADER_STAGE_ANY_HIT_BIT_NV
+    , eCallableNV = VK_SHADER_STAGE_CALLABLE_BIT_NV
+    , eClosestHitNV = VK_SHADER_STAGE_CLOSEST_HIT_BIT_NV
+    , eIntersectionNV = VK_SHADER_STAGE_INTERSECTION_BIT_NV
+    , eMissNV = VK_SHADER_STAGE_MISS_BIT_NV
+    , eRaygenNV = VK_SHADER_STAGE_RAYGEN_BIT_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ShaderStageFlagBits value )
   {
@@ -8220,18 +8383,19 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ShadingRatePaletteEntryNV
   {
-    eNoInvocations = VK_SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV,
-    e16InvocationsPerPixel = VK_SHADING_RATE_PALETTE_ENTRY_16_INVOCATIONS_PER_PIXEL_NV,
-    e8InvocationsPerPixel = VK_SHADING_RATE_PALETTE_ENTRY_8_INVOCATIONS_PER_PIXEL_NV,
-    e4InvocationsPerPixel = VK_SHADING_RATE_PALETTE_ENTRY_4_INVOCATIONS_PER_PIXEL_NV,
-    e2InvocationsPerPixel = VK_SHADING_RATE_PALETTE_ENTRY_2_INVOCATIONS_PER_PIXEL_NV,
-    e1InvocationPerPixel = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_PIXEL_NV,
-    e1InvocationPer2X1Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X1_PIXELS_NV,
-    e1InvocationPer1X2Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_1X2_PIXELS_NV,
-    e1InvocationPer2X2Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X2_PIXELS_NV,
-    e1InvocationPer4X2Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X2_PIXELS_NV,
-    e1InvocationPer2X4Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X4_PIXELS_NV,
-    e1InvocationPer4X4Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV};
+      eNoInvocations = VK_SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV
+    , e16InvocationsPerPixel = VK_SHADING_RATE_PALETTE_ENTRY_16_INVOCATIONS_PER_PIXEL_NV
+    , e8InvocationsPerPixel = VK_SHADING_RATE_PALETTE_ENTRY_8_INVOCATIONS_PER_PIXEL_NV
+    , e4InvocationsPerPixel = VK_SHADING_RATE_PALETTE_ENTRY_4_INVOCATIONS_PER_PIXEL_NV
+    , e2InvocationsPerPixel = VK_SHADING_RATE_PALETTE_ENTRY_2_INVOCATIONS_PER_PIXEL_NV
+    , e1InvocationPerPixel = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_PIXEL_NV
+    , e1InvocationPer2X1Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X1_PIXELS_NV
+    , e1InvocationPer1X2Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_1X2_PIXELS_NV
+    , e1InvocationPer2X2Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X2_PIXELS_NV
+    , e1InvocationPer4X2Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X2_PIXELS_NV
+    , e1InvocationPer2X4Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X4_PIXELS_NV
+    , e1InvocationPer4X4Pixels = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ShadingRatePaletteEntryNV value )
   {
@@ -8255,8 +8419,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SharingMode
   {
-    eExclusive = VK_SHARING_MODE_EXCLUSIVE,
-    eConcurrent = VK_SHARING_MODE_CONCURRENT};
+      eExclusive = VK_SHARING_MODE_EXCLUSIVE
+    , eConcurrent = VK_SHARING_MODE_CONCURRENT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SharingMode value )
   {
@@ -8270,9 +8435,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SparseImageFormatFlagBits : VkSparseImageFormatFlags
   {
-    eSingleMiptail = VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT,
-    eAlignedMipSize = VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT,
-    eNonstandardBlockSize = VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT};
+      eSingleMiptail = VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT
+    , eAlignedMipSize = VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT
+    , eNonstandardBlockSize = VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SparseImageFormatFlagBits value )
   {
@@ -8287,7 +8453,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SparseMemoryBindFlagBits : VkSparseMemoryBindFlags
   {
-    eMetadata = VK_SPARSE_MEMORY_BIND_METADATA_BIT};
+      eMetadata = VK_SPARSE_MEMORY_BIND_METADATA_BIT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SparseMemoryBindFlagBits value )
   {
@@ -8300,10 +8467,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class StencilFaceFlagBits : VkStencilFaceFlags
   {
-    eFront = VK_STENCIL_FACE_FRONT_BIT,
-    eBack = VK_STENCIL_FACE_BACK_BIT,
-    eFrontAndBack = VK_STENCIL_FACE_FRONT_AND_BACK,
-    eVkStencilFrontAndBack = VK_STENCIL_FRONT_AND_BACK};
+      eFront = VK_STENCIL_FACE_FRONT_BIT
+    , eBack = VK_STENCIL_FACE_BACK_BIT
+    , eFrontAndBack = VK_STENCIL_FACE_FRONT_AND_BACK
+    , eVkStencilFrontAndBack = VK_STENCIL_FRONT_AND_BACK
+  };
 
   VULKAN_HPP_INLINE std::string to_string( StencilFaceFlagBits value )
   {
@@ -8318,14 +8486,15 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class StencilOp
   {
-    eKeep = VK_STENCIL_OP_KEEP,
-    eZero = VK_STENCIL_OP_ZERO,
-    eReplace = VK_STENCIL_OP_REPLACE,
-    eIncrementAndClamp = VK_STENCIL_OP_INCREMENT_AND_CLAMP,
-    eDecrementAndClamp = VK_STENCIL_OP_DECREMENT_AND_CLAMP,
-    eInvert = VK_STENCIL_OP_INVERT,
-    eIncrementAndWrap = VK_STENCIL_OP_INCREMENT_AND_WRAP,
-    eDecrementAndWrap = VK_STENCIL_OP_DECREMENT_AND_WRAP};
+      eKeep = VK_STENCIL_OP_KEEP
+    , eZero = VK_STENCIL_OP_ZERO
+    , eReplace = VK_STENCIL_OP_REPLACE
+    , eIncrementAndClamp = VK_STENCIL_OP_INCREMENT_AND_CLAMP
+    , eDecrementAndClamp = VK_STENCIL_OP_DECREMENT_AND_CLAMP
+    , eInvert = VK_STENCIL_OP_INVERT
+    , eIncrementAndWrap = VK_STENCIL_OP_INCREMENT_AND_WRAP
+    , eDecrementAndWrap = VK_STENCIL_OP_DECREMENT_AND_WRAP
+  };
 
   VULKAN_HPP_INLINE std::string to_string( StencilOp value )
   {
@@ -8345,685 +8514,650 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class StructureType
   {
-    eApplicationInfo = VK_STRUCTURE_TYPE_APPLICATION_INFO,
-    eInstanceCreateInfo = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
-    eDeviceQueueCreateInfo = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
-    eDeviceCreateInfo = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
-    eSubmitInfo = VK_STRUCTURE_TYPE_SUBMIT_INFO,
-    eMemoryAllocateInfo = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
-    eMappedMemoryRange = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE,
-    eBindSparseInfo = VK_STRUCTURE_TYPE_BIND_SPARSE_INFO,
-    eFenceCreateInfo = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO,
-    eSemaphoreCreateInfo = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,
-    eEventCreateInfo = VK_STRUCTURE_TYPE_EVENT_CREATE_INFO,
-    eQueryPoolCreateInfo = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO,
-    eBufferCreateInfo = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
-    eBufferViewCreateInfo = VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO,
-    eImageCreateInfo = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
-    eImageViewCreateInfo = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
-    eShaderModuleCreateInfo = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
-    ePipelineCacheCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO,
-    ePipelineShaderStageCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
-    ePipelineVertexInputStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO,
-    ePipelineInputAssemblyStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO,
-    ePipelineTessellationStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO,
-    ePipelineViewportStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO,
-    ePipelineRasterizationStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO,
-    ePipelineMultisampleStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO,
-    ePipelineDepthStencilStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO,
-    ePipelineColorBlendStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO,
-    ePipelineDynamicStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO,
-    eGraphicsPipelineCreateInfo = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO,
-    eComputePipelineCreateInfo = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO,
-    ePipelineLayoutCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
-    eSamplerCreateInfo = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
-    eDescriptorSetLayoutCreateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
-    eDescriptorPoolCreateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO,
-    eDescriptorSetAllocateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO,
-    eWriteDescriptorSet = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
-    eCopyDescriptorSet = VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET,
-    eFramebufferCreateInfo = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO,
-    eRenderPassCreateInfo = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO,
-    eCommandPoolCreateInfo = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
-    eCommandBufferAllocateInfo = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO,
-    eCommandBufferInheritanceInfo = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO,
-    eCommandBufferBeginInfo = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
-    eRenderPassBeginInfo = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
-    eBufferMemoryBarrier = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
-    eImageMemoryBarrier = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
-    eMemoryBarrier = VK_STRUCTURE_TYPE_MEMORY_BARRIER,
-    eLoaderInstanceCreateInfo = VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO,
-    eLoaderDeviceCreateInfo = VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO,
-    ePhysicalDeviceSubgroupProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES,
-    eBindBufferMemoryInfo = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO,
-    eBindImageMemoryInfo = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO,
-    ePhysicalDevice16BitStorageFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES,
-    eMemoryDedicatedRequirements = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS,
-    eMemoryDedicatedAllocateInfo = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO,
-    eMemoryAllocateFlagsInfo = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO,
-    eDeviceGroupRenderPassBeginInfo = VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO,
-    eDeviceGroupCommandBufferBeginInfo = VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO,
-    eDeviceGroupSubmitInfo = VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO,
-    eDeviceGroupBindSparseInfo = VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO,
-    eBindBufferMemoryDeviceGroupInfo = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO,
-    eBindImageMemoryDeviceGroupInfo = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO,
-    ePhysicalDeviceGroupProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES,
-    eDeviceGroupDeviceCreateInfo = VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO,
-    eBufferMemoryRequirementsInfo2 = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2,
-    eImageMemoryRequirementsInfo2 = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2,
-    eImageSparseMemoryRequirementsInfo2 = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2,
-    eMemoryRequirements2 = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2,
-    eSparseImageMemoryRequirements2 = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2,
-    ePhysicalDeviceFeatures2 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2,
-    ePhysicalDeviceProperties2 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2,
-    eFormatProperties2 = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2,
-    eImageFormatProperties2 = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2,
-    ePhysicalDeviceImageFormatInfo2 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2,
-    eQueueFamilyProperties2 = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2,
-    ePhysicalDeviceMemoryProperties2 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2,
-    eSparseImageFormatProperties2 = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2,
-    ePhysicalDeviceSparseImageFormatInfo2 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2,
-    ePhysicalDevicePointClippingProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES,
-    eRenderPassInputAttachmentAspectCreateInfo = VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO,
-    eImageViewUsageCreateInfo = VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO,
-    ePipelineTessellationDomainOriginStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO,
-    eRenderPassMultiviewCreateInfo = VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO,
-    ePhysicalDeviceMultiviewFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES,
-    ePhysicalDeviceMultiviewProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES,
-    ePhysicalDeviceVariablePointersFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
-    eProtectedSubmitInfo = VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO,
-    ePhysicalDeviceProtectedMemoryFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES,
-    ePhysicalDeviceProtectedMemoryProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES,
-    eDeviceQueueInfo2 = VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2,
-    eSamplerYcbcrConversionCreateInfo = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO,
-    eSamplerYcbcrConversionInfo = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO,
-    eBindImagePlaneMemoryInfo = VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO,
-    eImagePlaneMemoryRequirementsInfo = VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO,
-    ePhysicalDeviceSamplerYcbcrConversionFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES,
-    eSamplerYcbcrConversionImageFormatProperties = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES,
-    eDescriptorUpdateTemplateCreateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO,
-    ePhysicalDeviceExternalImageFormatInfo = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO,
-    eExternalImageFormatProperties = VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES,
-    ePhysicalDeviceExternalBufferInfo = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO,
-    eExternalBufferProperties = VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES,
-    ePhysicalDeviceIdProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES,
-    eExternalMemoryBufferCreateInfo = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO,
-    eExternalMemoryImageCreateInfo = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO,
-    eExportMemoryAllocateInfo = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO,
-    ePhysicalDeviceExternalFenceInfo = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO,
-    eExternalFenceProperties = VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES,
-    eExportFenceCreateInfo = VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO,
-    eExportSemaphoreCreateInfo = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO,
-    ePhysicalDeviceExternalSemaphoreInfo = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO,
-    eExternalSemaphoreProperties = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES,
-    ePhysicalDeviceMaintenance3Properties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES,
-    eDescriptorSetLayoutSupport = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT,
-    ePhysicalDeviceShaderDrawParametersFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
-    ePhysicalDeviceVulkan11Features = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES,
-    ePhysicalDeviceVulkan11Properties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES,
-    ePhysicalDeviceVulkan12Features = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES,
-    ePhysicalDeviceVulkan12Properties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES,
-    eImageFormatListCreateInfo = VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO,
-    eAttachmentDescription2 = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2,
-    eAttachmentReference2 = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2,
-    eSubpassDescription2 = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2,
-    eSubpassDependency2 = VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2,
-    eRenderPassCreateInfo2 = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2,
-    eSubpassBeginInfo = VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO,
-    eSubpassEndInfo = VK_STRUCTURE_TYPE_SUBPASS_END_INFO,
-    ePhysicalDevice8BitStorageFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES,
-    ePhysicalDeviceDriverProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES,
-    ePhysicalDeviceShaderAtomicInt64Features = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES,
-    ePhysicalDeviceShaderFloat16Int8Features = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES,
-    ePhysicalDeviceFloatControlsProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES,
-    eDescriptorSetLayoutBindingFlagsCreateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO,
-    ePhysicalDeviceDescriptorIndexingFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES,
-    ePhysicalDeviceDescriptorIndexingProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES,
-    eDescriptorSetVariableDescriptorCountAllocateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO,
-    eDescriptorSetVariableDescriptorCountLayoutSupport = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT,
-    ePhysicalDeviceDepthStencilResolveProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES,
-    eSubpassDescriptionDepthStencilResolve = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE,
-    ePhysicalDeviceScalarBlockLayoutFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES,
-    eImageStencilUsageCreateInfo = VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO,
-    ePhysicalDeviceSamplerFilterMinmaxProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES,
-    eSamplerReductionModeCreateInfo = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO,
-    ePhysicalDeviceVulkanMemoryModelFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES,
-    ePhysicalDeviceImagelessFramebufferFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES,
-    eFramebufferAttachmentsCreateInfo = VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO,
-    eFramebufferAttachmentImageInfo = VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO,
-    eRenderPassAttachmentBeginInfo = VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO,
-    ePhysicalDeviceUniformBufferStandardLayoutFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES,
-    ePhysicalDeviceShaderSubgroupExtendedTypesFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES,
-    ePhysicalDeviceSeparateDepthStencilLayoutsFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES,
-    eAttachmentReferenceStencilLayout = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT,
-    eAttachmentDescriptionStencilLayout = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT,
-    ePhysicalDeviceHostQueryResetFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES,
-    ePhysicalDeviceTimelineSemaphoreFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES,
-    ePhysicalDeviceTimelineSemaphoreProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES,
-    eSemaphoreTypeCreateInfo = VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO,
-    eTimelineSemaphoreSubmitInfo = VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO,
-    eSemaphoreWaitInfo = VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO,
-    eSemaphoreSignalInfo = VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO,
-    ePhysicalDeviceBufferDeviceAddressFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES,
-    eBufferDeviceAddressInfo = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO,
-    eBufferOpaqueCaptureAddressCreateInfo = VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO,
-    eMemoryOpaqueCaptureAddressAllocateInfo = VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO,
-    eDeviceMemoryOpaqueCaptureAddressInfo = VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO,
-    eSwapchainCreateInfoKHR = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,
-    ePresentInfoKHR = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR,
-    eDeviceGroupPresentCapabilitiesKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR,
-    eImageSwapchainCreateInfoKHR = VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR,
-    eBindImageMemorySwapchainInfoKHR = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR,
-    eAcquireNextImageInfoKHR = VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR,
-    eDeviceGroupPresentInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR,
-    eDeviceGroupSwapchainCreateInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR,
-    eDisplayModeCreateInfoKHR = VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR,
-    eDisplaySurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR,
-    eDisplayPresentInfoKHR = VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR,
+    // clang-format off
+      eApplicationInfo = VK_STRUCTURE_TYPE_APPLICATION_INFO
+    , eInstanceCreateInfo = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
+    , eDeviceQueueCreateInfo = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO
+    , eDeviceCreateInfo = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO
+    , eSubmitInfo = VK_STRUCTURE_TYPE_SUBMIT_INFO
+    , eMemoryAllocateInfo = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO
+    , eMappedMemoryRange = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE
+    , eBindSparseInfo = VK_STRUCTURE_TYPE_BIND_SPARSE_INFO
+    , eFenceCreateInfo = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO
+    , eSemaphoreCreateInfo = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO
+    , eEventCreateInfo = VK_STRUCTURE_TYPE_EVENT_CREATE_INFO
+    , eQueryPoolCreateInfo = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO
+    , eBufferCreateInfo = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO
+    , eBufferViewCreateInfo = VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO
+    , eImageCreateInfo = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO
+    , eImageViewCreateInfo = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO
+    , eShaderModuleCreateInfo = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO
+    , ePipelineCacheCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO
+    , ePipelineShaderStageCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO
+    , ePipelineVertexInputStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO
+    , ePipelineInputAssemblyStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO
+    , ePipelineTessellationStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO
+    , ePipelineViewportStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO
+    , ePipelineRasterizationStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO
+    , ePipelineMultisampleStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO
+    , ePipelineDepthStencilStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO
+    , ePipelineColorBlendStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO
+    , ePipelineDynamicStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO
+    , eGraphicsPipelineCreateInfo = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO
+    , eComputePipelineCreateInfo = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO
+    , ePipelineLayoutCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO
+    , eSamplerCreateInfo = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO
+    , eDescriptorSetLayoutCreateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO
+    , eDescriptorPoolCreateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO
+    , eDescriptorSetAllocateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO
+    , eWriteDescriptorSet = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET
+    , eCopyDescriptorSet = VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET
+    , eFramebufferCreateInfo = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO
+    , eRenderPassCreateInfo = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO
+    , eCommandPoolCreateInfo = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO
+    , eCommandBufferAllocateInfo = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO
+    , eCommandBufferInheritanceInfo = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO
+    , eCommandBufferBeginInfo = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO
+    , eRenderPassBeginInfo = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO
+    , eBufferMemoryBarrier = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER
+    , eImageMemoryBarrier = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER
+    , eMemoryBarrier = VK_STRUCTURE_TYPE_MEMORY_BARRIER
+    , eLoaderInstanceCreateInfo = VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO
+    , eLoaderDeviceCreateInfo = VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO
+    , ePhysicalDeviceSubgroupProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES
+    , eBindBufferMemoryInfo = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO
+    , eBindImageMemoryInfo = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO
+    , ePhysicalDevice16BitStorageFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES
+    , eMemoryDedicatedRequirements = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS
+    , eMemoryDedicatedAllocateInfo = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO
+    , eMemoryAllocateFlagsInfo = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO
+    , eDeviceGroupRenderPassBeginInfo = VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO
+    , eDeviceGroupCommandBufferBeginInfo = VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO
+    , eDeviceGroupSubmitInfo = VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO
+    , eDeviceGroupBindSparseInfo = VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO
+    , eBindBufferMemoryDeviceGroupInfo = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO
+    , eBindImageMemoryDeviceGroupInfo = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO
+    , ePhysicalDeviceGroupProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES
+    , eDeviceGroupDeviceCreateInfo = VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO
+    , eBufferMemoryRequirementsInfo2 = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2
+    , eImageMemoryRequirementsInfo2 = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2
+    , eImageSparseMemoryRequirementsInfo2 = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2
+    , eMemoryRequirements2 = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2
+    , eSparseImageMemoryRequirements2 = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2
+    , ePhysicalDeviceFeatures2 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2
+    , ePhysicalDeviceProperties2 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2
+    , eFormatProperties2 = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2
+    , eImageFormatProperties2 = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2
+    , ePhysicalDeviceImageFormatInfo2 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2
+    , eQueueFamilyProperties2 = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2
+    , ePhysicalDeviceMemoryProperties2 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2
+    , eSparseImageFormatProperties2 = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2
+    , ePhysicalDeviceSparseImageFormatInfo2 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2
+    , ePhysicalDevicePointClippingProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES
+    , eRenderPassInputAttachmentAspectCreateInfo = VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO
+    , eImageViewUsageCreateInfo = VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO
+    , ePipelineTessellationDomainOriginStateCreateInfo = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO
+    , eRenderPassMultiviewCreateInfo = VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO
+    , ePhysicalDeviceMultiviewFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES
+    , ePhysicalDeviceMultiviewProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES
+    , ePhysicalDeviceVariablePointersFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES
+    , eProtectedSubmitInfo = VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO
+    , ePhysicalDeviceProtectedMemoryFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES
+    , ePhysicalDeviceProtectedMemoryProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES
+    , eDeviceQueueInfo2 = VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2
+    , eSamplerYcbcrConversionCreateInfo = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO
+    , eSamplerYcbcrConversionInfo = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO
+    , eBindImagePlaneMemoryInfo = VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO
+    , eImagePlaneMemoryRequirementsInfo = VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO
+    , ePhysicalDeviceSamplerYcbcrConversionFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES
+    , eSamplerYcbcrConversionImageFormatProperties = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES
+    , eDescriptorUpdateTemplateCreateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO
+    , ePhysicalDeviceExternalImageFormatInfo = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO
+    , eExternalImageFormatProperties = VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES
+    , ePhysicalDeviceExternalBufferInfo = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO
+    , eExternalBufferProperties = VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES
+    , ePhysicalDeviceIdProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES
+    , eExternalMemoryBufferCreateInfo = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO
+    , eExternalMemoryImageCreateInfo = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO
+    , eExportMemoryAllocateInfo = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO
+    , ePhysicalDeviceExternalFenceInfo = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO
+    , eExternalFenceProperties = VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES
+    , eExportFenceCreateInfo = VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO
+    , eExportSemaphoreCreateInfo = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO
+    , ePhysicalDeviceExternalSemaphoreInfo = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO
+    , eExternalSemaphoreProperties = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES
+    , ePhysicalDeviceMaintenance3Properties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES
+    , eDescriptorSetLayoutSupport = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT
+    , ePhysicalDeviceShaderDrawParametersFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES
+    , ePhysicalDeviceVulkan11Features = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES
+    , ePhysicalDeviceVulkan11Properties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES
+    , ePhysicalDeviceVulkan12Features = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES
+    , ePhysicalDeviceVulkan12Properties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES
+    , eImageFormatListCreateInfo = VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO
+    , eAttachmentDescription2 = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2
+    , eAttachmentReference2 = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2
+    , eSubpassDescription2 = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2
+    , eSubpassDependency2 = VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2
+    , eRenderPassCreateInfo2 = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2
+    , eSubpassBeginInfo = VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO
+    , eSubpassEndInfo = VK_STRUCTURE_TYPE_SUBPASS_END_INFO
+    , ePhysicalDevice8BitStorageFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES
+    , ePhysicalDeviceDriverProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES
+    , ePhysicalDeviceShaderAtomicInt64Features = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES
+    , ePhysicalDeviceShaderFloat16Int8Features = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES
+    , ePhysicalDeviceFloatControlsProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES
+    , eDescriptorSetLayoutBindingFlagsCreateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO
+    , ePhysicalDeviceDescriptorIndexingFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES
+    , ePhysicalDeviceDescriptorIndexingProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES
+    , eDescriptorSetVariableDescriptorCountAllocateInfo = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO
+    , eDescriptorSetVariableDescriptorCountLayoutSupport = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT
+    , ePhysicalDeviceDepthStencilResolveProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES
+    , eSubpassDescriptionDepthStencilResolve = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE
+    , ePhysicalDeviceScalarBlockLayoutFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES
+    , eImageStencilUsageCreateInfo = VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO
+    , ePhysicalDeviceSamplerFilterMinmaxProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES
+    , eSamplerReductionModeCreateInfo = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO
+    , ePhysicalDeviceVulkanMemoryModelFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES
+    , ePhysicalDeviceImagelessFramebufferFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES
+    , eFramebufferAttachmentsCreateInfo = VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO
+    , eFramebufferAttachmentImageInfo = VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO
+    , eRenderPassAttachmentBeginInfo = VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO
+    , ePhysicalDeviceUniformBufferStandardLayoutFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES
+    , ePhysicalDeviceShaderSubgroupExtendedTypesFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES
+    , ePhysicalDeviceSeparateDepthStencilLayoutsFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES
+    , eAttachmentReferenceStencilLayout = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT
+    , eAttachmentDescriptionStencilLayout = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT
+    , ePhysicalDeviceHostQueryResetFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES
+    , ePhysicalDeviceTimelineSemaphoreFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES
+    , ePhysicalDeviceTimelineSemaphoreProperties = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES
+    , eSemaphoreTypeCreateInfo = VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO
+    , eTimelineSemaphoreSubmitInfo = VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO
+    , eSemaphoreWaitInfo = VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO
+    , eSemaphoreSignalInfo = VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO
+    , ePhysicalDeviceBufferDeviceAddressFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES
+    , eBufferDeviceAddressInfo = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO
+    , eBufferOpaqueCaptureAddressCreateInfo = VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO
+    , eMemoryOpaqueCaptureAddressAllocateInfo = VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO
+    , eDeviceMemoryOpaqueCaptureAddressInfo = VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO
+    , eSwapchainCreateInfoKHR = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR
+    , ePresentInfoKHR = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR
+    , eDeviceGroupPresentCapabilitiesKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR
+    , eImageSwapchainCreateInfoKHR = VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR
+    , eBindImageMemorySwapchainInfoKHR = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR
+    , eAcquireNextImageInfoKHR = VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR
+    , eDeviceGroupPresentInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR
+    , eDeviceGroupSwapchainCreateInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR
+    , eDisplayModeCreateInfoKHR = VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR
+    , eDisplaySurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR
+    , eDisplayPresentInfoKHR = VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR
 #ifdef VK_USE_PLATFORM_XLIB_KHR
-    eXlibSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR,
+    , eXlibSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR
 #endif /*VK_USE_PLATFORM_XLIB_KHR*/
 #ifdef VK_USE_PLATFORM_XCB_KHR
-    eXcbSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR,
+    , eXcbSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
-    eWaylandSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR,
+    , eWaylandSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR
 #endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-    eAndroidSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR,
+    , eAndroidSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-    eWin32SurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR,
+    , eWin32SurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-    eDebugReportCallbackCreateInfoEXT = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
-    ePipelineRasterizationStateRasterizationOrderAMD = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD,
-    eDebugMarkerObjectNameInfoEXT = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT,
-    eDebugMarkerObjectTagInfoEXT = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT,
-    eDebugMarkerMarkerInfoEXT = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT,
-    eDedicatedAllocationImageCreateInfoNV = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV,
-    eDedicatedAllocationBufferCreateInfoNV = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV,
-    eDedicatedAllocationMemoryAllocateInfoNV = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV,
-    ePhysicalDeviceTransformFeedbackFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT,
-    ePhysicalDeviceTransformFeedbackPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT,
-    ePipelineRasterizationStateStreamCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT,
-    eImageViewHandleInfoNVX = VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX,
-    eImageViewAddressPropertiesNVX = VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX,
-    eTextureLodGatherFormatPropertiesAMD = VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD,
+    , eDebugReportCallbackCreateInfoEXT = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT
+    , ePipelineRasterizationStateRasterizationOrderAMD = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD
+    , eDebugMarkerObjectNameInfoEXT = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT
+    , eDebugMarkerObjectTagInfoEXT = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT
+    , eDebugMarkerMarkerInfoEXT = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT
+    , eDedicatedAllocationImageCreateInfoNV = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV
+    , eDedicatedAllocationBufferCreateInfoNV = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV
+    , eDedicatedAllocationMemoryAllocateInfoNV = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV
+    , ePhysicalDeviceTransformFeedbackFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT
+    , ePhysicalDeviceTransformFeedbackPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT
+    , ePipelineRasterizationStateStreamCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT
+    , eImageViewHandleInfoNVX = VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX
+    , eImageViewAddressPropertiesNVX = VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX
+    , eTextureLodGatherFormatPropertiesAMD = VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD
 #ifdef VK_USE_PLATFORM_GGP
-    eStreamDescriptorSurfaceCreateInfoGGP = VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP,
+    , eStreamDescriptorSurfaceCreateInfoGGP = VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP
 #endif /*VK_USE_PLATFORM_GGP*/
-    ePhysicalDeviceCornerSampledImageFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV,
-    eExternalMemoryImageCreateInfoNV = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV,
-    eExportMemoryAllocateInfoNV = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV,
+    , ePhysicalDeviceCornerSampledImageFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV
+    , eExternalMemoryImageCreateInfoNV = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV
+    , eExportMemoryAllocateInfoNV = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-    eImportMemoryWin32HandleInfoNV = VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV,
+    , eImportMemoryWin32HandleInfoNV = VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV
+    , eExportMemoryWin32HandleInfoNV = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV
+    , eWin32KeyedMutexAcquireReleaseInfoNV = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eExportMemoryWin32HandleInfoNV = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eWin32KeyedMutexAcquireReleaseInfoNV = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-    eValidationFlagsEXT = VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT,
+    , eValidationFlagsEXT = VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT
 #ifdef VK_USE_PLATFORM_VI_NN
-    eViSurfaceCreateInfoNN = VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN,
+    , eViSurfaceCreateInfoNN = VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN
 #endif /*VK_USE_PLATFORM_VI_NN*/
-    ePhysicalDeviceTextureCompressionAstcHdrFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT,
-    eImageViewAstcDecodeModeEXT = VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT,
-    ePhysicalDeviceAstcDecodeFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT,
+    , ePhysicalDeviceTextureCompressionAstcHdrFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT
+    , eImageViewAstcDecodeModeEXT = VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT
+    , ePhysicalDeviceAstcDecodeFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-    eImportMemoryWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR,
+    , eImportMemoryWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR
+    , eExportMemoryWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR
+    , eMemoryWin32HandlePropertiesKHR = VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR
+    , eMemoryGetWin32HandleInfoKHR = VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+    , eImportMemoryFdInfoKHR = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR
+    , eMemoryFdPropertiesKHR = VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR
+    , eMemoryGetFdInfoKHR = VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-    eExportMemoryWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR,
+    , eWin32KeyedMutexAcquireReleaseInfoKHR = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR
+    , eImportSemaphoreWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR
+    , eExportSemaphoreWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR
+    , eD3D12FenceSubmitInfoKHR = VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR
+    , eSemaphoreGetWin32HandleInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+    , eImportSemaphoreFdInfoKHR = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR
+    , eSemaphoreGetFdInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR
+    , ePhysicalDevicePushDescriptorPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR
+    , eCommandBufferInheritanceConditionalRenderingInfoEXT = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT
+    , ePhysicalDeviceConditionalRenderingFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT
+    , eConditionalRenderingBeginInfoEXT = VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT
+    , ePresentRegionsKHR = VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR
+    , ePipelineViewportWScalingStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV
+    , eSurfaceCapabilities2EXT = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT
+    , eDisplayPowerInfoEXT = VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT
+    , eDeviceEventInfoEXT = VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT
+    , eDisplayEventInfoEXT = VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT
+    , eSwapchainCounterCreateInfoEXT = VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT
+    , ePresentTimesInfoGOOGLE = VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE
+    , ePhysicalDeviceMultiviewPerViewAttributesPropertiesNVX = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX
+    , ePipelineViewportSwizzleStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV
+    , ePhysicalDeviceDiscardRectanglePropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT
+    , ePipelineDiscardRectangleStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT
+    , ePhysicalDeviceConservativeRasterizationPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT
+    , ePipelineRasterizationConservativeStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT
+    , ePhysicalDeviceDepthClipEnableFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT
+    , ePipelineRasterizationDepthClipStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT
+    , eHdrMetadataEXT = VK_STRUCTURE_TYPE_HDR_METADATA_EXT
+    , eSharedPresentSurfaceCapabilitiesKHR = VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-    eMemoryWin32HandlePropertiesKHR = VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR,
+    , eImportFenceWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR
+    , eExportFenceWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR
+    , eFenceGetWin32HandleInfoKHR = VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eMemoryGetWin32HandleInfoKHR = VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-    eImportMemoryFdInfoKHR = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR,
-    eMemoryFdPropertiesKHR = VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR,
-    eMemoryGetFdInfoKHR = VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR,
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eWin32KeyedMutexAcquireReleaseInfoKHR = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eImportSemaphoreWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eExportSemaphoreWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eD3D12FenceSubmitInfoKHR = VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eSemaphoreGetWin32HandleInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-    eImportSemaphoreFdInfoKHR = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR,
-    eSemaphoreGetFdInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR,
-    ePhysicalDevicePushDescriptorPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR,
-    eCommandBufferInheritanceConditionalRenderingInfoEXT = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT,
-    ePhysicalDeviceConditionalRenderingFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT,
-    eConditionalRenderingBeginInfoEXT = VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT,
-    ePresentRegionsKHR = VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR,
-    ePipelineViewportWScalingStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV,
-    eSurfaceCapabilities2EXT = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT,
-    eDisplayPowerInfoEXT = VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT,
-    eDeviceEventInfoEXT = VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT,
-    eDisplayEventInfoEXT = VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT,
-    eSwapchainCounterCreateInfoEXT = VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT,
-    ePresentTimesInfoGOOGLE = VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE,
-    ePhysicalDeviceMultiviewPerViewAttributesPropertiesNVX = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX,
-    ePipelineViewportSwizzleStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV,
-    ePhysicalDeviceDiscardRectanglePropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT,
-    ePipelineDiscardRectangleStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT,
-    ePhysicalDeviceConservativeRasterizationPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT,
-    ePipelineRasterizationConservativeStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT,
-    ePhysicalDeviceDepthClipEnableFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT,
-    ePipelineRasterizationDepthClipStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT,
-    eHdrMetadataEXT = VK_STRUCTURE_TYPE_HDR_METADATA_EXT,
-    eSharedPresentSurfaceCapabilitiesKHR = VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR,
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eImportFenceWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eExportFenceWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eFenceGetWin32HandleInfoKHR = VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-    eImportFenceFdInfoKHR = VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR,
-    eFenceGetFdInfoKHR = VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR,
-    ePhysicalDevicePerformanceQueryFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR,
-    ePhysicalDevicePerformanceQueryPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR,
-    eQueryPoolPerformanceCreateInfoKHR = VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR,
-    ePerformanceQuerySubmitInfoKHR = VK_STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR,
-    eAcquireProfilingLockInfoKHR = VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR,
-    ePerformanceCounterKHR = VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_KHR,
-    ePerformanceCounterDescriptionKHR = VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR,
-    ePhysicalDeviceSurfaceInfo2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR,
-    eSurfaceCapabilities2KHR = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR,
-    eSurfaceFormat2KHR = VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR,
-    eDisplayProperties2KHR = VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR,
-    eDisplayPlaneProperties2KHR = VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR,
-    eDisplayModeProperties2KHR = VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR,
-    eDisplayPlaneInfo2KHR = VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR,
-    eDisplayPlaneCapabilities2KHR = VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR,
+    , eImportFenceFdInfoKHR = VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR
+    , eFenceGetFdInfoKHR = VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR
+    , ePhysicalDevicePerformanceQueryFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR
+    , ePhysicalDevicePerformanceQueryPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR
+    , eQueryPoolPerformanceCreateInfoKHR = VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR
+    , ePerformanceQuerySubmitInfoKHR = VK_STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR
+    , eAcquireProfilingLockInfoKHR = VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR
+    , ePerformanceCounterKHR = VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_KHR
+    , ePerformanceCounterDescriptionKHR = VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR
+    , ePhysicalDeviceSurfaceInfo2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR
+    , eSurfaceCapabilities2KHR = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR
+    , eSurfaceFormat2KHR = VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR
+    , eDisplayProperties2KHR = VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR
+    , eDisplayPlaneProperties2KHR = VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR
+    , eDisplayModeProperties2KHR = VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR
+    , eDisplayPlaneInfo2KHR = VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR
+    , eDisplayPlaneCapabilities2KHR = VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR
 #ifdef VK_USE_PLATFORM_IOS_MVK
-    eIosSurfaceCreateInfoMVK = VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK,
+    , eIosSurfaceCreateInfoMVK = VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK
 #endif /*VK_USE_PLATFORM_IOS_MVK*/
 #ifdef VK_USE_PLATFORM_MACOS_MVK
-    eMacosSurfaceCreateInfoMVK = VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK,
+    , eMacosSurfaceCreateInfoMVK = VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK
 #endif /*VK_USE_PLATFORM_MACOS_MVK*/
-    eDebugUtilsObjectNameInfoEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT,
-    eDebugUtilsObjectTagInfoEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT,
-    eDebugUtilsLabelEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT,
-    eDebugUtilsMessengerCallbackDataEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT,
-    eDebugUtilsMessengerCreateInfoEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
+    , eDebugUtilsObjectNameInfoEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT
+    , eDebugUtilsObjectTagInfoEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT
+    , eDebugUtilsLabelEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT
+    , eDebugUtilsMessengerCallbackDataEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT
+    , eDebugUtilsMessengerCreateInfoEXT = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-    eAndroidHardwareBufferUsageANDROID = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID,
+    , eAndroidHardwareBufferUsageANDROID = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID
+    , eAndroidHardwareBufferPropertiesANDROID = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID
+    , eAndroidHardwareBufferFormatPropertiesANDROID = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID
+    , eImportAndroidHardwareBufferInfoANDROID = VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID
+    , eMemoryGetAndroidHardwareBufferInfoANDROID = VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID
+    , eExternalFormatANDROID = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-#ifdef VK_USE_PLATFORM_ANDROID_KHR
-    eAndroidHardwareBufferPropertiesANDROID = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID,
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-#ifdef VK_USE_PLATFORM_ANDROID_KHR
-    eAndroidHardwareBufferFormatPropertiesANDROID = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID,
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-#ifdef VK_USE_PLATFORM_ANDROID_KHR
-    eImportAndroidHardwareBufferInfoANDROID = VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID,
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-#ifdef VK_USE_PLATFORM_ANDROID_KHR
-    eMemoryGetAndroidHardwareBufferInfoANDROID = VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID,
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-#ifdef VK_USE_PLATFORM_ANDROID_KHR
-    eExternalFormatANDROID = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID,
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-    ePhysicalDeviceInlineUniformBlockFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,
-    ePhysicalDeviceInlineUniformBlockPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,
-    eWriteDescriptorSetInlineUniformBlockEXT = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT,
-    eDescriptorPoolInlineUniformBlockCreateInfoEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT,
-    eSampleLocationsInfoEXT = VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT,
-    eRenderPassSampleLocationsBeginInfoEXT = VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT,
-    ePipelineSampleLocationsStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT,
-    ePhysicalDeviceSampleLocationsPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT,
-    eMultisamplePropertiesEXT = VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT,
-    ePhysicalDeviceBlendOperationAdvancedFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT,
-    ePhysicalDeviceBlendOperationAdvancedPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT,
-    ePipelineColorBlendAdvancedStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT,
-    ePipelineCoverageToColorStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV,
-    eWriteDescriptorSetAccelerationStructureKHR = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR,
-    eAccelerationStructureBuildGeometryInfoKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR,
-    eAccelerationStructureDeviceAddressInfoKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR,
-    eAccelerationStructureGeometryAabbsDataKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR,
-    eAccelerationStructureGeometryInstancesDataKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR,
-    eAccelerationStructureGeometryTrianglesDataKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR,
-    eAccelerationStructureGeometryKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR,
-    eAccelerationStructureVersionInfoKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR,
-    eCopyAccelerationStructureInfoKHR = VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR,
-    eCopyAccelerationStructureToMemoryInfoKHR = VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR,
-    eCopyMemoryToAccelerationStructureInfoKHR = VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR,
-    ePhysicalDeviceAccelerationStructureFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR,
-    ePhysicalDeviceAccelerationStructurePropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR,
-    eAccelerationStructureCreateInfoKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR,
-    eAccelerationStructureBuildSizesInfoKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR,
-    ePhysicalDeviceRayTracingPipelineFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR,
-    ePhysicalDeviceRayTracingPipelinePropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR,
-    eRayTracingPipelineCreateInfoKHR = VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR,
-    eRayTracingShaderGroupCreateInfoKHR = VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR,
-    eRayTracingPipelineInterfaceCreateInfoKHR = VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR,
-    ePhysicalDeviceRayQueryFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR,
-    ePipelineCoverageModulationStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV,
-    ePhysicalDeviceShaderSmBuiltinsFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV,
-    ePhysicalDeviceShaderSmBuiltinsPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV,
-    eDrmFormatModifierPropertiesListEXT = VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT,
-    ePhysicalDeviceImageDrmFormatModifierInfoEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT,
-    eImageDrmFormatModifierListCreateInfoEXT = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT,
-    eImageDrmFormatModifierExplicitCreateInfoEXT = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT,
-    eImageDrmFormatModifierPropertiesEXT = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT,
-    eValidationCacheCreateInfoEXT = VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT,
-    eShaderModuleValidationCacheCreateInfoEXT = VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT,
+    , ePhysicalDeviceInlineUniformBlockFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT
+    , ePhysicalDeviceInlineUniformBlockPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT
+    , eWriteDescriptorSetInlineUniformBlockEXT = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT
+    , eDescriptorPoolInlineUniformBlockCreateInfoEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT
+    , eSampleLocationsInfoEXT = VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT
+    , eRenderPassSampleLocationsBeginInfoEXT = VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT
+    , ePipelineSampleLocationsStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT
+    , ePhysicalDeviceSampleLocationsPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT
+    , eMultisamplePropertiesEXT = VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT
+    , ePhysicalDeviceBlendOperationAdvancedFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT
+    , ePhysicalDeviceBlendOperationAdvancedPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT
+    , ePipelineColorBlendAdvancedStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT
+    , ePipelineCoverageToColorStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV
+    , eWriteDescriptorSetAccelerationStructureKHR = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR
+    , eAccelerationStructureBuildGeometryInfoKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR
+    , eAccelerationStructureDeviceAddressInfoKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR
+    , eAccelerationStructureGeometryAabbsDataKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR
+    , eAccelerationStructureGeometryInstancesDataKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR
+    , eAccelerationStructureGeometryTrianglesDataKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR
+    , eAccelerationStructureGeometryKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR
+    , eAccelerationStructureVersionInfoKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR
+    , eCopyAccelerationStructureInfoKHR = VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR
+    , eCopyAccelerationStructureToMemoryInfoKHR = VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR
+    , eCopyMemoryToAccelerationStructureInfoKHR = VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR
+    , ePhysicalDeviceAccelerationStructureFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR
+    , ePhysicalDeviceAccelerationStructurePropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR
+    , eAccelerationStructureCreateInfoKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR
+    , eAccelerationStructureBuildSizesInfoKHR = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR
+    , ePhysicalDeviceRayTracingPipelineFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR
+    , ePhysicalDeviceRayTracingPipelinePropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR
+    , eRayTracingPipelineCreateInfoKHR = VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR
+    , eRayTracingShaderGroupCreateInfoKHR = VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR
+    , eRayTracingPipelineInterfaceCreateInfoKHR = VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR
+    , ePhysicalDeviceRayQueryFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR
+    , ePipelineCoverageModulationStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV
+    , ePhysicalDeviceShaderSmBuiltinsFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV
+    , ePhysicalDeviceShaderSmBuiltinsPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV
+    , eDrmFormatModifierPropertiesListEXT = VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT
+    , ePhysicalDeviceImageDrmFormatModifierInfoEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT
+    , eImageDrmFormatModifierListCreateInfoEXT = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT
+    , eImageDrmFormatModifierExplicitCreateInfoEXT = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT
+    , eImageDrmFormatModifierPropertiesEXT = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT
+    , eValidationCacheCreateInfoEXT = VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT
+    , eShaderModuleValidationCacheCreateInfoEXT = VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT
 #ifdef VK_ENABLE_BETA_EXTENSIONS
-    ePhysicalDevicePortabilitySubsetFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR,
+    , ePhysicalDevicePortabilitySubsetFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR
+    , ePhysicalDevicePortabilitySubsetPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-#ifdef VK_ENABLE_BETA_EXTENSIONS
-    ePhysicalDevicePortabilitySubsetPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR,
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
-    ePipelineViewportShadingRateImageStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV,
-    ePhysicalDeviceShadingRateImageFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV,
-    ePhysicalDeviceShadingRateImagePropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV,
-    ePipelineViewportCoarseSampleOrderStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV,
-    eRayTracingPipelineCreateInfoNV = VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV,
-    eAccelerationStructureCreateInfoNV = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV,
-    eGeometryNV = VK_STRUCTURE_TYPE_GEOMETRY_NV,
-    eGeometryTrianglesNV = VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NV,
-    eGeometryAabbNV = VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV,
-    eBindAccelerationStructureMemoryInfoNV = VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV,
-    eWriteDescriptorSetAccelerationStructureNV = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV,
-    eAccelerationStructureMemoryRequirementsInfoNV = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV,
-    ePhysicalDeviceRayTracingPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV,
-    eRayTracingShaderGroupCreateInfoNV = VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV,
-    eAccelerationStructureInfoNV = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_NV,
-    ePhysicalDeviceRepresentativeFragmentTestFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV,
-    ePipelineRepresentativeFragmentTestStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV,
-    ePhysicalDeviceImageViewImageFormatInfoEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT,
-    eFilterCubicImageViewImageFormatPropertiesEXT = VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT,
-    eDeviceQueueGlobalPriorityCreateInfoEXT = VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT,
-    eImportMemoryHostPointerInfoEXT = VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT,
-    eMemoryHostPointerPropertiesEXT = VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT,
-    ePhysicalDeviceExternalMemoryHostPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
-    ePhysicalDeviceShaderClockFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR,
-    ePipelineCompilerControlCreateInfoAMD = VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD,
-    eCalibratedTimestampInfoEXT = VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT,
-    ePhysicalDeviceShaderCorePropertiesAMD = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD,
-    eDeviceMemoryOverallocationCreateInfoAMD = VK_STRUCTURE_TYPE_DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD,
-    ePhysicalDeviceVertexAttributeDivisorPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
-    ePipelineVertexInputDivisorStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT,
-    ePhysicalDeviceVertexAttributeDivisorFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
+    , ePipelineViewportShadingRateImageStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV
+    , ePhysicalDeviceShadingRateImageFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV
+    , ePhysicalDeviceShadingRateImagePropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV
+    , ePipelineViewportCoarseSampleOrderStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV
+    , eRayTracingPipelineCreateInfoNV = VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV
+    , eAccelerationStructureCreateInfoNV = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV
+    , eGeometryNV = VK_STRUCTURE_TYPE_GEOMETRY_NV
+    , eGeometryTrianglesNV = VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NV
+    , eGeometryAabbNV = VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV
+    , eBindAccelerationStructureMemoryInfoNV = VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV
+    , eWriteDescriptorSetAccelerationStructureNV = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV
+    , eAccelerationStructureMemoryRequirementsInfoNV = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV
+    , ePhysicalDeviceRayTracingPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV
+    , eRayTracingShaderGroupCreateInfoNV = VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV
+    , eAccelerationStructureInfoNV = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_NV
+    , ePhysicalDeviceRepresentativeFragmentTestFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV
+    , ePipelineRepresentativeFragmentTestStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV
+    , ePhysicalDeviceImageViewImageFormatInfoEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT
+    , eFilterCubicImageViewImageFormatPropertiesEXT = VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT
+    , eDeviceQueueGlobalPriorityCreateInfoEXT = VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT
+    , eImportMemoryHostPointerInfoEXT = VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT
+    , eMemoryHostPointerPropertiesEXT = VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT
+    , ePhysicalDeviceExternalMemoryHostPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT
+    , ePhysicalDeviceShaderClockFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR
+    , ePipelineCompilerControlCreateInfoAMD = VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD
+    , eCalibratedTimestampInfoEXT = VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT
+    , ePhysicalDeviceShaderCorePropertiesAMD = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD
+    , eDeviceMemoryOverallocationCreateInfoAMD = VK_STRUCTURE_TYPE_DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD
+    , ePhysicalDeviceVertexAttributeDivisorPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT
+    , ePipelineVertexInputDivisorStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT
+    , ePhysicalDeviceVertexAttributeDivisorFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT
 #ifdef VK_USE_PLATFORM_GGP
-    ePresentFrameTokenGGP = VK_STRUCTURE_TYPE_PRESENT_FRAME_TOKEN_GGP,
+    , ePresentFrameTokenGGP = VK_STRUCTURE_TYPE_PRESENT_FRAME_TOKEN_GGP
 #endif /*VK_USE_PLATFORM_GGP*/
-    ePipelineCreationFeedbackCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT,
-    ePhysicalDeviceComputeShaderDerivativesFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV,
-    ePhysicalDeviceMeshShaderFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV,
-    ePhysicalDeviceMeshShaderPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV,
-    ePhysicalDeviceFragmentShaderBarycentricFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV,
-    ePhysicalDeviceShaderImageFootprintFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV,
-    ePipelineViewportExclusiveScissorStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV,
-    ePhysicalDeviceExclusiveScissorFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV,
-    eCheckpointDataNV = VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV,
-    eQueueFamilyCheckpointPropertiesNV = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV,
-    ePhysicalDeviceShaderIntegerFunctions2FeaturesINTEL = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL,
-    eQueryPoolPerformanceQueryCreateInfoINTEL = VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL,
-    eInitializePerformanceApiInfoINTEL = VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL,
-    ePerformanceMarkerInfoINTEL = VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL,
-    ePerformanceStreamMarkerInfoINTEL = VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL,
-    ePerformanceOverrideInfoINTEL = VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL,
-    ePerformanceConfigurationAcquireInfoINTEL = VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL,
-    ePhysicalDevicePciBusInfoPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT,
-    eDisplayNativeHdrSurfaceCapabilitiesAMD = VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD,
-    eSwapchainDisplayNativeHdrCreateInfoAMD = VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD,
+    , ePipelineCreationFeedbackCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT
+    , ePhysicalDeviceComputeShaderDerivativesFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV
+    , ePhysicalDeviceMeshShaderFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV
+    , ePhysicalDeviceMeshShaderPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV
+    , ePhysicalDeviceFragmentShaderBarycentricFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV
+    , ePhysicalDeviceShaderImageFootprintFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV
+    , ePipelineViewportExclusiveScissorStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV
+    , ePhysicalDeviceExclusiveScissorFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV
+    , eCheckpointDataNV = VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV
+    , eQueueFamilyCheckpointPropertiesNV = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV
+    , ePhysicalDeviceShaderIntegerFunctions2FeaturesINTEL = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL
+    , eQueryPoolPerformanceQueryCreateInfoINTEL = VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL
+    , eInitializePerformanceApiInfoINTEL = VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL
+    , ePerformanceMarkerInfoINTEL = VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL
+    , ePerformanceStreamMarkerInfoINTEL = VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL
+    , ePerformanceOverrideInfoINTEL = VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL
+    , ePerformanceConfigurationAcquireInfoINTEL = VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL
+    , ePhysicalDevicePciBusInfoPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT
+    , eDisplayNativeHdrSurfaceCapabilitiesAMD = VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD
+    , eSwapchainDisplayNativeHdrCreateInfoAMD = VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD
 #ifdef VK_USE_PLATFORM_FUCHSIA
-    eImagepipeSurfaceCreateInfoFUCHSIA = VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA,
+    , eImagepipeSurfaceCreateInfoFUCHSIA = VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
-    ePhysicalDeviceShaderTerminateInvocationFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR,
+    , ePhysicalDeviceShaderTerminateInvocationFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR
 #ifdef VK_USE_PLATFORM_METAL_EXT
-    eMetalSurfaceCreateInfoEXT = VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT,
+    , eMetalSurfaceCreateInfoEXT = VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
-    ePhysicalDeviceFragmentDensityMapFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT,
-    ePhysicalDeviceFragmentDensityMapPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT,
-    eRenderPassFragmentDensityMapCreateInfoEXT = VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT,
-    ePhysicalDeviceSubgroupSizeControlPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT,
-    ePipelineShaderStageRequiredSubgroupSizeCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT,
-    ePhysicalDeviceSubgroupSizeControlFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT,
-    eFragmentShadingRateAttachmentInfoKHR = VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR,
-    ePipelineFragmentShadingRateStateCreateInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR,
-    ePhysicalDeviceFragmentShadingRatePropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR,
-    ePhysicalDeviceFragmentShadingRateFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR,
-    ePhysicalDeviceFragmentShadingRateKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR,
-    ePhysicalDeviceShaderCoreProperties2AMD = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD,
-    ePhysicalDeviceCoherentMemoryFeaturesAMD = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD,
-    ePhysicalDeviceShaderImageAtomicInt64FeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT,
-    ePhysicalDeviceMemoryBudgetPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT,
-    ePhysicalDeviceMemoryPriorityFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT,
-    eMemoryPriorityAllocateInfoEXT = VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT,
-    eSurfaceProtectedCapabilitiesKHR = VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR,
-    ePhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV,
-    ePhysicalDeviceBufferDeviceAddressFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT,
-    eBufferDeviceAddressCreateInfoEXT = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT,
-    ePhysicalDeviceToolPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT,
-    eValidationFeaturesEXT = VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT,
-    ePhysicalDeviceCooperativeMatrixFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV,
-    eCooperativeMatrixPropertiesNV = VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV,
-    ePhysicalDeviceCooperativeMatrixPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV,
-    ePhysicalDeviceCoverageReductionModeFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV,
-    ePipelineCoverageReductionStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV,
-    eFramebufferMixedSamplesCombinationNV = VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV,
-    ePhysicalDeviceFragmentShaderInterlockFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT,
-    ePhysicalDeviceYcbcrImageArraysFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT,
+    , ePhysicalDeviceFragmentDensityMapFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT
+    , ePhysicalDeviceFragmentDensityMapPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT
+    , eRenderPassFragmentDensityMapCreateInfoEXT = VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT
+    , ePhysicalDeviceSubgroupSizeControlPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT
+    , ePipelineShaderStageRequiredSubgroupSizeCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT
+    , ePhysicalDeviceSubgroupSizeControlFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT
+    , eFragmentShadingRateAttachmentInfoKHR = VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR
+    , ePipelineFragmentShadingRateStateCreateInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR
+    , ePhysicalDeviceFragmentShadingRatePropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR
+    , ePhysicalDeviceFragmentShadingRateFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR
+    , ePhysicalDeviceFragmentShadingRateKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR
+    , ePhysicalDeviceShaderCoreProperties2AMD = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD
+    , ePhysicalDeviceCoherentMemoryFeaturesAMD = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD
+    , ePhysicalDeviceShaderImageAtomicInt64FeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT
+    , ePhysicalDeviceMemoryBudgetPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT
+    , ePhysicalDeviceMemoryPriorityFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT
+    , eMemoryPriorityAllocateInfoEXT = VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT
+    , eSurfaceProtectedCapabilitiesKHR = VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR
+    , ePhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV
+    , ePhysicalDeviceBufferDeviceAddressFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT
+    , eBufferDeviceAddressCreateInfoEXT = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT
+    , ePhysicalDeviceToolPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT
+    , eValidationFeaturesEXT = VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT
+    , ePhysicalDeviceCooperativeMatrixFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV
+    , eCooperativeMatrixPropertiesNV = VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV
+    , ePhysicalDeviceCooperativeMatrixPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV
+    , ePhysicalDeviceCoverageReductionModeFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV
+    , ePipelineCoverageReductionStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV
+    , eFramebufferMixedSamplesCombinationNV = VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV
+    , ePhysicalDeviceFragmentShaderInterlockFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT
+    , ePhysicalDeviceYcbcrImageArraysFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-    eSurfaceFullScreenExclusiveInfoEXT = VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT,
+    , eSurfaceFullScreenExclusiveInfoEXT = VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT
+    , eSurfaceCapabilitiesFullScreenExclusiveEXT = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT
+    , eSurfaceFullScreenExclusiveWin32InfoEXT = VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eSurfaceCapabilitiesFullScreenExclusiveEXT = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
-    eSurfaceFullScreenExclusiveWin32InfoEXT = VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT,
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-    eHeadlessSurfaceCreateInfoEXT = VK_STRUCTURE_TYPE_HEADLESS_SURFACE_CREATE_INFO_EXT,
-    ePhysicalDeviceLineRasterizationFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT,
-    ePipelineRasterizationLineStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT,
-    ePhysicalDeviceLineRasterizationPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT,
-    ePhysicalDeviceShaderAtomicFloatFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT,
-    ePhysicalDeviceIndexTypeUint8FeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT,
-    ePhysicalDeviceExtendedDynamicStateFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT,
-    ePhysicalDevicePipelineExecutablePropertiesFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR,
-    ePipelineInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR,
-    ePipelineExecutablePropertiesKHR = VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR,
-    ePipelineExecutableInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INFO_KHR,
-    ePipelineExecutableStatisticKHR = VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_STATISTIC_KHR,
-    ePipelineExecutableInternalRepresentationKHR = VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR,
-    ePhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT,
-    ePhysicalDeviceDeviceGeneratedCommandsPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV,
-    eGraphicsShaderGroupCreateInfoNV = VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV,
-    eGraphicsPipelineShaderGroupsCreateInfoNV = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV,
-    eIndirectCommandsLayoutTokenNV = VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV,
-    eIndirectCommandsLayoutCreateInfoNV = VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV,
-    eGeneratedCommandsInfoNV = VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV,
-    eGeneratedCommandsMemoryRequirementsInfoNV = VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV,
-    ePhysicalDeviceDeviceGeneratedCommandsFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV,
-    ePhysicalDeviceTexelBufferAlignmentFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT,
-    ePhysicalDeviceTexelBufferAlignmentPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT,
-    eCommandBufferInheritanceRenderPassTransformInfoQCOM = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM,
-    eRenderPassTransformBeginInfoQCOM = VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM,
-    ePhysicalDeviceDeviceMemoryReportFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT,
-    eDeviceDeviceMemoryReportCreateInfoEXT = VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT,
-    eDeviceMemoryReportCallbackDataEXT = VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT,
-    ePhysicalDeviceRobustness2FeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT,
-    ePhysicalDeviceRobustness2PropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT,
-    eSamplerCustomBorderColorCreateInfoEXT = VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT,
-    ePhysicalDeviceCustomBorderColorPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT,
-    ePhysicalDeviceCustomBorderColorFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT,
-    ePipelineLibraryCreateInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR,
-    ePhysicalDevicePrivateDataFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT,
-    eDevicePrivateDataCreateInfoEXT = VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT,
-    ePrivateDataSlotCreateInfoEXT = VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT,
-    ePhysicalDevicePipelineCreationCacheControlFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT,
-    ePhysicalDeviceDiagnosticsConfigFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV,
-    eDeviceDiagnosticsConfigCreateInfoNV = VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV,
-    eMemoryBarrier2KHR = VK_STRUCTURE_TYPE_MEMORY_BARRIER_2_KHR,
-    eBufferMemoryBarrier2KHR = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR,
-    eImageMemoryBarrier2KHR = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2_KHR,
-    eDependencyInfoKHR = VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR,
-    eSubmitInfo2KHR = VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR,
-    eSemaphoreSubmitInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR,
-    eCommandBufferSubmitInfoKHR = VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR,
-    ePhysicalDeviceSynchronization2FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR,
-    eQueueFamilyCheckpointProperties2Nv = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV,
-    eCheckpointData2Nv = VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV,
-    ePhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR,
-    ePhysicalDeviceFragmentShadingRateEnumsPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV,
-    ePhysicalDeviceFragmentShadingRateEnumsFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV,
-    ePipelineFragmentShadingRateEnumStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV,
-    ePhysicalDeviceFragmentDensityMap2FeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT,
-    ePhysicalDeviceFragmentDensityMap2PropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT,
-    eCopyCommandTransformInfoQCOM = VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM,
-    ePhysicalDeviceImageRobustnessFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT,
-    ePhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR,
-    eCopyBufferInfo2KHR = VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR,
-    eCopyImageInfo2KHR = VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2_KHR,
-    eCopyBufferToImageInfo2KHR = VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2_KHR,
-    eCopyImageToBufferInfo2KHR = VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2_KHR,
-    eBlitImageInfo2KHR = VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR,
-    eResolveImageInfo2KHR = VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2_KHR,
-    eBufferCopy2KHR = VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR,
-    eImageCopy2KHR = VK_STRUCTURE_TYPE_IMAGE_COPY_2_KHR,
-    eImageBlit2KHR = VK_STRUCTURE_TYPE_IMAGE_BLIT_2_KHR,
-    eBufferImageCopy2KHR = VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR,
-    eImageResolve2KHR = VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR,
-    ePhysicalDevice4444FormatsFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT,
+    , eHeadlessSurfaceCreateInfoEXT = VK_STRUCTURE_TYPE_HEADLESS_SURFACE_CREATE_INFO_EXT
+    , ePhysicalDeviceLineRasterizationFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT
+    , ePipelineRasterizationLineStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT
+    , ePhysicalDeviceLineRasterizationPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT
+    , ePhysicalDeviceShaderAtomicFloatFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT
+    , ePhysicalDeviceIndexTypeUint8FeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT
+    , ePhysicalDeviceExtendedDynamicStateFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT
+    , ePhysicalDevicePipelineExecutablePropertiesFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR
+    , ePipelineInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR
+    , ePipelineExecutablePropertiesKHR = VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR
+    , ePipelineExecutableInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INFO_KHR
+    , ePipelineExecutableStatisticKHR = VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_STATISTIC_KHR
+    , ePipelineExecutableInternalRepresentationKHR = VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR
+    , ePhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT
+    , ePhysicalDeviceDeviceGeneratedCommandsPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV
+    , eGraphicsShaderGroupCreateInfoNV = VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV
+    , eGraphicsPipelineShaderGroupsCreateInfoNV = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV
+    , eIndirectCommandsLayoutTokenNV = VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV
+    , eIndirectCommandsLayoutCreateInfoNV = VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV
+    , eGeneratedCommandsInfoNV = VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV
+    , eGeneratedCommandsMemoryRequirementsInfoNV = VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV
+    , ePhysicalDeviceDeviceGeneratedCommandsFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV
+    , ePhysicalDeviceTexelBufferAlignmentFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT
+    , ePhysicalDeviceTexelBufferAlignmentPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT
+    , eCommandBufferInheritanceRenderPassTransformInfoQCOM = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM
+    , eRenderPassTransformBeginInfoQCOM = VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM
+    , ePhysicalDeviceDeviceMemoryReportFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT
+    , eDeviceDeviceMemoryReportCreateInfoEXT = VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT
+    , eDeviceMemoryReportCallbackDataEXT = VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT
+    , ePhysicalDeviceRobustness2FeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT
+    , ePhysicalDeviceRobustness2PropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT
+    , eSamplerCustomBorderColorCreateInfoEXT = VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT
+    , ePhysicalDeviceCustomBorderColorPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT
+    , ePhysicalDeviceCustomBorderColorFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT
+    , ePipelineLibraryCreateInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR
+    , ePhysicalDevicePrivateDataFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT
+    , eDevicePrivateDataCreateInfoEXT = VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT
+    , ePrivateDataSlotCreateInfoEXT = VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT
+    , ePhysicalDevicePipelineCreationCacheControlFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT
+    , ePhysicalDeviceDiagnosticsConfigFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV
+    , eDeviceDiagnosticsConfigCreateInfoNV = VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV
+    , eMemoryBarrier2KHR = VK_STRUCTURE_TYPE_MEMORY_BARRIER_2_KHR
+    , eBufferMemoryBarrier2KHR = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR
+    , eImageMemoryBarrier2KHR = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2_KHR
+    , eDependencyInfoKHR = VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR
+    , eSubmitInfo2KHR = VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR
+    , eSemaphoreSubmitInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR
+    , eCommandBufferSubmitInfoKHR = VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR
+    , ePhysicalDeviceSynchronization2FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR
+    , eQueueFamilyCheckpointProperties2Nv = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV
+    , eCheckpointData2Nv = VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV
+    , ePhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR
+    , ePhysicalDeviceFragmentShadingRateEnumsPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV
+    , ePhysicalDeviceFragmentShadingRateEnumsFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV
+    , ePipelineFragmentShadingRateEnumStateCreateInfoNV = VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV
+    , ePhysicalDeviceFragmentDensityMap2FeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT
+    , ePhysicalDeviceFragmentDensityMap2PropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT
+    , eCopyCommandTransformInfoQCOM = VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM
+    , ePhysicalDeviceImageRobustnessFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT
+    , ePhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR
+    , eCopyBufferInfo2KHR = VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR
+    , eCopyImageInfo2KHR = VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2_KHR
+    , eCopyBufferToImageInfo2KHR = VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2_KHR
+    , eCopyImageToBufferInfo2KHR = VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2_KHR
+    , eBlitImageInfo2KHR = VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR
+    , eResolveImageInfo2KHR = VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2_KHR
+    , eBufferCopy2KHR = VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR
+    , eImageCopy2KHR = VK_STRUCTURE_TYPE_IMAGE_COPY_2_KHR
+    , eImageBlit2KHR = VK_STRUCTURE_TYPE_IMAGE_BLIT_2_KHR
+    , eBufferImageCopy2KHR = VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR
+    , eImageResolve2KHR = VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR
+    , ePhysicalDevice4444FormatsFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT
 #ifdef VK_USE_PLATFORM_DIRECTFB_EXT
-    eDirectfbSurfaceCreateInfoEXT = VK_STRUCTURE_TYPE_DIRECTFB_SURFACE_CREATE_INFO_EXT,
+    , eDirectfbSurfaceCreateInfoEXT = VK_STRUCTURE_TYPE_DIRECTFB_SURFACE_CREATE_INFO_EXT
 #endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
-    ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE,
-    eMutableDescriptorTypeCreateInfoVALVE = VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE,
+    , ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE
+    , eMutableDescriptorTypeCreateInfoVALVE = VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE
 #ifdef VK_USE_PLATFORM_SCREEN_QNX
-    eScreenSurfaceCreateInfoQNX = VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX,
+    , eScreenSurfaceCreateInfoQNX = VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
-    eAttachmentDescription2KHR = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR,
-    eAttachmentDescriptionStencilLayoutKHR = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT_KHR,
-    eAttachmentReference2KHR = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR,
-    eAttachmentReferenceStencilLayoutKHR = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR,
-    eBindBufferMemoryDeviceGroupInfoKHR = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR,
-    eBindBufferMemoryInfoKHR = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHR,
-    eBindImageMemoryDeviceGroupInfoKHR = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR,
-    eBindImageMemoryInfoKHR = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHR,
-    eBindImagePlaneMemoryInfoKHR = VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO_KHR,
-    eBufferDeviceAddressInfoEXT = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT,
-    eBufferDeviceAddressInfoKHR = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_KHR,
-    eBufferMemoryRequirementsInfo2KHR = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR,
-    eBufferOpaqueCaptureAddressCreateInfoKHR = VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR,
-    eDebugReportCreateInfoEXT = VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT,
-    eDescriptorSetLayoutBindingFlagsCreateInfoEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT,
-    eDescriptorSetLayoutSupportKHR = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT_KHR,
-    eDescriptorSetVariableDescriptorCountAllocateInfoEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT,
-    eDescriptorSetVariableDescriptorCountLayoutSupportEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT,
-    eDescriptorUpdateTemplateCreateInfoKHR = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR,
-    eDeviceGroupBindSparseInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHR,
-    eDeviceGroupCommandBufferBeginInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHR,
-    eDeviceGroupDeviceCreateInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHR,
-    eDeviceGroupRenderPassBeginInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHR,
-    eDeviceGroupSubmitInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHR,
-    eDeviceMemoryOpaqueCaptureAddressInfoKHR = VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR,
-    eExportFenceCreateInfoKHR = VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO_KHR,
-    eExportMemoryAllocateInfoKHR = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR,
-    eExportSemaphoreCreateInfoKHR = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR,
-    eExternalBufferPropertiesKHR = VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES_KHR,
-    eExternalFencePropertiesKHR = VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR,
-    eExternalImageFormatPropertiesKHR = VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR,
-    eExternalMemoryBufferCreateInfoKHR = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHR,
-    eExternalMemoryImageCreateInfoKHR = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR,
-    eExternalSemaphorePropertiesKHR = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR,
-    eFormatProperties2KHR = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR,
-    eFramebufferAttachmentsCreateInfoKHR = VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR,
-    eFramebufferAttachmentImageInfoKHR = VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR,
-    eImageFormatListCreateInfoKHR = VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR,
-    eImageFormatProperties2KHR = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR,
-    eImageMemoryRequirementsInfo2KHR = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR,
-    eImagePlaneMemoryRequirementsInfoKHR = VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO_KHR,
-    eImageSparseMemoryRequirementsInfo2KHR = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR,
-    eImageStencilUsageCreateInfoEXT = VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT,
-    eImageViewUsageCreateInfoKHR = VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO_KHR,
-    eMemoryAllocateFlagsInfoKHR = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHR,
-    eMemoryDedicatedAllocateInfoKHR = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR,
-    eMemoryDedicatedRequirementsKHR = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR,
-    eMemoryOpaqueCaptureAddressAllocateInfoKHR = VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO_KHR,
-    eMemoryRequirements2KHR = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR,
-    ePhysicalDevice16BitStorageFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR,
-    ePhysicalDevice8BitStorageFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR,
-    ePhysicalDeviceBufferAddressFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_ADDRESS_FEATURES_EXT,
-    ePhysicalDeviceBufferDeviceAddressFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_KHR,
-    ePhysicalDeviceDepthStencilResolvePropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR,
-    ePhysicalDeviceDescriptorIndexingFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT,
-    ePhysicalDeviceDescriptorIndexingPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT,
-    ePhysicalDeviceDriverPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR,
-    ePhysicalDeviceExternalBufferInfoKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHR,
-    ePhysicalDeviceExternalFenceInfoKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR,
-    ePhysicalDeviceExternalImageFormatInfoKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR,
-    ePhysicalDeviceExternalSemaphoreInfoKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR,
-    ePhysicalDeviceFeatures2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,
-    ePhysicalDeviceFloat16Int8FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR,
-    ePhysicalDeviceFloatControlsPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR,
-    ePhysicalDeviceGroupPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHR,
-    ePhysicalDeviceHostQueryResetFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT,
-    ePhysicalDeviceIdPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR,
-    ePhysicalDeviceImagelessFramebufferFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR,
-    ePhysicalDeviceImageFormatInfo2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR,
-    ePhysicalDeviceMaintenance3PropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES_KHR,
-    ePhysicalDeviceMemoryProperties2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR,
-    ePhysicalDeviceMultiviewFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR,
-    ePhysicalDeviceMultiviewPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR,
-    ePhysicalDevicePointClippingPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES_KHR,
-    ePhysicalDeviceProperties2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR,
-    ePhysicalDeviceSamplerFilterMinmaxPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT,
-    ePhysicalDeviceSamplerYcbcrConversionFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES_KHR,
-    ePhysicalDeviceScalarBlockLayoutFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT,
-    ePhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR,
-    ePhysicalDeviceShaderAtomicInt64FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR,
-    ePhysicalDeviceShaderDrawParameterFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,
-    ePhysicalDeviceShaderFloat16Int8FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR,
-    ePhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES_KHR,
-    ePhysicalDeviceSparseImageFormatInfo2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR,
-    ePhysicalDeviceTimelineSemaphoreFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES_KHR,
-    ePhysicalDeviceTimelineSemaphorePropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES_KHR,
-    ePhysicalDeviceUniformBufferStandardLayoutFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR,
-    ePhysicalDeviceVariablePointersFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR,
-    ePhysicalDeviceVariablePointerFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES,
-    ePhysicalDeviceVariablePointerFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR,
-    ePhysicalDeviceVulkanMemoryModelFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR,
-    ePipelineTessellationDomainOriginStateCreateInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO_KHR,
-    eQueryPoolCreateInfoINTEL = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL,
-    eQueueFamilyProperties2KHR = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR,
-    eRenderPassAttachmentBeginInfoKHR = VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR,
-    eRenderPassCreateInfo2KHR = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR,
-    eRenderPassInputAttachmentAspectCreateInfoKHR = VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO_KHR,
-    eRenderPassMultiviewCreateInfoKHR = VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR,
-    eSamplerReductionModeCreateInfoEXT = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT,
-    eSamplerYcbcrConversionCreateInfoKHR = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO_KHR,
-    eSamplerYcbcrConversionImageFormatPropertiesKHR = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES_KHR,
-    eSamplerYcbcrConversionInfoKHR = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO_KHR,
-    eSemaphoreSignalInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO_KHR,
-    eSemaphoreTypeCreateInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR,
-    eSemaphoreWaitInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO_KHR,
-    eSparseImageFormatProperties2KHR = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR,
-    eSparseImageMemoryRequirements2KHR = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR,
-    eSubpassBeginInfoKHR = VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR,
-    eSubpassDependency2KHR = VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR,
-    eSubpassDescription2KHR = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR,
-    eSubpassDescriptionDepthStencilResolveKHR = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR,
-    eSubpassEndInfoKHR = VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR,
-    eTimelineSemaphoreSubmitInfoKHR = VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR};
+    , eAttachmentDescription2KHR = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR
+    , eAttachmentDescriptionStencilLayoutKHR = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT_KHR
+    , eAttachmentReference2KHR = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR
+    , eAttachmentReferenceStencilLayoutKHR = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR
+    , eBindBufferMemoryDeviceGroupInfoKHR = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR
+    , eBindBufferMemoryInfoKHR = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHR
+    , eBindImageMemoryDeviceGroupInfoKHR = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR
+    , eBindImageMemoryInfoKHR = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHR
+    , eBindImagePlaneMemoryInfoKHR = VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO_KHR
+    , eBufferDeviceAddressInfoEXT = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT
+    , eBufferDeviceAddressInfoKHR = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_KHR
+    , eBufferMemoryRequirementsInfo2KHR = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR
+    , eBufferOpaqueCaptureAddressCreateInfoKHR = VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR
+    , eDebugReportCreateInfoEXT = VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT
+    , eDescriptorSetLayoutBindingFlagsCreateInfoEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT
+    , eDescriptorSetLayoutSupportKHR = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT_KHR
+    , eDescriptorSetVariableDescriptorCountAllocateInfoEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT
+    , eDescriptorSetVariableDescriptorCountLayoutSupportEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT
+    , eDescriptorUpdateTemplateCreateInfoKHR = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR
+    , eDeviceGroupBindSparseInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHR
+    , eDeviceGroupCommandBufferBeginInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHR
+    , eDeviceGroupDeviceCreateInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHR
+    , eDeviceGroupRenderPassBeginInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHR
+    , eDeviceGroupSubmitInfoKHR = VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHR
+    , eDeviceMemoryOpaqueCaptureAddressInfoKHR = VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR
+    , eExportFenceCreateInfoKHR = VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO_KHR
+    , eExportMemoryAllocateInfoKHR = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR
+    , eExportSemaphoreCreateInfoKHR = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR
+    , eExternalBufferPropertiesKHR = VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES_KHR
+    , eExternalFencePropertiesKHR = VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR
+    , eExternalImageFormatPropertiesKHR = VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR
+    , eExternalMemoryBufferCreateInfoKHR = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHR
+    , eExternalMemoryImageCreateInfoKHR = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR
+    , eExternalSemaphorePropertiesKHR = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR
+    , eFormatProperties2KHR = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR
+    , eFramebufferAttachmentsCreateInfoKHR = VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR
+    , eFramebufferAttachmentImageInfoKHR = VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR
+    , eImageFormatListCreateInfoKHR = VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR
+    , eImageFormatProperties2KHR = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR
+    , eImageMemoryRequirementsInfo2KHR = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR
+    , eImagePlaneMemoryRequirementsInfoKHR = VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO_KHR
+    , eImageSparseMemoryRequirementsInfo2KHR = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR
+    , eImageStencilUsageCreateInfoEXT = VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT
+    , eImageViewUsageCreateInfoKHR = VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO_KHR
+    , eMemoryAllocateFlagsInfoKHR = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHR
+    , eMemoryDedicatedAllocateInfoKHR = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR
+    , eMemoryDedicatedRequirementsKHR = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR
+    , eMemoryOpaqueCaptureAddressAllocateInfoKHR = VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO_KHR
+    , eMemoryRequirements2KHR = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR
+    , ePhysicalDevice16BitStorageFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR
+    , ePhysicalDevice8BitStorageFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR
+    , ePhysicalDeviceBufferAddressFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_ADDRESS_FEATURES_EXT
+    , ePhysicalDeviceBufferDeviceAddressFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_KHR
+    , ePhysicalDeviceDepthStencilResolvePropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR
+    , ePhysicalDeviceDescriptorIndexingFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT
+    , ePhysicalDeviceDescriptorIndexingPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT
+    , ePhysicalDeviceDriverPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR
+    , ePhysicalDeviceExternalBufferInfoKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHR
+    , ePhysicalDeviceExternalFenceInfoKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR
+    , ePhysicalDeviceExternalImageFormatInfoKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR
+    , ePhysicalDeviceExternalSemaphoreInfoKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR
+    , ePhysicalDeviceFeatures2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR
+    , ePhysicalDeviceFloat16Int8FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR
+    , ePhysicalDeviceFloatControlsPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR
+    , ePhysicalDeviceGroupPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHR
+    , ePhysicalDeviceHostQueryResetFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT
+    , ePhysicalDeviceIdPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR
+    , ePhysicalDeviceImagelessFramebufferFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR
+    , ePhysicalDeviceImageFormatInfo2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR
+    , ePhysicalDeviceMaintenance3PropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES_KHR
+    , ePhysicalDeviceMemoryProperties2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR
+    , ePhysicalDeviceMultiviewFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR
+    , ePhysicalDeviceMultiviewPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR
+    , ePhysicalDevicePointClippingPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES_KHR
+    , ePhysicalDeviceProperties2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR
+    , ePhysicalDeviceSamplerFilterMinmaxPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT
+    , ePhysicalDeviceSamplerYcbcrConversionFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES_KHR
+    , ePhysicalDeviceScalarBlockLayoutFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT
+    , ePhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR
+    , ePhysicalDeviceShaderAtomicInt64FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR
+    , ePhysicalDeviceShaderDrawParameterFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES
+    , ePhysicalDeviceShaderFloat16Int8FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR
+    , ePhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES_KHR
+    , ePhysicalDeviceSparseImageFormatInfo2KHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR
+    , ePhysicalDeviceTimelineSemaphoreFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES_KHR
+    , ePhysicalDeviceTimelineSemaphorePropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES_KHR
+    , ePhysicalDeviceUniformBufferStandardLayoutFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR
+    , ePhysicalDeviceVariablePointersFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR
+    , ePhysicalDeviceVariablePointerFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES
+    , ePhysicalDeviceVariablePointerFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR
+    , ePhysicalDeviceVulkanMemoryModelFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR
+    , ePipelineTessellationDomainOriginStateCreateInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO_KHR
+    , eQueryPoolCreateInfoINTEL = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL
+    , eQueueFamilyProperties2KHR = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR
+    , eRenderPassAttachmentBeginInfoKHR = VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR
+    , eRenderPassCreateInfo2KHR = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR
+    , eRenderPassInputAttachmentAspectCreateInfoKHR = VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO_KHR
+    , eRenderPassMultiviewCreateInfoKHR = VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR
+    , eSamplerReductionModeCreateInfoEXT = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT
+    , eSamplerYcbcrConversionCreateInfoKHR = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO_KHR
+    , eSamplerYcbcrConversionImageFormatPropertiesKHR = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES_KHR
+    , eSamplerYcbcrConversionInfoKHR = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO_KHR
+    , eSemaphoreSignalInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO_KHR
+    , eSemaphoreTypeCreateInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR
+    , eSemaphoreWaitInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO_KHR
+    , eSparseImageFormatProperties2KHR = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR
+    , eSparseImageMemoryRequirements2KHR = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR
+    , eSubpassBeginInfoKHR = VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR
+    , eSubpassDependency2KHR = VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR
+    , eSubpassDescription2KHR = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR
+    , eSubpassDescriptionDepthStencilResolveKHR = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR
+    , eSubpassEndInfoKHR = VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR
+    , eTimelineSemaphoreSubmitInfoKHR = VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR
+    // clang-format on
+  };
 
   VULKAN_HPP_INLINE std::string to_string( StructureType value )
   {
@@ -9241,11 +9375,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eExportMemoryAllocateInfoNV : return "ExportMemoryAllocateInfoNV";
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eImportMemoryWin32HandleInfoNV : return "ImportMemoryWin32HandleInfoNV";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eExportMemoryWin32HandleInfoNV : return "ExportMemoryWin32HandleInfoNV";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eWin32KeyedMutexAcquireReleaseInfoNV : return "Win32KeyedMutexAcquireReleaseInfoNV";
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eValidationFlagsEXT : return "ValidationFlagsEXT";
@@ -9257,14 +9387,8 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceAstcDecodeFeaturesEXT : return "PhysicalDeviceAstcDecodeFeaturesEXT";
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eImportMemoryWin32HandleInfoKHR : return "ImportMemoryWin32HandleInfoKHR";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eExportMemoryWin32HandleInfoKHR : return "ExportMemoryWin32HandleInfoKHR";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eMemoryWin32HandlePropertiesKHR : return "MemoryWin32HandlePropertiesKHR";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eMemoryGetWin32HandleInfoKHR : return "MemoryGetWin32HandleInfoKHR";
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eImportMemoryFdInfoKHR : return "ImportMemoryFdInfoKHR";
@@ -9272,17 +9396,9 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eMemoryGetFdInfoKHR : return "MemoryGetFdInfoKHR";
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eWin32KeyedMutexAcquireReleaseInfoKHR : return "Win32KeyedMutexAcquireReleaseInfoKHR";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eImportSemaphoreWin32HandleInfoKHR : return "ImportSemaphoreWin32HandleInfoKHR";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eExportSemaphoreWin32HandleInfoKHR : return "ExportSemaphoreWin32HandleInfoKHR";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eD3D12FenceSubmitInfoKHR : return "D3D12FenceSubmitInfoKHR";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eSemaphoreGetWin32HandleInfoKHR : return "SemaphoreGetWin32HandleInfoKHR";
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eImportSemaphoreFdInfoKHR : return "ImportSemaphoreFdInfoKHR";
@@ -9311,11 +9427,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eSharedPresentSurfaceCapabilitiesKHR : return "SharedPresentSurfaceCapabilitiesKHR";
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eImportFenceWin32HandleInfoKHR : return "ImportFenceWin32HandleInfoKHR";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eExportFenceWin32HandleInfoKHR : return "ExportFenceWin32HandleInfoKHR";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eFenceGetWin32HandleInfoKHR : return "FenceGetWin32HandleInfoKHR";
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eImportFenceFdInfoKHR : return "ImportFenceFdInfoKHR";
@@ -9348,20 +9460,10 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eDebugUtilsMessengerCreateInfoEXT : return "DebugUtilsMessengerCreateInfoEXT";
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eAndroidHardwareBufferUsageANDROID : return "AndroidHardwareBufferUsageANDROID";
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eAndroidHardwareBufferPropertiesANDROID : return "AndroidHardwareBufferPropertiesANDROID";
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eAndroidHardwareBufferFormatPropertiesANDROID : return "AndroidHardwareBufferFormatPropertiesANDROID";
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eImportAndroidHardwareBufferInfoANDROID : return "ImportAndroidHardwareBufferInfoANDROID";
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eMemoryGetAndroidHardwareBufferInfoANDROID : return "MemoryGetAndroidHardwareBufferInfoANDROID";
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-#ifdef VK_USE_PLATFORM_ANDROID_KHR
       case StructureType::eExternalFormatANDROID : return "ExternalFormatANDROID";
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
       case StructureType::ePhysicalDeviceInlineUniformBlockFeaturesEXT : return "PhysicalDeviceInlineUniformBlockFeaturesEXT";
@@ -9410,8 +9512,6 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eShaderModuleValidationCacheCreateInfoEXT : return "ShaderModuleValidationCacheCreateInfoEXT";
 #ifdef VK_ENABLE_BETA_EXTENSIONS
       case StructureType::ePhysicalDevicePortabilitySubsetFeaturesKHR : return "PhysicalDevicePortabilitySubsetFeaturesKHR";
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
-#ifdef VK_ENABLE_BETA_EXTENSIONS
       case StructureType::ePhysicalDevicePortabilitySubsetPropertiesKHR : return "PhysicalDevicePortabilitySubsetPropertiesKHR";
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
       case StructureType::ePipelineViewportShadingRateImageStateCreateInfoNV : return "PipelineViewportShadingRateImageStateCreateInfoNV";
@@ -9508,11 +9608,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceYcbcrImageArraysFeaturesEXT : return "PhysicalDeviceYcbcrImageArraysFeaturesEXT";
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eSurfaceFullScreenExclusiveInfoEXT : return "SurfaceFullScreenExclusiveInfoEXT";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eSurfaceCapabilitiesFullScreenExclusiveEXT : return "SurfaceCapabilitiesFullScreenExclusiveEXT";
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
-#ifdef VK_USE_PLATFORM_WIN32_KHR
       case StructureType::eSurfaceFullScreenExclusiveWin32InfoEXT : return "SurfaceFullScreenExclusiveWin32InfoEXT";
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
       case StructureType::eHeadlessSurfaceCreateInfoEXT : return "HeadlessSurfaceCreateInfoEXT";
@@ -9601,15 +9697,16 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SubgroupFeatureFlagBits : VkSubgroupFeatureFlags
   {
-    eBasic = VK_SUBGROUP_FEATURE_BASIC_BIT,
-    eVote = VK_SUBGROUP_FEATURE_VOTE_BIT,
-    eArithmetic = VK_SUBGROUP_FEATURE_ARITHMETIC_BIT,
-    eBallot = VK_SUBGROUP_FEATURE_BALLOT_BIT,
-    eShuffle = VK_SUBGROUP_FEATURE_SHUFFLE_BIT,
-    eShuffleRelative = VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT,
-    eClustered = VK_SUBGROUP_FEATURE_CLUSTERED_BIT,
-    eQuad = VK_SUBGROUP_FEATURE_QUAD_BIT,
-    ePartitionedNV = VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV};
+      eBasic = VK_SUBGROUP_FEATURE_BASIC_BIT
+    , eVote = VK_SUBGROUP_FEATURE_VOTE_BIT
+    , eArithmetic = VK_SUBGROUP_FEATURE_ARITHMETIC_BIT
+    , eBallot = VK_SUBGROUP_FEATURE_BALLOT_BIT
+    , eShuffle = VK_SUBGROUP_FEATURE_SHUFFLE_BIT
+    , eShuffleRelative = VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT
+    , eClustered = VK_SUBGROUP_FEATURE_CLUSTERED_BIT
+    , eQuad = VK_SUBGROUP_FEATURE_QUAD_BIT
+    , ePartitionedNV = VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SubgroupFeatureFlagBits value )
   {
@@ -9630,7 +9727,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SubmitFlagBitsKHR : VkSubmitFlagsKHR
   {
-    eProtected = VK_SUBMIT_PROTECTED_BIT_KHR};
+      eProtected = VK_SUBMIT_PROTECTED_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SubmitFlagBitsKHR value )
   {
@@ -9643,8 +9741,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SubpassContents
   {
-    eInline = VK_SUBPASS_CONTENTS_INLINE,
-    eSecondaryCommandBuffers = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS};
+      eInline = VK_SUBPASS_CONTENTS_INLINE
+    , eSecondaryCommandBuffers = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SubpassContents value )
   {
@@ -9658,10 +9757,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SubpassDescriptionFlagBits : VkSubpassDescriptionFlags
   {
-    ePerViewAttributesNVX = VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX,
-    ePerViewPositionXOnlyNVX = VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX,
-    eFragmentRegionQCOM = VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM,
-    eShaderResolveQCOM = VK_SUBPASS_DESCRIPTION_SHADER_RESOLVE_BIT_QCOM};
+      ePerViewAttributesNVX = VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX
+    , ePerViewPositionXOnlyNVX = VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX
+    , eFragmentRegionQCOM = VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM
+    , eShaderResolveQCOM = VK_SUBPASS_DESCRIPTION_SHADER_RESOLVE_BIT_QCOM
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SubpassDescriptionFlagBits value )
   {
@@ -9677,7 +9777,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SurfaceCounterFlagBitsEXT : VkSurfaceCounterFlagsEXT
   {
-    eVblank = VK_SURFACE_COUNTER_VBLANK_BIT_EXT};
+      eVblank = VK_SURFACE_COUNTER_VBLANK_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SurfaceCounterFlagBitsEXT value )
   {
@@ -9690,15 +9791,16 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SurfaceTransformFlagBitsKHR : VkSurfaceTransformFlagsKHR
   {
-    eIdentity = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR,
-    eRotate90 = VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR,
-    eRotate180 = VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR,
-    eRotate270 = VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR,
-    eHorizontalMirror = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR,
-    eHorizontalMirrorRotate90 = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR,
-    eHorizontalMirrorRotate180 = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR,
-    eHorizontalMirrorRotate270 = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR,
-    eInherit = VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR};
+      eIdentity = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR
+    , eRotate90 = VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR
+    , eRotate180 = VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR
+    , eRotate270 = VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR
+    , eHorizontalMirror = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR
+    , eHorizontalMirrorRotate90 = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR
+    , eHorizontalMirrorRotate180 = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR
+    , eHorizontalMirrorRotate270 = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR
+    , eInherit = VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SurfaceTransformFlagBitsKHR value )
   {
@@ -9719,9 +9821,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SwapchainCreateFlagBitsKHR : VkSwapchainCreateFlagsKHR
   {
-    eSplitInstanceBindRegions = VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR,
-    eProtected = VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR,
-    eMutableFormat = VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR};
+      eSplitInstanceBindRegions = VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR
+    , eProtected = VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR
+    , eMutableFormat = VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SwapchainCreateFlagBitsKHR value )
   {
@@ -9736,11 +9839,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SystemAllocationScope
   {
-    eCommand = VK_SYSTEM_ALLOCATION_SCOPE_COMMAND,
-    eObject = VK_SYSTEM_ALLOCATION_SCOPE_OBJECT,
-    eCache = VK_SYSTEM_ALLOCATION_SCOPE_CACHE,
-    eDevice = VK_SYSTEM_ALLOCATION_SCOPE_DEVICE,
-    eInstance = VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE};
+      eCommand = VK_SYSTEM_ALLOCATION_SCOPE_COMMAND
+    , eObject = VK_SYSTEM_ALLOCATION_SCOPE_OBJECT
+    , eCache = VK_SYSTEM_ALLOCATION_SCOPE_CACHE
+    , eDevice = VK_SYSTEM_ALLOCATION_SCOPE_DEVICE
+    , eInstance = VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE
+  };
 
   VULKAN_HPP_INLINE std::string to_string( SystemAllocationScope value )
   {
@@ -9757,8 +9861,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class TessellationDomainOrigin
   {
-    eUpperLeft = VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT,
-    eLowerLeft = VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT};
+      eUpperLeft = VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT
+    , eLowerLeft = VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT
+  };
   using TessellationDomainOriginKHR = TessellationDomainOrigin;
 
   VULKAN_HPP_INLINE std::string to_string( TessellationDomainOrigin value )
@@ -9773,10 +9878,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class TimeDomainEXT
   {
-    eDevice = VK_TIME_DOMAIN_DEVICE_EXT,
-    eClockMonotonic = VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT,
-    eClockMonotonicRaw = VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT,
-    eQueryPerformanceCounter = VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT};
+      eDevice = VK_TIME_DOMAIN_DEVICE_EXT
+    , eClockMonotonic = VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT
+    , eClockMonotonicRaw = VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT
+    , eQueryPerformanceCounter = VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( TimeDomainEXT value )
   {
@@ -9792,13 +9898,14 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ToolPurposeFlagBitsEXT : VkToolPurposeFlagsEXT
   {
-    eValidation = VK_TOOL_PURPOSE_VALIDATION_BIT_EXT,
-    eProfiling = VK_TOOL_PURPOSE_PROFILING_BIT_EXT,
-    eTracing = VK_TOOL_PURPOSE_TRACING_BIT_EXT,
-    eAdditionalFeatures = VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT,
-    eModifyingFeatures = VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT,
-    eDebugReporting = VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT,
-    eDebugMarkers = VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT};
+      eValidation = VK_TOOL_PURPOSE_VALIDATION_BIT_EXT
+    , eProfiling = VK_TOOL_PURPOSE_PROFILING_BIT_EXT
+    , eTracing = VK_TOOL_PURPOSE_TRACING_BIT_EXT
+    , eAdditionalFeatures = VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT
+    , eModifyingFeatures = VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT
+    , eDebugReporting = VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT
+    , eDebugMarkers = VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ToolPurposeFlagBitsEXT value )
   {
@@ -9817,7 +9924,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ValidationCacheHeaderVersionEXT
   {
-    eOne = VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT};
+      eOne = VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ValidationCacheHeaderVersionEXT value )
   {
@@ -9830,8 +9938,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ValidationCheckEXT
   {
-    eAll = VK_VALIDATION_CHECK_ALL_EXT,
-    eShaders = VK_VALIDATION_CHECK_SHADERS_EXT};
+      eAll = VK_VALIDATION_CHECK_ALL_EXT
+    , eShaders = VK_VALIDATION_CHECK_SHADERS_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ValidationCheckEXT value )
   {
@@ -9845,13 +9954,14 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ValidationFeatureDisableEXT
   {
-    eAll = VK_VALIDATION_FEATURE_DISABLE_ALL_EXT,
-    eShaders = VK_VALIDATION_FEATURE_DISABLE_SHADERS_EXT,
-    eThreadSafety = VK_VALIDATION_FEATURE_DISABLE_THREAD_SAFETY_EXT,
-    eApiParameters = VK_VALIDATION_FEATURE_DISABLE_API_PARAMETERS_EXT,
-    eObjectLifetimes = VK_VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT,
-    eCoreChecks = VK_VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT,
-    eUniqueHandles = VK_VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT};
+      eAll = VK_VALIDATION_FEATURE_DISABLE_ALL_EXT
+    , eShaders = VK_VALIDATION_FEATURE_DISABLE_SHADERS_EXT
+    , eThreadSafety = VK_VALIDATION_FEATURE_DISABLE_THREAD_SAFETY_EXT
+    , eApiParameters = VK_VALIDATION_FEATURE_DISABLE_API_PARAMETERS_EXT
+    , eObjectLifetimes = VK_VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT
+    , eCoreChecks = VK_VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT
+    , eUniqueHandles = VK_VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ValidationFeatureDisableEXT value )
   {
@@ -9870,11 +9980,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ValidationFeatureEnableEXT
   {
-    eGpuAssisted = VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT,
-    eGpuAssistedReserveBindingSlot = VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT,
-    eBestPractices = VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT,
-    eDebugPrintf = VK_VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT,
-    eSynchronizationValidation = VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT};
+      eGpuAssisted = VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT
+    , eGpuAssistedReserveBindingSlot = VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT
+    , eBestPractices = VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT
+    , eDebugPrintf = VK_VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT
+    , eSynchronizationValidation = VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ValidationFeatureEnableEXT value )
   {
@@ -9891,12 +10002,13 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class VendorId
   {
-    eVIV = VK_VENDOR_ID_VIV,
-    eVSI = VK_VENDOR_ID_VSI,
-    eKazan = VK_VENDOR_ID_KAZAN,
-    eCodeplay = VK_VENDOR_ID_CODEPLAY,
-    eMESA = VK_VENDOR_ID_MESA,
-    ePocl = VK_VENDOR_ID_POCL};
+      eVIV = VK_VENDOR_ID_VIV
+    , eVSI = VK_VENDOR_ID_VSI
+    , eKazan = VK_VENDOR_ID_KAZAN
+    , eCodeplay = VK_VENDOR_ID_CODEPLAY
+    , eMESA = VK_VENDOR_ID_MESA
+    , ePocl = VK_VENDOR_ID_POCL
+  };
 
   VULKAN_HPP_INLINE std::string to_string( VendorId value )
   {
@@ -9914,8 +10026,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class VertexInputRate
   {
-    eVertex = VK_VERTEX_INPUT_RATE_VERTEX,
-    eInstance = VK_VERTEX_INPUT_RATE_INSTANCE};
+      eVertex = VK_VERTEX_INPUT_RATE_VERTEX
+    , eInstance = VK_VERTEX_INPUT_RATE_INSTANCE
+  };
 
   VULKAN_HPP_INLINE std::string to_string( VertexInputRate value )
   {
@@ -9929,14 +10042,15 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ViewportCoordinateSwizzleNV
   {
-    ePositiveX = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV,
-    eNegativeX = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_X_NV,
-    ePositiveY = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV,
-    eNegativeY = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Y_NV,
-    ePositiveZ = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV,
-    eNegativeZ = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV,
-    ePositiveW = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV,
-    eNegativeW = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV};
+      ePositiveX = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV
+    , eNegativeX = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_X_NV
+    , ePositiveY = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV
+    , eNegativeY = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Y_NV
+    , ePositiveZ = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV
+    , eNegativeZ = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV
+    , ePositiveW = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV
+    , eNegativeW = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV
+  };
 
   VULKAN_HPP_INLINE std::string to_string( ViewportCoordinateSwizzleNV value )
   {
@@ -10001,7 +10115,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(AccelerationStructureCreateFlagBitsKHR::eDeviceAddressCaptureReplay)
+      allFlags = 
+          VkFlags( AccelerationStructureCreateFlagBitsKHR::eDeviceAddressCaptureReplay )
     };
   };
 
@@ -10042,35 +10157,36 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(AccessFlagBits::eIndirectCommandRead) |
-VkFlags(AccessFlagBits::eIndexRead) |
-VkFlags(AccessFlagBits::eVertexAttributeRead) |
-VkFlags(AccessFlagBits::eUniformRead) |
-VkFlags(AccessFlagBits::eInputAttachmentRead) |
-VkFlags(AccessFlagBits::eShaderRead) |
-VkFlags(AccessFlagBits::eShaderWrite) |
-VkFlags(AccessFlagBits::eColorAttachmentRead) |
-VkFlags(AccessFlagBits::eColorAttachmentWrite) |
-VkFlags(AccessFlagBits::eDepthStencilAttachmentRead) |
-VkFlags(AccessFlagBits::eDepthStencilAttachmentWrite) |
-VkFlags(AccessFlagBits::eTransferRead) |
-VkFlags(AccessFlagBits::eTransferWrite) |
-VkFlags(AccessFlagBits::eHostRead) |
-VkFlags(AccessFlagBits::eHostWrite) |
-VkFlags(AccessFlagBits::eMemoryRead) |
-VkFlags(AccessFlagBits::eMemoryWrite) |
-VkFlags(AccessFlagBits::eTransformFeedbackWriteEXT) |
-VkFlags(AccessFlagBits::eTransformFeedbackCounterReadEXT) |
-VkFlags(AccessFlagBits::eTransformFeedbackCounterWriteEXT) |
-VkFlags(AccessFlagBits::eConditionalRenderingReadEXT) |
-VkFlags(AccessFlagBits::eColorAttachmentReadNoncoherentEXT) |
-VkFlags(AccessFlagBits::eAccelerationStructureReadKHR) |
-VkFlags(AccessFlagBits::eAccelerationStructureWriteKHR) |
-VkFlags(AccessFlagBits::eShadingRateImageReadNV) |
-VkFlags(AccessFlagBits::eFragmentDensityMapReadEXT) |
-VkFlags(AccessFlagBits::eCommandPreprocessReadNV) |
-VkFlags(AccessFlagBits::eCommandPreprocessWriteNV) |
-VkFlags(AccessFlagBits::eNoneKHR)
+      allFlags = 
+          VkFlags( AccessFlagBits::eIndirectCommandRead )
+        | VkFlags( AccessFlagBits::eIndexRead )
+        | VkFlags( AccessFlagBits::eVertexAttributeRead )
+        | VkFlags( AccessFlagBits::eUniformRead )
+        | VkFlags( AccessFlagBits::eInputAttachmentRead )
+        | VkFlags( AccessFlagBits::eShaderRead )
+        | VkFlags( AccessFlagBits::eShaderWrite )
+        | VkFlags( AccessFlagBits::eColorAttachmentRead )
+        | VkFlags( AccessFlagBits::eColorAttachmentWrite )
+        | VkFlags( AccessFlagBits::eDepthStencilAttachmentRead )
+        | VkFlags( AccessFlagBits::eDepthStencilAttachmentWrite )
+        | VkFlags( AccessFlagBits::eTransferRead )
+        | VkFlags( AccessFlagBits::eTransferWrite )
+        | VkFlags( AccessFlagBits::eHostRead )
+        | VkFlags( AccessFlagBits::eHostWrite )
+        | VkFlags( AccessFlagBits::eMemoryRead )
+        | VkFlags( AccessFlagBits::eMemoryWrite )
+        | VkFlags( AccessFlagBits::eTransformFeedbackWriteEXT )
+        | VkFlags( AccessFlagBits::eTransformFeedbackCounterReadEXT )
+        | VkFlags( AccessFlagBits::eTransformFeedbackCounterWriteEXT )
+        | VkFlags( AccessFlagBits::eConditionalRenderingReadEXT )
+        | VkFlags( AccessFlagBits::eColorAttachmentReadNoncoherentEXT )
+        | VkFlags( AccessFlagBits::eAccelerationStructureReadKHR )
+        | VkFlags( AccessFlagBits::eAccelerationStructureWriteKHR )
+        | VkFlags( AccessFlagBits::eShadingRateImageReadNV )
+        | VkFlags( AccessFlagBits::eFragmentDensityMapReadEXT )
+        | VkFlags( AccessFlagBits::eCommandPreprocessReadNV )
+        | VkFlags( AccessFlagBits::eCommandPreprocessWriteNV )
+        | VkFlags( AccessFlagBits::eNoneKHR )
     };
   };
 
@@ -10138,38 +10254,39 @@ VkFlags(AccessFlagBits::eNoneKHR)
   {
     enum : VkFlags64
     {
-      allFlags = VkFlags64(AccessFlagBits2KHR::e2None) |
-VkFlags64(AccessFlagBits2KHR::e2IndirectCommandRead) |
-VkFlags64(AccessFlagBits2KHR::e2IndexRead) |
-VkFlags64(AccessFlagBits2KHR::e2VertexAttributeRead) |
-VkFlags64(AccessFlagBits2KHR::e2UniformRead) |
-VkFlags64(AccessFlagBits2KHR::e2InputAttachmentRead) |
-VkFlags64(AccessFlagBits2KHR::e2ShaderRead) |
-VkFlags64(AccessFlagBits2KHR::e2ShaderWrite) |
-VkFlags64(AccessFlagBits2KHR::e2ColorAttachmentRead) |
-VkFlags64(AccessFlagBits2KHR::e2ColorAttachmentWrite) |
-VkFlags64(AccessFlagBits2KHR::e2DepthStencilAttachmentRead) |
-VkFlags64(AccessFlagBits2KHR::e2DepthStencilAttachmentWrite) |
-VkFlags64(AccessFlagBits2KHR::e2TransferRead) |
-VkFlags64(AccessFlagBits2KHR::e2TransferWrite) |
-VkFlags64(AccessFlagBits2KHR::e2HostRead) |
-VkFlags64(AccessFlagBits2KHR::e2HostWrite) |
-VkFlags64(AccessFlagBits2KHR::e2MemoryRead) |
-VkFlags64(AccessFlagBits2KHR::e2MemoryWrite) |
-VkFlags64(AccessFlagBits2KHR::e2ShaderSampledRead) |
-VkFlags64(AccessFlagBits2KHR::e2ShaderStorageRead) |
-VkFlags64(AccessFlagBits2KHR::e2ShaderStorageWrite) |
-VkFlags64(AccessFlagBits2KHR::e2TransformFeedbackWriteExt) |
-VkFlags64(AccessFlagBits2KHR::e2TransformFeedbackCounterReadExt) |
-VkFlags64(AccessFlagBits2KHR::e2TransformFeedbackCounterWriteExt) |
-VkFlags64(AccessFlagBits2KHR::e2ConditionalRenderingReadExt) |
-VkFlags64(AccessFlagBits2KHR::e2CommandPreprocessReadNv) |
-VkFlags64(AccessFlagBits2KHR::e2CommandPreprocessWriteNv) |
-VkFlags64(AccessFlagBits2KHR::e2FragmentShadingRateAttachmentRead) |
-VkFlags64(AccessFlagBits2KHR::e2AccelerationStructureRead) |
-VkFlags64(AccessFlagBits2KHR::e2AccelerationStructureWrite) |
-VkFlags64(AccessFlagBits2KHR::e2FragmentDensityMapReadExt) |
-VkFlags64(AccessFlagBits2KHR::e2ColorAttachmentReadNoncoherentExt)
+      allFlags = 
+          VkFlags64( AccessFlagBits2KHR::e2None )
+        | VkFlags64( AccessFlagBits2KHR::e2IndirectCommandRead )
+        | VkFlags64( AccessFlagBits2KHR::e2IndexRead )
+        | VkFlags64( AccessFlagBits2KHR::e2VertexAttributeRead )
+        | VkFlags64( AccessFlagBits2KHR::e2UniformRead )
+        | VkFlags64( AccessFlagBits2KHR::e2InputAttachmentRead )
+        | VkFlags64( AccessFlagBits2KHR::e2ShaderRead )
+        | VkFlags64( AccessFlagBits2KHR::e2ShaderWrite )
+        | VkFlags64( AccessFlagBits2KHR::e2ColorAttachmentRead )
+        | VkFlags64( AccessFlagBits2KHR::e2ColorAttachmentWrite )
+        | VkFlags64( AccessFlagBits2KHR::e2DepthStencilAttachmentRead )
+        | VkFlags64( AccessFlagBits2KHR::e2DepthStencilAttachmentWrite )
+        | VkFlags64( AccessFlagBits2KHR::e2TransferRead )
+        | VkFlags64( AccessFlagBits2KHR::e2TransferWrite )
+        | VkFlags64( AccessFlagBits2KHR::e2HostRead )
+        | VkFlags64( AccessFlagBits2KHR::e2HostWrite )
+        | VkFlags64( AccessFlagBits2KHR::e2MemoryRead )
+        | VkFlags64( AccessFlagBits2KHR::e2MemoryWrite )
+        | VkFlags64( AccessFlagBits2KHR::e2ShaderSampledRead )
+        | VkFlags64( AccessFlagBits2KHR::e2ShaderStorageRead )
+        | VkFlags64( AccessFlagBits2KHR::e2ShaderStorageWrite )
+        | VkFlags64( AccessFlagBits2KHR::e2TransformFeedbackWriteExt )
+        | VkFlags64( AccessFlagBits2KHR::e2TransformFeedbackCounterReadExt )
+        | VkFlags64( AccessFlagBits2KHR::e2TransformFeedbackCounterWriteExt )
+        | VkFlags64( AccessFlagBits2KHR::e2ConditionalRenderingReadExt )
+        | VkFlags64( AccessFlagBits2KHR::e2CommandPreprocessReadNv )
+        | VkFlags64( AccessFlagBits2KHR::e2CommandPreprocessWriteNv )
+        | VkFlags64( AccessFlagBits2KHR::e2FragmentShadingRateAttachmentRead )
+        | VkFlags64( AccessFlagBits2KHR::e2AccelerationStructureRead )
+        | VkFlags64( AccessFlagBits2KHR::e2AccelerationStructureWrite )
+        | VkFlags64( AccessFlagBits2KHR::e2FragmentDensityMapReadExt )
+        | VkFlags64( AccessFlagBits2KHR::e2ColorAttachmentReadNoncoherentExt )
     };
   };
 
@@ -10267,7 +10384,8 @@ VkFlags64(AccessFlagBits2KHR::e2ColorAttachmentReadNoncoherentExt)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(AttachmentDescriptionFlagBits::eMayAlias)
+      allFlags = 
+          VkFlags( AttachmentDescriptionFlagBits::eMayAlias )
     };
   };
 
@@ -10308,11 +10426,12 @@ VkFlags64(AccessFlagBits2KHR::e2ColorAttachmentReadNoncoherentExt)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(BufferCreateFlagBits::eSparseBinding) |
-VkFlags(BufferCreateFlagBits::eSparseResidency) |
-VkFlags(BufferCreateFlagBits::eSparseAliased) |
-VkFlags(BufferCreateFlagBits::eProtected) |
-VkFlags(BufferCreateFlagBits::eDeviceAddressCaptureReplay)
+      allFlags = 
+          VkFlags( BufferCreateFlagBits::eSparseBinding )
+        | VkFlags( BufferCreateFlagBits::eSparseResidency )
+        | VkFlags( BufferCreateFlagBits::eSparseAliased )
+        | VkFlags( BufferCreateFlagBits::eProtected )
+        | VkFlags( BufferCreateFlagBits::eDeviceAddressCaptureReplay )
     };
   };
 
@@ -10357,22 +10476,23 @@ VkFlags(BufferCreateFlagBits::eDeviceAddressCaptureReplay)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(BufferUsageFlagBits::eTransferSrc) |
-VkFlags(BufferUsageFlagBits::eTransferDst) |
-VkFlags(BufferUsageFlagBits::eUniformTexelBuffer) |
-VkFlags(BufferUsageFlagBits::eStorageTexelBuffer) |
-VkFlags(BufferUsageFlagBits::eUniformBuffer) |
-VkFlags(BufferUsageFlagBits::eStorageBuffer) |
-VkFlags(BufferUsageFlagBits::eIndexBuffer) |
-VkFlags(BufferUsageFlagBits::eVertexBuffer) |
-VkFlags(BufferUsageFlagBits::eIndirectBuffer) |
-VkFlags(BufferUsageFlagBits::eShaderDeviceAddress) |
-VkFlags(BufferUsageFlagBits::eTransformFeedbackBufferEXT) |
-VkFlags(BufferUsageFlagBits::eTransformFeedbackCounterBufferEXT) |
-VkFlags(BufferUsageFlagBits::eConditionalRenderingEXT) |
-VkFlags(BufferUsageFlagBits::eAccelerationStructureBuildInputReadOnlyKHR) |
-VkFlags(BufferUsageFlagBits::eAccelerationStructureStorageKHR) |
-VkFlags(BufferUsageFlagBits::eShaderBindingTableKHR)
+      allFlags = 
+          VkFlags( BufferUsageFlagBits::eTransferSrc )
+        | VkFlags( BufferUsageFlagBits::eTransferDst )
+        | VkFlags( BufferUsageFlagBits::eUniformTexelBuffer )
+        | VkFlags( BufferUsageFlagBits::eStorageTexelBuffer )
+        | VkFlags( BufferUsageFlagBits::eUniformBuffer )
+        | VkFlags( BufferUsageFlagBits::eStorageBuffer )
+        | VkFlags( BufferUsageFlagBits::eIndexBuffer )
+        | VkFlags( BufferUsageFlagBits::eVertexBuffer )
+        | VkFlags( BufferUsageFlagBits::eIndirectBuffer )
+        | VkFlags( BufferUsageFlagBits::eShaderDeviceAddress )
+        | VkFlags( BufferUsageFlagBits::eTransformFeedbackBufferEXT )
+        | VkFlags( BufferUsageFlagBits::eTransformFeedbackCounterBufferEXT )
+        | VkFlags( BufferUsageFlagBits::eConditionalRenderingEXT )
+        | VkFlags( BufferUsageFlagBits::eAccelerationStructureBuildInputReadOnlyKHR )
+        | VkFlags( BufferUsageFlagBits::eAccelerationStructureStorageKHR )
+        | VkFlags( BufferUsageFlagBits::eShaderBindingTableKHR )
     };
   };
 
@@ -10444,11 +10564,12 @@ VkFlags(BufferUsageFlagBits::eShaderBindingTableKHR)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(BuildAccelerationStructureFlagBitsKHR::eAllowUpdate) |
-VkFlags(BuildAccelerationStructureFlagBitsKHR::eAllowCompaction) |
-VkFlags(BuildAccelerationStructureFlagBitsKHR::ePreferFastTrace) |
-VkFlags(BuildAccelerationStructureFlagBitsKHR::ePreferFastBuild) |
-VkFlags(BuildAccelerationStructureFlagBitsKHR::eLowMemory)
+      allFlags = 
+          VkFlags( BuildAccelerationStructureFlagBitsKHR::eAllowUpdate )
+        | VkFlags( BuildAccelerationStructureFlagBitsKHR::eAllowCompaction )
+        | VkFlags( BuildAccelerationStructureFlagBitsKHR::ePreferFastTrace )
+        | VkFlags( BuildAccelerationStructureFlagBitsKHR::ePreferFastBuild )
+        | VkFlags( BuildAccelerationStructureFlagBitsKHR::eLowMemory )
     };
   };
 
@@ -10495,10 +10616,11 @@ VkFlags(BuildAccelerationStructureFlagBitsKHR::eLowMemory)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ColorComponentFlagBits::eR) |
-VkFlags(ColorComponentFlagBits::eG) |
-VkFlags(ColorComponentFlagBits::eB) |
-VkFlags(ColorComponentFlagBits::eA)
+      allFlags = 
+          VkFlags( ColorComponentFlagBits::eR )
+        | VkFlags( ColorComponentFlagBits::eG )
+        | VkFlags( ColorComponentFlagBits::eB )
+        | VkFlags( ColorComponentFlagBits::eA )
     };
   };
 
@@ -10542,7 +10664,8 @@ VkFlags(ColorComponentFlagBits::eA)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(CommandBufferResetFlagBits::eReleaseResources)
+      allFlags = 
+          VkFlags( CommandBufferResetFlagBits::eReleaseResources )
     };
   };
 
@@ -10583,9 +10706,10 @@ VkFlags(ColorComponentFlagBits::eA)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(CommandBufferUsageFlagBits::eOneTimeSubmit) |
-VkFlags(CommandBufferUsageFlagBits::eRenderPassContinue) |
-VkFlags(CommandBufferUsageFlagBits::eSimultaneousUse)
+      allFlags = 
+          VkFlags( CommandBufferUsageFlagBits::eOneTimeSubmit )
+        | VkFlags( CommandBufferUsageFlagBits::eRenderPassContinue )
+        | VkFlags( CommandBufferUsageFlagBits::eSimultaneousUse )
     };
   };
 
@@ -10628,9 +10752,10 @@ VkFlags(CommandBufferUsageFlagBits::eSimultaneousUse)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(CommandPoolCreateFlagBits::eTransient) |
-VkFlags(CommandPoolCreateFlagBits::eResetCommandBuffer) |
-VkFlags(CommandPoolCreateFlagBits::eProtected)
+      allFlags = 
+          VkFlags( CommandPoolCreateFlagBits::eTransient )
+        | VkFlags( CommandPoolCreateFlagBits::eResetCommandBuffer )
+        | VkFlags( CommandPoolCreateFlagBits::eProtected )
     };
   };
 
@@ -10673,7 +10798,8 @@ VkFlags(CommandPoolCreateFlagBits::eProtected)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(CommandPoolResetFlagBits::eReleaseResources)
+      allFlags = 
+          VkFlags( CommandPoolResetFlagBits::eReleaseResources )
     };
   };
 
@@ -10732,10 +10858,11 @@ VkFlags(CommandPoolCreateFlagBits::eProtected)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(CompositeAlphaFlagBitsKHR::eOpaque) |
-VkFlags(CompositeAlphaFlagBitsKHR::ePreMultiplied) |
-VkFlags(CompositeAlphaFlagBitsKHR::ePostMultiplied) |
-VkFlags(CompositeAlphaFlagBitsKHR::eInherit)
+      allFlags = 
+          VkFlags( CompositeAlphaFlagBitsKHR::eOpaque )
+        | VkFlags( CompositeAlphaFlagBitsKHR::ePreMultiplied )
+        | VkFlags( CompositeAlphaFlagBitsKHR::ePostMultiplied )
+        | VkFlags( CompositeAlphaFlagBitsKHR::eInherit )
     };
   };
 
@@ -10779,7 +10906,8 @@ VkFlags(CompositeAlphaFlagBitsKHR::eInherit)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ConditionalRenderingFlagBitsEXT::eInverted)
+      allFlags = 
+          VkFlags( ConditionalRenderingFlagBitsEXT::eInverted )
     };
   };
 
@@ -10820,10 +10948,11 @@ VkFlags(CompositeAlphaFlagBitsKHR::eInherit)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(CullModeFlagBits::eNone) |
-VkFlags(CullModeFlagBits::eFront) |
-VkFlags(CullModeFlagBits::eBack) |
-VkFlags(CullModeFlagBits::eFrontAndBack)
+      allFlags = 
+          VkFlags( CullModeFlagBits::eNone )
+        | VkFlags( CullModeFlagBits::eFront )
+        | VkFlags( CullModeFlagBits::eBack )
+        | VkFlags( CullModeFlagBits::eFrontAndBack )
     };
   };
 
@@ -10865,11 +10994,12 @@ VkFlags(CullModeFlagBits::eFrontAndBack)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DebugReportFlagBitsEXT::eInformation) |
-VkFlags(DebugReportFlagBitsEXT::eWarning) |
-VkFlags(DebugReportFlagBitsEXT::ePerformanceWarning) |
-VkFlags(DebugReportFlagBitsEXT::eError) |
-VkFlags(DebugReportFlagBitsEXT::eDebug)
+      allFlags = 
+          VkFlags( DebugReportFlagBitsEXT::eInformation )
+        | VkFlags( DebugReportFlagBitsEXT::eWarning )
+        | VkFlags( DebugReportFlagBitsEXT::ePerformanceWarning )
+        | VkFlags( DebugReportFlagBitsEXT::eError )
+        | VkFlags( DebugReportFlagBitsEXT::eDebug )
     };
   };
 
@@ -10914,10 +11044,11 @@ VkFlags(DebugReportFlagBitsEXT::eDebug)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eVerbose) |
-VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eInfo) |
-VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eWarning) |
-VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eError)
+      allFlags = 
+          VkFlags( DebugUtilsMessageSeverityFlagBitsEXT::eVerbose )
+        | VkFlags( DebugUtilsMessageSeverityFlagBitsEXT::eInfo )
+        | VkFlags( DebugUtilsMessageSeverityFlagBitsEXT::eWarning )
+        | VkFlags( DebugUtilsMessageSeverityFlagBitsEXT::eError )
     };
   };
 
@@ -10961,9 +11092,10 @@ VkFlags(DebugUtilsMessageSeverityFlagBitsEXT::eError)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DebugUtilsMessageTypeFlagBitsEXT::eGeneral) |
-VkFlags(DebugUtilsMessageTypeFlagBitsEXT::eValidation) |
-VkFlags(DebugUtilsMessageTypeFlagBitsEXT::ePerformance)
+      allFlags = 
+          VkFlags( DebugUtilsMessageTypeFlagBitsEXT::eGeneral )
+        | VkFlags( DebugUtilsMessageTypeFlagBitsEXT::eValidation )
+        | VkFlags( DebugUtilsMessageTypeFlagBitsEXT::ePerformance )
     };
   };
 
@@ -11038,9 +11170,10 @@ VkFlags(DebugUtilsMessageTypeFlagBitsEXT::ePerformance)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DependencyFlagBits::eByRegion) |
-VkFlags(DependencyFlagBits::eDeviceGroup) |
-VkFlags(DependencyFlagBits::eViewLocal)
+      allFlags = 
+          VkFlags( DependencyFlagBits::eByRegion )
+        | VkFlags( DependencyFlagBits::eDeviceGroup )
+        | VkFlags( DependencyFlagBits::eViewLocal )
     };
   };
 
@@ -11083,10 +11216,11 @@ VkFlags(DependencyFlagBits::eViewLocal)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DescriptorBindingFlagBits::eUpdateAfterBind) |
-VkFlags(DescriptorBindingFlagBits::eUpdateUnusedWhilePending) |
-VkFlags(DescriptorBindingFlagBits::ePartiallyBound) |
-VkFlags(DescriptorBindingFlagBits::eVariableDescriptorCount)
+      allFlags = 
+          VkFlags( DescriptorBindingFlagBits::eUpdateAfterBind )
+        | VkFlags( DescriptorBindingFlagBits::eUpdateUnusedWhilePending )
+        | VkFlags( DescriptorBindingFlagBits::ePartiallyBound )
+        | VkFlags( DescriptorBindingFlagBits::eVariableDescriptorCount )
     };
   };
 
@@ -11132,9 +11266,10 @@ VkFlags(DescriptorBindingFlagBits::eVariableDescriptorCount)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DescriptorPoolCreateFlagBits::eFreeDescriptorSet) |
-VkFlags(DescriptorPoolCreateFlagBits::eUpdateAfterBind) |
-VkFlags(DescriptorPoolCreateFlagBits::eHostOnlyVALVE)
+      allFlags = 
+          VkFlags( DescriptorPoolCreateFlagBits::eFreeDescriptorSet )
+        | VkFlags( DescriptorPoolCreateFlagBits::eUpdateAfterBind )
+        | VkFlags( DescriptorPoolCreateFlagBits::eHostOnlyVALVE )
     };
   };
 
@@ -11193,9 +11328,10 @@ VkFlags(DescriptorPoolCreateFlagBits::eHostOnlyVALVE)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DescriptorSetLayoutCreateFlagBits::eUpdateAfterBindPool) |
-VkFlags(DescriptorSetLayoutCreateFlagBits::ePushDescriptorKHR) |
-VkFlags(DescriptorSetLayoutCreateFlagBits::eHostOnlyPoolVALVE)
+      allFlags = 
+          VkFlags( DescriptorSetLayoutCreateFlagBits::eUpdateAfterBindPool )
+        | VkFlags( DescriptorSetLayoutCreateFlagBits::ePushDescriptorKHR )
+        | VkFlags( DescriptorSetLayoutCreateFlagBits::eHostOnlyPoolVALVE )
     };
   };
 
@@ -11265,9 +11401,10 @@ VkFlags(DescriptorSetLayoutCreateFlagBits::eHostOnlyPoolVALVE)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DeviceDiagnosticsConfigFlagBitsNV::eEnableShaderDebugInfo) |
-VkFlags(DeviceDiagnosticsConfigFlagBitsNV::eEnableResourceTracking) |
-VkFlags(DeviceDiagnosticsConfigFlagBitsNV::eEnableAutomaticCheckpoints)
+      allFlags = 
+          VkFlags( DeviceDiagnosticsConfigFlagBitsNV::eEnableShaderDebugInfo )
+        | VkFlags( DeviceDiagnosticsConfigFlagBitsNV::eEnableResourceTracking )
+        | VkFlags( DeviceDiagnosticsConfigFlagBitsNV::eEnableAutomaticCheckpoints )
     };
   };
 
@@ -11310,10 +11447,11 @@ VkFlags(DeviceDiagnosticsConfigFlagBitsNV::eEnableAutomaticCheckpoints)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DeviceGroupPresentModeFlagBitsKHR::eLocal) |
-VkFlags(DeviceGroupPresentModeFlagBitsKHR::eRemote) |
-VkFlags(DeviceGroupPresentModeFlagBitsKHR::eSum) |
-VkFlags(DeviceGroupPresentModeFlagBitsKHR::eLocalMultiDevice)
+      allFlags = 
+          VkFlags( DeviceGroupPresentModeFlagBitsKHR::eLocal )
+        | VkFlags( DeviceGroupPresentModeFlagBitsKHR::eRemote )
+        | VkFlags( DeviceGroupPresentModeFlagBitsKHR::eSum )
+        | VkFlags( DeviceGroupPresentModeFlagBitsKHR::eLocalMultiDevice )
     };
   };
 
@@ -11373,7 +11511,8 @@ VkFlags(DeviceGroupPresentModeFlagBitsKHR::eLocalMultiDevice)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DeviceQueueCreateFlagBits::eProtected)
+      allFlags = 
+          VkFlags( DeviceQueueCreateFlagBits::eProtected )
     };
   };
 
@@ -11448,10 +11587,11 @@ VkFlags(DeviceGroupPresentModeFlagBitsKHR::eLocalMultiDevice)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(DisplayPlaneAlphaFlagBitsKHR::eOpaque) |
-VkFlags(DisplayPlaneAlphaFlagBitsKHR::eGlobal) |
-VkFlags(DisplayPlaneAlphaFlagBitsKHR::ePerPixel) |
-VkFlags(DisplayPlaneAlphaFlagBitsKHR::ePerPixelPremultiplied)
+      allFlags = 
+          VkFlags( DisplayPlaneAlphaFlagBitsKHR::eOpaque )
+        | VkFlags( DisplayPlaneAlphaFlagBitsKHR::eGlobal )
+        | VkFlags( DisplayPlaneAlphaFlagBitsKHR::ePerPixel )
+        | VkFlags( DisplayPlaneAlphaFlagBitsKHR::ePerPixelPremultiplied )
     };
   };
 
@@ -11511,7 +11651,8 @@ VkFlags(DisplayPlaneAlphaFlagBitsKHR::ePerPixelPremultiplied)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(EventCreateFlagBits::eDeviceOnlyKHR)
+      allFlags = 
+          VkFlags( EventCreateFlagBits::eDeviceOnlyKHR )
     };
   };
 
@@ -11552,8 +11693,9 @@ VkFlags(DisplayPlaneAlphaFlagBitsKHR::ePerPixelPremultiplied)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalFenceFeatureFlagBits::eExportable) |
-VkFlags(ExternalFenceFeatureFlagBits::eImportable)
+      allFlags = 
+          VkFlags( ExternalFenceFeatureFlagBits::eExportable )
+        | VkFlags( ExternalFenceFeatureFlagBits::eImportable )
     };
   };
 
@@ -11597,10 +11739,11 @@ VkFlags(ExternalFenceFeatureFlagBits::eImportable)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalFenceHandleTypeFlagBits::eOpaqueFd) |
-VkFlags(ExternalFenceHandleTypeFlagBits::eOpaqueWin32) |
-VkFlags(ExternalFenceHandleTypeFlagBits::eOpaqueWin32Kmt) |
-VkFlags(ExternalFenceHandleTypeFlagBits::eSyncFd)
+      allFlags = 
+          VkFlags( ExternalFenceHandleTypeFlagBits::eOpaqueFd )
+        | VkFlags( ExternalFenceHandleTypeFlagBits::eOpaqueWin32 )
+        | VkFlags( ExternalFenceHandleTypeFlagBits::eOpaqueWin32Kmt )
+        | VkFlags( ExternalFenceHandleTypeFlagBits::eSyncFd )
     };
   };
 
@@ -11646,9 +11789,10 @@ VkFlags(ExternalFenceHandleTypeFlagBits::eSyncFd)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalMemoryFeatureFlagBits::eDedicatedOnly) |
-VkFlags(ExternalMemoryFeatureFlagBits::eExportable) |
-VkFlags(ExternalMemoryFeatureFlagBits::eImportable)
+      allFlags = 
+          VkFlags( ExternalMemoryFeatureFlagBits::eDedicatedOnly )
+        | VkFlags( ExternalMemoryFeatureFlagBits::eExportable )
+        | VkFlags( ExternalMemoryFeatureFlagBits::eImportable )
     };
   };
 
@@ -11693,9 +11837,10 @@ VkFlags(ExternalMemoryFeatureFlagBits::eImportable)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalMemoryFeatureFlagBitsNV::eDedicatedOnly) |
-VkFlags(ExternalMemoryFeatureFlagBitsNV::eExportable) |
-VkFlags(ExternalMemoryFeatureFlagBitsNV::eImportable)
+      allFlags = 
+          VkFlags( ExternalMemoryFeatureFlagBitsNV::eDedicatedOnly )
+        | VkFlags( ExternalMemoryFeatureFlagBitsNV::eExportable )
+        | VkFlags( ExternalMemoryFeatureFlagBitsNV::eImportable )
     };
   };
 
@@ -11738,19 +11883,20 @@ VkFlags(ExternalMemoryFeatureFlagBitsNV::eImportable)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalMemoryHandleTypeFlagBits::eOpaqueFd) |
-VkFlags(ExternalMemoryHandleTypeFlagBits::eOpaqueWin32) |
-VkFlags(ExternalMemoryHandleTypeFlagBits::eOpaqueWin32Kmt) |
-VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D11Texture) |
-VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D11TextureKmt) |
-VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D12Heap) |
-VkFlags(ExternalMemoryHandleTypeFlagBits::eD3D12Resource) |
-VkFlags(ExternalMemoryHandleTypeFlagBits::eDmaBufEXT) |
+      allFlags = 
+          VkFlags( ExternalMemoryHandleTypeFlagBits::eOpaqueFd )
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eOpaqueWin32 )
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eOpaqueWin32Kmt )
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eD3D11Texture )
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eD3D11TextureKmt )
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eD3D12Heap )
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eD3D12Resource )
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eDmaBufEXT )
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-VkFlags(ExternalMemoryHandleTypeFlagBits::eAndroidHardwareBufferANDROID) |
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eAndroidHardwareBufferANDROID )
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-VkFlags(ExternalMemoryHandleTypeFlagBits::eHostAllocationEXT) |
-VkFlags(ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT)
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eHostAllocationEXT )
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT )
     };
   };
 
@@ -11805,10 +11951,11 @@ VkFlags(ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32) |
-VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32Kmt) |
-VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eD3D11Image) |
-VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eD3D11ImageKmt)
+      allFlags = 
+          VkFlags( ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32 )
+        | VkFlags( ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32Kmt )
+        | VkFlags( ExternalMemoryHandleTypeFlagBitsNV::eD3D11Image )
+        | VkFlags( ExternalMemoryHandleTypeFlagBitsNV::eD3D11ImageKmt )
     };
   };
 
@@ -11852,8 +11999,9 @@ VkFlags(ExternalMemoryHandleTypeFlagBitsNV::eD3D11ImageKmt)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalSemaphoreFeatureFlagBits::eExportable) |
-VkFlags(ExternalSemaphoreFeatureFlagBits::eImportable)
+      allFlags = 
+          VkFlags( ExternalSemaphoreFeatureFlagBits::eExportable )
+        | VkFlags( ExternalSemaphoreFeatureFlagBits::eImportable )
     };
   };
 
@@ -11897,11 +12045,12 @@ VkFlags(ExternalSemaphoreFeatureFlagBits::eImportable)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd) |
-VkFlags(ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32) |
-VkFlags(ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32Kmt) |
-VkFlags(ExternalSemaphoreHandleTypeFlagBits::eD3D12Fence) |
-VkFlags(ExternalSemaphoreHandleTypeFlagBits::eSyncFd)
+      allFlags = 
+          VkFlags( ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd )
+        | VkFlags( ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32 )
+        | VkFlags( ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32Kmt )
+        | VkFlags( ExternalSemaphoreHandleTypeFlagBits::eD3D12Fence )
+        | VkFlags( ExternalSemaphoreHandleTypeFlagBits::eSyncFd )
     };
   };
 
@@ -11948,7 +12097,8 @@ VkFlags(ExternalSemaphoreHandleTypeFlagBits::eSyncFd)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(FenceCreateFlagBits::eSignaled)
+      allFlags = 
+          VkFlags( FenceCreateFlagBits::eSignaled )
     };
   };
 
@@ -11989,7 +12139,8 @@ VkFlags(ExternalSemaphoreHandleTypeFlagBits::eSyncFd)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(FenceImportFlagBits::eTemporary)
+      allFlags = 
+          VkFlags( FenceImportFlagBits::eTemporary )
     };
   };
 
@@ -12032,33 +12183,34 @@ VkFlags(ExternalSemaphoreHandleTypeFlagBits::eSyncFd)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(FormatFeatureFlagBits::eSampledImage) |
-VkFlags(FormatFeatureFlagBits::eStorageImage) |
-VkFlags(FormatFeatureFlagBits::eStorageImageAtomic) |
-VkFlags(FormatFeatureFlagBits::eUniformTexelBuffer) |
-VkFlags(FormatFeatureFlagBits::eStorageTexelBuffer) |
-VkFlags(FormatFeatureFlagBits::eStorageTexelBufferAtomic) |
-VkFlags(FormatFeatureFlagBits::eVertexBuffer) |
-VkFlags(FormatFeatureFlagBits::eColorAttachment) |
-VkFlags(FormatFeatureFlagBits::eColorAttachmentBlend) |
-VkFlags(FormatFeatureFlagBits::eDepthStencilAttachment) |
-VkFlags(FormatFeatureFlagBits::eBlitSrc) |
-VkFlags(FormatFeatureFlagBits::eBlitDst) |
-VkFlags(FormatFeatureFlagBits::eSampledImageFilterLinear) |
-VkFlags(FormatFeatureFlagBits::eTransferSrc) |
-VkFlags(FormatFeatureFlagBits::eTransferDst) |
-VkFlags(FormatFeatureFlagBits::eMidpointChromaSamples) |
-VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionLinearFilter) |
-VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionSeparateReconstructionFilter) |
-VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicit) |
-VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicitForceable) |
-VkFlags(FormatFeatureFlagBits::eDisjoint) |
-VkFlags(FormatFeatureFlagBits::eCositedChromaSamples) |
-VkFlags(FormatFeatureFlagBits::eSampledImageFilterMinmax) |
-VkFlags(FormatFeatureFlagBits::eSampledImageFilterCubicIMG) |
-VkFlags(FormatFeatureFlagBits::eAccelerationStructureVertexBufferKHR) |
-VkFlags(FormatFeatureFlagBits::eFragmentDensityMapEXT) |
-VkFlags(FormatFeatureFlagBits::eFragmentShadingRateAttachmentKHR)
+      allFlags = 
+          VkFlags( FormatFeatureFlagBits::eSampledImage )
+        | VkFlags( FormatFeatureFlagBits::eStorageImage )
+        | VkFlags( FormatFeatureFlagBits::eStorageImageAtomic )
+        | VkFlags( FormatFeatureFlagBits::eUniformTexelBuffer )
+        | VkFlags( FormatFeatureFlagBits::eStorageTexelBuffer )
+        | VkFlags( FormatFeatureFlagBits::eStorageTexelBufferAtomic )
+        | VkFlags( FormatFeatureFlagBits::eVertexBuffer )
+        | VkFlags( FormatFeatureFlagBits::eColorAttachment )
+        | VkFlags( FormatFeatureFlagBits::eColorAttachmentBlend )
+        | VkFlags( FormatFeatureFlagBits::eDepthStencilAttachment )
+        | VkFlags( FormatFeatureFlagBits::eBlitSrc )
+        | VkFlags( FormatFeatureFlagBits::eBlitDst )
+        | VkFlags( FormatFeatureFlagBits::eSampledImageFilterLinear )
+        | VkFlags( FormatFeatureFlagBits::eTransferSrc )
+        | VkFlags( FormatFeatureFlagBits::eTransferDst )
+        | VkFlags( FormatFeatureFlagBits::eMidpointChromaSamples )
+        | VkFlags( FormatFeatureFlagBits::eSampledImageYcbcrConversionLinearFilter )
+        | VkFlags( FormatFeatureFlagBits::eSampledImageYcbcrConversionSeparateReconstructionFilter )
+        | VkFlags( FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicit )
+        | VkFlags( FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicitForceable )
+        | VkFlags( FormatFeatureFlagBits::eDisjoint )
+        | VkFlags( FormatFeatureFlagBits::eCositedChromaSamples )
+        | VkFlags( FormatFeatureFlagBits::eSampledImageFilterMinmax )
+        | VkFlags( FormatFeatureFlagBits::eSampledImageFilterCubicIMG )
+        | VkFlags( FormatFeatureFlagBits::eAccelerationStructureVertexBufferKHR )
+        | VkFlags( FormatFeatureFlagBits::eFragmentDensityMapEXT )
+        | VkFlags( FormatFeatureFlagBits::eFragmentShadingRateAttachmentKHR )
     };
   };
 
@@ -12125,7 +12277,8 @@ VkFlags(FormatFeatureFlagBits::eFragmentShadingRateAttachmentKHR)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(FramebufferCreateFlagBits::eImageless)
+      allFlags = 
+          VkFlags( FramebufferCreateFlagBits::eImageless )
     };
   };
 
@@ -12166,8 +12319,9 @@ VkFlags(FormatFeatureFlagBits::eFragmentShadingRateAttachmentKHR)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(GeometryFlagBitsKHR::eOpaque) |
-VkFlags(GeometryFlagBitsKHR::eNoDuplicateAnyHitInvocation)
+      allFlags = 
+          VkFlags( GeometryFlagBitsKHR::eOpaque )
+        | VkFlags( GeometryFlagBitsKHR::eNoDuplicateAnyHitInvocation )
     };
   };
 
@@ -12211,10 +12365,11 @@ VkFlags(GeometryFlagBitsKHR::eNoDuplicateAnyHitInvocation)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(GeometryInstanceFlagBitsKHR::eTriangleFacingCullDisable) |
-VkFlags(GeometryInstanceFlagBitsKHR::eTriangleFrontCounterclockwise) |
-VkFlags(GeometryInstanceFlagBitsKHR::eForceOpaque) |
-VkFlags(GeometryInstanceFlagBitsKHR::eForceNoOpaque)
+      allFlags = 
+          VkFlags( GeometryInstanceFlagBitsKHR::eTriangleFacingCullDisable )
+        | VkFlags( GeometryInstanceFlagBitsKHR::eTriangleFrontCounterclockwise )
+        | VkFlags( GeometryInstanceFlagBitsKHR::eForceOpaque )
+        | VkFlags( GeometryInstanceFlagBitsKHR::eForceNoOpaque )
     };
   };
 
@@ -12294,17 +12449,18 @@ VkFlags(GeometryInstanceFlagBitsKHR::eForceNoOpaque)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ImageAspectFlagBits::eColor) |
-VkFlags(ImageAspectFlagBits::eDepth) |
-VkFlags(ImageAspectFlagBits::eStencil) |
-VkFlags(ImageAspectFlagBits::eMetadata) |
-VkFlags(ImageAspectFlagBits::ePlane0) |
-VkFlags(ImageAspectFlagBits::ePlane1) |
-VkFlags(ImageAspectFlagBits::ePlane2) |
-VkFlags(ImageAspectFlagBits::eMemoryPlane0EXT) |
-VkFlags(ImageAspectFlagBits::eMemoryPlane1EXT) |
-VkFlags(ImageAspectFlagBits::eMemoryPlane2EXT) |
-VkFlags(ImageAspectFlagBits::eMemoryPlane3EXT)
+      allFlags = 
+          VkFlags( ImageAspectFlagBits::eColor )
+        | VkFlags( ImageAspectFlagBits::eDepth )
+        | VkFlags( ImageAspectFlagBits::eStencil )
+        | VkFlags( ImageAspectFlagBits::eMetadata )
+        | VkFlags( ImageAspectFlagBits::ePlane0 )
+        | VkFlags( ImageAspectFlagBits::ePlane1 )
+        | VkFlags( ImageAspectFlagBits::ePlane2 )
+        | VkFlags( ImageAspectFlagBits::eMemoryPlane0EXT )
+        | VkFlags( ImageAspectFlagBits::eMemoryPlane1EXT )
+        | VkFlags( ImageAspectFlagBits::eMemoryPlane2EXT )
+        | VkFlags( ImageAspectFlagBits::eMemoryPlane3EXT )
     };
   };
 
@@ -12355,21 +12511,22 @@ VkFlags(ImageAspectFlagBits::eMemoryPlane3EXT)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ImageCreateFlagBits::eSparseBinding) |
-VkFlags(ImageCreateFlagBits::eSparseResidency) |
-VkFlags(ImageCreateFlagBits::eSparseAliased) |
-VkFlags(ImageCreateFlagBits::eMutableFormat) |
-VkFlags(ImageCreateFlagBits::eCubeCompatible) |
-VkFlags(ImageCreateFlagBits::eAlias) |
-VkFlags(ImageCreateFlagBits::eSplitInstanceBindRegions) |
-VkFlags(ImageCreateFlagBits::e2DArrayCompatible) |
-VkFlags(ImageCreateFlagBits::eBlockTexelViewCompatible) |
-VkFlags(ImageCreateFlagBits::eExtendedUsage) |
-VkFlags(ImageCreateFlagBits::eProtected) |
-VkFlags(ImageCreateFlagBits::eDisjoint) |
-VkFlags(ImageCreateFlagBits::eCornerSampledNV) |
-VkFlags(ImageCreateFlagBits::eSampleLocationsCompatibleDepthEXT) |
-VkFlags(ImageCreateFlagBits::eSubsampledEXT)
+      allFlags = 
+          VkFlags( ImageCreateFlagBits::eSparseBinding )
+        | VkFlags( ImageCreateFlagBits::eSparseResidency )
+        | VkFlags( ImageCreateFlagBits::eSparseAliased )
+        | VkFlags( ImageCreateFlagBits::eMutableFormat )
+        | VkFlags( ImageCreateFlagBits::eCubeCompatible )
+        | VkFlags( ImageCreateFlagBits::eAlias )
+        | VkFlags( ImageCreateFlagBits::eSplitInstanceBindRegions )
+        | VkFlags( ImageCreateFlagBits::e2DArrayCompatible )
+        | VkFlags( ImageCreateFlagBits::eBlockTexelViewCompatible )
+        | VkFlags( ImageCreateFlagBits::eExtendedUsage )
+        | VkFlags( ImageCreateFlagBits::eProtected )
+        | VkFlags( ImageCreateFlagBits::eDisjoint )
+        | VkFlags( ImageCreateFlagBits::eCornerSampledNV )
+        | VkFlags( ImageCreateFlagBits::eSampleLocationsCompatibleDepthEXT )
+        | VkFlags( ImageCreateFlagBits::eSubsampledEXT )
     };
   };
 
@@ -12442,16 +12599,17 @@ VkFlags(ImageCreateFlagBits::eSubsampledEXT)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ImageUsageFlagBits::eTransferSrc) |
-VkFlags(ImageUsageFlagBits::eTransferDst) |
-VkFlags(ImageUsageFlagBits::eSampled) |
-VkFlags(ImageUsageFlagBits::eStorage) |
-VkFlags(ImageUsageFlagBits::eColorAttachment) |
-VkFlags(ImageUsageFlagBits::eDepthStencilAttachment) |
-VkFlags(ImageUsageFlagBits::eTransientAttachment) |
-VkFlags(ImageUsageFlagBits::eInputAttachment) |
-VkFlags(ImageUsageFlagBits::eShadingRateImageNV) |
-VkFlags(ImageUsageFlagBits::eFragmentDensityMapEXT)
+      allFlags = 
+          VkFlags( ImageUsageFlagBits::eTransferSrc )
+        | VkFlags( ImageUsageFlagBits::eTransferDst )
+        | VkFlags( ImageUsageFlagBits::eSampled )
+        | VkFlags( ImageUsageFlagBits::eStorage )
+        | VkFlags( ImageUsageFlagBits::eColorAttachment )
+        | VkFlags( ImageUsageFlagBits::eDepthStencilAttachment )
+        | VkFlags( ImageUsageFlagBits::eTransientAttachment )
+        | VkFlags( ImageUsageFlagBits::eInputAttachment )
+        | VkFlags( ImageUsageFlagBits::eShadingRateImageNV )
+        | VkFlags( ImageUsageFlagBits::eFragmentDensityMapEXT )
     };
   };
 
@@ -12501,8 +12659,9 @@ VkFlags(ImageUsageFlagBits::eFragmentDensityMapEXT)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ImageViewCreateFlagBits::eFragmentDensityMapDynamicEXT) |
-VkFlags(ImageViewCreateFlagBits::eFragmentDensityMapDeferredEXT)
+      allFlags = 
+          VkFlags( ImageViewCreateFlagBits::eFragmentDensityMapDynamicEXT )
+        | VkFlags( ImageViewCreateFlagBits::eFragmentDensityMapDeferredEXT )
     };
   };
 
@@ -12544,9 +12703,10 @@ VkFlags(ImageViewCreateFlagBits::eFragmentDensityMapDeferredEXT)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eExplicitPreprocess) |
-VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eIndexedSequences) |
-VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eUnorderedSequences)
+      allFlags = 
+          VkFlags( IndirectCommandsLayoutUsageFlagBitsNV::eExplicitPreprocess )
+        | VkFlags( IndirectCommandsLayoutUsageFlagBitsNV::eIndexedSequences )
+        | VkFlags( IndirectCommandsLayoutUsageFlagBitsNV::eUnorderedSequences )
     };
   };
 
@@ -12589,7 +12749,8 @@ VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eUnorderedSequences)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(IndirectStateFlagBitsNV::eFlagFrontface)
+      allFlags = 
+          VkFlags( IndirectStateFlagBitsNV::eFlagFrontface )
     };
   };
 
@@ -12657,9 +12818,10 @@ VkFlags(IndirectCommandsLayoutUsageFlagBitsNV::eUnorderedSequences)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(MemoryAllocateFlagBits::eDeviceMask) |
-VkFlags(MemoryAllocateFlagBits::eDeviceAddress) |
-VkFlags(MemoryAllocateFlagBits::eDeviceAddressCaptureReplay)
+      allFlags = 
+          VkFlags( MemoryAllocateFlagBits::eDeviceMask )
+        | VkFlags( MemoryAllocateFlagBits::eDeviceAddress )
+        | VkFlags( MemoryAllocateFlagBits::eDeviceAddressCaptureReplay )
     };
   };
 
@@ -12704,8 +12866,9 @@ VkFlags(MemoryAllocateFlagBits::eDeviceAddressCaptureReplay)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(MemoryHeapFlagBits::eDeviceLocal) |
-VkFlags(MemoryHeapFlagBits::eMultiInstance)
+      allFlags = 
+          VkFlags( MemoryHeapFlagBits::eDeviceLocal )
+        | VkFlags( MemoryHeapFlagBits::eMultiInstance )
     };
   };
 
@@ -12763,14 +12926,15 @@ VkFlags(MemoryHeapFlagBits::eMultiInstance)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(MemoryPropertyFlagBits::eDeviceLocal) |
-VkFlags(MemoryPropertyFlagBits::eHostVisible) |
-VkFlags(MemoryPropertyFlagBits::eHostCoherent) |
-VkFlags(MemoryPropertyFlagBits::eHostCached) |
-VkFlags(MemoryPropertyFlagBits::eLazilyAllocated) |
-VkFlags(MemoryPropertyFlagBits::eProtected) |
-VkFlags(MemoryPropertyFlagBits::eDeviceCoherentAMD) |
-VkFlags(MemoryPropertyFlagBits::eDeviceUncachedAMD)
+      allFlags = 
+          VkFlags( MemoryPropertyFlagBits::eDeviceLocal )
+        | VkFlags( MemoryPropertyFlagBits::eHostVisible )
+        | VkFlags( MemoryPropertyFlagBits::eHostCoherent )
+        | VkFlags( MemoryPropertyFlagBits::eHostCached )
+        | VkFlags( MemoryPropertyFlagBits::eLazilyAllocated )
+        | VkFlags( MemoryPropertyFlagBits::eProtected )
+        | VkFlags( MemoryPropertyFlagBits::eDeviceCoherentAMD )
+        | VkFlags( MemoryPropertyFlagBits::eDeviceUncachedAMD )
     };
   };
 
@@ -12836,10 +13000,11 @@ VkFlags(MemoryPropertyFlagBits::eDeviceUncachedAMD)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PeerMemoryFeatureFlagBits::eCopySrc) |
-VkFlags(PeerMemoryFeatureFlagBits::eCopyDst) |
-VkFlags(PeerMemoryFeatureFlagBits::eGenericSrc) |
-VkFlags(PeerMemoryFeatureFlagBits::eGenericDst)
+      allFlags = 
+          VkFlags( PeerMemoryFeatureFlagBits::eCopySrc )
+        | VkFlags( PeerMemoryFeatureFlagBits::eCopyDst )
+        | VkFlags( PeerMemoryFeatureFlagBits::eGenericSrc )
+        | VkFlags( PeerMemoryFeatureFlagBits::eGenericDst )
     };
   };
 
@@ -12885,8 +13050,9 @@ VkFlags(PeerMemoryFeatureFlagBits::eGenericDst)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PerformanceCounterDescriptionFlagBitsKHR::ePerformanceImpacting) |
-VkFlags(PerformanceCounterDescriptionFlagBitsKHR::eConcurrentlyImpacted)
+      allFlags = 
+          VkFlags( PerformanceCounterDescriptionFlagBitsKHR::ePerformanceImpacting )
+        | VkFlags( PerformanceCounterDescriptionFlagBitsKHR::eConcurrentlyImpacted )
     };
   };
 
@@ -12928,7 +13094,8 @@ VkFlags(PerformanceCounterDescriptionFlagBitsKHR::eConcurrentlyImpacted)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PipelineCacheCreateFlagBits::eExternallySynchronizedEXT)
+      allFlags = 
+          VkFlags( PipelineCacheCreateFlagBits::eExternallySynchronizedEXT )
     };
   };
 
@@ -13042,25 +13209,26 @@ VkFlags(PerformanceCounterDescriptionFlagBitsKHR::eConcurrentlyImpacted)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PipelineCreateFlagBits::eDisableOptimization) |
-VkFlags(PipelineCreateFlagBits::eAllowDerivatives) |
-VkFlags(PipelineCreateFlagBits::eDerivative) |
-VkFlags(PipelineCreateFlagBits::eViewIndexFromDeviceIndex) |
-VkFlags(PipelineCreateFlagBits::eDispatchBase) |
-VkFlags(PipelineCreateFlagBits::eRayTracingNoNullAnyHitShadersKHR) |
-VkFlags(PipelineCreateFlagBits::eRayTracingNoNullClosestHitShadersKHR) |
-VkFlags(PipelineCreateFlagBits::eRayTracingNoNullMissShadersKHR) |
-VkFlags(PipelineCreateFlagBits::eRayTracingNoNullIntersectionShadersKHR) |
-VkFlags(PipelineCreateFlagBits::eRayTracingSkipTrianglesKHR) |
-VkFlags(PipelineCreateFlagBits::eRayTracingSkipAabbsKHR) |
-VkFlags(PipelineCreateFlagBits::eRayTracingShaderGroupHandleCaptureReplayKHR) |
-VkFlags(PipelineCreateFlagBits::eDeferCompileNV) |
-VkFlags(PipelineCreateFlagBits::eCaptureStatisticsKHR) |
-VkFlags(PipelineCreateFlagBits::eCaptureInternalRepresentationsKHR) |
-VkFlags(PipelineCreateFlagBits::eIndirectBindableNV) |
-VkFlags(PipelineCreateFlagBits::eLibraryKHR) |
-VkFlags(PipelineCreateFlagBits::eFailOnPipelineCompileRequiredEXT) |
-VkFlags(PipelineCreateFlagBits::eEarlyReturnOnFailureEXT)
+      allFlags = 
+          VkFlags( PipelineCreateFlagBits::eDisableOptimization )
+        | VkFlags( PipelineCreateFlagBits::eAllowDerivatives )
+        | VkFlags( PipelineCreateFlagBits::eDerivative )
+        | VkFlags( PipelineCreateFlagBits::eViewIndexFromDeviceIndex )
+        | VkFlags( PipelineCreateFlagBits::eDispatchBase )
+        | VkFlags( PipelineCreateFlagBits::eRayTracingNoNullAnyHitShadersKHR )
+        | VkFlags( PipelineCreateFlagBits::eRayTracingNoNullClosestHitShadersKHR )
+        | VkFlags( PipelineCreateFlagBits::eRayTracingNoNullMissShadersKHR )
+        | VkFlags( PipelineCreateFlagBits::eRayTracingNoNullIntersectionShadersKHR )
+        | VkFlags( PipelineCreateFlagBits::eRayTracingSkipTrianglesKHR )
+        | VkFlags( PipelineCreateFlagBits::eRayTracingSkipAabbsKHR )
+        | VkFlags( PipelineCreateFlagBits::eRayTracingShaderGroupHandleCaptureReplayKHR )
+        | VkFlags( PipelineCreateFlagBits::eDeferCompileNV )
+        | VkFlags( PipelineCreateFlagBits::eCaptureStatisticsKHR )
+        | VkFlags( PipelineCreateFlagBits::eCaptureInternalRepresentationsKHR )
+        | VkFlags( PipelineCreateFlagBits::eIndirectBindableNV )
+        | VkFlags( PipelineCreateFlagBits::eLibraryKHR )
+        | VkFlags( PipelineCreateFlagBits::eFailOnPipelineCompileRequiredEXT )
+        | VkFlags( PipelineCreateFlagBits::eEarlyReturnOnFailureEXT )
     };
   };
 
@@ -13119,9 +13287,10 @@ VkFlags(PipelineCreateFlagBits::eEarlyReturnOnFailureEXT)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PipelineCreationFeedbackFlagBitsEXT::eValid) |
-VkFlags(PipelineCreationFeedbackFlagBitsEXT::eApplicationPipelineCacheHit) |
-VkFlags(PipelineCreationFeedbackFlagBitsEXT::eBasePipelineAcceleration)
+      allFlags = 
+          VkFlags( PipelineCreationFeedbackFlagBitsEXT::eValid )
+        | VkFlags( PipelineCreationFeedbackFlagBitsEXT::eApplicationPipelineCacheHit )
+        | VkFlags( PipelineCreationFeedbackFlagBitsEXT::eBasePipelineAcceleration )
     };
   };
 
@@ -13324,8 +13493,9 @@ VkFlags(PipelineCreationFeedbackFlagBitsEXT::eBasePipelineAcceleration)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PipelineShaderStageCreateFlagBits::eAllowVaryingSubgroupSizeEXT) |
-VkFlags(PipelineShaderStageCreateFlagBits::eRequireFullSubgroupsEXT)
+      allFlags = 
+          VkFlags( PipelineShaderStageCreateFlagBits::eAllowVaryingSubgroupSizeEXT )
+        | VkFlags( PipelineShaderStageCreateFlagBits::eRequireFullSubgroupsEXT )
     };
   };
 
@@ -13367,33 +13537,34 @@ VkFlags(PipelineShaderStageCreateFlagBits::eRequireFullSubgroupsEXT)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(PipelineStageFlagBits::eTopOfPipe) |
-VkFlags(PipelineStageFlagBits::eDrawIndirect) |
-VkFlags(PipelineStageFlagBits::eVertexInput) |
-VkFlags(PipelineStageFlagBits::eVertexShader) |
-VkFlags(PipelineStageFlagBits::eTessellationControlShader) |
-VkFlags(PipelineStageFlagBits::eTessellationEvaluationShader) |
-VkFlags(PipelineStageFlagBits::eGeometryShader) |
-VkFlags(PipelineStageFlagBits::eFragmentShader) |
-VkFlags(PipelineStageFlagBits::eEarlyFragmentTests) |
-VkFlags(PipelineStageFlagBits::eLateFragmentTests) |
-VkFlags(PipelineStageFlagBits::eColorAttachmentOutput) |
-VkFlags(PipelineStageFlagBits::eComputeShader) |
-VkFlags(PipelineStageFlagBits::eTransfer) |
-VkFlags(PipelineStageFlagBits::eBottomOfPipe) |
-VkFlags(PipelineStageFlagBits::eHost) |
-VkFlags(PipelineStageFlagBits::eAllGraphics) |
-VkFlags(PipelineStageFlagBits::eAllCommands) |
-VkFlags(PipelineStageFlagBits::eTransformFeedbackEXT) |
-VkFlags(PipelineStageFlagBits::eConditionalRenderingEXT) |
-VkFlags(PipelineStageFlagBits::eAccelerationStructureBuildKHR) |
-VkFlags(PipelineStageFlagBits::eRayTracingShaderKHR) |
-VkFlags(PipelineStageFlagBits::eShadingRateImageNV) |
-VkFlags(PipelineStageFlagBits::eTaskShaderNV) |
-VkFlags(PipelineStageFlagBits::eMeshShaderNV) |
-VkFlags(PipelineStageFlagBits::eFragmentDensityProcessEXT) |
-VkFlags(PipelineStageFlagBits::eCommandPreprocessNV) |
-VkFlags(PipelineStageFlagBits::eNoneKHR)
+      allFlags = 
+          VkFlags( PipelineStageFlagBits::eTopOfPipe )
+        | VkFlags( PipelineStageFlagBits::eDrawIndirect )
+        | VkFlags( PipelineStageFlagBits::eVertexInput )
+        | VkFlags( PipelineStageFlagBits::eVertexShader )
+        | VkFlags( PipelineStageFlagBits::eTessellationControlShader )
+        | VkFlags( PipelineStageFlagBits::eTessellationEvaluationShader )
+        | VkFlags( PipelineStageFlagBits::eGeometryShader )
+        | VkFlags( PipelineStageFlagBits::eFragmentShader )
+        | VkFlags( PipelineStageFlagBits::eEarlyFragmentTests )
+        | VkFlags( PipelineStageFlagBits::eLateFragmentTests )
+        | VkFlags( PipelineStageFlagBits::eColorAttachmentOutput )
+        | VkFlags( PipelineStageFlagBits::eComputeShader )
+        | VkFlags( PipelineStageFlagBits::eTransfer )
+        | VkFlags( PipelineStageFlagBits::eBottomOfPipe )
+        | VkFlags( PipelineStageFlagBits::eHost )
+        | VkFlags( PipelineStageFlagBits::eAllGraphics )
+        | VkFlags( PipelineStageFlagBits::eAllCommands )
+        | VkFlags( PipelineStageFlagBits::eTransformFeedbackEXT )
+        | VkFlags( PipelineStageFlagBits::eConditionalRenderingEXT )
+        | VkFlags( PipelineStageFlagBits::eAccelerationStructureBuildKHR )
+        | VkFlags( PipelineStageFlagBits::eRayTracingShaderKHR )
+        | VkFlags( PipelineStageFlagBits::eShadingRateImageNV )
+        | VkFlags( PipelineStageFlagBits::eTaskShaderNV )
+        | VkFlags( PipelineStageFlagBits::eMeshShaderNV )
+        | VkFlags( PipelineStageFlagBits::eFragmentDensityProcessEXT )
+        | VkFlags( PipelineStageFlagBits::eCommandPreprocessNV )
+        | VkFlags( PipelineStageFlagBits::eNoneKHR )
     };
   };
 
@@ -13459,40 +13630,41 @@ VkFlags(PipelineStageFlagBits::eNoneKHR)
   {
     enum : VkFlags64
     {
-      allFlags = VkFlags64(PipelineStageFlagBits2KHR::e2None) |
-VkFlags64(PipelineStageFlagBits2KHR::e2TopOfPipe) |
-VkFlags64(PipelineStageFlagBits2KHR::e2DrawIndirect) |
-VkFlags64(PipelineStageFlagBits2KHR::e2VertexInput) |
-VkFlags64(PipelineStageFlagBits2KHR::e2VertexShader) |
-VkFlags64(PipelineStageFlagBits2KHR::e2TessellationControlShader) |
-VkFlags64(PipelineStageFlagBits2KHR::e2TessellationEvaluationShader) |
-VkFlags64(PipelineStageFlagBits2KHR::e2GeometryShader) |
-VkFlags64(PipelineStageFlagBits2KHR::e2FragmentShader) |
-VkFlags64(PipelineStageFlagBits2KHR::e2EarlyFragmentTests) |
-VkFlags64(PipelineStageFlagBits2KHR::e2LateFragmentTests) |
-VkFlags64(PipelineStageFlagBits2KHR::e2ColorAttachmentOutput) |
-VkFlags64(PipelineStageFlagBits2KHR::e2ComputeShader) |
-VkFlags64(PipelineStageFlagBits2KHR::e2AllTransfer) |
-VkFlags64(PipelineStageFlagBits2KHR::e2BottomOfPipe) |
-VkFlags64(PipelineStageFlagBits2KHR::e2Host) |
-VkFlags64(PipelineStageFlagBits2KHR::e2AllGraphics) |
-VkFlags64(PipelineStageFlagBits2KHR::e2AllCommands) |
-VkFlags64(PipelineStageFlagBits2KHR::e2Copy) |
-VkFlags64(PipelineStageFlagBits2KHR::e2Resolve) |
-VkFlags64(PipelineStageFlagBits2KHR::e2Blit) |
-VkFlags64(PipelineStageFlagBits2KHR::e2Clear) |
-VkFlags64(PipelineStageFlagBits2KHR::e2IndexInput) |
-VkFlags64(PipelineStageFlagBits2KHR::e2VertexAttributeInput) |
-VkFlags64(PipelineStageFlagBits2KHR::e2PreRasterizationShaders) |
-VkFlags64(PipelineStageFlagBits2KHR::e2TransformFeedbackExt) |
-VkFlags64(PipelineStageFlagBits2KHR::e2ConditionalRenderingExt) |
-VkFlags64(PipelineStageFlagBits2KHR::e2CommandPreprocessNv) |
-VkFlags64(PipelineStageFlagBits2KHR::e2FragmentShadingRateAttachment) |
-VkFlags64(PipelineStageFlagBits2KHR::e2AccelerationStructureBuild) |
-VkFlags64(PipelineStageFlagBits2KHR::e2RayTracingShader) |
-VkFlags64(PipelineStageFlagBits2KHR::e2FragmentDensityProcessExt) |
-VkFlags64(PipelineStageFlagBits2KHR::e2TaskShaderNv) |
-VkFlags64(PipelineStageFlagBits2KHR::e2MeshShaderNv)
+      allFlags = 
+          VkFlags64( PipelineStageFlagBits2KHR::e2None )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2TopOfPipe )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2DrawIndirect )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2VertexInput )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2VertexShader )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2TessellationControlShader )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2TessellationEvaluationShader )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2GeometryShader )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2FragmentShader )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2EarlyFragmentTests )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2LateFragmentTests )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2ColorAttachmentOutput )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2ComputeShader )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2AllTransfer )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2BottomOfPipe )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2Host )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2AllGraphics )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2AllCommands )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2Copy )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2Resolve )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2Blit )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2Clear )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2IndexInput )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2VertexAttributeInput )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2PreRasterizationShaders )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2TransformFeedbackExt )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2ConditionalRenderingExt )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2CommandPreprocessNv )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2FragmentShadingRateAttachment )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2AccelerationStructureBuild )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2RayTracingShader )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2FragmentDensityProcessExt )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2TaskShaderNv )
+        | VkFlags64( PipelineStageFlagBits2KHR::e2MeshShaderNv )
     };
   };
 
@@ -13638,7 +13810,8 @@ VkFlags64(PipelineStageFlagBits2KHR::e2MeshShaderNv)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(QueryControlFlagBits::ePrecise)
+      allFlags = 
+          VkFlags( QueryControlFlagBits::ePrecise )
     };
   };
 
@@ -13679,17 +13852,18 @@ VkFlags64(PipelineStageFlagBits2KHR::e2MeshShaderNv)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(QueryPipelineStatisticFlagBits::eInputAssemblyVertices) |
-VkFlags(QueryPipelineStatisticFlagBits::eInputAssemblyPrimitives) |
-VkFlags(QueryPipelineStatisticFlagBits::eVertexShaderInvocations) |
-VkFlags(QueryPipelineStatisticFlagBits::eGeometryShaderInvocations) |
-VkFlags(QueryPipelineStatisticFlagBits::eGeometryShaderPrimitives) |
-VkFlags(QueryPipelineStatisticFlagBits::eClippingInvocations) |
-VkFlags(QueryPipelineStatisticFlagBits::eClippingPrimitives) |
-VkFlags(QueryPipelineStatisticFlagBits::eFragmentShaderInvocations) |
-VkFlags(QueryPipelineStatisticFlagBits::eTessellationControlShaderPatches) |
-VkFlags(QueryPipelineStatisticFlagBits::eTessellationEvaluationShaderInvocations) |
-VkFlags(QueryPipelineStatisticFlagBits::eComputeShaderInvocations)
+      allFlags = 
+          VkFlags( QueryPipelineStatisticFlagBits::eInputAssemblyVertices )
+        | VkFlags( QueryPipelineStatisticFlagBits::eInputAssemblyPrimitives )
+        | VkFlags( QueryPipelineStatisticFlagBits::eVertexShaderInvocations )
+        | VkFlags( QueryPipelineStatisticFlagBits::eGeometryShaderInvocations )
+        | VkFlags( QueryPipelineStatisticFlagBits::eGeometryShaderPrimitives )
+        | VkFlags( QueryPipelineStatisticFlagBits::eClippingInvocations )
+        | VkFlags( QueryPipelineStatisticFlagBits::eClippingPrimitives )
+        | VkFlags( QueryPipelineStatisticFlagBits::eFragmentShaderInvocations )
+        | VkFlags( QueryPipelineStatisticFlagBits::eTessellationControlShaderPatches )
+        | VkFlags( QueryPipelineStatisticFlagBits::eTessellationEvaluationShaderInvocations )
+        | VkFlags( QueryPipelineStatisticFlagBits::eComputeShaderInvocations )
     };
   };
 
@@ -13749,10 +13923,11 @@ VkFlags(QueryPipelineStatisticFlagBits::eComputeShaderInvocations)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(QueryResultFlagBits::e64) |
-VkFlags(QueryResultFlagBits::eWait) |
-VkFlags(QueryResultFlagBits::eWithAvailability) |
-VkFlags(QueryResultFlagBits::ePartial)
+      allFlags = 
+          VkFlags( QueryResultFlagBits::e64 )
+        | VkFlags( QueryResultFlagBits::eWait )
+        | VkFlags( QueryResultFlagBits::eWithAvailability )
+        | VkFlags( QueryResultFlagBits::ePartial )
     };
   };
 
@@ -13796,11 +13971,12 @@ VkFlags(QueryResultFlagBits::ePartial)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(QueueFlagBits::eGraphics) |
-VkFlags(QueueFlagBits::eCompute) |
-VkFlags(QueueFlagBits::eTransfer) |
-VkFlags(QueueFlagBits::eSparseBinding) |
-VkFlags(QueueFlagBits::eProtected)
+      allFlags = 
+          VkFlags( QueueFlagBits::eGraphics )
+        | VkFlags( QueueFlagBits::eCompute )
+        | VkFlags( QueueFlagBits::eTransfer )
+        | VkFlags( QueueFlagBits::eSparseBinding )
+        | VkFlags( QueueFlagBits::eProtected )
     };
   };
 
@@ -13845,7 +14021,8 @@ VkFlags(QueueFlagBits::eProtected)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(RenderPassCreateFlagBits::eTransformQCOM)
+      allFlags = 
+          VkFlags( RenderPassCreateFlagBits::eTransformQCOM )
     };
   };
 
@@ -13886,11 +14063,12 @@ VkFlags(QueueFlagBits::eProtected)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ResolveModeFlagBits::eNone) |
-VkFlags(ResolveModeFlagBits::eSampleZero) |
-VkFlags(ResolveModeFlagBits::eAverage) |
-VkFlags(ResolveModeFlagBits::eMin) |
-VkFlags(ResolveModeFlagBits::eMax)
+      allFlags = 
+          VkFlags( ResolveModeFlagBits::eNone )
+        | VkFlags( ResolveModeFlagBits::eSampleZero )
+        | VkFlags( ResolveModeFlagBits::eAverage )
+        | VkFlags( ResolveModeFlagBits::eMin )
+        | VkFlags( ResolveModeFlagBits::eMax )
     };
   };
 
@@ -13936,13 +14114,14 @@ VkFlags(ResolveModeFlagBits::eMax)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SampleCountFlagBits::e1) |
-VkFlags(SampleCountFlagBits::e2) |
-VkFlags(SampleCountFlagBits::e4) |
-VkFlags(SampleCountFlagBits::e8) |
-VkFlags(SampleCountFlagBits::e16) |
-VkFlags(SampleCountFlagBits::e32) |
-VkFlags(SampleCountFlagBits::e64)
+      allFlags = 
+          VkFlags( SampleCountFlagBits::e1 )
+        | VkFlags( SampleCountFlagBits::e2 )
+        | VkFlags( SampleCountFlagBits::e4 )
+        | VkFlags( SampleCountFlagBits::e8 )
+        | VkFlags( SampleCountFlagBits::e16 )
+        | VkFlags( SampleCountFlagBits::e32 )
+        | VkFlags( SampleCountFlagBits::e64 )
     };
   };
 
@@ -13989,8 +14168,9 @@ VkFlags(SampleCountFlagBits::e64)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SamplerCreateFlagBits::eSubsampledEXT) |
-VkFlags(SamplerCreateFlagBits::eSubsampledCoarseReconstructionEXT)
+      allFlags = 
+          VkFlags( SamplerCreateFlagBits::eSubsampledEXT )
+        | VkFlags( SamplerCreateFlagBits::eSubsampledCoarseReconstructionEXT )
     };
   };
 
@@ -14066,7 +14246,8 @@ VkFlags(SamplerCreateFlagBits::eSubsampledCoarseReconstructionEXT)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SemaphoreImportFlagBits::eTemporary)
+      allFlags = 
+          VkFlags( SemaphoreImportFlagBits::eTemporary )
     };
   };
 
@@ -14109,7 +14290,8 @@ VkFlags(SamplerCreateFlagBits::eSubsampledCoarseReconstructionEXT)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SemaphoreWaitFlagBits::eAny)
+      allFlags = 
+          VkFlags( SemaphoreWaitFlagBits::eAny )
     };
   };
 
@@ -14170,22 +14352,23 @@ VkFlags(SamplerCreateFlagBits::eSubsampledCoarseReconstructionEXT)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ShaderStageFlagBits::eVertex) |
-VkFlags(ShaderStageFlagBits::eTessellationControl) |
-VkFlags(ShaderStageFlagBits::eTessellationEvaluation) |
-VkFlags(ShaderStageFlagBits::eGeometry) |
-VkFlags(ShaderStageFlagBits::eFragment) |
-VkFlags(ShaderStageFlagBits::eCompute) |
-VkFlags(ShaderStageFlagBits::eAllGraphics) |
-VkFlags(ShaderStageFlagBits::eAll) |
-VkFlags(ShaderStageFlagBits::eRaygenKHR) |
-VkFlags(ShaderStageFlagBits::eAnyHitKHR) |
-VkFlags(ShaderStageFlagBits::eClosestHitKHR) |
-VkFlags(ShaderStageFlagBits::eMissKHR) |
-VkFlags(ShaderStageFlagBits::eIntersectionKHR) |
-VkFlags(ShaderStageFlagBits::eCallableKHR) |
-VkFlags(ShaderStageFlagBits::eTaskNV) |
-VkFlags(ShaderStageFlagBits::eMeshNV)
+      allFlags = 
+          VkFlags( ShaderStageFlagBits::eVertex )
+        | VkFlags( ShaderStageFlagBits::eTessellationControl )
+        | VkFlags( ShaderStageFlagBits::eTessellationEvaluation )
+        | VkFlags( ShaderStageFlagBits::eGeometry )
+        | VkFlags( ShaderStageFlagBits::eFragment )
+        | VkFlags( ShaderStageFlagBits::eCompute )
+        | VkFlags( ShaderStageFlagBits::eAllGraphics )
+        | VkFlags( ShaderStageFlagBits::eAll )
+        | VkFlags( ShaderStageFlagBits::eRaygenKHR )
+        | VkFlags( ShaderStageFlagBits::eAnyHitKHR )
+        | VkFlags( ShaderStageFlagBits::eClosestHitKHR )
+        | VkFlags( ShaderStageFlagBits::eMissKHR )
+        | VkFlags( ShaderStageFlagBits::eIntersectionKHR )
+        | VkFlags( ShaderStageFlagBits::eCallableKHR )
+        | VkFlags( ShaderStageFlagBits::eTaskNV )
+        | VkFlags( ShaderStageFlagBits::eMeshNV )
     };
   };
 
@@ -14239,9 +14422,10 @@ VkFlags(ShaderStageFlagBits::eMeshNV)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SparseImageFormatFlagBits::eSingleMiptail) |
-VkFlags(SparseImageFormatFlagBits::eAlignedMipSize) |
-VkFlags(SparseImageFormatFlagBits::eNonstandardBlockSize)
+      allFlags = 
+          VkFlags( SparseImageFormatFlagBits::eSingleMiptail )
+        | VkFlags( SparseImageFormatFlagBits::eAlignedMipSize )
+        | VkFlags( SparseImageFormatFlagBits::eNonstandardBlockSize )
     };
   };
 
@@ -14284,7 +14468,8 @@ VkFlags(SparseImageFormatFlagBits::eNonstandardBlockSize)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SparseMemoryBindFlagBits::eMetadata)
+      allFlags = 
+          VkFlags( SparseMemoryBindFlagBits::eMetadata )
     };
   };
 
@@ -14325,9 +14510,10 @@ VkFlags(SparseImageFormatFlagBits::eNonstandardBlockSize)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(StencilFaceFlagBits::eFront) |
-VkFlags(StencilFaceFlagBits::eBack) |
-VkFlags(StencilFaceFlagBits::eFrontAndBack)
+      allFlags = 
+          VkFlags( StencilFaceFlagBits::eFront )
+        | VkFlags( StencilFaceFlagBits::eBack )
+        | VkFlags( StencilFaceFlagBits::eFrontAndBack )
     };
   };
 
@@ -14387,15 +14573,16 @@ VkFlags(StencilFaceFlagBits::eFrontAndBack)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SubgroupFeatureFlagBits::eBasic) |
-VkFlags(SubgroupFeatureFlagBits::eVote) |
-VkFlags(SubgroupFeatureFlagBits::eArithmetic) |
-VkFlags(SubgroupFeatureFlagBits::eBallot) |
-VkFlags(SubgroupFeatureFlagBits::eShuffle) |
-VkFlags(SubgroupFeatureFlagBits::eShuffleRelative) |
-VkFlags(SubgroupFeatureFlagBits::eClustered) |
-VkFlags(SubgroupFeatureFlagBits::eQuad) |
-VkFlags(SubgroupFeatureFlagBits::ePartitionedNV)
+      allFlags = 
+          VkFlags( SubgroupFeatureFlagBits::eBasic )
+        | VkFlags( SubgroupFeatureFlagBits::eVote )
+        | VkFlags( SubgroupFeatureFlagBits::eArithmetic )
+        | VkFlags( SubgroupFeatureFlagBits::eBallot )
+        | VkFlags( SubgroupFeatureFlagBits::eShuffle )
+        | VkFlags( SubgroupFeatureFlagBits::eShuffleRelative )
+        | VkFlags( SubgroupFeatureFlagBits::eClustered )
+        | VkFlags( SubgroupFeatureFlagBits::eQuad )
+        | VkFlags( SubgroupFeatureFlagBits::ePartitionedNV )
     };
   };
 
@@ -14444,7 +14631,8 @@ VkFlags(SubgroupFeatureFlagBits::ePartitionedNV)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SubmitFlagBitsKHR::eProtected)
+      allFlags = 
+          VkFlags( SubmitFlagBitsKHR::eProtected )
     };
   };
 
@@ -14485,10 +14673,11 @@ VkFlags(SubgroupFeatureFlagBits::ePartitionedNV)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SubpassDescriptionFlagBits::ePerViewAttributesNVX) |
-VkFlags(SubpassDescriptionFlagBits::ePerViewPositionXOnlyNVX) |
-VkFlags(SubpassDescriptionFlagBits::eFragmentRegionQCOM) |
-VkFlags(SubpassDescriptionFlagBits::eShaderResolveQCOM)
+      allFlags = 
+          VkFlags( SubpassDescriptionFlagBits::ePerViewAttributesNVX )
+        | VkFlags( SubpassDescriptionFlagBits::ePerViewPositionXOnlyNVX )
+        | VkFlags( SubpassDescriptionFlagBits::eFragmentRegionQCOM )
+        | VkFlags( SubpassDescriptionFlagBits::eShaderResolveQCOM )
     };
   };
 
@@ -14532,7 +14721,8 @@ VkFlags(SubpassDescriptionFlagBits::eShaderResolveQCOM)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SurfaceCounterFlagBitsEXT::eVblank)
+      allFlags = 
+          VkFlags( SurfaceCounterFlagBitsEXT::eVblank )
     };
   };
 
@@ -14573,15 +14763,16 @@ VkFlags(SubpassDescriptionFlagBits::eShaderResolveQCOM)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SurfaceTransformFlagBitsKHR::eIdentity) |
-VkFlags(SurfaceTransformFlagBitsKHR::eRotate90) |
-VkFlags(SurfaceTransformFlagBitsKHR::eRotate180) |
-VkFlags(SurfaceTransformFlagBitsKHR::eRotate270) |
-VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirror) |
-VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate90) |
-VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate180) |
-VkFlags(SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate270) |
-VkFlags(SurfaceTransformFlagBitsKHR::eInherit)
+      allFlags = 
+          VkFlags( SurfaceTransformFlagBitsKHR::eIdentity )
+        | VkFlags( SurfaceTransformFlagBitsKHR::eRotate90 )
+        | VkFlags( SurfaceTransformFlagBitsKHR::eRotate180 )
+        | VkFlags( SurfaceTransformFlagBitsKHR::eRotate270 )
+        | VkFlags( SurfaceTransformFlagBitsKHR::eHorizontalMirror )
+        | VkFlags( SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate90 )
+        | VkFlags( SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate180 )
+        | VkFlags( SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate270 )
+        | VkFlags( SurfaceTransformFlagBitsKHR::eInherit )
     };
   };
 
@@ -14630,9 +14821,10 @@ VkFlags(SurfaceTransformFlagBitsKHR::eInherit)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(SwapchainCreateFlagBitsKHR::eSplitInstanceBindRegions) |
-VkFlags(SwapchainCreateFlagBitsKHR::eProtected) |
-VkFlags(SwapchainCreateFlagBitsKHR::eMutableFormat)
+      allFlags = 
+          VkFlags( SwapchainCreateFlagBitsKHR::eSplitInstanceBindRegions )
+        | VkFlags( SwapchainCreateFlagBitsKHR::eProtected )
+        | VkFlags( SwapchainCreateFlagBitsKHR::eMutableFormat )
     };
   };
 
@@ -14675,13 +14867,14 @@ VkFlags(SwapchainCreateFlagBitsKHR::eMutableFormat)
   {
     enum : VkFlags
     {
-      allFlags = VkFlags(ToolPurposeFlagBitsEXT::eValidation) |
-VkFlags(ToolPurposeFlagBitsEXT::eProfiling) |
-VkFlags(ToolPurposeFlagBitsEXT::eTracing) |
-VkFlags(ToolPurposeFlagBitsEXT::eAdditionalFeatures) |
-VkFlags(ToolPurposeFlagBitsEXT::eModifyingFeatures) |
-VkFlags(ToolPurposeFlagBitsEXT::eDebugReporting) |
-VkFlags(ToolPurposeFlagBitsEXT::eDebugMarkers)
+      allFlags = 
+          VkFlags( ToolPurposeFlagBitsEXT::eValidation )
+        | VkFlags( ToolPurposeFlagBitsEXT::eProfiling )
+        | VkFlags( ToolPurposeFlagBitsEXT::eTracing )
+        | VkFlags( ToolPurposeFlagBitsEXT::eAdditionalFeatures )
+        | VkFlags( ToolPurposeFlagBitsEXT::eModifyingFeatures )
+        | VkFlags( ToolPurposeFlagBitsEXT::eDebugReporting )
+        | VkFlags( ToolPurposeFlagBitsEXT::eDebugMarkers )
     };
   };
 
@@ -92610,8 +92803,12 @@ namespace VULKAN_HPP_NAMESPACE
   class DispatchLoaderDynamic
   {
   public:
+    using PFN_dummy = void ( * )();
+
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkAcquireFullScreenExclusiveModeEXT vkAcquireFullScreenExclusiveModeEXT = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkAcquireFullScreenExclusiveModeEXT = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
     PFN_vkAcquireNextImage2KHR vkAcquireNextImage2KHR = 0;
     PFN_vkAcquireNextImageKHR vkAcquireNextImageKHR = 0;
@@ -92619,9 +92816,13 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkAcquireProfilingLockKHR vkAcquireProfilingLockKHR = 0;
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkAcquireWinrtDisplayNV vkAcquireWinrtDisplayNV = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkAcquireWinrtDisplayNV = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_XLIB_XRANDR_EXT
     PFN_vkAcquireXlibDisplayEXT vkAcquireXlibDisplayEXT = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkAcquireXlibDisplayEXT = 0;
 #endif /*VK_USE_PLATFORM_XLIB_XRANDR_EXT*/
     PFN_vkAllocateCommandBuffers vkAllocateCommandBuffers = 0;
     PFN_vkAllocateDescriptorSets vkAllocateDescriptorSets = 0;
@@ -92777,6 +92978,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkCreateAccelerationStructureNV vkCreateAccelerationStructureNV = 0;
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
     PFN_vkCreateAndroidSurfaceKHR vkCreateAndroidSurfaceKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateAndroidSurfaceKHR = 0;
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
     PFN_vkCreateBuffer vkCreateBuffer = 0;
     PFN_vkCreateBufferView vkCreateBufferView = 0;
@@ -92792,6 +92995,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkCreateDevice vkCreateDevice = 0;
 #ifdef VK_USE_PLATFORM_DIRECTFB_EXT
     PFN_vkCreateDirectFBSurfaceEXT vkCreateDirectFBSurfaceEXT = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateDirectFBSurfaceEXT = 0;
 #endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
     PFN_vkCreateDisplayModeKHR vkCreateDisplayModeKHR = 0;
     PFN_vkCreateDisplayPlaneSurfaceKHR vkCreateDisplayPlaneSurfaceKHR = 0;
@@ -92802,19 +93007,27 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkCreateHeadlessSurfaceEXT vkCreateHeadlessSurfaceEXT = 0;
 #ifdef VK_USE_PLATFORM_IOS_MVK
     PFN_vkCreateIOSSurfaceMVK vkCreateIOSSurfaceMVK = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateIOSSurfaceMVK = 0;
 #endif /*VK_USE_PLATFORM_IOS_MVK*/
     PFN_vkCreateImage vkCreateImage = 0;
 #ifdef VK_USE_PLATFORM_FUCHSIA
     PFN_vkCreateImagePipeSurfaceFUCHSIA vkCreateImagePipeSurfaceFUCHSIA = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateImagePipeSurfaceFUCHSIA = 0;
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
     PFN_vkCreateImageView vkCreateImageView = 0;
     PFN_vkCreateIndirectCommandsLayoutNV vkCreateIndirectCommandsLayoutNV = 0;
     PFN_vkCreateInstance vkCreateInstance = 0;
 #ifdef VK_USE_PLATFORM_MACOS_MVK
     PFN_vkCreateMacOSSurfaceMVK vkCreateMacOSSurfaceMVK = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateMacOSSurfaceMVK = 0;
 #endif /*VK_USE_PLATFORM_MACOS_MVK*/
 #ifdef VK_USE_PLATFORM_METAL_EXT
     PFN_vkCreateMetalSurfaceEXT vkCreateMetalSurfaceEXT = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateMetalSurfaceEXT = 0;
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
     PFN_vkCreatePipelineCache vkCreatePipelineCache = 0;
     PFN_vkCreatePipelineLayout vkCreatePipelineLayout = 0;
@@ -92830,29 +93043,43 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkCreateSamplerYcbcrConversion vkCreateSamplerYcbcrConversion = 0;
 #ifdef VK_USE_PLATFORM_SCREEN_QNX
     PFN_vkCreateScreenSurfaceQNX vkCreateScreenSurfaceQNX = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateScreenSurfaceQNX = 0;
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
     PFN_vkCreateSemaphore vkCreateSemaphore = 0;
     PFN_vkCreateShaderModule vkCreateShaderModule = 0;
     PFN_vkCreateSharedSwapchainsKHR vkCreateSharedSwapchainsKHR = 0;
 #ifdef VK_USE_PLATFORM_GGP
     PFN_vkCreateStreamDescriptorSurfaceGGP vkCreateStreamDescriptorSurfaceGGP = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateStreamDescriptorSurfaceGGP = 0;
 #endif /*VK_USE_PLATFORM_GGP*/
     PFN_vkCreateSwapchainKHR vkCreateSwapchainKHR = 0;
     PFN_vkCreateValidationCacheEXT vkCreateValidationCacheEXT = 0;
 #ifdef VK_USE_PLATFORM_VI_NN
     PFN_vkCreateViSurfaceNN vkCreateViSurfaceNN = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateViSurfaceNN = 0;
 #endif /*VK_USE_PLATFORM_VI_NN*/
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
     PFN_vkCreateWaylandSurfaceKHR vkCreateWaylandSurfaceKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateWaylandSurfaceKHR = 0;
 #endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkCreateWin32SurfaceKHR vkCreateWin32SurfaceKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateWin32SurfaceKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_XCB_KHR
     PFN_vkCreateXcbSurfaceKHR vkCreateXcbSurfaceKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateXcbSurfaceKHR = 0;
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
 #ifdef VK_USE_PLATFORM_XLIB_KHR
     PFN_vkCreateXlibSurfaceKHR vkCreateXlibSurfaceKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkCreateXlibSurfaceKHR = 0;
 #endif /*VK_USE_PLATFORM_XLIB_KHR*/
     PFN_vkDebugMarkerSetObjectNameEXT vkDebugMarkerSetObjectNameEXT = 0;
     PFN_vkDebugMarkerSetObjectTagEXT vkDebugMarkerSetObjectTagEXT = 0;
@@ -92914,6 +93141,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetAccelerationStructureMemoryRequirementsNV vkGetAccelerationStructureMemoryRequirementsNV = 0;
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
     PFN_vkGetAndroidHardwareBufferPropertiesANDROID vkGetAndroidHardwareBufferPropertiesANDROID = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetAndroidHardwareBufferPropertiesANDROID = 0;
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
     PFN_vkGetBufferDeviceAddressEXT vkGetBufferDeviceAddressEXT = 0;
     PFN_vkGetBufferDeviceAddressKHR vkGetBufferDeviceAddressKHR = 0;
@@ -92934,6 +93163,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetDeviceGroupPresentCapabilitiesKHR vkGetDeviceGroupPresentCapabilitiesKHR = 0;
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkGetDeviceGroupSurfacePresentModes2EXT vkGetDeviceGroupSurfacePresentModes2EXT = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetDeviceGroupSurfacePresentModes2EXT = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
     PFN_vkGetDeviceGroupSurfacePresentModesKHR vkGetDeviceGroupSurfacePresentModesKHR = 0;
     PFN_vkGetDeviceMemoryCommitment vkGetDeviceMemoryCommitment = 0;
@@ -92952,6 +93183,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetFenceStatus vkGetFenceStatus = 0;
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkGetFenceWin32HandleKHR vkGetFenceWin32HandleKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetFenceWin32HandleKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
     PFN_vkGetGeneratedCommandsMemoryRequirementsNV vkGetGeneratedCommandsMemoryRequirementsNV = 0;
     PFN_vkGetImageDrmFormatModifierPropertiesEXT vkGetImageDrmFormatModifierPropertiesEXT = 0;
@@ -92967,18 +93200,26 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr = 0;
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
     PFN_vkGetMemoryAndroidHardwareBufferANDROID vkGetMemoryAndroidHardwareBufferANDROID = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetMemoryAndroidHardwareBufferANDROID = 0;
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
     PFN_vkGetMemoryFdKHR vkGetMemoryFdKHR = 0;
     PFN_vkGetMemoryFdPropertiesKHR vkGetMemoryFdPropertiesKHR = 0;
     PFN_vkGetMemoryHostPointerPropertiesEXT vkGetMemoryHostPointerPropertiesEXT = 0;
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkGetMemoryWin32HandleKHR vkGetMemoryWin32HandleKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetMemoryWin32HandleKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkGetMemoryWin32HandleNV vkGetMemoryWin32HandleNV = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetMemoryWin32HandleNV = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkGetMemoryWin32HandlePropertiesKHR vkGetMemoryWin32HandlePropertiesKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetMemoryWin32HandlePropertiesKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
     PFN_vkGetPastPresentationTimingGOOGLE vkGetPastPresentationTimingGOOGLE = 0;
     PFN_vkGetPerformanceParameterINTEL vkGetPerformanceParameterINTEL = 0;
@@ -92986,6 +93227,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = 0;
 #ifdef VK_USE_PLATFORM_DIRECTFB_EXT
     PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT vkGetPhysicalDeviceDirectFBPresentationSupportEXT = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetPhysicalDeviceDirectFBPresentationSupportEXT = 0;
 #endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
     PFN_vkGetPhysicalDeviceDisplayPlaneProperties2KHR vkGetPhysicalDeviceDisplayPlaneProperties2KHR = 0;
     PFN_vkGetPhysicalDeviceDisplayPlanePropertiesKHR vkGetPhysicalDeviceDisplayPlanePropertiesKHR = 0;
@@ -93022,6 +93265,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetPhysicalDeviceQueueFamilyProperties2 vkGetPhysicalDeviceQueueFamilyProperties2 = 0;
 #ifdef VK_USE_PLATFORM_SCREEN_QNX
     PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX vkGetPhysicalDeviceScreenPresentationSupportQNX = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetPhysicalDeviceScreenPresentationSupportQNX = 0;
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
     PFN_vkGetPhysicalDeviceSparseImageFormatProperties vkGetPhysicalDeviceSparseImageFormatProperties = 0;
     PFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR vkGetPhysicalDeviceSparseImageFormatProperties2KHR = 0;
@@ -93034,21 +93279,31 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetPhysicalDeviceSurfaceFormatsKHR vkGetPhysicalDeviceSurfaceFormatsKHR = 0;
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT vkGetPhysicalDeviceSurfacePresentModes2EXT = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetPhysicalDeviceSurfacePresentModes2EXT = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
     PFN_vkGetPhysicalDeviceSurfacePresentModesKHR vkGetPhysicalDeviceSurfacePresentModesKHR = 0;
     PFN_vkGetPhysicalDeviceSurfaceSupportKHR vkGetPhysicalDeviceSurfaceSupportKHR = 0;
     PFN_vkGetPhysicalDeviceToolPropertiesEXT vkGetPhysicalDeviceToolPropertiesEXT = 0;
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
     PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR vkGetPhysicalDeviceWaylandPresentationSupportKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetPhysicalDeviceWaylandPresentationSupportKHR = 0;
 #endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR vkGetPhysicalDeviceWin32PresentationSupportKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetPhysicalDeviceWin32PresentationSupportKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_XCB_KHR
     PFN_vkGetPhysicalDeviceXcbPresentationSupportKHR vkGetPhysicalDeviceXcbPresentationSupportKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetPhysicalDeviceXcbPresentationSupportKHR = 0;
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
 #ifdef VK_USE_PLATFORM_XLIB_KHR
     PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR vkGetPhysicalDeviceXlibPresentationSupportKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetPhysicalDeviceXlibPresentationSupportKHR = 0;
 #endif /*VK_USE_PLATFORM_XLIB_KHR*/
     PFN_vkGetPipelineCacheData vkGetPipelineCacheData = 0;
     PFN_vkGetPipelineExecutableInternalRepresentationsKHR vkGetPipelineExecutableInternalRepresentationsKHR = 0;
@@ -93060,6 +93315,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetQueueCheckpointDataNV vkGetQueueCheckpointDataNV = 0;
 #ifdef VK_USE_PLATFORM_XLIB_XRANDR_EXT
     PFN_vkGetRandROutputDisplayEXT vkGetRandROutputDisplayEXT = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetRandROutputDisplayEXT = 0;
 #endif /*VK_USE_PLATFORM_XLIB_XRANDR_EXT*/
     PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = 0;
     PFN_vkGetRayTracingShaderGroupHandlesNV vkGetRayTracingShaderGroupHandlesNV = 0;
@@ -93072,6 +93329,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetSemaphoreFdKHR vkGetSemaphoreFdKHR = 0;
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkGetSemaphoreWin32HandleKHR vkGetSemaphoreWin32HandleKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetSemaphoreWin32HandleKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
     PFN_vkGetShaderInfoAMD vkGetShaderInfoAMD = 0;
     PFN_vkGetSwapchainCounterEXT vkGetSwapchainCounterEXT = 0;
@@ -93080,14 +93339,20 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetValidationCacheDataEXT vkGetValidationCacheDataEXT = 0;
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkGetWinrtDisplayNV vkGetWinrtDisplayNV = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetWinrtDisplayNV = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
     PFN_vkImportFenceFdKHR vkImportFenceFdKHR = 0;
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkImportFenceWin32HandleKHR vkImportFenceWin32HandleKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkImportFenceWin32HandleKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
     PFN_vkImportSemaphoreFdKHR vkImportSemaphoreFdKHR = 0;
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkImportSemaphoreWin32HandleKHR vkImportSemaphoreWin32HandleKHR = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkImportSemaphoreWin32HandleKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
     PFN_vkInitializePerformanceApiINTEL vkInitializePerformanceApiINTEL = 0;
     PFN_vkInvalidateMappedMemoryRanges vkInvalidateMappedMemoryRanges = 0;
@@ -93108,6 +93373,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkReleaseDisplayEXT vkReleaseDisplayEXT = 0;
 #ifdef VK_USE_PLATFORM_WIN32_KHR
     PFN_vkReleaseFullScreenExclusiveModeEXT vkReleaseFullScreenExclusiveModeEXT = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkReleaseFullScreenExclusiveModeEXT = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
     PFN_vkReleasePerformanceConfigurationINTEL vkReleasePerformanceConfigurationINTEL = 0;
     PFN_vkReleaseProfilingLockKHR vkReleaseProfilingLockKHR = 0;
