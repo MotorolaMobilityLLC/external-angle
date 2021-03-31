@@ -94,11 +94,12 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #endif
 
 
-static_assert( VK_HEADER_VERSION ==  172 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  174 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
-#if defined(__LP64__) || defined(_WIN64) || (defined(__x86_64__) && !defined(__ILP32__) ) || defined(_M_X64) || defined(__ia64) || defined (_M_IA64) || defined(__aarch64__) || defined(__powerpc64__)
+#if defined( VK_USE_64_BIT_PTR_DEFINES )
+
 # if !defined( VULKAN_HPP_TYPESAFE_CONVERSION )
 #  define VULKAN_HPP_TYPESAFE_CONVERSION
 # endif
@@ -2937,6 +2938,20 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    VkResult vkGetMemoryZirconHandleFUCHSIA( VkDevice device, const VkMemoryGetZirconHandleInfoFUCHSIA* pGetZirconHandleInfo, zx_handle_t* pZirconHandle ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetMemoryZirconHandleFUCHSIA( device, pGetZirconHandleInfo, pZirconHandle );
+    }
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    VkResult vkGetMemoryZirconHandlePropertiesFUCHSIA( VkDevice device, VkExternalMemoryHandleTypeFlagBits handleType, zx_handle_t zirconHandle, VkMemoryZirconHandlePropertiesFUCHSIA* pMemoryZirconHandleProperties ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetMemoryZirconHandlePropertiesFUCHSIA( device, handleType, zirconHandle, pMemoryZirconHandleProperties );
+    }
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
     VkResult vkGetPastPresentationTimingGOOGLE( VkDevice device, VkSwapchainKHR swapchain, uint32_t* pPresentationTimingCount, VkPastPresentationTimingGOOGLE* pPresentationTimings ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkGetPastPresentationTimingGOOGLE( device, swapchain, pPresentationTimingCount, pPresentationTimings );
@@ -3330,6 +3345,13 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    VkResult vkGetSemaphoreZirconHandleFUCHSIA( VkDevice device, const VkSemaphoreGetZirconHandleInfoFUCHSIA* pGetZirconHandleInfo, zx_handle_t* pZirconHandle ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetSemaphoreZirconHandleFUCHSIA( device, pGetZirconHandleInfo, pZirconHandle );
+    }
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
     VkResult vkGetShaderInfoAMD( VkDevice device, VkPipeline pipeline, VkShaderStageFlagBits shaderStage, VkShaderInfoTypeAMD infoType, size_t* pInfoSize, void* pInfo ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkGetShaderInfoAMD( device, pipeline, shaderStage, infoType, pInfoSize, pInfo );
@@ -3385,6 +3407,13 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkImportSemaphoreWin32HandleKHR( device, pImportSemaphoreWin32HandleInfo );
     }
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    VkResult vkImportSemaphoreZirconHandleFUCHSIA( VkDevice device, const VkImportSemaphoreZirconHandleInfoFUCHSIA* pImportSemaphoreZirconHandleInfo ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkImportSemaphoreZirconHandleFUCHSIA( device, pImportSemaphoreZirconHandleInfo );
+    }
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
 
     VkResult vkInitializePerformanceApiINTEL( VkDevice device, const VkInitializePerformanceApiInfoINTEL* pInitializeInfo ) const VULKAN_HPP_NOEXCEPT
     {
@@ -5554,6 +5583,9 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
     , eHostAllocationEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT
     , eHostMappedForeignMemoryEXT = VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    , eZirconVmoFUCHSIA = VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
     // clang-format on
   };
   using ExternalMemoryHandleTypeFlagBitsKHR = ExternalMemoryHandleTypeFlagBits;
@@ -5575,6 +5607,9 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
       case ExternalMemoryHandleTypeFlagBits::eHostAllocationEXT : return "HostAllocationEXT";
       case ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT : return "HostMappedForeignMemoryEXT";
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      case ExternalMemoryHandleTypeFlagBits::eZirconVmoFUCHSIA : return "ZirconVmoFUCHSIA";
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
@@ -5618,12 +5653,17 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class ExternalSemaphoreHandleTypeFlagBits : VkExternalSemaphoreHandleTypeFlags
   {
+    // clang-format off
       eOpaqueFd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT
     , eOpaqueWin32 = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT
     , eOpaqueWin32Kmt = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT
     , eD3D12Fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT
     , eSyncFd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    , eZirconEventFUCHSIA = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
     , eD3D11Fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT
+    // clang-format on
   };
   using ExternalSemaphoreHandleTypeFlagBitsKHR = ExternalSemaphoreHandleTypeFlagBits;
 
@@ -5636,6 +5676,9 @@ namespace VULKAN_HPP_NAMESPACE
       case ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32Kmt : return "OpaqueWin32Kmt";
       case ExternalSemaphoreHandleTypeFlagBits::eD3D12Fence : return "D3D12Fence";
       case ExternalSemaphoreHandleTypeFlagBits::eSyncFd : return "SyncFd";
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      case ExternalSemaphoreHandleTypeFlagBits::eZirconEventFUCHSIA : return "ZirconEventFUCHSIA";
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
@@ -9040,6 +9083,13 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
     , ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE
     , eMutableDescriptorTypeCreateInfoVALVE = VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    , eImportMemoryZirconHandleInfoFUCHSIA = VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA
+    , eMemoryZirconHandlePropertiesFUCHSIA = VK_STRUCTURE_TYPE_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA
+    , eMemoryGetZirconHandleInfoFUCHSIA = VK_STRUCTURE_TYPE_MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA
+    , eImportSemaphoreZirconHandleInfoFUCHSIA = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA
+    , eSemaphoreGetZirconHandleInfoFUCHSIA = VK_STRUCTURE_TYPE_SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
 #ifdef VK_USE_PLATFORM_SCREEN_QNX
     , eScreenSurfaceCreateInfoQNX = VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
@@ -9688,6 +9738,13 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
       case StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE : return "PhysicalDeviceMutableDescriptorTypeFeaturesVALVE";
       case StructureType::eMutableDescriptorTypeCreateInfoVALVE : return "MutableDescriptorTypeCreateInfoVALVE";
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      case StructureType::eImportMemoryZirconHandleInfoFUCHSIA : return "ImportMemoryZirconHandleInfoFUCHSIA";
+      case StructureType::eMemoryZirconHandlePropertiesFUCHSIA : return "MemoryZirconHandlePropertiesFUCHSIA";
+      case StructureType::eMemoryGetZirconHandleInfoFUCHSIA : return "MemoryGetZirconHandleInfoFUCHSIA";
+      case StructureType::eImportSemaphoreZirconHandleInfoFUCHSIA : return "ImportSemaphoreZirconHandleInfoFUCHSIA";
+      case StructureType::eSemaphoreGetZirconHandleInfoFUCHSIA : return "SemaphoreGetZirconHandleInfoFUCHSIA";
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
 #ifdef VK_USE_PLATFORM_SCREEN_QNX
       case StructureType::eScreenSurfaceCreateInfoQNX : return "ScreenSurfaceCreateInfoQNX";
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
@@ -11897,6 +11954,9 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
         | VkFlags( ExternalMemoryHandleTypeFlagBits::eHostAllocationEXT )
         | VkFlags( ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT )
+#ifdef VK_USE_PLATFORM_FUCHSIA
+        | VkFlags( ExternalMemoryHandleTypeFlagBits::eZirconVmoFUCHSIA )
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
     };
   };
 
@@ -11941,6 +12001,9 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
     if ( value & ExternalMemoryHandleTypeFlagBits::eHostAllocationEXT ) result += "HostAllocationEXT | ";
     if ( value & ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT ) result += "HostMappedForeignMemoryEXT | ";
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    if ( value & ExternalMemoryHandleTypeFlagBits::eZirconVmoFUCHSIA ) result += "ZirconVmoFUCHSIA | ";
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
     return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
@@ -12051,6 +12114,9 @@ namespace VULKAN_HPP_NAMESPACE
         | VkFlags( ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32Kmt )
         | VkFlags( ExternalSemaphoreHandleTypeFlagBits::eD3D12Fence )
         | VkFlags( ExternalSemaphoreHandleTypeFlagBits::eSyncFd )
+#ifdef VK_USE_PLATFORM_FUCHSIA
+        | VkFlags( ExternalSemaphoreHandleTypeFlagBits::eZirconEventFUCHSIA )
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
     };
   };
 
@@ -12087,6 +12153,9 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32Kmt ) result += "OpaqueWin32Kmt | ";
     if ( value & ExternalSemaphoreHandleTypeFlagBits::eD3D12Fence ) result += "D3D12Fence | ";
     if ( value & ExternalSemaphoreHandleTypeFlagBits::eSyncFd ) result += "SyncFd | ";
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    if ( value & ExternalSemaphoreHandleTypeFlagBits::eZirconEventFUCHSIA ) result += "ZirconEventFUCHSIA | ";
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
     return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
@@ -46458,6 +46527,170 @@ namespace VULKAN_HPP_NAMESPACE
   };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+#ifdef VK_USE_PLATFORM_FUCHSIA
+  struct MemoryGetZirconHandleInfoFUCHSIA
+  {
+    static const bool allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryGetZirconHandleInfoFUCHSIA;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR MemoryGetZirconHandleInfoFUCHSIA(VULKAN_HPP_NAMESPACE::DeviceMemory memory_ = {}, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd) VULKAN_HPP_NOEXCEPT
+    : memory( memory_ ), handleType( handleType_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR MemoryGetZirconHandleInfoFUCHSIA( MemoryGetZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    MemoryGetZirconHandleInfoFUCHSIA( VkMemoryGetZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : MemoryGetZirconHandleInfoFUCHSIA( *reinterpret_cast<MemoryGetZirconHandleInfoFUCHSIA const *>( &rhs ) )
+    {}
+#endif // !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+
+    VULKAN_HPP_CONSTEXPR_14 MemoryGetZirconHandleInfoFUCHSIA & operator=( MemoryGetZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    MemoryGetZirconHandleInfoFUCHSIA & operator=( VkMemoryGetZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::MemoryGetZirconHandleInfoFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+    MemoryGetZirconHandleInfoFUCHSIA & setPNext( const void* pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    MemoryGetZirconHandleInfoFUCHSIA & setMemory( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ ) VULKAN_HPP_NOEXCEPT
+    {
+      memory = memory_;
+      return *this;
+    }
+
+    MemoryGetZirconHandleInfoFUCHSIA & setHandleType( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ ) VULKAN_HPP_NOEXCEPT
+    {
+      handleType = handleType_;
+      return *this;
+    }
+
+
+    operator VkMemoryGetZirconHandleInfoFUCHSIA const&() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkMemoryGetZirconHandleInfoFUCHSIA*>( this );
+    }
+
+    operator VkMemoryGetZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkMemoryGetZirconHandleInfoFUCHSIA*>( this );
+    }
+
+
+#if defined(VULKAN_HPP_HAS_SPACESHIP_OPERATOR)
+    auto operator<=>( MemoryGetZirconHandleInfoFUCHSIA const& ) const = default;
+#else
+    bool operator==( MemoryGetZirconHandleInfoFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( memory == rhs.memory )
+          && ( handleType == rhs.handleType );
+    }
+
+    bool operator!=( MemoryGetZirconHandleInfoFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eMemoryGetZirconHandleInfoFUCHSIA;
+    const void* pNext = {};
+    VULKAN_HPP_NAMESPACE::DeviceMemory memory = {};
+    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd;
+
+  };
+  static_assert( sizeof( MemoryGetZirconHandleInfoFUCHSIA ) == sizeof( VkMemoryGetZirconHandleInfoFUCHSIA ), "struct and wrapper have different size!" );
+  static_assert( std::is_standard_layout<MemoryGetZirconHandleInfoFUCHSIA>::value, "struct wrapper is not a standard layout!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eMemoryGetZirconHandleInfoFUCHSIA>
+  {
+    using Type = MemoryGetZirconHandleInfoFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+#ifdef VK_USE_PLATFORM_FUCHSIA
+  struct MemoryZirconHandlePropertiesFUCHSIA
+  {
+    static const bool allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryZirconHandlePropertiesFUCHSIA;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR MemoryZirconHandlePropertiesFUCHSIA(uint32_t memoryTypeBits_ = {}) VULKAN_HPP_NOEXCEPT
+    : memoryTypeBits( memoryTypeBits_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR MemoryZirconHandlePropertiesFUCHSIA( MemoryZirconHandlePropertiesFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    MemoryZirconHandlePropertiesFUCHSIA( VkMemoryZirconHandlePropertiesFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : MemoryZirconHandlePropertiesFUCHSIA( *reinterpret_cast<MemoryZirconHandlePropertiesFUCHSIA const *>( &rhs ) )
+    {}
+#endif // !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+
+    VULKAN_HPP_CONSTEXPR_14 MemoryZirconHandlePropertiesFUCHSIA & operator=( MemoryZirconHandlePropertiesFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    MemoryZirconHandlePropertiesFUCHSIA & operator=( VkMemoryZirconHandlePropertiesFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::MemoryZirconHandlePropertiesFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+
+    operator VkMemoryZirconHandlePropertiesFUCHSIA const&() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkMemoryZirconHandlePropertiesFUCHSIA*>( this );
+    }
+
+    operator VkMemoryZirconHandlePropertiesFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkMemoryZirconHandlePropertiesFUCHSIA*>( this );
+    }
+
+
+#if defined(VULKAN_HPP_HAS_SPACESHIP_OPERATOR)
+    auto operator<=>( MemoryZirconHandlePropertiesFUCHSIA const& ) const = default;
+#else
+    bool operator==( MemoryZirconHandlePropertiesFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( memoryTypeBits == rhs.memoryTypeBits );
+    }
+
+    bool operator!=( MemoryZirconHandlePropertiesFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eMemoryZirconHandlePropertiesFUCHSIA;
+    void* pNext = {};
+    uint32_t memoryTypeBits = {};
+
+  };
+  static_assert( sizeof( MemoryZirconHandlePropertiesFUCHSIA ) == sizeof( VkMemoryZirconHandlePropertiesFUCHSIA ), "struct and wrapper have different size!" );
+  static_assert( std::is_standard_layout<MemoryZirconHandlePropertiesFUCHSIA>::value, "struct wrapper is not a standard layout!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eMemoryZirconHandlePropertiesFUCHSIA>
+  {
+    using Type = MemoryZirconHandlePropertiesFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
   struct PastPresentationTimingGOOGLE
   {
 
@@ -47374,6 +47607,98 @@ namespace VULKAN_HPP_NAMESPACE
   };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+#ifdef VK_USE_PLATFORM_FUCHSIA
+  struct SemaphoreGetZirconHandleInfoFUCHSIA
+  {
+    static const bool allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreGetZirconHandleInfoFUCHSIA;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SemaphoreGetZirconHandleInfoFUCHSIA(VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {}, VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd) VULKAN_HPP_NOEXCEPT
+    : semaphore( semaphore_ ), handleType( handleType_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR SemaphoreGetZirconHandleInfoFUCHSIA( SemaphoreGetZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SemaphoreGetZirconHandleInfoFUCHSIA( VkSemaphoreGetZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SemaphoreGetZirconHandleInfoFUCHSIA( *reinterpret_cast<SemaphoreGetZirconHandleInfoFUCHSIA const *>( &rhs ) )
+    {}
+#endif // !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+
+    VULKAN_HPP_CONSTEXPR_14 SemaphoreGetZirconHandleInfoFUCHSIA & operator=( SemaphoreGetZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SemaphoreGetZirconHandleInfoFUCHSIA & operator=( VkSemaphoreGetZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SemaphoreGetZirconHandleInfoFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+    SemaphoreGetZirconHandleInfoFUCHSIA & setPNext( const void* pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    SemaphoreGetZirconHandleInfoFUCHSIA & setSemaphore( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ ) VULKAN_HPP_NOEXCEPT
+    {
+      semaphore = semaphore_;
+      return *this;
+    }
+
+    SemaphoreGetZirconHandleInfoFUCHSIA & setHandleType( VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ ) VULKAN_HPP_NOEXCEPT
+    {
+      handleType = handleType_;
+      return *this;
+    }
+
+
+    operator VkSemaphoreGetZirconHandleInfoFUCHSIA const&() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSemaphoreGetZirconHandleInfoFUCHSIA*>( this );
+    }
+
+    operator VkSemaphoreGetZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSemaphoreGetZirconHandleInfoFUCHSIA*>( this );
+    }
+
+
+#if defined(VULKAN_HPP_HAS_SPACESHIP_OPERATOR)
+    auto operator<=>( SemaphoreGetZirconHandleInfoFUCHSIA const& ) const = default;
+#else
+    bool operator==( SemaphoreGetZirconHandleInfoFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( semaphore == rhs.semaphore )
+          && ( handleType == rhs.handleType );
+    }
+
+    bool operator!=( SemaphoreGetZirconHandleInfoFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSemaphoreGetZirconHandleInfoFUCHSIA;
+    const void* pNext = {};
+    VULKAN_HPP_NAMESPACE::Semaphore semaphore = {};
+    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd;
+
+  };
+  static_assert( sizeof( SemaphoreGetZirconHandleInfoFUCHSIA ) == sizeof( VkSemaphoreGetZirconHandleInfoFUCHSIA ), "struct and wrapper have different size!" );
+  static_assert( std::is_standard_layout<SemaphoreGetZirconHandleInfoFUCHSIA>::value, "struct wrapper is not a standard layout!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eSemaphoreGetZirconHandleInfoFUCHSIA>
+  {
+    using Type = SemaphoreGetZirconHandleInfoFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
   struct ImportFenceFdInfoKHR
   {
     static const bool allowDuplicate = false;
@@ -47817,6 +48142,114 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImportSemaphoreWin32HandleInfoKHR;
   };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
+#ifdef VK_USE_PLATFORM_FUCHSIA
+  struct ImportSemaphoreZirconHandleInfoFUCHSIA
+  {
+    static const bool allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportSemaphoreZirconHandleInfoFUCHSIA;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImportSemaphoreZirconHandleInfoFUCHSIA(VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {}, VULKAN_HPP_NAMESPACE::SemaphoreImportFlags flags_ = {}, VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd, zx_handle_t zirconHandle_ = {}) VULKAN_HPP_NOEXCEPT
+    : semaphore( semaphore_ ), flags( flags_ ), handleType( handleType_ ), zirconHandle( zirconHandle_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR ImportSemaphoreZirconHandleInfoFUCHSIA( ImportSemaphoreZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportSemaphoreZirconHandleInfoFUCHSIA( VkImportSemaphoreZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImportSemaphoreZirconHandleInfoFUCHSIA( *reinterpret_cast<ImportSemaphoreZirconHandleInfoFUCHSIA const *>( &rhs ) )
+    {}
+#endif // !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+
+    VULKAN_HPP_CONSTEXPR_14 ImportSemaphoreZirconHandleInfoFUCHSIA & operator=( ImportSemaphoreZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportSemaphoreZirconHandleInfoFUCHSIA & operator=( VkImportSemaphoreZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImportSemaphoreZirconHandleInfoFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+    ImportSemaphoreZirconHandleInfoFUCHSIA & setPNext( const void* pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    ImportSemaphoreZirconHandleInfoFUCHSIA & setSemaphore( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ ) VULKAN_HPP_NOEXCEPT
+    {
+      semaphore = semaphore_;
+      return *this;
+    }
+
+    ImportSemaphoreZirconHandleInfoFUCHSIA & setFlags( VULKAN_HPP_NAMESPACE::SemaphoreImportFlags flags_ ) VULKAN_HPP_NOEXCEPT
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    ImportSemaphoreZirconHandleInfoFUCHSIA & setHandleType( VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ ) VULKAN_HPP_NOEXCEPT
+    {
+      handleType = handleType_;
+      return *this;
+    }
+
+    ImportSemaphoreZirconHandleInfoFUCHSIA & setZirconHandle( zx_handle_t zirconHandle_ ) VULKAN_HPP_NOEXCEPT
+    {
+      zirconHandle = zirconHandle_;
+      return *this;
+    }
+
+
+    operator VkImportSemaphoreZirconHandleInfoFUCHSIA const&() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImportSemaphoreZirconHandleInfoFUCHSIA*>( this );
+    }
+
+    operator VkImportSemaphoreZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImportSemaphoreZirconHandleInfoFUCHSIA*>( this );
+    }
+
+
+#if defined(VULKAN_HPP_HAS_SPACESHIP_OPERATOR)
+    auto operator<=>( ImportSemaphoreZirconHandleInfoFUCHSIA const& ) const = default;
+#else
+    bool operator==( ImportSemaphoreZirconHandleInfoFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( semaphore == rhs.semaphore )
+          && ( flags == rhs.flags )
+          && ( handleType == rhs.handleType )
+          && ( memcmp( &zirconHandle, &rhs.zirconHandle, sizeof( zx_handle_t ) ) == 0 );
+    }
+
+    bool operator!=( ImportSemaphoreZirconHandleInfoFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eImportSemaphoreZirconHandleInfoFUCHSIA;
+    const void* pNext = {};
+    VULKAN_HPP_NAMESPACE::Semaphore semaphore = {};
+    VULKAN_HPP_NAMESPACE::SemaphoreImportFlags flags = {};
+    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd;
+    zx_handle_t zirconHandle = {};
+
+  };
+  static_assert( sizeof( ImportSemaphoreZirconHandleInfoFUCHSIA ) == sizeof( VkImportSemaphoreZirconHandleInfoFUCHSIA ), "struct and wrapper have different size!" );
+  static_assert( std::is_standard_layout<ImportSemaphoreZirconHandleInfoFUCHSIA>::value, "struct wrapper is not a standard layout!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eImportSemaphoreZirconHandleInfoFUCHSIA>
+  {
+    using Type = ImportSemaphoreZirconHandleInfoFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct InitializePerformanceApiInfoINTEL
   {
@@ -50203,6 +50636,26 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    VULKAN_HPP_NODISCARD Result getMemoryZirconHandleFUCHSIA( const VULKAN_HPP_NAMESPACE::MemoryGetZirconHandleInfoFUCHSIA* pGetZirconHandleInfo, zx_handle_t* pZirconHandle, Dispatch const & d  VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS typename ResultValueType<zx_handle_t>::type getMemoryZirconHandleFUCHSIA( const MemoryGetZirconHandleInfoFUCHSIA & getZirconHandleInfo, Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    VULKAN_HPP_NODISCARD Result getMemoryZirconHandlePropertiesFUCHSIA( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, zx_handle_t zirconHandle, VULKAN_HPP_NAMESPACE::MemoryZirconHandlePropertiesFUCHSIA* pMemoryZirconHandleProperties, Dispatch const & d  VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::MemoryZirconHandlePropertiesFUCHSIA>::type getMemoryZirconHandlePropertiesFUCHSIA( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, zx_handle_t zirconHandle, Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     VULKAN_HPP_NODISCARD Result getPastPresentationTimingGOOGLE( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, uint32_t* pPresentationTimingCount, VULKAN_HPP_NAMESPACE::PastPresentationTimingGOOGLE* pPresentationTimings, Dispatch const & d  VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -50369,6 +50822,16 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    VULKAN_HPP_NODISCARD Result getSemaphoreZirconHandleFUCHSIA( const VULKAN_HPP_NAMESPACE::SemaphoreGetZirconHandleInfoFUCHSIA* pGetZirconHandleInfo, zx_handle_t* pZirconHandle, Dispatch const & d  VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS typename ResultValueType<zx_handle_t>::type getSemaphoreZirconHandleFUCHSIA( const SemaphoreGetZirconHandleInfoFUCHSIA & getZirconHandleInfo, Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     VULKAN_HPP_NODISCARD Result getShaderInfoAMD( VULKAN_HPP_NAMESPACE::Pipeline pipeline, VULKAN_HPP_NAMESPACE::ShaderStageFlagBits shaderStage, VULKAN_HPP_NAMESPACE::ShaderInfoTypeAMD infoType, size_t* pInfoSize, void* pInfo, Dispatch const & d  VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -50451,6 +50914,16 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS typename ResultValueType<void>::type importSemaphoreWin32HandleKHR( const ImportSemaphoreWin32HandleInfoKHR & importSemaphoreWin32HandleInfo, Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
+
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    VULKAN_HPP_NODISCARD Result importSemaphoreZirconHandleFUCHSIA( const VULKAN_HPP_NAMESPACE::ImportSemaphoreZirconHandleInfoFUCHSIA* pImportSemaphoreZirconHandleInfo, Dispatch const & d  VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS typename ResultValueType<void>::type importSemaphoreZirconHandleFUCHSIA( const ImportSemaphoreZirconHandleInfoFUCHSIA & importSemaphoreZirconHandleInfo, Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
 
 
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -60680,6 +61153,98 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImportMemoryWin32HandleInfoNV;
   };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
+#ifdef VK_USE_PLATFORM_FUCHSIA
+  struct ImportMemoryZirconHandleInfoFUCHSIA
+  {
+    static const bool allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportMemoryZirconHandleInfoFUCHSIA;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImportMemoryZirconHandleInfoFUCHSIA(VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd, zx_handle_t handle_ = {}) VULKAN_HPP_NOEXCEPT
+    : handleType( handleType_ ), handle( handle_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR ImportMemoryZirconHandleInfoFUCHSIA( ImportMemoryZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMemoryZirconHandleInfoFUCHSIA( VkImportMemoryZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImportMemoryZirconHandleInfoFUCHSIA( *reinterpret_cast<ImportMemoryZirconHandleInfoFUCHSIA const *>( &rhs ) )
+    {}
+#endif // !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+
+    VULKAN_HPP_CONSTEXPR_14 ImportMemoryZirconHandleInfoFUCHSIA & operator=( ImportMemoryZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMemoryZirconHandleInfoFUCHSIA & operator=( VkImportMemoryZirconHandleInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImportMemoryZirconHandleInfoFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+    ImportMemoryZirconHandleInfoFUCHSIA & setPNext( const void* pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    ImportMemoryZirconHandleInfoFUCHSIA & setHandleType( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ ) VULKAN_HPP_NOEXCEPT
+    {
+      handleType = handleType_;
+      return *this;
+    }
+
+    ImportMemoryZirconHandleInfoFUCHSIA & setHandle( zx_handle_t handle_ ) VULKAN_HPP_NOEXCEPT
+    {
+      handle = handle_;
+      return *this;
+    }
+
+
+    operator VkImportMemoryZirconHandleInfoFUCHSIA const&() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImportMemoryZirconHandleInfoFUCHSIA*>( this );
+    }
+
+    operator VkImportMemoryZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImportMemoryZirconHandleInfoFUCHSIA*>( this );
+    }
+
+
+#if defined(VULKAN_HPP_HAS_SPACESHIP_OPERATOR)
+    auto operator<=>( ImportMemoryZirconHandleInfoFUCHSIA const& ) const = default;
+#else
+    bool operator==( ImportMemoryZirconHandleInfoFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( handleType == rhs.handleType )
+          && ( memcmp( &handle, &rhs.handle, sizeof( zx_handle_t ) ) == 0 );
+    }
+
+    bool operator!=( ImportMemoryZirconHandleInfoFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eImportMemoryZirconHandleInfoFUCHSIA;
+    const void* pNext = {};
+    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd;
+    zx_handle_t handle = {};
+
+  };
+  static_assert( sizeof( ImportMemoryZirconHandleInfoFUCHSIA ) == sizeof( VkImportMemoryZirconHandleInfoFUCHSIA ), "struct and wrapper have different size!" );
+  static_assert( std::is_standard_layout<ImportMemoryZirconHandleInfoFUCHSIA>::value, "struct wrapper is not a standard layout!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eImportMemoryZirconHandleInfoFUCHSIA>
+  {
+    using Type = ImportMemoryZirconHandleInfoFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct InputAttachmentAspectReference
   {
@@ -87604,6 +88169,44 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 
+#ifdef VK_USE_PLATFORM_FUCHSIA
+  template <typename Dispatch>
+  VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE Result Device::getMemoryZirconHandleFUCHSIA( const VULKAN_HPP_NAMESPACE::MemoryGetZirconHandleInfoFUCHSIA* pGetZirconHandleInfo, zx_handle_t* pZirconHandle, Dispatch const & d  ) const VULKAN_HPP_NOEXCEPT
+  {
+    return static_cast<Result>( d.vkGetMemoryZirconHandleFUCHSIA( m_device, reinterpret_cast<const VkMemoryGetZirconHandleInfoFUCHSIA *>( pGetZirconHandleInfo ), pZirconHandle ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template <typename Dispatch>
+  VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE typename ResultValueType<zx_handle_t>::type Device::getMemoryZirconHandleFUCHSIA( const MemoryGetZirconHandleInfoFUCHSIA & getZirconHandleInfo, Dispatch const & d ) const
+  {
+    zx_handle_t zirconHandle;
+    Result result = static_cast<Result>( d.vkGetMemoryZirconHandleFUCHSIA( m_device, reinterpret_cast<const VkMemoryGetZirconHandleInfoFUCHSIA *>( &getZirconHandleInfo ), &zirconHandle ) );
+    return createResultValue( result, zirconHandle, VULKAN_HPP_NAMESPACE_STRING "::Device::getMemoryZirconHandleFUCHSIA" );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+
+#ifdef VK_USE_PLATFORM_FUCHSIA
+  template <typename Dispatch>
+  VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE Result Device::getMemoryZirconHandlePropertiesFUCHSIA( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, zx_handle_t zirconHandle, VULKAN_HPP_NAMESPACE::MemoryZirconHandlePropertiesFUCHSIA* pMemoryZirconHandleProperties, Dispatch const & d  ) const VULKAN_HPP_NOEXCEPT
+  {
+    return static_cast<Result>( d.vkGetMemoryZirconHandlePropertiesFUCHSIA( m_device, static_cast<VkExternalMemoryHandleTypeFlagBits>( handleType ), zirconHandle, reinterpret_cast< VkMemoryZirconHandlePropertiesFUCHSIA *>( pMemoryZirconHandleProperties ) ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template <typename Dispatch>
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::MemoryZirconHandlePropertiesFUCHSIA>::type Device::getMemoryZirconHandlePropertiesFUCHSIA( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, zx_handle_t zirconHandle, Dispatch const & d ) const
+  {
+    VULKAN_HPP_NAMESPACE::MemoryZirconHandlePropertiesFUCHSIA memoryZirconHandleProperties;
+    Result result = static_cast<Result>( d.vkGetMemoryZirconHandlePropertiesFUCHSIA( m_device, static_cast<VkExternalMemoryHandleTypeFlagBits>( handleType ), zirconHandle, reinterpret_cast<VkMemoryZirconHandlePropertiesFUCHSIA *>( &memoryZirconHandleProperties ) ) );
+    return createResultValue( result, memoryZirconHandleProperties, VULKAN_HPP_NAMESPACE_STRING "::Device::getMemoryZirconHandlePropertiesFUCHSIA" );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+
   template <typename Dispatch>
   VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE Result Device::getPastPresentationTimingGOOGLE( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, uint32_t* pPresentationTimingCount, VULKAN_HPP_NAMESPACE::PastPresentationTimingGOOGLE* pPresentationTimings, Dispatch const & d  ) const VULKAN_HPP_NOEXCEPT
   {
@@ -88162,6 +88765,25 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 
+#ifdef VK_USE_PLATFORM_FUCHSIA
+  template <typename Dispatch>
+  VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE Result Device::getSemaphoreZirconHandleFUCHSIA( const VULKAN_HPP_NAMESPACE::SemaphoreGetZirconHandleInfoFUCHSIA* pGetZirconHandleInfo, zx_handle_t* pZirconHandle, Dispatch const & d  ) const VULKAN_HPP_NOEXCEPT
+  {
+    return static_cast<Result>( d.vkGetSemaphoreZirconHandleFUCHSIA( m_device, reinterpret_cast<const VkSemaphoreGetZirconHandleInfoFUCHSIA *>( pGetZirconHandleInfo ), pZirconHandle ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template <typename Dispatch>
+  VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE typename ResultValueType<zx_handle_t>::type Device::getSemaphoreZirconHandleFUCHSIA( const SemaphoreGetZirconHandleInfoFUCHSIA & getZirconHandleInfo, Dispatch const & d ) const
+  {
+    zx_handle_t zirconHandle;
+    Result result = static_cast<Result>( d.vkGetSemaphoreZirconHandleFUCHSIA( m_device, reinterpret_cast<const VkSemaphoreGetZirconHandleInfoFUCHSIA *>( &getZirconHandleInfo ), &zirconHandle ) );
+    return createResultValue( result, zirconHandle, VULKAN_HPP_NAMESPACE_STRING "::Device::getSemaphoreZirconHandleFUCHSIA" );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+
   template <typename Dispatch>
   VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE Result Device::getShaderInfoAMD( VULKAN_HPP_NAMESPACE::Pipeline pipeline, VULKAN_HPP_NAMESPACE::ShaderStageFlagBits shaderStage, VULKAN_HPP_NAMESPACE::ShaderInfoTypeAMD infoType, size_t* pInfoSize, void* pInfo, Dispatch const & d  ) const VULKAN_HPP_NOEXCEPT
   {
@@ -88427,6 +89049,24 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
+
+#ifdef VK_USE_PLATFORM_FUCHSIA
+  template <typename Dispatch>
+  VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE Result Device::importSemaphoreZirconHandleFUCHSIA( const VULKAN_HPP_NAMESPACE::ImportSemaphoreZirconHandleInfoFUCHSIA* pImportSemaphoreZirconHandleInfo, Dispatch const & d  ) const VULKAN_HPP_NOEXCEPT
+  {
+    return static_cast<Result>( d.vkImportSemaphoreZirconHandleFUCHSIA( m_device, reinterpret_cast<const VkImportSemaphoreZirconHandleInfoFUCHSIA *>( pImportSemaphoreZirconHandleInfo ) ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template <typename Dispatch>
+  VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::importSemaphoreZirconHandleFUCHSIA( const ImportSemaphoreZirconHandleInfoFUCHSIA & importSemaphoreZirconHandleInfo, Dispatch const & d ) const
+  {
+    Result result = static_cast<Result>( d.vkImportSemaphoreZirconHandleFUCHSIA( m_device, reinterpret_cast<const VkImportSemaphoreZirconHandleInfoFUCHSIA *>( &importSemaphoreZirconHandleInfo ) ) );
+    return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING "::Device::importSemaphoreZirconHandleFUCHSIA" );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
 
 
   template <typename Dispatch>
@@ -92386,6 +93026,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template <> struct StructExtends<ImportMemoryWin32HandleInfoNV, MemoryAllocateInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+  template <> struct StructExtends<ImportMemoryZirconHandleInfoFUCHSIA, MemoryAllocateInfo>{ enum { value = true }; };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
   template <> struct StructExtends<MemoryAllocateFlagsInfo, MemoryAllocateInfo>{ enum { value = true }; };
   template <> struct StructExtends<MemoryBarrier2KHR, SubpassDependency2>{ enum { value = true }; };
   template <> struct StructExtends<MemoryDedicatedAllocateInfo, MemoryAllocateInfo>{ enum { value = true }; };
@@ -93221,6 +93864,16 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     PFN_dummy placeholder_dont_call_vkGetMemoryWin32HandlePropertiesKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    PFN_vkGetMemoryZirconHandleFUCHSIA vkGetMemoryZirconHandleFUCHSIA = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetMemoryZirconHandleFUCHSIA = 0;
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA vkGetMemoryZirconHandlePropertiesFUCHSIA = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetMemoryZirconHandlePropertiesFUCHSIA = 0;
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
     PFN_vkGetPastPresentationTimingGOOGLE vkGetPastPresentationTimingGOOGLE = 0;
     PFN_vkGetPerformanceParameterINTEL vkGetPerformanceParameterINTEL = 0;
     PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = 0;
@@ -93332,6 +93985,11 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     PFN_dummy placeholder_dont_call_vkGetSemaphoreWin32HandleKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    PFN_vkGetSemaphoreZirconHandleFUCHSIA vkGetSemaphoreZirconHandleFUCHSIA = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkGetSemaphoreZirconHandleFUCHSIA = 0;
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
     PFN_vkGetShaderInfoAMD vkGetShaderInfoAMD = 0;
     PFN_vkGetSwapchainCounterEXT vkGetSwapchainCounterEXT = 0;
     PFN_vkGetSwapchainImagesKHR vkGetSwapchainImagesKHR = 0;
@@ -93354,6 +94012,11 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     PFN_dummy placeholder_dont_call_vkImportSemaphoreWin32HandleKHR = 0;
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+    PFN_vkImportSemaphoreZirconHandleFUCHSIA vkImportSemaphoreZirconHandleFUCHSIA = 0;
+#else
+    PFN_dummy placeholder_dont_call_vkImportSemaphoreZirconHandleFUCHSIA = 0;
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
     PFN_vkInitializePerformanceApiINTEL vkInitializePerformanceApiINTEL = 0;
     PFN_vkInvalidateMappedMemoryRanges vkInvalidateMappedMemoryRanges = 0;
     PFN_vkMapMemory vkMapMemory = 0;
@@ -93947,6 +94610,12 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       vkGetMemoryWin32HandlePropertiesKHR = PFN_vkGetMemoryWin32HandlePropertiesKHR( vkGetInstanceProcAddr( instance, "vkGetMemoryWin32HandlePropertiesKHR" ) );
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      vkGetMemoryZirconHandleFUCHSIA = PFN_vkGetMemoryZirconHandleFUCHSIA( vkGetInstanceProcAddr( instance, "vkGetMemoryZirconHandleFUCHSIA" ) );
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      vkGetMemoryZirconHandlePropertiesFUCHSIA = PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA( vkGetInstanceProcAddr( instance, "vkGetMemoryZirconHandlePropertiesFUCHSIA" ) );
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
       vkGetPastPresentationTimingGOOGLE = PFN_vkGetPastPresentationTimingGOOGLE( vkGetInstanceProcAddr( instance, "vkGetPastPresentationTimingGOOGLE" ) );
       vkGetPerformanceParameterINTEL = PFN_vkGetPerformanceParameterINTEL( vkGetInstanceProcAddr( instance, "vkGetPerformanceParameterINTEL" ) );
       vkGetPipelineCacheData = PFN_vkGetPipelineCacheData( vkGetInstanceProcAddr( instance, "vkGetPipelineCacheData" ) );
@@ -93971,6 +94640,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       vkGetSemaphoreWin32HandleKHR = PFN_vkGetSemaphoreWin32HandleKHR( vkGetInstanceProcAddr( instance, "vkGetSemaphoreWin32HandleKHR" ) );
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      vkGetSemaphoreZirconHandleFUCHSIA = PFN_vkGetSemaphoreZirconHandleFUCHSIA( vkGetInstanceProcAddr( instance, "vkGetSemaphoreZirconHandleFUCHSIA" ) );
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
       vkGetShaderInfoAMD = PFN_vkGetShaderInfoAMD( vkGetInstanceProcAddr( instance, "vkGetShaderInfoAMD" ) );
       vkGetSwapchainCounterEXT = PFN_vkGetSwapchainCounterEXT( vkGetInstanceProcAddr( instance, "vkGetSwapchainCounterEXT" ) );
       vkGetSwapchainImagesKHR = PFN_vkGetSwapchainImagesKHR( vkGetInstanceProcAddr( instance, "vkGetSwapchainImagesKHR" ) );
@@ -93984,6 +94656,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       vkImportSemaphoreWin32HandleKHR = PFN_vkImportSemaphoreWin32HandleKHR( vkGetInstanceProcAddr( instance, "vkImportSemaphoreWin32HandleKHR" ) );
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      vkImportSemaphoreZirconHandleFUCHSIA = PFN_vkImportSemaphoreZirconHandleFUCHSIA( vkGetInstanceProcAddr( instance, "vkImportSemaphoreZirconHandleFUCHSIA" ) );
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
       vkInitializePerformanceApiINTEL = PFN_vkInitializePerformanceApiINTEL( vkGetInstanceProcAddr( instance, "vkInitializePerformanceApiINTEL" ) );
       vkInvalidateMappedMemoryRanges = PFN_vkInvalidateMappedMemoryRanges( vkGetInstanceProcAddr( instance, "vkInvalidateMappedMemoryRanges" ) );
       vkMapMemory = PFN_vkMapMemory( vkGetInstanceProcAddr( instance, "vkMapMemory" ) );
@@ -94364,6 +95039,12 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       vkGetMemoryWin32HandlePropertiesKHR = PFN_vkGetMemoryWin32HandlePropertiesKHR( vkGetDeviceProcAddr( device, "vkGetMemoryWin32HandlePropertiesKHR" ) );
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      vkGetMemoryZirconHandleFUCHSIA = PFN_vkGetMemoryZirconHandleFUCHSIA( vkGetDeviceProcAddr( device, "vkGetMemoryZirconHandleFUCHSIA" ) );
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      vkGetMemoryZirconHandlePropertiesFUCHSIA = PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA( vkGetDeviceProcAddr( device, "vkGetMemoryZirconHandlePropertiesFUCHSIA" ) );
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
       vkGetPastPresentationTimingGOOGLE = PFN_vkGetPastPresentationTimingGOOGLE( vkGetDeviceProcAddr( device, "vkGetPastPresentationTimingGOOGLE" ) );
       vkGetPerformanceParameterINTEL = PFN_vkGetPerformanceParameterINTEL( vkGetDeviceProcAddr( device, "vkGetPerformanceParameterINTEL" ) );
       vkGetPipelineCacheData = PFN_vkGetPipelineCacheData( vkGetDeviceProcAddr( device, "vkGetPipelineCacheData" ) );
@@ -94388,6 +95069,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       vkGetSemaphoreWin32HandleKHR = PFN_vkGetSemaphoreWin32HandleKHR( vkGetDeviceProcAddr( device, "vkGetSemaphoreWin32HandleKHR" ) );
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      vkGetSemaphoreZirconHandleFUCHSIA = PFN_vkGetSemaphoreZirconHandleFUCHSIA( vkGetDeviceProcAddr( device, "vkGetSemaphoreZirconHandleFUCHSIA" ) );
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
       vkGetShaderInfoAMD = PFN_vkGetShaderInfoAMD( vkGetDeviceProcAddr( device, "vkGetShaderInfoAMD" ) );
       vkGetSwapchainCounterEXT = PFN_vkGetSwapchainCounterEXT( vkGetDeviceProcAddr( device, "vkGetSwapchainCounterEXT" ) );
       vkGetSwapchainImagesKHR = PFN_vkGetSwapchainImagesKHR( vkGetDeviceProcAddr( device, "vkGetSwapchainImagesKHR" ) );
@@ -94401,6 +95085,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
       vkImportSemaphoreWin32HandleKHR = PFN_vkImportSemaphoreWin32HandleKHR( vkGetDeviceProcAddr( device, "vkImportSemaphoreWin32HandleKHR" ) );
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#ifdef VK_USE_PLATFORM_FUCHSIA
+      vkImportSemaphoreZirconHandleFUCHSIA = PFN_vkImportSemaphoreZirconHandleFUCHSIA( vkGetDeviceProcAddr( device, "vkImportSemaphoreZirconHandleFUCHSIA" ) );
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
       vkInitializePerformanceApiINTEL = PFN_vkInitializePerformanceApiINTEL( vkGetDeviceProcAddr( device, "vkInitializePerformanceApiINTEL" ) );
       vkInvalidateMappedMemoryRanges = PFN_vkInvalidateMappedMemoryRanges( vkGetDeviceProcAddr( device, "vkInvalidateMappedMemoryRanges" ) );
       vkMapMemory = PFN_vkMapMemory( vkGetDeviceProcAddr( device, "vkMapMemory" ) );
