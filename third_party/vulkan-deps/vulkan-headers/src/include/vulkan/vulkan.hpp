@@ -93,7 +93,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <compare>
 #endif
 
-static_assert( VK_HEADER_VERSION == 178, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 179, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -8245,14 +8245,14 @@ namespace VULKAN_HPP_NAMESPACE
     eVideoDecodeSrcKHR = VK_IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR,
     eVideoDecodeDpbKHR = VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR,
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-    eShadingRateImageNV    = VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV,
-    eFragmentDensityMapEXT = VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT,
+    eFragmentDensityMapEXT            = VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT,
+    eFragmentShadingRateAttachmentKHR = VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR,
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
     eVideoEncodeDstKHR = VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR,
     eVideoEncodeSrcKHR = VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR,
     eVideoEncodeDpbKHR = VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR,
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-    eFragmentShadingRateAttachmentKHR = VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+    eShadingRateImageNV = VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV
   };
 
   VULKAN_HPP_INLINE std::string to_string( ImageUsageFlagBits value )
@@ -8272,8 +8272,8 @@ namespace VULKAN_HPP_NAMESPACE
       case ImageUsageFlagBits::eVideoDecodeSrcKHR: return "VideoDecodeSrcKHR";
       case ImageUsageFlagBits::eVideoDecodeDpbKHR: return "VideoDecodeDpbKHR";
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-      case ImageUsageFlagBits::eShadingRateImageNV: return "ShadingRateImageNV";
       case ImageUsageFlagBits::eFragmentDensityMapEXT: return "FragmentDensityMapEXT";
+      case ImageUsageFlagBits::eFragmentShadingRateAttachmentKHR: return "FragmentShadingRateAttachmentKHR";
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
       case ImageUsageFlagBits::eVideoEncodeDstKHR: return "VideoEncodeDstKHR";
       case ImageUsageFlagBits::eVideoEncodeSrcKHR: return "VideoEncodeSrcKHR";
@@ -8497,15 +8497,15 @@ namespace VULKAN_HPP_NAMESPACE
     eConditionalRenderingEXT          = VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT,
     eAccelerationStructureBuildKHR    = VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR,
     eRayTracingShaderKHR              = VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR,
-    eShadingRateImageNV               = VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV,
     eTaskShaderNV                     = VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV,
     eMeshShaderNV                     = VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV,
     eFragmentDensityProcessEXT        = VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT,
+    eFragmentShadingRateAttachmentKHR = VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR,
     eCommandPreprocessNV              = VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV,
     eNoneKHR                          = VK_PIPELINE_STAGE_NONE_KHR,
     eAccelerationStructureBuildNV     = VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_NV,
-    eFragmentShadingRateAttachmentKHR = VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR,
-    eRayTracingShaderNV               = VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV
+    eRayTracingShaderNV               = VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV,
+    eShadingRateImageNV               = VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV
   };
 
   VULKAN_HPP_INLINE std::string to_string( PipelineStageFlagBits value )
@@ -8533,10 +8533,10 @@ namespace VULKAN_HPP_NAMESPACE
       case PipelineStageFlagBits::eConditionalRenderingEXT: return "ConditionalRenderingEXT";
       case PipelineStageFlagBits::eAccelerationStructureBuildKHR: return "AccelerationStructureBuildKHR";
       case PipelineStageFlagBits::eRayTracingShaderKHR: return "RayTracingShaderKHR";
-      case PipelineStageFlagBits::eShadingRateImageNV: return "ShadingRateImageNV";
       case PipelineStageFlagBits::eTaskShaderNV: return "TaskShaderNV";
       case PipelineStageFlagBits::eMeshShaderNV: return "MeshShaderNV";
       case PipelineStageFlagBits::eFragmentDensityProcessEXT: return "FragmentDensityProcessEXT";
+      case PipelineStageFlagBits::eFragmentShadingRateAttachmentKHR: return "FragmentShadingRateAttachmentKHR";
       case PipelineStageFlagBits::eCommandPreprocessNV: return "CommandPreprocessNV";
       case PipelineStageFlagBits::eNoneKHR: return "NoneKHR";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
@@ -8880,9 +8880,9 @@ namespace VULKAN_HPP_NAMESPACE
     eVideoDecodeSrcKHR = VK_IMAGE_LAYOUT_VIDEO_DECODE_SRC_KHR,
     eVideoDecodeDpbKHR = VK_IMAGE_LAYOUT_VIDEO_DECODE_DPB_KHR,
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-    eSharedPresentKHR             = VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR,
-    eShadingRateOptimalNV         = VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV,
-    eFragmentDensityMapOptimalEXT = VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT,
+    eSharedPresentKHR                        = VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR,
+    eFragmentDensityMapOptimalEXT            = VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT,
+    eFragmentShadingRateAttachmentOptimalKHR = VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR,
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
     eVideoEncodeDstKHR = VK_IMAGE_LAYOUT_VIDEO_ENCODE_DST_KHR,
     eVideoEncodeSrcKHR = VK_IMAGE_LAYOUT_VIDEO_ENCODE_SRC_KHR,
@@ -8894,7 +8894,7 @@ namespace VULKAN_HPP_NAMESPACE
     eDepthAttachmentStencilReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR,
     eDepthReadOnlyOptimalKHR                  = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR,
     eDepthReadOnlyStencilAttachmentOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR,
-    eFragmentShadingRateAttachmentOptimalKHR  = VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR,
+    eShadingRateOptimalNV                     = VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV,
     eStencilAttachmentOptimalKHR              = VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR,
     eStencilReadOnlyOptimalKHR                = VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR
   };
@@ -8925,8 +8925,8 @@ namespace VULKAN_HPP_NAMESPACE
       case ImageLayout::eVideoDecodeDpbKHR: return "VideoDecodeDpbKHR";
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
       case ImageLayout::eSharedPresentKHR: return "SharedPresentKHR";
-      case ImageLayout::eShadingRateOptimalNV: return "ShadingRateOptimalNV";
       case ImageLayout::eFragmentDensityMapOptimalEXT: return "FragmentDensityMapOptimalEXT";
+      case ImageLayout::eFragmentShadingRateAttachmentOptimalKHR: return "FragmentShadingRateAttachmentOptimalKHR";
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
       case ImageLayout::eVideoEncodeDstKHR: return "VideoEncodeDstKHR";
       case ImageLayout::eVideoEncodeSrcKHR: return "VideoEncodeSrcKHR";
@@ -9834,14 +9834,14 @@ namespace VULKAN_HPP_NAMESPACE
     eColorAttachmentReadNoncoherentEXT    = VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT,
     eAccelerationStructureReadKHR         = VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR,
     eAccelerationStructureWriteKHR        = VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR,
-    eShadingRateImageReadNV               = VK_ACCESS_SHADING_RATE_IMAGE_READ_BIT_NV,
     eFragmentDensityMapReadEXT            = VK_ACCESS_FRAGMENT_DENSITY_MAP_READ_BIT_EXT,
+    eFragmentShadingRateAttachmentReadKHR = VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR,
     eCommandPreprocessReadNV              = VK_ACCESS_COMMAND_PREPROCESS_READ_BIT_NV,
     eCommandPreprocessWriteNV             = VK_ACCESS_COMMAND_PREPROCESS_WRITE_BIT_NV,
     eNoneKHR                              = VK_ACCESS_NONE_KHR,
     eAccelerationStructureReadNV          = VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_NV,
     eAccelerationStructureWriteNV         = VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_NV,
-    eFragmentShadingRateAttachmentReadKHR = VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR
+    eShadingRateImageReadNV               = VK_ACCESS_SHADING_RATE_IMAGE_READ_BIT_NV
   };
 
   VULKAN_HPP_INLINE std::string to_string( AccessFlagBits value )
@@ -9872,8 +9872,8 @@ namespace VULKAN_HPP_NAMESPACE
       case AccessFlagBits::eColorAttachmentReadNoncoherentEXT: return "ColorAttachmentReadNoncoherentEXT";
       case AccessFlagBits::eAccelerationStructureReadKHR: return "AccelerationStructureReadKHR";
       case AccessFlagBits::eAccelerationStructureWriteKHR: return "AccelerationStructureWriteKHR";
-      case AccessFlagBits::eShadingRateImageReadNV: return "ShadingRateImageReadNV";
       case AccessFlagBits::eFragmentDensityMapReadEXT: return "FragmentDensityMapReadEXT";
+      case AccessFlagBits::eFragmentShadingRateAttachmentReadKHR: return "FragmentShadingRateAttachmentReadKHR";
       case AccessFlagBits::eCommandPreprocessReadNV: return "CommandPreprocessReadNV";
       case AccessFlagBits::eCommandPreprocessWriteNV: return "CommandPreprocessWriteNV";
       case AccessFlagBits::eNoneKHR: return "NoneKHR";
@@ -13221,19 +13221,20 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags =
-        VkFlags( ImageUsageFlagBits::eTransferSrc ) | VkFlags( ImageUsageFlagBits::eTransferDst ) |
-        VkFlags( ImageUsageFlagBits::eSampled ) | VkFlags( ImageUsageFlagBits::eStorage ) |
-        VkFlags( ImageUsageFlagBits::eColorAttachment ) | VkFlags( ImageUsageFlagBits::eDepthStencilAttachment ) |
-        VkFlags( ImageUsageFlagBits::eTransientAttachment ) | VkFlags( ImageUsageFlagBits::eInputAttachment )
+      allFlags = VkFlags( ImageUsageFlagBits::eTransferSrc ) | VkFlags( ImageUsageFlagBits::eTransferDst ) |
+                 VkFlags( ImageUsageFlagBits::eSampled ) | VkFlags( ImageUsageFlagBits::eStorage ) |
+                 VkFlags( ImageUsageFlagBits::eColorAttachment ) |
+                 VkFlags( ImageUsageFlagBits::eDepthStencilAttachment ) |
+                 VkFlags( ImageUsageFlagBits::eTransientAttachment ) | VkFlags( ImageUsageFlagBits::eInputAttachment )
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
-        | VkFlags( ImageUsageFlagBits::eVideoDecodeDstKHR ) | VkFlags( ImageUsageFlagBits::eVideoDecodeSrcKHR ) |
-        VkFlags( ImageUsageFlagBits::eVideoDecodeDpbKHR )
+                 | VkFlags( ImageUsageFlagBits::eVideoDecodeDstKHR ) |
+                 VkFlags( ImageUsageFlagBits::eVideoDecodeSrcKHR ) | VkFlags( ImageUsageFlagBits::eVideoDecodeDpbKHR )
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-        | VkFlags( ImageUsageFlagBits::eShadingRateImageNV ) | VkFlags( ImageUsageFlagBits::eFragmentDensityMapEXT )
+                 | VkFlags( ImageUsageFlagBits::eFragmentDensityMapEXT ) |
+                 VkFlags( ImageUsageFlagBits::eFragmentShadingRateAttachmentKHR )
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
-        | VkFlags( ImageUsageFlagBits::eVideoEncodeDstKHR ) | VkFlags( ImageUsageFlagBits::eVideoEncodeSrcKHR ) |
-        VkFlags( ImageUsageFlagBits::eVideoEncodeDpbKHR )
+                 | VkFlags( ImageUsageFlagBits::eVideoEncodeDstKHR ) |
+                 VkFlags( ImageUsageFlagBits::eVideoEncodeSrcKHR ) | VkFlags( ImageUsageFlagBits::eVideoEncodeDpbKHR )
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
     };
   };
@@ -13295,10 +13296,10 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ImageUsageFlagBits::eVideoDecodeDpbKHR )
       result += "VideoDecodeDpbKHR | ";
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-    if ( value & ImageUsageFlagBits::eShadingRateImageNV )
-      result += "ShadingRateImageNV | ";
     if ( value & ImageUsageFlagBits::eFragmentDensityMapEXT )
       result += "FragmentDensityMapEXT | ";
+    if ( value & ImageUsageFlagBits::eFragmentShadingRateAttachmentKHR )
+      result += "FragmentShadingRateAttachmentKHR | ";
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
     if ( value & ImageUsageFlagBits::eVideoEncodeDstKHR )
       result += "VideoEncodeDstKHR | ";
@@ -13630,9 +13631,9 @@ namespace VULKAN_HPP_NAMESPACE
         VkFlags( PipelineStageFlagBits::eAllCommands ) | VkFlags( PipelineStageFlagBits::eTransformFeedbackEXT ) |
         VkFlags( PipelineStageFlagBits::eConditionalRenderingEXT ) |
         VkFlags( PipelineStageFlagBits::eAccelerationStructureBuildKHR ) |
-        VkFlags( PipelineStageFlagBits::eRayTracingShaderKHR ) | VkFlags( PipelineStageFlagBits::eShadingRateImageNV ) |
-        VkFlags( PipelineStageFlagBits::eTaskShaderNV ) | VkFlags( PipelineStageFlagBits::eMeshShaderNV ) |
-        VkFlags( PipelineStageFlagBits::eFragmentDensityProcessEXT ) |
+        VkFlags( PipelineStageFlagBits::eRayTracingShaderKHR ) | VkFlags( PipelineStageFlagBits::eTaskShaderNV ) |
+        VkFlags( PipelineStageFlagBits::eMeshShaderNV ) | VkFlags( PipelineStageFlagBits::eFragmentDensityProcessEXT ) |
+        VkFlags( PipelineStageFlagBits::eFragmentShadingRateAttachmentKHR ) |
         VkFlags( PipelineStageFlagBits::eCommandPreprocessNV ) | VkFlags( PipelineStageFlagBits::eNoneKHR )
     };
   };
@@ -13708,14 +13709,14 @@ namespace VULKAN_HPP_NAMESPACE
       result += "AccelerationStructureBuildKHR | ";
     if ( value & PipelineStageFlagBits::eRayTracingShaderKHR )
       result += "RayTracingShaderKHR | ";
-    if ( value & PipelineStageFlagBits::eShadingRateImageNV )
-      result += "ShadingRateImageNV | ";
     if ( value & PipelineStageFlagBits::eTaskShaderNV )
       result += "TaskShaderNV | ";
     if ( value & PipelineStageFlagBits::eMeshShaderNV )
       result += "MeshShaderNV | ";
     if ( value & PipelineStageFlagBits::eFragmentDensityProcessEXT )
       result += "FragmentDensityProcessEXT | ";
+    if ( value & PipelineStageFlagBits::eFragmentShadingRateAttachmentKHR )
+      result += "FragmentShadingRateAttachmentKHR | ";
     if ( value & PipelineStageFlagBits::eCommandPreprocessNV )
       result += "CommandPreprocessNV | ";
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
@@ -15094,24 +15095,26 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum : VkFlags
     {
-      allFlags =
-        VkFlags( AccessFlagBits::eIndirectCommandRead ) | VkFlags( AccessFlagBits::eIndexRead ) |
-        VkFlags( AccessFlagBits::eVertexAttributeRead ) | VkFlags( AccessFlagBits::eUniformRead ) |
-        VkFlags( AccessFlagBits::eInputAttachmentRead ) | VkFlags( AccessFlagBits::eShaderRead ) |
-        VkFlags( AccessFlagBits::eShaderWrite ) | VkFlags( AccessFlagBits::eColorAttachmentRead ) |
-        VkFlags( AccessFlagBits::eColorAttachmentWrite ) | VkFlags( AccessFlagBits::eDepthStencilAttachmentRead ) |
-        VkFlags( AccessFlagBits::eDepthStencilAttachmentWrite ) | VkFlags( AccessFlagBits::eTransferRead ) |
-        VkFlags( AccessFlagBits::eTransferWrite ) | VkFlags( AccessFlagBits::eHostRead ) |
-        VkFlags( AccessFlagBits::eHostWrite ) | VkFlags( AccessFlagBits::eMemoryRead ) |
-        VkFlags( AccessFlagBits::eMemoryWrite ) | VkFlags( AccessFlagBits::eTransformFeedbackWriteEXT ) |
-        VkFlags( AccessFlagBits::eTransformFeedbackCounterReadEXT ) |
-        VkFlags( AccessFlagBits::eTransformFeedbackCounterWriteEXT ) |
-        VkFlags( AccessFlagBits::eConditionalRenderingReadEXT ) |
-        VkFlags( AccessFlagBits::eColorAttachmentReadNoncoherentEXT ) |
-        VkFlags( AccessFlagBits::eAccelerationStructureReadKHR ) |
-        VkFlags( AccessFlagBits::eAccelerationStructureWriteKHR ) | VkFlags( AccessFlagBits::eShadingRateImageReadNV ) |
-        VkFlags( AccessFlagBits::eFragmentDensityMapReadEXT ) | VkFlags( AccessFlagBits::eCommandPreprocessReadNV ) |
-        VkFlags( AccessFlagBits::eCommandPreprocessWriteNV ) | VkFlags( AccessFlagBits::eNoneKHR )
+      allFlags = VkFlags( AccessFlagBits::eIndirectCommandRead ) | VkFlags( AccessFlagBits::eIndexRead ) |
+                 VkFlags( AccessFlagBits::eVertexAttributeRead ) | VkFlags( AccessFlagBits::eUniformRead ) |
+                 VkFlags( AccessFlagBits::eInputAttachmentRead ) | VkFlags( AccessFlagBits::eShaderRead ) |
+                 VkFlags( AccessFlagBits::eShaderWrite ) | VkFlags( AccessFlagBits::eColorAttachmentRead ) |
+                 VkFlags( AccessFlagBits::eColorAttachmentWrite ) |
+                 VkFlags( AccessFlagBits::eDepthStencilAttachmentRead ) |
+                 VkFlags( AccessFlagBits::eDepthStencilAttachmentWrite ) | VkFlags( AccessFlagBits::eTransferRead ) |
+                 VkFlags( AccessFlagBits::eTransferWrite ) | VkFlags( AccessFlagBits::eHostRead ) |
+                 VkFlags( AccessFlagBits::eHostWrite ) | VkFlags( AccessFlagBits::eMemoryRead ) |
+                 VkFlags( AccessFlagBits::eMemoryWrite ) | VkFlags( AccessFlagBits::eTransformFeedbackWriteEXT ) |
+                 VkFlags( AccessFlagBits::eTransformFeedbackCounterReadEXT ) |
+                 VkFlags( AccessFlagBits::eTransformFeedbackCounterWriteEXT ) |
+                 VkFlags( AccessFlagBits::eConditionalRenderingReadEXT ) |
+                 VkFlags( AccessFlagBits::eColorAttachmentReadNoncoherentEXT ) |
+                 VkFlags( AccessFlagBits::eAccelerationStructureReadKHR ) |
+                 VkFlags( AccessFlagBits::eAccelerationStructureWriteKHR ) |
+                 VkFlags( AccessFlagBits::eFragmentDensityMapReadEXT ) |
+                 VkFlags( AccessFlagBits::eFragmentShadingRateAttachmentReadKHR ) |
+                 VkFlags( AccessFlagBits::eCommandPreprocessReadNV ) |
+                 VkFlags( AccessFlagBits::eCommandPreprocessWriteNV ) | VkFlags( AccessFlagBits::eNoneKHR )
     };
   };
 
@@ -15192,10 +15195,10 @@ namespace VULKAN_HPP_NAMESPACE
       result += "AccelerationStructureReadKHR | ";
     if ( value & AccessFlagBits::eAccelerationStructureWriteKHR )
       result += "AccelerationStructureWriteKHR | ";
-    if ( value & AccessFlagBits::eShadingRateImageReadNV )
-      result += "ShadingRateImageReadNV | ";
     if ( value & AccessFlagBits::eFragmentDensityMapReadEXT )
       result += "FragmentDensityMapReadEXT | ";
+    if ( value & AccessFlagBits::eFragmentShadingRateAttachmentReadKHR )
+      result += "FragmentShadingRateAttachmentReadKHR | ";
     if ( value & AccessFlagBits::eCommandPreprocessReadNV )
       result += "CommandPreprocessReadNV | ";
     if ( value & AccessFlagBits::eCommandPreprocessWriteNV )
