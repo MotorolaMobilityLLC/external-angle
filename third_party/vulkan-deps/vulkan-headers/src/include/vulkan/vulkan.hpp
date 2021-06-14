@@ -93,7 +93,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <compare>
 #endif
 
-static_assert( VK_HEADER_VERSION == 180, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 181, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -8267,15 +8267,6 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
-  enum class InstanceCreateFlagBits
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( InstanceCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   enum class InternalAllocationType
   {
     eExecutable = VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE
@@ -8433,15 +8424,6 @@ namespace VULKAN_HPP_NAMESPACE
       case SystemAllocationScope::eInstance: return "Instance";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
-  }
-
-  enum class DeviceCreateFlagBits
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( DeviceCreateFlagBits )
-  {
-    return "(void)";
   }
 
   enum class DeviceQueueCreateFlagBits : VkDeviceQueueCreateFlags
@@ -8658,15 +8640,6 @@ namespace VULKAN_HPP_NAMESPACE
       case QueryPipelineStatisticFlagBits::eComputeShaderInvocations: return "ComputeShaderInvocations";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
-  }
-
-  enum class QueryPoolCreateFlagBits
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( QueryPoolCreateFlagBits )
-  {
-    return "(void)";
   }
 
   enum class QueryResultFlagBits : VkQueryResultFlags
@@ -10153,6 +10126,159 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
+  enum class InstanceCreateFlagBits
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( InstanceCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class DeviceCreateFlagBits
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( DeviceCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class MemoryMapFlagBits : VkMemoryMapFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( MemoryMapFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class SemaphoreCreateFlagBits : VkSemaphoreCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( SemaphoreCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class QueryPoolCreateFlagBits
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( QueryPoolCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class BufferViewCreateFlagBits : VkBufferViewCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( BufferViewCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class PipelineColorBlendStateCreateFlagBits : VkPipelineColorBlendStateCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineColorBlendStateCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class PipelineDepthStencilStateCreateFlagBits : VkPipelineDepthStencilStateCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineDepthStencilStateCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class PipelineDynamicStateCreateFlagBits : VkPipelineDynamicStateCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineDynamicStateCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class PipelineInputAssemblyStateCreateFlagBits : VkPipelineInputAssemblyStateCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineInputAssemblyStateCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class PipelineLayoutCreateFlagBits : VkPipelineLayoutCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineLayoutCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class PipelineMultisampleStateCreateFlagBits : VkPipelineMultisampleStateCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineMultisampleStateCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class PipelineRasterizationStateCreateFlagBits : VkPipelineRasterizationStateCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineRasterizationStateCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class PipelineTessellationStateCreateFlagBits : VkPipelineTessellationStateCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineTessellationStateCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class PipelineVertexInputStateCreateFlagBits : VkPipelineVertexInputStateCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineVertexInputStateCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class PipelineViewportStateCreateFlagBits : VkPipelineViewportStateCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineViewportStateCreateFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class DescriptorPoolResetFlagBits : VkDescriptorPoolResetFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( DescriptorPoolResetFlagBits )
+  {
+    return "(void)";
+  }
+
   //=== VK_VERSION_1_1 ===
 
   enum class SubgroupFeatureFlagBits : VkSubgroupFeatureFlags
@@ -10512,6 +10638,24 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
+  enum class CommandPoolTrimFlagBits : VkCommandPoolTrimFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( CommandPoolTrimFlagBits )
+  {
+    return "(void)";
+  }
+
+  enum class DescriptorUpdateTemplateCreateFlagBits : VkDescriptorUpdateTemplateCreateFlags
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( DescriptorUpdateTemplateCreateFlagBits )
+  {
+    return "(void)";
+  }
+
   //=== VK_VERSION_1_2 ===
 
   enum class DriverId
@@ -10857,6 +11001,89 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
+  enum class DisplayModeCreateFlagBitsKHR : VkDisplayModeCreateFlagsKHR
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( DisplayModeCreateFlagBitsKHR )
+  {
+    return "(void)";
+  }
+
+  enum class DisplaySurfaceCreateFlagBitsKHR : VkDisplaySurfaceCreateFlagsKHR
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( DisplaySurfaceCreateFlagBitsKHR )
+  {
+    return "(void)";
+  }
+
+#if defined( VK_USE_PLATFORM_XLIB_KHR )
+  //=== VK_KHR_xlib_surface ===
+
+  enum class XlibSurfaceCreateFlagBitsKHR : VkXlibSurfaceCreateFlagsKHR
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( XlibSurfaceCreateFlagBitsKHR )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_XLIB_KHR*/
+
+#if defined( VK_USE_PLATFORM_XCB_KHR )
+  //=== VK_KHR_xcb_surface ===
+
+  enum class XcbSurfaceCreateFlagBitsKHR : VkXcbSurfaceCreateFlagsKHR
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( XcbSurfaceCreateFlagBitsKHR )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_XCB_KHR*/
+
+#if defined( VK_USE_PLATFORM_WAYLAND_KHR )
+  //=== VK_KHR_wayland_surface ===
+
+  enum class WaylandSurfaceCreateFlagBitsKHR : VkWaylandSurfaceCreateFlagsKHR
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( WaylandSurfaceCreateFlagBitsKHR )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
+
+#if defined( VK_USE_PLATFORM_ANDROID_KHR )
+  //=== VK_KHR_android_surface ===
+
+  enum class AndroidSurfaceCreateFlagBitsKHR : VkAndroidSurfaceCreateFlagsKHR
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( AndroidSurfaceCreateFlagBitsKHR )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+
+#if defined( VK_USE_PLATFORM_WIN32_KHR )
+  //=== VK_KHR_win32_surface ===
+
+  enum class Win32SurfaceCreateFlagBitsKHR : VkWin32SurfaceCreateFlagsKHR
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( Win32SurfaceCreateFlagBitsKHR )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
   //=== VK_EXT_debug_report ===
 
   enum class DebugReportFlagBitsEXT : VkDebugReportFlagsEXT
@@ -11145,6 +11372,24 @@ namespace VULKAN_HPP_NAMESPACE
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
+
+  enum class VideoBeginCodingFlagBitsKHR : VkVideoBeginCodingFlagsKHR
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( VideoBeginCodingFlagBitsKHR )
+  {
+    return "(void)";
+  }
+
+  enum class VideoEndCodingFlagBitsKHR : VkVideoEndCodingFlagsKHR
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( VideoEndCodingFlagBitsKHR )
+  {
+    return "(void)";
+  }
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -11166,6 +11411,17 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+  //=== VK_EXT_transform_feedback ===
+
+  enum class PipelineRasterizationStateStreamCreateFlagBitsEXT : VkPipelineRasterizationStateStreamCreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineRasterizationStateStreamCreateFlagBitsEXT )
+  {
+    return "(void)";
+  }
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_EXT_video_encode_h264 ===
@@ -11295,6 +11551,15 @@ namespace VULKAN_HPP_NAMESPACE
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
+
+  enum class VideoDecodeH264CreateFlagBitsEXT : VkVideoDecodeH264CreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( VideoDecodeH264CreateFlagBitsEXT )
+  {
+    return "(void)";
+  }
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_AMD_shader_info ===
@@ -11316,6 +11581,19 @@ namespace VULKAN_HPP_NAMESPACE
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
+
+#if defined( VK_USE_PLATFORM_GGP )
+  //=== VK_GGP_stream_descriptor_surface ===
+
+  enum class StreamDescriptorSurfaceCreateFlagBitsGGP : VkStreamDescriptorSurfaceCreateFlagsGGP
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( StreamDescriptorSurfaceCreateFlagBitsGGP )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_GGP*/
 
   //=== VK_NV_external_memory_capabilities ===
 
@@ -11374,6 +11652,19 @@ namespace VULKAN_HPP_NAMESPACE
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
+
+#if defined( VK_USE_PLATFORM_VI_NN )
+  //=== VK_NN_vi_surface ===
+
+  enum class ViSurfaceCreateFlagBitsNN : VkViSurfaceCreateFlagsNN
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( ViSurfaceCreateFlagBitsNN )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_VI_NN*/
 
   //=== VK_EXT_conditional_rendering ===
 
@@ -11485,6 +11776,15 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
+  enum class PipelineViewportSwizzleStateCreateFlagBitsNV : VkPipelineViewportSwizzleStateCreateFlagsNV
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineViewportSwizzleStateCreateFlagBitsNV )
+  {
+    return "(void)";
+  }
+
   //=== VK_EXT_discard_rectangles ===
 
   enum class DiscardRectangleModeEXT
@@ -11501,6 +11801,15 @@ namespace VULKAN_HPP_NAMESPACE
       case DiscardRectangleModeEXT::eExclusive: return "Exclusive";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
+  }
+
+  enum class PipelineDiscardRectangleStateCreateFlagBitsEXT : VkPipelineDiscardRectangleStateCreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineDiscardRectangleStateCreateFlagBitsEXT )
+  {
+    return "(void)";
   }
 
   //=== VK_EXT_conservative_rasterization ===
@@ -11521,6 +11830,27 @@ namespace VULKAN_HPP_NAMESPACE
       case ConservativeRasterizationModeEXT::eUnderestimate: return "Underestimate";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
+  }
+
+  enum class
+    PipelineRasterizationConservativeStateCreateFlagBitsEXT : VkPipelineRasterizationConservativeStateCreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineRasterizationConservativeStateCreateFlagBitsEXT )
+  {
+    return "(void)";
+  }
+
+  //=== VK_EXT_depth_clip_enable ===
+
+  enum class PipelineRasterizationDepthClipStateCreateFlagBitsEXT : VkPipelineRasterizationDepthClipStateCreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineRasterizationDepthClipStateCreateFlagBitsEXT )
+  {
+    return "(void)";
   }
 
   //=== VK_KHR_performance_query ===
@@ -11629,6 +11959,32 @@ namespace VULKAN_HPP_NAMESPACE
     return "(void)";
   }
 
+#if defined( VK_USE_PLATFORM_IOS_MVK )
+  //=== VK_MVK_ios_surface ===
+
+  enum class IOSSurfaceCreateFlagBitsMVK : VkIOSSurfaceCreateFlagsMVK
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( IOSSurfaceCreateFlagBitsMVK )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_IOS_MVK*/
+
+#if defined( VK_USE_PLATFORM_MACOS_MVK )
+  //=== VK_MVK_macos_surface ===
+
+  enum class MacOSSurfaceCreateFlagBitsMVK : VkMacOSSurfaceCreateFlagsMVK
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( MacOSSurfaceCreateFlagBitsMVK )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_MACOS_MVK*/
+
   //=== VK_EXT_debug_utils ===
 
   enum class DebugUtilsMessageSeverityFlagBitsEXT : VkDebugUtilsMessageSeverityFlagsEXT
@@ -11669,6 +12025,24 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
+  enum class DebugUtilsMessengerCallbackDataFlagBitsEXT : VkDebugUtilsMessengerCallbackDataFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( DebugUtilsMessengerCallbackDataFlagBitsEXT )
+  {
+    return "(void)";
+  }
+
+  enum class DebugUtilsMessengerCreateFlagBitsEXT : VkDebugUtilsMessengerCreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( DebugUtilsMessengerCreateFlagBitsEXT )
+  {
+    return "(void)";
+  }
+
   //=== VK_EXT_blend_operation_advanced ===
 
   enum class BlendOverlapEXT
@@ -11687,6 +12061,17 @@ namespace VULKAN_HPP_NAMESPACE
       case BlendOverlapEXT::eConjoint: return "Conjoint";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
+  }
+
+  //=== VK_NV_fragment_coverage_to_color ===
+
+  enum class PipelineCoverageToColorStateCreateFlagBitsNV : VkPipelineCoverageToColorStateCreateFlagsNV
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineCoverageToColorStateCreateFlagBitsNV )
+  {
+    return "(void)";
   }
 
   //=== VK_KHR_acceleration_structure ===
@@ -11898,6 +12283,15 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
+  enum class PipelineCoverageModulationStateCreateFlagBitsNV : VkPipelineCoverageModulationStateCreateFlagsNV
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineCoverageModulationStateCreateFlagBitsNV )
+  {
+    return "(void)";
+  }
+
   //=== VK_EXT_validation_cache ===
 
   enum class ValidationCacheHeaderVersionEXT
@@ -11912,6 +12306,15 @@ namespace VULKAN_HPP_NAMESPACE
       case ValidationCacheHeaderVersionEXT::eOne: return "One";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
+  }
+
+  enum class ValidationCacheCreateFlagBitsEXT : VkValidationCacheCreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( ValidationCacheCreateFlagBitsEXT )
+  {
+    return "(void)";
   }
 
   //=== VK_NV_shading_rate_image ===
@@ -12047,6 +12450,19 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+  //=== VK_EXT_video_decode_h265 ===
+
+  enum class VideoDecodeH265CreateFlagBitsEXT : VkVideoDecodeH265CreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( VideoDecodeH265CreateFlagBitsEXT )
+  {
+    return "(void)";
+  }
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
   //=== VK_AMD_memory_overallocation_behavior ===
 
   enum class MemoryOverallocationBehaviorAMD
@@ -12172,6 +12588,32 @@ namespace VULKAN_HPP_NAMESPACE
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
+
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  //=== VK_FUCHSIA_imagepipe_surface ===
+
+  enum class ImagePipeSurfaceCreateFlagBitsFUCHSIA : VkImagePipeSurfaceCreateFlagsFUCHSIA
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( ImagePipeSurfaceCreateFlagBitsFUCHSIA )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  //=== VK_EXT_metal_surface ===
+
+  enum class MetalSurfaceCreateFlagBitsEXT : VkMetalSurfaceCreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( MetalSurfaceCreateFlagBitsEXT )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
 
   //=== VK_KHR_fragment_shading_rate ===
 
@@ -12362,6 +12804,15 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
+  enum class PipelineCoverageReductionStateCreateFlagBitsNV : VkPipelineCoverageReductionStateCreateFlagsNV
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineCoverageReductionStateCreateFlagBitsNV )
+  {
+    return "(void)";
+  }
+
   //=== VK_EXT_provoking_vertex ===
 
   enum class ProvokingVertexModeEXT
@@ -12403,6 +12854,17 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
+  //=== VK_EXT_headless_surface ===
+
+  enum class HeadlessSurfaceCreateFlagBitsEXT : VkHeadlessSurfaceCreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( HeadlessSurfaceCreateFlagBitsEXT )
+  {
+    return "(void)";
+  }
 
   //=== VK_EXT_line_rasterization ===
 
@@ -12532,6 +12994,15 @@ namespace VULKAN_HPP_NAMESPACE
       case DeviceMemoryReportEventTypeEXT::eAllocationFailed: return "AllocationFailed";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
+  }
+
+  enum class DeviceMemoryReportFlagBitsEXT : VkDeviceMemoryReportFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( DeviceMemoryReportFlagBitsEXT )
+  {
+    return "(void)";
   }
 
   //=== VK_EXT_private_data ===
@@ -12872,6 +13343,19 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
+#if defined( VK_USE_PLATFORM_DIRECTFB_EXT )
+  //=== VK_EXT_directfb_surface ===
+
+  enum class DirectFBSurfaceCreateFlagBitsEXT : VkDirectFBSurfaceCreateFlagsEXT
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( DirectFBSurfaceCreateFlagBitsEXT )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
+
   //=== VK_KHR_ray_tracing_pipeline ===
 
   enum class RayTracingShaderGroupTypeKHR
@@ -12912,6 +13396,19 @@ namespace VULKAN_HPP_NAMESPACE
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
+
+#if defined( VK_USE_PLATFORM_SCREEN_QNX )
+  //=== VK_QNX_screen_surface ===
+
+  enum class ScreenSurfaceCreateFlagBitsQNX : VkScreenSurfaceCreateFlagsQNX
+  {
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( ScreenSurfaceCreateFlagBitsQNX )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_SCREEN_QNX*/
 
   template <ObjectType value>
   struct cpp_type
@@ -13691,15 +14188,6 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
 
-  enum class MemoryMapFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( MemoryMapFlagBits )
-  {
-    return "(void)";
-  }
-
   using MemoryMapFlags = Flags<MemoryMapFlagBits>;
 
   VULKAN_HPP_INLINE std::string to_string( MemoryMapFlags )
@@ -13918,15 +14406,6 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & FenceCreateFlagBits::eSignaled )
       result += "Signaled | ";
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
-  }
-
-  enum class SemaphoreCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( SemaphoreCreateFlagBits )
-  {
-    return "(void)";
   }
 
   using SemaphoreCreateFlags = Flags<SemaphoreCreateFlagBits>;
@@ -14286,15 +14765,6 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
 
-  enum class BufferViewCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( BufferViewCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   using BufferViewCreateFlags = Flags<BufferViewCreateFlagBits>;
 
   VULKAN_HPP_INLINE std::string to_string( BufferViewCreateFlags )
@@ -14505,15 +14975,6 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
 
-  enum class PipelineColorBlendStateCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineColorBlendStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   using PipelineColorBlendStateCreateFlags = Flags<PipelineColorBlendStateCreateFlagBits>;
 
   VULKAN_HPP_INLINE std::string to_string( PipelineColorBlendStateCreateFlags )
@@ -14618,29 +15079,11 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
 
-  enum class PipelineDepthStencilStateCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineDepthStencilStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   using PipelineDepthStencilStateCreateFlags = Flags<PipelineDepthStencilStateCreateFlagBits>;
 
   VULKAN_HPP_INLINE std::string to_string( PipelineDepthStencilStateCreateFlags )
   {
     return "{}";
-  }
-
-  enum class PipelineDynamicStateCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineDynamicStateCreateFlagBits )
-  {
-    return "(void)";
   }
 
   using PipelineDynamicStateCreateFlags = Flags<PipelineDynamicStateCreateFlagBits>;
@@ -14650,29 +15093,11 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
-  enum class PipelineInputAssemblyStateCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineInputAssemblyStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   using PipelineInputAssemblyStateCreateFlags = Flags<PipelineInputAssemblyStateCreateFlagBits>;
 
   VULKAN_HPP_INLINE std::string to_string( PipelineInputAssemblyStateCreateFlags )
   {
     return "{}";
-  }
-
-  enum class PipelineLayoutCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineLayoutCreateFlagBits )
-  {
-    return "(void)";
   }
 
   using PipelineLayoutCreateFlags = Flags<PipelineLayoutCreateFlagBits>;
@@ -14682,29 +15107,11 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
-  enum class PipelineMultisampleStateCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineMultisampleStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   using PipelineMultisampleStateCreateFlags = Flags<PipelineMultisampleStateCreateFlagBits>;
 
   VULKAN_HPP_INLINE std::string to_string( PipelineMultisampleStateCreateFlags )
   {
     return "{}";
-  }
-
-  enum class PipelineRasterizationStateCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineRasterizationStateCreateFlagBits )
-  {
-    return "(void)";
   }
 
   using PipelineRasterizationStateCreateFlags = Flags<PipelineRasterizationStateCreateFlagBits>;
@@ -14763,15 +15170,6 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
 
-  enum class PipelineTessellationStateCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineTessellationStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   using PipelineTessellationStateCreateFlags = Flags<PipelineTessellationStateCreateFlagBits>;
 
   VULKAN_HPP_INLINE std::string to_string( PipelineTessellationStateCreateFlags )
@@ -14779,29 +15177,11 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
-  enum class PipelineVertexInputStateCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineVertexInputStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   using PipelineVertexInputStateCreateFlags = Flags<PipelineVertexInputStateCreateFlagBits>;
 
   VULKAN_HPP_INLINE std::string to_string( PipelineVertexInputStateCreateFlags )
   {
     return "{}";
-  }
-
-  enum class PipelineViewportStateCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineViewportStateCreateFlagBits )
-  {
-    return "(void)";
   }
 
   using PipelineViewportStateCreateFlags = Flags<PipelineViewportStateCreateFlagBits>;
@@ -14987,15 +15367,6 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & DescriptorPoolCreateFlagBits::eHostOnlyVALVE )
       result += "HostOnlyVALVE | ";
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
-  }
-
-  enum class DescriptorPoolResetFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( DescriptorPoolResetFlagBits )
-  {
-    return "(void)";
   }
 
   using DescriptorPoolResetFlags = Flags<DescriptorPoolResetFlagBits>;
@@ -15883,15 +16254,6 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
 
-  enum class CommandPoolTrimFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( CommandPoolTrimFlagBits )
-  {
-    return "(void)";
-  }
-
   using CommandPoolTrimFlags = Flags<CommandPoolTrimFlagBits>;
 
   using CommandPoolTrimFlagsKHR = CommandPoolTrimFlags;
@@ -15899,15 +16261,6 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_INLINE std::string to_string( CommandPoolTrimFlags )
   {
     return "{}";
-  }
-
-  enum class DescriptorUpdateTemplateCreateFlagBits : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( DescriptorUpdateTemplateCreateFlagBits )
-  {
-    return "(void)";
   }
 
   using DescriptorUpdateTemplateCreateFlags = Flags<DescriptorUpdateTemplateCreateFlagBits>;
@@ -16710,15 +17063,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_KHR_display ===
 
-  enum class DisplayModeCreateFlagBitsKHR : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( DisplayModeCreateFlagBitsKHR )
-  {
-    return "(void)";
-  }
-
   using DisplayModeCreateFlagsKHR = Flags<DisplayModeCreateFlagBitsKHR>;
 
   VULKAN_HPP_INLINE std::string to_string( DisplayModeCreateFlagsKHR )
@@ -16778,15 +17122,6 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & DisplayPlaneAlphaFlagBitsKHR::ePerPixelPremultiplied )
       result += "PerPixelPremultiplied | ";
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
-  }
-
-  enum class DisplaySurfaceCreateFlagBitsKHR : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( DisplaySurfaceCreateFlagBitsKHR )
-  {
-    return "(void)";
   }
 
   using DisplaySurfaceCreateFlagsKHR = Flags<DisplaySurfaceCreateFlagBitsKHR>;
@@ -16868,15 +17203,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_XLIB_KHR )
   //=== VK_KHR_xlib_surface ===
 
-  enum class XlibSurfaceCreateFlagBitsKHR : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( XlibSurfaceCreateFlagBitsKHR )
-  {
-    return "(void)";
-  }
-
   using XlibSurfaceCreateFlagsKHR = Flags<XlibSurfaceCreateFlagBitsKHR>;
 
   VULKAN_HPP_INLINE std::string to_string( XlibSurfaceCreateFlagsKHR )
@@ -16887,15 +17213,6 @@ namespace VULKAN_HPP_NAMESPACE
 
 #if defined( VK_USE_PLATFORM_XCB_KHR )
   //=== VK_KHR_xcb_surface ===
-
-  enum class XcbSurfaceCreateFlagBitsKHR : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( XcbSurfaceCreateFlagBitsKHR )
-  {
-    return "(void)";
-  }
 
   using XcbSurfaceCreateFlagsKHR = Flags<XcbSurfaceCreateFlagBitsKHR>;
 
@@ -16908,15 +17225,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_WAYLAND_KHR )
   //=== VK_KHR_wayland_surface ===
 
-  enum class WaylandSurfaceCreateFlagBitsKHR : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( WaylandSurfaceCreateFlagBitsKHR )
-  {
-    return "(void)";
-  }
-
   using WaylandSurfaceCreateFlagsKHR = Flags<WaylandSurfaceCreateFlagBitsKHR>;
 
   VULKAN_HPP_INLINE std::string to_string( WaylandSurfaceCreateFlagsKHR )
@@ -16928,15 +17236,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
   //=== VK_KHR_android_surface ===
 
-  enum class AndroidSurfaceCreateFlagBitsKHR : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( AndroidSurfaceCreateFlagBitsKHR )
-  {
-    return "(void)";
-  }
-
   using AndroidSurfaceCreateFlagsKHR = Flags<AndroidSurfaceCreateFlagBitsKHR>;
 
   VULKAN_HPP_INLINE std::string to_string( AndroidSurfaceCreateFlagsKHR )
@@ -16947,15 +17246,6 @@ namespace VULKAN_HPP_NAMESPACE
 
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   //=== VK_KHR_win32_surface ===
-
-  enum class Win32SurfaceCreateFlagBitsKHR : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( Win32SurfaceCreateFlagBitsKHR )
-  {
-    return "(void)";
-  }
 
   using Win32SurfaceCreateFlagsKHR = Flags<Win32SurfaceCreateFlagBitsKHR>;
 
@@ -17290,29 +17580,11 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
 
-  enum class VideoBeginCodingFlagBitsKHR : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( VideoBeginCodingFlagBitsKHR )
-  {
-    return "(void)";
-  }
-
   using VideoBeginCodingFlagsKHR = Flags<VideoBeginCodingFlagBitsKHR>;
 
   VULKAN_HPP_INLINE std::string to_string( VideoBeginCodingFlagsKHR )
   {
     return "{}";
-  }
-
-  enum class VideoEndCodingFlagBitsKHR : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( VideoEndCodingFlagBitsKHR )
-  {
-    return "(void)";
   }
 
   using VideoEndCodingFlagsKHR = Flags<VideoEndCodingFlagBitsKHR>;
@@ -17473,15 +17745,6 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_EXT_transform_feedback ===
-
-  enum class PipelineRasterizationStateStreamCreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineRasterizationStateStreamCreateFlagBitsEXT )
-  {
-    return "(void)";
-  }
 
   using PipelineRasterizationStateStreamCreateFlagsEXT = Flags<PipelineRasterizationStateStreamCreateFlagBitsEXT>;
 
@@ -17775,15 +18038,6 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
 
-  enum class VideoDecodeH264CreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( VideoDecodeH264CreateFlagBitsEXT )
-  {
-    return "(void)";
-  }
-
   using VideoDecodeH264CreateFlagsEXT = Flags<VideoDecodeH264CreateFlagBitsEXT>;
 
   VULKAN_HPP_INLINE std::string to_string( VideoDecodeH264CreateFlagsEXT )
@@ -17794,15 +18048,6 @@ namespace VULKAN_HPP_NAMESPACE
 
 #if defined( VK_USE_PLATFORM_GGP )
   //=== VK_GGP_stream_descriptor_surface ===
-
-  enum class StreamDescriptorSurfaceCreateFlagBitsGGP : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( StreamDescriptorSurfaceCreateFlagBitsGGP )
-  {
-    return "(void)";
-  }
 
   using StreamDescriptorSurfaceCreateFlagsGGP = Flags<StreamDescriptorSurfaceCreateFlagBitsGGP>;
 
@@ -17924,15 +18169,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_VI_NN )
   //=== VK_NN_vi_surface ===
 
-  enum class ViSurfaceCreateFlagBitsNN : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( ViSurfaceCreateFlagBitsNN )
-  {
-    return "(void)";
-  }
-
   using ViSurfaceCreateFlagsNN = Flags<ViSurfaceCreateFlagBitsNN>;
 
   VULKAN_HPP_INLINE std::string to_string( ViSurfaceCreateFlagsNN )
@@ -18039,15 +18275,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_NV_viewport_swizzle ===
 
-  enum class PipelineViewportSwizzleStateCreateFlagBitsNV : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineViewportSwizzleStateCreateFlagBitsNV )
-  {
-    return "(void)";
-  }
-
   using PipelineViewportSwizzleStateCreateFlagsNV = Flags<PipelineViewportSwizzleStateCreateFlagBitsNV>;
 
   VULKAN_HPP_INLINE std::string to_string( PipelineViewportSwizzleStateCreateFlagsNV )
@@ -18056,15 +18283,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   //=== VK_EXT_discard_rectangles ===
-
-  enum class PipelineDiscardRectangleStateCreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineDiscardRectangleStateCreateFlagBitsEXT )
-  {
-    return "(void)";
-  }
 
   using PipelineDiscardRectangleStateCreateFlagsEXT = Flags<PipelineDiscardRectangleStateCreateFlagBitsEXT>;
 
@@ -18075,15 +18293,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_EXT_conservative_rasterization ===
 
-  enum class PipelineRasterizationConservativeStateCreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineRasterizationConservativeStateCreateFlagBitsEXT )
-  {
-    return "(void)";
-  }
-
   using PipelineRasterizationConservativeStateCreateFlagsEXT =
     Flags<PipelineRasterizationConservativeStateCreateFlagBitsEXT>;
 
@@ -18093,15 +18302,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   //=== VK_EXT_depth_clip_enable ===
-
-  enum class PipelineRasterizationDepthClipStateCreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineRasterizationDepthClipStateCreateFlagBitsEXT )
-  {
-    return "(void)";
-  }
 
   using PipelineRasterizationDepthClipStateCreateFlagsEXT = Flags<PipelineRasterizationDepthClipStateCreateFlagBitsEXT>;
 
@@ -18171,15 +18371,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_IOS_MVK )
   //=== VK_MVK_ios_surface ===
 
-  enum class IOSSurfaceCreateFlagBitsMVK : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( IOSSurfaceCreateFlagBitsMVK )
-  {
-    return "(void)";
-  }
-
   using IOSSurfaceCreateFlagsMVK = Flags<IOSSurfaceCreateFlagBitsMVK>;
 
   VULKAN_HPP_INLINE std::string to_string( IOSSurfaceCreateFlagsMVK )
@@ -18190,15 +18381,6 @@ namespace VULKAN_HPP_NAMESPACE
 
 #if defined( VK_USE_PLATFORM_MACOS_MVK )
   //=== VK_MVK_macos_surface ===
-
-  enum class MacOSSurfaceCreateFlagBitsMVK : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( MacOSSurfaceCreateFlagBitsMVK )
-  {
-    return "(void)";
-  }
 
   using MacOSSurfaceCreateFlagsMVK = Flags<MacOSSurfaceCreateFlagBitsMVK>;
 
@@ -18317,29 +18499,11 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
 
-  enum class DebugUtilsMessengerCallbackDataFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( DebugUtilsMessengerCallbackDataFlagBitsEXT )
-  {
-    return "(void)";
-  }
-
   using DebugUtilsMessengerCallbackDataFlagsEXT = Flags<DebugUtilsMessengerCallbackDataFlagBitsEXT>;
 
   VULKAN_HPP_INLINE std::string to_string( DebugUtilsMessengerCallbackDataFlagsEXT )
   {
     return "{}";
-  }
-
-  enum class DebugUtilsMessengerCreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( DebugUtilsMessengerCreateFlagBitsEXT )
-  {
-    return "(void)";
   }
 
   using DebugUtilsMessengerCreateFlagsEXT = Flags<DebugUtilsMessengerCreateFlagBitsEXT>;
@@ -18350,15 +18514,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   //=== VK_NV_fragment_coverage_to_color ===
-
-  enum class PipelineCoverageToColorStateCreateFlagBitsNV : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineCoverageToColorStateCreateFlagBitsNV )
-  {
-    return "(void)";
-  }
 
   using PipelineCoverageToColorStateCreateFlagsNV = Flags<PipelineCoverageToColorStateCreateFlagBitsNV>;
 
@@ -18583,15 +18738,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_NV_framebuffer_mixed_samples ===
 
-  enum class PipelineCoverageModulationStateCreateFlagBitsNV : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineCoverageModulationStateCreateFlagBitsNV )
-  {
-    return "(void)";
-  }
-
   using PipelineCoverageModulationStateCreateFlagsNV = Flags<PipelineCoverageModulationStateCreateFlagBitsNV>;
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCoverageModulationStateCreateFlagsNV )
@@ -18600,15 +18746,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   //=== VK_EXT_validation_cache ===
-
-  enum class ValidationCacheCreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( ValidationCacheCreateFlagBitsEXT )
-  {
-    return "(void)";
-  }
 
   using ValidationCacheCreateFlagsEXT = Flags<ValidationCacheCreateFlagBitsEXT>;
 
@@ -18628,15 +18765,6 @@ namespace VULKAN_HPP_NAMESPACE
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_EXT_video_decode_h265 ===
-
-  enum class VideoDecodeH265CreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( VideoDecodeH265CreateFlagBitsEXT )
-  {
-    return "(void)";
-  }
 
   using VideoDecodeH265CreateFlagsEXT = Flags<VideoDecodeH265CreateFlagBitsEXT>;
 
@@ -18703,15 +18831,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   //=== VK_FUCHSIA_imagepipe_surface ===
 
-  enum class ImagePipeSurfaceCreateFlagBitsFUCHSIA : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( ImagePipeSurfaceCreateFlagBitsFUCHSIA )
-  {
-    return "(void)";
-  }
-
   using ImagePipeSurfaceCreateFlagsFUCHSIA = Flags<ImagePipeSurfaceCreateFlagBitsFUCHSIA>;
 
   VULKAN_HPP_INLINE std::string to_string( ImagePipeSurfaceCreateFlagsFUCHSIA )
@@ -18722,15 +18841,6 @@ namespace VULKAN_HPP_NAMESPACE
 
 #if defined( VK_USE_PLATFORM_METAL_EXT )
   //=== VK_EXT_metal_surface ===
-
-  enum class MetalSurfaceCreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( MetalSurfaceCreateFlagBitsEXT )
-  {
-    return "(void)";
-  }
 
   using MetalSurfaceCreateFlagsEXT = Flags<MetalSurfaceCreateFlagBitsEXT>;
 
@@ -18814,15 +18924,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_NV_coverage_reduction_mode ===
 
-  enum class PipelineCoverageReductionStateCreateFlagBitsNV : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineCoverageReductionStateCreateFlagBitsNV )
-  {
-    return "(void)";
-  }
-
   using PipelineCoverageReductionStateCreateFlagsNV = Flags<PipelineCoverageReductionStateCreateFlagBitsNV>;
 
   VULKAN_HPP_INLINE std::string to_string( PipelineCoverageReductionStateCreateFlagsNV )
@@ -18831,15 +18932,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   //=== VK_EXT_headless_surface ===
-
-  enum class HeadlessSurfaceCreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( HeadlessSurfaceCreateFlagBitsEXT )
-  {
-    return "(void)";
-  }
 
   using HeadlessSurfaceCreateFlagsEXT = Flags<HeadlessSurfaceCreateFlagBitsEXT>;
 
@@ -18949,15 +19041,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   //=== VK_EXT_device_memory_report ===
-
-  enum class DeviceMemoryReportFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( DeviceMemoryReportFlagBitsEXT )
-  {
-    return "(void)";
-  }
 
   using DeviceMemoryReportFlagsEXT = Flags<DeviceMemoryReportFlagBitsEXT>;
 
@@ -19516,15 +19599,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_DIRECTFB_EXT )
   //=== VK_EXT_directfb_surface ===
 
-  enum class DirectFBSurfaceCreateFlagBitsEXT : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( DirectFBSurfaceCreateFlagBitsEXT )
-  {
-    return "(void)";
-  }
-
   using DirectFBSurfaceCreateFlagsEXT = Flags<DirectFBSurfaceCreateFlagBitsEXT>;
 
   VULKAN_HPP_INLINE std::string to_string( DirectFBSurfaceCreateFlagsEXT )
@@ -19535,15 +19609,6 @@ namespace VULKAN_HPP_NAMESPACE
 
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
   //=== VK_QNX_screen_surface ===
-
-  enum class ScreenSurfaceCreateFlagBitsQNX : VkFlags
-  {
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( ScreenSurfaceCreateFlagBitsQNX )
-  {
-    return "(void)";
-  }
 
   using ScreenSurfaceCreateFlagsQNX = Flags<ScreenSurfaceCreateFlagBitsQNX>;
 
@@ -104101,8 +104166,9 @@ namespace VULKAN_HPP_NAMESPACE
                                                                   reinterpret_cast<void *>( data.data() ),
                                                                   static_cast<VkDeviceSize>( stride ),
                                                                   static_cast<VkQueryResultFlags>( flags ) ) );
-    return createResultValue(
-      result, VULKAN_HPP_NAMESPACE_STRING "::Device::getQueryPoolResults", { Result::eSuccess, Result::eNotReady } );
+    return createResultValue( result,
+                              VULKAN_HPP_NAMESPACE_STRING "::Device::getQueryPoolResults",
+                              { VULKAN_HPP_NAMESPACE::Result::eSuccess, VULKAN_HPP_NAMESPACE::Result::eNotReady } );
   }
 
   template <typename T, typename Allocator, typename Dispatch>
