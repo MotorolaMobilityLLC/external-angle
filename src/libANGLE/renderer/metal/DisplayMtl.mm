@@ -415,8 +415,8 @@ void DisplayMtl::generateExtensions(egl::DisplayExtensions *outExtensions) const
     // Note that robust resource initialization is not yet implemented. We only expose
     // this extension so that ANGLE can be initialized in Chrome. WebGL will fail to use
     // this extension (anglebug.com/4929)
-    outExtensions->robustResourceInitialization = true;
-    outExtensions->powerPreference              = true;
+    outExtensions->robustResourceInitializationANGLE = true;
+    outExtensions->powerPreference                   = true;
 
     // EGL_KHR_image
     outExtensions->image     = true;
@@ -780,28 +780,28 @@ void DisplayMtl::initializeExtensions() const
     mNativeExtensions = gl::Extensions();
 
     // Enable this for simple buffer readback testing, but some functionality is missing.
-    // NOTE(hqle): Support full mapBufferRange extension.
-    mNativeExtensions.mapBufferOES           = true;
-    mNativeExtensions.mapBufferRange         = true;
-    mNativeExtensions.textureStorage         = true;
-    mNativeExtensions.drawBuffers            = true;
-    mNativeExtensions.drawBuffersIndexedEXT  = true;
-    mNativeExtensions.drawBuffersIndexedOES  = true;
-    mNativeExtensions.fragDepth              = true;
-    mNativeExtensions.framebufferBlitANGLE   = true;
-    mNativeExtensions.framebufferBlitNV      = true;
-    mNativeExtensions.framebufferMultisample = true;
-    mNativeExtensions.copyTexture            = true;
-    mNativeExtensions.copyCompressedTexture  = false;
+    // NOTE(hqle): Support full mapBufferRangeEXT extension.
+    mNativeExtensions.mapbufferOES                  = true;
+    mNativeExtensions.mapBufferRangeEXT             = true;
+    mNativeExtensions.textureStorageEXT             = true;
+    mNativeExtensions.drawBuffersEXT                = true;
+    mNativeExtensions.drawBuffersIndexedEXT         = true;
+    mNativeExtensions.drawBuffersIndexedOES         = true;
+    mNativeExtensions.fragDepthEXT                  = true;
+    mNativeExtensions.framebufferBlitANGLE          = true;
+    mNativeExtensions.framebufferBlitNV             = true;
+    mNativeExtensions.framebufferMultisampleANGLE   = true;
+    mNativeExtensions.copyTextureCHROMIUM           = true;
+    mNativeExtensions.copyCompressedTextureCHROMIUM = false;
 
     // EXT_debug_marker is not implemented yet, but the entry points must be exposed for the
     // Metal backend to be used in Chrome (http://anglebug.com/4946)
-    mNativeExtensions.debugMarker = true;
+    mNativeExtensions.debugMarkerEXT = true;
 
-    mNativeExtensions.robustness             = true;
-    mNativeExtensions.textureBorderClampOES  = false;  // not implemented yet
-    mNativeExtensions.translatedShaderSource = true;
-    mNativeExtensions.discardFramebuffer     = true;
+    mNativeExtensions.robustnessEXT               = true;
+    mNativeExtensions.textureBorderClampOES       = false;  // not implemented yet
+    mNativeExtensions.translatedShaderSourceANGLE = true;
+    mNativeExtensions.discardFramebufferEXT       = true;
 
     // TODO(anglebug.com/5505): figure out why WebGL drawing buffer
     // creation fails on macOS when the Metal backend advertises the
@@ -811,41 +811,41 @@ void DisplayMtl::initializeExtensions() const
     if (mFeatures.allowMultisampleStoreAndResolve.enabled &&
         mFeatures.hasDepthAutoResolve.enabled && mFeatures.hasStencilAutoResolve.enabled)
     {
-        mNativeExtensions.multisampledRenderToTexture = true;
+        mNativeExtensions.multisampledRenderToTextureEXT = true;
     }
 #endif
 
     // Enable EXT_blend_minmax
-    mNativeExtensions.blendMinMax = true;
+    mNativeExtensions.blendMinmaxEXT = true;
 
-    mNativeExtensions.eglImageOES         = true;
-    mNativeExtensions.eglImageExternalOES = false;
+    mNativeExtensions.EGLImageOES         = true;
+    mNativeExtensions.EGLImageExternalOES = false;
     // NOTE(hqle): Support GL_OES_EGL_image_external_essl3.
-    mNativeExtensions.eglImageExternalEssl3OES = false;
+    mNativeExtensions.EGLImageExternalEssl3OES = false;
 
-    mNativeExtensions.memoryObject   = false;
-    mNativeExtensions.memoryObjectFd = false;
+    mNativeExtensions.memoryObjectEXT   = false;
+    mNativeExtensions.memoryObjectFdEXT = false;
 
-    mNativeExtensions.semaphore   = false;
-    mNativeExtensions.semaphoreFd = false;
+    mNativeExtensions.semaphoreEXT   = false;
+    mNativeExtensions.semaphoreFdEXT = false;
 
     mNativeExtensions.instancedArraysANGLE = mFeatures.hasBaseVertexInstancedDraw.enabled;
     mNativeExtensions.instancedArraysEXT   = mNativeExtensions.instancedArraysANGLE;
 
-    mNativeExtensions.robustBufferAccessBehavior = false;
+    mNativeExtensions.robustBufferAccessBehaviorKHR = false;
 
-    mNativeExtensions.eglSyncOES = false;
+    mNativeExtensions.EGLSyncOES = false;
 
-    mNativeExtensions.occlusionQueryBoolean = true;
+    mNativeExtensions.occlusionQueryBooleanEXT = true;
 
-    mNativeExtensions.disjointTimerQuery          = false;
-    mNativeExtensions.queryCounterBitsTimeElapsed = false;
-    mNativeExtensions.queryCounterBitsTimestamp   = false;
+    mNativeExtensions.disjointTimerQueryEXT = false;
+    mNativeCaps.queryCounterBitsTimeElapsed = 0;
+    mNativeCaps.queryCounterBitsTimestamp   = 0;
 
-    mNativeExtensions.textureFilterAnisotropic = true;
-    mNativeExtensions.maxTextureAnisotropy     = 16;
+    mNativeExtensions.textureFilterAnisotropicEXT = true;
+    mNativeCaps.maxTextureAnisotropy              = 16;
 
-    mNativeExtensions.textureNPOTOES = true;
+    mNativeExtensions.textureNpotOES = true;
 
     mNativeExtensions.texture3DOES = true;
 
@@ -870,7 +870,7 @@ void DisplayMtl::initializeExtensions() const
         mNativeExtensions.fenceNV = true;
 
         // GL_OES_EGL_sync
-        mNativeExtensions.eglSyncOES = true;
+        mNativeExtensions.EGLSyncOES = true;
     }
 }
 
@@ -889,7 +889,7 @@ void DisplayMtl::initializeTextureCaps() const
     // emulated.
     if (supportsAppleGPUFamily(1) && gl::DetermineCompressedTextureETCSupport(mNativeTextureCaps))
     {
-        mNativeExtensions.compressedTextureETC = true;
+        mNativeExtensions.compressedTextureEtcANGLE = true;
     }
     else
     {
@@ -897,22 +897,22 @@ void DisplayMtl::initializeTextureCaps() const
     }
 
     // Enable ASTC sliced 3D, requires MTLGPUFamilyApple3
-    if (supportsAppleGPUFamily(3) && mNativeExtensions.textureCompressionASTCLDRKHR)
+    if (supportsAppleGPUFamily(3) && mNativeExtensions.textureCompressionAstcLdrKHR)
     {
-        mNativeExtensions.textureCompressionSliced3dASTCKHR = true;
+        mNativeExtensions.textureCompressionAstcSliced3dKHR = true;
     }
 
     // Enable ASTC HDR, requires MTLGPUFamilyApple6
-    if (supportsAppleGPUFamily(6) && mNativeExtensions.textureCompressionASTCLDRKHR)
+    if (supportsAppleGPUFamily(6) && mNativeExtensions.textureCompressionAstcLdrKHR)
     {
-        mNativeExtensions.textureCompressionASTCHDRKHR = true;
+        mNativeExtensions.textureCompressionAstcHdrKHR = true;
     }
 
     // Disable all depth buffer and stencil buffer readback extensions until we need them
     mNativeExtensions.readDepthNV         = false;
     mNativeExtensions.readStencilNV       = false;
     mNativeExtensions.depthBufferFloat2NV = false;
-    mNativeExtensions.textureCompressionASTCLDRKHR &= supportsAppleGPUFamily(2);
+    mNativeExtensions.textureCompressionAstcLdrKHR &= supportsAppleGPUFamily(2);
 }
 
 void DisplayMtl::initializeLimitations()

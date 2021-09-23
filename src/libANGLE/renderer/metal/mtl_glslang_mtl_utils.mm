@@ -175,12 +175,23 @@ std::string updateShaderAttributes(std::string shaderSourceIn, const gl::Program
                 stream << " " << attribute.name << "_" << std::to_string(i)
                        << sh::kUnassignedAttributeString;
                 attributeBindings.insert({std::string(stream.str()), i + attribute.location});
+                stream.str("");
+                // Any renamed attributes are marked as Angle Internal (see RewriteKeywords.cpp
+                // Rewriter::createRenamed)
+                stream << " ANGLE" << attribute.mappedName << "_" << std::to_string(i)
+                       << sh::kUnassignedAttributeString;
+                attributeBindings.insert({std::string(stream.str()), i + attribute.location});
             }
         }
         else
         {
             stream.str("");
             stream << " " << attribute.name << sh::kUnassignedAttributeString;
+            attributeBindings.insert({std::string(stream.str()), attribute.location});
+            stream.str("");
+            // Any renamed attributes are marked as Angle Internal (see RewriteKeywords.cpp
+            // Rewriter::createRenamed)
+            stream << " ANGLE" << attribute.mappedName << sh::kUnassignedAttributeString;
             attributeBindings.insert({std::string(stream.str()), attribute.location});
         }
     }
@@ -262,7 +273,7 @@ std::string GenerateTransformFeedbackVaryingOutput(const gl::TransformFeedbackVa
                        << "ANGLE_" << std::string(sh::kUniformsVar) << ".ANGLE_xfbBufferOffsets["
                        << bufferIndex << "] + (gl_VertexID + ANGLE_instanceIdMod * "
                        << "ANGLE_" << std::string(sh::kUniformsVar)
-                       << ".ANGLE_xfbVerticesPerDraw) * " << stride << " + " << offset << "] = "
+                       << ".ANGLE_xfbVerticesPerInstance) * " << stride << " + " << offset << "] = "
                        << "as_type<float>"
                        << "("
                        << "ANGLE_vertexOut." << varying.name;
