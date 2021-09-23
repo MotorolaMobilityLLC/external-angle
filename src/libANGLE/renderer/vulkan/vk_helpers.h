@@ -845,7 +845,7 @@ class BufferMemory : angle::NonCopyable
     uint8_t *mMappedMemory;
 };
 
-class BufferHelper final : public Resource
+class BufferHelper final : public ReadWriteResource
 {
   public:
     BufferHelper();
@@ -1234,6 +1234,10 @@ class CommandBufferHelper : angle::NonCopyable
     void finalizeDepthStencilImageLayout(Context *context);
     void finalizeDepthStencilResolveImageLayout(Context *context);
     void finalizeDepthStencilLoadStore(Context *context);
+    void finalizeDepthStencilLoadStoreOps(Context *context,
+                                          ResourceAccess access,
+                                          RenderPassLoadOp *loadOp,
+                                          RenderPassStoreOp *storeOp);
     void finalizeDepthStencilImageLayoutAndLoadStore(Context *context);
 
     void updateImageLayoutAndBarrier(Context *context,
@@ -1476,7 +1480,8 @@ class ImageHelper final : public Resource, public angle::Subject
         const MemoryProperties &memoryProperties,
         const VkMemoryRequirements &memoryRequirements,
         const VkSamplerYcbcrConversionCreateInfo *samplerYcbcrConversionCreateInfo,
-        const void *extraAllocationInfo,
+        uint32_t extraAllocationInfoCount,
+        const void **extraAllocationInfo,
         uint32_t currentQueueFamilyIndex,
         VkMemoryPropertyFlags flags);
     angle::Result initLayerImageView(Context *context,
@@ -1925,9 +1930,9 @@ class ImageHelper final : public Resource, public angle::Subject
     void restoreSubresourceStencilContent(gl::LevelIndex level,
                                           uint32_t layerIndex,
                                           uint32_t layerCount);
-    bool hasStagedUpdatesWithMismatchedFormat(gl::LevelIndex levelStart,
-                                              gl::LevelIndex levelEnd,
-                                              angle::FormatID formatID) const;
+    angle::Result reformatStagedUpdate(ContextVk *contextVk,
+                                       angle::FormatID srcFormatID,
+                                       angle::FormatID dstFormatID);
 
   private:
     enum class UpdateSource

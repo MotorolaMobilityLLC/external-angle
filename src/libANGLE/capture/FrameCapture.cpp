@@ -18,6 +18,7 @@
 
 #include "common/angle_version.h"
 #include "common/mathutil.h"
+#include "common/serializer/JsonSerializer.h"
 #include "common/string_utils.h"
 #include "common/system_utils.h"
 #include "libANGLE/Config.h"
@@ -42,7 +43,6 @@
 #include "libANGLE/entry_points_utils.h"
 #include "libANGLE/queryconversions.h"
 #include "libANGLE/queryutils.h"
-#include "libANGLE/serializer/JsonSerializer.h"
 #include "third_party/ceval/ceval.h"
 
 #define USE_SYSTEM_ZLIB
@@ -2071,6 +2071,8 @@ void CaptureVertexArrayState(std::vector<CallCapture> *setupCalls,
     const std::vector<gl::VertexAttribute> &vertexAttribs = vertexArray->getVertexAttributes();
     const std::vector<gl::VertexBinding> &vertexBindings  = vertexArray->getVertexBindings();
 
+    gl::AttributesMask vertexPointerBindings;
+
     for (GLuint attribIndex = 0; attribIndex < gl::MAX_VERTEX_ATTRIBS; ++attribIndex)
     {
         const gl::VertexAttribute defaultAttrib(attribIndex);
@@ -2117,24 +2119,58 @@ void CaptureVertexArrayState(std::vector<CallCapture> *setupCalls,
                      VertexBindingMatchesAttribStride(attrib, binding) &&
                      (!buffer || binding.getOffset() == reinterpret_cast<GLintptr>(attrib.pointer)))
             {
-                // Check if we can use strictly ES2 semantics.
+                // Check if we can use strictly ES2 semantics, and track indexes that do.
+                vertexPointerBindings.set(attribIndex);
+
                 Capture(setupCalls,
                         CaptureVertexAttribPointer(
                             *replayState, true, attribIndex, attrib.format->channelCount,
                             attrib.format->vertexAttribType, attrib.format->isNorm(),
                             attrib.vertexAttribArrayStride, attrib.pointer));
+
+                if (binding.getDivisor() != 0)
+                {
+                    Capture(setupCalls, CaptureVertexAttribDivisor(*replayState, true, attribIndex,
+                                                                   binding.getDivisor()));
+                }
             }
             else
             {
-                // TOOD: http://anglebug.com/6274. ES 3.1 vertex array state is not yet implemented.
-                UNIMPLEMENTED();
+                ASSERT(context->getClientVersion() >= gl::ES_3_1);
+
+                Capture(setupCalls,
+                        CaptureVertexAttribFormat(*replayState, true, attribIndex,
+                                                  attrib.format->channelCount,
+                                                  attrib.format->vertexAttribType,
+                                                  attrib.format->isNorm(), attrib.relativeOffset));
+                Capture(setupCalls, CaptureVertexAttribBinding(*replayState, true, attribIndex,
+                                                               attrib.bindingIndex));
             }
+        }
+    }
+
+    // The loop below expects attribs and bindings to have equal counts
+    static_assert(gl::MAX_VERTEX_ATTRIBS == gl::MAX_VERTEX_ATTRIB_BINDINGS,
+                  "Max vertex attribs and bindings count mismatch");
+
+    // Loop through binding indices that weren't used by VertexAttribPointer
+    for (size_t bindingIndex : vertexPointerBindings.flip())
+    {
+        const gl::VertexBinding &binding = vertexBindings[bindingIndex];
+
+        if (binding.getBuffer().id().value != 0)
+        {
+            Capture(setupCalls,
+                    CaptureBindVertexBuffer(*replayState, true, static_cast<GLuint>(bindingIndex),
+                                            binding.getBuffer().id(), binding.getOffset(),
+                                            binding.getStride()));
         }
 
         if (binding.getDivisor() != 0)
         {
-            Capture(setupCalls, CaptureVertexAttribDivisor(*replayState, true, attribIndex,
-                                                           binding.getDivisor()));
+            Capture(setupCalls, CaptureVertexBindingDivisor(*replayState, true,
+                                                            static_cast<GLuint>(bindingIndex),
+                                                            binding.getDivisor()));
         }
     }
 
@@ -2558,10 +2594,7 @@ void CaptureShareGroupMidExecutionSetup(const gl::Context *context,
     const gl::State &apiState              = context->getState();
 
     // Small helper function to make the code more readable.
-    auto cap = [frameCaptureShared, setupCalls](CallCapture &&call) {
-        frameCaptureShared->updateReadBufferSize(call.params.getReadBufferSize());
-        setupCalls->emplace_back(std::move(call));
-    };
+    auto cap = [setupCalls](CallCapture &&call) { setupCalls->emplace_back(std::move(call)); };
 
     // Capture Buffer data.
     const gl::BufferManager &buffers = apiState.getBufferManagerForCapture();
@@ -4178,7 +4211,7 @@ FrameCaptureShared::FrameCaptureShared()
       mClientVertexArrayMap{},
       mFrameIndex(1),
       mCaptureStartFrame(1),
-      mCaptureEndFrame(10),
+      mCaptureEndFrame(0),
       mClientArraySizes{},
       mReadBufferSize(0),
       mHasResourceType{},
@@ -4285,6 +4318,11 @@ FrameCaptureShared::FrameCaptureShared()
         // commands issued are handled correctly by maybeCapturePreCallUpdates() and
         // maybeCapturePostCallUpdates().
         setCaptureActive();
+    }
+
+    if (mCaptureEndFrame < mCaptureStartFrame)
+    {
+        mEnabled = false;
     }
 }
 
@@ -5227,10 +5265,10 @@ void FrameCaptureShared::maybeCapturePreCallUpdates(const gl::Context *context, 
         mResourceTracker.onShaderProgramAccess(shaderProgramID);
     }
 
-    updatePreCallResourceCounts(call);
+    updateResourceCounts(call);
 }
 
-void FrameCaptureShared::updatePreCallResourceCounts(const CallCapture &call)
+void FrameCaptureShared::updateResourceCounts(const CallCapture &call)
 {
     for (const ParamCapture &param : call.params.getParamCaptures())
     {
@@ -5537,6 +5575,17 @@ void FrameCaptureShared::checkForCaptureTrigger()
     }
 }
 
+void FrameCaptureShared::scanSetupCalls(const gl::Context *context,
+                                        std::vector<CallCapture> &setupCalls)
+{
+    // Scan all the instructions in the list for tracking
+    for (CallCapture &call : setupCalls)
+    {
+        updateReadBufferSize(call.params.getReadBufferSize());
+        updateResourceCounts(call);
+    }
+}
+
 void FrameCaptureShared::runMidExecutionCapture(const gl::Context *mainContext)
 {
     // Make sure all pending work for every Context in the share group has completed so all data
@@ -5555,6 +5604,8 @@ void FrameCaptureShared::runMidExecutionCapture(const gl::Context *mainContext)
     CaptureShareGroupMidExecutionSetup(mainContext, &shareGroupSetupCalls, &mResourceTracker,
                                        mainContextReplayState);
 
+    scanSetupCalls(mainContext, shareGroupSetupCalls);
+
     WriteShareGroupCppSetupReplay(mCompression, mOutDirectory, mCaptureLabel, 1, 1,
                                   shareGroupSetupCalls, &mResourceTracker, &mBinaryData,
                                   mSerializeStateEnabled, *this);
@@ -5569,6 +5620,7 @@ void FrameCaptureShared::runMidExecutionCapture(const gl::Context *mainContext)
             CaptureMidExecutionSetup(shareContext, &frameCapture->getSetupCalls(),
                                      &mResourceTracker, mainContextReplayState,
                                      mValidateSerializedState);
+            scanSetupCalls(mainContext, frameCapture->getSetupCalls());
         }
         else
         {
@@ -5581,6 +5633,8 @@ void FrameCaptureShared::runMidExecutionCapture(const gl::Context *mainContext)
             CaptureMidExecutionSetup(shareContext, &frameCapture->getSetupCalls(),
                                      &mResourceTracker, auxContextReplayState,
                                      mValidateSerializedState);
+
+            scanSetupCalls(mainContext, frameCapture->getSetupCalls());
 
             WriteAuxiliaryContextCppSetupReplay(mCompression, mOutDirectory, shareContext,
                                                 mCaptureLabel, 1, frameCapture->getSetupCalls(),
@@ -5965,6 +6019,34 @@ void FrameCaptureShared::writeCppReplayIndexFiles(const gl::Context *context,
     json.endGroup();
 
     {
+        std::vector<std::string> traceFiles;
+        for (uint32_t frameIndex = 1; frameIndex <= frameCount; ++frameIndex)
+        {
+            traceFiles.push_back(GetCaptureFileName(contextId, mCaptureLabel, frameIndex, ".cpp"));
+        }
+
+        for (gl::Context *shareContext : shareGroup->getContexts())
+        {
+            if (shareContext->id() == contextId)
+            {
+                // We already listed all of the "main" context's files, so skip it here.
+                continue;
+            }
+            traceFiles.push_back(GetCaptureFileName(shareContext->id(), mCaptureLabel, 1, ".cpp"));
+        }
+
+        // Only save the MEC setup if we are using MEC.
+        if (mCaptureStartFrame != 1)
+        {
+            traceFiles.push_back(GetCaptureFileName(kSharedContextId, mCaptureLabel, 1, ".cpp"));
+        }
+
+        json.addVectorOfStrings("TraceFiles", traceFiles);
+    }
+
+    json.addScalar("WindowSurfaceContextID", contextId.value);
+
+    {
         std::stringstream jsonFileNameStream;
         jsonFileNameStream << mOutDirectory << FmtCapturePrefix(kNoContextId, mCaptureLabel)
                            << ".json";
@@ -6105,35 +6187,6 @@ void FrameCaptureShared::writeCppReplayIndexFiles(const gl::Context *context,
 
         SaveFileHelper saveSource(sourcePath);
         saveSource << sourceContents;
-    }
-
-    {
-        std::stringstream indexPathStream;
-        indexPathStream << mOutDirectory << FmtCapturePrefix(contextId, mCaptureLabel)
-                        << "_files.txt";
-        std::string indexPath = indexPathStream.str();
-
-        SaveFileHelper saveIndex(indexPath);
-        for (uint32_t frameIndex = 1; frameIndex <= frameCount; ++frameIndex)
-        {
-            saveIndex << GetCaptureFileName(contextId, mCaptureLabel, frameIndex, ".cpp") << "\n";
-        }
-
-        for (gl::Context *shareContext : shareGroup->getContexts())
-        {
-            if (shareContext->id() == contextId)
-            {
-                // We already listed all of the "main" context's files, so skip it here.
-                continue;
-            }
-            saveIndex << GetCaptureFileName(shareContext->id(), mCaptureLabel, 1, ".cpp") << "\n";
-        }
-
-        // Only save the MEC setup if we are using MEC.
-        if (mCaptureStartFrame != 1)
-        {
-            saveIndex << GetCaptureFileName(kSharedContextId, mCaptureLabel, 1, ".cpp") << "\n";
-        }
     }
 }
 
