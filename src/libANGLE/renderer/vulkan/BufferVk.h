@@ -121,6 +121,7 @@ class BufferVk : public BufferImpl
                                GLbitfield access,
                                void **mapPtr);
     angle::Result unmapImpl(ContextVk *contextVk);
+    angle::Result ghostBuffer(ContextVk *contextVk, VkDeviceSize offset, void **mapPtr);
 
     ConversionBuffer *getVertexConversionBuffer(RendererVk *renderer,
                                                 angle::FormatID formatID,
@@ -182,7 +183,9 @@ class BufferVk : public BufferImpl
     void release(ContextVk *context);
     void markConversionBuffersDirty();
 
-    angle::Result acquireBufferHelper(ContextVk *contextVk, size_t sizeInBytes);
+    angle::Result acquireBufferHelper(ContextVk *contextVk,
+                                      size_t sizeInBytes,
+                                      bool notifyFrontEnd);
 
     struct VertexConversionBuffer : public ConversionBuffer
     {
