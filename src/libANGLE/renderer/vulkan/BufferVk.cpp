@@ -430,7 +430,7 @@ angle::Result BufferVk::setDataWithMemoryType(const gl::Context *context,
                                   bufferHelperPoolInitialSize, memoryPropertyFlags,
                                   vk::DynamicBufferPolicy::FrequentSmallAllocations);
 
-        ANGLE_TRY(acquireBufferHelper(contextVk, size));
+        ANGLE_TRY(acquireBufferHelper(contextVk, size, false));
 
         // persistentMapRequired may request that the server read from or write to the buffer while
         // it is mapped. The client's pointer to the data store remains valid so long as the data
@@ -586,6 +586,40 @@ angle::Result BufferVk::mapImpl(ContextVk *contextVk, void **mapPtr)
     return mapRangeImpl(contextVk, 0, static_cast<VkDeviceSize>(mState.getSize()), 0, mapPtr);
 }
 
+angle::Result BufferVk::ghostBuffer(ContextVk *contextVk, VkDeviceSize offset, void **mapPtr)
+{
+    vk::BufferHelper *previousBuffer = nullptr;
+    VkDeviceSize previousOffset      = 0;
+
+    ++contextVk->getPerfCounters().buffersGhosted;
+
+    // If we are creating a new buffer because the GPU is using it as read-only, then we
+    // also need to copy the contents of the previous buffer into the new buffer, in
+    // case the caller only updates a portion of the new buffer.
+    previousBuffer = mBuffer;
+    previousOffset = mBufferOffset;
+    ANGLE_TRY(acquireBufferHelper(contextVk, static_cast<size_t>(mState.getSize()), true));
+
+    // Before returning the new buffer, map the previous buffer and copy its entire
+    // contents into the new buffer.
+    uint8_t *previousBufferMapPtr = nullptr;
+    uint8_t *newBufferMapPtr      = nullptr;
+    ANGLE_TRY(previousBuffer->mapWithOffset(contextVk, &previousBufferMapPtr,
+                                            static_cast<size_t>(previousOffset)));
+    ANGLE_TRY(
+        mBuffer->mapWithOffset(contextVk, &newBufferMapPtr, static_cast<size_t>(mBufferOffset)));
+
+    ASSERT(previousBuffer->isCoherent());
+    ASSERT(mBuffer->isCoherent());
+    memcpy(newBufferMapPtr, previousBufferMapPtr, static_cast<size_t>(mState.getSize()));
+
+    previousBuffer->unmap(contextVk->getRenderer());
+    // Return the already mapped pointer with the offset adjustment to avoid the call to unmap().
+    *mapPtr = newBufferMapPtr + offset;
+
+    return angle::Result::Continue;
+}
+
 angle::Result BufferVk::mapRangeImpl(ContextVk *contextVk,
                                      VkDeviceSize offset,
                                      VkDeviceSize length,
@@ -596,18 +630,29 @@ angle::Result BufferVk::mapRangeImpl(ContextVk *contextVk,
     {
         ASSERT(mBuffer && mBuffer->valid());
 
-        if ((access & GL_MAP_INVALIDATE_BUFFER_BIT) != 0 &&
-            mBuffer->isCurrentlyInUse(contextVk->getLastCompletedQueueSerial()) &&
-            !mBuffer->isExternalBuffer())
+        if (mBuffer->isCurrentlyInUse(contextVk->getLastCompletedQueueSerial()) &&
+            !mBuffer->isExternalBuffer() && mBuffer->isHostVisible())
         {
-            // We try to map buffer, but buffer is busy. Caller has told us it doesn't care about
-            // previous content. Instead of wait for GPU to finish, we just allocate a new buffer.
-            ANGLE_TRY(acquireBufferHelper(contextVk, static_cast<size_t>(mState.getSize())));
-        }
-        else if ((access & GL_MAP_UNSYNCHRONIZED_BIT) == 0)
-        {
-            ANGLE_TRY(mBuffer->waitForIdle(contextVk,
-                                           "GPU stall due to mapping buffer in use by the GPU"));
+            // We try to map the buffer, but it's busy. Instead of waiting for the GPU to
+            // finish, we just allocate a new buffer if:
+            // 1.) Caller has told us it doesn't care about previous contents, or
+            // 2.) The GPU won't write to the buffer.
+
+            if ((access & GL_MAP_INVALIDATE_BUFFER_BIT) != 0)
+            {
+                ANGLE_TRY(
+                    acquireBufferHelper(contextVk, static_cast<size_t>(mState.getSize()), true));
+            }
+            else if (!mBuffer->isCurrentlyInUseForWrite(contextVk->getLastCompletedQueueSerial()))
+            {
+                // This will keep the new buffer mapped and update mapPtr, so return immediately.
+                return ghostBuffer(contextVk, offset, mapPtr);
+            }
+            else if ((access & GL_MAP_UNSYNCHRONIZED_BIT) == 0)
+            {
+                ANGLE_TRY(mBuffer->waitForIdle(
+                    contextVk, "GPU stall due to mapping buffer in use by the GPU"));
+            }
         }
 
         if (mBuffer->isHostVisible())
@@ -821,12 +866,7 @@ angle::Result BufferVk::acquireAndUpdate(ContextVk *contextVk,
     bool updateRegionBeforeSubData = (offset > 0);
     bool updateRegionAfterSubData  = (offsetAfterSubdata < bufferSize);
 
-    if (updateRegionBeforeSubData || updateRegionAfterSubData)
-    {
-        src->retain(&contextVk->getResourceUseList());
-    }
-
-    ANGLE_TRY(acquireBufferHelper(contextVk, bufferSize));
+    ANGLE_TRY(acquireBufferHelper(contextVk, bufferSize, false));
     ANGLE_TRY(updateBuffer(contextVk, data, updateSize, offset));
 
     constexpr int kMaxCopyRegions = 2;
@@ -918,7 +958,9 @@ void BufferVk::onDataChanged()
     markConversionBuffersDirty();
 }
 
-angle::Result BufferVk::acquireBufferHelper(ContextVk *contextVk, size_t sizeInBytes)
+angle::Result BufferVk::acquireBufferHelper(ContextVk *contextVk,
+                                            size_t sizeInBytes,
+                                            bool notifyFrontEnd)
 {
     // This method should not be called if it is an ExternalBuffer
     ASSERT(mBuffer == nullptr || mBuffer->isExternalBuffer() == false);
@@ -937,6 +979,15 @@ angle::Result BufferVk::acquireBufferHelper(ContextVk *contextVk, size_t sizeInB
 
     mBuffer = mBufferPool.getCurrentBuffer();
     ASSERT(mBuffer);
+
+    if (notifyFrontEnd)
+    {
+        // Tell the observers (front end) that a new buffer was created, so the necessary
+        // dirty bits can be set. This allows the buffer views pointing to the old buffer to
+        // be recreated and point to the new buffer, along with updating the descriptor sets
+        // to use the new buffer.
+        onStateChange(angle::SubjectMessage::InternalMemoryAllocationChanged);
+    }
 
     return angle::Result::Continue;
 }

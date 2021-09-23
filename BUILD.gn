@@ -2,7 +2,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-# import the use_x11 variable
+# import the ozone_platform_x11 variable
 import("gni/angle.gni")
 if (angle_has_build) {
   import("//build/config/linux/pkg_config.gni")
@@ -306,13 +306,14 @@ config("angle_disable_pool_alloc") {
 }
 
 config("debug_annotations_config") {
+  defines = []
   if (is_debug) {
-    defines = [ "ANGLE_ENABLE_DEBUG_ANNOTATIONS" ]
+    defines += [ "ANGLE_ENABLE_DEBUG_ANNOTATIONS" ]
   }
   if (angle_enable_annotator_run_time_checks) {
     # When used with angle_enable_trace, enables debug markers for AGI with run-time checks to
     # filter out EVENT() messages when the debug annotator is disabled.
-    defines = [ "ANGLE_ENABLE_ANNOTATOR_RUN_TIME_CHECKS" ]
+    defines += [ "ANGLE_ENABLE_ANNOTATOR_RUN_TIME_CHECKS" ]
   }
 }
 
@@ -806,7 +807,7 @@ if (angle_enable_vulkan || angle_enable_metal) {
   }
 }
 
-if (is_win) {
+if ((is_win && angle_enable_gl) || angle_enable_d3d11 || angle_enable_d3d9) {
   angle_source_set("angle_d3d_format_tables") {
     sources = [
       "src/libANGLE/renderer/dxgi_format_map.h",
@@ -1010,8 +1011,8 @@ if (angle_has_rapidjson) {
       "$angle_root/third_party/rapidjson",
     ]
     sources = [
-      "src/libANGLE/serializer/JsonSerializer.cpp",
-      "src/libANGLE/serializer/JsonSerializer.h",
+      "src/common/serializer/JsonSerializer.cpp",
+      "src/common/serializer/JsonSerializer.h",
     ]
     public_configs = [ ":angle_rapidjson_config" ]
   }
