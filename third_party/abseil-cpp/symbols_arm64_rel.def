@@ -76,7 +76,6 @@ EXPORTS
     ??$ParseFloat@$0BA@@strings_internal@absl@@YA?AUParsedFloat@01@PEBD0W4chars_format@1@@Z
     ??$ParseFormatString@UParsedFormatConsumer@ParsedFormatBase@str_format_internal@absl@@@str_format_internal@absl@@YA_NVstring_view@1@UParsedFormatConsumer@ParsedFormatBase@01@@Z
     ??$Prepend@V?$basic_string@DU?$char_traits@D@__1@std@@V?$allocator@D@23@@__1@std@@$0A@@Cord@absl@@QEAAX$$QEAV?$basic_string@DU?$char_traits@D@__1@std@@V?$allocator@D@23@@__1@std@@@Z
-    ??$STLStringReserveAmortized@V?$basic_string@DU?$char_traits@D@__1@std@@V?$allocator@D@23@@__1@std@@@strings_internal@absl@@YAXPEAV?$basic_string@DU?$char_traits@D@__1@std@@V?$allocator@D@23@@__1@std@@_K@Z
     ??$STLStringResizeUninitializedAmortized@V?$basic_string@DU?$char_traits@D@__1@std@@V?$allocator@D@23@@__1@std@@@strings_internal@absl@@YAXPEAV?$basic_string@DU?$char_traits@D@__1@std@@V?$allocator@D@23@@__1@std@@_K@Z
     ??$SetEdge@$00@CordRepBtree@cord_internal@absl@@QEAA?AUOpResult@012@_NPEAUCordRep@12@_K@Z
     ??$SetEdge@$0A@@CordRepBtree@cord_internal@absl@@QEAA?AUOpResult@012@_NPEAUCordRep@12@_K@Z
@@ -217,6 +216,10 @@ EXPORTS
     ?AdvanceStack@ChunkIterator@Cord@absl@@AEAAAEAV123@XZ
     ?Alloc@LowLevelAlloc@base_internal@absl@@SAPEAX_K@Z
     ?AllocWithArena@LowLevelAlloc@base_internal@absl@@SAPEAX_KPEAUArena@123@@Z
+    ?Allocate@?$MallocAdapter@V?$allocator@PEAUCordRep@cord_internal@absl@@@__1@std@@$0A@@inlined_vector_internal@absl@@SA?AU?$Allocation@V?$allocator@PEAUCordRep@cord_internal@absl@@@__1@std@@@23@AEAV?$allocator@PEAUCordRep@cord_internal@absl@@@__1@std@@_K@Z
+    ?Allocate@?$MallocAdapter@V?$allocator@PEBUCordRep@cord_internal@absl@@@__1@std@@$0A@@inlined_vector_internal@absl@@SA?AU?$Allocation@V?$allocator@PEBUCordRep@cord_internal@absl@@@__1@std@@@23@AEAV?$allocator@PEBUCordRep@cord_internal@absl@@@__1@std@@_K@Z
+    ?Allocate@?$MallocAdapter@V?$allocator@UPayload@status_internal@absl@@@__1@std@@$0A@@inlined_vector_internal@absl@@SA?AU?$Allocation@V?$allocator@UPayload@status_internal@absl@@@__1@std@@@23@AEAV?$allocator@UPayload@status_internal@absl@@@__1@std@@_K@Z
+    ?Allocate@?$MallocAdapter@V?$allocator@USubRange@absl@@@__1@std@@$0A@@inlined_vector_internal@absl@@SA?AU?$Allocation@V?$allocator@USubRange@absl@@@__1@std@@@23@AEAV?$allocator@USubRange@absl@@@__1@std@@_K@Z
     ?AlreadyExistsError@absl@@YA?AVStatus@1@Vstring_view@1@@Z
     ?Append@Cord@absl@@QEAAX$$QEAV12@@Z
     ?Append@Cord@absl@@QEAAXAEBV12@@Z
