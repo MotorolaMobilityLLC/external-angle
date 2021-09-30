@@ -21,10 +21,8 @@ namespace
 {
 bool IsElementArrayBufferSubjectIndex(angle::SubjectIndex subjectIndex)
 {
-    return (subjectIndex == MAX_VERTEX_ATTRIBS);
+    return (subjectIndex == kElementArrayBufferIndex);
 }
-
-constexpr angle::SubjectIndex kElementArrayBufferIndex = MAX_VERTEX_ATTRIBS;
 }  // namespace
 
 // VertexArrayState implementation.
@@ -114,23 +112,35 @@ VertexArray::VertexArray(rx::GLImplFactory *factory,
     : mId(id),
       mState(this, maxAttribs, maxAttribBindings),
       mVertexArray(factory->createVertexArray(mState)),
-      mBufferAccessValidationEnabled(false)
+      mBufferAccessValidationEnabled(false),
+      mContentsObservers(this)
 {
     for (size_t attribIndex = 0; attribIndex < maxAttribBindings; ++attribIndex)
     {
         mArrayBufferObserverBindings.emplace_back(this, attribIndex);
     }
+
+    mVertexArray->setContentsObservers(&mContentsObservers);
 }
 
 void VertexArray::onDestroy(const Context *context)
 {
     bool isBound = context->isCurrentVertexArray(this);
-    for (VertexBinding &binding : mState.mVertexBindings)
+    for (uint32_t bindingIndex = 0; bindingIndex < gl::MAX_VERTEX_ATTRIB_BINDINGS; ++bindingIndex)
     {
+        VertexBinding &binding = mState.mVertexBindings[bindingIndex];
+        Buffer *buffer         = binding.getBuffer().get();
         if (isBound)
         {
-            if (binding.getBuffer().get())
-                binding.getBuffer()->onNonTFBindingChanged(-1);
+            if (buffer)
+            {
+                buffer->onNonTFBindingChanged(-1);
+            }
+        }
+        if (buffer)
+        {
+            // Note: the non-contents observer is unbound in the ObserverBinding destructor.
+            buffer->removeContentsObserver(this, bindingIndex);
         }
         binding.setBuffer(context, nullptr);
     }
@@ -163,14 +173,16 @@ bool VertexArray::detachBuffer(const Context *context, BufferID bufferID)
     bool anyBufferDetached = false;
     for (uint32_t bindingIndex = 0; bindingIndex < gl::MAX_VERTEX_ATTRIB_BINDINGS; ++bindingIndex)
     {
-        VertexBinding &binding = mState.mVertexBindings[bindingIndex];
-        if (binding.getBuffer().id() == bufferID)
+        VertexBinding &binding                      = mState.mVertexBindings[bindingIndex];
+        const BindingPointer<Buffer> &bufferBinding = binding.getBuffer();
+        if (bufferBinding.id() == bufferID)
         {
             if (isBound)
             {
-                if (binding.getBuffer().get())
-                    binding.getBuffer()->onNonTFBindingChanged(-1);
+                if (bufferBinding.get())
+                    bufferBinding->onNonTFBindingChanged(-1);
             }
+            bufferBinding->removeContentsObserver(this, bindingIndex);
             binding.setBuffer(context, nullptr);
             mArrayBufferObserverBindings[bindingIndex].reset();
 
@@ -326,6 +338,7 @@ bool VertexArray::bindVertexBufferImpl(const Context *context,
     {
         oldBuffer->onNonTFBindingChanged(-1);
         oldBuffer->removeObserver(observer);
+        oldBuffer->removeContentsObserver(this, static_cast<uint32_t>(bindingIndex));
         oldBuffer->release(context);
     }
 
@@ -634,6 +647,7 @@ void VertexArray::onSubjectStateChange(angle::SubjectIndex index, angle::Subject
     switch (message)
     {
         case angle::SubjectMessage::ContentsChanged:
+            ASSERT(IsElementArrayBufferSubjectIndex(index));
             setDependentDirtyBit(true, index);
             break;
 
@@ -662,8 +676,6 @@ void VertexArray::onSubjectStateChange(angle::SubjectIndex index, angle::Subject
             break;
 
         case angle::SubjectMessage::SubjectUnmapped:
-            setDependentDirtyBit(true, index);
-
             if (!IsElementArrayBufferSubjectIndex(index))
             {
                 updateCachedMappedArrayBuffersBinding(mState.mVertexBindings[index]);
@@ -672,7 +684,7 @@ void VertexArray::onSubjectStateChange(angle::SubjectIndex index, angle::Subject
             break;
 
         case angle::SubjectMessage::InternalMemoryAllocationChanged:
-            // Nothing to do.
+            setDependentDirtyBit(false, index);
             break;
 
         default:
@@ -748,5 +760,24 @@ void VertexArray::IndexRangeCache::put(DrawElementsType type,
     mIndexCountKey = indexCount;
     mOffsetKey     = offset;
     mPayload       = indexRange;
+}
+
+void VertexArray::onBufferContentsChange(uint32_t bufferIndex)
+{
+    setDependentDirtyBit(true, bufferIndex);
+}
+
+VertexArrayBufferContentsObservers::VertexArrayBufferContentsObservers(VertexArray *vertexArray)
+    : mVertexArray(vertexArray)
+{}
+
+void VertexArrayBufferContentsObservers::enableForBuffer(Buffer *buffer, uint32_t bufferIndex)
+{
+    buffer->addContentsObserver(mVertexArray, bufferIndex);
+}
+
+void VertexArrayBufferContentsObservers::disableForBuffer(Buffer *buffer, uint32_t bufferIndex)
+{
+    buffer->removeContentsObserver(mVertexArray, bufferIndex);
 }
 }  // namespace gl
