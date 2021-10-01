@@ -132,7 +132,7 @@ cc_library_shared {
         "third_party_vulkan_deps_spirv_tools_src_spvtools_opencl_tables_opencl1-0",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_debuginfo",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.clspvreflection",
-        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.vulkan.debuginfo.100",
+        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.shader.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_opencl.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-gcn-shader",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-shader-ballot",
@@ -238,7 +238,7 @@ cc_library_shared {
         "third_party_vulkan_deps_spirv_tools_src_spvtools_opencl_tables_opencl1-0",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_debuginfo",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.clspvreflection",
-        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.vulkan.debuginfo.100",
+        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.shader.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_opencl.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-gcn-shader",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-shader-ballot",
@@ -949,17 +949,17 @@ cc_genrule {
     ],
 }
 cc_genrule {
-    name: "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.vulkan.debuginfo.100",
+    name: "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.shader.debuginfo.100",
     tool_files: [
         "third_party/vulkan-deps/spirv-tools/src/utils/generate_grammar_tables.py",
     ],
-    cmd: "$(location) --extinst-vendor-grammar $(location third_party/vulkan-deps/spirv-tools/src/source/extinst.nonsemantic.vulkan.debuginfo.100.grammar.json) --vendor-insts-output $(location nonsemantic.vulkan.debuginfo.100.insts.inc) --vendor-operand-kind-prefix VKDEBUG100_",
+    cmd: "$(location) --extinst-vendor-grammar $(location third_party/vulkan-deps/spirv-headers/src/include/spirv/unified1/extinst.nonsemantic.shader.debuginfo.100.grammar.json) --vendor-insts-output $(location nonsemantic.shader.debuginfo.100.insts.inc) --vendor-operand-kind-prefix SHDEBUG100_",
     srcs: [
-        "third_party/vulkan-deps/spirv-tools/src/source/extinst.nonsemantic.vulkan.debuginfo.100.grammar.json",
+        "third_party/vulkan-deps/spirv-headers/src/include/spirv/unified1/extinst.nonsemantic.shader.debuginfo.100.grammar.json",
     ],
     sdk_version: "28",
     out: [
-        "nonsemantic.vulkan.debuginfo.100.insts.inc",
+        "nonsemantic.shader.debuginfo.100.insts.inc",
     ],
 }
 cc_genrule {
@@ -1012,13 +1012,13 @@ cc_genrule {
     tool_files: [
         "third_party/vulkan-deps/spirv-tools/src/utils/generate_language_headers.py",
     ],
-    cmd: "$(location) --extinst-grammar $(location third_party/vulkan-deps/spirv-tools/src/source/extinst.nonsemantic.vulkan.debuginfo.100.grammar.json) --extinst-output-path $(location NonSemanticVulkanDebugInfo100.h)",
+    cmd: "$(location) --extinst-grammar $(location third_party/vulkan-deps/spirv-headers/src/include/spirv/unified1/extinst.nonsemantic.shader.debuginfo.100.grammar.json) --extinst-output-path $(location NonSemanticShaderDebugInfo100.h)",
     srcs: [
-        "third_party/vulkan-deps/spirv-tools/src/source/extinst.nonsemantic.vulkan.debuginfo.100.grammar.json",
+        "third_party/vulkan-deps/spirv-headers/src/include/spirv/unified1/extinst.nonsemantic.shader.debuginfo.100.grammar.json",
     ],
     sdk_version: "28",
     out: [
-        "NonSemanticVulkanDebugInfo100.h",
+        "NonSemanticShaderDebugInfo100.h",
     ],
 }
 cc_genrule {
@@ -1126,7 +1126,7 @@ cc_library_static {
         "third_party_vulkan_deps_spirv_tools_src_spvtools_opencl_tables_opencl1-0",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_debuginfo",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.clspvreflection",
-        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.vulkan.debuginfo.100",
+        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.shader.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_opencl.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-gcn-shader",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-shader-ballot",
@@ -1221,7 +1221,7 @@ cc_library_static {
         "third_party_vulkan_deps_spirv_tools_src_spvtools_opencl_tables_opencl1-0",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_debuginfo",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.clspvreflection",
-        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.vulkan.debuginfo.100",
+        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.shader.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_opencl.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-gcn-shader",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-shader-ballot",
@@ -1817,7 +1817,7 @@ cc_library_static {
         "third_party_vulkan_deps_spirv_tools_src_spvtools_opencl_tables_opencl1-0",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_debuginfo",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.clspvreflection",
-        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.vulkan.debuginfo.100",
+        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.shader.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_opencl.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-gcn-shader",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-shader-ballot",
@@ -6556,7 +6556,7 @@ cc_defaults {
         "third_party_vulkan_deps_spirv_tools_src_spvtools_opencl_tables_opencl1-0",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_debuginfo",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.clspvreflection",
-        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.vulkan.debuginfo.100",
+        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.shader.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_opencl.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-gcn-shader",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-shader-ballot",
@@ -6743,7 +6743,7 @@ cc_defaults {
         "third_party_vulkan_deps_spirv_tools_src_spvtools_opencl_tables_opencl1-0",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_debuginfo",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.clspvreflection",
-        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.vulkan.debuginfo.100",
+        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.shader.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_opencl.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-gcn-shader",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-shader-ballot",
@@ -6931,7 +6931,7 @@ cc_library_shared {
         "third_party_vulkan_deps_spirv_tools_src_spvtools_opencl_tables_opencl1-0",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_debuginfo",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.clspvreflection",
-        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.vulkan.debuginfo.100",
+        "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_nonsemantic.shader.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_opencl.debuginfo.100",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-gcn-shader",
         "third_party_vulkan_deps_spirv_tools_src_spvtools_vendor_tables_spv-amd-shader-ballot",
