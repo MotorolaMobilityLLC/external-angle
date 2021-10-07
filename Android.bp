@@ -812,6 +812,7 @@ cc_defaults {
         "src/libANGLE/renderer/vulkan/TransformFeedbackVk.cpp",
         "src/libANGLE/renderer/vulkan/UtilsVk.cpp",
         "src/libANGLE/renderer/vulkan/VertexArrayVk.cpp",
+        "src/libANGLE/renderer/vulkan/VulkanSecondaryCommandBuffer.cpp",
         "src/libANGLE/renderer/vulkan/android/AHBFunctions.cpp",
         "src/libANGLE/renderer/vulkan/android/DisplayVkAndroid.cpp",
         "src/libANGLE/renderer/vulkan/android/HardwareBufferImageSiblingVkAndroid.cpp",

@@ -8493,8 +8493,6 @@ void main()
 // Tests that PointCoord behaves the same betweeen a user FBO and the back buffer.
 TEST_P(GLSLTest, PointCoordConsistency)
 {
-    // AMD's OpenGL drivers may have the same issue. http://anglebug.com/1643
-    ANGLE_SKIP_TEST_IF(IsAMD() && IsWindows() && IsOpenGL());
     // http://anglebug.com/4092
     ANGLE_SKIP_TEST_IF(isSwiftshader());
 
@@ -12885,6 +12883,29 @@ TEST_P(GLSLTest, HandleExcessiveLoopBug)
 
     GLuint shader = CompileShader(GL_VERTEX_SHADER, kVS);
     EXPECT_NE(0u, shader);
+    glDeleteShader(shader);
+}
+
+// Regression test for a validation bug in the translator where func(void, int) was accepted even
+// though it's illegal, and the function was callable as if the void parameter isn't there.
+TEST_P(GLSLTest, NoParameterAfterVoid)
+{
+    constexpr char kVS[] = R"(void f(void, int a){}
+void main(){f(1);})";
+
+    GLuint shader = CompileShader(GL_VERTEX_SHADER, kVS);
+    EXPECT_EQ(0u, shader);
+    glDeleteShader(shader);
+}
+
+// Similar to NoParameterAfterVoid, but tests func(void, void).
+TEST_P(GLSLTest, NoParameterAfterVoid2)
+{
+    constexpr char kVS[] = R"(void f(void, void){}
+void main(){f();})";
+
+    GLuint shader = CompileShader(GL_VERTEX_SHADER, kVS);
+    EXPECT_EQ(0u, shader);
     glDeleteShader(shader);
 }
 
