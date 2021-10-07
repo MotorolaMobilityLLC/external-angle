@@ -18,19 +18,19 @@ vars = {
   'spirv_headers_revision': 'ae217c17809fadb232ec94b29304b4afcd417bb4',
 
   # Current revision of SPIRV-Tools for Vulkan.
-  'spirv_tools_revision': '2d12367ced2dd34444822340070b4545ae7c02f1',
+  'spirv_tools_revision': '63a39123262ef79e315ed84720d6ed519f0cc939',
 
   # Current revision of Khronos Vulkan-Headers.
   'vulkan_headers_revision': 'fa27a13cf74080df2ad421a788299db1276f17a7',
 
   # Current revision of Khronos Vulkan-Loader.
-  'vulkan_loader_revision': 'd47266c7ee24fdbf453b3a02621fb4f9fb670c6d',
+  'vulkan_loader_revision': '4d52412bcf0fc68ac3c4ea5640994bbe46b8b584',
 
   # Current revision of Khronos Vulkan-Tools.
-  'vulkan_tools_revision': 'a956d1a0e57d825bb2dd03c74a8c79e84bf5cf48',
+  'vulkan_tools_revision': '6ca43559e0eb9b23e59e9a978adf58cc6214d20f',
 
   # Current revision of Khronos Vulkan-ValidationLayers.
-  'vulkan_validation_revision': 'd360374f4cbcd890f6379041834098d32dd756c4',
+  'vulkan_validation_revision': '37b8cc153ec2d45fec1f0d9728442225dd791e5f',
 }
 
 deps = {
