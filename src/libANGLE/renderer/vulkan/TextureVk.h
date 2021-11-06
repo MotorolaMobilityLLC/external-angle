@@ -295,6 +295,9 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
     gl::LevelIndex getNativeImageLevel(gl::LevelIndex frontendLevel) const;
     uint32_t getNativeImageLayer(uint32_t frontendLayer) const;
 
+    // Get the layer count for views.
+    uint32_t getImageViewLayerCount() const;
+
     void releaseAndDeleteImageAndViews(ContextVk *contextVk);
     angle::Result ensureImageAllocated(ContextVk *contextVk, const vk::Format &format);
     void setImageHelper(ContextVk *contextVk,
@@ -303,7 +306,6 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
                         const vk::Format &format,
                         uint32_t imageLevelOffset,
                         uint32_t imageLayerOffset,
-                        gl::LevelIndex imageBaseLevel,
                         bool selfOwned);
     void updateImageHelper(ContextVk *contextVk, size_t imageCopyBufferAlignment);
     vk::ImageViewHelper &getImageViews()
@@ -390,8 +392,8 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
 
     angle::Result copySubTextureImpl(ContextVk *contextVk,
                                      const gl::ImageIndex &index,
-                                     const gl::Offset &destOffset,
-                                     const gl::InternalFormat &destFormat,
+                                     const gl::Offset &dstOffset,
+                                     const gl::InternalFormat &dstFormat,
                                      gl::LevelIndex sourceLevelGL,
                                      const gl::Box &sourceBox,
                                      bool unpackFlipY,
@@ -401,8 +403,8 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
 
     angle::Result copySubImageImplWithTransfer(ContextVk *contextVk,
                                                const gl::ImageIndex &index,
-                                               const gl::Offset &destOffset,
-                                               const vk::Format &destFormat,
+                                               const gl::Offset &dstOffset,
+                                               const vk::Format &dstFormat,
                                                gl::LevelIndex sourceLevelGL,
                                                size_t sourceLayer,
                                                const gl::Box &sourceBox,
@@ -410,8 +412,8 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
 
     angle::Result copySubImageImplWithDraw(ContextVk *contextVk,
                                            const gl::ImageIndex &index,
-                                           const gl::Offset &destOffset,
-                                           const vk::Format &destFormat,
+                                           const gl::Offset &dstOffset,
+                                           const vk::Format &dstFormat,
                                            gl::LevelIndex sourceLevelGL,
                                            const gl::Box &sourceBox,
                                            bool isSrcFlipY,
@@ -463,10 +465,6 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
     // Queues a flush of any modified image attributes. The image will be reallocated with its new
     // attributes at the next opportunity.
     angle::Result respecifyImageStorage(ContextVk *contextVk);
-    angle::Result respecifyImageStorageAndLevels(ContextVk *contextVk,
-                                                 gl::LevelIndex previousFirstAllocateLevelGL,
-                                                 gl::LevelIndex baseLevelGL,
-                                                 gl::LevelIndex maxLevelGL);
 
     // Update base and max levels, and re-create image if needed.
     angle::Result updateBaseMaxLevels(ContextVk *contextVk,
@@ -575,6 +573,8 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
     // texture is no longer mip-complete.  However, if every level is redefined such that at the end
     // the image becomes mip-complete again, no reinitialization of the image is done.  This bitset
     // is additionally used to ensure the image is recreated in the next syncState, if not already.
+    //
+    // Note: this bitmask is for gl::LevelIndex, not vk::LevelIndex
     gl::TexLevelMask mRedefinedLevels;
 
     angle::ObserverBinding mImageObserverBinding;

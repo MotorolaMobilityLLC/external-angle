@@ -29,7 +29,7 @@ namespace {
 /// @param upper - Upper bound of integer generated
 /// @returns i, where lower <= i < upper
 template <typename I>
-I RandomUInt(std::mt19937* engine, I lower, I upper) {
+I RandomUInt(std::mt19937_64* engine, I lower, I upper) {
   assert(lower < upper && "|lower| must be stictly less than |upper|");
   return std::uniform_int_distribution<I>(lower, upper - 1)(*engine);
 }
@@ -70,7 +70,8 @@ void HashCombine(size_t* hash, const T& value) {
 /// @param size - number of elements in buffer
 /// @returns hash of the data in the buffer
 size_t HashBuffer(const uint8_t* data, const size_t size) {
-  size_t hash = 0xCA8945571519E991;  // seed with an arbitrary prime
+  size_t hash =
+      static_cast<size_t>(0xCA8945571519E991);  // seed with an arbitrary prime
   HashCombine(&hash, size);
   for (size_t i = 0; i < size; i++) {
     HashCombine(&hash, data[i]);
@@ -87,23 +88,24 @@ RandomGenerator::RandomGenerator(const uint8_t* data, size_t size) {
 }
 
 spv_target_env RandomGenerator::GetTargetEnv() {
-  // SPV_ENV_WEBGPU_0 is intentionally omitted here, since it is deprecated and
-  // using it will cause asserts.
-  static const std::array<spv_target_env, 23> envs = {
-      SPV_ENV_UNIVERSAL_1_0,       SPV_ENV_VULKAN_1_0,
-      SPV_ENV_UNIVERSAL_1_1,       SPV_ENV_UNIVERSAL_1_2,
-      SPV_ENV_UNIVERSAL_1_3,       SPV_ENV_VULKAN_1_1,
-      SPV_ENV_OPENCL_1_2,          SPV_ENV_OPENCL_EMBEDDED_1_2,
-      SPV_ENV_OPENCL_2_0,          SPV_ENV_OPENCL_EMBEDDED_2_0,
-      SPV_ENV_OPENCL_EMBEDDED_2_1, SPV_ENV_OPENCL_EMBEDDED_2_2,
-      SPV_ENV_OPENCL_2_1,          SPV_ENV_OPENCL_2_2,
-      SPV_ENV_UNIVERSAL_1_4,       SPV_ENV_VULKAN_1_1_SPIRV_1_4,
-      SPV_ENV_UNIVERSAL_1_5,       SPV_ENV_VULKAN_1_2,
-      SPV_ENV_OPENGL_4_0,          SPV_ENV_OPENGL_4_1,
-      SPV_ENV_OPENGL_4_2,          SPV_ENV_OPENGL_4_3,
-      SPV_ENV_OPENGL_4_5};
+  spv_target_env result;
 
-  return envs[RandomUInt(&engine_, 0lu, envs.size())];
+  // Need to check that the generated value isn't for a deprecated target env.
+  do {
+    result = static_cast<spv_target_env>(
+        RandomUInt(&engine_, 0u, static_cast<unsigned int>(SPV_ENV_MAX)));
+  } while (!spvIsValidEnv(result));
+
+  return result;
+}
+
+uint32_t RandomGenerator::GetUInt32(uint32_t lower, uint32_t upper) {
+  return RandomUInt(&engine_, lower, upper);
+}
+
+uint32_t RandomGenerator::GetUInt32(uint32_t bound) {
+  assert(bound > 0 && "|bound| must be greater than 0");
+  return RandomUInt(&engine_, 0u, bound);
 }
 
 uint64_t RandomGenerator::CalculateSeed(const uint8_t* data, size_t size) {

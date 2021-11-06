@@ -2581,6 +2581,132 @@ OpFunctionEnd
   SinglePassRunAndCheck<InlineExhaustivePass>(before, after, false, true);
 }
 
+TEST_F(InlineTest, InlineForLinkage) {
+  const std::string before =
+      R"(OpCapability SampledBuffer
+OpCapability ImageBuffer
+OpCapability Shader
+OpCapability Linkage
+OpMemoryModel Logical GLSL450
+OpSource HLSL 630
+OpName %type_buffer_image "type.buffer.image"
+OpName %output "output"
+OpName %main "main"
+OpName %color "color"
+OpName %bb_entry "bb.entry"
+OpName %param_var_color "param.var.color"
+OpName %fn "fn"
+OpName %color_0 "color"
+OpName %bb_entry_0 "bb.entry"
+OpName %v "v"
+OpDecorate %main LinkageAttributes "main" Export
+OpDecorate %output DescriptorSet 0
+OpDecorate %output Binding 1
+%float = OpTypeFloat 32
+%float_0_200000003 = OpConstant %float 0.200000003
+%v4float = OpTypeVector %float 4
+%6 = OpConstantComposite %v4float %float_0_200000003 %float_0_200000003 %float_0_200000003 %float_0_200000003
+%int = OpTypeInt 32 1
+%int_0 = OpConstant %int 0
+%type_buffer_image = OpTypeImage %float Buffer 2 0 0 2 Rgba32f
+%_ptr_UniformConstant_type_buffer_image = OpTypePointer UniformConstant %type_buffer_image
+%_ptr_Function_v4float = OpTypePointer Function %v4float
+%11 = OpTypeFunction %float %_ptr_Function_v4float
+%_ptr_Function_float = OpTypePointer Function %float
+%output = OpVariable %_ptr_UniformConstant_type_buffer_image UniformConstant
+%main = OpFunction %float None %11
+%color = OpFunctionParameter %_ptr_Function_v4float
+%bb_entry = OpLabel
+%param_var_color = OpVariable %_ptr_Function_v4float Function
+%16 = OpLoad %v4float %color
+OpStore %param_var_color %16
+%17 = OpFunctionCall %float %fn %param_var_color
+OpReturnValue %17
+OpFunctionEnd
+%fn = OpFunction %float None %11
+%color_0 = OpFunctionParameter %_ptr_Function_v4float
+%bb_entry_0 = OpLabel
+%v = OpVariable %_ptr_Function_v4float Function
+%22 = OpLoad %v4float %color_0
+OpStore %v %22
+%23 = OpLoad %v4float %v
+%24 = OpFMul %v4float %23 %6
+OpStore %v %24
+%26 = OpAccessChain %_ptr_Function_float %v %int_0
+%27 = OpLoad %float %26
+OpReturnValue %27
+OpFunctionEnd
+      )";
+
+  const std::string after =
+      R"(OpCapability SampledBuffer
+OpCapability ImageBuffer
+OpCapability Shader
+OpCapability Linkage
+OpMemoryModel Logical GLSL450
+OpSource HLSL 630
+OpName %type_buffer_image "type.buffer.image"
+OpName %output "output"
+OpName %main "main"
+OpName %color "color"
+OpName %bb_entry "bb.entry"
+OpName %param_var_color "param.var.color"
+OpName %fn "fn"
+OpName %color_0 "color"
+OpName %bb_entry_0 "bb.entry"
+OpName %v "v"
+OpDecorate %main LinkageAttributes "main" Export
+OpDecorate %output DescriptorSet 0
+OpDecorate %output Binding 1
+%float = OpTypeFloat 32
+%float_0_200000003 = OpConstant %float 0.200000003
+%v4float = OpTypeVector %float 4
+%6 = OpConstantComposite %v4float %float_0_200000003 %float_0_200000003 %float_0_200000003 %float_0_200000003
+%int = OpTypeInt 32 1
+%int_0 = OpConstant %int 0
+%type_buffer_image = OpTypeImage %float Buffer 2 0 0 2 Rgba32f
+%_ptr_UniformConstant_type_buffer_image = OpTypePointer UniformConstant %type_buffer_image
+%_ptr_Function_v4float = OpTypePointer Function %v4float
+%11 = OpTypeFunction %float %_ptr_Function_v4float
+%_ptr_Function_float = OpTypePointer Function %float
+%output = OpVariable %_ptr_UniformConstant_type_buffer_image UniformConstant
+%main = OpFunction %float None %11
+%color = OpFunctionParameter %_ptr_Function_v4float
+%bb_entry = OpLabel
+%28 = OpVariable %_ptr_Function_v4float Function
+%29 = OpVariable %_ptr_Function_float Function
+%param_var_color = OpVariable %_ptr_Function_v4float Function
+%16 = OpLoad %v4float %color
+OpStore %param_var_color %16
+%31 = OpLoad %v4float %param_var_color
+OpStore %28 %31
+%32 = OpLoad %v4float %28
+%33 = OpFMul %v4float %32 %6
+OpStore %28 %33
+%34 = OpAccessChain %_ptr_Function_float %28 %int_0
+%35 = OpLoad %float %34
+OpStore %29 %35
+%17 = OpLoad %float %29
+OpReturnValue %17
+OpFunctionEnd
+%fn = OpFunction %float None %11
+%color_0 = OpFunctionParameter %_ptr_Function_v4float
+%bb_entry_0 = OpLabel
+%v = OpVariable %_ptr_Function_v4float Function
+%22 = OpLoad %v4float %color_0
+OpStore %v %22
+%23 = OpLoad %v4float %v
+%24 = OpFMul %v4float %23 %6
+OpStore %v %24
+%26 = OpAccessChain %_ptr_Function_float %v %int_0
+%27 = OpLoad %float %26
+OpReturnValue %27
+OpFunctionEnd
+)";
+  SetAssembleOptions(SPV_TEXT_TO_BINARY_OPTION_PRESERVE_NUMERIC_IDS);
+  SinglePassRunAndCheck<InlineExhaustivePass>(before, after, false, true);
+}
+
 TEST_F(InlineTest, InlineFuncWithOpTerminateRayNotInContinue) {
   const std::string text =
       R"(
@@ -4107,6 +4233,105 @@ OpReturnValue %bar_ret
 OpFunctionEnd
 )";
 
+  SinglePassRunAndMatch<InlineExhaustivePass>(text, true);
+}
+
+TEST_F(InlineTest, CreateConstantForInlinedAt) {
+  // This shader causes CreateDebugInlinedAt to generate a constant.
+  // Using the Constant manager would attempt to build the invalidated
+  // DefUse manager during inlining which could cause an assert because
+  // the function is in an inconsistant state. This test verifies that
+  // CreateDebugInlinedAt detects that the DefUse manager is disabled
+  // and creates a duplicate constant safely without the Constant manager.
+  //
+  // int function1() {
+  //   return 1;
+  // }
+  //
+  // void main() {
+  //   function1();
+  // }
+
+  const std::string text = R"(OpCapability Shader
+; CHECK: %uint_7 = OpConstant %uint 7
+; CHECK: %uint_7_0 = OpConstant %uint 7
+; CHECK: OpExtInst %void %1 DebugInlinedAt %uint_7_0
+OpExtension "SPV_KHR_non_semantic_info"
+%1 = OpExtInstImport "NonSemantic.Shader.DebugInfo.100"
+OpMemoryModel Logical GLSL450
+OpEntryPoint Fragment %main "main"
+OpExecutionMode %main OriginUpperLeft
+%3 = OpString "parent3.hlsl"
+%8 = OpString "int"
+%19 = OpString "function1"
+%20 = OpString ""
+%26 = OpString "main"
+OpName %main "main"
+OpName %src_main "src.main"
+OpName %bb_entry "bb.entry"
+OpName %function1 "function1"
+OpName %bb_entry_0 "bb.entry"
+%int = OpTypeInt 32 1
+%int_1 = OpConstant %int 1
+%uint = OpTypeInt 32 0
+%uint_32 = OpConstant %uint 32
+%void = OpTypeVoid
+%uint_4 = OpConstant %uint 4
+%uint_0 = OpConstant %uint 0
+%uint_3 = OpConstant %uint 3
+%uint_1 = OpConstant %uint 1
+%uint_5 = OpConstant %uint 5
+%uint_2 = OpConstant %uint 2
+%uint_17 = OpConstant %uint 17
+%uint_6 = OpConstant %uint 6
+%uint_13 = OpConstant %uint 13
+%uint_7 = OpConstant %uint 7
+%31 = OpTypeFunction %void
+%42 = OpTypeFunction %int
+%10 = OpExtInst %void %1 DebugTypeBasic %8 %uint_32 %uint_4 %uint_0
+%13 = OpExtInst %void %1 DebugTypeFunction %uint_3 %10
+%15 = OpExtInst %void %1 DebugSource %3
+%16 = OpExtInst %void %1 DebugCompilationUnit %uint_1 %uint_4 %15 %uint_5
+%21 = OpExtInst %void %1 DebugFunction %19 %13 %15 %uint_2 %uint_1 %16 %20 %uint_3 %uint_2
+%23 = OpExtInst %void %1 DebugLexicalBlock %15 %uint_2 %uint_17 %21
+%25 = OpExtInst %void %1 DebugTypeFunction %uint_3 %void
+%27 = OpExtInst %void %1 DebugFunction %26 %25 %15 %uint_6 %uint_1 %16 %20 %uint_3 %uint_6
+%29 = OpExtInst %void %1 DebugLexicalBlock %15 %uint_6 %uint_13 %27
+%main = OpFunction %void None %31
+%32 = OpLabel
+%33 = OpFunctionCall %void %src_main
+OpLine %3 8 1
+OpReturn
+OpFunctionEnd
+OpLine %3 6 1
+%src_main = OpFunction %void None %31
+OpNoLine
+%bb_entry = OpLabel
+%47 = OpExtInst %void %1 DebugScope %27
+%37 = OpExtInst %void %1 DebugFunctionDefinition %27 %src_main
+%48 = OpExtInst %void %1 DebugScope %29
+OpLine %3 7 3
+%39 = OpFunctionCall %int %function1
+%49 = OpExtInst %void %1 DebugScope %27
+OpLine %3 8 1
+OpReturn
+%50 = OpExtInst %void %1 DebugNoScope
+OpFunctionEnd
+OpLine %3 2 1
+%function1 = OpFunction %int None %42
+OpNoLine
+%bb_entry_0 = OpLabel
+%51 = OpExtInst %void %1 DebugScope %21
+%45 = OpExtInst %void %1 DebugFunctionDefinition %21 %function1
+%52 = OpExtInst %void %1 DebugScope %23
+OpLine %3 3 3
+OpReturnValue %int_1
+%53 = OpExtInst %void %1 DebugNoScope
+OpFunctionEnd
+)";
+
+  SetTargetEnv(SPV_ENV_VULKAN_1_2);
+  SetAssembleOptions(SPV_TEXT_TO_BINARY_OPTION_PRESERVE_NUMERIC_IDS);
   SinglePassRunAndMatch<InlineExhaustivePass>(text, true);
 }
 
