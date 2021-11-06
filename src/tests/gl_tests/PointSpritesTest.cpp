@@ -22,8 +22,7 @@ constexpr char kVertexShaderSource[] =
             gl_Position  = vPosition;
         })";
 
-// TODO(ynovikov): Improve the tests to work with point size 1. http://anglebug.com/2553
-constexpr GLfloat kMinMaxPointSize = 2.0f;
+constexpr GLfloat kMinMaxPointSize = 1.0f;
 
 class PointSpritesTest : public ANGLETest
 {
@@ -462,10 +461,6 @@ TEST_P(PointSpritesTest, PointSizeAboveMaxIsClamped)
     // If the center of the point ends up being outside the renderable surface, no point gets
     // rendered at all on AMD. http://anglebug.com/2113
     ANGLE_SKIP_TEST_IF(IsAMD() && IsVulkan());
-
-    // TODO(hqle): Metal on macbook also has problem with drawing point outside framebuffer.
-    // http://anglebug.com/4135
-    ANGLE_SKIP_TEST_IF(IsMetal());
 
     // TODO(anglebug.com/5491)
     ANGLE_SKIP_TEST_IF(IsIOS() && IsOpenGLES());

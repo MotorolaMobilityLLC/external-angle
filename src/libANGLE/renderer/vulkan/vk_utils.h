@@ -20,6 +20,7 @@
 #include "common/debug.h"
 #include "libANGLE/Error.h"
 #include "libANGLE/Observer.h"
+#include "libANGLE/angletypes.h"
 #include "libANGLE/renderer/serial_utils.h"
 #include "libANGLE/renderer/vulkan/SecondaryCommandBuffer.h"
 #include "libANGLE/renderer/vulkan/VulkanSecondaryCommandBuffer.h"
@@ -53,12 +54,8 @@ class ShareGroup;
 
 namespace gl
 {
-struct Box;
 class MockOverlay;
-struct Extents;
 struct RasterizerState;
-struct Rectangle;
-class State;
 struct SwizzleState;
 struct VertexAttribute;
 class VertexBinding;
@@ -156,6 +153,23 @@ void AddToPNextChain(VulkanStruct1 *chainStart, VulkanStruct2 *ptr)
     VkBaseOutStructure *localPtr = reinterpret_cast<VkBaseOutStructure *>(chainStart);
     ptr->pNext                   = localPtr->pNext;
     localPtr->pNext              = reinterpret_cast<VkBaseOutStructure *>(ptr);
+}
+
+// Append ptr to the end of the chain
+template <typename VulkanStruct1, typename VulkanStruct2>
+void AppendToPNextChain(VulkanStruct1 *chainStart, VulkanStruct2 *ptr)
+{
+    if (!ptr)
+    {
+        return;
+    }
+
+    VkBaseOutStructure *endPtr = reinterpret_cast<VkBaseOutStructure *>(chainStart);
+    while (endPtr->pNext)
+    {
+        endPtr = endPtr->pNext;
+    }
+    endPtr->pNext = reinterpret_cast<VkBaseOutStructure *>(ptr);
 }
 
 struct Error
@@ -353,8 +367,55 @@ class MemoryProperties final : angle::NonCopyable
         return mMemoryProperties.memoryHeaps[heapIndex].size;
     }
 
+    uint32_t getMemoryTypeCount() const { return mMemoryProperties.memoryTypeCount; }
+
   private:
     VkPhysicalDeviceMemoryProperties mMemoryProperties;
+};
+
+class BufferMemory : angle::NonCopyable
+{
+  public:
+    BufferMemory();
+    ~BufferMemory();
+    angle::Result initExternal(void *clientBuffer);
+    angle::Result init();
+
+    void destroy(RendererVk *renderer);
+
+    angle::Result map(ContextVk *contextVk, VkDeviceSize size, uint8_t **ptrOut)
+    {
+        if (mMappedMemory == nullptr)
+        {
+            ANGLE_TRY(mapImpl(contextVk, size));
+        }
+        *ptrOut = mMappedMemory;
+        return angle::Result::Continue;
+    }
+    void unmap(RendererVk *renderer);
+    void flush(RendererVk *renderer,
+               VkMemoryMapFlags memoryPropertyFlags,
+               VkDeviceSize offset,
+               VkDeviceSize size);
+    void invalidate(RendererVk *renderer,
+                    VkMemoryMapFlags memoryPropertyFlags,
+                    VkDeviceSize offset,
+                    VkDeviceSize size);
+
+    bool isExternalBuffer() const { return mClientBuffer != nullptr; }
+
+    uint8_t *getMappedMemory() const { return mMappedMemory; }
+    DeviceMemory *getExternalMemoryObject() { return &mExternalMemory; }
+    Allocation *getMemoryObject() { return &mAllocation; }
+
+  private:
+    angle::Result mapImpl(ContextVk *contextVk, VkDeviceSize size);
+
+    Allocation mAllocation;        // use mAllocation if isExternalBuffer() is false
+    DeviceMemory mExternalMemory;  // use mExternalMemory if isExternalBuffer() is true
+
+    void *mClientBuffer;
+    uint8_t *mMappedMemory;
 };
 
 // Similar to StagingImage, for Buffers.
@@ -737,6 +798,9 @@ ANGLE_DISABLE_STRUCT_PADDING_WARNINGS
 
 template <typename T>
 using SpecializationConstantMap = angle::PackedEnumMap<sh::vk::SpecializationConstantId, T>;
+
+using ShaderAndSerialPointer = BindingPointer<ShaderAndSerial>;
+using ShaderAndSerialMap     = gl::ShaderMap<ShaderAndSerialPointer>;
 
 void MakeDebugUtilsLabel(GLenum source, const char *marker, VkDebugUtilsLabelEXT *label);
 
