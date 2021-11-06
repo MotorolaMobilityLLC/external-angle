@@ -44,11 +44,22 @@ class RandomGenerator {
   /// @param size - number of elements in |data|, must be > 0
   static uint64_t CalculateSeed(const uint8_t* data, size_t size);
 
-  /// Get random target env.
+  /// Get random valid target env.
   spv_target_env GetTargetEnv();
 
+  /// Get uint32_t value from uniform distribution.
+  /// @param lower - lower bound of integer generated
+  /// @param upper - upper bound of integer generated
+  /// @returns i, where lower <= i < upper
+  uint32_t GetUInt32(uint32_t lower, uint32_t upper);
+
+  /// Get uint32_t value from uniform distribution.
+  /// @param bound - Upper bound of integer generated
+  /// @returns i, where 0 <= i < bound
+  uint32_t GetUInt32(uint32_t bound);
+
  private:
-  std::mt19937 engine_;
+  std::mt19937_64 engine_;
 };  // class RandomGenerator
 
 }  // namespace fuzzers
