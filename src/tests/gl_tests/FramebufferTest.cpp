@@ -623,20 +623,18 @@ TEST_P(FramebufferTest_ES3, TextureAttachmentMipLevels)
 
 TEST_P(FramebufferTest_ES3, TextureAttachmentMipLevelsReadBack)
 {
-#if defined(ADDRESS_SANITIZER)
-    // http://anglebug.com/4737
-    ANGLE_SKIP_TEST_IF(IsOSX());
-#endif
-
     GLFramebuffer framebuffer;
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
     GLTexture texture;
     glBindTexture(GL_TEXTURE_2D, texture);
 
-    const std::array<GLColor, 2 * 2> mip0Data = {GLColor::red, GLColor::red, GLColor::red,
-                                                 GLColor::red};
-    const std::array<GLColor, 1 * 1> mip1Data = {GLColor::green};
+    const std::array<GLColor, 4 * 4> mip0Data = {
+        GLColor::red, GLColor::red, GLColor::red, GLColor::red, GLColor::red, GLColor::red,
+        GLColor::red, GLColor::red, GLColor::red, GLColor::red, GLColor::red, GLColor::red,
+        GLColor::red, GLColor::red, GLColor::red, GLColor::red};
+    const std::array<GLColor, 2 * 2> mip1Data = {GLColor::green, GLColor::green, GLColor::green,
+                                                 GLColor::green};
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 4, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, mip0Data.data());
     glTexImage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 2, 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, mip1Data.data());
@@ -656,11 +654,6 @@ TEST_P(FramebufferTest_ES3, TextureAttachmentMipLevelsReadBack)
 // and Vulkan level in referring to that rendertarget.
 TEST_P(FramebufferTest_ES3, TextureAttachmentMipLevelsReadBackWithDraw)
 {
-#if defined(ADDRESS_SANITIZER)
-    // http://anglebug.com/4737
-    ANGLE_SKIP_TEST_IF(IsOSX());
-#endif
-
     ANGLE_GL_PROGRAM(greenProgram, essl1_shaders::vs::Simple(), essl1_shaders::fs::Green());
 
     GLFramebuffer framebuffer;
@@ -669,9 +662,12 @@ TEST_P(FramebufferTest_ES3, TextureAttachmentMipLevelsReadBackWithDraw)
     GLTexture texture;
     glBindTexture(GL_TEXTURE_2D, texture);
 
-    const std::array<GLColor, 2 * 2> mip0Data = {GLColor::red, GLColor::red, GLColor::red,
-                                                 GLColor::red};
-    const std::array<GLColor, 1 * 1> mip1Data = {GLColor::green};
+    const std::array<GLColor, 4 * 4> mip0Data = {
+        GLColor::red, GLColor::red, GLColor::red, GLColor::red, GLColor::red, GLColor::red,
+        GLColor::red, GLColor::red, GLColor::red, GLColor::red, GLColor::red, GLColor::red,
+        GLColor::red, GLColor::red, GLColor::red, GLColor::red};
+    const std::array<GLColor, 2 * 2> mip1Data = {GLColor::green, GLColor::green, GLColor::green,
+                                                 GLColor::green};
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 4, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, mip0Data.data());
     glTexImage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 2, 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, mip1Data.data());
@@ -3168,9 +3164,6 @@ TEST_P(FramebufferTest_ES3, SampleFromAttachedTextureWithDifferentLODAndFBOSwitc
 // initialize a VkImage object).
 TEST_P(FramebufferTest_ES3, RenderAndInvalidateImmutableTextureWithBeyondMaxLevel)
 {
-    // ToDo: https://issuetracker.google.com/181800403
-    ANGLE_SKIP_TEST_IF(IsMetal());
-
     constexpr GLuint kLevel0Size = 4;
     constexpr GLuint kLevel1Size = kLevel0Size / 2;
 
@@ -3218,9 +3211,6 @@ TEST_P(FramebufferTest_ES3, RenderAndInvalidateImmutableTextureWithBeyondMaxLeve
 // texture itself has been initialized with data before rendering.
 TEST_P(FramebufferTest_ES3, RenderAndInvalidateImmutableTextureWithSubImageWithBeyondMaxLevel)
 {
-    // ToDo: https://issuetracker.google.com/181800403
-    ANGLE_SKIP_TEST_IF(IsMetal());
-
     constexpr GLuint kLevel0Size = 4;
     constexpr GLuint kLevel1Size = kLevel0Size / 2;
     std::array<GLColor, kLevel0Size * kLevel0Size> gData;
@@ -3271,12 +3261,8 @@ TEST_P(FramebufferTest_ES3, RenderAndInvalidateImmutableTextureWithSubImageWithB
 // Test render to a texture level that is excluded from [base_level, max_level]. This specific test
 // renders to an immutable texture at the level that is smaller than GL_TEXTURE_BASE_LEVEL. The
 // texture itself has been initialized with data before rendering. Filament is using it this way
-// https://issuetracker.google.com/181800403.
 TEST_P(FramebufferTest_ES3, RenderAndInvalidateImmutableTextureWithBellowBaseLevelLOD)
 {
-    // ToDo: https://issuetracker.google.com/181800403
-    ANGLE_SKIP_TEST_IF(IsMetal());
-
     constexpr GLuint kLevel0Size = 4;
     constexpr GLuint kLevel1Size = kLevel0Size / 2;
     std::array<GLColor, kLevel0Size * kLevel0Size> gData;
@@ -3330,9 +3316,6 @@ TEST_P(FramebufferTest_ES3, RenderAndInvalidateImmutableTextureWithBellowBaseLev
 // levels.
 TEST_P(FramebufferTest_ES3, RenderImmutableTextureWithSubImageWithBeyondMaxLevel)
 {
-    // ToDo: https://issuetracker.google.com/181800403
-    ANGLE_SKIP_TEST_IF(IsMetal());
-
     // Set up program to sample from specific lod level.
     GLProgram textureLodProgram;
     textureLodProgram.makeRaster(essl3_shaders::vs::Texture2DLod(),
@@ -3405,9 +3388,6 @@ TEST_P(FramebufferTest_ES3, RenderImmutableTextureWithSubImageWithBeyondMaxLevel
 // GL_TEXTURE_BASE_LEVEL and sample from it at the same time.
 TEST_P(FramebufferTest_ES3, RenderSampleDepthTextureWithExcludedLevel)
 {
-    // ToDo: https://issuetracker.google.com/181800403
-    ANGLE_SKIP_TEST_IF(IsMetal());
-
     // Set up program to copy depth texture's value to color.red.
     constexpr char kVS[] = R"(precision mediump float;
 attribute vec4 a_position;
@@ -3608,8 +3588,7 @@ TEST_P(FramebufferTest_ES3, ChangeAttachmentThenInvalidateAndDraw)
 // outside common intersection area are undefined.
 TEST_P(FramebufferTest_ES3, AttachmentsWithUnequalDimensions)
 {
-    // TODO: https://anglebug.com/5866
-    ANGLE_SKIP_TEST_IF(IsD3D() || IsMetal());
+    ANGLE_SKIP_TEST_IF(IsD3D());
 
     constexpr GLsizei kSizeLarge = 32;
     constexpr GLsizei kSizeSmall = 16;
@@ -3930,9 +3909,7 @@ GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(FramebufferTest_ES3);
 ANGLE_INSTANTIATE_TEST_ES3_AND(FramebufferTest_ES3,
                                WithEmulatedPrerotation(ES3_VULKAN(), 90),
                                WithEmulatedPrerotation(ES3_VULKAN(), 180),
-                               WithEmulatedPrerotation(ES3_VULKAN(), 270),
-                               WithDirectSPIRVGeneration(WithEmulatedPrerotation(ES3_VULKAN(),
-                                                                                 90)));
+                               WithEmulatedPrerotation(ES3_VULKAN(), 270));
 
 GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(FramebufferTest_ES31);
 ANGLE_INSTANTIATE_TEST_ES31(FramebufferTest_ES31);
