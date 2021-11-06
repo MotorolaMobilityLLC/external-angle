@@ -1987,9 +1987,6 @@ TEST_P(GLSLTest, MaxVaryingVec3AndOneFloat)
 // Only fails on D3D9 because of packing limitations.
 TEST_P(GLSLTest, MaxVaryingVec3ArrayAndOneFloatArray)
 {
-    // TODO(anglebug.com/5360): Failing on ARM-based Apple DTKs.
-    ANGLE_SKIP_TEST_IF(IsOSX() && IsARM64() && IsMetal());
-
     GLint maxVaryings = 0;
     glGetIntegerv(GL_MAX_VARYING_VECTORS, &maxVaryings);
 
@@ -2016,7 +2013,7 @@ TEST_P(GLSLTest, TwiceMaxVaryingVec2)
 // Disabled because of a failure in D3D9
 TEST_P(GLSLTest, MaxVaryingVec2Arrays)
 {
-    ANGLE_SKIP_TEST_IF(IsD3DSM3());
+    ANGLE_SKIP_TEST_IF(IsD3D9());
 
     // TODO(geofflang): Figure out why this fails on NVIDIA's GLES driver
     ANGLE_SKIP_TEST_IF(IsOpenGLES());
@@ -2024,9 +2021,6 @@ TEST_P(GLSLTest, MaxVaryingVec2Arrays)
     // TODO(geofflang): Find out why this doesn't compile on Apple AMD OpenGL drivers
     // (http://anglebug.com/1291)
     ANGLE_SKIP_TEST_IF(IsOSX() && IsAMD() && IsOpenGL());
-
-    // TODO(anglebug.com/5360): Failing on ARM-based Apple DTKs.
-    ANGLE_SKIP_TEST_IF(IsOSX() && IsARM64() && IsMetal());
 
     GLint maxVaryings = 0;
     glGetIntegerv(GL_MAX_VARYING_VECTORS, &maxVaryings);
@@ -2463,11 +2457,7 @@ TEST_P(GLSLTest, PowOfSmallConstant)
     }
 }
 
-// Test that fragment shaders which contain non-constant loop indexers and compiled for FL9_3 and
-// below
-// fail with a specific error message.
-// Additionally test that the same fragment shader compiles successfully with feature levels greater
-// than FL9_3.
+// Test fragment shaders which contain non-constant loop indexers
 TEST_P(GLSLTest, LoopIndexingValidation)
 {
     constexpr char kFS[] = R"(precision mediump float;
@@ -2498,7 +2488,7 @@ void main()
     // If the test is configured to run limited to Feature Level 9_3, then it is
     // assumed that shader compilation will fail with an expected error message containing
     // "Loop index cannot be compared with non-constant expression"
-    if ((GetParam() == ES2_D3D11_FL9_3() || GetParam() == ES2_D3D9()))
+    if (GetParam() == ES2_D3D9())
     {
         if (compileResult != 0)
         {
@@ -3167,8 +3157,6 @@ TEST_P(GLSLTest_ES3, InitGlobalArrayWithArrayIndexing)
 // Test that index-constant sampler array indexing is supported.
 TEST_P(GLSLTest, IndexConstantSamplerArrayIndexing)
 {
-    ANGLE_SKIP_TEST_IF(IsD3D11_FL93());
-
     constexpr char kFS[] =
         "precision mediump float;\n"
         "uniform sampler2D uni[2];\n"
@@ -3384,12 +3372,6 @@ TEST_P(GLSLTest_ES3, AtanVec2)
 // Convers a bug with the unary minus operator on signed integer workaround.
 TEST_P(GLSLTest_ES3, UnaryMinusOperatorSignedInt)
 {
-    // http://anglebug.com/5242
-    // Test times out on dual-GPU MacBook Pros that don't show up as
-    // IsIntel(); skip on all Metal for now.
-    // See also http://anglebug.com/6174 .
-    ANGLE_SKIP_TEST_IF(IsMetal());
-
     constexpr char kVS[] =
         "#version 300 es\n"
         "in highp vec4 position;\n"
@@ -3437,12 +3419,6 @@ TEST_P(GLSLTest_ES3, UnaryMinusOperatorSignedInt)
 // Convers a bug with the unary minus operator on unsigned integer workaround.
 TEST_P(GLSLTest_ES3, UnaryMinusOperatorUnsignedInt)
 {
-    // http://anglebug.com/5242
-    // Test times out on dual-GPU MacBook Pros that don't show up as
-    // IsIntel(); skip on all Metal for now.
-    // See also http://anglebug.com/6174 .
-    ANGLE_SKIP_TEST_IF(IsMetal());
-
     constexpr char kVS[] =
         "#version 300 es\n"
         "in highp vec4 position;\n"
@@ -4635,7 +4611,7 @@ layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 layout(binding = 0, r32f) uniform highp image2D image1[2][3];
 layout(binding = 6, r32f) uniform highp image2D image2;
 
-void testFunction(image2D imageOut[2][3])
+void testFunction(highp image2D imageOut[2][3])
 {
     // image1 is an array of 1x1 images.
     // image2 is a 1x4 image with the following data:
@@ -5103,8 +5079,8 @@ TEST_P(GLSLTest_ES31, ParameterArraysOfArraysSampler)
         "uniform mediump isampler2D test[2][3];\n"
         "const vec2 ZERO = vec2(0.0, 0.0);\n"
         "\n"
-        "bool check(isampler2D data[2][3]);\n"
-        "bool check(isampler2D data[2][3]) {\n"
+        "bool check(mediump isampler2D data[2][3]);\n"
+        "bool check(mediump isampler2D data[2][3]) {\n"
         "#define DO_CHECK(i,j) \\\n"
         "    if (texture(data[i][j], ZERO) != ivec4(i+1, j+1, 0, 1)) { \\\n"
         "        return false; \\\n"
@@ -5308,20 +5284,20 @@ TEST_P(GLSLTest_ES31, ParameterArrayArrayArraySampler)
         "uniform mediump isampler2D test2[4];\n"
         "const vec2 ZERO = vec2(0.0, 0.0);\n"
         "\n"
-        "bool check1D(isampler2D arr[4], int x, int y) {\n"
+        "bool check1D(mediump isampler2D arr[4], int x, int y) {\n"
         "    if (texture(arr[0], ZERO) != ivec4(x, y, 0, 0)+1) return false;\n"
         "    if (texture(arr[1], ZERO) != ivec4(x, y, 1, 0)+1) return false;\n"
         "    if (texture(arr[2], ZERO) != ivec4(x, y, 2, 0)+1) return false;\n"
         "    if (texture(arr[3], ZERO) != ivec4(x, y, 3, 0)+1) return false;\n"
         "    return true;\n"
         "}\n"
-        "bool check2D(isampler2D arr[3][4], int x) {\n"
+        "bool check2D(mediump isampler2D arr[3][4], int x) {\n"
         "    if (!check1D(arr[0], x, 0)) return false;\n"
         "    if (!check1D(arr[1], x, 1)) return false;\n"
         "    if (!check1D(arr[2], x, 2)) return false;\n"
         "    return true;\n"
         "}\n"
-        "bool check3D(isampler2D arr[2][3][4]) {\n"
+        "bool check3D(mediump isampler2D arr[2][3][4]) {\n"
         "    if (!check2D(arr[0], 0)) return false;\n"
         "    if (!check2D(arr[1], 1)) return false;\n"
         "    return true;\n"
@@ -9039,7 +9015,6 @@ TEST_P(GLSLTest, FragData)
 // Test angle can handle big initial stack size with dynamic stack allocation.
 TEST_P(GLSLTest, MemoryExhaustedTest)
 {
-    ANGLE_SKIP_TEST_IF(IsD3D11_FL93());
     GLuint program =
         CompileProgram(essl1_shaders::vs::Simple(), BuildBigInitialStackShader(36).c_str());
     EXPECT_NE(0u, program);
@@ -14012,6 +13987,46 @@ void main()
     EXPECT_PIXEL_COLOR_EQ(0, 0, GLColor::green);
 }
 
+// Tests initializing a nameless shader IO block using the shader translator option.
+TEST_P(GLSLTest_ES31_InitShaderVariables, InitIOBlockNameless)
+{
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled("GL_EXT_shader_io_blocks"));
+
+    const char kVS[] = R"(#version 310 es
+#extension GL_EXT_shader_io_blocks : require
+in vec4 position;
+out BlockType {
+    vec4 blockMember;
+};
+
+void main()
+{
+    gl_Position = position;
+})";
+
+    const char kFS[] = R"(#version 310 es
+#extension GL_EXT_shader_io_blocks : require
+precision mediump float;
+out vec4 colorOut;
+in BlockType {
+    vec4 blockMember;
+};
+
+void main()
+{
+    if (blockMember == vec4(0)) {
+        colorOut = vec4(0, 1, 0, 1);
+    } else {
+        colorOut = vec4(1, 0, 0, 1);
+    }
+})";
+
+    ANGLE_GL_PROGRAM(testProgram, kVS, kFS);
+    drawQuad(testProgram, "position", 0.5f, 1.0f, true);
+    ASSERT_GL_NO_ERROR();
+    EXPECT_PIXEL_COLOR_EQ(0, 0, GLColor::green);
+}
+
 // Tests initializing a shader IO block with an array using the shader translator option.
 TEST_P(GLSLTest_ES31_InitShaderVariables, InitIOBlockWithArray)
 {
@@ -14041,6 +14056,47 @@ void main()
 {
     if (BlockTypeOut.blockMember[0] == vec4(0) &&
         BlockTypeOut.blockMember[1] == vec4(0)) {
+        colorOut = vec4(0, 1, 0, 1);
+    } else {
+        colorOut = vec4(1, 0, 0, 1);
+    }
+})";
+
+    ANGLE_GL_PROGRAM(testProgram, kVS, kFS);
+    drawQuad(testProgram, "position", 0.5f, 1.0f, true);
+    ASSERT_GL_NO_ERROR();
+    EXPECT_PIXEL_COLOR_EQ(0, 0, GLColor::green);
+}
+
+// Tests initializing a shader IO block array using the shader translator option.
+TEST_P(GLSLTest_ES31_InitShaderVariables, InitIOBlockArray)
+{
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled("GL_EXT_shader_io_blocks"));
+
+    const char kVS[] = R"(#version 310 es
+#extension GL_EXT_shader_io_blocks : require
+in vec4 position;
+out BlockType {
+    vec4 blockMember;
+} BlockTypeOut[2];
+
+void main()
+{
+    gl_Position = position;
+})";
+
+    const char kFS[] = R"(#version 310 es
+#extension GL_EXT_shader_io_blocks : require
+precision mediump float;
+out vec4 colorOut;
+in BlockType {
+    vec4 blockMember;
+} BlockTypeOut[2];
+
+void main()
+{
+    if (BlockTypeOut[0].blockMember == vec4(0) &&
+        BlockTypeOut[1].blockMember == vec4(0)) {
         colorOut = vec4(0, 1, 0, 1);
     } else {
         colorOut = vec4(1, 0, 0, 1);
@@ -14205,25 +14261,126 @@ TEST_P(WebGL2GLSLTest, UnsuccessfulRelinkWithBindAttribLocation)
     glDrawArrays(GL_TRIANGLES, 79, 16);
     EXPECT_GL_ERROR(GL_INVALID_OPERATION);
 }
+
+// Covers a HLSL compiler bug.
+TEST_P(GLSLTest_ES3, ComplexCrossExpression)
+{
+    constexpr char kFS[] = R"(#version 300 es
+precision mediump float;
+vec3 a = vec3(0.0);
+out vec4 color;
+void main()
+{
+    cross(max(vec3(0.0), reflect(dot(a, vec3(0.0)), 0.0)), vec3(0.0));
+})";
+
+    ANGLE_GL_PROGRAM(testProgram, essl3_shaders::vs::Simple(), kFS);
+    drawQuad(testProgram, essl3_shaders::PositionAttrib(), 0.5f, 1.0f, true);
+    ASSERT_GL_NO_ERROR();
+}
+
+// Regression test for a crash in SPIR-V output when faced with an array of struct constant.
+TEST_P(GLSLTest_ES3, ArrayOfStructConstantBug)
+{
+    constexpr char kFS[] = R"(#version 300 es
+struct S {
+    int foo;
+};
+void main() {
+    S a[3];
+    a = S[3](S(0), S(1), S(2));
+})";
+
+    GLuint shader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    const char *sourceArray[1] = {kFS};
+    GLint lengths[1]           = {static_cast<GLint>(sizeof(kFS) - 1)};
+    glShaderSource(shader, 1, sourceArray, lengths);
+    glCompileShader(shader);
+
+    GLint compileResult;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &compileResult);
+    EXPECT_NE(compileResult, 0);
+}
+
+// Regression test for a bug in SPIR-V output where float+matrix was mishandled.
+TEST_P(GLSLTest_ES3, FloatPlusMatrix)
+{
+    constexpr char kFS[] = R"(#version 300 es
+
+precision mediump float;
+
+layout(location=0) out vec4 color;
+
+uniform float f;
+
+void main()
+{
+    mat3x2 m = f + mat3x2(0);
+    color = vec4(m[0][0]);
+})";
+
+    GLuint shader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    const char *sourceArray[1] = {kFS};
+    GLint lengths[1]           = {static_cast<GLint>(sizeof(kFS) - 1)};
+    glShaderSource(shader, 1, sourceArray, lengths);
+    glCompileShader(shader);
+
+    GLint compileResult;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &compileResult);
+    EXPECT_NE(compileResult, 0);
+}
+
+// Regression test for a bug in SPIR-V output where a transformation creates float(constant) without
+// folding it into a TIntermConstantUnion.  This transformation is clamping non-constant indices in
+// WebGL.  The |false ? i : 5| as index caused the transformation to consider this a non-constant
+// index.
+TEST_P(WebGL2GLSLTest, IndexClampConstantIndexBug)
+{
+    constexpr char kFS[] = R"(#version 300 es
+precision highp float;
+
+layout(location=0) out float f;
+
+uniform int i;
+
+void main()
+{
+    float data[10];
+    f = data[false ? i : 5];
+})";
+
+    GLuint shader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    const char *sourceArray[1] = {kFS};
+    GLint lengths[1]           = {static_cast<GLint>(sizeof(kFS) - 1)};
+    glShaderSource(shader, 1, sourceArray, lengths);
+    glCompileShader(shader);
+
+    GLint compileResult;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &compileResult);
+    EXPECT_NE(compileResult, 0);
+}
 }  // anonymous namespace
 
-ANGLE_INSTANTIATE_TEST_ES2_AND_ES3_AND(GLSLTest, WithDirectSPIRVGeneration(ES2_VULKAN()));
+ANGLE_INSTANTIATE_TEST_ES2_AND_ES3_AND(GLSLTest, WithGlslang(ES2_VULKAN()));
 
 ANGLE_INSTANTIATE_TEST_ES2_AND_ES3(GLSLTestNoValidation);
 
 GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(GLSLTest_ES3);
-ANGLE_INSTANTIATE_TEST_ES3_AND(GLSLTest_ES3, WithDirectSPIRVGeneration(ES3_VULKAN()));
+ANGLE_INSTANTIATE_TEST_ES3_AND(GLSLTest_ES3, WithGlslang(ES3_VULKAN()));
 
 GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(GLSLTestLoops);
-ANGLE_INSTANTIATE_TEST_ES3_AND(GLSLTestLoops, WithDirectSPIRVGeneration(ES3_VULKAN()));
+ANGLE_INSTANTIATE_TEST_ES3_AND(GLSLTestLoops, WithGlslang(ES3_VULKAN()));
 
-ANGLE_INSTANTIATE_TEST_ES2_AND(WebGLGLSLTest, WithDirectSPIRVGeneration(ES2_VULKAN()));
+ANGLE_INSTANTIATE_TEST_ES2_AND(WebGLGLSLTest, WithGlslang(ES2_VULKAN()));
 
 GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(WebGL2GLSLTest);
-ANGLE_INSTANTIATE_TEST_ES3_AND(WebGL2GLSLTest, WithDirectSPIRVGeneration(ES3_VULKAN()));
+ANGLE_INSTANTIATE_TEST_ES3_AND(WebGL2GLSLTest, WithGlslang(ES3_VULKAN()));
 
 GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(GLSLTest_ES31);
-ANGLE_INSTANTIATE_TEST_ES31_AND(GLSLTest_ES31, WithDirectSPIRVGeneration(ES31_VULKAN()));
+ANGLE_INSTANTIATE_TEST_ES31_AND(GLSLTest_ES31, WithGlslang(ES31_VULKAN()));
 
 GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(GLSLTest_ES31_InitShaderVariables);
 ANGLE_INSTANTIATE_TEST(GLSLTest_ES31_InitShaderVariables, WithInitShaderVariables(ES31_VULKAN()));

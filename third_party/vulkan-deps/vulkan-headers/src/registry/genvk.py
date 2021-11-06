@@ -205,6 +205,10 @@ def makeGenOpts(args):
 
 
     # API validity files for spec
+    #
+    # requireCommandAliases is set to True because we need validity files
+    # for the command something is promoted to even when the promoted-to
+    # feature is not included. This avoids wordy includes of validity files.
     genOpts['validinc'] = [
           ValidityOutputGenerator,
           DocGeneratorOptions(
@@ -219,7 +223,9 @@ def makeGenOpts(args):
             defaultExtensions = None,
             addExtensions     = addExtensionsPat,
             removeExtensions  = removeExtensionsPat,
-            emitExtensions    = emitExtensionsPat)
+            emitExtensions    = emitExtensionsPat,
+            requireCommandAliases = True,
+            )
         ]
 
     # API host sync table files for spec
@@ -329,6 +335,7 @@ def makeGenOpts(args):
         'VK_EXT_video_decode_h264',
         'VK_EXT_video_decode_h265',
         'VK_EXT_video_encode_h264',
+        'VK_EXT_video_encode_h265',
     ]
 
     betaSuppressExtensions = []
@@ -659,6 +666,10 @@ if __name__ == '__main__':
         diag = open(args.diagfile, 'w', encoding='utf-8')
     else:
         diag = None
+
+    if args.time:
+        # Log diagnostics and warnings
+        setLogFile(setDiag = True, setWarn = True, filename = '-')
 
     (gen, options) = (None, None)
     if not args.validate:

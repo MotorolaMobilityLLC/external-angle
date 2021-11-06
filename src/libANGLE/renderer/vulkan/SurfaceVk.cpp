@@ -132,16 +132,120 @@ angle::Result InitImageHelper(DisplayVk *displayVk,
     VkExtent3D extents = {std::max(static_cast<uint32_t>(width), 1u),
                           std::max(static_cast<uint32_t>(height), 1u), 1u};
 
+    angle::FormatID renderableFormatId = vkFormat.getActualRenderableImageFormatID();
+    RendererVk *rendererVk             = displayVk->getRenderer();
+    // For devices that don't support creating swapchain images with RGB8, emulate with RGBA8.
+    if (rendererVk->getFeatures().overrideSurfaceFormatRGB8toRGBA8.enabled &&
+        renderableFormatId == angle::FormatID::R8G8B8_UNORM)
+    {
+        renderableFormatId = angle::FormatID::R8G8B8A8_UNORM;
+    }
+
     VkImageCreateFlags imageCreateFlags =
         hasProtectedContent ? VK_IMAGE_CREATE_PROTECTED_BIT : vk::kVkImageCreateFlagsNone;
     ANGLE_TRY(imageHelper->initExternal(
         displayVk, gl::TextureType::_2D, extents, vkFormat.getIntendedFormatID(),
-        vkFormat.getActualRenderableImageFormatID(), samples, usage, imageCreateFlags,
-        vk::ImageLayout::Undefined, nullptr, gl::LevelIndex(0), 1, 1, isRobustResourceInitEnabled,
-        nullptr, hasProtectedContent));
+        renderableFormatId, samples, usage, imageCreateFlags, vk::ImageLayout::Undefined, nullptr,
+        gl::LevelIndex(0), 1, 1, isRobustResourceInitEnabled, nullptr, hasProtectedContent));
 
     return angle::Result::Continue;
 }
+
+VkColorSpaceKHR MapEglColorSpaceToVkColorSpace(EGLenum EGLColorspace)
+{
+    switch (EGLColorspace)
+    {
+        case EGL_NONE:
+        case EGL_GL_COLORSPACE_LINEAR:
+        case EGL_GL_COLORSPACE_SRGB_KHR:
+        case EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT:
+            return VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
+        case EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT:
+            return VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT;
+        case EGL_GL_COLORSPACE_DISPLAY_P3_EXT:
+            return VK_COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT;
+        case EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT:
+            return VK_COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT;
+        case EGL_GL_COLORSPACE_SCRGB_EXT:
+            return VK_COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT;
+        default:
+            UNREACHABLE();
+            return VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
+    }
+}
+
+angle::Result DoesSurfaceSupportFormatAndColorspace(DisplayVk *displayVk,
+                                                    VkPhysicalDevice physicalDevice,
+                                                    VkSurfaceKHR surface,
+                                                    VkFormat format,
+                                                    VkColorSpaceKHR colorSpace,
+                                                    bool *surfaceFormatSupported)
+{
+    VkPhysicalDeviceSurfaceInfo2KHR surfaceInfo2 = {};
+    surfaceInfo2.sType   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR;
+    surfaceInfo2.surface = surface;
+
+    uint32_t surfaceFormatCount = 0;
+    ANGLE_VK_TRY(displayVk, vkGetPhysicalDeviceSurfaceFormats2KHR(physicalDevice, &surfaceInfo2,
+                                                                  &surfaceFormatCount, nullptr));
+
+    std::vector<VkSurfaceFormat2KHR> surfaceFormats2(surfaceFormatCount);
+    for (VkSurfaceFormat2KHR &surfaceFormat2 : surfaceFormats2)
+    {
+        surfaceFormat2.sType = VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR;
+    }
+    ANGLE_VK_TRY(displayVk,
+                 vkGetPhysicalDeviceSurfaceFormats2KHR(
+                     physicalDevice, &surfaceInfo2, &surfaceFormatCount, surfaceFormats2.data()));
+
+    for (VkSurfaceFormat2KHR &surfaceFormat2 : surfaceFormats2)
+    {
+        if (surfaceFormat2.surfaceFormat.format == format &&
+            surfaceFormat2.surfaceFormat.colorSpace == colorSpace)
+        {
+            *surfaceFormatSupported = true;
+            return angle::Result::Continue;
+        }
+    }
+
+    return angle::Result::Continue;
+}
+
+angle::Result DoesSurfaceSupportFormat(DisplayVk *displayVk,
+                                       VkPhysicalDevice physicalDevice,
+                                       VkSurfaceKHR surface,
+                                       VkFormat format,
+                                       bool *surfaceFormatSupported)
+{
+    uint32_t surfaceFormatCount = 0;
+    ANGLE_VK_TRY(displayVk, vkGetPhysicalDeviceSurfaceFormatsKHR(physicalDevice, surface,
+                                                                 &surfaceFormatCount, nullptr));
+
+    std::vector<VkSurfaceFormatKHR> surfaceFormats(surfaceFormatCount);
+    ANGLE_VK_TRY(displayVk,
+                 vkGetPhysicalDeviceSurfaceFormatsKHR(physicalDevice, surface, &surfaceFormatCount,
+                                                      surfaceFormats.data()));
+
+    if (surfaceFormatCount == 1u && surfaceFormats[0].format == VK_FORMAT_UNDEFINED)
+    {
+        // This is fine.
+        *surfaceFormatSupported = true;
+    }
+    else
+    {
+        for (const VkSurfaceFormatKHR &surfaceFormat : surfaceFormats)
+        {
+            if (surfaceFormat.format == format)
+            {
+                *surfaceFormatSupported = true;
+                return angle::Result::Continue;
+            }
+        }
+    }
+
+    return angle::Result::Continue;
+}
+
 }  // namespace
 
 #if defined(ANGLE_ENABLE_OVERLAY)
@@ -470,6 +574,13 @@ ImagePresentHistory::ImagePresentHistory(ImagePresentHistory &&other)
     : semaphore(std::move(other.semaphore)), oldSwapchains(std::move(other.oldSwapchains))
 {}
 
+ImagePresentHistory &ImagePresentHistory::operator=(ImagePresentHistory &&other)
+{
+    std::swap(semaphore, other.semaphore);
+    std::swap(oldSwapchains, other.oldSwapchains);
+    return *this;
+}
+
 SwapchainImage::SwapchainImage()  = default;
 SwapchainImage::~SwapchainImage() = default;
 
@@ -477,8 +588,7 @@ SwapchainImage::SwapchainImage(SwapchainImage &&other)
     : image(std::move(other.image)),
       imageViews(std::move(other.imageViews)),
       framebuffer(std::move(other.framebuffer)),
-      presentHistory(std::move(other.presentHistory)),
-      currentPresentHistoryIndex(other.currentPresentHistoryIndex)
+      presentHistory(std::move(other.presentHistory))
 {}
 }  // namespace impl
 
@@ -496,8 +606,8 @@ WindowSurfaceVk::WindowSurfaceVk(const egl::SurfaceState &surfaceState, EGLNativ
       mPreTransform(VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR),
       mEmulatedPreTransform(VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR),
       mCompositeAlpha(VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR),
-      mCurrentSwapHistoryIndex(0),
       mCurrentSwapchainImageIndex(0),
+      mAcquireImageSemaphore(nullptr),
       mDepthStencilImageBinding(this, kAnySurfaceImageSubjectIndex),
       mColorImageMSBinding(this, kAnySurfaceImageSubjectIndex),
       mNeedToAcquireNextSwapchainImage(false),
@@ -537,6 +647,10 @@ void WindowSurfaceVk::destroy(const egl::Display *display)
         mSwapchain = VK_NULL_HANDLE;
     }
 
+    for (vk::Semaphore &semaphore : mAcquireImageSemaphores)
+    {
+        semaphore.destroy(device);
+    }
     for (SwapchainCleanupData &oldSwapchain : mOldSwapchains)
     {
         oldSwapchain.destroy(device, &mPresentSemaphoreRecycler);
@@ -549,7 +663,6 @@ void WindowSurfaceVk::destroy(const egl::Display *display)
         mSurface = VK_NULL_HANDLE;
     }
 
-    mAcquireImageSemaphore.destroy(device);
     mPresentSemaphoreRecycler.destroy(device);
 }
 
@@ -751,40 +864,46 @@ angle::Result WindowSurfaceVk::initializeImpl(DisplayVk *displayVk)
     }
     setSwapInterval(preferredSwapInterval);
 
-    uint32_t surfaceFormatCount = 0;
-    ANGLE_VK_TRY(displayVk, vkGetPhysicalDeviceSurfaceFormatsKHR(physicalDevice, mSurface,
-                                                                 &surfaceFormatCount, nullptr));
-
-    std::vector<VkSurfaceFormatKHR> surfaceFormats(surfaceFormatCount);
-    ANGLE_VK_TRY(displayVk,
-                 vkGetPhysicalDeviceSurfaceFormatsKHR(physicalDevice, mSurface, &surfaceFormatCount,
-                                                      surfaceFormats.data()));
-
     const vk::Format &format = renderer->getFormat(mState.config->renderTargetFormat);
     VkFormat nativeFormat    = format.getActualRenderableImageVkFormat();
-
-    if (surfaceFormatCount == 1u && surfaceFormats[0].format == VK_FORMAT_UNDEFINED)
+    RendererVk *rendererVk   = displayVk->getRenderer();
+    // For devices that don't support creating swapchain images with RGB8, emulate with RGBA8.
+    if (rendererVk->getFeatures().overrideSurfaceFormatRGB8toRGBA8.enabled &&
+        nativeFormat == VK_FORMAT_R8G8B8_UNORM)
     {
-        // This is fine.
+        nativeFormat = VK_FORMAT_R8G8B8A8_UNORM;
+    }
+
+    bool surfaceFormatSupported = false;
+    VkColorSpaceKHR colorSpace  = MapEglColorSpaceToVkColorSpace(
+        static_cast<EGLenum>(mState.attributes.get(EGL_GL_COLORSPACE, EGL_NONE)));
+
+    if (renderer->getFeatures().supportsSurfaceCapabilities2Extension.enabled)
+    {
+
+        // If a non-linear colorspace was requested but the non-linear colorspace is
+        // not supported in combination with the vulkan surface format, treat it as a non-fatal
+        // error
+        ANGLE_TRY(DoesSurfaceSupportFormatAndColorspace(displayVk, physicalDevice, mSurface,
+                                                        nativeFormat, colorSpace,
+                                                        &surfaceFormatSupported));
+    }
+    else if (colorSpace != VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+    {
+        // VK_KHR_get_surface_capabilities2 is required to query support for colorspaces
+        // from VK_EXT_swapchain_colorspace
     }
     else
     {
-        bool foundFormat = false;
-        for (const VkSurfaceFormatKHR &surfaceFormat : surfaceFormats)
-        {
-            if (surfaceFormat.format == nativeFormat)
-            {
-                foundFormat = true;
-                break;
-            }
-        }
-
         // If a non-linear colorspace was requested but the non-linear format is
         // not supported as a vulkan surface format, treat it as a non-fatal error
-        if (!foundFormat)
-        {
-            return angle::Result::Incomplete;
-        }
+        ANGLE_TRY(DoesSurfaceSupportFormat(displayVk, physicalDevice, mSurface, nativeFormat,
+                                           &surfaceFormatSupported));
+    }
+
+    if (!surfaceFormatSupported)
+    {
+        return angle::Result::Incomplete;
     }
 
     mCompositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
@@ -796,6 +915,12 @@ angle::Result WindowSurfaceVk::initializeImpl(DisplayVk *displayVk)
                    VK_ERROR_INITIALIZATION_FAILED);
 
     ANGLE_TRY(createSwapChain(displayVk, extents, VK_NULL_HANDLE));
+
+    // Create the semaphores that will be used for vkAcquireNextImageKHR.
+    for (vk::Semaphore &semaphore : mAcquireImageSemaphores)
+    {
+        ANGLE_VK_TRY(displayVk, semaphore.init(displayVk->getDevice()));
+    }
 
     VkResult vkResult = acquireNextSwapchainImage(displayVk);
     ASSERT(vkResult != VK_SUBOPTIMAL_KHR);
@@ -936,29 +1061,6 @@ angle::Result WindowSurfaceVk::newPresentSemaphore(vk::Context *context,
     return angle::Result::Continue;
 }
 
-static VkColorSpaceKHR MapEglColorSpaceToVkColorSpace(EGLenum EGLColorspace)
-{
-    switch (EGLColorspace)
-    {
-        case EGL_NONE:
-        case EGL_GL_COLORSPACE_LINEAR:
-        case EGL_GL_COLORSPACE_SRGB_KHR:
-        case EGL_GL_COLORSPACE_DISPLAY_P3_PASSTHROUGH_EXT:
-            return VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
-        case EGL_GL_COLORSPACE_DISPLAY_P3_LINEAR_EXT:
-            return VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT;
-        case EGL_GL_COLORSPACE_DISPLAY_P3_EXT:
-            return VK_COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT;
-        case EGL_GL_COLORSPACE_SCRGB_LINEAR_EXT:
-            return VK_COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT;
-        case EGL_GL_COLORSPACE_SCRGB_EXT:
-            return VK_COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT;
-        default:
-            UNREACHABLE();
-            return VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
-    }
-}
-
 angle::Result WindowSurfaceVk::resizeSwapchainImages(vk::Context *context, uint32_t imageCount)
 {
     if (static_cast<size_t>(imageCount) != mSwapchainImages.size())
@@ -1007,8 +1109,16 @@ angle::Result WindowSurfaceVk::createSwapChain(vk::Context *context,
     RendererVk *renderer = context->getRenderer();
     VkDevice device      = renderer->getDevice();
 
-    const vk::Format &format = renderer->getFormat(mState.config->renderTargetFormat);
-    VkFormat nativeFormat    = format.getActualRenderableImageVkFormat();
+    const vk::Format &format         = renderer->getFormat(mState.config->renderTargetFormat);
+    angle::FormatID actualFormatID   = format.getActualRenderableImageFormatID();
+    angle::FormatID intendedFormatID = format.getIntendedFormatID();
+
+    // For devices that don't support creating swapchain images with RGB8, emulate with RGBA8.
+    if (renderer->getFeatures().overrideSurfaceFormatRGB8toRGBA8.enabled &&
+        intendedFormatID == angle::FormatID::R8G8B8_UNORM)
+    {
+        actualFormatID = angle::FormatID::R8G8B8A8_UNORM;
+    }
 
     gl::Extents rotatedExtents = extents;
     if (Is90DegreeRotation(getPreTransform()))
@@ -1042,7 +1152,7 @@ angle::Result WindowSurfaceVk::createSwapChain(vk::Context *context,
     swapchainInfo.flags = mState.hasProtectedContent() ? VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR : 0;
     swapchainInfo.surface         = mSurface;
     swapchainInfo.minImageCount   = mMinImageCount;
-    swapchainInfo.imageFormat     = nativeFormat;
+    swapchainInfo.imageFormat     = vk::GetVkFormatFromFormatID(actualFormatID);
     swapchainInfo.imageColorSpace = MapEglColorSpaceToVkColorSpace(
         static_cast<EGLenum>(mState.attributes.get(EGL_GL_COLORSPACE, EGL_NONE)));
     // Note: Vulkan doesn't allow 0-width/height swapchains.
@@ -1118,9 +1228,10 @@ angle::Result WindowSurfaceVk::createSwapChain(vk::Context *context,
     for (uint32_t imageIndex = 0; imageIndex < imageCount; ++imageIndex)
     {
         SwapchainImage &member = mSwapchainImages[imageIndex];
+
         member.image.init2DWeakReference(context, swapchainImages[imageIndex], extents,
-                                         Is90DegreeRotation(getPreTransform()), format, 1,
-                                         robustInit);
+                                         Is90DegreeRotation(getPreTransform()), intendedFormatID,
+                                         actualFormatID, 1, robustInit);
         member.imageViews.init(renderer);
         member.mFrameNumber = 0;
     }
@@ -1362,7 +1473,9 @@ angle::Result WindowSurfaceVk::present(ContextVk *contextVk,
     RendererVk *renderer = contextVk->getRenderer();
 
     // Throttle the submissions to avoid getting too far ahead of the GPU.
-    Serial *swapSerial = &mSwapHistory[mCurrentSwapHistoryIndex];
+    Serial *swapSerial = &mSwapHistory.front();
+    mSwapHistory.next();
+
     {
         ANGLE_TRACE_EVENT0("gpu.angle", "WindowSurfaceVk::present: Throttle CPU");
         ANGLE_TRY(renderer->finishToSerial(contextVk, *swapSerial));
@@ -1431,8 +1544,10 @@ angle::Result WindowSurfaceVk::present(ContextVk *contextVk,
     // semaphore can be reused.  See doc/PresentSemaphores.md for details.
     //
     // This also means the swapchain(s) scheduled to be deleted at the same time can be deleted.
-    ImagePresentHistory &presentHistory = image.presentHistory[image.currentPresentHistoryIndex];
-    vk::Semaphore *presentSemaphore     = &presentHistory.semaphore;
+    ImagePresentHistory &presentHistory = image.presentHistory.front();
+    image.presentHistory.next();
+
+    vk::Semaphore *presentSemaphore = &presentHistory.semaphore;
     ASSERT(presentSemaphore->valid());
 
     for (SwapchainCleanupData &oldSwapchain : presentHistory.oldSwapchains)
@@ -1445,10 +1560,7 @@ angle::Result WindowSurfaceVk::present(ContextVk *contextVk,
     // present can be destroyed.
     presentHistory.oldSwapchains = std::move(mOldSwapchains);
 
-    image.currentPresentHistoryIndex =
-        (image.currentPresentHistoryIndex + 1) % image.presentHistory.size();
-
-    ANGLE_TRY(contextVk->flushImpl(presentSemaphore));
+    ANGLE_TRY(contextVk->flushAndGetSerial(presentSemaphore, swapSerial));
 
     VkPresentInfoKHR presentInfo   = {};
     presentInfo.sType              = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
@@ -1493,13 +1605,7 @@ angle::Result WindowSurfaceVk::present(ContextVk *contextVk,
         presentInfo.pNext = &presentRegions;
     }
 
-    // TODO(jmadill): Fix potential serial race. b/172704839
-    *swapSerial = renderer->getLastSubmittedQueueSerial();
-    ASSERT(!mAcquireImageSemaphore.valid());
-
-    ++mCurrentSwapHistoryIndex;
-    mCurrentSwapHistoryIndex =
-        mCurrentSwapHistoryIndex == mSwapHistory.size() ? 0 : mCurrentSwapHistoryIndex;
+    ASSERT(mAcquireImageSemaphore == nullptr);
 
     VkResult result = renderer->queuePresent(contextVk, contextVk->getPriority(), presentInfo);
 
@@ -1610,16 +1716,12 @@ VkResult WindowSurfaceVk::acquireNextSwapchainImage(vk::Context *context)
 {
     VkDevice device = context->getDevice();
 
-    vk::DeviceScoped<vk::Semaphore> acquireImageSemaphore(device);
-    VkResult result = acquireImageSemaphore.get().init(device);
-    if (ANGLE_UNLIKELY(result != VK_SUCCESS))
-    {
-        return result;
-    }
+    const vk::Semaphore *acquireImageSemaphore = &mAcquireImageSemaphores.front();
+    ASSERT(acquireImageSemaphore->valid());
 
-    result = vkAcquireNextImageKHR(device, mSwapchain, UINT64_MAX,
-                                   acquireImageSemaphore.get().getHandle(), VK_NULL_HANDLE,
-                                   &mCurrentSwapchainImageIndex);
+    VkResult result =
+        vkAcquireNextImageKHR(device, mSwapchain, UINT64_MAX, acquireImageSemaphore->getHandle(),
+                              VK_NULL_HANDLE, &mCurrentSwapchainImageIndex);
     // VK_SUBOPTIMAL_KHR is ok since we still have an Image that can be presented successfully
     if (ANGLE_UNLIKELY(result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR))
     {
@@ -1627,7 +1729,8 @@ VkResult WindowSurfaceVk::acquireNextSwapchainImage(vk::Context *context)
     }
 
     // The semaphore will be waited on in the next flush.
-    mAcquireImageSemaphore = acquireImageSemaphore.release();
+    mAcquireImageSemaphores.next();
+    mAcquireImageSemaphore = acquireImageSemaphore;
 
     SwapchainImage &image = mSwapchainImages[mCurrentSwapchainImageIndex];
 
@@ -1887,9 +1990,11 @@ angle::Result WindowSurfaceVk::getCurrentFramebuffer(ContextVk *contextVk,
     return angle::Result::Continue;
 }
 
-vk::Semaphore WindowSurfaceVk::getAcquireImageSemaphore()
+const vk::Semaphore *WindowSurfaceVk::getAndResetAcquireImageSemaphore()
 {
-    return std::move(mAcquireImageSemaphore);
+    const vk::Semaphore *acquireSemaphore = mAcquireImageSemaphore;
+    mAcquireImageSemaphore                = nullptr;
+    return acquireSemaphore;
 }
 
 angle::Result WindowSurfaceVk::initializeContents(const gl::Context *context,

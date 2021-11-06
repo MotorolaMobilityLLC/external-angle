@@ -1,7 +1,7 @@
 // Copyright (c) 2017 The Khronos Group Inc.
 // Copyright (c) 2017 Valve Corporation
 // Copyright (c) 2017 LunarG Inc.
-// Copyright (c) 2018 Google LLC
+// Copyright (c) 2018-2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@
 #include "source/cfa.h"
 #include "source/latest_version_glsl_std_450_header.h"
 #include "source/opt/eliminate_dead_functions_util.h"
+#include "source/opt/ir_builder.h"
 #include "source/opt/iterator.h"
 #include "source/opt/reflect.h"
 #include "source/spirv_constant.h"
@@ -96,16 +97,21 @@ bool AggressiveDCEPass::IsVarOfStorage(uint32_t varId, uint32_t storageClass) {
          storageClass;
 }
 
-bool AggressiveDCEPass::IsLocalVar(uint32_t varId) {
+bool AggressiveDCEPass::IsLocalVar(uint32_t varId, Function* func) {
   if (IsVarOfStorage(varId, SpvStorageClassFunction)) {
     return true;
   }
-  if (!private_like_local_) {
+
+  if (!IsVarOfStorage(varId, SpvStorageClassPrivate) &&
+      !IsVarOfStorage(varId, SpvStorageClassWorkgroup)) {
     return false;
   }
 
-  return IsVarOfStorage(varId, SpvStorageClassPrivate) ||
-         IsVarOfStorage(varId, SpvStorageClassWorkgroup);
+  // For a variable in the Private or WorkGroup storage class, the variable will
+  // get a new instance for every call to an entry point.  If the entry point
+  // does not have a call, then no other function can read or write to that
+  // instance of the variable.
+  return IsEntryPointWithNoCalls(func);
 }
 
 void AggressiveDCEPass::AddStores(Function* func, uint32_t ptrId) {
@@ -161,14 +167,6 @@ bool AggressiveDCEPass::AllExtensionsSupported() const {
   return true;
 }
 
-bool AggressiveDCEPass::IsDead(Instruction* inst) {
-  if (IsLive(inst)) return false;
-  if ((inst->IsBranch() || inst->opcode() == SpvOpUnreachable) &&
-      context()->get_instr_block(inst)->GetMergeInst() == nullptr)
-    return false;
-  return true;
-}
-
 bool AggressiveDCEPass::IsTargetDead(Instruction* inst) {
   const uint32_t tId = inst->GetSingleWordInOperand(0);
   Instruction* tInst = get_def_use_mgr()->GetDef(tId);
@@ -185,12 +183,12 @@ bool AggressiveDCEPass::IsTargetDead(Instruction* inst) {
     });
     return dead;
   }
-  return IsDead(tInst);
+  return !IsLive(tInst);
 }
 
 void AggressiveDCEPass::ProcessLoad(Function* func, uint32_t varId) {
   // Only process locals
-  if (!IsLocalVar(varId)) return;
+  if (!IsLocalVar(varId, func)) return;
   // Return if already processed
   if (live_local_vars_.find(varId) != live_local_vars_.end()) return;
   // Mark all stores to varId as live
@@ -280,7 +278,7 @@ bool AggressiveDCEPass::KillDeadInstructions(
   for (auto bi = structured_order.begin(); bi != structured_order.end();) {
     uint32_t merge_block_id = 0;
     (*bi)->ForEachInst([this, &modified, &merge_block_id](Instruction* inst) {
-      if (!IsDead(inst)) return;
+      if (IsLive(inst)) return;
       if (inst->opcode() == SpvOpLabel) return;
       // If dead instruction is selection merge, remember merge block
       // for new branch at end of block
@@ -318,6 +316,12 @@ bool AggressiveDCEPass::KillDeadInstructions(
         live_insts_.Set(merge_terminator->unique_id());
       }
     } else {
+      Instruction* inst = (*bi)->terminator();
+      if (!IsLive(inst)) {
+        // If the terminator is not live, this block has no live instructions,
+        // and it will be unreachable.
+        AddUnreachable(*bi);
+      }
       ++bi;
     }
   }
@@ -452,26 +456,38 @@ uint32_t AggressiveDCEPass::GetVariableId(uint32_t ptr_id) {
 
 void AggressiveDCEPass::MarkBlockAsLive(Instruction* inst) {
   BasicBlock* basic_block = context()->get_instr_block(inst);
-  if (basic_block != nullptr) {
-    AddToWorklist(basic_block->GetLabelInst());
+  if (basic_block == nullptr) {
+    return;
   }
 
-  // If in a structured if or loop construct, add the controlling
-  // conditional branch and its merge.
-  BasicBlock* blk = context()->get_instr_block(inst);
-  Instruction* branchInst = GetHeaderBranch(blk);
-  if (branchInst != nullptr) {
-    AddToWorklist(branchInst);
-    Instruction* mergeInst = GetMergeInstruction(branchInst);
-    AddToWorklist(mergeInst);
+  // If we intend to keep this instruction, we need the block label and
+  // block terminator to have a valid block for the instruction.
+  AddToWorklist(basic_block->GetLabelInst());
+
+  // We need to mark the successors blocks that follow as live.  If this is
+  // header of the merge construct, the construct may be folded, but we will
+  // definitely need the merge label.  If it is not a construct, the terminator
+  // must be live, and the successor blocks will be marked as live when
+  // processing the terminator.
+  uint32_t merge_id = basic_block->MergeBlockIdIfAny();
+  if (merge_id == 0) {
+    AddToWorklist(basic_block->terminator());
+  } else {
+    AddToWorklist(context()->get_def_use_mgr()->GetDef(merge_id));
   }
 
-  // If the block is a header, add the next outermost controlling
-  // conditional branch and its merge.
-  Instruction* nextBranchInst = GetBranchForNextHeader(blk);
-  if (nextBranchInst != nullptr) {
-    AddToWorklist(nextBranchInst);
-    Instruction* mergeInst = GetMergeInstruction(nextBranchInst);
+  // Mark the structured control flow constructs that contains this block as
+  // live.  If |inst| is an instruction in the loop header, then it is part of
+  // the loop, so the loop construct must be live.  We exclude the label because
+  // it does not matter how many times it is executed.  This could be extended
+  // to more instructions, but we will need it for now.
+  if (inst->opcode() != SpvOpLabel)
+    MarkLoopConstructAsLiveIfLoopHeader(basic_block);
+
+  Instruction* next_branch_inst = GetBranchForNextHeader(basic_block);
+  if (next_branch_inst != nullptr) {
+    AddToWorklist(next_branch_inst);
+    Instruction* mergeInst = GetMergeInstruction(next_branch_inst);
     AddToWorklist(mergeInst);
   }
 
@@ -480,14 +496,20 @@ void AggressiveDCEPass::MarkBlockAsLive(Instruction* inst) {
     AddBreaksAndContinuesToWorklist(inst);
   }
 }
+void AggressiveDCEPass::MarkLoopConstructAsLiveIfLoopHeader(
+    BasicBlock* basic_block) {
+  // If this is the header for a loop, then loop structure needs to keep as well
+  // because the loop header is also part of the loop.
+  Instruction* merge_inst = basic_block->GetLoopMergeInst();
+  if (merge_inst != nullptr) {
+    AddToWorklist(basic_block->terminator());
+    AddToWorklist(merge_inst);
+  }
+}
 
 void AggressiveDCEPass::AddOperandsToWorkList(const Instruction* inst) {
-  inst->ForEachInId([&inst, this](const uint32_t* iid) {
+  inst->ForEachInId([this](const uint32_t* iid) {
     Instruction* inInst = get_def_use_mgr()->GetDef(*iid);
-    // Do not add label if an operand of a branch. This is not needed
-    // as part of live code discovery and can create false live code,
-    // for example, the branch to a header of a loop.
-    if (inInst->opcode() == SpvOpLabel && inst->IsBranch()) return;
     AddToWorklist(inInst);
   });
   if (inst->type_id() != 0) {
@@ -499,86 +521,45 @@ void AggressiveDCEPass::InitializeWorkList(
     Function* func, std::list<BasicBlock*>& structured_order) {
   AddToWorklist(&func->DefInst());
   MarkFunctionParameterAsLive(func);
+  MarkFirstBlockAsLive(func);
 
   // Add instructions with external side effects to the worklist. Also add
   // branches that are not attached to a structured construct.
   // TODO(s-perron): The handling of branch seems to be adhoc.  This needs to be
   // cleaned up.
-  bool call_in_func = false;
-  bool func_is_entry_point = false;
-
-  // TODO(s-perron): We need to check if this is actually needed.  In cases
-  // where private variable can be treated as if they are function scope, the
-  // private-to-local pass should be able to change them to function scope.
-  std::vector<Instruction*> private_stores;
-
   for (auto& bi : structured_order) {
     for (auto ii = bi->begin(); ii != bi->end(); ++ii) {
       SpvOp op = ii->opcode();
+      if (ii->IsBranch()) {
+        continue;
+      }
       switch (op) {
         case SpvOpStore: {
           uint32_t var_id = 0;
           (void)GetPtr(&*ii, &var_id);
-          // Mark stores as live if their variable is not function scope
-          // and is not private scope. Remember private stores for possible
-          // later inclusion.  We cannot call IsLocalVar at this point because
-          // private_like_local_ has not been set yet.
-          if (IsVarOfStorage(var_id, SpvStorageClassPrivate) ||
-              IsVarOfStorage(var_id, SpvStorageClassWorkgroup))
-            private_stores.push_back(&*ii);
-          else if (!IsVarOfStorage(var_id, SpvStorageClassFunction))
-            AddToWorklist(&*ii);
+          if (!IsLocalVar(var_id, func)) AddToWorklist(&*ii);
         } break;
         case SpvOpCopyMemory:
         case SpvOpCopyMemorySized: {
           uint32_t var_id = 0;
-          (void)GetPtr(ii->GetSingleWordInOperand(kCopyMemoryTargetAddrInIdx),
-                       &var_id);
-          if (IsVarOfStorage(var_id, SpvStorageClassPrivate) ||
-              IsVarOfStorage(var_id, SpvStorageClassWorkgroup))
-            private_stores.push_back(&*ii);
-          else if (!IsVarOfStorage(var_id, SpvStorageClassFunction))
-            AddToWorklist(&*ii);
-        } break;
-        case SpvOpSwitch:
-        case SpvOpBranch:
-        case SpvOpBranchConditional:
-        case SpvOpUnreachable: {
-          bool branch_related_to_construct =
-              (GetMergeInstruction(&*ii) == nullptr &&
-               GetHeaderBlock(context()->get_instr_block(&*ii)) == nullptr);
-          if (branch_related_to_construct) {
-            AddToWorklist(&*ii);
-          }
+          uint32_t target_addr_id =
+              ii->GetSingleWordInOperand(kCopyMemoryTargetAddrInIdx);
+          (void)GetPtr(target_addr_id, &var_id);
+          if (!IsLocalVar(var_id, func)) AddToWorklist(&*ii);
         } break;
         case SpvOpLoopMerge:
         case SpvOpSelectionMerge:
+        case SpvOpUnreachable:
           break;
         default: {
           // Function calls, atomics, function params, function returns, etc.
           if (!ii->IsOpcodeSafeToDelete()) {
             AddToWorklist(&*ii);
           }
-          // Remember function calls
-          if (op == SpvOpFunctionCall) call_in_func = true;
         } break;
       }
     }
   }
-  // See if current function is an entry point
-  for (auto& ei : get_module()->entry_points()) {
-    if (ei.GetSingleWordInOperand(kEntryPointFunctionIdInIdx) ==
-        func->result_id()) {
-      func_is_entry_point = true;
-      break;
-    }
-  }
-  // If the current function is an entry point and has no function calls,
-  // we can optimize private variables as locals
-  private_like_local_ = func_is_entry_point && !call_in_func;
-  // If privates are not like local, add their stores to worklist
-  if (!private_like_local_)
-    for (auto& ps : private_stores) AddToWorklist(ps);
 }
 
 void AggressiveDCEPass::InitializeModuleScopeLiveInstructions() {
@@ -636,15 +617,24 @@ void AggressiveDCEPass::InitializeModuleScopeLiveInstructions() {
   }
 
   // For each DebugInfo GlobalVariable keep all operands except the Variable.
-  // Later, if the variable is dead, we will set the operand to DebugInfoNone.
+  // Later, if the variable is killed with KillInst(), we will set the operand
+  // to DebugInfoNone. Create and save DebugInfoNone now for this possible
+  // later use. This is slightly unoptimal, but it avoids generating it during
+  // instruction killing when the module is not consistent.
+  bool debug_global_seen = false;
   for (auto& dbg : get_module()->ext_inst_debuginfo()) {
     if (dbg.GetCommonDebugOpcode() != CommonDebugInfoDebugGlobalVariable)
       continue;
+    debug_global_seen = true;
     dbg.ForEachInId([this](const uint32_t* iid) {
       Instruction* in_inst = get_def_use_mgr()->GetDef(*iid);
       if (in_inst->opcode() == SpvOpVariable) return;
       AddToWorklist(in_inst);
     });
+  }
+  if (debug_global_seen) {
+    auto dbg_none = context()->get_debug_info_mgr()->GetDebugInfoNone();
+    AddToWorklist(dbg_none);
   }
 }
 
@@ -783,7 +773,7 @@ bool AggressiveDCEPass::ProcessGlobalValues() {
             uint32_t counter_buffer_id = annotation->GetSingleWordInOperand(2);
             Instruction* counter_buffer_inst =
                 get_def_use_mgr()->GetDef(counter_buffer_id);
-            if (IsDead(counter_buffer_inst)) {
+            if (!IsLive(counter_buffer_inst)) {
               context()->KillInst(annotation);
               modified = true;
             }
@@ -798,7 +788,7 @@ bool AggressiveDCEPass::ProcessGlobalValues() {
         for (uint32_t i = 1; i < annotation->NumOperands();) {
           Instruction* opInst =
               get_def_use_mgr()->GetDef(annotation->GetSingleWordOperand(i));
-          if (IsDead(opInst)) {
+          if (!IsLive(opInst)) {
             // Don't increment |i|.
             annotation->RemoveOperand(i);
             modified = true;
@@ -825,7 +815,7 @@ bool AggressiveDCEPass::ProcessGlobalValues() {
         for (uint32_t i = 1; i < annotation->NumOperands();) {
           Instruction* opInst =
               get_def_use_mgr()->GetDef(annotation->GetSingleWordOperand(i));
-          if (IsDead(opInst)) {
+          if (!IsLive(opInst)) {
             // Don't increment |i|.
             annotation->RemoveOperand(i + 1);
             annotation->RemoveOperand(i);
@@ -859,13 +849,13 @@ bool AggressiveDCEPass::ProcessGlobalValues() {
   }
 
   for (auto& dbg : get_module()->ext_inst_debuginfo()) {
-    if (!IsDead(&dbg)) continue;
+    if (IsLive(&dbg)) continue;
     // Save GlobalVariable if its variable is live, otherwise null out variable
     // index
     if (dbg.GetCommonDebugOpcode() == CommonDebugInfoDebugGlobalVariable) {
       auto var_id = dbg.GetSingleWordOperand(kGlobalVariableVariableIndex);
       Instruction* var_inst = get_def_use_mgr()->GetDef(var_id);
-      if (!IsDead(var_inst)) continue;
+      if (IsLive(var_inst)) continue;
       context()->ForgetUses(&dbg);
       dbg.SetOperand(
           kGlobalVariableVariableIndex,
@@ -880,7 +870,7 @@ bool AggressiveDCEPass::ProcessGlobalValues() {
   // Since ADCE is disabled for non-shaders, we don't check for export linkage
   // attributes here.
   for (auto& val : get_module()->types_values()) {
-    if (IsDead(&val)) {
+    if (!IsLive(&val)) {
       // Save forwarded pointer if pointer is live since closure does not mark
       // this live as it does not have a result id. This is a little too
       // conservative since it is not known if the structure type that needed
@@ -888,7 +878,7 @@ bool AggressiveDCEPass::ProcessGlobalValues() {
       if (val.opcode() == SpvOpTypeForwardPointer) {
         uint32_t ptr_ty_id = val.GetSingleWordInOperand(0);
         Instruction* ptr_ty_inst = get_def_use_mgr()->GetDef(ptr_ty_id);
-        if (!IsDead(ptr_ty_inst)) continue;
+        if (IsLive(ptr_ty_inst)) continue;
       }
       to_kill_.push_back(&val);
       modified = true;
@@ -907,7 +897,7 @@ bool AggressiveDCEPass::ProcessGlobalValues() {
         } else {
           auto* var =
               get_def_use_mgr()->GetDef(entry.GetSingleWordInOperand(i));
-          if (!IsDead(var)) {
+          if (IsLive(var)) {
             new_operands.push_back(entry.GetInOperand(i));
           }
         }
@@ -1056,6 +1046,44 @@ bool AggressiveDCEPass::BlockIsInConstruct(BasicBlock* header_block,
         current_header);
   }
   return false;
+}
+
+bool AggressiveDCEPass::IsEntryPointWithNoCalls(Function* func) {
+  auto cached_result = entry_point_with_no_calls_cache_.find(func->result_id());
+  if (cached_result != entry_point_with_no_calls_cache_.end()) {
+    return cached_result->second;
+  }
+  bool result = IsEntryPoint(func) && !HasCall(func);
+  entry_point_with_no_calls_cache_[func->result_id()] = result;
+  return result;
+}
+
+bool AggressiveDCEPass::IsEntryPoint(Function* func) {
+  for (const Instruction& entry_point : get_module()->entry_points()) {
+    uint32_t entry_point_id =
+        entry_point.GetSingleWordInOperand(kEntryPointFunctionIdInIdx);
+    if (entry_point_id == func->result_id()) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool AggressiveDCEPass::HasCall(Function* func) {
+  return !func->WhileEachInst(
+      [](Instruction* inst) { return inst->opcode() != SpvOpFunctionCall; });
+}
+
+void AggressiveDCEPass::MarkFirstBlockAsLive(Function* func) {
+  BasicBlock* first_block = &*func->begin();
+  MarkBlockAsLive(first_block->GetLabelInst());
+}
+
+void AggressiveDCEPass::AddUnreachable(BasicBlock*& block) {
+  InstructionBuilder builder(
+      context(), block,
+      IRContext::kAnalysisInstrToBlockMapping | IRContext::kAnalysisDefUse);
+  builder.AddUnreachable();
 }
 
 }  // namespace opt
