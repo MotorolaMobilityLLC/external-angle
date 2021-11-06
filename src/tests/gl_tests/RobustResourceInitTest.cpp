@@ -313,8 +313,8 @@ class RobustResourceInitTestES31 : public RobustResourceInitTest
 // it only works on the implemented renderers
 TEST_P(RobustResourceInitTest, ExpectedRendererSupport)
 {
-    bool shouldHaveSupport = IsD3D11() || IsD3D11_FL93() || IsD3D9() || IsOpenGL() ||
-                             IsOpenGLES() || IsVulkan() || IsMetal();
+    bool shouldHaveSupport =
+        IsD3D11() || IsD3D9() || IsOpenGL() || IsOpenGLES() || IsVulkan() || IsMetal();
     EXPECT_EQ(shouldHaveSupport, hasGLExtension());
     EXPECT_EQ(shouldHaveSupport, hasEGLExtension());
     EXPECT_EQ(shouldHaveSupport, hasRobustSurfaceInit());
@@ -436,10 +436,6 @@ TEST_P(RobustResourceInitTestES3, D3D11RecoverFromStorageBug)
     // http://anglebug.com/5770
     // Vulkan uses incorrect copy sizes when redefining/zero initializing NPOT compressed textures.
     ANGLE_SKIP_TEST_IF(IsVulkan());
-
-    // http://anglebug.com/4929
-    // Metal doesn't support robust resource init with compressed textures yet.
-    ANGLE_SKIP_TEST_IF(IsMetal());
 
     static constexpr uint8_t img_8x8_rgb_dxt1[] = {
         0xe0, 0x07, 0x00, 0xf8, 0x11, 0x10, 0x15, 0x00, 0x1f, 0x00, 0xe0,
@@ -1629,7 +1625,6 @@ void RobustResourceInitTest::maskedStencilClear(ClearFunc clearFunc)
 TEST_P(RobustResourceInitTest, MaskedStencilClear)
 {
     ANGLE_SKIP_TEST_IF(!hasGLExtension());
-    ANGLE_SKIP_TEST_IF(IsD3D11_FL93());
 
     // http://anglebug.com/2407, but only fails on Nexus devices
     ANGLE_SKIP_TEST_IF(IsNexus5X() && IsOpenGLES());
@@ -1693,7 +1688,6 @@ void VerifyRGBA8PixelRect(InitializedTest inInitialized)
 TEST_P(RobustResourceInitTest, CopyTexSubImage2D)
 {
     ANGLE_SKIP_TEST_IF(!hasGLExtension());
-    ANGLE_SKIP_TEST_IF(IsD3D11_FL93());
 
     static constexpr int kDestSize = 4;
     constexpr int kSrcSize         = kDestSize / 2;
@@ -1909,10 +1903,6 @@ TEST_P(RobustResourceInitTestES3, CompressedSubImage)
     ANGLE_SKIP_TEST_IF(!hasGLExtension());
     ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled("GL_EXT_texture_compression_dxt1"));
 
-    // http://anglebug.com/4929
-    // Metal doesn't support robust resource init with compressed textures yet.
-    ANGLE_SKIP_TEST_IF(IsMetal());
-
     constexpr int width     = 8;
     constexpr int height    = 8;
     constexpr int subX0     = 0;
@@ -2032,9 +2022,6 @@ TEST_P(RobustResourceInitTest, SurfaceInitialized)
 TEST_P(RobustResourceInitTest, SurfaceInitializedAfterSwap)
 {
     ANGLE_SKIP_TEST_IF(!hasRobustSurfaceInit());
-
-    // Test failure introduced by Apple's changes (anglebug.com/5505)
-    ANGLE_SKIP_TEST_IF(IsMetal() && IsAMD());
 
     EGLint swapBehaviour = 0;
     ASSERT_TRUE(eglQuerySurface(getEGLWindow()->getDisplay(), getEGLWindow()->getSurface(),

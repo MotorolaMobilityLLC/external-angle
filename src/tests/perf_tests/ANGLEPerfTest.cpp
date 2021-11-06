@@ -770,7 +770,10 @@ void ANGLERenderTest::SetUp()
         }
     }
 
-    mIsTimestampQueryAvailable = IsGLExtensionEnabled("GL_EXT_disjoint_timer_query");
+    if (mTestParams.trackGpuTime)
+    {
+        mIsTimestampQueryAvailable = EnsureGLExtensionEnabled("GL_EXT_disjoint_timer_query");
+    }
 
     if (!areExtensionPrerequisitesFulfilled())
     {
@@ -1057,7 +1060,7 @@ double GetHostTimeSeconds()
 {
     // Move the time origin to the first call to this function, to avoid generating unnecessarily
     // large timestamps.
-    static double origin = GetCurrentTime();
-    return GetCurrentTime() - origin;
+    static double origin = GetCurrentSystemTime();
+    return GetCurrentSystemTime() - origin;
 }
 }  // namespace angle

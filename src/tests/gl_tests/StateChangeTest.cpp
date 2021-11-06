@@ -802,7 +802,7 @@ TEST_P(StateChangeRenderTest, GenerateMipmap)
     drawQuad(mProgram, "position", 0.5f);
     EXPECT_PIXEL_COLOR_EQ(0, 0, red);
 
-    // This will trigger the texture to be re-created on FL9_3.
+    // This may trigger the texture to be re-created internally.
     glGenerateMipmap(GL_TEXTURE_2D);
 
     // Explictly check FBO status sync in some versions of ANGLE no_error skips FBO checks.
@@ -1691,8 +1691,7 @@ TEST_P(SimpleStateChangeTest, DrawArraysThenDrawElements)
 {
     // http://anglebug.com/4121
     ANGLE_SKIP_TEST_IF(IsIntel() && IsLinux() && IsOpenGLES());
-    // http://anglebug.com/4177
-    ANGLE_SKIP_TEST_IF(IsOSX() && IsMetal());
+
     ANGLE_GL_PROGRAM(program, essl1_shaders::vs::Simple(), essl1_shaders::fs::Blue());
     glUseProgram(program);
 
@@ -2096,8 +2095,6 @@ TEST_P(SimpleStateChangeTest, DrawRepeatUnalignedVboChange)
 {
     // http://anglebug.com/4470
     ANGLE_SKIP_TEST_IF(isSwiftshader() && (IsWindows() || IsLinux()));
-    // http://anglebug.com/6171
-    ANGLE_SKIP_TEST_IF(IsOSX() && IsARM64() && IsMetal());
 
     const int kRepeat = 2;
 
@@ -5384,9 +5381,6 @@ TEST_P(WebGL2ValidationStateChangeTest, MultiAttachmentDrawFramebufferNegativeAP
     // Crashes on 64-bit Android.  http://anglebug.com/3878
     ANGLE_SKIP_TEST_IF(IsVulkan() && IsAndroid());
 
-    // http://anglebug.com/5233
-    ANGLE_SKIP_TEST_IF(IsMetal());
-
     // Set up a program that writes to two outputs: one int and one float.
     constexpr char kVS[] = R"(#version 300 es
 layout(location = 0) in vec2 position;
@@ -6477,9 +6471,9 @@ TEST_P(ImageRespecificationTest, ImageTarget2DOESSwitch)
         EGL_TRUE,
         EGL_NONE,
     };
-    EGLImageKHR firstEGLImage =
-        eglCreateImageKHR(window->getDisplay(), window->getContext(), EGL_GL_TEXTURE_2D_KHR,
-                          reinterpret_cast<EGLClientBuffer>(firstTexture.get()), attribs);
+    EGLImageKHR firstEGLImage = eglCreateImageKHR(
+        window->getDisplay(), window->getContext(), EGL_GL_TEXTURE_2D_KHR,
+        reinterpret_cast<EGLClientBuffer>(static_cast<uintptr_t>(firstTexture.get())), attribs);
     ASSERT_EGL_SUCCESS();
 
     // Create the target texture and attach it to the framebuffer
@@ -6520,9 +6514,9 @@ TEST_P(ImageRespecificationTest, ImageTarget2DOESSwitch)
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    EGLImageKHR secondEGLImage =
-        eglCreateImageKHR(window->getDisplay(), window->getContext(), EGL_GL_TEXTURE_2D_KHR,
-                          reinterpret_cast<EGLClientBuffer>(secondTexture.get()), attribs);
+    EGLImageKHR secondEGLImage = eglCreateImageKHR(
+        window->getDisplay(), window->getContext(), EGL_GL_TEXTURE_2D_KHR,
+        reinterpret_cast<EGLClientBuffer>(static_cast<uintptr_t>(secondTexture.get())), attribs);
     ASSERT_EGL_SUCCESS();
 
     glBindTexture(GL_TEXTURE_2D, mTargetTexture);
@@ -6911,7 +6905,7 @@ void main()
         EGLConfig config           = window->getConfig();
         EGLint pbufferAttributes[] = {EGL_WIDTH, 1, EGL_HEIGHT, 1, EGL_NONE, EGL_NONE};
         EGLSurface surface         = eglCreatePbufferSurface(dpy, config, pbufferAttributes);
-        EGLContext ctx             = window->createContext(EGL_NO_CONTEXT);
+        EGLContext ctx             = window->createContext(EGL_NO_CONTEXT, nullptr);
         EXPECT_EGL_SUCCESS();
         std::thread flushThread = std::thread([&]() {
             EXPECT_EGL_TRUE(eglMakeCurrent(dpy, surface, surface, ctx));
@@ -7040,6 +7034,79 @@ void main()
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nullptr);
     ASSERT_GL_NO_ERROR();
     EXPECT_PIXEL_COLOR_EQ(0, 0, GLColor::red);
+}
+
+// Covers a bug where we would use a stale cache variable in the Vulkan back-end.
+TEST_P(SimpleStateChangeTestES3, DeleteFramebufferBeforeQuery)
+{
+    ANGLE_GL_PROGRAM(testProgram, essl1_shaders::vs::Zero(), essl1_shaders::fs::Red());
+    glUseProgram(testProgram);
+
+    GLFramebuffer fbo;
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+
+    GLRenderbuffer rbo;
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH32F_STENCIL8, 16, 16);
+    glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+    GLfloat floatArray[] = {1, 2, 3, 4};
+
+    GLBuffer buffer;
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLfloat) * 4, floatArray, GL_DYNAMIC_COPY);
+    glDrawElements(GL_TRIANGLE_FAN, 5, GL_UNSIGNED_SHORT, 0);
+
+    fbo.reset();
+
+    GLQuery query2;
+    glBeginQuery(GL_ANY_SAMPLES_PASSED_CONSERVATIVE, query2);
+
+    ASSERT_GL_NO_ERROR();
+}
+
+// Covers an edge case
+TEST_P(SimpleStateChangeTestES3, TextureTypeConflictAfterDraw)
+{
+    constexpr char kVS[] = R"(precision highp float;
+attribute vec4 a_position;
+void main()
+{
+    gl_Position = a_position;
+}
+)";
+
+    constexpr char kFS[] = R"(precision highp float;
+uniform sampler2D u_2d1;
+uniform samplerCube u_Cube1;
+void main()
+{
+    gl_FragColor = texture2D(u_2d1, vec2(0.0, 0.0)) + textureCube(u_Cube1, vec3(0.0, 0.0, 0.0));
+}
+)";
+
+    ANGLE_GL_PROGRAM(testProgram, kVS, kFS);
+    glUseProgram(testProgram);
+
+    GLTexture texture;
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexStorage2D(GL_TEXTURE_2D, 4, GL_SRGB8, 1268, 614);
+
+    GLint uniformloc = glGetUniformLocation(testProgram, "u_Cube1");
+    ASSERT_NE(-1, uniformloc);
+    glUniform1i(uniformloc, 1);
+
+    glDrawArrays(GL_POINTS, 0, 1);
+    ASSERT_GL_NO_ERROR();
+
+    // Trigger the state update.
+    glLinkProgram(testProgram);
+    texture.reset();
+
+    // The texture types are now conflicting, and draws should fail.
+    glDrawArrays(GL_POINTS, 0, 1);
+    EXPECT_GL_ERROR(GL_INVALID_OPERATION);
 }
 }  // anonymous namespace
 
