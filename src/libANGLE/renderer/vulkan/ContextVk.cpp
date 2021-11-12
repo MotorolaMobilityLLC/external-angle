@@ -781,6 +781,17 @@ angle::Result ContextVk::initialize()
         VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
     size_t stagingBufferAlignment =
         static_cast<size_t>(mRenderer->getPhysicalDeviceProperties().limits.minMemoryMapAlignment);
+    ASSERT(gl::isPow2(mRenderer->getPhysicalDeviceProperties().limits.nonCoherentAtomSize));
+    ASSERT(gl::isPow2(
+        mRenderer->getPhysicalDeviceProperties().limits.optimalBufferCopyOffsetAlignment));
+    stagingBufferAlignment = static_cast<size_t>(std::max(
+        stagingBufferAlignment,
+        static_cast<size_t>(
+            mRenderer->getPhysicalDeviceProperties().limits.optimalBufferCopyOffsetAlignment)));
+    stagingBufferAlignment = static_cast<size_t>(std::max(
+        stagingBufferAlignment,
+        static_cast<size_t>(mRenderer->getPhysicalDeviceProperties().limits.nonCoherentAtomSize)));
+
     constexpr size_t kStagingBufferSize = 1024u * 1024u;  // 1M
     mStagingBuffer.init(mRenderer, kStagingBufferUsageFlags, stagingBufferAlignment,
                         kStagingBufferSize, true, vk::DynamicBufferPolicy::SporadicTextureUpload);
@@ -5280,7 +5291,8 @@ angle::Result ContextVk::flushAndGetSerial(const vk::Semaphore *signalSemaphore,
     // calling back to flushImpl.
     mHasDeferredFlush = false;
 
-    ANGLE_TRY(flushCommandsAndEndRenderPass());
+    // Avoid calling vkQueueSubmit() twice, since submitFrame() below will do that.
+    ANGLE_TRY(flushCommandsAndEndRenderPassWithoutQueueSubmit());
 
     if (mIsAnyHostVisibleBufferWritten)
     {
@@ -5292,8 +5304,21 @@ angle::Result ContextVk::flushAndGetSerial(const vk::Semaphore *signalSemaphore,
         memoryBarrier.srcAccessMask   = VK_ACCESS_MEMORY_WRITE_BIT;
         memoryBarrier.dstAccessMask   = VK_ACCESS_HOST_READ_BIT | VK_ACCESS_HOST_WRITE_BIT;
 
+        const VkPipelineStageFlags supportedShaderStages =
+            (VK_PIPELINE_STAGE_VERTEX_SHADER_BIT |
+             VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT |
+             VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT |
+             VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT | VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT |
+             VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT) &
+            mRenderer->getSupportedVulkanPipelineStageMask();
+        const VkPipelineStageFlags bufferWriteStages =
+            VK_PIPELINE_STAGE_TRANSFER_BIT | supportedShaderStages |
+            (getFeatures().supportsTransformFeedbackExtension.enabled
+                 ? VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT
+                 : 0);
+
         mOutsideRenderPassCommands->getCommandBuffer().memoryBarrier(
-            VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, VK_PIPELINE_STAGE_HOST_BIT, &memoryBarrier);
+            bufferWriteStages, VK_PIPELINE_STAGE_HOST_BIT, &memoryBarrier);
         mIsAnyHostVisibleBufferWritten = false;
     }
 
@@ -5587,6 +5612,8 @@ angle::Result ContextVk::startRenderPass(gl::Rectangle renderArea,
                                          vk::CommandBuffer **commandBufferOut,
                                          bool *renderPassDescChangedOut)
 {
+    ASSERT(mDrawFramebuffer == vk::GetImpl(mState.getDrawFramebuffer()));
+
     ANGLE_TRY(mDrawFramebuffer->startNewRenderPass(this, renderArea, &mRenderPassCommandBuffer,
                                                    renderPassDescChangedOut));
 
@@ -5654,7 +5681,7 @@ uint32_t ContextVk::getCurrentViewCount() const
     return drawFBO->getRenderPassDesc().viewCount();
 }
 
-angle::Result ContextVk::flushCommandsAndEndRenderPassImpl()
+angle::Result ContextVk::flushCommandsAndEndRenderPassImpl(QueueSubmitType queueSubmit)
 {
     // Ensure we flush the RenderPass *after* the prior commands.
     ANGLE_TRY(flushOutsideRenderPassCommands());
@@ -5665,6 +5692,11 @@ angle::Result ContextVk::flushCommandsAndEndRenderPassImpl()
         onRenderPassFinished();
         return angle::Result::Continue;
     }
+
+    // Set dirty bits if render pass was open (and thus will be closed).
+    mGraphicsDirtyBits |= mNewGraphicsCommandBufferDirtyBits;
+    // Restart at subpass 0.
+    mGraphicsPipelineDesc->resetSubpass(&mGraphicsPipelineTransition);
 
     mCurrentTransformFeedbackBuffers.clear();
 
@@ -5718,7 +5750,7 @@ angle::Result ContextVk::flushCommandsAndEndRenderPassImpl()
         ANGLE_TRY(flushOutsideRenderPassCommands());
     }
 
-    if (mHasDeferredFlush)
+    if (mHasDeferredFlush && queueSubmit == QueueSubmitType::PerformQueueSubmit)
     {
         // If we have deferred glFlush call in the middle of renderpass, flush them now.
         ANGLE_TRY(flushImpl(nullptr));
@@ -5729,20 +5761,12 @@ angle::Result ContextVk::flushCommandsAndEndRenderPassImpl()
 
 angle::Result ContextVk::flushCommandsAndEndRenderPass()
 {
-    bool isRenderPassStarted = mRenderPassCommands->started();
+    return flushCommandsAndEndRenderPassImpl(QueueSubmitType::PerformQueueSubmit);
+}
 
-    ANGLE_TRY(flushCommandsAndEndRenderPassImpl());
-
-    // Set dirty bits if render pass was open (and thus has been closed).
-    if (isRenderPassStarted)
-    {
-        mGraphicsDirtyBits |= mNewGraphicsCommandBufferDirtyBits;
-
-        // Restart at subpass 0.
-        mGraphicsPipelineDesc->resetSubpass(&mGraphicsPipelineTransition);
-    }
-
-    return angle::Result::Continue;
+angle::Result ContextVk::flushCommandsAndEndRenderPassWithoutQueueSubmit()
+{
+    return flushCommandsAndEndRenderPassImpl(QueueSubmitType::SkipQueueSubmit);
 }
 
 angle::Result ContextVk::flushDirtyGraphicsRenderPass(DirtyBits::Iterator *dirtyBitsIterator,
@@ -5750,7 +5774,7 @@ angle::Result ContextVk::flushDirtyGraphicsRenderPass(DirtyBits::Iterator *dirty
 {
     ASSERT(mRenderPassCommands->started());
 
-    ANGLE_TRY(flushCommandsAndEndRenderPassImpl());
+    ANGLE_TRY(flushCommandsAndEndRenderPassImpl(QueueSubmitType::PerformQueueSubmit));
 
     // Set dirty bits that need processing on new render pass on the dirty bits iterator that's
     // being processed right now.
