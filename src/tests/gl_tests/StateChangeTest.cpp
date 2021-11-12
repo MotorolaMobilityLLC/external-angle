@@ -7108,6 +7108,127 @@ void main()
     glDrawArrays(GL_POINTS, 0, 1);
     EXPECT_GL_ERROR(GL_INVALID_OPERATION);
 }
+
+// Regression test for a bug where a mutable texture is used with non-zero base level then rebased
+// to zero but made incomplete and attached to the framebuffer.  The texture's image is not
+// recreated with level 0, leading to errors when drawing to the framebuffer.
+TEST_P(SimpleStateChangeTestES3, NonZeroBaseMutableTextureThenZeroBaseButIncompleteBug)
+{
+    ANGLE_GL_PROGRAM(program, essl1_shaders::vs::Texture2D(), essl1_shaders::fs::Texture2D());
+    glUseProgram(program);
+
+    const std::array<GLColor, 4> kMip0Data = {GLColor::red, GLColor::red, GLColor::red,
+                                              GLColor::red};
+    const std::array<GLColor, 2> kMip1Data = {GLColor::green, GLColor::green};
+
+    // Create two textures.
+    GLTexture immutableTex;
+    glBindTexture(GL_TEXTURE_2D, immutableTex);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 1, 1);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, kMip0Data.data());
+
+    GLTexture mutableTex;
+    glBindTexture(GL_TEXTURE_2D, mutableTex);
+    for (uint32_t mip = 0; mip < 2; ++mip)
+    {
+        const uint32_t size = 4 >> mip;
+        glTexImage2D(GL_TEXTURE_2D, mip, GL_RGBA8, size, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE,
+                     mip == 0 ? kMip0Data.data() : kMip1Data.data());
+    }
+
+    GLFramebuffer fbo;
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+    // Sample from the mutable texture at non-zero base level.
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 1);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, immutableTex, 0);
+    drawQuad(program, std::string(essl1_shaders::PositionAttrib()), 0.0f);
+    EXPECT_PIXEL_COLOR_EQ(0, 0, kMip1Data[0]);
+
+    // Rebase the mutable texture to zero, but enable mipmapping which makes it incomplete.
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+    // Remove feedback loop for good measure.
+    glBindTexture(GL_TEXTURE_2D, immutableTex);
+
+    // Draw into base zero of the texture.
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mutableTex, 0);
+    drawQuad(program, std::string(essl1_shaders::PositionAttrib()), 0.0f);
+
+    EXPECT_PIXEL_COLOR_EQ(0, 0, kMip1Data[1]);
+    ASSERT_GL_NO_ERROR();
+}
+
+// Regression test for a bug where the framebuffer binding was not synced during invalidate when a
+// clear operation was deferred.
+TEST_P(SimpleStateChangeTestES3, ChangeFramebufferThenInvalidateWithClear)
+{
+    // Clear the default framebuffer.
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Start rendering to another framebuffer
+    GLFramebuffer fbo;
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+
+    GLRenderbuffer rbo;
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8, 16, 16);
+    glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, rbo);
+
+    ANGLE_GL_PROGRAM(program, essl1_shaders::vs::Passthrough(), essl1_shaders::fs::Red());
+    glUseProgram(program);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    // Switch back to the default framebuffer
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+
+    // Invalidate it.  Don't invalidate color, as that's the one being cleared.
+    constexpr GLenum kAttachment = GL_DEPTH;
+    glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, &kAttachment);
+    EXPECT_GL_NO_ERROR();
+}
+
+// Test that clear / invalidate / clear works.  The invalidate is for a target that's not cleared.
+// Regression test for a bug where invalidate() would start a render pass to perform the first
+// clear, while the second clear didn't expect a render pass opened without any draw calls in it.
+TEST_P(SimpleStateChangeTestES3, ClearColorInvalidateDepthClearColor)
+{
+    // Clear color.
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Invalidate depth.
+    constexpr GLenum kAttachment = GL_DEPTH;
+    glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, &kAttachment);
+    EXPECT_GL_NO_ERROR();
+
+    // Clear color again.
+    glClear(GL_COLOR_BUFFER_BIT);
+    ASSERT_GL_NO_ERROR();
+}
+
+// Regression test for a bug where glInvalidateFramebuffer(GL_FRAMEBUFFER, ...) was invalidating
+// both the draw and read framebuffers.
+TEST_P(SimpleStateChangeTestES3, InvalidateFramebufferShouldntInvalidateReadFramebuffer)
+{
+    // Create an invalid read framebuffer.
+    GLFramebuffer fbo;
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, fbo);
+
+    GLTexture tex;
+    glBindTexture(GL_TEXTURE_2D_ARRAY, tex);
+    glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, GL_R8, 1, 1, 1);
+    glFramebufferTextureLayer(GL_READ_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, tex, 0, 5);
+
+    // Invalidate using GL_FRAMEBUFFER.  If GL_READ_FRAMEBUFFER was used, validation would fail due
+    // to the framebuffer not being complete.  A bug here was attempting to invalidate the read
+    // framebuffer given GL_FRAMEBUFFER anyway.
+    constexpr std::array<GLenum, 2> kAttachments = {GL_DEPTH, GL_STENCIL};
+    glInvalidateFramebuffer(GL_FRAMEBUFFER, 2, kAttachments.data());
+    EXPECT_GL_NO_ERROR();
+}
 }  // anonymous namespace
 
 ANGLE_INSTANTIATE_TEST_ES2(StateChangeTest);
