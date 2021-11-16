@@ -380,6 +380,22 @@ constexpr SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
      "FRAGMENT_SHADER_UNIFORM_READ|SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_READ|SYNC_COLOR_"
      "ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, command: vkCmdPipelineBarrier, seq_no: 38",
      "", false},
+    // From: TracePerfTest.Run/vulkan_swiftshader_manhattan_31 http://anglebug.com/6701
+    {"SYNC-HAZARD-WRITE_AFTER_WRITE",
+     "Hazard WRITE_AFTER_WRITE in subpass 0 for attachment 1 aspect stencil during load with "
+     "loadOp VK_ATTACHMENT_LOAD_OP_DONT_CARE. Access info (usage: "
+     "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
+     "SYNC_IMAGE_LAYOUT_TRANSITION, write_barriers: "
+     "SYNC_VERTEX_SHADER_SHADER_SAMPLED_READ|SYNC_VERTEX_SHADER_SHADER_STORAGE_READ|SYNC_VERTEX_"
+     "SHADER_UNIFORM_READ|SYNC_TESSELLATION_CONTROL_SHADER_SHADER_SAMPLED_READ|SYNC_TESSELLATION_"
+     "CONTROL_SHADER_SHADER_STORAGE_READ|SYNC_TESSELLATION_CONTROL_SHADER_UNIFORM_READ|SYNC_"
+     "TESSELLATION_EVALUATION_SHADER_SHADER_SAMPLED_READ|SYNC_TESSELLATION_EVALUATION_SHADER_"
+     "SHADER_STORAGE_READ|SYNC_TESSELLATION_EVALUATION_SHADER_UNIFORM_READ|SYNC_GEOMETRY_SHADER_"
+     "SHADER_SAMPLED_READ|SYNC_GEOMETRY_SHADER_SHADER_STORAGE_READ|SYNC_GEOMETRY_SHADER_UNIFORM_"
+     "READ|SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_READ|SYNC_FRAGMENT_SHADER_SHADER_"
+     "SAMPLED_READ|SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ|SYNC_FRAGMENT_SHADER_UNIFORM_READ|SYNC_"
+     "LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_READ, command: vkCmdPipelineBarrier",
+     "", false},
 };
 
 enum class DebugMessageReport
@@ -1366,8 +1382,8 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
     std::vector<VkPhysicalDevice> physicalDevices(physicalDeviceCount);
     ANGLE_VK_TRY(displayVk, vkEnumeratePhysicalDevices(mInstance, &physicalDeviceCount,
                                                        physicalDevices.data()));
-    ChoosePhysicalDevice(physicalDevices, mEnabledICD, &mPhysicalDevice,
-                         &mPhysicalDeviceProperties);
+    ChoosePhysicalDevice(vkGetPhysicalDeviceProperties, physicalDevices, mEnabledICD,
+                         &mPhysicalDevice, &mPhysicalDeviceProperties);
 
     mGarbageCollectionFlushThreshold =
         static_cast<uint32_t>(mPhysicalDeviceProperties.limits.maxMemoryAllocationCount *
@@ -1762,6 +1778,11 @@ angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueF
     {
         mEnabledDeviceExtensions.push_back(VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME);
         hasGetMemoryRequirements2KHR = true;
+    }
+
+    if (ExtensionFound(VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, deviceExtensionNames))
+    {
+        mEnabledDeviceExtensions.push_back(VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME);
     }
 
     // Enable VK_KHR_bind_memory2, if supported
@@ -2518,13 +2539,6 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
             ExtensionFound(VK_EXT_DEPTH_CLIP_ENABLE_EXTENSION_NAME, deviceExtensionNames) &&
             (!IsLinux() || nvidiaVersion.major > 418u));
 
-    // Work around ineffective compute-graphics barriers on Nexus 5X.
-    // TODO(syoussefi): Figure out which other vendors and driver versions are affected.
-    // http://anglebug.com/3019
-    ANGLE_FEATURE_CONDITION(&mFeatures, flushAfterVertexConversion,
-                            IsAndroid() && IsNexus5X(mPhysicalDeviceProperties.vendorID,
-                                                     mPhysicalDeviceProperties.deviceID));
-
     ANGLE_FEATURE_CONDITION(
         &mFeatures, supportsRenderpass2,
         ExtensionFound(VK_KHR_CREATE_RENDERPASS_2_EXTENSION_NAME, deviceExtensionNames));
@@ -2705,7 +2719,14 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
           (mPhysicalDeviceProperties.driverVersion < kPixel2DriverWithRelaxedPrecision)) &&
             !IsPixel4(mPhysicalDeviceProperties.vendorID, mPhysicalDeviceProperties.deviceID));
 
-    ANGLE_FEATURE_CONDITION(&mFeatures, preferAggregateBarrierCalls, isNvidia || isAMD || isIntel);
+    // The following platforms are less sensitive to the src/dst stage masks in barriers, and behave
+    // more efficiently when all barriers are aggregated, rather than individually and precisely
+    // specified:
+    //
+    // - Desktop GPUs
+    // - SwiftShader
+    ANGLE_FEATURE_CONDITION(&mFeatures, preferAggregateBarrierCalls,
+                            isNvidia || isAMD || isIntel || isSwiftShader);
 
     // Currently disabled by default: http://anglebug.com/4324
     ANGLE_FEATURE_CONDITION(&mFeatures, asyncCommandQueue, false);
@@ -3070,6 +3091,8 @@ angle::Result RendererVk::queueSubmitOneOff(vk::Context *context,
                                             vk::PrimaryCommandBuffer &&primary,
                                             bool hasProtectedContent,
                                             egl::ContextPriority priority,
+                                            const vk::Semaphore *waitSemaphore,
+                                            VkPipelineStageFlags waitSemaphoreStageMasks,
                                             const vk::Fence *fence,
                                             vk::SubmitPolicy submitPolicy,
                                             Serial *serialOut)
@@ -3082,16 +3105,16 @@ angle::Result RendererVk::queueSubmitOneOff(vk::Context *context,
     if (mFeatures.asyncCommandQueue.enabled)
     {
         submitQueueSerial = mCommandProcessor.reserveSubmitSerial();
-        ANGLE_TRY(mCommandProcessor.queueSubmitOneOff(context, hasProtectedContent, priority,
-                                                      primary.getHandle(), fence, submitPolicy,
-                                                      submitQueueSerial));
+        ANGLE_TRY(mCommandProcessor.queueSubmitOneOff(
+            context, hasProtectedContent, priority, primary.getHandle(), waitSemaphore,
+            waitSemaphoreStageMasks, fence, submitPolicy, submitQueueSerial));
     }
     else
     {
         submitQueueSerial = mCommandQueue.reserveSubmitSerial();
-        ANGLE_TRY(mCommandQueue.queueSubmitOneOff(context, hasProtectedContent, priority,
-                                                  primary.getHandle(), fence, submitPolicy,
-                                                  submitQueueSerial));
+        ANGLE_TRY(mCommandQueue.queueSubmitOneOff(
+            context, hasProtectedContent, priority, primary.getHandle(), waitSemaphore,
+            waitSemaphoreStageMasks, fence, submitPolicy, submitQueueSerial));
     }
 
     *serialOut = submitQueueSerial;
