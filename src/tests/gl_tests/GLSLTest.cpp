@@ -1168,6 +1168,68 @@ void main() {
     }
 }
 
+GLint GetFirstIntPixelRedValue()
+{
+    GLint pixel[4];
+    glReadPixels(0, 0, 1, 1, GL_RGBA_INTEGER, GL_INT, pixel);
+    return pixel[0];
+}
+
+TEST_P(GLSLTest_ES3, GLVertexIDIntegerTextureDrawElements)
+{
+    constexpr char kVS[] = R"(#version 300 es
+    flat out highp int vVertexID;
+
+    void main() {
+        vVertexID = gl_VertexID;
+        gl_PointSize = 1.0;
+        gl_Position = vec4(0,0,0,1);
+    })";
+
+    constexpr char kFS[] = R"(#version 300 es
+    flat in highp int vVertexID;
+    out highp int oVertexID;
+    void main() {
+        oVertexID = vVertexID;
+    })";
+
+    ANGLE_GL_PROGRAM(program, kVS, kFS);
+    glUseProgram(program);
+    glViewport(0, 0, 1, 1);
+
+    GLTexture tex;
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32I, 1, 1);
+    GLFramebuffer fb;
+    glBindFramebuffer(GL_FRAMEBUFFER, fb);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
+
+    EXPECT_GL_NO_ERROR();
+
+    GLint clearData[4] = {42};
+    glClearBufferiv(GL_COLOR, 0, clearData);
+    EXPECT_EQ(42, GetFirstIntPixelRedValue());
+
+    const int kIndexDataSize = 5;
+    GLushort indexData[]     = {1, 2, 5, 3, 10000};
+    GLBuffer indexBuffer;
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexData), indexData, GL_STATIC_DRAW);
+
+    for (size_t first = 0; first < kIndexDataSize; ++first)
+    {
+        for (size_t count = 1; first + count <= kIndexDataSize; ++count)
+        {
+            glDrawElements(GL_POINTS, count, GL_UNSIGNED_SHORT,
+                           reinterpret_cast<const void *>(first * 2u));
+            GLint expected = indexData[first + count - 1];
+            GLint actual   = GetFirstIntPixelRedValue();
+            EXPECT_EQ(expected, actual);
+        }
+    }
+    EXPECT_GL_NO_ERROR();
+}
+
 // Helper function for the GLVertexIDIntegerTextureDrawArrays test
 void GLVertexIDIntegerTextureDrawArrays_helper(int first, int count, GLenum err)
 {
@@ -6169,6 +6231,46 @@ TEST_P(GLSLTest_ES31, VaryingTessellationSampleInAndOut)
     ANGLE_GL_PROGRAM_WITH_TESS(program, kVS, kTCS, kTES, kFS);
     drawPatches(program.get(), "inputAttribute", 0.5f, 1.0f, GL_FALSE);
     ASSERT_GL_NO_ERROR();
+}
+
+// Test that a shader with sample in / sample out can be used successfully when the varying
+// precision is different between VS and FS.
+TEST_P(GLSLTest_ES31, VaryingSampleInAndOutDifferentPrecision)
+{
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled("GL_OES_shader_multisample_interpolation"));
+
+    constexpr char kVS[] =
+        R"(#version 310 es
+        #extension GL_OES_shader_multisample_interpolation : require
+
+        precision highp float;
+        in vec4 inputAttribute;
+
+        sample out highp float v;
+        void main()
+        {
+            v = inputAttribute[0];
+            gl_Position = inputAttribute;
+        })";
+
+    constexpr char kFS[] =
+        R"(#version 310 es
+        #extension GL_OES_shader_multisample_interpolation : require
+
+        precision highp float;
+        sample in mediump float v;
+        layout(location = 0) out mediump vec4 color;
+
+        void main()
+        {
+            color = vec4(round((v + 1.) / 2. * 5.) / 5., 0, 0, 1);
+        })";
+
+    ANGLE_GL_PROGRAM(program, kVS, kFS);
+    drawQuad(program.get(), "inputAttribute", 0.5f, 1.0f, GL_FALSE);
+    ASSERT_GL_NO_ERROR();
+
+    EXPECT_PIXEL_COLOR_EQ(getWindowWidth() - 1, 0, GLColor::red);
 }
 
 // Test that a varying struct that's not declared in the fragment shader links successfully.
