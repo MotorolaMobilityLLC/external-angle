@@ -60,6 +60,10 @@ luci.project(
     ],
     bindings = [
         luci.binding(
+            roles = "role/configs.validator",
+            users = "angle-try-builder@chops-service-accounts.iam.gserviceaccount.com",
+        ),
+        luci.binding(
             roles = "role/swarming.poolOwner",
             groups = ["project-angle-owners", "mdb/chrome-troopers"],
         ),
@@ -203,6 +207,8 @@ def angle_builder(name, cpu):
         goma_props["enable_ats"] = True
 
     is_asan = "-asan" in name
+    is_tsan = "-tsan" in name
+    is_ubsan = "-ubsan" in name
     is_debug = "-dbg" in name
     is_perf = name.endswith("-perf")
     is_trace = name.endswith("-trace")
@@ -246,6 +252,10 @@ def angle_builder(name, cpu):
         short_name = get_gpu_type_from_builder_name(name)
     elif is_asan:
         short_name = "asan"
+    elif is_tsan:
+        short_name = "tsan"
+    elif is_ubsan:
+        short_name = "ubsan"
     elif is_debug:
         short_name = "dbg"
     else:
@@ -262,7 +272,7 @@ def angle_builder(name, cpu):
     luci.builder(
         name = name,
         bucket = "ci",
-        triggered_by = ["master-poller"],
+        triggered_by = ["main-poller"],
         executable = "recipe:angle",
         service_account = "angle-ci-builder@chops-service-accounts.iam.gserviceaccount.com",
         properties = properties,
@@ -304,10 +314,10 @@ def angle_builder(name, cpu):
             ),
         )
 
-        # Do not add ASAN tests to CQ (yet). http://anglebug.com/5795
-        if not is_asan:
+        # Don't add TSAN/UBSAN to CQ (yet). http://anglebug.com/5795
+        if not is_tsan and not is_ubsan:
             luci.cq_tryjob_verifier(
-                cq_group = "master",
+                cq_group = "main",
                 builder = "angle:try/" + name,
                 location_regexp = location_regexp,
             )
@@ -358,11 +368,11 @@ luci.builder(
 )
 
 luci.gitiles_poller(
-    name = "master-poller",
+    name = "main-poller",
     bucket = "ci",
     repo = "https://chromium.googlesource.com/angle/angle",
     refs = [
-        "refs/heads/master",
+        "refs/heads/main",
     ],
     schedule = "with 10s interval",
 )
@@ -373,6 +383,8 @@ angle_builder("android-arm-dbg-compile", cpu = "arm")
 angle_builder("android-arm64-dbg-compile", cpu = "arm64")
 angle_builder("android-arm64-test", cpu = "arm64")
 angle_builder("linux-asan-test", cpu = "x64")
+angle_builder("linux-tsan-test", cpu = "x64")
+angle_builder("linux-ubsan-test", cpu = "x64")
 angle_builder("linux-dbg-compile", cpu = "x64")
 angle_builder("linux-test", cpu = "x64")
 angle_builder("mac-dbg-compile", cpu = "x64")
@@ -404,7 +416,6 @@ luci.console_view(
     name = "ci",
     title = "ANGLE CI Builders",
     repo = "https://chromium.googlesource.com/angle/angle",
-    refs = ["refs/heads/master"],
 )
 
 luci.list_view(
@@ -426,10 +437,10 @@ luci.cq(
 )
 
 luci.cq_group(
-    name = "master",
+    name = "main",
     watch = cq.refset(
         "https://chromium.googlesource.com/angle/angle",
-        refs = [r"refs/heads/master", r"refs/heads/main"],
+        refs = [r"refs/heads/main"],
     ),
     acls = [
         acl.entry(
