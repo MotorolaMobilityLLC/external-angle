@@ -564,6 +564,12 @@ struct FeaturesVk : FeatureSetBase
                                        "VkDevice supports protected memory", &members,
                                        "http://anglebug.com/3965"};
 
+    // Whether the VkDevice supports the VK_EXT_host_query_reset extension
+    // http://anglebug.com/6692
+    Feature supportsHostQueryReset = {"supportsHostQueryReset", FeatureCategory::VulkanFeatures,
+                                      "VkDevice supports VK_EXT_host_query_reset extension",
+                                      &members, "http://anglebug.com/6692"};
+
     // Whether the VkInstance supports the VK_KHR_get_surface_capabilities2 extension.
     Feature supportsSurfaceCapabilities2Extension = {
         "supportsSurfaceCapabilities2Extension", FeatureCategory::VulkanFeatures,
@@ -584,6 +590,11 @@ struct FeaturesVk : FeatureSetBase
     Feature overrideSurfaceFormatRGB8toRGBA8 = {
         "overrideSurfaceFormatRGB8toRGBA8", FeatureCategory::VulkanWorkarounds,
         "Override surface format GL_RGB8 to GL_RGBA8", &members, "http://anglebug.com/6651"};
+
+    // Whether the VkSurface supports VK_KHR_shared_presentable_images.
+    Feature supportsSharedPresentableImageExtension = {
+        "supportsSharedPresentableImageExtension", FeatureCategory::VulkanFeatures,
+        "VkSurface supports the VK_KHR_shared_presentable_images extension", &members};
 };
 
 inline FeaturesVk::FeaturesVk()  = default;
