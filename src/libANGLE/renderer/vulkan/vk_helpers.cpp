@@ -10,6 +10,7 @@
 #include "libANGLE/renderer/driver_utils.h"
 
 #include "common/utilities.h"
+#include "common/vulkan/vk_headers.h"
 #include "image_util/loadimage.h"
 #include "libANGLE/Context.h"
 #include "libANGLE/renderer/renderer_utils.h"
@@ -299,6 +300,21 @@ constexpr angle::PackedEnumMap<ImageLayout, ImageMemoryBarrierData> kImageMemory
             // Transition from: RAR and WAR don't need memory barrier.
             0,
             ResourceAccess::ReadOnly,
+            PipelineStage::BottomOfPipe,
+        },
+    },
+    {
+        ImageLayout::SharedPresent,
+        ImageMemoryBarrierData{
+            "SharedPresent",
+            VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR,
+            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+            VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
+            // Transition to: all reads and writes must happen after barrier.
+            VK_ACCESS_MEMORY_READ_BIT | VK_ACCESS_MEMORY_WRITE_BIT,
+            // Transition from: all writes must finish before barrier.
+            VK_ACCESS_MEMORY_WRITE_BIT,
+            ResourceAccess::Write,
             PipelineStage::BottomOfPipe,
         },
     },
@@ -2963,7 +2979,7 @@ void QueryHelper::beginQueryImpl(ContextVk *contextVk,
 {
     ASSERT(mStatus != QueryStatus::Active);
     const QueryPool &queryPool = getQueryPool();
-    resetCommandBuffer->resetQueryPool(queryPool, mQuery, mQueryCount);
+    resetQueryPoolImpl(contextVk, queryPool, resetCommandBuffer);
     commandBuffer->beginQuery(queryPool, mQuery, 0);
     mStatus = QueryStatus::Active;
 }
@@ -3014,6 +3030,22 @@ angle::Result QueryHelper::endQuery(ContextVk *contextVk)
     return angle::Result::Continue;
 }
 
+template <typename CommandBufferT>
+void QueryHelper::resetQueryPoolImpl(ContextVk *contextVk,
+                                     const QueryPool &queryPool,
+                                     CommandBufferT *commandBuffer)
+{
+    RendererVk *renderer = contextVk->getRenderer();
+    if (renderer->getFeatures().supportsHostQueryReset.enabled)
+    {
+        vkResetQueryPoolEXT(contextVk->getDevice(), queryPool.getHandle(), mQuery, mQueryCount);
+    }
+    else
+    {
+        commandBuffer->resetQueryPool(queryPool, mQuery, mQueryCount);
+    }
+}
+
 angle::Result QueryHelper::beginRenderPassQuery(ContextVk *contextVk)
 {
     CommandBuffer *outsideRenderPassCommandBuffer;
@@ -3054,14 +3086,14 @@ void QueryHelper::writeTimestampToPrimary(ContextVk *contextVk, PrimaryCommandBu
     // Note that commands may not be flushed at this point.
 
     const QueryPool &queryPool = getQueryPool();
-    primary->resetQueryPool(queryPool, mQuery, mQueryCount);
+    resetQueryPoolImpl(contextVk, queryPool, primary);
     primary->writeTimestamp(VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, queryPool, mQuery);
 }
 
 void QueryHelper::writeTimestamp(ContextVk *contextVk, CommandBuffer *commandBuffer)
 {
     const QueryPool &queryPool = getQueryPool();
-    commandBuffer->resetQueryPool(queryPool, mQuery, mQueryCount);
+    resetQueryPoolImpl(contextVk, queryPool, commandBuffer);
     commandBuffer->writeTimestamp(VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, queryPool, mQuery);
     // timestamp results are available immediately, retain this query so that we get its serial
     // updated which is used to indicate that query results are (or will be) available.
@@ -4874,7 +4906,7 @@ bool ImageHelper::isReadBarrierNecessary(ImageLayout newLayout) const
     //
     // RAW (read-after-write) hazards always require a memory barrier.  This can only happen if the
     // layout (same as new layout) is writable which in turn is only possible if the image is
-    // simultaneously bound for shader write (i.e. the layout is GENERAL).
+    // simultaneously bound for shader write (i.e. the layout is GENERAL or SHARED_PRESENT).
     const ImageMemoryBarrierData &layoutData = kImageMemoryBarrierData[mCurrentLayout];
     return layoutData.type == ResourceAccess::Write;
 }
@@ -4987,6 +5019,23 @@ void ImageHelper::barrierImpl(Context *context,
                               uint32_t newQueueFamilyIndex,
                               CommandBufferT *commandBuffer)
 {
+    if (mCurrentLayout == ImageLayout::SharedPresent)
+    {
+        const ImageMemoryBarrierData &transition = kImageMemoryBarrierData[mCurrentLayout];
+
+        VkMemoryBarrier memoryBarrier = {};
+        memoryBarrier.sType           = VK_STRUCTURE_TYPE_MEMORY_BARRIER;
+        memoryBarrier.srcAccessMask   = transition.srcAccessMask;
+        memoryBarrier.dstAccessMask   = transition.dstAccessMask;
+
+        commandBuffer->memoryBarrier(transition.srcStageMask, transition.dstStageMask,
+                                     &memoryBarrier);
+        return;
+    }
+
+    // Make sure we never transition out of SharedPresent
+    ASSERT(mCurrentLayout != ImageLayout::SharedPresent || newLayout == ImageLayout::SharedPresent);
+
     const ImageMemoryBarrierData &transitionFrom = kImageMemoryBarrierData[mCurrentLayout];
     const ImageMemoryBarrierData &transitionTo   = kImageMemoryBarrierData[newLayout];
 
@@ -5013,6 +5062,11 @@ bool ImageHelper::updateLayoutAndBarrier(Context *context,
                                          ImageLayout newLayout,
                                          PipelineBarrier *barrier)
 {
+    // Once you transition to ImageLayout::SharedPresent, you never transition out of it.
+    if (mCurrentLayout == ImageLayout::SharedPresent)
+    {
+        newLayout = ImageLayout::SharedPresent;
+    }
     bool barrierModified = false;
     if (newLayout == mCurrentLayout)
     {
@@ -5092,7 +5146,8 @@ void ImageHelper::clearColor(const VkClearColorValue &color,
 {
     ASSERT(valid());
 
-    ASSERT(mCurrentLayout == ImageLayout::TransferDst);
+    ASSERT(mCurrentLayout == ImageLayout::TransferDst ||
+           mCurrentLayout == ImageLayout::SharedPresent);
 
     VkImageSubresourceRange range = {};
     range.aspectMask              = VK_IMAGE_ASPECT_COLOR_BIT;
@@ -5445,7 +5500,8 @@ void ImageHelper::resolve(ImageHelper *dst,
                           const VkImageResolve &region,
                           CommandBuffer *commandBuffer)
 {
-    ASSERT(mCurrentLayout == ImageLayout::TransferSrc);
+    ASSERT(mCurrentLayout == ImageLayout::TransferSrc ||
+           mCurrentLayout == ImageLayout::SharedPresent);
     commandBuffer->resolveImage(getImage(), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, dst->getImage(),
                                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
 }
