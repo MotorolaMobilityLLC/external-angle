@@ -429,7 +429,7 @@ void UpdateCurrentTestResult(const testing::TestResult &resultIn, TestResults *r
         resultOut.type = TestResultType::Pass;
     }
 
-    resultOut.elapsedTimeSeconds = resultsOut->currentTestTimer.getElapsedTime();
+    resultOut.elapsedTimeSeconds = resultsOut->currentTestTimer.getElapsedWallClockTime();
 }
 
 TestIdentifier GetTestIdentifier(const testing::TestInfo &testInfo)
@@ -1363,7 +1363,7 @@ void TestSuite::onCrashOrTimeout(TestResultType crashOrTimeout)
     {
         TestResult &result        = mTestResults.results[mTestResults.currentTest];
         result.type               = crashOrTimeout;
-        result.elapsedTimeSeconds = mTestResults.currentTestTimer.getElapsedTime();
+        result.elapsedTimeSeconds = mTestResults.currentTestTimer.getElapsedWallClockTime();
     }
 
     if (mResultsFile.empty())
@@ -1761,6 +1761,19 @@ int TestSuite::run()
                 {
                     return 1;
                 }
+
+                const std::string &batchStdout = processInfo.process->getStdout();
+                std::vector<std::string> lines =
+                    SplitString(batchStdout, "\r\n", WhitespaceHandling::TRIM_WHITESPACE,
+                                SplitResult::SPLIT_WANT_NONEMPTY);
+                constexpr size_t kKeepLines = 10;
+                printf("Last %d lines of batch stdout:\n", static_cast<int>(kKeepLines));
+                for (size_t lineNo = lines.size() - std::min(lines.size(), kKeepLines);
+                     lineNo < lines.size(); ++lineNo)
+                {
+                    printf("%s\n", lines[lineNo].c_str());
+                }
+
                 for (const TestIdentifier &testIdentifier : processInfo.testsInBatch)
                 {
                     // Because the whole batch failed we can't know how long each test took.
@@ -1782,7 +1795,7 @@ int TestSuite::run()
         {
             messageTimer.start();
         }
-        else if (messageTimer.getElapsedTime() > kIdleMessageTimeout)
+        else if (messageTimer.getElapsedWallClockTime() > kIdleMessageTimeout)
         {
             const ProcessInfo &processInfo = mCurrentProcesses[0];
             double processTime             = processInfo.process->getElapsedTimeSeconds();
@@ -1818,7 +1831,7 @@ int TestSuite::run()
     }
 
     totalRunTime.stop();
-    printf("Tests completed in %lf seconds\n", totalRunTime.getElapsedTime());
+    printf("Tests completed in %lf seconds\n", totalRunTime.getElapsedWallClockTime());
 
     return printFailuresAndReturnCount() == 0 ? 0 : 1;
 }
@@ -1871,7 +1884,7 @@ void TestSuite::startWatchdog()
         {
             {
                 std::lock_guard<std::mutex> guard(mTestResults.currentTestMutex);
-                if (mTestResults.currentTestTimer.getElapsedTime() >
+                if (mTestResults.currentTestTimer.getElapsedWallClockTime() >
                     mTestResults.currentTestTimeout)
                 {
                     break;
