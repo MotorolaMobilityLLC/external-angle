@@ -166,6 +166,11 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
                                            const GLsizei *counts,
                                            const GLsizei *instanceCounts,
                                            GLsizei drawcount) override;
+    angle::Result multiDrawArraysIndirect(const gl::Context *context,
+                                          gl::PrimitiveMode mode,
+                                          const void *indirect,
+                                          GLsizei drawcount,
+                                          GLsizei stride) override;
     angle::Result multiDrawElements(const gl::Context *context,
                                     gl::PrimitiveMode mode,
                                     const GLsizei *counts,
@@ -179,6 +184,12 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
                                              const GLvoid *const *indices,
                                              const GLsizei *instanceCounts,
                                              GLsizei drawcount) override;
+    angle::Result multiDrawElementsIndirect(const gl::Context *context,
+                                            gl::PrimitiveMode mode,
+                                            gl::DrawElementsType type,
+                                            const void *indirect,
+                                            GLsizei drawcount,
+                                            GLsizei stride) override;
     angle::Result multiDrawArraysInstancedBaseInstance(const gl::Context *context,
                                                        gl::PrimitiveMode mode,
                                                        const GLint *firsts,
@@ -195,6 +206,19 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
                                                                    const GLint *baseVertices,
                                                                    const GLuint *baseInstances,
                                                                    GLsizei drawcount) override;
+
+    // MultiDrawIndirect helper functions
+    angle::Result multiDrawElementsIndirectHelper(const gl::Context *context,
+                                                  gl::PrimitiveMode mode,
+                                                  gl::DrawElementsType type,
+                                                  const void *indirect,
+                                                  GLsizei drawcount,
+                                                  GLsizei stride);
+    angle::Result multiDrawArraysIndirectHelper(const gl::Context *context,
+                                                gl::PrimitiveMode mode,
+                                                const void *indirect,
+                                                GLsizei drawcount,
+                                                GLsizei stride);
 
     // ShareGroup
     ShareGroupVk *getShareGroupVk() { return mShareGroupVk; }
@@ -331,6 +355,12 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     // EXT_shader_framebuffer_fetch_non_coherent
     void framebufferFetchBarrier() override;
+
+    // GL_ANGLE_vulkan_image
+    angle::Result acquireTextures(const gl::Context *context,
+                                  const gl::TextureBarrierVector &textureBarriers) override;
+    angle::Result releaseTextures(const gl::Context *context,
+                                  gl::TextureBarrierVector *textureBarriers) override;
 
     VkDevice getDevice() const;
     egl::ContextPriority getPriority() const { return mContextPriority; }
