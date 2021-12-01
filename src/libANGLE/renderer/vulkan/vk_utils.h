@@ -991,9 +991,6 @@ void InitExternalSemaphoreFdFunctions(VkInstance instance);
 // VK_EXT_external_memory_host
 void InitExternalMemoryHostFunctions(VkInstance instance);
 
-// VK_EXT_external_memory_host
-void InitHostQueryResetFunctions(VkInstance instance);
-
 // VK_KHR_external_fence_capabilities
 void InitExternalFenceCapabilitiesFunctions(VkInstance instance);
 
@@ -1060,6 +1057,7 @@ void GetExtentsAndLayerCount(gl::TextureType textureType,
                              uint32_t *layerCountOut);
 
 vk::LevelIndex GetLevelIndex(gl::LevelIndex levelGL, gl::LevelIndex baseLevel);
+
 }  // namespace gl_vk
 
 namespace vk_gl

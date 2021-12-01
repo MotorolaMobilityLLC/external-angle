@@ -10,7 +10,6 @@
 #include "libANGLE/renderer/driver_utils.h"
 
 #include "common/utilities.h"
-#include "common/vulkan/vk_headers.h"
 #include "image_util/loadimage.h"
 #include "libANGLE/Context.h"
 #include "libANGLE/renderer/renderer_utils.h"
@@ -840,6 +839,88 @@ VkImageCreateFlags GetImageCreateFlags(gl::TextureType textureType)
         default:
             return 0;
     }
+}
+
+ImageLayout GetImageLayoutFromGLImageLayout(GLenum layout)
+{
+    switch (layout)
+    {
+        case GL_NONE:
+            return ImageLayout::Undefined;
+        case GL_LAYOUT_GENERAL_EXT:
+            return ImageLayout::ExternalShadersWrite;
+        case GL_LAYOUT_COLOR_ATTACHMENT_EXT:
+            return ImageLayout::ColorAttachment;
+        case GL_LAYOUT_DEPTH_STENCIL_ATTACHMENT_EXT:
+        case GL_LAYOUT_DEPTH_STENCIL_READ_ONLY_EXT:
+        case GL_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_EXT:
+        case GL_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_EXT:
+            // Note: once VK_KHR_separate_depth_stencil_layouts becomes core or ubiquitous, we
+            // should optimize depth/stencil image layout transitions to only be performed on the
+            // aspect that needs transition.  In that case, these four layouts can be distinguished
+            // and optimized.  Note that the exact equivalent of these layouts are specified in
+            // VK_KHR_maintenance2, which are also usable, granted we transition the pair of
+            // depth/stencil layouts accordingly elsewhere in ANGLE.
+            return ImageLayout::DepthStencilAttachment;
+        case GL_LAYOUT_SHADER_READ_ONLY_EXT:
+            return ImageLayout::ExternalShadersReadOnly;
+        case GL_LAYOUT_TRANSFER_SRC_EXT:
+            return ImageLayout::TransferSrc;
+        case GL_LAYOUT_TRANSFER_DST_EXT:
+            return ImageLayout::TransferDst;
+        default:
+            UNREACHABLE();
+            return vk::ImageLayout::Undefined;
+    }
+}
+
+GLenum ConvertImageLayoutToGLImageLayout(ImageLayout layout)
+{
+    switch (layout)
+    {
+        case ImageLayout::Undefined:
+            return GL_NONE;
+        case ImageLayout::ColorAttachment:
+            return GL_LAYOUT_COLOR_ATTACHMENT_EXT;
+        case ImageLayout::ColorAttachmentAndFragmentShaderRead:
+        case ImageLayout::ColorAttachmentAndAllShadersRead:
+        case ImageLayout::DSAttachmentWriteAndFragmentShaderRead:
+        case ImageLayout::DSAttachmentWriteAndAllShadersRead:
+        case ImageLayout::DSAttachmentReadAndFragmentShaderRead:
+        case ImageLayout::DSAttachmentReadAndAllShadersRead:
+            break;
+        case ImageLayout::DepthStencilAttachmentReadOnly:
+            return GL_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_EXT;
+        case ImageLayout::DepthStencilAttachment:
+            return GL_LAYOUT_DEPTH_STENCIL_ATTACHMENT_EXT;
+        case ImageLayout::DepthStencilResolveAttachment:
+        case ImageLayout::Present:
+        case ImageLayout::SharedPresent:
+        case ImageLayout::ExternalPreInitialized:
+            break;
+        case ImageLayout::ExternalShadersReadOnly:
+            return GL_LAYOUT_SHADER_READ_ONLY_EXT;
+        case ImageLayout::ExternalShadersWrite:
+            return GL_LAYOUT_GENERAL_EXT;
+        case ImageLayout::TransferSrc:
+            return GL_LAYOUT_TRANSFER_SRC_EXT;
+        case ImageLayout::TransferDst:
+            return GL_LAYOUT_TRANSFER_DST_EXT;
+        case ImageLayout::VertexShaderReadOnly:
+        case ImageLayout::VertexShaderWrite:
+        case ImageLayout::PreFragmentShadersReadOnly:
+        case ImageLayout::PreFragmentShadersWrite:
+        case ImageLayout::FragmentShaderReadOnly:
+        case ImageLayout::FragmentShaderWrite:
+        case ImageLayout::ComputeShaderReadOnly:
+        case ImageLayout::ComputeShaderWrite:
+        case ImageLayout::AllGraphicsShadersReadOnly:
+        case ImageLayout::AllGraphicsShadersWrite:
+        case ImageLayout::InvalidEnum:
+            break;
+    }
+    UNREACHABLE();
+    return GL_NONE;
 }
 
 VkImageLayout ConvertImageLayoutToVkImageLayout(ImageLayout imageLayout)
@@ -2979,7 +3060,7 @@ void QueryHelper::beginQueryImpl(ContextVk *contextVk,
 {
     ASSERT(mStatus != QueryStatus::Active);
     const QueryPool &queryPool = getQueryPool();
-    resetQueryPoolImpl(contextVk, queryPool, resetCommandBuffer);
+    resetCommandBuffer->resetQueryPool(queryPool, mQuery, mQueryCount);
     commandBuffer->beginQuery(queryPool, mQuery, 0);
     mStatus = QueryStatus::Active;
 }
@@ -3030,22 +3111,6 @@ angle::Result QueryHelper::endQuery(ContextVk *contextVk)
     return angle::Result::Continue;
 }
 
-template <typename CommandBufferT>
-void QueryHelper::resetQueryPoolImpl(ContextVk *contextVk,
-                                     const QueryPool &queryPool,
-                                     CommandBufferT *commandBuffer)
-{
-    RendererVk *renderer = contextVk->getRenderer();
-    if (renderer->getFeatures().supportsHostQueryReset.enabled)
-    {
-        vkResetQueryPoolEXT(contextVk->getDevice(), queryPool.getHandle(), mQuery, mQueryCount);
-    }
-    else
-    {
-        commandBuffer->resetQueryPool(queryPool, mQuery, mQueryCount);
-    }
-}
-
 angle::Result QueryHelper::beginRenderPassQuery(ContextVk *contextVk)
 {
     CommandBuffer *outsideRenderPassCommandBuffer;
@@ -3086,14 +3151,14 @@ void QueryHelper::writeTimestampToPrimary(ContextVk *contextVk, PrimaryCommandBu
     // Note that commands may not be flushed at this point.
 
     const QueryPool &queryPool = getQueryPool();
-    resetQueryPoolImpl(contextVk, queryPool, primary);
+    primary->resetQueryPool(queryPool, mQuery, mQueryCount);
     primary->writeTimestamp(VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, queryPool, mQuery);
 }
 
 void QueryHelper::writeTimestamp(ContextVk *contextVk, CommandBuffer *commandBuffer)
 {
     const QueryPool &queryPool = getQueryPool();
-    resetQueryPoolImpl(contextVk, queryPool, commandBuffer);
+    commandBuffer->resetQueryPool(queryPool, mQuery, mQueryCount);
     commandBuffer->writeTimestamp(VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, queryPool, mQuery);
     // timestamp results are available immediately, retain this query so that we get its serial
     // updated which is used to indicate that query results are (or will be) available.
@@ -3900,8 +3965,8 @@ ImageHelper::ImageHelper(ImageHelper &&other)
       mCurrentQueueFamilyIndex(other.mCurrentQueueFamilyIndex),
       mLastNonShaderReadOnlyLayout(other.mLastNonShaderReadOnlyLayout),
       mCurrentShaderReadStageMask(other.mCurrentShaderReadStageMask),
+      mYcbcrConversionDesc(other.mYcbcrConversionDesc),
       mYuvConversionSampler(std::move(other.mYuvConversionSampler)),
-      mExternalFormat(other.mExternalFormat),
       mFirstAllocatedLevel(other.mFirstAllocatedLevel),
       mLayerCount(other.mLayerCount),
       mLevelCount(other.mLevelCount),
@@ -3939,7 +4004,7 @@ void ImageHelper::resetCachedProperties()
     mFirstAllocatedLevel         = gl::LevelIndex(0);
     mLayerCount                  = 0;
     mLevelCount                  = 0;
-    mExternalFormat              = 0;
+    mYcbcrConversionDesc.reset();
     mCurrentSingleClearValue.reset();
     mRenderPassUsageFlags.reset();
 
@@ -4130,9 +4195,14 @@ angle::Result ImageHelper::initExternal(Context *context,
             DeriveCreateInfoPNext(context, actualFormatID, nullptr, &imageFormatListInfoStorage,
                                   &imageListFormatsStorage, &mCreateFlags);
     }
+    else
+    {
+        // Derive the tiling for external images.
+        deriveExternalImageTiling(externalImageCreateInfo);
+    }
 
+    mYcbcrConversionDesc.reset();
     mYuvConversionSampler.reset();
-    mExternalFormat = 0;
 
     const angle::Format &actualFormat = angle::Format::Get(actualFormatID);
     VkFormat actualVkFormat           = GetVkFormatFromFormatID(actualFormatID);
@@ -4158,6 +4228,9 @@ angle::Result ImageHelper::initExternal(Context *context,
                                                VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT) != 0)
                                                  ? VK_CHROMA_LOCATION_COSITED_EVEN
                                                  : VK_CHROMA_LOCATION_MIDPOINT;
+        VkSamplerYcbcrModelConversion conversionModel = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601;
+        VkSamplerYcbcrRange colorRange                = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW;
+        VkFilter chromaFilter                         = VK_FILTER_NEAREST;
 
         // Create the VkSamplerYcbcrConversion to associate with image views and samplers
         VkSamplerYcbcrConversionCreateInfo yuvConversionInfo = {};
@@ -4165,12 +4238,16 @@ angle::Result ImageHelper::initExternal(Context *context,
         yuvConversionInfo.format        = actualVkFormat;
         yuvConversionInfo.xChromaOffset = supportedLocation;
         yuvConversionInfo.yChromaOffset = supportedLocation;
-        yuvConversionInfo.ycbcrModel    = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601;
-        yuvConversionInfo.ycbcrRange    = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW;
-        yuvConversionInfo.chromaFilter  = VK_FILTER_NEAREST;
+        yuvConversionInfo.ycbcrModel    = conversionModel;
+        yuvConversionInfo.ycbcrRange    = colorRange;
+        yuvConversionInfo.chromaFilter  = chromaFilter;
+
+        // Update the YuvConversionCache key
+        mYcbcrConversionDesc.update(rendererVk, 0, conversionModel, colorRange, supportedLocation,
+                                    supportedLocation, chromaFilter, intendedFormatID);
 
         ANGLE_TRY(rendererVk->getYuvConversionCache().getYuvConversion(
-            context, actualVkFormat, false, yuvConversionInfo, &mYuvConversionSampler));
+            context, mYcbcrConversionDesc, yuvConversionInfo, &mYuvConversionSampler));
     }
 
     if (hasProtectedContent)
@@ -4198,6 +4275,10 @@ angle::Result ImageHelper::initExternal(Context *context,
     mCurrentLayout = initialLayout;
 
     ANGLE_VK_TRY(context, mImage.init(context->getDevice(), imageInfo));
+
+    mVkImageCreateInfo               = imageInfo;
+    mVkImageCreateInfo.pNext         = nullptr;
+    mVkImageCreateInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
     stageClearIfEmulatedFormat(isRobustResourceInitEnabled, externalImageCreateInfo != nullptr);
 
@@ -4246,6 +4327,22 @@ const void *ImageHelper::DeriveCreateInfoPNext(
     }
 
     return pNext;
+}
+
+void ImageHelper::deriveExternalImageTiling(const void *createInfoChain)
+{
+    const VkBaseInStructure *chain = reinterpret_cast<const VkBaseInStructure *>(createInfoChain);
+    while (chain != nullptr)
+    {
+        if (chain->sType == VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT ||
+            chain->sType == VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT)
+        {
+            mTilingMode = VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT;
+            return;
+        }
+
+        chain = reinterpret_cast<const VkBaseInStructure *>(chain->pNext);
+    }
 }
 
 void ImageHelper::releaseImage(RendererVk *renderer)
@@ -4480,10 +4577,18 @@ angle::Result ImageHelper::initExternalMemory(
             reinterpret_cast<const VkExternalFormatANDROID *>(
                 samplerYcbcrConversionCreateInfo->pNext);
         ASSERT(vkExternalFormat->sType == VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID);
-        mExternalFormat = vkExternalFormat->externalFormat;
+
+        // Update the YuvConversionCache key
+        mYcbcrConversionDesc.update(context->getRenderer(), vkExternalFormat->externalFormat,
+                                    samplerYcbcrConversionCreateInfo->ycbcrModel,
+                                    samplerYcbcrConversionCreateInfo->ycbcrRange,
+                                    samplerYcbcrConversionCreateInfo->xChromaOffset,
+                                    samplerYcbcrConversionCreateInfo->yChromaOffset,
+                                    samplerYcbcrConversionCreateInfo->chromaFilter,
+                                    angle::FormatID::NONE);
 
         ANGLE_TRY(context->getRenderer()->getYuvConversionCache().getYuvConversion(
-            context, mExternalFormat, true, *samplerYcbcrConversionCreateInfo,
+            context, mYcbcrConversionDesc, *samplerYcbcrConversionCreateInfo,
             &mYuvConversionSampler));
     }
 #endif
@@ -4602,7 +4707,7 @@ angle::Result ImageHelper::initLayerImageViewImpl(
 
         // VUID-VkImageViewCreateInfo-image-02399
         // If image has an external format, format must be VK_FORMAT_UNDEFINED
-        if (mExternalFormat)
+        if (mYcbcrConversionDesc.mIsExternalFormat)
         {
             viewInfo.format = VK_FORMAT_UNDEFINED;
         }
@@ -4742,6 +4847,10 @@ angle::Result ImageHelper::initStaging(Context *context,
     imageInfo.initialLayout         = getCurrentLayout();
 
     ANGLE_VK_TRY(context, mImage.init(context->getDevice(), imageInfo));
+
+    mVkImageCreateInfo               = imageInfo;
+    mVkImageCreateInfo.pNext         = nullptr;
+    mVkImageCreateInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
     // Allocate and bind device-local memory.
     VkMemoryPropertyFlags memoryPropertyFlags = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
@@ -5056,6 +5165,13 @@ void ImageHelper::barrierImpl(Context *context,
     mCurrentLayout           = newLayout;
     mCurrentQueueFamilyIndex = newQueueFamilyIndex;
 }
+
+template void ImageHelper::barrierImpl<rx::vk::priv::CommandBuffer>(
+    Context *context,
+    VkImageAspectFlags aspectMask,
+    ImageLayout newLayout,
+    uint32_t newQueueFamilyIndex,
+    rx::vk::priv::CommandBuffer *commandBuffer);
 
 bool ImageHelper::updateLayoutAndBarrier(Context *context,
                                          VkImageAspectFlags aspectMask,
@@ -5905,11 +6021,6 @@ angle::Result ImageHelper::CalculateBufferInfo(ContextVk *contextVk,
                                                inputSkipBytes));
 
     return angle::Result::Continue;
-}
-
-bool ImageHelper::hasImmutableSampler() const
-{
-    return mExternalFormat != 0 || getActualFormat().isYUV;
 }
 
 void ImageHelper::onWrite(gl::LevelIndex levelStart,
