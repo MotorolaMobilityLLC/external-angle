@@ -140,6 +140,30 @@ constexpr size_t kDefaultValueSize              = sizeof(gl::VertexAttribCurrent
 constexpr size_t kDefaultBufferSize             = kDefaultValueSize * 16;
 constexpr size_t kDriverUniformsAllocatorPageSize = 4 * 1024;
 
+bool CanMultiDrawIndirectUseCmd(ContextVk *contextVk,
+                                VertexArrayVk *vertexArray,
+                                gl::PrimitiveMode mode,
+                                GLsizei drawcount,
+                                GLsizei stride)
+{
+    // Use the generic implementation if multiDrawIndirect is disabled, if line loop is being used
+    // for multiDraw, if drawcount is greater than maxDrawIndirectCount, or if there are streaming
+    // vertex attributes.
+    const bool supportsMultiDrawIndirect =
+        contextVk->getFeatures().supportsMultiDrawIndirect.enabled;
+    const bool isMultiDrawLineLoop = (mode == gl::PrimitiveMode::LineLoop && drawcount > 1);
+    const bool isDrawCountBeyondLimit =
+        (static_cast<uint32_t>(drawcount) >
+         contextVk->getRenderer()->getPhysicalDeviceProperties().limits.maxDrawIndirectCount);
+    const bool isMultiDrawWithStreamingAttribs =
+        (vertexArray->getStreamingVertexAttribsMask().any() && drawcount > 1);
+
+    const bool canMultiDrawIndirectUseCmd = supportsMultiDrawIndirect && !isMultiDrawLineLoop &&
+                                            !isDrawCountBeyondLimit &&
+                                            !isMultiDrawWithStreamingAttribs;
+    return canMultiDrawIndirectUseCmd;
+}
+
 uint32_t GetCoverageSampleCount(const gl::State &glState, FramebufferVk *drawFramebuffer)
 {
     if (!glState.isSampleCoverageEnabled())
@@ -2832,6 +2856,61 @@ angle::Result ContextVk::drawArraysIndirect(const gl::Context *context,
                                             gl::PrimitiveMode mode,
                                             const void *indirect)
 {
+    return multiDrawArraysIndirectHelper(context, mode, indirect, 1, 0);
+}
+
+angle::Result ContextVk::drawElementsIndirect(const gl::Context *context,
+                                              gl::PrimitiveMode mode,
+                                              gl::DrawElementsType type,
+                                              const void *indirect)
+{
+    return multiDrawElementsIndirectHelper(context, mode, type, indirect, 1, 0);
+}
+
+angle::Result ContextVk::multiDrawArrays(const gl::Context *context,
+                                         gl::PrimitiveMode mode,
+                                         const GLint *firsts,
+                                         const GLsizei *counts,
+                                         GLsizei drawcount)
+{
+    return rx::MultiDrawArraysGeneral(this, context, mode, firsts, counts, drawcount);
+}
+
+angle::Result ContextVk::multiDrawArraysInstanced(const gl::Context *context,
+                                                  gl::PrimitiveMode mode,
+                                                  const GLint *firsts,
+                                                  const GLsizei *counts,
+                                                  const GLsizei *instanceCounts,
+                                                  GLsizei drawcount)
+{
+    return rx::MultiDrawArraysInstancedGeneral(this, context, mode, firsts, counts, instanceCounts,
+                                               drawcount);
+}
+
+angle::Result ContextVk::multiDrawArraysIndirect(const gl::Context *context,
+                                                 gl::PrimitiveMode mode,
+                                                 const void *indirect,
+                                                 GLsizei drawcount,
+                                                 GLsizei stride)
+{
+    return multiDrawArraysIndirectHelper(context, mode, indirect, drawcount, stride);
+}
+
+angle::Result ContextVk::multiDrawArraysIndirectHelper(const gl::Context *context,
+                                                       gl::PrimitiveMode mode,
+                                                       const void *indirect,
+                                                       GLsizei drawcount,
+                                                       GLsizei stride)
+{
+    if (!rx::CanMultiDrawIndirectUseCmd(this, mVertexArray, mode, drawcount, stride))
+    {
+        return rx::MultiDrawArraysIndirectGeneral(this, context, mode, indirect, drawcount, stride);
+    }
+
+    // Stride must be a multiple of the size of VkDrawIndirectCommand (stride = 0 is invalid when
+    // drawcount > 1).
+    uint32_t vkStride = (stride == 0 && drawcount > 1) ? sizeof(VkDrawIndirectCommand) : stride;
+
     gl::Buffer *indirectBuffer        = mState.getTargetBuffer(gl::BufferBinding::DrawIndirect);
     VkDeviceSize indirectBufferOffset = 0;
     vk::BufferHelper *currentIndirectBuf =
@@ -2841,6 +2920,9 @@ angle::Result ContextVk::drawArraysIndirect(const gl::Context *context,
 
     if (mVertexArray->getStreamingVertexAttribsMask().any())
     {
+        // Handling instanced vertex attributes is not covered for drawcount > 1.
+        ASSERT(drawcount <= 1);
+
         // We have instanced vertex attributes that need to be emulated for Vulkan.
         // invalidate any cache and map the buffer so that we can read the indirect data.
         // Mapping the buffer will cause a flush.
@@ -2859,6 +2941,9 @@ angle::Result ContextVk::drawArraysIndirect(const gl::Context *context,
 
     if (mode == gl::PrimitiveMode::LineLoop)
     {
+        // Line loop only supports handling at most one indirect parameter.
+        ASSERT(drawcount <= 1);
+
         ASSERT(indirectBuffer);
         vk::BufferHelper *dstIndirectBuf  = nullptr;
         VkDeviceSize dstIndirectBufOffset = 0;
@@ -2868,7 +2953,7 @@ angle::Result ContextVk::drawArraysIndirect(const gl::Context *context,
                                             &dstIndirectBufOffset));
 
         mRenderPassCommandBuffer->drawIndexedIndirect(dstIndirectBuf->getBuffer(),
-                                                      dstIndirectBufOffset, 1, 0);
+                                                      dstIndirectBufOffset, drawcount, vkStride);
         return angle::Result::Continue;
     }
 
@@ -2876,15 +2961,60 @@ angle::Result ContextVk::drawArraysIndirect(const gl::Context *context,
                                 currentIndirectBufOffset));
 
     mRenderPassCommandBuffer->drawIndirect(currentIndirectBuf->getBuffer(),
-                                           currentIndirectBufOffset, 1, 0);
+                                           currentIndirectBufOffset, drawcount, vkStride);
     return angle::Result::Continue;
 }
 
-angle::Result ContextVk::drawElementsIndirect(const gl::Context *context,
-                                              gl::PrimitiveMode mode,
-                                              gl::DrawElementsType type,
-                                              const void *indirect)
+angle::Result ContextVk::multiDrawElements(const gl::Context *context,
+                                           gl::PrimitiveMode mode,
+                                           const GLsizei *counts,
+                                           gl::DrawElementsType type,
+                                           const GLvoid *const *indices,
+                                           GLsizei drawcount)
 {
+    return rx::MultiDrawElementsGeneral(this, context, mode, counts, type, indices, drawcount);
+}
+
+angle::Result ContextVk::multiDrawElementsInstanced(const gl::Context *context,
+                                                    gl::PrimitiveMode mode,
+                                                    const GLsizei *counts,
+                                                    gl::DrawElementsType type,
+                                                    const GLvoid *const *indices,
+                                                    const GLsizei *instanceCounts,
+                                                    GLsizei drawcount)
+{
+    return rx::MultiDrawElementsInstancedGeneral(this, context, mode, counts, type, indices,
+                                                 instanceCounts, drawcount);
+}
+
+angle::Result ContextVk::multiDrawElementsIndirect(const gl::Context *context,
+                                                   gl::PrimitiveMode mode,
+                                                   gl::DrawElementsType type,
+                                                   const void *indirect,
+                                                   GLsizei drawcount,
+                                                   GLsizei stride)
+{
+    return multiDrawElementsIndirectHelper(context, mode, type, indirect, drawcount, stride);
+}
+
+angle::Result ContextVk::multiDrawElementsIndirectHelper(const gl::Context *context,
+                                                         gl::PrimitiveMode mode,
+                                                         gl::DrawElementsType type,
+                                                         const void *indirect,
+                                                         GLsizei drawcount,
+                                                         GLsizei stride)
+{
+    if (!rx::CanMultiDrawIndirectUseCmd(this, mVertexArray, mode, drawcount, stride))
+    {
+        return rx::MultiDrawElementsIndirectGeneral(this, context, mode, type, indirect, drawcount,
+                                                    stride);
+    }
+
+    // Stride must be a multiple of the size of VkDrawIndexedIndirectCommand (stride = 0 is invalid
+    // when drawcount > 1).
+    uint32_t vkStride =
+        (stride == 0 && drawcount > 1) ? sizeof(VkDrawIndexedIndirectCommand) : stride;
+
     gl::Buffer *indirectBuffer = mState.getTargetBuffer(gl::BufferBinding::DrawIndirect);
     ASSERT(indirectBuffer);
     VkDeviceSize indirectBufferOffset = 0;
@@ -2895,6 +3025,9 @@ angle::Result ContextVk::drawElementsIndirect(const gl::Context *context,
 
     if (mVertexArray->getStreamingVertexAttribsMask().any())
     {
+        // Handling instanced vertex attributes is not covered for drawcount > 1.
+        ASSERT(drawcount <= 1);
+
         // We have instanced vertex attributes that need to be emulated for Vulkan.
         // invalidate any cache and map the buffer so that we can read the indirect data.
         // Mapping the buffer will cause a flush.
@@ -2932,6 +3065,9 @@ angle::Result ContextVk::drawElementsIndirect(const gl::Context *context,
 
     if (mode == gl::PrimitiveMode::LineLoop)
     {
+        // Line loop only supports handling at most one indirect parameter.
+        ASSERT(drawcount <= 1);
+
         vk::BufferHelper *dstIndirectBuf;
         VkDeviceSize dstIndirectBufOffset;
 
@@ -2949,50 +3085,8 @@ angle::Result ContextVk::drawElementsIndirect(const gl::Context *context,
     }
 
     mRenderPassCommandBuffer->drawIndexedIndirect(currentIndirectBuf->getBuffer(),
-                                                  currentIndirectBufOffset, 1, 0);
+                                                  currentIndirectBufOffset, drawcount, vkStride);
     return angle::Result::Continue;
-}
-
-angle::Result ContextVk::multiDrawArrays(const gl::Context *context,
-                                         gl::PrimitiveMode mode,
-                                         const GLint *firsts,
-                                         const GLsizei *counts,
-                                         GLsizei drawcount)
-{
-    return rx::MultiDrawArraysGeneral(this, context, mode, firsts, counts, drawcount);
-}
-
-angle::Result ContextVk::multiDrawArraysInstanced(const gl::Context *context,
-                                                  gl::PrimitiveMode mode,
-                                                  const GLint *firsts,
-                                                  const GLsizei *counts,
-                                                  const GLsizei *instanceCounts,
-                                                  GLsizei drawcount)
-{
-    return rx::MultiDrawArraysInstancedGeneral(this, context, mode, firsts, counts, instanceCounts,
-                                               drawcount);
-}
-
-angle::Result ContextVk::multiDrawElements(const gl::Context *context,
-                                           gl::PrimitiveMode mode,
-                                           const GLsizei *counts,
-                                           gl::DrawElementsType type,
-                                           const GLvoid *const *indices,
-                                           GLsizei drawcount)
-{
-    return rx::MultiDrawElementsGeneral(this, context, mode, counts, type, indices, drawcount);
-}
-
-angle::Result ContextVk::multiDrawElementsInstanced(const gl::Context *context,
-                                                    gl::PrimitiveMode mode,
-                                                    const GLsizei *counts,
-                                                    gl::DrawElementsType type,
-                                                    const GLvoid *const *indices,
-                                                    const GLsizei *instanceCounts,
-                                                    GLsizei drawcount)
-{
-    return rx::MultiDrawElementsInstancedGeneral(this, context, mode, counts, type, indices,
-                                                 instanceCounts, drawcount);
 }
 
 angle::Result ContextVk::multiDrawArraysInstancedBaseInstance(const gl::Context *context,
@@ -4754,6 +4848,43 @@ void ContextVk::framebufferFetchBarrier()
     mGraphicsDirtyBits.set(DIRTY_BIT_FRAMEBUFFER_FETCH_BARRIER);
 }
 
+angle::Result ContextVk::acquireTextures(const gl::Context *context,
+                                         const gl::TextureBarrierVector &textureBarriers)
+{
+    for (const gl::TextureAndLayout &textureBarrier : textureBarriers)
+    {
+        TextureVk *textureVk   = vk::GetImpl(textureBarrier.texture);
+        vk::ImageHelper &image = textureVk->getImage();
+        vk::ImageLayout layout = vk::GetImageLayoutFromGLImageLayout(textureBarrier.layout);
+        // Image should not be accessed while unowned. Emulated formats may have staged updates
+        // to clear the image after initialization.
+        ASSERT(!image.hasStagedUpdatesInAllocatedLevels() || image.hasEmulatedImageChannels());
+        image.setCurrentImageLayout(layout);
+    }
+    return angle::Result::Continue;
+}
+
+angle::Result ContextVk::releaseTextures(const gl::Context *context,
+                                         gl::TextureBarrierVector *textureBarriers)
+{
+    for (gl::TextureAndLayout &textureBarrier : *textureBarriers)
+    {
+
+        TextureVk *textureVk = vk::GetImpl(textureBarrier.texture);
+
+        ANGLE_TRY(textureVk->ensureImageInitialized(this, ImageMipLevels::EnabledLevels));
+
+        vk::ImageHelper &image = textureVk->getImage();
+        ANGLE_TRY(onImageReleaseToExternal(image));
+
+        textureBarrier.layout =
+            vk::ConvertImageLayoutToGLImageLayout(image.getCurrentImageLayout());
+    }
+
+    ANGLE_TRY(flushImpl(nullptr, RenderPassClosureReason::ImageUseThenReleaseToExternal));
+    return mRenderer->ensureNoPendingWork(this);
+}
+
 vk::DynamicQueryPool *ContextVk::getQueryPool(gl::QueryType queryType)
 {
     ASSERT(queryType == gl::QueryType::AnySamples ||
@@ -5147,9 +5278,8 @@ angle::Result ContextVk::updateActiveTextures(const gl::Context *context, gl::Co
     const gl::ActiveTextureMask &activeTextures    = executable->getActiveSamplersMask();
     const gl::ActiveTextureTypeArray &textureTypes = executable->getActiveSamplerTypes();
 
-    bool recreatePipelineLayout                     = false;
-    FormatIndexMap<uint64_t> externalFormatIndexMap = {};
-    FormatIndexMap<VkFormat> vkFormatIndexMap       = {};
+    bool recreatePipelineLayout                       = false;
+    ImmutableSamplerIndexMap immutableSamplerIndexMap = {};
     for (size_t textureUnit : activeTextures)
     {
         gl::Texture *texture        = textures[textureUnit];
@@ -5239,17 +5369,8 @@ angle::Result ContextVk::updateActiveTextures(const gl::Context *context, gl::Co
 
         if (textureVk->getImage().hasImmutableSampler())
         {
-            uint64_t externalFormat = textureVk->getImage().getExternalFormat();
-            VkFormat vkFormat       = textureVk->getImage().getActualVkFormat();
-            if (externalFormat != 0)
-            {
-                externalFormatIndexMap[externalFormat] = static_cast<uint32_t>(textureUnit);
-            }
-            else
-            {
-                ASSERT(vkFormat != 0);
-                vkFormatIndexMap[vkFormat] = static_cast<uint32_t>(textureUnit);
-            }
+            immutableSamplerIndexMap[*textureVk->getImage().getYcbcrConversionDesc()] =
+                static_cast<uint32_t>(textureUnit);
         }
 
         if (textureVk->getAndResetImmutableSamplerDirtyState())
@@ -5258,7 +5379,7 @@ angle::Result ContextVk::updateActiveTextures(const gl::Context *context, gl::Co
         }
     }
 
-    if (!mExecutable->isImmutableSamplerFormatCompatible(externalFormatIndexMap, vkFormatIndexMap))
+    if (!mExecutable->areImmutableSamplersCompatible(immutableSamplerIndexMap))
     {
         recreatePipelineLayout = true;
     }

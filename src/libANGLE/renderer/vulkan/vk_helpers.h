@@ -545,10 +545,6 @@ class QueryHelper final : public Resource
                         CommandBuffer *resetCommandBuffer,
                         CommandBuffer *commandBuffer);
     void endQueryImpl(ContextVk *contextVk, CommandBuffer *commandBuffer);
-    template <typename CommandBufferT>
-    void resetQueryPoolImpl(ContextVk *contextVk,
-                            const QueryPool &queryPool,
-                            CommandBufferT *commandBuffer);
     VkResult getResultImpl(ContextVk *contextVk,
                            const VkQueryResultFlags flags,
                            QueryResult *resultOut);
@@ -1431,6 +1427,10 @@ enum class ImageLayout
 
 VkImageCreateFlags GetImageCreateFlags(gl::TextureType textureType);
 
+ImageLayout GetImageLayoutFromGLImageLayout(GLenum layout);
+
+GLenum ConvertImageLayoutToGLImageLayout(ImageLayout imageLayout);
+
 VkImageLayout ConvertImageLayoutToVkImageLayout(ImageLayout imageLayout);
 
 // How the ImageHelper object is being used by the renderpass
@@ -1642,6 +1642,7 @@ class ImageHelper final : public Resource, public angle::Subject
     const Image &getImage() const { return mImage; }
     const DeviceMemory &getDeviceMemory() const { return mDeviceMemory; }
 
+    const VkImageCreateInfo &getVkImageCreateInfo() const { return mVkImageCreateInfo; }
     void setTilingMode(VkImageTiling tilingMode) { mTilingMode = tilingMode; }
     VkImageTiling getTilingMode() const { return mTilingMode; }
     VkImageCreateFlags getCreateFlags() const { return mCreateFlags; }
@@ -2001,8 +2002,13 @@ class ImageHelper final : public Resource, public angle::Subject
                  uint32_t layerStart,
                  uint32_t layerCount,
                  VkImageAspectFlags aspectFlags);
-    bool hasImmutableSampler() const;
-    uint64_t getExternalFormat() const { return mExternalFormat; }
+    bool hasImmutableSampler() const { return mYcbcrConversionDesc.valid(); }
+    uint64_t getExternalFormat() const
+    {
+        return mYcbcrConversionDesc.mIsExternalFormat ? mYcbcrConversionDesc.mExternalOrVkFormat
+                                                      : 0;
+    }
+    const YcbcrConversionDesc *getYcbcrConversionDesc() const { return &mYcbcrConversionDesc; }
 
     // Used by framebuffer and render pass functions to decide loadOps and invalidate/un-invalidate
     // render target contents.
@@ -2113,6 +2119,8 @@ class ImageHelper final : public Resource, public angle::Subject
         } data;
         RefCounted<ImageHelper> *image;
     };
+
+    void deriveExternalImageTiling(const void *createInfoChain);
 
     // Called from flushStagedUpdates, removes updates that are later superseded by another.  This
     // cannot be done at the time the updates were staged, as the image is not created (and thus the
@@ -2233,6 +2241,7 @@ class ImageHelper final : public Resource, public angle::Subject
     DeviceMemory mDeviceMemory;
 
     // Image properties.
+    VkImageCreateInfo mVkImageCreateInfo;
     VkImageType mImageType;
     VkImageTiling mTilingMode;
     VkImageCreateFlags mCreateFlags;
@@ -2259,8 +2268,8 @@ class ImageHelper final : public Resource, public angle::Subject
     RenderPassUsageFlags mRenderPassUsageFlags;
 
     // For imported images
+    YcbcrConversionDesc mYcbcrConversionDesc;
     BindingPointer<SamplerYcbcrConversion> mYuvConversionSampler;
-    uint64_t mExternalFormat;
 
     // The first level that has been allocated. For mutable textures, this should be same as
     // mBaseLevel since we always reallocate VkImage based on mBaseLevel change. But for immutable
