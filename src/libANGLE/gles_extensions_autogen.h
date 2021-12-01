@@ -607,6 +607,9 @@ struct Extensions
     // GL_ANGLE_request_extension
     bool requestExtensionANGLE = false;
 
+    // GL_ANGLE_rgbx_internal_format
+    bool rgbxInternalFormatANGLE = false;
+
     // GL_ANGLE_robust_client_memory
     bool robustClientMemoryANGLE = false;
 
@@ -639,6 +642,9 @@ struct Extensions
 
     // GL_ANGLE_texture_rectangle
     bool textureRectangleANGLE = false;
+
+    // GL_ANGLE_vulkan_image
+    bool vulkanImageANGLE = false;
 
     // GL_ANGLE_webgl_compatibility
     bool webglCompatibilityANGLE = false;

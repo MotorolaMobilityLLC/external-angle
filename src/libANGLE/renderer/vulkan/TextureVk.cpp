@@ -1798,7 +1798,8 @@ angle::Result TextureVk::generateMipmapsWithCompute(ContextVk *contextVk)
     samplerState.setWrapR(GL_CLAMP_TO_EDGE);
 
     vk::BindingPointer<vk::SamplerHelper> sampler;
-    vk::SamplerDesc samplerDesc(contextVk, samplerState, false, 0, static_cast<angle::FormatID>(0));
+    vk::SamplerDesc samplerDesc(contextVk, samplerState, false, nullptr,
+                                static_cast<angle::FormatID>(0));
     ANGLE_TRY(renderer->getSamplerCache().getSampler(contextVk, samplerDesc, &sampler));
 
     // If the image has more levels than supported, generate as many mips as possible at a time.
@@ -2269,8 +2270,8 @@ angle::Result TextureVk::bindTexImage(const gl::Context *context, egl::Surface *
 
     releaseAndDeleteImageAndViews(contextVk);
 
-    GLenum internalFormat    = surface->getConfig()->renderTargetFormat;
-    const vk::Format &format = renderer->getFormat(internalFormat);
+    const gl::InternalFormat &glInternalFormat = *surface->getBindTexImageFormat().info;
+    const vk::Format &format = renderer->getFormat(glInternalFormat.sizedInternalFormat);
 
     // eglBindTexImage can only be called with pbuffer (offscreen) surfaces
     OffscreenSurfaceVk *offscreenSurface = GetImplAs<OffscreenSurfaceVk>(surface);
@@ -2278,9 +2279,8 @@ angle::Result TextureVk::bindTexImage(const gl::Context *context, egl::Surface *
                    surface->getMipmapLevel(), 0, false);
 
     ASSERT(mImage->getLayerCount() == 1);
-    gl::Format glFormat(internalFormat);
     return initImageViews(contextVk, format.getActualImageFormat(getRequiredImageAccess()),
-                          glFormat.info->sized, 1, 1);
+                          glInternalFormat.sized, 1, 1);
 }
 
 angle::Result TextureVk::releaseTexImage(const gl::Context *context)
@@ -2715,7 +2715,7 @@ angle::Result TextureVk::syncState(const gl::Context *context,
     }
 
     vk::SamplerDesc samplerDesc(contextVk, mState.getSamplerState(), mState.isStencilMode(),
-                                mImage->getExternalFormat(), mImage->getIntendedFormatID());
+                                mImage->getYcbcrConversionDesc(), mImage->getIntendedFormatID());
     ANGLE_TRY(renderer->getSamplerCache().getSampler(contextVk, samplerDesc, &mSampler));
 
     return angle::Result::Continue;
