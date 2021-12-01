@@ -377,6 +377,7 @@
     /* GL_ANGLE_request_extension */                                                               \
     void requestExtension(const GLchar *name);                                                     \
     void disableExtension(const GLchar *name);                                                     \
+    /* GL_ANGLE_rgbx_internal_format */                                                            \
     /* GL_ANGLE_robust_client_memory */                                                            \
     void getBooleanvRobust(GLenum pname, GLsizei bufSize, GLsizei *length, GLboolean *params);     \
     void getBufferParameterivRobust(BufferBinding targetPacked, GLenum pname, GLsizei bufSize,     \
@@ -532,6 +533,10 @@
     void invalidateTexture(TextureType targetPacked);                                              \
     /* GL_ANGLE_texture_multisample */                                                             \
     /* GL_ANGLE_texture_rectangle */                                                               \
+    /* GL_ANGLE_vulkan_image */                                                                    \
+    void acquireTextures(GLuint numTextures, const TextureID *texturesPacked,                      \
+                         const GLenum *layouts);                                                   \
+    void releaseTextures(GLuint numTextures, const TextureID *texturesPacked, GLenum *layouts);    \
     /* GL_ANGLE_webgl_compatibility */                                                             \
     /* GL_ANGLE_yuv_internal_format */                                                             \
     /* GL_CHROMIUM_bind_generates_resource */                                                      \

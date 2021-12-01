@@ -2135,11 +2135,22 @@ void CaptureVertexArrayState(std::vector<CallCapture> *setupCalls,
                 // Check if we can use strictly ES2 semantics, and track indexes that do.
                 vertexPointerBindings.set(attribIndex);
 
-                Capture(setupCalls,
-                        CaptureVertexAttribPointer(
-                            *replayState, true, attribIndex, attrib.format->channelCount,
-                            attrib.format->vertexAttribType, attrib.format->isNorm(),
-                            attrib.vertexAttribArrayStride, attrib.pointer));
+                if (attrib.format->isPureInt())
+                {
+                    Capture(setupCalls, CaptureVertexAttribIPointer(*replayState, true, attribIndex,
+                                                                    attrib.format->channelCount,
+                                                                    attrib.format->vertexAttribType,
+                                                                    attrib.vertexAttribArrayStride,
+                                                                    attrib.pointer));
+                }
+                else
+                {
+                    Capture(setupCalls,
+                            CaptureVertexAttribPointer(
+                                *replayState, true, attribIndex, attrib.format->channelCount,
+                                attrib.format->vertexAttribType, attrib.format->isNorm(),
+                                attrib.vertexAttribArrayStride, attrib.pointer));
+                }
 
                 if (binding.getDivisor() != 0)
                 {
@@ -2151,11 +2162,22 @@ void CaptureVertexArrayState(std::vector<CallCapture> *setupCalls,
             {
                 ASSERT(context->getClientVersion() >= gl::ES_3_1);
 
-                Capture(setupCalls,
-                        CaptureVertexAttribFormat(*replayState, true, attribIndex,
-                                                  attrib.format->channelCount,
-                                                  attrib.format->vertexAttribType,
-                                                  attrib.format->isNorm(), attrib.relativeOffset));
+                if (attrib.format->isPureInt())
+                {
+                    Capture(setupCalls, CaptureVertexAttribIFormat(*replayState, true, attribIndex,
+                                                                   attrib.format->channelCount,
+                                                                   attrib.format->vertexAttribType,
+                                                                   attrib.relativeOffset));
+                }
+                else
+                {
+                    Capture(setupCalls, CaptureVertexAttribFormat(*replayState, true, attribIndex,
+                                                                  attrib.format->channelCount,
+                                                                  attrib.format->vertexAttribType,
+                                                                  attrib.format->isNorm(),
+                                                                  attrib.relativeOffset));
+                }
+
                 Capture(setupCalls, CaptureVertexAttribBinding(*replayState, true, attribIndex,
                                                                attrib.bindingIndex));
             }
@@ -3400,6 +3422,10 @@ void CaptureMidExecutionSetup(const gl::Context *context,
         MaybeCaptureUpdateResourceIDs(setupCalls);
         cap(framebufferFuncs.bindFramebuffer(replayState, true, GL_FRAMEBUFFER, id));
         currentDrawFramebuffer = currentReadFramebuffer = id;
+
+        resourceTracker->getTrackedResource(ResourceIDType::Framebuffer)
+            .getStartingResources()
+            .insert(id.value);
 
         // Color Attachments.
         for (const gl::FramebufferAttachment &colorAttachment : framebuffer->getColorAttachments())
@@ -5963,7 +5989,8 @@ void TrackedResource::setGennedResource(GLuint id)
 
 bool TrackedResource::resourceIsGenerated(GLuint id)
 {
-    return mNewResources.find(id) != mNewResources.end();
+    return mStartingResources.find(id) != mStartingResources.end() ||
+           mNewResources.find(id) != mNewResources.end();
 }
 
 void TrackedResource::setDeletedResource(GLuint id)
