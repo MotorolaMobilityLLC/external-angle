@@ -1104,7 +1104,6 @@ void CommandBufferHelper::bufferRead(ContextVk *contextVk,
                                      PipelineStage readStage,
                                      BufferHelper *buffer)
 {
-    buffer->retainReadOnly(&contextVk->getResourceUseList());
     VkPipelineStageFlagBits stageBits = kPipelineStageFlagBitMap[readStage];
     if (buffer->recordReadBarrier(readAccessType, stageBits, &mPipelineBarriers[readStage]))
     {
@@ -1115,6 +1114,7 @@ void CommandBufferHelper::bufferRead(ContextVk *contextVk,
     if (!mUsedBuffers.contains(buffer->getBufferSerial().getValue()))
     {
         mUsedBuffers.insert(buffer->getBufferSerial().getValue(), BufferAccess::Read);
+        buffer->retainReadOnly(&contextVk->getResourceUseList());
     }
 }
 
@@ -1155,8 +1155,6 @@ void CommandBufferHelper::imageRead(ContextVk *contextVk,
                                     ImageLayout imageLayout,
                                     ImageHelper *image)
 {
-    image->retain(&contextVk->getResourceUseList());
-
     if (image->isReadBarrierNecessary(imageLayout))
     {
         updateImageLayoutAndBarrier(contextVk, image, aspectFlags, imageLayout);
@@ -1169,7 +1167,12 @@ void CommandBufferHelper::imageRead(ContextVk *contextVk,
         if (!usesImageInRenderPass(*image))
         {
             mRenderPassUsedImages.insert(image->getImageSerial().getValue());
+            image->retain(&contextVk->getResourceUseList());
         }
+    }
+    else
+    {
+        image->retain(&contextVk->getResourceUseList());
     }
 }
 
@@ -6536,6 +6539,9 @@ void ImageHelper::stageSelfAsSubresourceUpdates(ContextVk *contextVk,
 
     // Move the necessary information for staged update to work, and keep the rest as part of this
     // object.
+
+    // Usage info
+    prevImage->get().Resource::operator=(std::move(*this));
 
     // Vulkan objects
     prevImage->get().mImage        = std::move(mImage);
