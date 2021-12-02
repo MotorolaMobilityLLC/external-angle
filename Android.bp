@@ -4602,6 +4602,7 @@ cc_defaults {
         "third_party_abseil_cpp_absl_container_inlined_vector",
         "third_party_abseil_cpp_absl_functional_function_ref",
         "third_party_abseil_cpp_absl_meta_type_traits",
+        "third_party_abseil_cpp_absl_numeric_bits",
         "third_party_abseil_cpp_absl_strings_cord_internal",
         "third_party_abseil_cpp_absl_strings_cordz_functions",
         "third_party_abseil_cpp_absl_strings_cordz_info",
