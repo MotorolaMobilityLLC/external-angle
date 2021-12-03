@@ -34,7 +34,7 @@ vars = {
   'checkout_android_native_support': 'checkout_android or checkout_chromeos',
 
   # Version of Chromium our Chromium-based DEPS are mirrored from.
-  'chromium_revision': 'd2d61620103da2b79b0391bfa477d17257619b7c',
+  'chromium_revision': 'd666676e2702fea117990c3282953c11a66bbd0c',
   # We never want to checkout chromium,
   # but need a dummy DEPS entry for the autoroller
   'dummy_checkout_chromium': False,
@@ -84,7 +84,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling luci-go
   # and whatever else without interference from each other.
-  'luci_go': 'git_revision:e4c95e4e4cdc987f1860e4111589606bcd3a8f32',
+  'luci_go': 'git_revision:91cbdea8898ac2d498f2412d35279b00784a1ece',
 
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling android_sdk_build-tools_version
@@ -182,7 +182,7 @@ deps = {
   },
 
   'testing': {
-    'url': '{chromium_git}/chromium/src/testing@ac23806e2be24afb32d5d50470cb7149e9469963',
+    'url': '{chromium_git}/chromium/src/testing@c70310ef4a68a4e458f6b516eb67f16ce7b016b1',
     'condition': 'not build_with_chromium',
   },
 
@@ -496,7 +496,7 @@ deps = {
   },
 
   'third_party/SwiftShader': {
-    'url': '{swiftshader_git}/SwiftShader@ff91ac52f4b7e89d29f4c037b10f8fe182001e32',
+    'url': '{swiftshader_git}/SwiftShader@f9c39655a610a2ef636b834316fbc94669d6aadd',
     'condition': 'not build_with_chromium',
   },
 
@@ -516,7 +516,7 @@ deps = {
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@cb8be59599df8d3d36115e4164946d58fceb40f8',
+    'url': '{chromium_git}/vulkan-deps@933bb8aaaef9f7ccafd11bc096f907c4d67b0c2f',
     'condition': 'not build_with_chromium',
   },
 
