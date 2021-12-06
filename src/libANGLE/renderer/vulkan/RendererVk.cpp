@@ -1531,6 +1531,9 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     mProtectedMemoryProperties.sType =
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES;
 
+    mHostQueryResetFeatures       = {};
+    mHostQueryResetFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT;
+
     if (!vkGetPhysicalDeviceProperties2KHR || !vkGetPhysicalDeviceFeatures2KHR)
     {
         return;
@@ -1640,6 +1643,13 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
         vk::AddToPNextChain(&deviceProperties, &mProtectedMemoryProperties);
     }
 
+    // Query host query reset features
+    if (ExtensionFound(VK_EXT_HOST_QUERY_RESET_EXTENSION_NAME, deviceExtensionNames) ||
+        mPhysicalDeviceProperties.apiVersion >= VK_MAKE_VERSION(1, 2, 0))
+    {
+        vk::AddToPNextChain(&deviceFeatures, &mHostQueryResetFeatures);
+    }
+
     vkGetPhysicalDeviceFeatures2KHR(mPhysicalDevice, &deviceFeatures);
     vkGetPhysicalDeviceProperties2KHR(mPhysicalDevice, &deviceProperties);
 
@@ -1685,6 +1695,7 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     mSamplerYcbcrConversionFeatures.pNext            = nullptr;
     mProtectedMemoryFeatures.pNext                   = nullptr;
     mProtectedMemoryProperties.pNext                 = nullptr;
+    mHostQueryResetFeatures.pNext                    = nullptr;
 }
 
 angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueFamilyIndex)
@@ -1726,6 +1737,9 @@ angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueF
     ANGLE_VK_TRY(displayVk,
                  vkEnumerateDeviceExtensionProperties(
                      mPhysicalDevice, nullptr, &deviceExtensionCount, deviceExtensionProps.data()));
+    // In case fewer items were returned than requested, resize deviceExtensionProps to the number
+    // of extensions returned (i.e. deviceExtensionCount).  See: b/208937840
+    deviceExtensionProps.resize(deviceExtensionCount);
 
     // Enumerate device extensions that are provided by explicit layers.
     for (const char *layerName : enabledDeviceLayerNames)
@@ -1938,6 +1952,8 @@ angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueF
     mEnabledFeatures.features.imageCubeArray = getFeatures().supportsImageCubeArray.enabled;
     // Used to support framebuffers with multiple attachments:
     mEnabledFeatures.features.independentBlend = mPhysicalDeviceFeatures.independentBlend;
+    // Used to support multi_draw_indirect
+    mEnabledFeatures.features.multiDrawIndirect = mPhysicalDeviceFeatures.multiDrawIndirect;
     // Used to support robust buffer access:
     mEnabledFeatures.features.robustBufferAccess = mPhysicalDeviceFeatures.robustBufferAccess;
     // Used to support Anisotropic filtering:
@@ -2114,6 +2130,12 @@ angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueF
         vk::AddToPNextChain(&mEnabledFeatures, &mProtectedMemoryFeatures);
     }
 
+    if (getFeatures().supportsHostQueryReset.enabled)
+    {
+        mEnabledDeviceExtensions.push_back(VK_EXT_HOST_QUERY_RESET_EXTENSION_NAME);
+        vk::AddToPNextChain(&mEnabledFeatures, &mHostQueryResetFeatures);
+    }
+
     mCurrentQueueFamilyIndex = queueFamilyIndex;
 
     vk::QueueFamily queueFamily;
@@ -2178,6 +2200,10 @@ angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueF
     ANGLE_UNUSED_VARIABLE(hasGetMemoryRequirements2KHR);
     ANGLE_UNUSED_VARIABLE(hasBindMemory2KHR);
 #else
+    if (getFeatures().supportsHostQueryReset.enabled)
+    {
+        InitHostQueryResetFunctions(mInstance);
+    }
     if (hasGetMemoryRequirements2KHR)
     {
         InitGetMemoryRequirements2KHRFunctions(mDevice);
@@ -2373,7 +2399,8 @@ gl::Version RendererVk::getMaxSupportedESVersion() const
     }
 
     // Limit to ES3.1 if there are any blockers for 3.2.
-    if (!vk::CanSupportGPUShader5EXT(mPhysicalDeviceFeatures))
+    if (!vk::CanSupportGPUShader5EXT(mPhysicalDeviceFeatures) &&
+        !mFeatures.exposeNonConformantExtensionsAndVersions.enabled)
     {
         maxVersion = LimitVersionTo(maxVersion, {3, 1});
     }
@@ -2514,6 +2541,10 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // http://anglebug.com/3965
     ANGLE_FEATURE_CONDITION(&mFeatures, supportsProtectedMemory,
                             (mProtectedMemoryFeatures.protectedMemory == VK_TRUE));
+
+    // http://anglebug.com/6692
+    ANGLE_FEATURE_CONDITION(&mFeatures, supportsHostQueryReset,
+                            (mHostQueryResetFeatures.hostQueryReset == VK_TRUE));
 
     // Note: Protected Swapchains is not determined until we have a VkSurface to query.
     // So here vendors should indicate support so that protected_content extension
@@ -2661,6 +2692,9 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
         &mFeatures, supportsCustomBorderColorEXT,
         mCustomBorderColorFeatures.customBorderColors == VK_TRUE &&
             mCustomBorderColorFeatures.customBorderColorWithoutFormat == VK_TRUE && !isSwiftShader);
+
+    ANGLE_FEATURE_CONDITION(&mFeatures, supportsMultiDrawIndirect,
+                            mPhysicalDeviceFeatures.multiDrawIndirect == VK_TRUE);
 
     ANGLE_FEATURE_CONDITION(&mFeatures, disableFifoPresentMode, IsLinux() && isIntel);
 
