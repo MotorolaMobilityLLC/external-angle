@@ -339,11 +339,15 @@ void AppendBufferVectorToDesc(vk::ShaderBuffersDescriptorDesc *desc,
             VkDeviceSize bufferOffset = 0;
             vk::BufferSerial bufferSerial =
                 bufferVk->getBufferAndOffset(&bufferOffset).getBufferSerial();
-
             desc->appendBufferSerial(bufferSerial);
+
             ASSERT(static_cast<uint64_t>(binding.getSize()) <=
                    static_cast<uint64_t>(std::numeric_limits<uint32_t>::max()));
-            desc->append32BitValue(static_cast<uint32_t>(binding.getSize()));
+            // binding's size could be 0 if it is bound by glBindBufferBase call. In this case, the
+            // spec says we should use the actual buffer size at the time buffer is been referenced.
+            GLint64 size = binding.getSize() == 0 ? bufferGL->getSize() : binding.getSize();
+            desc->append32BitValue(static_cast<uint32_t>(size));
+
             if (appendOffset)
             {
                 ASSERT(static_cast<uint64_t>(binding.getOffset()) <
@@ -444,6 +448,9 @@ constexpr angle::PackedEnumMap<RenderPassClosureReason, const char *> kRenderPas
      "Render pass closed due to reformatting texture to a renderable fallback"},
     {RenderPassClosureReason::DeviceLocalBufferMap,
      "Render pass closed due to mapping device local buffer"},
+    {RenderPassClosureReason::PrepareForBlit, "Render pass closed prior to draw-based blit"},
+    {RenderPassClosureReason::PrepareForImageCopy,
+     "Render pass closed prior to draw-based image copy"},
     {RenderPassClosureReason::TemporaryForImageClear,
      "Temporary render pass used for image clear closed"},
     {RenderPassClosureReason::TemporaryForImageCopy,
@@ -3028,6 +3035,10 @@ angle::Result ContextVk::multiDrawElementsIndirectHelper(const gl::Context *cont
         &vk::GetImpl(indirectBuffer)->getBufferAndOffset(&indirectBufferOffset);
     VkDeviceSize currentIndirectBufOffset =
         indirectBufferOffset + reinterpret_cast<VkDeviceSize>(indirect);
+
+    // Reset the index buffer offset
+    mGraphicsDirtyBits.set(DIRTY_BIT_INDEX_BUFFER);
+    mCurrentIndexBufferOffset = 0;
 
     if (mVertexArray->getStreamingVertexAttribsMask().any())
     {
