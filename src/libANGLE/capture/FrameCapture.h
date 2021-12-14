@@ -217,6 +217,7 @@ class ReplayWriter final : angle::NonCopyable
     ReplayWriter();
     ~ReplayWriter();
 
+    void setSourceFileSizeThreshold(size_t sourceFileSizeThreshold);
     void setFilenamePattern(const std::string &pattern);
     void setCaptureLabel(const std::string &label);
     void setSourcePrologue(const std::string &prologue);
@@ -235,15 +236,23 @@ class ReplayWriter final : angle::NonCopyable
                                                const std::vector<std::string> &strings,
                                                bool *isNewEntryOut);
 
-    void saveFrame(uint32_t frameIndex);
+    void saveFrame();
+    void saveFrameIfFull();
     void saveIndexFilesAndHeader();
     void saveSetupFile();
+
+    std::vector<std::string> getAndResetWrittenFiles();
 
   private:
     static std::string GetVarName(EntryPoint entryPoint, const std::string &paramName, int counter);
 
     void saveHeader();
     void writeReplaySource(const std::string &filename);
+    void addWrittenFile(const std::string &filename);
+    size_t getStoredReplaySourceSize() const;
+
+    size_t mSourceFileSizeThreshold;
+    size_t mFrameIndex;
 
     DataTracker mDataTracker;
     std::string mFilenamePattern;
@@ -259,6 +268,8 @@ class ReplayWriter final : angle::NonCopyable
 
     std::vector<std::string> mPrivateFunctionPrototypes;
     std::vector<std::string> mPrivateFunctions;
+
+    std::vector<std::string> mWrittenFiles;
 };
 
 using BufferCalls = std::map<GLuint, std::vector<CallCapture>>;
@@ -278,9 +289,13 @@ class TrackedResource final : angle::NonCopyable
     TrackedResource();
     ~TrackedResource();
 
+    const ResourceSet &getStartingResources() const { return mStartingResources; }
     ResourceSet &getStartingResources() { return mStartingResources; }
+    const ResourceSet &getNewResources() const { return mNewResources; }
     ResourceSet &getNewResources() { return mNewResources; }
+    const ResourceSet &getResourcesToRegen() const { return mResourcesToRegen; }
     ResourceSet &getResourcesToRegen() { return mResourcesToRegen; }
+    const ResourceSet &getResourcesToRestore() const { return mResourcesToRestore; }
     ResourceSet &getResourcesToRestore() { return mResourcesToRestore; }
 
     void setGennedResource(GLuint id);
@@ -557,7 +572,8 @@ class FrameCaptureShared final : angle::NonCopyable
     }
 
   private:
-    void writeCppReplayIndexFiles(const gl::Context *, bool writeResetContextCall);
+    void writeJSON(const gl::Context *context);
+    void writeCppReplayIndexFiles(const gl::Context *context, bool writeResetContextCall);
     void writeMainContextCppReplay(const gl::Context *context,
                                    const std::vector<CallCapture> &setupCalls);
 
@@ -590,7 +606,8 @@ class FrameCaptureShared final : angle::NonCopyable
     void overrideProgramBinary(const gl::Context *context,
                                CallCapture &call,
                                std::vector<CallCapture> &outCalls);
-    void updateResourceCounts(const CallCapture &call);
+    void updateResourceCountsFromParamCapture(const ParamCapture &param, ResourceIDType idType);
+    void updateResourceCountsFromCallCapture(const CallCapture &call);
 
     void runMidExecutionCapture(const gl::Context *context);
 

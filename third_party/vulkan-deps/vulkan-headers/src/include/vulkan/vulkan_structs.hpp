@@ -127,6 +127,26 @@ namespace VULKAN_HPP_NAMESPACE
                             "AabbPositionsKHR is not nothrow_move_constructible!" );
   using AabbPositionsNV = AabbPositionsKHR;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AabbPositionsKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AabbPositionsKHR const & aabbPositionsKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( float, seed, aabbPositionsKHR.minX );
+    VULKAN_HPP_HASH_COMBINE( float, seed, aabbPositionsKHR.minY );
+    VULKAN_HPP_HASH_COMBINE( float, seed, aabbPositionsKHR.minZ );
+    VULKAN_HPP_HASH_COMBINE( float, seed, aabbPositionsKHR.maxX );
+    VULKAN_HPP_HASH_COMBINE( float, seed, aabbPositionsKHR.maxY );
+    VULKAN_HPP_HASH_COMBINE( float, seed, aabbPositionsKHR.maxZ );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   union DeviceOrHostAddressConstKHR
   {
     using NativeType = VkDeviceOrHostAddressConstKHR;
@@ -1030,6 +1050,25 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::AccelerationStructureBuildRangeInfoKHR>::value,
     "AccelerationStructureBuildRangeInfoKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureBuildRangeInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureBuildRangeInfoKHR const &
+                            accelerationStructureBuildRangeInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureBuildRangeInfoKHR.primitiveCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureBuildRangeInfoKHR.primitiveOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureBuildRangeInfoKHR.firstVertex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureBuildRangeInfoKHR.transformOffset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureBuildSizesInfoKHR
   {
     using NativeType = VkAccelerationStructureBuildSizesInfoKHR;
@@ -1145,6 +1184,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AccelerationStructureBuildSizesInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureBuildSizesInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureBuildSizesInfoKHR const &
+                            accelerationStructureBuildSizesInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, accelerationStructureBuildSizesInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, accelerationStructureBuildSizesInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, accelerationStructureBuildSizesInfoKHR.accelerationStructureSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, accelerationStructureBuildSizesInfoKHR.updateScratchSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, accelerationStructureBuildSizesInfoKHR.buildScratchSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureCreateInfoKHR
   {
     using NativeType = VkAccelerationStructureCreateInfoKHR;
@@ -1290,6 +1352,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AccelerationStructureCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureCreateInfoKHR const &
+                            accelerationStructureCreateInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, accelerationStructureCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, accelerationStructureCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::AccelerationStructureCreateFlagsKHR, seed, accelerationStructureCreateInfoKHR.createFlags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, accelerationStructureCreateInfoKHR.buffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, accelerationStructureCreateInfoKHR.offset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, accelerationStructureCreateInfoKHR.size );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::AccelerationStructureTypeKHR, seed, accelerationStructureCreateInfoKHR.type );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceAddress, seed, accelerationStructureCreateInfoKHR.deviceAddress );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct GeometryTrianglesNV
   {
     using NativeType = VkGeometryTrianglesNV;
@@ -1478,6 +1566,34 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = GeometryTrianglesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::GeometryTrianglesNV>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::GeometryTrianglesNV const & geometryTrianglesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, geometryTrianglesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, geometryTrianglesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, geometryTrianglesNV.vertexData );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, geometryTrianglesNV.vertexOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, geometryTrianglesNV.vertexCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, geometryTrianglesNV.vertexStride );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, geometryTrianglesNV.vertexFormat );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, geometryTrianglesNV.indexData );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, geometryTrianglesNV.indexOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, geometryTrianglesNV.indexCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::IndexType, seed, geometryTrianglesNV.indexType );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, geometryTrianglesNV.transformData );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, geometryTrianglesNV.transformOffset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct GeometryAABBNV
   {
     using NativeType = VkGeometryAABBNV;
@@ -1589,6 +1705,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = GeometryAABBNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::GeometryAABBNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::GeometryAABBNV const & geometryAABBNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, geometryAABBNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, geometryAABBNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, geometryAABBNV.aabbData );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, geometryAABBNV.numAABBs );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, geometryAABBNV.stride );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, geometryAABBNV.offset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct GeometryDataNV
   {
     using NativeType = VkGeometryDataNV;
@@ -1666,6 +1802,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::GeometryDataNV>::value,
                             "GeometryDataNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::GeometryDataNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::GeometryDataNV const & geometryDataNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::GeometryTrianglesNV, seed, geometryDataNV.triangles );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::GeometryAABBNV, seed, geometryDataNV.aabbs );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct GeometryNV
   {
     using NativeType = VkGeometryNV;
@@ -1771,6 +1923,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = GeometryNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::GeometryNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::GeometryNV const & geometryNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, geometryNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, geometryNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::GeometryTypeKHR, seed, geometryNV.geometryType );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::GeometryDataNV, seed, geometryNV.geometry );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::GeometryFlagsKHR, seed, geometryNV.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureInfoNV
   {
     using NativeType = VkAccelerationStructureInfoNV;
@@ -1926,6 +2097,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AccelerationStructureInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureInfoNV const & accelerationStructureInfoNV ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, accelerationStructureInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, accelerationStructureInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::AccelerationStructureTypeNV, seed, accelerationStructureInfoNV.type );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::BuildAccelerationStructureFlagsNV, seed, accelerationStructureInfoNV.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureInfoNV.instanceCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureInfoNV.geometryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::GeometryNV *, seed, accelerationStructureInfoNV.pGeometries );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureCreateInfoNV
   {
     using NativeType = VkAccelerationStructureCreateInfoNV;
@@ -2027,6 +2222,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AccelerationStructureCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureCreateInfoNV const &
+                            accelerationStructureCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, accelerationStructureCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, accelerationStructureCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, accelerationStructureCreateInfoNV.compactedSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::AccelerationStructureInfoNV, seed, accelerationStructureCreateInfoNV.info );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureDeviceAddressInfoKHR
   {
     using NativeType = VkAccelerationStructureDeviceAddressInfoKHR;
@@ -2122,6 +2337,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AccelerationStructureDeviceAddressInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureDeviceAddressInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureDeviceAddressInfoKHR const &
+                            accelerationStructureDeviceAddressInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, accelerationStructureDeviceAddressInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, accelerationStructureDeviceAddressInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR,
+                             seed,
+                             accelerationStructureDeviceAddressInfoKHR.accelerationStructure );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureGeometryMotionTrianglesDataNV
   {
     using NativeType = VkAccelerationStructureGeometryMotionTrianglesDataNV;
@@ -2273,6 +2509,28 @@ namespace VULKAN_HPP_NAMESPACE
                             "TransformMatrixKHR is not nothrow_move_constructible!" );
   using TransformMatrixNV = TransformMatrixKHR;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::TransformMatrixKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::TransformMatrixKHR const & transformMatrixKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    for ( size_t i = 0; i < 3; ++i )
+    {
+      for ( size_t j = 0; j < 4; ++j )
+      {
+        VULKAN_HPP_HASH_COMBINE( float, seed, transformMatrixKHR.matrix[i][j] );
+      }
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureInstanceKHR
   {
     using NativeType = VkAccelerationStructureInstanceKHR;
@@ -2398,6 +2656,29 @@ namespace VULKAN_HPP_NAMESPACE
     "AccelerationStructureInstanceKHR is not nothrow_move_constructible!" );
   using AccelerationStructureInstanceNV = AccelerationStructureInstanceKHR;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureInstanceKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureInstanceKHR const & accelerationStructureInstanceKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::TransformMatrixKHR, seed, accelerationStructureInstanceKHR.transform );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureInstanceKHR.instanceCustomIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureInstanceKHR.mask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureInstanceKHR.instanceShaderBindingTableRecordOffset );
+    VULKAN_HPP_HASH_COMBINE( VkGeometryInstanceFlagsKHR, seed, accelerationStructureInstanceKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, accelerationStructureInstanceKHR.accelerationStructureReference );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureMatrixMotionInstanceNV
   {
     using NativeType = VkAccelerationStructureMatrixMotionInstanceNV;
@@ -2536,6 +2817,32 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::AccelerationStructureMatrixMotionInstanceNV>::value,
     "AccelerationStructureMatrixMotionInstanceNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureMatrixMotionInstanceNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureMatrixMotionInstanceNV const &
+                            accelerationStructureMatrixMotionInstanceNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::TransformMatrixKHR, seed, accelerationStructureMatrixMotionInstanceNV.transformT0 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::TransformMatrixKHR, seed, accelerationStructureMatrixMotionInstanceNV.transformT1 );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureMatrixMotionInstanceNV.instanceCustomIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureMatrixMotionInstanceNV.mask );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, accelerationStructureMatrixMotionInstanceNV.instanceShaderBindingTableRecordOffset );
+    VULKAN_HPP_HASH_COMBINE( VkGeometryInstanceFlagsKHR, seed, accelerationStructureMatrixMotionInstanceNV.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      uint64_t, seed, accelerationStructureMatrixMotionInstanceNV.accelerationStructureReference );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureMemoryRequirementsInfoNV
   {
     using NativeType = VkAccelerationStructureMemoryRequirementsInfoNV;
@@ -2644,6 +2951,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AccelerationStructureMemoryRequirementsInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsInfoNV const &
+                            accelerationStructureMemoryRequirementsInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, accelerationStructureMemoryRequirementsInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, accelerationStructureMemoryRequirementsInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsTypeNV,
+                             seed,
+                             accelerationStructureMemoryRequirementsInfoNV.type );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccelerationStructureNV,
+                             seed,
+                             accelerationStructureMemoryRequirementsInfoNV.accelerationStructure );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureMotionInfoNV
   {
     using NativeType = VkAccelerationStructureMotionInfoNV;
@@ -2745,6 +3076,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AccelerationStructureMotionInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureMotionInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureMotionInfoNV const &
+                            accelerationStructureMotionInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, accelerationStructureMotionInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, accelerationStructureMotionInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureMotionInfoNV.maxInstances );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::AccelerationStructureMotionInfoFlagsNV, seed, accelerationStructureMotionInfoNV.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SRTDataNV
   {
     using NativeType = VkSRTDataNV;
@@ -2948,6 +3299,36 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SRTDataNV>::value,
                             "SRTDataNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SRTDataNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SRTDataNV const & sRTDataNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.sx );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.a );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.b );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.pvx );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.sy );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.c );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.pvy );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.sz );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.pvz );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.qx );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.qy );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.qz );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.qw );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.tx );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.ty );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sRTDataNV.tz );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AccelerationStructureSRTMotionInstanceNV
   {
     using NativeType = VkAccelerationStructureSRTMotionInstanceNV;
@@ -3086,6 +3467,31 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::AccelerationStructureSRTMotionInstanceNV>::value,
     "AccelerationStructureSRTMotionInstanceNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureSRTMotionInstanceNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureSRTMotionInstanceNV const &
+                            accelerationStructureSRTMotionInstanceNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SRTDataNV, seed, accelerationStructureSRTMotionInstanceNV.transformT0 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SRTDataNV, seed, accelerationStructureSRTMotionInstanceNV.transformT1 );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureSRTMotionInstanceNV.instanceCustomIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, accelerationStructureSRTMotionInstanceNV.mask );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, accelerationStructureSRTMotionInstanceNV.instanceShaderBindingTableRecordOffset );
+    VULKAN_HPP_HASH_COMBINE( VkGeometryInstanceFlagsKHR, seed, accelerationStructureSRTMotionInstanceNV.flags );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, accelerationStructureSRTMotionInstanceNV.accelerationStructureReference );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   union AccelerationStructureMotionInstanceDataNV
   {
     using NativeType = VkAccelerationStructureMotionInstanceDataNV;
@@ -3324,6 +3730,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AccelerationStructureVersionInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AccelerationStructureVersionInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AccelerationStructureVersionInfoKHR const &
+                            accelerationStructureVersionInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, accelerationStructureVersionInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, accelerationStructureVersionInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( const uint8_t *, seed, accelerationStructureVersionInfoKHR.pVersionData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AcquireNextImageInfoKHR
   {
     using NativeType = VkAcquireNextImageInfoKHR;
@@ -3448,6 +3872,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AcquireNextImageInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AcquireNextImageInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AcquireNextImageInfoKHR const & acquireNextImageInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, acquireNextImageInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, acquireNextImageInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SwapchainKHR, seed, acquireNextImageInfoKHR.swapchain );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, acquireNextImageInfoKHR.timeout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Semaphore, seed, acquireNextImageInfoKHR.semaphore );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Fence, seed, acquireNextImageInfoKHR.fence );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, acquireNextImageInfoKHR.deviceMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AcquireProfilingLockInfoKHR
   {
     using NativeType = VkAcquireProfilingLockInfoKHR;
@@ -3544,6 +3990,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AcquireProfilingLockInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AcquireProfilingLockInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AcquireProfilingLockInfoKHR const & acquireProfilingLockInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, acquireProfilingLockInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, acquireProfilingLockInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::AcquireProfilingLockFlagsKHR, seed, acquireProfilingLockInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, acquireProfilingLockInfoKHR.timeout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AllocationCallbacks
   {
     using NativeType = VkAllocationCallbacks;
@@ -3661,6 +4127,27 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::AllocationCallbacks>::value,
                             "AllocationCallbacks is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AllocationCallbacks>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::AllocationCallbacks const & allocationCallbacks ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( void *, seed, allocationCallbacks.pUserData );
+    VULKAN_HPP_HASH_COMBINE( PFN_vkAllocationFunction, seed, allocationCallbacks.pfnAllocation );
+    VULKAN_HPP_HASH_COMBINE( PFN_vkReallocationFunction, seed, allocationCallbacks.pfnReallocation );
+    VULKAN_HPP_HASH_COMBINE( PFN_vkFreeFunction, seed, allocationCallbacks.pfnFree );
+    VULKAN_HPP_HASH_COMBINE( PFN_vkInternalAllocationNotification, seed, allocationCallbacks.pfnInternalAllocation );
+    VULKAN_HPP_HASH_COMBINE( PFN_vkInternalFreeNotification, seed, allocationCallbacks.pfnInternalFree );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ComponentMapping
   {
     using NativeType = VkComponentMapping;
@@ -3756,6 +4243,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ComponentMapping>::value,
                             "ComponentMapping is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ComponentMapping>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ComponentMapping const & componentMapping ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentSwizzle, seed, componentMapping.r );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentSwizzle, seed, componentMapping.g );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentSwizzle, seed, componentMapping.b );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentSwizzle, seed, componentMapping.a );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
   struct AndroidHardwareBufferFormatProperties2ANDROID
   {
@@ -3864,6 +4369,45 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = AndroidHardwareBufferFormatProperties2ANDROID;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AndroidHardwareBufferFormatProperties2ANDROID>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AndroidHardwareBufferFormatProperties2ANDROID const &
+                            androidHardwareBufferFormatProperties2ANDROID ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, androidHardwareBufferFormatProperties2ANDROID.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, androidHardwareBufferFormatProperties2ANDROID.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, androidHardwareBufferFormatProperties2ANDROID.format );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, androidHardwareBufferFormatProperties2ANDROID.externalFormat );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FormatFeatureFlags2KHR,
+                             seed,
+                             androidHardwareBufferFormatProperties2ANDROID.formatFeatures );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentMapping,
+                             seed,
+                             androidHardwareBufferFormatProperties2ANDROID.samplerYcbcrConversionComponents );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion,
+                             seed,
+                             androidHardwareBufferFormatProperties2ANDROID.suggestedYcbcrModel );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SamplerYcbcrRange,
+                             seed,
+                             androidHardwareBufferFormatProperties2ANDROID.suggestedYcbcrRange );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ChromaLocation,
+                             seed,
+                             androidHardwareBufferFormatProperties2ANDROID.suggestedXChromaOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ChromaLocation,
+                             seed,
+                             androidHardwareBufferFormatProperties2ANDROID.suggestedYChromaOffset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
@@ -3974,6 +4518,41 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = AndroidHardwareBufferFormatPropertiesANDROID;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AndroidHardwareBufferFormatPropertiesANDROID>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AndroidHardwareBufferFormatPropertiesANDROID const &
+                            androidHardwareBufferFormatPropertiesANDROID ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, androidHardwareBufferFormatPropertiesANDROID.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, androidHardwareBufferFormatPropertiesANDROID.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, androidHardwareBufferFormatPropertiesANDROID.format );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, androidHardwareBufferFormatPropertiesANDROID.externalFormat );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags, seed, androidHardwareBufferFormatPropertiesANDROID.formatFeatures );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentMapping,
+                             seed,
+                             androidHardwareBufferFormatPropertiesANDROID.samplerYcbcrConversionComponents );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion,
+                             seed,
+                             androidHardwareBufferFormatPropertiesANDROID.suggestedYcbcrModel );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SamplerYcbcrRange, seed, androidHardwareBufferFormatPropertiesANDROID.suggestedYcbcrRange );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ChromaLocation, seed, androidHardwareBufferFormatPropertiesANDROID.suggestedXChromaOffset );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ChromaLocation, seed, androidHardwareBufferFormatPropertiesANDROID.suggestedYChromaOffset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
@@ -4057,6 +4636,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = AndroidHardwareBufferPropertiesANDROID;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AndroidHardwareBufferPropertiesANDROID>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AndroidHardwareBufferPropertiesANDROID const &
+                            androidHardwareBufferPropertiesANDROID ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, androidHardwareBufferPropertiesANDROID.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, androidHardwareBufferPropertiesANDROID.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, androidHardwareBufferPropertiesANDROID.allocationSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, androidHardwareBufferPropertiesANDROID.memoryTypeBits );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
@@ -4135,6 +4735,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = AndroidHardwareBufferUsageANDROID;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AndroidHardwareBufferUsageANDROID>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AndroidHardwareBufferUsageANDROID const &
+                            androidHardwareBufferUsageANDROID ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, androidHardwareBufferUsageANDROID.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, androidHardwareBufferUsageANDROID.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, androidHardwareBufferUsageANDROID.androidHardwareBufferUsage );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
@@ -4234,6 +4853,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = AndroidSurfaceCreateInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AndroidSurfaceCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AndroidSurfaceCreateInfoKHR const & androidSurfaceCreateInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, androidSurfaceCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, androidSurfaceCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::AndroidSurfaceCreateFlagsKHR, seed, androidSurfaceCreateInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( struct ANativeWindow *, seed, androidSurfaceCreateInfoKHR.window );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
   struct ApplicationInfo
@@ -4357,6 +4997,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ApplicationInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ApplicationInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ApplicationInfo const & applicationInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, applicationInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, applicationInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, applicationInfo.pApplicationName );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, applicationInfo.applicationVersion );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, applicationInfo.pEngineName );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, applicationInfo.engineVersion );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, applicationInfo.apiVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AttachmentDescription
   {
     using NativeType = VkAttachmentDescription;
@@ -4509,6 +5170,30 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::AttachmentDescription>::value,
                             "AttachmentDescription is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AttachmentDescription>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::AttachmentDescription const & attachmentDescription ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentDescriptionFlags, seed, attachmentDescription.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, attachmentDescription.format );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SampleCountFlagBits, seed, attachmentDescription.samples );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentLoadOp, seed, attachmentDescription.loadOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentStoreOp, seed, attachmentDescription.storeOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentLoadOp, seed, attachmentDescription.stencilLoadOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentStoreOp, seed, attachmentDescription.stencilStoreOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, attachmentDescription.initialLayout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, attachmentDescription.finalLayout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AttachmentDescription2
   {
     using NativeType = VkAttachmentDescription2;
@@ -4680,6 +5365,32 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using AttachmentDescription2KHR = AttachmentDescription2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AttachmentDescription2>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::AttachmentDescription2 const & attachmentDescription2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, attachmentDescription2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, attachmentDescription2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentDescriptionFlags, seed, attachmentDescription2.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, attachmentDescription2.format );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SampleCountFlagBits, seed, attachmentDescription2.samples );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentLoadOp, seed, attachmentDescription2.loadOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentStoreOp, seed, attachmentDescription2.storeOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentLoadOp, seed, attachmentDescription2.stencilLoadOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentStoreOp, seed, attachmentDescription2.stencilStoreOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, attachmentDescription2.initialLayout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, attachmentDescription2.finalLayout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AttachmentDescriptionStencilLayout
   {
     using NativeType = VkAttachmentDescriptionStencilLayout;
@@ -4784,6 +5495,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using AttachmentDescriptionStencilLayoutKHR = AttachmentDescriptionStencilLayout;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AttachmentDescriptionStencilLayout>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::AttachmentDescriptionStencilLayout const &
+                            attachmentDescriptionStencilLayout ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, attachmentDescriptionStencilLayout.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, attachmentDescriptionStencilLayout.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageLayout, seed, attachmentDescriptionStencilLayout.stencilInitialLayout );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageLayout, seed, attachmentDescriptionStencilLayout.stencilFinalLayout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AttachmentReference
   {
     using NativeType = VkAttachmentReference;
@@ -4861,6 +5593,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::AttachmentReference>::value,
                             "AttachmentReference is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AttachmentReference>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::AttachmentReference const & attachmentReference ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, attachmentReference.attachment );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, attachmentReference.layout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AttachmentReference2
   {
     using NativeType = VkAttachmentReference2;
@@ -4967,6 +5716,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using AttachmentReference2KHR = AttachmentReference2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AttachmentReference2>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::AttachmentReference2 const & attachmentReference2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, attachmentReference2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, attachmentReference2.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, attachmentReference2.attachment );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, attachmentReference2.layout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageAspectFlags, seed, attachmentReference2.aspectMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AttachmentReferenceStencilLayout
   {
     using NativeType = VkAttachmentReferenceStencilLayout;
@@ -5058,6 +5827,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using AttachmentReferenceStencilLayoutKHR = AttachmentReferenceStencilLayout;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AttachmentReferenceStencilLayout>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::AttachmentReferenceStencilLayout const & attachmentReferenceStencilLayout ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, attachmentReferenceStencilLayout.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, attachmentReferenceStencilLayout.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, attachmentReferenceStencilLayout.stencilLayout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AttachmentSampleCountInfoAMD
   {
     using NativeType = VkAttachmentSampleCountInfoAMD;
@@ -5193,6 +5981,28 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using AttachmentSampleCountInfoNV = AttachmentSampleCountInfoAMD;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AttachmentSampleCountInfoAMD>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::AttachmentSampleCountInfoAMD const & attachmentSampleCountInfoAMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, attachmentSampleCountInfoAMD.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, attachmentSampleCountInfoAMD.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, attachmentSampleCountInfoAMD.colorAttachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SampleCountFlagBits *, seed, attachmentSampleCountInfoAMD.pColorAttachmentSamples );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlagBits, seed, attachmentSampleCountInfoAMD.depthStencilAttachmentSamples );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct Extent2D
   {
     using NativeType = VkExtent2D;
@@ -5265,6 +6075,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::Extent2D>::value,
                             "Extent2D is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::Extent2D>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::Extent2D const & extent2D ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, extent2D.width );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, extent2D.height );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SampleLocationEXT
   {
     using NativeType = VkSampleLocationEXT;
@@ -5339,6 +6165,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SampleLocationEXT>::value,
                             "SampleLocationEXT is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SampleLocationEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SampleLocationEXT const & sampleLocationEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( float, seed, sampleLocationEXT.x );
+    VULKAN_HPP_HASH_COMBINE( float, seed, sampleLocationEXT.y );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SampleLocationsInfoEXT
   {
     using NativeType = VkSampleLocationsInfoEXT;
@@ -5483,6 +6325,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SampleLocationsInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SampleLocationsInfoEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SampleLocationsInfoEXT const & sampleLocationsInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, sampleLocationsInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, sampleLocationsInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlagBits, seed, sampleLocationsInfoEXT.sampleLocationsPerPixel );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, sampleLocationsInfoEXT.sampleLocationGridSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, sampleLocationsInfoEXT.sampleLocationsCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SampleLocationEXT *, seed, sampleLocationsInfoEXT.pSampleLocations );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct AttachmentSampleLocationsEXT
   {
     using NativeType = VkAttachmentSampleLocationsEXT;
@@ -5564,6 +6429,24 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::AttachmentSampleLocationsEXT>::value,
     "AttachmentSampleLocationsEXT is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::AttachmentSampleLocationsEXT>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::AttachmentSampleLocationsEXT const & attachmentSampleLocationsEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, attachmentSampleLocationsEXT.attachmentIndex );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleLocationsInfoEXT, seed, attachmentSampleLocationsEXT.sampleLocationsInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BaseInStructure
   {
     using NativeType = VkBaseInStructure;
@@ -5632,6 +6515,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BaseInStructure>::value,
                             "BaseInStructure is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BaseInStructure>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BaseInStructure const & baseInStructure ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, baseInStructure.sType );
+    VULKAN_HPP_HASH_COMBINE( const struct VULKAN_HPP_NAMESPACE::BaseInStructure *, seed, baseInStructure.pNext );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BaseOutStructure
   {
     using NativeType = VkBaseOutStructure;
@@ -5700,6 +6599,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BaseOutStructure>::value,
                             "BaseOutStructure is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BaseOutStructure>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BaseOutStructure const & baseOutStructure ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, baseOutStructure.sType );
+    VULKAN_HPP_HASH_COMBINE( struct VULKAN_HPP_NAMESPACE::BaseOutStructure *, seed, baseOutStructure.pNext );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindAccelerationStructureMemoryInfoNV
   {
     using NativeType = VkBindAccelerationStructureMemoryInfoNV;
@@ -5859,6 +6774,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BindAccelerationStructureMemoryInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoNV const &
+                            bindAccelerationStructureMemoryInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bindAccelerationStructureMemoryInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bindAccelerationStructureMemoryInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccelerationStructureNV,
+                             seed,
+                             bindAccelerationStructureMemoryInfoNV.accelerationStructure );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, bindAccelerationStructureMemoryInfoNV.memory );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, bindAccelerationStructureMemoryInfoNV.memoryOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindAccelerationStructureMemoryInfoNV.deviceIndexCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, bindAccelerationStructureMemoryInfoNV.pDeviceIndices );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindBufferMemoryDeviceGroupInfo
   {
     using NativeType = VkBindBufferMemoryDeviceGroupInfo;
@@ -5976,6 +6916,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using BindBufferMemoryDeviceGroupInfoKHR = BindBufferMemoryDeviceGroupInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindBufferMemoryDeviceGroupInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::BindBufferMemoryDeviceGroupInfo const & bindBufferMemoryDeviceGroupInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bindBufferMemoryDeviceGroupInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bindBufferMemoryDeviceGroupInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindBufferMemoryDeviceGroupInfo.deviceIndexCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, bindBufferMemoryDeviceGroupInfo.pDeviceIndices );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindBufferMemoryInfo
   {
     using NativeType = VkBindBufferMemoryInfo;
@@ -6081,6 +7041,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using BindBufferMemoryInfoKHR = BindBufferMemoryInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo const & bindBufferMemoryInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bindBufferMemoryInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bindBufferMemoryInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, bindBufferMemoryInfo.buffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, bindBufferMemoryInfo.memory );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bindBufferMemoryInfo.memoryOffset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct Offset2D
   {
     using NativeType = VkOffset2D;
@@ -6153,6 +7133,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::Offset2D>::value,
                             "Offset2D is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::Offset2D>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::Offset2D const & offset2D ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, offset2D.x );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, offset2D.y );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct Rect2D
   {
     using NativeType = VkRect2D;
@@ -6226,6 +7222,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::Rect2D>::value,
                             "Rect2D is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::Rect2D>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::Rect2D const & rect2D ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset2D, seed, rect2D.offset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, rect2D.extent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindImageMemoryDeviceGroupInfo
   {
     using NativeType = VkBindImageMemoryDeviceGroupInfo;
@@ -6382,6 +7394,28 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using BindImageMemoryDeviceGroupInfoKHR = BindImageMemoryDeviceGroupInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindImageMemoryDeviceGroupInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BindImageMemoryDeviceGroupInfo const & bindImageMemoryDeviceGroupInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bindImageMemoryDeviceGroupInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bindImageMemoryDeviceGroupInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindImageMemoryDeviceGroupInfo.deviceIndexCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, bindImageMemoryDeviceGroupInfo.pDeviceIndices );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindImageMemoryDeviceGroupInfo.splitInstanceBindRegionCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::Rect2D *, seed, bindImageMemoryDeviceGroupInfo.pSplitInstanceBindRegions );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindImageMemoryInfo
   {
     using NativeType = VkBindImageMemoryInfo;
@@ -6487,6 +7521,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using BindImageMemoryInfoKHR = BindImageMemoryInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindImageMemoryInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::BindImageMemoryInfo const & bindImageMemoryInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bindImageMemoryInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bindImageMemoryInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, bindImageMemoryInfo.image );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, bindImageMemoryInfo.memory );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bindImageMemoryInfo.memoryOffset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindImageMemorySwapchainInfoKHR
   {
     using NativeType = VkBindImageMemorySwapchainInfoKHR;
@@ -6585,6 +7639,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BindImageMemorySwapchainInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindImageMemorySwapchainInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::BindImageMemorySwapchainInfoKHR const & bindImageMemorySwapchainInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bindImageMemorySwapchainInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bindImageMemorySwapchainInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SwapchainKHR, seed, bindImageMemorySwapchainInfoKHR.swapchain );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindImageMemorySwapchainInfoKHR.imageIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindImagePlaneMemoryInfo
   {
     using NativeType = VkBindImagePlaneMemoryInfo;
@@ -6673,6 +7747,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using BindImagePlaneMemoryInfoKHR = BindImagePlaneMemoryInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindImagePlaneMemoryInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BindImagePlaneMemoryInfo const & bindImagePlaneMemoryInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bindImagePlaneMemoryInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bindImagePlaneMemoryInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageAspectFlagBits, seed, bindImagePlaneMemoryInfo.planeAspect );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindIndexBufferIndirectCommandNV
   {
     using NativeType = VkBindIndexBufferIndirectCommandNV;
@@ -6764,6 +7856,26 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BindIndexBufferIndirectCommandNV>::value,
     "BindIndexBufferIndirectCommandNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindIndexBufferIndirectCommandNV>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::BindIndexBufferIndirectCommandNV const & bindIndexBufferIndirectCommandNV ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceAddress, seed, bindIndexBufferIndirectCommandNV.bufferAddress );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindIndexBufferIndirectCommandNV.size );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::IndexType, seed, bindIndexBufferIndirectCommandNV.indexType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindShaderGroupIndirectCommandNV
   {
     using NativeType = VkBindShaderGroupIndirectCommandNV;
@@ -6834,6 +7946,23 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BindShaderGroupIndirectCommandNV>::value,
     "BindShaderGroupIndirectCommandNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindShaderGroupIndirectCommandNV>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::BindShaderGroupIndirectCommandNV const & bindShaderGroupIndirectCommandNV ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindShaderGroupIndirectCommandNV.groupIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SparseMemoryBind
   {
     using NativeType = VkSparseMemoryBind;
@@ -6941,6 +8070,25 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SparseMemoryBind>::value,
                             "SparseMemoryBind is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SparseMemoryBind>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SparseMemoryBind const & sparseMemoryBind ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, sparseMemoryBind.resourceOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, sparseMemoryBind.size );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, sparseMemoryBind.memory );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, sparseMemoryBind.memoryOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SparseMemoryBindFlags, seed, sparseMemoryBind.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SparseBufferMemoryBindInfo
   {
     using NativeType = VkSparseBufferMemoryBindInfo;
@@ -7049,6 +8197,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SparseBufferMemoryBindInfo>::value,
                             "SparseBufferMemoryBindInfo is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SparseBufferMemoryBindInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SparseBufferMemoryBindInfo const & sparseBufferMemoryBindInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, sparseBufferMemoryBindInfo.buffer );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, sparseBufferMemoryBindInfo.bindCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::SparseMemoryBind *, seed, sparseBufferMemoryBindInfo.pBinds );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SparseImageOpaqueMemoryBindInfo
   {
     using NativeType = VkSparseImageOpaqueMemoryBindInfo;
@@ -7159,6 +8325,26 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SparseImageOpaqueMemoryBindInfo>::value,
     "SparseImageOpaqueMemoryBindInfo is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SparseImageOpaqueMemoryBindInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SparseImageOpaqueMemoryBindInfo const & sparseImageOpaqueMemoryBindInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, sparseImageOpaqueMemoryBindInfo.image );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, sparseImageOpaqueMemoryBindInfo.bindCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SparseMemoryBind *, seed, sparseImageOpaqueMemoryBindInfo.pBinds );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageSubresource
   {
     using NativeType = VkImageSubresource;
@@ -7244,6 +8430,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageSubresource>::value,
                             "ImageSubresource is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageSubresource>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageSubresource const & imageSubresource ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageAspectFlags, seed, imageSubresource.aspectMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageSubresource.mipLevel );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageSubresource.arrayLayer );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct Offset3D
   {
     using NativeType = VkOffset3D;
@@ -7326,6 +8529,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::Offset3D>::value,
                             "Offset3D is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::Offset3D>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::Offset3D const & offset3D ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, offset3D.x );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, offset3D.y );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, offset3D.z );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct Extent3D
   {
     using NativeType = VkExtent3D;
@@ -7411,6 +8631,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::Extent3D>::value,
                             "Extent3D is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::Extent3D>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::Extent3D const & extent3D ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, extent3D.width );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, extent3D.height );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, extent3D.depth );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SparseImageMemoryBind
   {
     using NativeType = VkSparseImageMemoryBind;
@@ -7530,6 +8767,27 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SparseImageMemoryBind>::value,
                             "SparseImageMemoryBind is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SparseImageMemoryBind>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SparseImageMemoryBind const & sparseImageMemoryBind ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresource, seed, sparseImageMemoryBind.subresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, sparseImageMemoryBind.offset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, sparseImageMemoryBind.extent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, sparseImageMemoryBind.memory );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, sparseImageMemoryBind.memoryOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SparseMemoryBindFlags, seed, sparseImageMemoryBind.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SparseImageMemoryBindInfo
   {
     using NativeType = VkSparseImageMemoryBindInfo;
@@ -7638,6 +8896,25 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SparseImageMemoryBindInfo>::value,
                             "SparseImageMemoryBindInfo is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SparseImageMemoryBindInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SparseImageMemoryBindInfo const & sparseImageMemoryBindInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, sparseImageMemoryBindInfo.image );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, sparseImageMemoryBindInfo.bindCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SparseImageMemoryBind *, seed, sparseImageMemoryBindInfo.pBinds );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindSparseInfo
   {
     using NativeType = VkBindSparseInfo;
@@ -7894,6 +9171,35 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BindSparseInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindSparseInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BindSparseInfo const & bindSparseInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bindSparseInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bindSparseInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindSparseInfo.waitSemaphoreCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Semaphore *, seed, bindSparseInfo.pWaitSemaphores );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindSparseInfo.bufferBindCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SparseBufferMemoryBindInfo *, seed, bindSparseInfo.pBufferBinds );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindSparseInfo.imageOpaqueBindCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SparseImageOpaqueMemoryBindInfo *, seed, bindSparseInfo.pImageOpaqueBinds );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindSparseInfo.imageBindCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SparseImageMemoryBindInfo *, seed, bindSparseInfo.pImageBinds );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindSparseInfo.signalSemaphoreCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Semaphore *, seed, bindSparseInfo.pSignalSemaphores );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BindVertexBufferIndirectCommandNV
   {
     using NativeType = VkBindVertexBufferIndirectCommandNV;
@@ -7983,6 +9289,25 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BindVertexBufferIndirectCommandNV>::value,
     "BindVertexBufferIndirectCommandNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BindVertexBufferIndirectCommandNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BindVertexBufferIndirectCommandNV const &
+                            bindVertexBufferIndirectCommandNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceAddress, seed, bindVertexBufferIndirectCommandNV.bufferAddress );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindVertexBufferIndirectCommandNV.size );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bindVertexBufferIndirectCommandNV.stride );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageSubresourceLayers
   {
     using NativeType = VkImageSubresourceLayers;
@@ -8079,6 +9404,25 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageSubresourceLayers>::value,
                             "ImageSubresourceLayers is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageSubresourceLayers>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers const & imageSubresourceLayers ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageAspectFlags, seed, imageSubresourceLayers.aspectMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageSubresourceLayers.mipLevel );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageSubresourceLayers.baseArrayLayer );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageSubresourceLayers.layerCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageBlit2KHR
   {
     using NativeType = VkImageBlit2KHR;
@@ -8196,6 +9540,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageBlit2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageBlit2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageBlit2KHR const & imageBlit2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageBlit2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageBlit2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageBlit2KHR.srcSubresource );
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageBlit2KHR.srcOffsets[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageBlit2KHR.dstSubresource );
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageBlit2KHR.dstOffsets[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BlitImageInfo2KHR
   {
     using NativeType = VkBlitImageInfo2KHR;
@@ -8369,6 +9739,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BlitImageInfo2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BlitImageInfo2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BlitImageInfo2KHR const & blitImageInfo2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, blitImageInfo2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, blitImageInfo2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, blitImageInfo2KHR.srcImage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, blitImageInfo2KHR.srcImageLayout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, blitImageInfo2KHR.dstImage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, blitImageInfo2KHR.dstImageLayout );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, blitImageInfo2KHR.regionCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ImageBlit2KHR *, seed, blitImageInfo2KHR.pRegions );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Filter, seed, blitImageInfo2KHR.filter );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   struct BufferCollectionBufferCreateInfoFUCHSIA
   {
@@ -8473,6 +9866,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = BufferCollectionBufferCreateInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferCollectionBufferCreateInfoFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferCollectionBufferCreateInfoFUCHSIA const &
+                            bufferCollectionBufferCreateInfoFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferCollectionBufferCreateInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferCollectionBufferCreateInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA, seed, bufferCollectionBufferCreateInfoFUCHSIA.collection );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCollectionBufferCreateInfoFUCHSIA.index );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -8611,6 +10025,29 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = BufferCollectionConstraintsInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA const &
+                            bufferCollectionConstraintsInfoFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferCollectionConstraintsInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferCollectionConstraintsInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCollectionConstraintsInfoFUCHSIA.minBufferCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCollectionConstraintsInfoFUCHSIA.maxBufferCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCollectionConstraintsInfoFUCHSIA.minBufferCountForCamping );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCollectionConstraintsInfoFUCHSIA.minBufferCountForDedicatedSlack );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCollectionConstraintsInfoFUCHSIA.minBufferCountForSharedSlack );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -8703,6 +10140,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = BufferCollectionCreateInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferCollectionCreateInfoFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferCollectionCreateInfoFUCHSIA const &
+                            bufferCollectionCreateInfoFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferCollectionCreateInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferCollectionCreateInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE( zx_handle_t, seed, bufferCollectionCreateInfoFUCHSIA.collectionToken );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -8808,6 +10264,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = BufferCollectionImageCreateInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferCollectionImageCreateInfoFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferCollectionImageCreateInfoFUCHSIA const &
+                            bufferCollectionImageCreateInfoFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferCollectionImageCreateInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferCollectionImageCreateInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA, seed, bufferCollectionImageCreateInfoFUCHSIA.collection );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCollectionImageCreateInfoFUCHSIA.index );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -8894,6 +10371,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = SysmemColorSpaceFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA const & sysmemColorSpaceFUCHSIA ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, sysmemColorSpaceFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, sysmemColorSpaceFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, sysmemColorSpaceFUCHSIA.colorSpace );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -9096,6 +10592,43 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = BufferCollectionPropertiesFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferCollectionPropertiesFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferCollectionPropertiesFUCHSIA const &
+                            bufferCollectionPropertiesFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferCollectionPropertiesFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, bufferCollectionPropertiesFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCollectionPropertiesFUCHSIA.memoryTypeBits );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCollectionPropertiesFUCHSIA.bufferCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCollectionPropertiesFUCHSIA.createInfoIndex );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, bufferCollectionPropertiesFUCHSIA.sysmemPixelFormat );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags, seed, bufferCollectionPropertiesFUCHSIA.formatFeatures );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA, seed, bufferCollectionPropertiesFUCHSIA.sysmemColorSpaceIndex );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentMapping,
+                             seed,
+                             bufferCollectionPropertiesFUCHSIA.samplerYcbcrConversionComponents );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion, seed, bufferCollectionPropertiesFUCHSIA.suggestedYcbcrModel );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SamplerYcbcrRange, seed, bufferCollectionPropertiesFUCHSIA.suggestedYcbcrRange );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ChromaLocation, seed, bufferCollectionPropertiesFUCHSIA.suggestedXChromaOffset );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ChromaLocation, seed, bufferCollectionPropertiesFUCHSIA.suggestedYChromaOffset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct BufferCreateInfo
@@ -9260,6 +10793,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BufferCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferCreateInfo const & bufferCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BufferCreateFlags, seed, bufferCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferCreateInfo.size );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BufferUsageFlags, seed, bufferCreateInfo.usage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SharingMode, seed, bufferCreateInfo.sharingMode );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferCreateInfo.queueFamilyIndexCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, bufferCreateInfo.pQueueFamilyIndices );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   struct BufferConstraintsInfoFUCHSIA
   {
@@ -9372,6 +10927,30 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = BufferConstraintsInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferConstraintsInfoFUCHSIA>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::BufferConstraintsInfoFUCHSIA const & bufferConstraintsInfoFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferConstraintsInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferConstraintsInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BufferCreateInfo, seed, bufferConstraintsInfoFUCHSIA.createInfo );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags, seed, bufferConstraintsInfoFUCHSIA.requiredFormatFeatures );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA,
+                             seed,
+                             bufferConstraintsInfoFUCHSIA.bufferCollectionConstraints );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct BufferCopy
@@ -9458,6 +11037,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferCopy>::value,
                             "BufferCopy is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferCopy>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferCopy const & bufferCopy ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferCopy.srcOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferCopy.dstOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferCopy.size );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BufferCopy2KHR
   {
     using NativeType = VkBufferCopy2KHR;
@@ -9562,6 +11158,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BufferCopy2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferCopy2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferCopy2KHR const & bufferCopy2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferCopy2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferCopy2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferCopy2KHR.srcOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferCopy2KHR.dstOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferCopy2KHR.size );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BufferDeviceAddressCreateInfoEXT
   {
     using NativeType = VkBufferDeviceAddressCreateInfoEXT;
@@ -9651,6 +11266,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BufferDeviceAddressCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferDeviceAddressCreateInfoEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::BufferDeviceAddressCreateInfoEXT const & bufferDeviceAddressCreateInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferDeviceAddressCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferDeviceAddressCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceAddress, seed, bufferDeviceAddressCreateInfoEXT.deviceAddress );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BufferDeviceAddressInfo
   {
     using NativeType = VkBufferDeviceAddressInfo;
@@ -9738,6 +11373,24 @@ namespace VULKAN_HPP_NAMESPACE
   using BufferDeviceAddressInfoEXT = BufferDeviceAddressInfo;
   using BufferDeviceAddressInfoKHR = BufferDeviceAddressInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferDeviceAddressInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferDeviceAddressInfo const & bufferDeviceAddressInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferDeviceAddressInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferDeviceAddressInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, bufferDeviceAddressInfo.buffer );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BufferImageCopy
   {
     using NativeType = VkBufferImageCopy;
@@ -9855,6 +11508,26 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferImageCopy>::value,
                             "BufferImageCopy is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferImageCopy>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferImageCopy const & bufferImageCopy ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferImageCopy.bufferOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferImageCopy.bufferRowLength );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferImageCopy.bufferImageHeight );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, bufferImageCopy.imageSubresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, bufferImageCopy.imageOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, bufferImageCopy.imageExtent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BufferImageCopy2KHR
   {
     using NativeType = VkBufferImageCopy2KHR;
@@ -9991,6 +11664,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BufferImageCopy2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferImageCopy2KHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::BufferImageCopy2KHR const & bufferImageCopy2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferImageCopy2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferImageCopy2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferImageCopy2KHR.bufferOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferImageCopy2KHR.bufferRowLength );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferImageCopy2KHR.bufferImageHeight );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, bufferImageCopy2KHR.imageSubresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, bufferImageCopy2KHR.imageOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, bufferImageCopy2KHR.imageExtent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BufferMemoryBarrier
   {
     using NativeType = VkBufferMemoryBarrier;
@@ -10136,6 +11832,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BufferMemoryBarrier;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferMemoryBarrier>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::BufferMemoryBarrier const & bufferMemoryBarrier ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferMemoryBarrier.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferMemoryBarrier.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags, seed, bufferMemoryBarrier.srcAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags, seed, bufferMemoryBarrier.dstAccessMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferMemoryBarrier.srcQueueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferMemoryBarrier.dstQueueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, bufferMemoryBarrier.buffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferMemoryBarrier.offset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferMemoryBarrier.size );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BufferMemoryBarrier2KHR
   {
     using NativeType = VkBufferMemoryBarrier2KHR;
@@ -10305,6 +12025,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BufferMemoryBarrier2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferMemoryBarrier2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferMemoryBarrier2KHR const & bufferMemoryBarrier2KHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferMemoryBarrier2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferMemoryBarrier2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR, seed, bufferMemoryBarrier2KHR.srcStageMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags2KHR, seed, bufferMemoryBarrier2KHR.srcAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR, seed, bufferMemoryBarrier2KHR.dstStageMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags2KHR, seed, bufferMemoryBarrier2KHR.dstAccessMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferMemoryBarrier2KHR.srcQueueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, bufferMemoryBarrier2KHR.dstQueueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, bufferMemoryBarrier2KHR.buffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferMemoryBarrier2KHR.offset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferMemoryBarrier2KHR.size );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BufferMemoryRequirementsInfo2
   {
     using NativeType = VkBufferMemoryRequirementsInfo2;
@@ -10394,6 +12140,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using BufferMemoryRequirementsInfo2KHR = BufferMemoryRequirementsInfo2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferMemoryRequirementsInfo2>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferMemoryRequirementsInfo2 const & bufferMemoryRequirementsInfo2 )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferMemoryRequirementsInfo2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferMemoryRequirementsInfo2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, bufferMemoryRequirementsInfo2.buffer );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BufferOpaqueCaptureAddressCreateInfo
   {
     using NativeType = VkBufferOpaqueCaptureAddressCreateInfo;
@@ -10485,6 +12249,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using BufferOpaqueCaptureAddressCreateInfoKHR = BufferOpaqueCaptureAddressCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferOpaqueCaptureAddressCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::BufferOpaqueCaptureAddressCreateInfo const &
+                            bufferOpaqueCaptureAddressCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferOpaqueCaptureAddressCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferOpaqueCaptureAddressCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, bufferOpaqueCaptureAddressCreateInfo.opaqueCaptureAddress );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct BufferViewCreateInfo
   {
     using NativeType = VkBufferViewCreateInfo;
@@ -10609,6 +12391,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BufferViewCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::BufferViewCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::BufferViewCreateInfo const & bufferViewCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, bufferViewCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, bufferViewCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BufferViewCreateFlags, seed, bufferViewCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, bufferViewCreateInfo.buffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, bufferViewCreateInfo.format );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferViewCreateInfo.offset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, bufferViewCreateInfo.range );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CalibratedTimestampInfoEXT
   {
     using NativeType = VkCalibratedTimestampInfoEXT;
@@ -10697,6 +12501,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CalibratedTimestampInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CalibratedTimestampInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CalibratedTimestampInfoEXT const & calibratedTimestampInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, calibratedTimestampInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, calibratedTimestampInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::TimeDomainEXT, seed, calibratedTimestampInfoEXT.timeDomain );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CheckpointData2NV
   {
     using NativeType = VkCheckpointData2NV;
@@ -10770,6 +12592,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CheckpointData2NV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CheckpointData2NV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CheckpointData2NV const & checkpointData2NV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, checkpointData2NV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, checkpointData2NV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR, seed, checkpointData2NV.stage );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, checkpointData2NV.pCheckpointMarker );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CheckpointDataNV
   {
     using NativeType = VkCheckpointDataNV;
@@ -10844,6 +12684,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CheckpointDataNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CheckpointDataNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CheckpointDataNV const & checkpointDataNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, checkpointDataNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, checkpointDataNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlagBits, seed, checkpointDataNV.stage );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, checkpointDataNV.pCheckpointMarker );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   union ClearColorValue
   {
     using NativeType = VkClearColorValue;
@@ -10966,6 +12824,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ClearDepthStencilValue>::value,
                             "ClearDepthStencilValue is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ClearDepthStencilValue>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ClearDepthStencilValue const & clearDepthStencilValue ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( float, seed, clearDepthStencilValue.depth );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, clearDepthStencilValue.stencil );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   union ClearValue
   {
     using NativeType = VkClearValue;
@@ -11168,6 +13043,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ClearRect>::value,
                             "ClearRect is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ClearRect>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ClearRect const & clearRect ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Rect2D, seed, clearRect.rect );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, clearRect.baseArrayLayer );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, clearRect.layerCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CoarseSampleLocationNV
   {
     using NativeType = VkCoarseSampleLocationNV;
@@ -11252,6 +13144,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::CoarseSampleLocationNV>::value,
                             "CoarseSampleLocationNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CoarseSampleLocationNV>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::CoarseSampleLocationNV const & coarseSampleLocationNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, coarseSampleLocationNV.pixelX );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, coarseSampleLocationNV.pixelY );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, coarseSampleLocationNV.sample );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CoarseSampleOrderCustomNV
   {
     using NativeType = VkCoarseSampleOrderCustomNV;
@@ -11378,6 +13288,27 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::CoarseSampleOrderCustomNV>::value,
                             "CoarseSampleOrderCustomNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CoarseSampleOrderCustomNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CoarseSampleOrderCustomNV const & coarseSampleOrderCustomNV ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV, seed, coarseSampleOrderCustomNV.shadingRate );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, coarseSampleOrderCustomNV.sampleCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, coarseSampleOrderCustomNV.sampleLocationCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::CoarseSampleLocationNV *, seed, coarseSampleOrderCustomNV.pSampleLocations );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CommandBufferAllocateInfo
   {
     using NativeType = VkCommandBufferAllocateInfo;
@@ -11486,6 +13417,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CommandBufferAllocateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CommandBufferAllocateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CommandBufferAllocateInfo const & commandBufferAllocateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, commandBufferAllocateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, commandBufferAllocateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CommandPool, seed, commandBufferAllocateInfo.commandPool );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CommandBufferLevel, seed, commandBufferAllocateInfo.level );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, commandBufferAllocateInfo.commandBufferCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CommandBufferInheritanceInfo
   {
     using NativeType = VkCommandBufferInheritanceInfo;
@@ -11626,6 +13577,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CommandBufferInheritanceInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CommandBufferInheritanceInfo>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::CommandBufferInheritanceInfo const & commandBufferInheritanceInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, commandBufferInheritanceInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, commandBufferInheritanceInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::RenderPass, seed, commandBufferInheritanceInfo.renderPass );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, commandBufferInheritanceInfo.subpass );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Framebuffer, seed, commandBufferInheritanceInfo.framebuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, commandBufferInheritanceInfo.occlusionQueryEnable );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::QueryControlFlags, seed, commandBufferInheritanceInfo.queryFlags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::QueryPipelineStatisticFlags, seed, commandBufferInheritanceInfo.pipelineStatistics );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CommandBufferBeginInfo
   {
     using NativeType = VkCommandBufferBeginInfo;
@@ -11723,6 +13698,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CommandBufferBeginInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CommandBufferBeginInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::CommandBufferBeginInfo const & commandBufferBeginInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, commandBufferBeginInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, commandBufferBeginInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CommandBufferUsageFlags, seed, commandBufferBeginInfo.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::CommandBufferInheritanceInfo *, seed, commandBufferBeginInfo.pInheritanceInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CommandBufferInheritanceConditionalRenderingInfoEXT
   {
     using NativeType = VkCommandBufferInheritanceConditionalRenderingInfoEXT;
@@ -11820,6 +13815,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CommandBufferInheritanceConditionalRenderingInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CommandBufferInheritanceConditionalRenderingInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CommandBufferInheritanceConditionalRenderingInfoEXT const &
+                            commandBufferInheritanceConditionalRenderingInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, commandBufferInheritanceConditionalRenderingInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, commandBufferInheritanceConditionalRenderingInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             commandBufferInheritanceConditionalRenderingInfoEXT.conditionalRenderingEnable );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CommandBufferInheritanceRenderPassTransformInfoQCOM
   {
     using NativeType = VkCommandBufferInheritanceRenderPassTransformInfoQCOM;
@@ -11929,6 +13945,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CommandBufferInheritanceRenderPassTransformInfoQCOM;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CommandBufferInheritanceRenderPassTransformInfoQCOM>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CommandBufferInheritanceRenderPassTransformInfoQCOM const &
+                            commandBufferInheritanceRenderPassTransformInfoQCOM ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, commandBufferInheritanceRenderPassTransformInfoQCOM.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, commandBufferInheritanceRenderPassTransformInfoQCOM.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR,
+                             seed,
+                             commandBufferInheritanceRenderPassTransformInfoQCOM.transform );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Rect2D, seed, commandBufferInheritanceRenderPassTransformInfoQCOM.renderArea );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CommandBufferInheritanceRenderingInfoKHR
   {
     using NativeType = VkCommandBufferInheritanceRenderingInfoKHR;
@@ -12119,6 +14158,36 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CommandBufferInheritanceRenderingInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CommandBufferInheritanceRenderingInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CommandBufferInheritanceRenderingInfoKHR const &
+                            commandBufferInheritanceRenderingInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, commandBufferInheritanceRenderingInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, commandBufferInheritanceRenderingInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::RenderingFlagsKHR, seed, commandBufferInheritanceRenderingInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, commandBufferInheritanceRenderingInfoKHR.viewMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, commandBufferInheritanceRenderingInfoKHR.colorAttachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::Format *, seed, commandBufferInheritanceRenderingInfoKHR.pColorAttachmentFormats );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Format, seed, commandBufferInheritanceRenderingInfoKHR.depthAttachmentFormat );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Format, seed, commandBufferInheritanceRenderingInfoKHR.stencilAttachmentFormat );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlagBits, seed, commandBufferInheritanceRenderingInfoKHR.rasterizationSamples );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct Viewport
   {
     using NativeType = VkViewport;
@@ -12229,6 +14298,26 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::Viewport>::value,
                             "Viewport is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::Viewport>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::Viewport const & viewport ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( float, seed, viewport.x );
+    VULKAN_HPP_HASH_COMBINE( float, seed, viewport.y );
+    VULKAN_HPP_HASH_COMBINE( float, seed, viewport.width );
+    VULKAN_HPP_HASH_COMBINE( float, seed, viewport.height );
+    VULKAN_HPP_HASH_COMBINE( float, seed, viewport.minDepth );
+    VULKAN_HPP_HASH_COMBINE( float, seed, viewport.maxDepth );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CommandBufferInheritanceViewportScissorInfoNV
   {
     using NativeType = VkCommandBufferInheritanceViewportScissorInfoNV;
@@ -12345,6 +14434,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CommandBufferInheritanceViewportScissorInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CommandBufferInheritanceViewportScissorInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CommandBufferInheritanceViewportScissorInfoNV const &
+                            commandBufferInheritanceViewportScissorInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, commandBufferInheritanceViewportScissorInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, commandBufferInheritanceViewportScissorInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, commandBufferInheritanceViewportScissorInfoNV.viewportScissor2D );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, commandBufferInheritanceViewportScissorInfoNV.viewportDepthCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::Viewport *, seed, commandBufferInheritanceViewportScissorInfoNV.pViewportDepths );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CommandBufferSubmitInfoKHR
   {
     using NativeType = VkCommandBufferSubmitInfoKHR;
@@ -12441,6 +14553,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CommandBufferSubmitInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CommandBufferSubmitInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CommandBufferSubmitInfoKHR const & commandBufferSubmitInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, commandBufferSubmitInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, commandBufferSubmitInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CommandBuffer, seed, commandBufferSubmitInfoKHR.commandBuffer );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, commandBufferSubmitInfoKHR.deviceMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CommandPoolCreateInfo
   {
     using NativeType = VkCommandPoolCreateInfo;
@@ -12536,6 +14667,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CommandPoolCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CommandPoolCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::CommandPoolCreateInfo const & commandPoolCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, commandPoolCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, commandPoolCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CommandPoolCreateFlags, seed, commandPoolCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, commandPoolCreateInfo.queueFamilyIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SpecializationMapEntry
   {
     using NativeType = VkSpecializationMapEntry;
@@ -12620,6 +14770,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SpecializationMapEntry>::value,
                             "SpecializationMapEntry is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SpecializationMapEntry>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SpecializationMapEntry const & specializationMapEntry ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, specializationMapEntry.constantID );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, specializationMapEntry.offset );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, specializationMapEntry.size );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SpecializationInfo
   {
     using NativeType = VkSpecializationInfo;
@@ -12749,6 +14917,26 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SpecializationInfo>::value,
                             "SpecializationInfo is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SpecializationInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SpecializationInfo const & specializationInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, specializationInfo.mapEntryCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SpecializationMapEntry *, seed, specializationInfo.pMapEntries );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, specializationInfo.dataSize );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, specializationInfo.pData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineShaderStageCreateInfo
   {
     using NativeType = VkPipelineShaderStageCreateInfo;
@@ -12878,6 +15066,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineShaderStageCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateInfo const & pipelineShaderStageCreateInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineShaderStageCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineShaderStageCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateFlags, seed, pipelineShaderStageCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderStageFlagBits, seed, pipelineShaderStageCreateInfo.stage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderModule, seed, pipelineShaderStageCreateInfo.module );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, pipelineShaderStageCreateInfo.pName );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SpecializationInfo *, seed, pipelineShaderStageCreateInfo.pSpecializationInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ComputePipelineCreateInfo
   {
     using NativeType = VkComputePipelineCreateInfo;
@@ -13006,6 +15218,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ComputePipelineCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ComputePipelineCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ComputePipelineCreateInfo const & computePipelineCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, computePipelineCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, computePipelineCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCreateFlags, seed, computePipelineCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateInfo, seed, computePipelineCreateInfo.stage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineLayout, seed, computePipelineCreateInfo.layout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Pipeline, seed, computePipelineCreateInfo.basePipelineHandle );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, computePipelineCreateInfo.basePipelineIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ConditionalRenderingBeginInfoEXT
   {
     using NativeType = VkConditionalRenderingBeginInfoEXT;
@@ -13116,6 +15351,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ConditionalRenderingBeginInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ConditionalRenderingBeginInfoEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ConditionalRenderingBeginInfoEXT const & conditionalRenderingBeginInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, conditionalRenderingBeginInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, conditionalRenderingBeginInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, conditionalRenderingBeginInfoEXT.buffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, conditionalRenderingBeginInfoEXT.offset );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ConditionalRenderingFlagsEXT, seed, conditionalRenderingBeginInfoEXT.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ConformanceVersion
   {
     using NativeType = VkConformanceVersion;
@@ -13210,6 +15467,25 @@ namespace VULKAN_HPP_NAMESPACE
                             "ConformanceVersion is not nothrow_move_constructible!" );
   using ConformanceVersionKHR = ConformanceVersion;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ConformanceVersion>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ConformanceVersion const & conformanceVersion ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, conformanceVersion.major );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, conformanceVersion.minor );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, conformanceVersion.subminor );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, conformanceVersion.patch );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CooperativeMatrixPropertiesNV
   {
     using NativeType = VkCooperativeMatrixPropertiesNV;
@@ -13368,6 +15644,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CooperativeMatrixPropertiesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CooperativeMatrixPropertiesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CooperativeMatrixPropertiesNV const & cooperativeMatrixPropertiesNV )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, cooperativeMatrixPropertiesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, cooperativeMatrixPropertiesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, cooperativeMatrixPropertiesNV.MSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, cooperativeMatrixPropertiesNV.NSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, cooperativeMatrixPropertiesNV.KSize );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentTypeNV, seed, cooperativeMatrixPropertiesNV.AType );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentTypeNV, seed, cooperativeMatrixPropertiesNV.BType );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentTypeNV, seed, cooperativeMatrixPropertiesNV.CType );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentTypeNV, seed, cooperativeMatrixPropertiesNV.DType );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ScopeNV, seed, cooperativeMatrixPropertiesNV.scope );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CopyAccelerationStructureInfoKHR
   {
     using NativeType = VkCopyAccelerationStructureInfoKHR;
@@ -13480,6 +15781,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CopyAccelerationStructureInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CopyAccelerationStructureInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::CopyAccelerationStructureInfoKHR const & copyAccelerationStructureInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, copyAccelerationStructureInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, copyAccelerationStructureInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::AccelerationStructureKHR, seed, copyAccelerationStructureInfoKHR.src );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::AccelerationStructureKHR, seed, copyAccelerationStructureInfoKHR.dst );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::CopyAccelerationStructureModeKHR, seed, copyAccelerationStructureInfoKHR.mode );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CopyAccelerationStructureToMemoryInfoKHR
   {
     using NativeType = VkCopyAccelerationStructureToMemoryInfoKHR;
@@ -13721,6 +16046,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CopyBufferInfo2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CopyBufferInfo2KHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::CopyBufferInfo2KHR const & copyBufferInfo2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, copyBufferInfo2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, copyBufferInfo2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, copyBufferInfo2KHR.srcBuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, copyBufferInfo2KHR.dstBuffer );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, copyBufferInfo2KHR.regionCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::BufferCopy2KHR *, seed, copyBufferInfo2KHR.pRegions );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CopyBufferToImageInfo2KHR
   {
     using NativeType = VkCopyBufferToImageInfo2KHR;
@@ -13874,6 +16220,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CopyBufferToImageInfo2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CopyBufferToImageInfo2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CopyBufferToImageInfo2KHR const & copyBufferToImageInfo2KHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, copyBufferToImageInfo2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, copyBufferToImageInfo2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, copyBufferToImageInfo2KHR.srcBuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, copyBufferToImageInfo2KHR.dstImage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, copyBufferToImageInfo2KHR.dstImageLayout );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, copyBufferToImageInfo2KHR.regionCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::BufferImageCopy2KHR *, seed, copyBufferToImageInfo2KHR.pRegions );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CopyCommandTransformInfoQCOM
   {
     using NativeType = VkCopyCommandTransformInfoQCOM;
@@ -13964,6 +16333,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CopyCommandTransformInfoQCOM;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CopyCommandTransformInfoQCOM>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::CopyCommandTransformInfoQCOM const & copyCommandTransformInfoQCOM ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, copyCommandTransformInfoQCOM.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, copyCommandTransformInfoQCOM.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR, seed, copyCommandTransformInfoQCOM.transform );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CopyDescriptorSet
   {
     using NativeType = VkCopyDescriptorSet;
@@ -14106,6 +16494,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CopyDescriptorSet;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CopyDescriptorSet>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CopyDescriptorSet const & copyDescriptorSet ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, copyDescriptorSet.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, copyDescriptorSet.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DescriptorSet, seed, copyDescriptorSet.srcSet );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, copyDescriptorSet.srcBinding );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, copyDescriptorSet.srcArrayElement );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DescriptorSet, seed, copyDescriptorSet.dstSet );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, copyDescriptorSet.dstBinding );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, copyDescriptorSet.dstArrayElement );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, copyDescriptorSet.descriptorCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageCopy2KHR
   {
     using NativeType = VkImageCopy2KHR;
@@ -14232,6 +16643,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageCopy2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageCopy2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageCopy2KHR const & imageCopy2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageCopy2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageCopy2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageCopy2KHR.srcSubresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageCopy2KHR.srcOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageCopy2KHR.dstSubresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageCopy2KHR.dstOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, imageCopy2KHR.extent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CopyImageInfo2KHR
   {
     using NativeType = VkCopyImageInfo2KHR;
@@ -14394,6 +16826,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CopyImageInfo2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CopyImageInfo2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CopyImageInfo2KHR const & copyImageInfo2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, copyImageInfo2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, copyImageInfo2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, copyImageInfo2KHR.srcImage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, copyImageInfo2KHR.srcImageLayout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, copyImageInfo2KHR.dstImage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, copyImageInfo2KHR.dstImageLayout );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, copyImageInfo2KHR.regionCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ImageCopy2KHR *, seed, copyImageInfo2KHR.pRegions );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CopyImageToBufferInfo2KHR
   {
     using NativeType = VkCopyImageToBufferInfo2KHR;
@@ -14547,6 +17001,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CopyImageToBufferInfo2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CopyImageToBufferInfo2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CopyImageToBufferInfo2KHR const & copyImageToBufferInfo2KHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, copyImageToBufferInfo2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, copyImageToBufferInfo2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, copyImageToBufferInfo2KHR.srcImage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, copyImageToBufferInfo2KHR.srcImageLayout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, copyImageToBufferInfo2KHR.dstBuffer );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, copyImageToBufferInfo2KHR.regionCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::BufferImageCopy2KHR *, seed, copyImageToBufferInfo2KHR.pRegions );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CopyMemoryToAccelerationStructureInfoKHR
   {
     using NativeType = VkCopyMemoryToAccelerationStructureInfoKHR;
@@ -14744,6 +17221,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CuFunctionCreateInfoNVX;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CuFunctionCreateInfoNVX>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CuFunctionCreateInfoNVX const & cuFunctionCreateInfoNVX ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, cuFunctionCreateInfoNVX.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, cuFunctionCreateInfoNVX.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CuModuleNVX, seed, cuFunctionCreateInfoNVX.module );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, cuFunctionCreateInfoNVX.pName );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CuLaunchInfoNVX
   {
     using NativeType = VkCuLaunchInfoNVX;
@@ -14977,6 +17473,34 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CuLaunchInfoNVX;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CuLaunchInfoNVX>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::CuLaunchInfoNVX const & cuLaunchInfoNVX ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, cuLaunchInfoNVX.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, cuLaunchInfoNVX.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CuFunctionNVX, seed, cuLaunchInfoNVX.function );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, cuLaunchInfoNVX.gridDimX );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, cuLaunchInfoNVX.gridDimY );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, cuLaunchInfoNVX.gridDimZ );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, cuLaunchInfoNVX.blockDimX );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, cuLaunchInfoNVX.blockDimY );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, cuLaunchInfoNVX.blockDimZ );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, cuLaunchInfoNVX.sharedMemBytes );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, cuLaunchInfoNVX.paramCount );
+    VULKAN_HPP_HASH_COMBINE( const void * const *, seed, cuLaunchInfoNVX.pParams );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, cuLaunchInfoNVX.extraCount );
+    VULKAN_HPP_HASH_COMBINE( const void * const *, seed, cuLaunchInfoNVX.pExtras );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct CuModuleCreateInfoNVX
   {
     using NativeType = VkCuModuleCreateInfoNVX;
@@ -15086,6 +17610,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = CuModuleCreateInfoNVX;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::CuModuleCreateInfoNVX>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::CuModuleCreateInfoNVX const & cuModuleCreateInfoNVX ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, cuModuleCreateInfoNVX.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, cuModuleCreateInfoNVX.pNext );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, cuModuleCreateInfoNVX.dataSize );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, cuModuleCreateInfoNVX.pData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct D3D12FenceSubmitInfoKHR
   {
@@ -15236,6 +17779,28 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = D3D12FenceSubmitInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::D3D12FenceSubmitInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::D3D12FenceSubmitInfoKHR const & d3D12FenceSubmitInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, d3D12FenceSubmitInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, d3D12FenceSubmitInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, d3D12FenceSubmitInfoKHR.waitSemaphoreValuesCount );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, d3D12FenceSubmitInfoKHR.pWaitSemaphoreValues );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, d3D12FenceSubmitInfoKHR.signalSemaphoreValuesCount );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, d3D12FenceSubmitInfoKHR.pSignalSemaphoreValues );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   struct DebugMarkerMarkerInfoEXT
@@ -15333,6 +17898,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DebugMarkerMarkerInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DebugMarkerMarkerInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DebugMarkerMarkerInfoEXT const & debugMarkerMarkerInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, debugMarkerMarkerInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugMarkerMarkerInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, debugMarkerMarkerInfoEXT.pMarkerName );
+    for ( size_t i = 0; i < 4; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( float, seed, debugMarkerMarkerInfoEXT.color[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DebugMarkerObjectNameInfoEXT
   {
     using NativeType = VkDebugMarkerObjectNameInfoEXT;
@@ -15442,6 +18029,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DebugMarkerObjectNameInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DebugMarkerObjectNameInfoEXT>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::DebugMarkerObjectNameInfoEXT const & debugMarkerObjectNameInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, debugMarkerObjectNameInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugMarkerObjectNameInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT, seed, debugMarkerObjectNameInfoEXT.objectType );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, debugMarkerObjectNameInfoEXT.object );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, debugMarkerObjectNameInfoEXT.pObjectName );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DebugMarkerObjectTagInfoEXT
   {
     using NativeType = VkDebugMarkerObjectTagInfoEXT;
@@ -15594,6 +18202,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DebugMarkerObjectTagInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DebugMarkerObjectTagInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DebugMarkerObjectTagInfoEXT const & debugMarkerObjectTagInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, debugMarkerObjectTagInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugMarkerObjectTagInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT, seed, debugMarkerObjectTagInfoEXT.objectType );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, debugMarkerObjectTagInfoEXT.object );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, debugMarkerObjectTagInfoEXT.tagName );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, debugMarkerObjectTagInfoEXT.tagSize );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugMarkerObjectTagInfoEXT.pTag );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DebugReportCallbackCreateInfoEXT
   {
     using NativeType = VkDebugReportCallbackCreateInfoEXT;
@@ -15702,6 +18333,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DebugReportCallbackCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DebugReportCallbackCreateInfoEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DebugReportCallbackCreateInfoEXT const & debugReportCallbackCreateInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, debugReportCallbackCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugReportCallbackCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DebugReportFlagsEXT, seed, debugReportCallbackCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( PFN_vkDebugReportCallbackEXT, seed, debugReportCallbackCreateInfoEXT.pfnCallback );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, debugReportCallbackCreateInfoEXT.pUserData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DebugUtilsLabelEXT
   {
     using NativeType = VkDebugUtilsLabelEXT;
@@ -15795,6 +18447,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DebugUtilsLabelEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DebugUtilsLabelEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DebugUtilsLabelEXT const & debugUtilsLabelEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, debugUtilsLabelEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugUtilsLabelEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, debugUtilsLabelEXT.pLabelName );
+    for ( size_t i = 0; i < 4; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( float, seed, debugUtilsLabelEXT.color[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DebugUtilsObjectNameInfoEXT
   {
     using NativeType = VkDebugUtilsObjectNameInfoEXT;
@@ -15903,6 +18577,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DebugUtilsObjectNameInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DebugUtilsObjectNameInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DebugUtilsObjectNameInfoEXT const & debugUtilsObjectNameInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, debugUtilsObjectNameInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugUtilsObjectNameInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ObjectType, seed, debugUtilsObjectNameInfoEXT.objectType );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, debugUtilsObjectNameInfoEXT.objectHandle );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, debugUtilsObjectNameInfoEXT.pObjectName );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DebugUtilsMessengerCallbackDataEXT
   {
     using NativeType = VkDebugUtilsMessengerCallbackDataEXT;
@@ -16147,6 +18841,37 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DebugUtilsMessengerCallbackDataEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCallbackDataEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCallbackDataEXT const &
+                            debugUtilsMessengerCallbackDataEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, debugUtilsMessengerCallbackDataEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugUtilsMessengerCallbackDataEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCallbackDataFlagsEXT, seed, debugUtilsMessengerCallbackDataEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, debugUtilsMessengerCallbackDataEXT.pMessageIdName );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, debugUtilsMessengerCallbackDataEXT.messageIdNumber );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, debugUtilsMessengerCallbackDataEXT.pMessage );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, debugUtilsMessengerCallbackDataEXT.queueLabelCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DebugUtilsLabelEXT *, seed, debugUtilsMessengerCallbackDataEXT.pQueueLabels );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, debugUtilsMessengerCallbackDataEXT.cmdBufLabelCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DebugUtilsLabelEXT *, seed, debugUtilsMessengerCallbackDataEXT.pCmdBufLabels );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, debugUtilsMessengerCallbackDataEXT.objectCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DebugUtilsObjectNameInfoEXT *, seed, debugUtilsMessengerCallbackDataEXT.pObjects );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DebugUtilsMessengerCreateInfoEXT
   {
     using NativeType = VkDebugUtilsMessengerCreateInfoEXT;
@@ -16277,6 +19002,33 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DebugUtilsMessengerCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCreateInfoEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCreateInfoEXT const & debugUtilsMessengerCreateInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, debugUtilsMessengerCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugUtilsMessengerCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCreateFlagsEXT, seed, debugUtilsMessengerCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DebugUtilsMessageSeverityFlagsEXT, seed, debugUtilsMessengerCreateInfoEXT.messageSeverity );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DebugUtilsMessageTypeFlagsEXT, seed, debugUtilsMessengerCreateInfoEXT.messageType );
+    VULKAN_HPP_HASH_COMBINE(
+      PFN_vkDebugUtilsMessengerCallbackEXT, seed, debugUtilsMessengerCreateInfoEXT.pfnUserCallback );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, debugUtilsMessengerCreateInfoEXT.pUserData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DebugUtilsObjectTagInfoEXT
   {
     using NativeType = VkDebugUtilsObjectTagInfoEXT;
@@ -16427,6 +19179,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DebugUtilsObjectTagInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DebugUtilsObjectTagInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DebugUtilsObjectTagInfoEXT const & debugUtilsObjectTagInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, debugUtilsObjectTagInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugUtilsObjectTagInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ObjectType, seed, debugUtilsObjectTagInfoEXT.objectType );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, debugUtilsObjectTagInfoEXT.objectHandle );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, debugUtilsObjectTagInfoEXT.tagName );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, debugUtilsObjectTagInfoEXT.tagSize );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, debugUtilsObjectTagInfoEXT.pTag );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DedicatedAllocationBufferCreateInfoNV
   {
     using NativeType = VkDedicatedAllocationBufferCreateInfoNV;
@@ -16518,6 +19292,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DedicatedAllocationBufferCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DedicatedAllocationBufferCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DedicatedAllocationBufferCreateInfoNV const &
+                            dedicatedAllocationBufferCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, dedicatedAllocationBufferCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, dedicatedAllocationBufferCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, dedicatedAllocationBufferCreateInfoNV.dedicatedAllocation );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DedicatedAllocationImageCreateInfoNV
   {
     using NativeType = VkDedicatedAllocationImageCreateInfoNV;
@@ -16609,6 +19402,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DedicatedAllocationImageCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DedicatedAllocationImageCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DedicatedAllocationImageCreateInfoNV const &
+                            dedicatedAllocationImageCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, dedicatedAllocationImageCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, dedicatedAllocationImageCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, dedicatedAllocationImageCreateInfoNV.dedicatedAllocation );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DedicatedAllocationMemoryAllocateInfoNV
   {
     using NativeType = VkDedicatedAllocationMemoryAllocateInfoNV;
@@ -16713,6 +19525,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DedicatedAllocationMemoryAllocateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DedicatedAllocationMemoryAllocateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DedicatedAllocationMemoryAllocateInfoNV const &
+                            dedicatedAllocationMemoryAllocateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, dedicatedAllocationMemoryAllocateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, dedicatedAllocationMemoryAllocateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, dedicatedAllocationMemoryAllocateInfoNV.image );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, dedicatedAllocationMemoryAllocateInfoNV.buffer );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryBarrier2KHR
   {
     using NativeType = VkMemoryBarrier2KHR;
@@ -16830,6 +19661,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MemoryBarrier2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryBarrier2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryBarrier2KHR const & memoryBarrier2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryBarrier2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryBarrier2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR, seed, memoryBarrier2KHR.srcStageMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags2KHR, seed, memoryBarrier2KHR.srcAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR, seed, memoryBarrier2KHR.dstStageMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags2KHR, seed, memoryBarrier2KHR.dstAccessMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageSubresourceRange
   {
     using NativeType = VkImageSubresourceRange;
@@ -16935,6 +19786,26 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageSubresourceRange>::value,
                             "ImageSubresourceRange is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageSubresourceRange>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImageSubresourceRange const & imageSubresourceRange ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageAspectFlags, seed, imageSubresourceRange.aspectMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageSubresourceRange.baseMipLevel );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageSubresourceRange.levelCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageSubresourceRange.baseArrayLayer );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageSubresourceRange.layerCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageMemoryBarrier2KHR
   {
     using NativeType = VkImageMemoryBarrier2KHR;
@@ -17115,6 +19986,34 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageMemoryBarrier2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageMemoryBarrier2KHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImageMemoryBarrier2KHR const & imageMemoryBarrier2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageMemoryBarrier2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageMemoryBarrier2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR, seed, imageMemoryBarrier2KHR.srcStageMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags2KHR, seed, imageMemoryBarrier2KHR.srcAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR, seed, imageMemoryBarrier2KHR.dstStageMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags2KHR, seed, imageMemoryBarrier2KHR.dstAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, imageMemoryBarrier2KHR.oldLayout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, imageMemoryBarrier2KHR.newLayout );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageMemoryBarrier2KHR.srcQueueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageMemoryBarrier2KHR.dstQueueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, imageMemoryBarrier2KHR.image );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageSubresourceRange, seed, imageMemoryBarrier2KHR.subresourceRange );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DependencyInfoKHR
   {
     using NativeType = VkDependencyInfoKHR;
@@ -17317,6 +20216,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DependencyInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DependencyInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DependencyInfoKHR const & dependencyInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, dependencyInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, dependencyInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DependencyFlags, seed, dependencyInfoKHR.dependencyFlags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, dependencyInfoKHR.memoryBarrierCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::MemoryBarrier2KHR *, seed, dependencyInfoKHR.pMemoryBarriers );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, dependencyInfoKHR.bufferMemoryBarrierCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::BufferMemoryBarrier2KHR *, seed, dependencyInfoKHR.pBufferMemoryBarriers );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, dependencyInfoKHR.imageMemoryBarrierCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::ImageMemoryBarrier2KHR *, seed, dependencyInfoKHR.pImageMemoryBarriers );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorBufferInfo
   {
     using NativeType = VkDescriptorBufferInfo;
@@ -17403,6 +20327,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DescriptorBufferInfo>::value,
                             "DescriptorBufferInfo is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorBufferInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DescriptorBufferInfo const & descriptorBufferInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, descriptorBufferInfo.buffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, descriptorBufferInfo.offset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, descriptorBufferInfo.range );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorImageInfo
   {
     using NativeType = VkDescriptorImageInfo;
@@ -17491,6 +20433,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DescriptorImageInfo>::value,
                             "DescriptorImageInfo is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorImageInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DescriptorImageInfo const & descriptorImageInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Sampler, seed, descriptorImageInfo.sampler );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageView, seed, descriptorImageInfo.imageView );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, descriptorImageInfo.imageLayout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorPoolSize
   {
     using NativeType = VkDescriptorPoolSize;
@@ -17568,6 +20528,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DescriptorPoolSize>::value,
                             "DescriptorPoolSize is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorPoolSize>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DescriptorPoolSize const & descriptorPoolSize ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DescriptorType, seed, descriptorPoolSize.type );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorPoolSize.descriptorCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorPoolCreateInfo
   {
     using NativeType = VkDescriptorPoolCreateInfo;
@@ -17706,6 +20683,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DescriptorPoolCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorPoolCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorPoolCreateInfo const & descriptorPoolCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, descriptorPoolCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, descriptorPoolCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DescriptorPoolCreateFlags, seed, descriptorPoolCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorPoolCreateInfo.maxSets );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorPoolCreateInfo.poolSizeCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DescriptorPoolSize *, seed, descriptorPoolCreateInfo.pPoolSizes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorPoolInlineUniformBlockCreateInfoEXT
   {
     using NativeType = VkDescriptorPoolInlineUniformBlockCreateInfoEXT;
@@ -17802,6 +20801,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DescriptorPoolInlineUniformBlockCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorPoolInlineUniformBlockCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorPoolInlineUniformBlockCreateInfoEXT const &
+                            descriptorPoolInlineUniformBlockCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, descriptorPoolInlineUniformBlockCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, descriptorPoolInlineUniformBlockCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, descriptorPoolInlineUniformBlockCreateInfoEXT.maxInlineUniformBlockBindings );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorSetAllocateInfo
   {
     using NativeType = VkDescriptorSetAllocateInfo;
@@ -17932,6 +20951,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DescriptorSetAllocateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorSetAllocateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorSetAllocateInfo const & descriptorSetAllocateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, descriptorSetAllocateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, descriptorSetAllocateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DescriptorPool, seed, descriptorSetAllocateInfo.descriptorPool );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorSetAllocateInfo.descriptorSetCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DescriptorSetLayout *, seed, descriptorSetAllocateInfo.pSetLayouts );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorSetLayoutBinding
   {
     using NativeType = VkDescriptorSetLayoutBinding;
@@ -18068,6 +21108,27 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DescriptorSetLayoutBinding>::value,
                             "DescriptorSetLayoutBinding is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorSetLayoutBinding>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorSetLayoutBinding const & descriptorSetLayoutBinding ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorSetLayoutBinding.binding );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DescriptorType, seed, descriptorSetLayoutBinding.descriptorType );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorSetLayoutBinding.descriptorCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderStageFlags, seed, descriptorSetLayoutBinding.stageFlags );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::Sampler *, seed, descriptorSetLayoutBinding.pImmutableSamplers );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorSetLayoutBindingFlagsCreateInfo
   {
     using NativeType = VkDescriptorSetLayoutBindingFlagsCreateInfo;
@@ -18194,6 +21255,28 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DescriptorSetLayoutBindingFlagsCreateInfoEXT = DescriptorSetLayoutBindingFlagsCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorSetLayoutBindingFlagsCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorSetLayoutBindingFlagsCreateInfo const &
+                            descriptorSetLayoutBindingFlagsCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, descriptorSetLayoutBindingFlagsCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, descriptorSetLayoutBindingFlagsCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorSetLayoutBindingFlagsCreateInfo.bindingCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::DescriptorBindingFlags *,
+                             seed,
+                             descriptorSetLayoutBindingFlagsCreateInfo.pBindingFlags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorSetLayoutCreateInfo
   {
     using NativeType = VkDescriptorSetLayoutCreateInfo;
@@ -18324,6 +21407,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DescriptorSetLayoutCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorSetLayoutCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorSetLayoutCreateInfo const & descriptorSetLayoutCreateInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, descriptorSetLayoutCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, descriptorSetLayoutCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DescriptorSetLayoutCreateFlags, seed, descriptorSetLayoutCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorSetLayoutCreateInfo.bindingCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DescriptorSetLayoutBinding *, seed, descriptorSetLayoutCreateInfo.pBindings );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorSetLayoutSupport
   {
     using NativeType = VkDescriptorSetLayoutSupport;
@@ -18396,6 +21501,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DescriptorSetLayoutSupportKHR = DescriptorSetLayoutSupport;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorSetLayoutSupport>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorSetLayoutSupport const & descriptorSetLayoutSupport ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, descriptorSetLayoutSupport.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, descriptorSetLayoutSupport.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, descriptorSetLayoutSupport.supported );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorSetVariableDescriptorCountAllocateInfo
   {
     using NativeType = VkDescriptorSetVariableDescriptorCountAllocateInfo;
@@ -18521,6 +21644,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DescriptorSetVariableDescriptorCountAllocateInfoEXT = DescriptorSetVariableDescriptorCountAllocateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorSetVariableDescriptorCountAllocateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorSetVariableDescriptorCountAllocateInfo const &
+                            descriptorSetVariableDescriptorCountAllocateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, descriptorSetVariableDescriptorCountAllocateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, descriptorSetVariableDescriptorCountAllocateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorSetVariableDescriptorCountAllocateInfo.descriptorSetCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const uint32_t *, seed, descriptorSetVariableDescriptorCountAllocateInfo.pDescriptorCounts );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorSetVariableDescriptorCountLayoutSupport
   {
     using NativeType = VkDescriptorSetVariableDescriptorCountLayoutSupport;
@@ -18603,6 +21747,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DescriptorSetVariableDescriptorCountLayoutSupportEXT = DescriptorSetVariableDescriptorCountLayoutSupport;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorSetVariableDescriptorCountLayoutSupport>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorSetVariableDescriptorCountLayoutSupport const &
+                            descriptorSetVariableDescriptorCountLayoutSupport ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, descriptorSetVariableDescriptorCountLayoutSupport.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, descriptorSetVariableDescriptorCountLayoutSupport.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, descriptorSetVariableDescriptorCountLayoutSupport.maxVariableDescriptorCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorUpdateTemplateEntry
   {
     using NativeType = VkDescriptorUpdateTemplateEntry;
@@ -18725,6 +21889,27 @@ namespace VULKAN_HPP_NAMESPACE
     "DescriptorUpdateTemplateEntry is not nothrow_move_constructible!" );
   using DescriptorUpdateTemplateEntryKHR = DescriptorUpdateTemplateEntry;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateEntry>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateEntry const & descriptorUpdateTemplateEntry )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorUpdateTemplateEntry.dstBinding );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorUpdateTemplateEntry.dstArrayElement );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorUpdateTemplateEntry.descriptorCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DescriptorType, seed, descriptorUpdateTemplateEntry.descriptorType );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, descriptorUpdateTemplateEntry.offset );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, descriptorUpdateTemplateEntry.stride );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DescriptorUpdateTemplateCreateInfo
   {
     using NativeType = VkDescriptorUpdateTemplateCreateInfo;
@@ -18925,6 +22110,38 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DescriptorUpdateTemplateCreateInfoKHR = DescriptorUpdateTemplateCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateInfo const &
+                            descriptorUpdateTemplateCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, descriptorUpdateTemplateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, descriptorUpdateTemplateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateFlags, seed, descriptorUpdateTemplateCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorUpdateTemplateCreateInfo.descriptorUpdateEntryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateEntry *,
+                             seed,
+                             descriptorUpdateTemplateCreateInfo.pDescriptorUpdateEntries );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateType, seed, descriptorUpdateTemplateCreateInfo.templateType );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DescriptorSetLayout, seed, descriptorUpdateTemplateCreateInfo.descriptorSetLayout );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineBindPoint, seed, descriptorUpdateTemplateCreateInfo.pipelineBindPoint );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineLayout, seed, descriptorUpdateTemplateCreateInfo.pipelineLayout );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, descriptorUpdateTemplateCreateInfo.set );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceBufferMemoryRequirementsKHR
   {
     using NativeType = VkDeviceBufferMemoryRequirementsKHR;
@@ -19015,6 +22232,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceBufferMemoryRequirementsKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceBufferMemoryRequirementsKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceBufferMemoryRequirementsKHR const &
+                            deviceBufferMemoryRequirementsKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceBufferMemoryRequirementsKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceBufferMemoryRequirementsKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::BufferCreateInfo *, seed, deviceBufferMemoryRequirementsKHR.pCreateInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceQueueCreateInfo
   {
     using NativeType = VkDeviceQueueCreateInfo;
@@ -19151,6 +22387,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceQueueCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceQueueCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DeviceQueueCreateInfo const & deviceQueueCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceQueueCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceQueueCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceQueueCreateFlags, seed, deviceQueueCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceQueueCreateInfo.queueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceQueueCreateInfo.queueCount );
+    VULKAN_HPP_HASH_COMBINE( const float *, seed, deviceQueueCreateInfo.pQueuePriorities );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFeatures
   {
     using NativeType = VkPhysicalDeviceFeatures;
@@ -19799,6 +23056,85 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures>::value,
                             "PhysicalDeviceFeatures is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures const & physicalDeviceFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.robustBufferAccess );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.fullDrawIndexUint32 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.imageCubeArray );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.independentBlend );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.geometryShader );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.tessellationShader );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.sampleRateShading );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.dualSrcBlend );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.logicOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.multiDrawIndirect );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.drawIndirectFirstInstance );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.depthClamp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.depthBiasClamp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.fillModeNonSolid );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.depthBounds );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.wideLines );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.largePoints );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.alphaToOne );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.multiViewport );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.samplerAnisotropy );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.textureCompressionETC2 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.textureCompressionASTC_LDR );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.textureCompressionBC );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.occlusionQueryPrecise );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.pipelineStatisticsQuery );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.vertexPipelineStoresAndAtomics );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.fragmentStoresAndAtomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderTessellationAndGeometryPointSize );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderImageGatherExtended );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderStorageImageExtendedFormats );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderStorageImageMultisample );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderStorageImageReadWithoutFormat );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderStorageImageWriteWithoutFormat );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderUniformBufferArrayDynamicIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderSampledImageArrayDynamicIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderStorageBufferArrayDynamicIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderStorageImageArrayDynamicIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderClipDistance );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderCullDistance );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderFloat64 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderInt64 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderInt16 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderResourceResidency );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.shaderResourceMinLod );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.sparseBinding );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.sparseResidencyBuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.sparseResidencyImage2D );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.sparseResidencyImage3D );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.sparseResidency2Samples );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.sparseResidency4Samples );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.sparseResidency8Samples );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.sparseResidency16Samples );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.sparseResidencyAliased );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.variableMultisampleRate );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFeatures.inheritedQueries );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceCreateInfo
   {
     using NativeType = VkDeviceCreateInfo;
@@ -20008,6 +23344,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceCreateInfo const & deviceCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceCreateFlags, seed, deviceCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceCreateInfo.queueCreateInfoCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DeviceQueueCreateInfo *, seed, deviceCreateInfo.pQueueCreateInfos );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceCreateInfo.enabledLayerCount );
+    VULKAN_HPP_HASH_COMBINE( const char * const *, seed, deviceCreateInfo.ppEnabledLayerNames );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceCreateInfo.enabledExtensionCount );
+    VULKAN_HPP_HASH_COMBINE( const char * const *, seed, deviceCreateInfo.ppEnabledExtensionNames );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures *, seed, deviceCreateInfo.pEnabledFeatures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceDeviceMemoryReportCreateInfoEXT
   {
     using NativeType = VkDeviceDeviceMemoryReportCreateInfoEXT;
@@ -20121,6 +23483,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceDeviceMemoryReportCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceDeviceMemoryReportCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceDeviceMemoryReportCreateInfoEXT const &
+                            deviceDeviceMemoryReportCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceDeviceMemoryReportCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceDeviceMemoryReportCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceMemoryReportFlagsEXT, seed, deviceDeviceMemoryReportCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      PFN_vkDeviceMemoryReportCallbackEXT, seed, deviceDeviceMemoryReportCreateInfoEXT.pfnUserCallback );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, deviceDeviceMemoryReportCreateInfoEXT.pUserData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceDiagnosticsConfigCreateInfoNV
   {
     using NativeType = VkDeviceDiagnosticsConfigCreateInfoNV;
@@ -20211,6 +23595,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceDiagnosticsConfigCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceDiagnosticsConfigCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceDiagnosticsConfigCreateInfoNV const &
+                            deviceDiagnosticsConfigCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceDiagnosticsConfigCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceDiagnosticsConfigCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceDiagnosticsConfigFlagsNV, seed, deviceDiagnosticsConfigCreateInfoNV.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceEventInfoEXT
   {
     using NativeType = VkDeviceEventInfoEXT;
@@ -20297,6 +23700,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceEventInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceEventInfoEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DeviceEventInfoEXT const & deviceEventInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceEventInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceEventInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceEventTypeEXT, seed, deviceEventInfoEXT.deviceEvent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceGroupBindSparseInfo
   {
     using NativeType = VkDeviceGroupBindSparseInfo;
@@ -20395,6 +23816,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DeviceGroupBindSparseInfoKHR = DeviceGroupBindSparseInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceGroupBindSparseInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceGroupBindSparseInfo const & deviceGroupBindSparseInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceGroupBindSparseInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceGroupBindSparseInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupBindSparseInfo.resourceDeviceIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupBindSparseInfo.memoryDeviceIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceGroupCommandBufferBeginInfo
   {
     using NativeType = VkDeviceGroupCommandBufferBeginInfo;
@@ -20485,6 +23925,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DeviceGroupCommandBufferBeginInfoKHR = DeviceGroupCommandBufferBeginInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceGroupCommandBufferBeginInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceGroupCommandBufferBeginInfo const &
+                            deviceGroupCommandBufferBeginInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceGroupCommandBufferBeginInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceGroupCommandBufferBeginInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupCommandBufferBeginInfo.deviceMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceGroupDeviceCreateInfo
   {
     using NativeType = VkDeviceGroupDeviceCreateInfo;
@@ -20605,6 +24063,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DeviceGroupDeviceCreateInfoKHR = DeviceGroupDeviceCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceGroupDeviceCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceGroupDeviceCreateInfo const & deviceGroupDeviceCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceGroupDeviceCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceGroupDeviceCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupDeviceCreateInfo.physicalDeviceCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::PhysicalDevice *, seed, deviceGroupDeviceCreateInfo.pPhysicalDevices );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceGroupPresentCapabilitiesKHR
   {
     using NativeType = VkDeviceGroupPresentCapabilitiesKHR;
@@ -20684,6 +24162,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceGroupPresentCapabilitiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceGroupPresentCapabilitiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceGroupPresentCapabilitiesKHR const &
+                            deviceGroupPresentCapabilitiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceGroupPresentCapabilitiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, deviceGroupPresentCapabilitiesKHR.pNext );
+    for ( size_t i = 0; i < VK_MAX_DEVICE_GROUP_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupPresentCapabilitiesKHR.presentMask[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR, seed, deviceGroupPresentCapabilitiesKHR.modes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceGroupPresentInfoKHR
   {
     using NativeType = VkDeviceGroupPresentInfoKHR;
@@ -20814,6 +24315,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceGroupPresentInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceGroupPresentInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceGroupPresentInfoKHR const & deviceGroupPresentInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceGroupPresentInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceGroupPresentInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupPresentInfoKHR.swapchainCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, deviceGroupPresentInfoKHR.pDeviceMasks );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagBitsKHR, seed, deviceGroupPresentInfoKHR.mode );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceGroupRenderPassBeginInfo
   {
     using NativeType = VkDeviceGroupRenderPassBeginInfo;
@@ -20945,6 +24467,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DeviceGroupRenderPassBeginInfoKHR = DeviceGroupRenderPassBeginInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceGroupRenderPassBeginInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceGroupRenderPassBeginInfo const & deviceGroupRenderPassBeginInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceGroupRenderPassBeginInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceGroupRenderPassBeginInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupRenderPassBeginInfo.deviceMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupRenderPassBeginInfo.deviceRenderAreaCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::Rect2D *, seed, deviceGroupRenderPassBeginInfo.pDeviceRenderAreas );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceGroupSubmitInfo
   {
     using NativeType = VkDeviceGroupSubmitInfo;
@@ -21133,6 +24676,29 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DeviceGroupSubmitInfoKHR = DeviceGroupSubmitInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceGroupSubmitInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DeviceGroupSubmitInfo const & deviceGroupSubmitInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceGroupSubmitInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceGroupSubmitInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupSubmitInfo.waitSemaphoreCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, deviceGroupSubmitInfo.pWaitSemaphoreDeviceIndices );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupSubmitInfo.commandBufferCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, deviceGroupSubmitInfo.pCommandBufferDeviceMasks );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceGroupSubmitInfo.signalSemaphoreCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, deviceGroupSubmitInfo.pSignalSemaphoreDeviceIndices );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceGroupSwapchainCreateInfoKHR
   {
     using NativeType = VkDeviceGroupSwapchainCreateInfoKHR;
@@ -21222,6 +24788,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceGroupSwapchainCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceGroupSwapchainCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceGroupSwapchainCreateInfoKHR const &
+                            deviceGroupSwapchainCreateInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceGroupSwapchainCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceGroupSwapchainCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR, seed, deviceGroupSwapchainCreateInfoKHR.modes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageCreateInfo
   {
     using NativeType = VkImageCreateInfo;
@@ -21468,6 +25053,35 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageCreateInfo const & imageCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageCreateFlags, seed, imageCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageType, seed, imageCreateInfo.imageType );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, imageCreateInfo.format );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, imageCreateInfo.extent );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageCreateInfo.mipLevels );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageCreateInfo.arrayLayers );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SampleCountFlagBits, seed, imageCreateInfo.samples );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageTiling, seed, imageCreateInfo.tiling );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags, seed, imageCreateInfo.usage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SharingMode, seed, imageCreateInfo.sharingMode );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageCreateInfo.queueFamilyIndexCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, imageCreateInfo.pQueueFamilyIndices );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, imageCreateInfo.initialLayout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceImageMemoryRequirementsKHR
   {
     using NativeType = VkDeviceImageMemoryRequirementsKHR;
@@ -21569,6 +25183,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceImageMemoryRequirementsKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceImageMemoryRequirementsKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DeviceImageMemoryRequirementsKHR const & deviceImageMemoryRequirementsKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceImageMemoryRequirementsKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceImageMemoryRequirementsKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::ImageCreateInfo *, seed, deviceImageMemoryRequirementsKHR.pCreateInfo );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageAspectFlagBits, seed, deviceImageMemoryRequirementsKHR.planeAspect );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceMemoryOpaqueCaptureAddressInfo
   {
     using NativeType = VkDeviceMemoryOpaqueCaptureAddressInfo;
@@ -21661,6 +25297,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DeviceMemoryOpaqueCaptureAddressInfoKHR = DeviceMemoryOpaqueCaptureAddressInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceMemoryOpaqueCaptureAddressInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceMemoryOpaqueCaptureAddressInfo const &
+                            deviceMemoryOpaqueCaptureAddressInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceMemoryOpaqueCaptureAddressInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceMemoryOpaqueCaptureAddressInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, deviceMemoryOpaqueCaptureAddressInfo.memory );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceMemoryOverallocationCreateInfoAMD
   {
     using NativeType = VkDeviceMemoryOverallocationCreateInfoAMD;
@@ -21758,6 +25412,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceMemoryOverallocationCreateInfoAMD;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceMemoryOverallocationCreateInfoAMD>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceMemoryOverallocationCreateInfoAMD const &
+                            deviceMemoryOverallocationCreateInfoAMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceMemoryOverallocationCreateInfoAMD.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceMemoryOverallocationCreateInfoAMD.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::MemoryOverallocationBehaviorAMD,
+                             seed,
+                             deviceMemoryOverallocationCreateInfoAMD.overallocationBehavior );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceMemoryReportCallbackDataEXT
   {
     using NativeType = VkDeviceMemoryReportCallbackDataEXT;
@@ -21855,6 +25529,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceMemoryReportCallbackDataEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceMemoryReportCallbackDataEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceMemoryReportCallbackDataEXT const &
+                            deviceMemoryReportCallbackDataEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceMemoryReportCallbackDataEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, deviceMemoryReportCallbackDataEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceMemoryReportFlagsEXT, seed, deviceMemoryReportCallbackDataEXT.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceMemoryReportEventTypeEXT, seed, deviceMemoryReportCallbackDataEXT.type );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, deviceMemoryReportCallbackDataEXT.memoryObjectId );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, deviceMemoryReportCallbackDataEXT.size );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ObjectType, seed, deviceMemoryReportCallbackDataEXT.objectType );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, deviceMemoryReportCallbackDataEXT.objectHandle );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceMemoryReportCallbackDataEXT.heapIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DevicePrivateDataCreateInfoEXT
   {
     using NativeType = VkDevicePrivateDataCreateInfoEXT;
@@ -21945,6 +25645,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DevicePrivateDataCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DevicePrivateDataCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DevicePrivateDataCreateInfoEXT const & devicePrivateDataCreateInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, devicePrivateDataCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, devicePrivateDataCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, devicePrivateDataCreateInfoEXT.privateDataSlotRequestCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceQueueGlobalPriorityCreateInfoEXT
   {
     using NativeType = VkDeviceQueueGlobalPriorityCreateInfoEXT;
@@ -22039,6 +25757,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceQueueGlobalPriorityCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceQueueGlobalPriorityCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceQueueGlobalPriorityCreateInfoEXT const &
+                            deviceQueueGlobalPriorityCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceQueueGlobalPriorityCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceQueueGlobalPriorityCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::QueueGlobalPriorityEXT, seed, deviceQueueGlobalPriorityCreateInfoEXT.globalPriority );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DeviceQueueInfo2
   {
     using NativeType = VkDeviceQueueInfo2;
@@ -22142,6 +25879,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DeviceQueueInfo2;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DeviceQueueInfo2>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DeviceQueueInfo2 const & deviceQueueInfo2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, deviceQueueInfo2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, deviceQueueInfo2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceQueueCreateFlags, seed, deviceQueueInfo2.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceQueueInfo2.queueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, deviceQueueInfo2.queueIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_DIRECTFB_EXT )
   struct DirectFBSurfaceCreateInfoEXT
   {
@@ -22248,6 +26004,28 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = DirectFBSurfaceCreateInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DirectFBSurfaceCreateInfoEXT>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::DirectFBSurfaceCreateInfoEXT const & directFBSurfaceCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, directFBSurfaceCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, directFBSurfaceCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DirectFBSurfaceCreateFlagsEXT, seed, directFBSurfaceCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( IDirectFB *, seed, directFBSurfaceCreateInfoEXT.dfb );
+    VULKAN_HPP_HASH_COMBINE( IDirectFBSurface *, seed, directFBSurfaceCreateInfoEXT.surface );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
 
   struct DispatchIndirectCommand
@@ -22334,6 +26112,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DispatchIndirectCommand>::value,
                             "DispatchIndirectCommand is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DispatchIndirectCommand>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DispatchIndirectCommand const & dispatchIndirectCommand ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, dispatchIndirectCommand.x );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, dispatchIndirectCommand.y );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, dispatchIndirectCommand.z );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayEventInfoEXT
   {
     using NativeType = VkDisplayEventInfoEXT;
@@ -22420,6 +26216,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplayEventInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayEventInfoEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DisplayEventInfoEXT const & displayEventInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displayEventInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, displayEventInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DisplayEventTypeEXT, seed, displayEventInfoEXT.displayEvent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayModeParametersKHR
   {
     using NativeType = VkDisplayModeParametersKHR;
@@ -22497,6 +26311,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DisplayModeParametersKHR>::value,
                             "DisplayModeParametersKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayModeParametersKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DisplayModeParametersKHR const & displayModeParametersKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, displayModeParametersKHR.visibleRegion );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, displayModeParametersKHR.refreshRate );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayModeCreateInfoKHR
   {
     using NativeType = VkDisplayModeCreateInfoKHR;
@@ -22594,6 +26425,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplayModeCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayModeCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DisplayModeCreateInfoKHR const & displayModeCreateInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displayModeCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, displayModeCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DisplayModeCreateFlagsKHR, seed, displayModeCreateInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DisplayModeParametersKHR, seed, displayModeCreateInfoKHR.parameters );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayModePropertiesKHR
   {
     using NativeType = VkDisplayModePropertiesKHR;
@@ -22657,6 +26508,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DisplayModePropertiesKHR>::value,
                             "DisplayModePropertiesKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayModePropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DisplayModePropertiesKHR const & displayModePropertiesKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DisplayModeKHR, seed, displayModePropertiesKHR.displayMode );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DisplayModeParametersKHR, seed, displayModePropertiesKHR.parameters );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayModeProperties2KHR
   {
     using NativeType = VkDisplayModeProperties2KHR;
@@ -22729,6 +26598,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplayModeProperties2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayModeProperties2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DisplayModeProperties2KHR const & displayModeProperties2KHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displayModeProperties2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, displayModeProperties2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DisplayModePropertiesKHR, seed, displayModeProperties2KHR.displayModeProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayNativeHdrSurfaceCapabilitiesAMD
   {
     using NativeType = VkDisplayNativeHdrSurfaceCapabilitiesAMD;
@@ -22807,6 +26695,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplayNativeHdrSurfaceCapabilitiesAMD;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayNativeHdrSurfaceCapabilitiesAMD>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DisplayNativeHdrSurfaceCapabilitiesAMD const &
+                            displayNativeHdrSurfaceCapabilitiesAMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displayNativeHdrSurfaceCapabilitiesAMD.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, displayNativeHdrSurfaceCapabilitiesAMD.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, displayNativeHdrSurfaceCapabilitiesAMD.localDimmingSupport );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayPlaneCapabilitiesKHR
   {
     using NativeType = VkDisplayPlaneCapabilitiesKHR;
@@ -22897,6 +26804,31 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR>::value,
     "DisplayPlaneCapabilitiesKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR const & displayPlaneCapabilitiesKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DisplayPlaneAlphaFlagsKHR, seed, displayPlaneCapabilitiesKHR.supportedAlpha );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset2D, seed, displayPlaneCapabilitiesKHR.minSrcPosition );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset2D, seed, displayPlaneCapabilitiesKHR.maxSrcPosition );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, displayPlaneCapabilitiesKHR.minSrcExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, displayPlaneCapabilitiesKHR.maxSrcExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset2D, seed, displayPlaneCapabilitiesKHR.minDstPosition );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset2D, seed, displayPlaneCapabilitiesKHR.maxDstPosition );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, displayPlaneCapabilitiesKHR.minDstExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, displayPlaneCapabilitiesKHR.maxDstExtent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayPlaneCapabilities2KHR
   {
     using NativeType = VkDisplayPlaneCapabilities2KHR;
@@ -22970,6 +26902,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplayPlaneCapabilities2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilities2KHR>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilities2KHR const & displayPlaneCapabilities2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displayPlaneCapabilities2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, displayPlaneCapabilities2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR, seed, displayPlaneCapabilities2KHR.capabilities );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayPlaneInfo2KHR
   {
     using NativeType = VkDisplayPlaneInfo2KHR;
@@ -23064,6 +27015,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplayPlaneInfo2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayPlaneInfo2KHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DisplayPlaneInfo2KHR const & displayPlaneInfo2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displayPlaneInfo2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, displayPlaneInfo2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DisplayModeKHR, seed, displayPlaneInfo2KHR.mode );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, displayPlaneInfo2KHR.planeIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayPlanePropertiesKHR
   {
     using NativeType = VkDisplayPlanePropertiesKHR;
@@ -23127,6 +27097,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DisplayPlanePropertiesKHR>::value,
                             "DisplayPlanePropertiesKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayPlanePropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DisplayPlanePropertiesKHR const & displayPlanePropertiesKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DisplayKHR, seed, displayPlanePropertiesKHR.currentDisplay );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, displayPlanePropertiesKHR.currentStackIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayPlaneProperties2KHR
   {
     using NativeType = VkDisplayPlaneProperties2KHR;
@@ -23200,6 +27187,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplayPlaneProperties2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayPlaneProperties2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DisplayPlaneProperties2KHR const & displayPlaneProperties2KHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displayPlaneProperties2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, displayPlaneProperties2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DisplayPlanePropertiesKHR, seed, displayPlaneProperties2KHR.displayPlaneProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayPowerInfoEXT
   {
     using NativeType = VkDisplayPowerInfoEXT;
@@ -23285,6 +27291,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplayPowerInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayPowerInfoEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DisplayPowerInfoEXT const & displayPowerInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displayPowerInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, displayPowerInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DisplayPowerStateEXT, seed, displayPowerInfoEXT.powerState );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayPresentInfoKHR
   {
     using NativeType = VkDisplayPresentInfoKHR;
@@ -23390,6 +27414,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplayPresentInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayPresentInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DisplayPresentInfoKHR const & displayPresentInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displayPresentInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, displayPresentInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Rect2D, seed, displayPresentInfoKHR.srcRect );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Rect2D, seed, displayPresentInfoKHR.dstRect );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, displayPresentInfoKHR.persistent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayPropertiesKHR
   {
     using NativeType = VkDisplayPropertiesKHR;
@@ -23470,6 +27514,29 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DisplayPropertiesKHR>::value,
                             "DisplayPropertiesKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayPropertiesKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DisplayPropertiesKHR const & displayPropertiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DisplayKHR, seed, displayPropertiesKHR.display );
+    VULKAN_HPP_HASH_COMBINE( const char *, seed, displayPropertiesKHR.displayName );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, displayPropertiesKHR.physicalDimensions );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, displayPropertiesKHR.physicalResolution );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagsKHR, seed, displayPropertiesKHR.supportedTransforms );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, displayPropertiesKHR.planeReorderPossible );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, displayPropertiesKHR.persistentContent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplayProperties2KHR
   {
     using NativeType = VkDisplayProperties2KHR;
@@ -23540,6 +27607,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplayProperties2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplayProperties2KHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DisplayProperties2KHR const & displayProperties2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displayProperties2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, displayProperties2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DisplayPropertiesKHR, seed, displayProperties2KHR.displayProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DisplaySurfaceCreateInfoKHR
   {
     using NativeType = VkDisplaySurfaceCreateInfoKHR;
@@ -23703,6 +27789,34 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DisplaySurfaceCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DisplaySurfaceCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DisplaySurfaceCreateInfoKHR const & displaySurfaceCreateInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, displaySurfaceCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, displaySurfaceCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DisplaySurfaceCreateFlagsKHR, seed, displaySurfaceCreateInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DisplayModeKHR, seed, displaySurfaceCreateInfoKHR.displayMode );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, displaySurfaceCreateInfoKHR.planeIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, displaySurfaceCreateInfoKHR.planeStackIndex );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR, seed, displaySurfaceCreateInfoKHR.transform );
+    VULKAN_HPP_HASH_COMBINE( float, seed, displaySurfaceCreateInfoKHR.globalAlpha );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DisplayPlaneAlphaFlagBitsKHR, seed, displaySurfaceCreateInfoKHR.alphaMode );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, displaySurfaceCreateInfoKHR.imageExtent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DrawIndexedIndirectCommand
   {
     using NativeType = VkDrawIndexedIndirectCommand;
@@ -23809,6 +27923,26 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DrawIndexedIndirectCommand>::value,
                             "DrawIndexedIndirectCommand is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DrawIndexedIndirectCommand>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DrawIndexedIndirectCommand const & drawIndexedIndirectCommand ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drawIndexedIndirectCommand.indexCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drawIndexedIndirectCommand.instanceCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drawIndexedIndirectCommand.firstIndex );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, drawIndexedIndirectCommand.vertexOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drawIndexedIndirectCommand.firstInstance );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DrawIndirectCommand
   {
     using NativeType = VkDrawIndirectCommand;
@@ -23903,6 +28037,25 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DrawIndirectCommand>::value,
                             "DrawIndirectCommand is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DrawIndirectCommand>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DrawIndirectCommand const & drawIndirectCommand ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drawIndirectCommand.vertexCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drawIndirectCommand.instanceCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drawIndirectCommand.firstVertex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drawIndirectCommand.firstInstance );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DrawMeshTasksIndirectCommandNV
   {
     using NativeType = VkDrawMeshTasksIndirectCommandNV;
@@ -23982,6 +28135,23 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DrawMeshTasksIndirectCommandNV>::value,
     "DrawMeshTasksIndirectCommandNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DrawMeshTasksIndirectCommandNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DrawMeshTasksIndirectCommandNV const & drawMeshTasksIndirectCommandNV )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drawMeshTasksIndirectCommandNV.taskCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drawMeshTasksIndirectCommandNV.firstTask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DrmFormatModifierProperties2EXT
   {
     using NativeType = VkDrmFormatModifierProperties2EXT;
@@ -24053,6 +28223,27 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DrmFormatModifierProperties2EXT>::value,
     "DrmFormatModifierProperties2EXT is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DrmFormatModifierProperties2EXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::DrmFormatModifierProperties2EXT const & drmFormatModifierProperties2EXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, drmFormatModifierProperties2EXT.drmFormatModifier );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drmFormatModifierProperties2EXT.drmFormatModifierPlaneCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FormatFeatureFlags2KHR,
+                             seed,
+                             drmFormatModifierProperties2EXT.drmFormatModifierTilingFeatures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DrmFormatModifierPropertiesEXT
   {
     using NativeType = VkDrmFormatModifierPropertiesEXT;
@@ -24124,6 +28315,25 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::DrmFormatModifierPropertiesEXT>::value,
     "DrmFormatModifierPropertiesEXT is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DrmFormatModifierPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DrmFormatModifierPropertiesEXT const & drmFormatModifierPropertiesEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, drmFormatModifierPropertiesEXT.drmFormatModifier );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drmFormatModifierPropertiesEXT.drmFormatModifierPlaneCount );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags, seed, drmFormatModifierPropertiesEXT.drmFormatModifierTilingFeatures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DrmFormatModifierPropertiesList2EXT
   {
     using NativeType = VkDrmFormatModifierPropertiesList2EXT;
@@ -24214,6 +28424,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DrmFormatModifierPropertiesList2EXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DrmFormatModifierPropertiesList2EXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DrmFormatModifierPropertiesList2EXT const &
+                            drmFormatModifierPropertiesList2EXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, drmFormatModifierPropertiesList2EXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, drmFormatModifierPropertiesList2EXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drmFormatModifierPropertiesList2EXT.drmFormatModifierCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DrmFormatModifierProperties2EXT *,
+                             seed,
+                             drmFormatModifierPropertiesList2EXT.pDrmFormatModifierProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct DrmFormatModifierPropertiesListEXT
   {
     using NativeType = VkDrmFormatModifierPropertiesListEXT;
@@ -24304,6 +28535,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = DrmFormatModifierPropertiesListEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::DrmFormatModifierPropertiesListEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::DrmFormatModifierPropertiesListEXT const &
+                            drmFormatModifierPropertiesListEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, drmFormatModifierPropertiesListEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, drmFormatModifierPropertiesListEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, drmFormatModifierPropertiesListEXT.drmFormatModifierCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DrmFormatModifierPropertiesEXT *,
+                             seed,
+                             drmFormatModifierPropertiesListEXT.pDrmFormatModifierProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct EventCreateInfo
   {
     using NativeType = VkEventCreateInfo;
@@ -24388,6 +28640,23 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = EventCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::EventCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::EventCreateInfo const & eventCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, eventCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, eventCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::EventCreateFlags, seed, eventCreateInfo.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ExportFenceCreateInfo
   {
     using NativeType = VkExportFenceCreateInfo;
@@ -24474,6 +28743,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ExportFenceCreateInfoKHR = ExportFenceCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExportFenceCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ExportFenceCreateInfo const & exportFenceCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, exportFenceCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, exportFenceCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlags, seed, exportFenceCreateInfo.handleTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct ExportFenceWin32HandleInfoKHR
   {
@@ -24581,6 +28869,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ExportFenceWin32HandleInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExportFenceWin32HandleInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExportFenceWin32HandleInfoKHR const & exportFenceWin32HandleInfoKHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, exportFenceWin32HandleInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, exportFenceWin32HandleInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( const SECURITY_ATTRIBUTES *, seed, exportFenceWin32HandleInfoKHR.pAttributes );
+    VULKAN_HPP_HASH_COMBINE( DWORD, seed, exportFenceWin32HandleInfoKHR.dwAccess );
+    VULKAN_HPP_HASH_COMBINE( LPCWSTR, seed, exportFenceWin32HandleInfoKHR.name );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   struct ExportMemoryAllocateInfo
@@ -24670,6 +28979,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ExportMemoryAllocateInfoKHR = ExportMemoryAllocateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExportMemoryAllocateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExportMemoryAllocateInfo const & exportMemoryAllocateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, exportMemoryAllocateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, exportMemoryAllocateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlags, seed, exportMemoryAllocateInfo.handleTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ExportMemoryAllocateInfoNV
   {
     using NativeType = VkExportMemoryAllocateInfoNV;
@@ -24757,6 +29085,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ExportMemoryAllocateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExportMemoryAllocateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExportMemoryAllocateInfoNV const & exportMemoryAllocateInfoNV ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, exportMemoryAllocateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, exportMemoryAllocateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV, seed, exportMemoryAllocateInfoNV.handleTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct ExportMemoryWin32HandleInfoKHR
   {
@@ -24864,6 +29211,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ExportMemoryWin32HandleInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExportMemoryWin32HandleInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExportMemoryWin32HandleInfoKHR const & exportMemoryWin32HandleInfoKHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, exportMemoryWin32HandleInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, exportMemoryWin32HandleInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( const SECURITY_ATTRIBUTES *, seed, exportMemoryWin32HandleInfoKHR.pAttributes );
+    VULKAN_HPP_HASH_COMBINE( DWORD, seed, exportMemoryWin32HandleInfoKHR.dwAccess );
+    VULKAN_HPP_HASH_COMBINE( LPCWSTR, seed, exportMemoryWin32HandleInfoKHR.name );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
@@ -24964,6 +29332,26 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ExportMemoryWin32HandleInfoNV;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExportMemoryWin32HandleInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExportMemoryWin32HandleInfoNV const & exportMemoryWin32HandleInfoNV )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, exportMemoryWin32HandleInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, exportMemoryWin32HandleInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( const SECURITY_ATTRIBUTES *, seed, exportMemoryWin32HandleInfoNV.pAttributes );
+    VULKAN_HPP_HASH_COMBINE( DWORD, seed, exportMemoryWin32HandleInfoNV.dwAccess );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   struct ExportSemaphoreCreateInfo
@@ -25054,6 +29442,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ExportSemaphoreCreateInfoKHR = ExportSemaphoreCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExportSemaphoreCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExportSemaphoreCreateInfo const & exportSemaphoreCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, exportSemaphoreCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, exportSemaphoreCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlags, seed, exportSemaphoreCreateInfo.handleTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct ExportSemaphoreWin32HandleInfoKHR
   {
@@ -25162,6 +29569,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ExportSemaphoreWin32HandleInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExportSemaphoreWin32HandleInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExportSemaphoreWin32HandleInfoKHR const &
+                            exportSemaphoreWin32HandleInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, exportSemaphoreWin32HandleInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, exportSemaphoreWin32HandleInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( const SECURITY_ATTRIBUTES *, seed, exportSemaphoreWin32HandleInfoKHR.pAttributes );
+    VULKAN_HPP_HASH_COMBINE( DWORD, seed, exportSemaphoreWin32HandleInfoKHR.dwAccess );
+    VULKAN_HPP_HASH_COMBINE( LPCWSTR, seed, exportSemaphoreWin32HandleInfoKHR.name );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   struct ExtensionProperties
@@ -25226,6 +29654,26 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ExtensionProperties>::value,
                             "ExtensionProperties is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExtensionProperties>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ExtensionProperties const & extensionProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    for ( size_t i = 0; i < VK_MAX_EXTENSION_NAME_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, extensionProperties.extensionName[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, extensionProperties.specVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ExternalMemoryProperties
   {
     using NativeType = VkExternalMemoryProperties;
@@ -25295,6 +29743,28 @@ namespace VULKAN_HPP_NAMESPACE
                             "ExternalMemoryProperties is not nothrow_move_constructible!" );
   using ExternalMemoryPropertiesKHR = ExternalMemoryProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExternalMemoryProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExternalMemoryProperties const & externalMemoryProperties ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryFeatureFlags, seed, externalMemoryProperties.externalMemoryFeatures );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlags,
+                             seed,
+                             externalMemoryProperties.exportFromImportedHandleTypes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlags, seed, externalMemoryProperties.compatibleHandleTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ExternalBufferProperties
   {
     using NativeType = VkExternalBufferProperties;
@@ -25368,6 +29838,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ExternalBufferPropertiesKHR = ExternalBufferProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExternalBufferProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExternalBufferProperties const & externalBufferProperties ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, externalBufferProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, externalBufferProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryProperties, seed, externalBufferProperties.externalMemoryProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ExternalFenceProperties
   {
     using NativeType = VkExternalFenceProperties;
@@ -25449,6 +29938,29 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ExternalFencePropertiesKHR = ExternalFenceProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExternalFenceProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExternalFenceProperties const & externalFenceProperties ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, externalFenceProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, externalFenceProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlags, seed, externalFenceProperties.exportFromImportedHandleTypes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlags, seed, externalFenceProperties.compatibleHandleTypes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalFenceFeatureFlags, seed, externalFenceProperties.externalFenceFeatures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
   struct ExternalFormatANDROID
   {
@@ -25532,6 +30044,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ExternalFormatANDROID;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExternalFormatANDROID>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ExternalFormatANDROID const & externalFormatANDROID ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, externalFormatANDROID.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, externalFormatANDROID.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, externalFormatANDROID.externalFormat );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
   struct ExternalImageFormatProperties
@@ -25610,6 +30141,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ExternalImageFormatPropertiesKHR = ExternalImageFormatProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExternalImageFormatProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExternalImageFormatProperties const & externalImageFormatProperties )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, externalImageFormatProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, externalImageFormatProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryProperties, seed, externalImageFormatProperties.externalMemoryProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageFormatProperties
   {
     using NativeType = VkImageFormatProperties;
@@ -25683,6 +30233,26 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageFormatProperties>::value,
                             "ImageFormatProperties is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageFormatProperties>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImageFormatProperties const & imageFormatProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, imageFormatProperties.maxExtent );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageFormatProperties.maxMipLevels );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageFormatProperties.maxArrayLayers );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, imageFormatProperties.sampleCounts );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, imageFormatProperties.maxResourceSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ExternalImageFormatPropertiesNV
   {
     using NativeType = VkExternalImageFormatPropertiesNV;
@@ -25758,6 +30328,33 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV>::value,
     "ExternalImageFormatPropertiesNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV const & externalImageFormatPropertiesNV ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageFormatProperties, seed, externalImageFormatPropertiesNV.imageFormatProperties );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ExternalMemoryFeatureFlagsNV,
+                             seed,
+                             externalImageFormatPropertiesNV.externalMemoryFeatures );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV,
+                             seed,
+                             externalImageFormatPropertiesNV.exportFromImportedHandleTypes );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV,
+                             seed,
+                             externalImageFormatPropertiesNV.compatibleHandleTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ExternalMemoryBufferCreateInfo
   {
     using NativeType = VkExternalMemoryBufferCreateInfo;
@@ -25848,6 +30445,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ExternalMemoryBufferCreateInfoKHR = ExternalMemoryBufferCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExternalMemoryBufferCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExternalMemoryBufferCreateInfo const & externalMemoryBufferCreateInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, externalMemoryBufferCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, externalMemoryBufferCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlags, seed, externalMemoryBufferCreateInfo.handleTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ExternalMemoryImageCreateInfo
   {
     using NativeType = VkExternalMemoryImageCreateInfo;
@@ -25938,6 +30554,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ExternalMemoryImageCreateInfoKHR = ExternalMemoryImageCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExternalMemoryImageCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExternalMemoryImageCreateInfo const & externalMemoryImageCreateInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, externalMemoryImageCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, externalMemoryImageCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlags, seed, externalMemoryImageCreateInfo.handleTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ExternalMemoryImageCreateInfoNV
   {
     using NativeType = VkExternalMemoryImageCreateInfoNV;
@@ -26027,6 +30662,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ExternalMemoryImageCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExternalMemoryImageCreateInfoNV>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ExternalMemoryImageCreateInfoNV const & externalMemoryImageCreateInfoNV ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, externalMemoryImageCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, externalMemoryImageCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV, seed, externalMemoryImageCreateInfoNV.handleTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ExternalSemaphoreProperties
   {
     using NativeType = VkExternalSemaphoreProperties;
@@ -26110,6 +30765,31 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ExternalSemaphorePropertiesKHR = ExternalSemaphoreProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ExternalSemaphoreProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ExternalSemaphoreProperties const & externalSemaphoreProperties ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, externalSemaphoreProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, externalSemaphoreProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlags,
+                             seed,
+                             externalSemaphoreProperties.exportFromImportedHandleTypes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlags, seed, externalSemaphoreProperties.compatibleHandleTypes );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ExternalSemaphoreFeatureFlags,
+                             seed,
+                             externalSemaphoreProperties.externalSemaphoreFeatures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct FenceCreateInfo
   {
     using NativeType = VkFenceCreateInfo;
@@ -26194,6 +30874,23 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = FenceCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FenceCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::FenceCreateInfo const & fenceCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, fenceCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, fenceCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FenceCreateFlags, seed, fenceCreateInfo.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct FenceGetFdInfoKHR
   {
     using NativeType = VkFenceGetFdInfoKHR;
@@ -26291,6 +30988,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = FenceGetFdInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FenceGetFdInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::FenceGetFdInfoKHR const & fenceGetFdInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, fenceGetFdInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, fenceGetFdInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Fence, seed, fenceGetFdInfoKHR.fence );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits, seed, fenceGetFdInfoKHR.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct FenceGetWin32HandleInfoKHR
   {
@@ -26391,6 +31107,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = FenceGetWin32HandleInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FenceGetWin32HandleInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::FenceGetWin32HandleInfoKHR const & fenceGetWin32HandleInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, fenceGetWin32HandleInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, fenceGetWin32HandleInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Fence, seed, fenceGetWin32HandleInfoKHR.fence );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits, seed, fenceGetWin32HandleInfoKHR.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   struct FilterCubicImageViewImageFormatPropertiesEXT
@@ -26476,6 +31213,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = FilterCubicImageViewImageFormatPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FilterCubicImageViewImageFormatPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::FilterCubicImageViewImageFormatPropertiesEXT const &
+                            filterCubicImageViewImageFormatPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, filterCubicImageViewImageFormatPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, filterCubicImageViewImageFormatPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, filterCubicImageViewImageFormatPropertiesEXT.filterCubic );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, filterCubicImageViewImageFormatPropertiesEXT.filterCubicMinmax );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct FormatProperties
   {
     using NativeType = VkFormatProperties;
@@ -26542,6 +31301,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::FormatProperties>::value,
                             "FormatProperties is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FormatProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::FormatProperties const & formatProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FormatFeatureFlags, seed, formatProperties.linearTilingFeatures );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FormatFeatureFlags, seed, formatProperties.optimalTilingFeatures );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FormatFeatureFlags, seed, formatProperties.bufferFeatures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct FormatProperties2
   {
     using NativeType = VkFormatProperties2;
@@ -26613,6 +31389,23 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using FormatProperties2KHR = FormatProperties2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FormatProperties2>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::FormatProperties2 const & formatProperties2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, formatProperties2.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, formatProperties2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FormatProperties, seed, formatProperties2.formatProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct FormatProperties3KHR
   {
     using NativeType = VkFormatProperties3KHR;
@@ -26690,6 +31483,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = FormatProperties3KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FormatProperties3KHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::FormatProperties3KHR const & formatProperties3KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, formatProperties3KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, formatProperties3KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags2KHR, seed, formatProperties3KHR.linearTilingFeatures );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags2KHR, seed, formatProperties3KHR.optimalTilingFeatures );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FormatFeatureFlags2KHR, seed, formatProperties3KHR.bufferFeatures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct FragmentShadingRateAttachmentInfoKHR
   {
     using NativeType = VkFragmentShadingRateAttachmentInfoKHR;
@@ -26793,6 +31608,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = FragmentShadingRateAttachmentInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FragmentShadingRateAttachmentInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::FragmentShadingRateAttachmentInfoKHR const &
+                            fragmentShadingRateAttachmentInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, fragmentShadingRateAttachmentInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, fragmentShadingRateAttachmentInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::AttachmentReference2 *,
+                             seed,
+                             fragmentShadingRateAttachmentInfoKHR.pFragmentShadingRateAttachment );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Extent2D, seed, fragmentShadingRateAttachmentInfoKHR.shadingRateAttachmentTexelSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct FramebufferAttachmentImageInfo
   {
     using NativeType = VkFramebufferAttachmentImageInfo;
@@ -26971,6 +31808,30 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using FramebufferAttachmentImageInfoKHR = FramebufferAttachmentImageInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FramebufferAttachmentImageInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::FramebufferAttachmentImageInfo const & framebufferAttachmentImageInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, framebufferAttachmentImageInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, framebufferAttachmentImageInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageCreateFlags, seed, framebufferAttachmentImageInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags, seed, framebufferAttachmentImageInfo.usage );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, framebufferAttachmentImageInfo.width );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, framebufferAttachmentImageInfo.height );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, framebufferAttachmentImageInfo.layerCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, framebufferAttachmentImageInfo.viewFormatCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Format *, seed, framebufferAttachmentImageInfo.pViewFormats );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct FramebufferAttachmentsCreateInfo
   {
     using NativeType = VkFramebufferAttachmentsCreateInfo;
@@ -27093,6 +31954,28 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using FramebufferAttachmentsCreateInfoKHR = FramebufferAttachmentsCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FramebufferAttachmentsCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::FramebufferAttachmentsCreateInfo const & framebufferAttachmentsCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, framebufferAttachmentsCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, framebufferAttachmentsCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, framebufferAttachmentsCreateInfo.attachmentImageInfoCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::FramebufferAttachmentImageInfo *,
+                             seed,
+                             framebufferAttachmentsCreateInfo.pAttachmentImageInfos );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct FramebufferCreateInfo
   {
     using NativeType = VkFramebufferCreateInfo;
@@ -27265,6 +32148,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = FramebufferCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FramebufferCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::FramebufferCreateInfo const & framebufferCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, framebufferCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, framebufferCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FramebufferCreateFlags, seed, framebufferCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::RenderPass, seed, framebufferCreateInfo.renderPass );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, framebufferCreateInfo.attachmentCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ImageView *, seed, framebufferCreateInfo.pAttachments );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, framebufferCreateInfo.width );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, framebufferCreateInfo.height );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, framebufferCreateInfo.layers );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct FramebufferMixedSamplesCombinationNV
   {
     using NativeType = VkFramebufferMixedSamplesCombinationNV;
@@ -27355,6 +32262,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = FramebufferMixedSamplesCombinationNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::FramebufferMixedSamplesCombinationNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::FramebufferMixedSamplesCombinationNV const &
+                            framebufferMixedSamplesCombinationNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, framebufferMixedSamplesCombinationNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, framebufferMixedSamplesCombinationNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::CoverageReductionModeNV, seed, framebufferMixedSamplesCombinationNV.coverageReductionMode );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlagBits, seed, framebufferMixedSamplesCombinationNV.rasterizationSamples );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, framebufferMixedSamplesCombinationNV.depthStencilSamples );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, framebufferMixedSamplesCombinationNV.colorSamples );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct IndirectCommandsStreamNV
   {
     using NativeType = VkIndirectCommandsStreamNV;
@@ -27433,6 +32365,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::IndirectCommandsStreamNV>::value,
                             "IndirectCommandsStreamNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::IndirectCommandsStreamNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::IndirectCommandsStreamNV const & indirectCommandsStreamNV ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, indirectCommandsStreamNV.buffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, indirectCommandsStreamNV.offset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct GeneratedCommandsInfoNV
   {
     using NativeType = VkGeneratedCommandsInfoNV;
@@ -27687,6 +32636,38 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = GeneratedCommandsInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::GeneratedCommandsInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::GeneratedCommandsInfoNV const & generatedCommandsInfoNV ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, generatedCommandsInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, generatedCommandsInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineBindPoint, seed, generatedCommandsInfoNV.pipelineBindPoint );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Pipeline, seed, generatedCommandsInfoNV.pipeline );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutNV, seed, generatedCommandsInfoNV.indirectCommandsLayout );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, generatedCommandsInfoNV.streamCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::IndirectCommandsStreamNV *, seed, generatedCommandsInfoNV.pStreams );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, generatedCommandsInfoNV.sequencesCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, generatedCommandsInfoNV.preprocessBuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, generatedCommandsInfoNV.preprocessOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, generatedCommandsInfoNV.preprocessSize );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, generatedCommandsInfoNV.sequencesCountBuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, generatedCommandsInfoNV.sequencesCountOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, generatedCommandsInfoNV.sequencesIndexBuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, generatedCommandsInfoNV.sequencesIndexOffset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct GeneratedCommandsMemoryRequirementsInfoNV
   {
     using NativeType = VkGeneratedCommandsMemoryRequirementsInfoNV;
@@ -27814,6 +32795,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = GeneratedCommandsMemoryRequirementsInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::GeneratedCommandsMemoryRequirementsInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::GeneratedCommandsMemoryRequirementsInfoNV const &
+                            generatedCommandsMemoryRequirementsInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, generatedCommandsMemoryRequirementsInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, generatedCommandsMemoryRequirementsInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineBindPoint, seed, generatedCommandsMemoryRequirementsInfoNV.pipelineBindPoint );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Pipeline, seed, generatedCommandsMemoryRequirementsInfoNV.pipeline );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutNV,
+                             seed,
+                             generatedCommandsMemoryRequirementsInfoNV.indirectCommandsLayout );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, generatedCommandsMemoryRequirementsInfoNV.maxSequencesCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct VertexInputBindingDescription
   {
     using NativeType = VkVertexInputBindingDescription;
@@ -27905,6 +32911,24 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VertexInputBindingDescription>::value,
     "VertexInputBindingDescription is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VertexInputBindingDescription>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VertexInputBindingDescription const & vertexInputBindingDescription )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputBindingDescription.binding );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputBindingDescription.stride );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VertexInputRate, seed, vertexInputBindingDescription.inputRate );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct VertexInputAttributeDescription
   {
     using NativeType = VkVertexInputAttributeDescription;
@@ -28005,6 +33029,26 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VertexInputAttributeDescription>::value,
     "VertexInputAttributeDescription is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VertexInputAttributeDescription>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VertexInputAttributeDescription const & vertexInputAttributeDescription ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputAttributeDescription.location );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputAttributeDescription.binding );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, vertexInputAttributeDescription.format );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputAttributeDescription.offset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineVertexInputStateCreateInfo
   {
     using NativeType = VkPipelineVertexInputStateCreateInfo;
@@ -28178,6 +33222,33 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineVertexInputStateCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineVertexInputStateCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineVertexInputStateCreateInfo const &
+                            pipelineVertexInputStateCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineVertexInputStateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineVertexInputStateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineVertexInputStateCreateFlags, seed, pipelineVertexInputStateCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineVertexInputStateCreateInfo.vertexBindingDescriptionCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VertexInputBindingDescription *,
+                             seed,
+                             pipelineVertexInputStateCreateInfo.pVertexBindingDescriptions );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineVertexInputStateCreateInfo.vertexAttributeDescriptionCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VertexInputAttributeDescription *,
+                             seed,
+                             pipelineVertexInputStateCreateInfo.pVertexAttributeDescriptions );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineInputAssemblyStateCreateInfo
   {
     using NativeType = VkPipelineInputAssemblyStateCreateInfo;
@@ -28290,6 +33361,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineInputAssemblyStateCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineInputAssemblyStateCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineInputAssemblyStateCreateInfo const &
+                            pipelineInputAssemblyStateCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineInputAssemblyStateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineInputAssemblyStateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineInputAssemblyStateCreateFlags, seed, pipelineInputAssemblyStateCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PrimitiveTopology, seed, pipelineInputAssemblyStateCreateInfo.topology );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineInputAssemblyStateCreateInfo.primitiveRestartEnable );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineTessellationStateCreateInfo
   {
     using NativeType = VkPipelineTessellationStateCreateInfo;
@@ -28392,6 +33486,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineTessellationStateCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineTessellationStateCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineTessellationStateCreateInfo const &
+                            pipelineTessellationStateCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineTessellationStateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineTessellationStateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineTessellationStateCreateFlags, seed, pipelineTessellationStateCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineTessellationStateCreateInfo.patchControlPoints );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineViewportStateCreateInfo
   {
     using NativeType = VkPipelineViewportStateCreateInfo;
@@ -28558,6 +33672,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineViewportStateCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineViewportStateCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PipelineViewportStateCreateInfo const & pipelineViewportStateCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineViewportStateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineViewportStateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineViewportStateCreateFlags, seed, pipelineViewportStateCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineViewportStateCreateInfo.viewportCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Viewport *, seed, pipelineViewportStateCreateInfo.pViewports );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineViewportStateCreateInfo.scissorCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Rect2D *, seed, pipelineViewportStateCreateInfo.pScissors );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineRasterizationStateCreateInfo
   {
     using NativeType = VkPipelineRasterizationStateCreateInfo;
@@ -28754,6 +33892,38 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineRasterizationStateCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineRasterizationStateCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineRasterizationStateCreateInfo const &
+                            pipelineRasterizationStateCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineRasterizationStateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineRasterizationStateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineRasterizationStateCreateFlags, seed, pipelineRasterizationStateCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineRasterizationStateCreateInfo.depthClampEnable );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineRasterizationStateCreateInfo.rasterizerDiscardEnable );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PolygonMode, seed, pipelineRasterizationStateCreateInfo.polygonMode );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CullModeFlags, seed, pipelineRasterizationStateCreateInfo.cullMode );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FrontFace, seed, pipelineRasterizationStateCreateInfo.frontFace );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineRasterizationStateCreateInfo.depthBiasEnable );
+    VULKAN_HPP_HASH_COMBINE( float, seed, pipelineRasterizationStateCreateInfo.depthBiasConstantFactor );
+    VULKAN_HPP_HASH_COMBINE( float, seed, pipelineRasterizationStateCreateInfo.depthBiasClamp );
+    VULKAN_HPP_HASH_COMBINE( float, seed, pipelineRasterizationStateCreateInfo.depthBiasSlopeFactor );
+    VULKAN_HPP_HASH_COMBINE( float, seed, pipelineRasterizationStateCreateInfo.lineWidth );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineMultisampleStateCreateInfo
   {
     using NativeType = VkPipelineMultisampleStateCreateInfo;
@@ -28909,6 +34079,35 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineMultisampleStateCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineMultisampleStateCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineMultisampleStateCreateInfo const &
+                            pipelineMultisampleStateCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineMultisampleStateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineMultisampleStateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineMultisampleStateCreateFlags, seed, pipelineMultisampleStateCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlagBits, seed, pipelineMultisampleStateCreateInfo.rasterizationSamples );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineMultisampleStateCreateInfo.sampleShadingEnable );
+    VULKAN_HPP_HASH_COMBINE( float, seed, pipelineMultisampleStateCreateInfo.minSampleShading );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SampleMask *, seed, pipelineMultisampleStateCreateInfo.pSampleMask );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineMultisampleStateCreateInfo.alphaToCoverageEnable );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineMultisampleStateCreateInfo.alphaToOneEnable );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct StencilOpState
   {
     using NativeType = VkStencilOpState;
@@ -29034,6 +34233,27 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::StencilOpState>::value,
                             "StencilOpState is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::StencilOpState>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::StencilOpState const & stencilOpState ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StencilOp, seed, stencilOpState.failOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StencilOp, seed, stencilOpState.passOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StencilOp, seed, stencilOpState.depthFailOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CompareOp, seed, stencilOpState.compareOp );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, stencilOpState.compareMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, stencilOpState.writeMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, stencilOpState.reference );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineDepthStencilStateCreateInfo
   {
     using NativeType = VkPipelineDepthStencilStateCreateInfo;
@@ -29219,6 +34439,37 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineDepthStencilStateCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateInfo const &
+                            pipelineDepthStencilStateCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineDepthStencilStateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineDepthStencilStateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateFlags, seed, pipelineDepthStencilStateCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineDepthStencilStateCreateInfo.depthTestEnable );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineDepthStencilStateCreateInfo.depthWriteEnable );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::CompareOp, seed, pipelineDepthStencilStateCreateInfo.depthCompareOp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineDepthStencilStateCreateInfo.depthBoundsTestEnable );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineDepthStencilStateCreateInfo.stencilTestEnable );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StencilOpState, seed, pipelineDepthStencilStateCreateInfo.front );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StencilOpState, seed, pipelineDepthStencilStateCreateInfo.back );
+    VULKAN_HPP_HASH_COMBINE( float, seed, pipelineDepthStencilStateCreateInfo.minDepthBounds );
+    VULKAN_HPP_HASH_COMBINE( float, seed, pipelineDepthStencilStateCreateInfo.maxDepthBounds );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineColorBlendAttachmentState
   {
     using NativeType = VkPipelineColorBlendAttachmentState;
@@ -29364,6 +34615,34 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PipelineColorBlendAttachmentState>::value,
     "PipelineColorBlendAttachmentState is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineColorBlendAttachmentState>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineColorBlendAttachmentState const &
+                            pipelineColorBlendAttachmentState ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineColorBlendAttachmentState.blendEnable );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::BlendFactor, seed, pipelineColorBlendAttachmentState.srcColorBlendFactor );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::BlendFactor, seed, pipelineColorBlendAttachmentState.dstColorBlendFactor );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BlendOp, seed, pipelineColorBlendAttachmentState.colorBlendOp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::BlendFactor, seed, pipelineColorBlendAttachmentState.srcAlphaBlendFactor );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::BlendFactor, seed, pipelineColorBlendAttachmentState.dstAlphaBlendFactor );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BlendOp, seed, pipelineColorBlendAttachmentState.alphaBlendOp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ColorComponentFlags, seed, pipelineColorBlendAttachmentState.colorWriteMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineColorBlendStateCreateInfo
   {
     using NativeType = VkPipelineColorBlendStateCreateInfo;
@@ -29535,6 +34814,35 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineColorBlendStateCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateInfo const &
+                            pipelineColorBlendStateCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineColorBlendStateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineColorBlendStateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateFlags, seed, pipelineColorBlendStateCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineColorBlendStateCreateInfo.logicOpEnable );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::LogicOp, seed, pipelineColorBlendStateCreateInfo.logicOp );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineColorBlendStateCreateInfo.attachmentCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineColorBlendAttachmentState *,
+                             seed,
+                             pipelineColorBlendStateCreateInfo.pAttachments );
+    for ( size_t i = 0; i < 4; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( float, seed, pipelineColorBlendStateCreateInfo.blendConstants[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineDynamicStateCreateInfo
   {
     using NativeType = VkPipelineDynamicStateCreateInfo;
@@ -29666,6 +34974,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineDynamicStateCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineDynamicStateCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineDynamicStateCreateInfo const & pipelineDynamicStateCreateInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineDynamicStateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineDynamicStateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineDynamicStateCreateFlags, seed, pipelineDynamicStateCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineDynamicStateCreateInfo.dynamicStateCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DynamicState *, seed, pipelineDynamicStateCreateInfo.pDynamicStates );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct GraphicsPipelineCreateInfo
   {
     using NativeType = VkGraphicsPipelineCreateInfo;
@@ -29969,6 +35299,57 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = GraphicsPipelineCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::GraphicsPipelineCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::GraphicsPipelineCreateInfo const & graphicsPipelineCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, graphicsPipelineCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, graphicsPipelineCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCreateFlags, seed, graphicsPipelineCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, graphicsPipelineCreateInfo.stageCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateInfo *, seed, graphicsPipelineCreateInfo.pStages );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineVertexInputStateCreateInfo *,
+                             seed,
+                             graphicsPipelineCreateInfo.pVertexInputState );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineInputAssemblyStateCreateInfo *,
+                             seed,
+                             graphicsPipelineCreateInfo.pInputAssemblyState );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineTessellationStateCreateInfo *,
+                             seed,
+                             graphicsPipelineCreateInfo.pTessellationState );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::PipelineViewportStateCreateInfo *, seed, graphicsPipelineCreateInfo.pViewportState );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineRasterizationStateCreateInfo *,
+                             seed,
+                             graphicsPipelineCreateInfo.pRasterizationState );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineMultisampleStateCreateInfo *,
+                             seed,
+                             graphicsPipelineCreateInfo.pMultisampleState );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateInfo *,
+                             seed,
+                             graphicsPipelineCreateInfo.pDepthStencilState );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateInfo *,
+                             seed,
+                             graphicsPipelineCreateInfo.pColorBlendState );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::PipelineDynamicStateCreateInfo *, seed, graphicsPipelineCreateInfo.pDynamicState );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineLayout, seed, graphicsPipelineCreateInfo.layout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::RenderPass, seed, graphicsPipelineCreateInfo.renderPass );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, graphicsPipelineCreateInfo.subpass );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Pipeline, seed, graphicsPipelineCreateInfo.basePipelineHandle );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, graphicsPipelineCreateInfo.basePipelineIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct GraphicsShaderGroupCreateInfoNV
   {
     using NativeType = VkGraphicsShaderGroupCreateInfoNV;
@@ -30113,6 +35494,33 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = GraphicsShaderGroupCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::GraphicsShaderGroupCreateInfoNV>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::GraphicsShaderGroupCreateInfoNV const & graphicsShaderGroupCreateInfoNV ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, graphicsShaderGroupCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, graphicsShaderGroupCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, graphicsShaderGroupCreateInfoNV.stageCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateInfo *, seed, graphicsShaderGroupCreateInfoNV.pStages );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineVertexInputStateCreateInfo *,
+                             seed,
+                             graphicsShaderGroupCreateInfoNV.pVertexInputState );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineTessellationStateCreateInfo *,
+                             seed,
+                             graphicsShaderGroupCreateInfoNV.pTessellationState );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct GraphicsPipelineShaderGroupsCreateInfoNV
   {
     using NativeType = VkGraphicsPipelineShaderGroupsCreateInfoNV;
@@ -30273,6 +35681,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = GraphicsPipelineShaderGroupsCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::GraphicsPipelineShaderGroupsCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::GraphicsPipelineShaderGroupsCreateInfoNV const &
+                            graphicsPipelineShaderGroupsCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, graphicsPipelineShaderGroupsCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, graphicsPipelineShaderGroupsCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, graphicsPipelineShaderGroupsCreateInfoNV.groupCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::GraphicsShaderGroupCreateInfoNV *,
+                             seed,
+                             graphicsPipelineShaderGroupsCreateInfoNV.pGroups );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, graphicsPipelineShaderGroupsCreateInfoNV.pipelineCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::Pipeline *, seed, graphicsPipelineShaderGroupsCreateInfoNV.pPipelines );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct XYColorEXT
   {
     using NativeType = VkXYColorEXT;
@@ -30347,6 +35780,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::XYColorEXT>::value,
                             "XYColorEXT is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::XYColorEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::XYColorEXT const & xYColorEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( float, seed, xYColorEXT.x );
+    VULKAN_HPP_HASH_COMBINE( float, seed, xYColorEXT.y );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct HdrMetadataEXT
   {
     using NativeType = VkHdrMetadataEXT;
@@ -30502,6 +35951,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = HdrMetadataEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::HdrMetadataEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::HdrMetadataEXT const & hdrMetadataEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, hdrMetadataEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, hdrMetadataEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::XYColorEXT, seed, hdrMetadataEXT.displayPrimaryRed );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::XYColorEXT, seed, hdrMetadataEXT.displayPrimaryGreen );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::XYColorEXT, seed, hdrMetadataEXT.displayPrimaryBlue );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::XYColorEXT, seed, hdrMetadataEXT.whitePoint );
+    VULKAN_HPP_HASH_COMBINE( float, seed, hdrMetadataEXT.maxLuminance );
+    VULKAN_HPP_HASH_COMBINE( float, seed, hdrMetadataEXT.minLuminance );
+    VULKAN_HPP_HASH_COMBINE( float, seed, hdrMetadataEXT.maxContentLightLevel );
+    VULKAN_HPP_HASH_COMBINE( float, seed, hdrMetadataEXT.maxFrameAverageLightLevel );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct HeadlessSurfaceCreateInfoEXT
   {
     using NativeType = VkHeadlessSurfaceCreateInfoEXT;
@@ -30589,6 +36062,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = HeadlessSurfaceCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::HeadlessSurfaceCreateInfoEXT>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::HeadlessSurfaceCreateInfoEXT const & headlessSurfaceCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, headlessSurfaceCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, headlessSurfaceCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::HeadlessSurfaceCreateFlagsEXT, seed, headlessSurfaceCreateInfoEXT.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_IOS_MVK )
   struct IOSSurfaceCreateInfoMVK
   {
@@ -30683,6 +36175,26 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = IOSSurfaceCreateInfoMVK;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::IOSSurfaceCreateInfoMVK>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::IOSSurfaceCreateInfoMVK const & iOSSurfaceCreateInfoMVK ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, iOSSurfaceCreateInfoMVK.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, iOSSurfaceCreateInfoMVK.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::IOSSurfaceCreateFlagsMVK, seed, iOSSurfaceCreateInfoMVK.flags );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, iOSSurfaceCreateInfoMVK.pView );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_IOS_MVK*/
 
   struct ImageBlit
@@ -30783,6 +36295,30 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageBlit>::value,
                             "ImageBlit is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageBlit>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageBlit const & imageBlit ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageBlit.srcSubresource );
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageBlit.srcOffsets[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageBlit.dstSubresource );
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageBlit.dstOffsets[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   struct ImageFormatConstraintsInfoFUCHSIA
   {
@@ -30926,6 +36462,34 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImageFormatConstraintsInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA const &
+                            imageFormatConstraintsInfoFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageFormatConstraintsInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageFormatConstraintsInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageCreateInfo, seed, imageFormatConstraintsInfoFUCHSIA.imageCreateInfo );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags, seed, imageFormatConstraintsInfoFUCHSIA.requiredFormatFeatures );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageFormatConstraintsFlagsFUCHSIA, seed, imageFormatConstraintsInfoFUCHSIA.flags );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, imageFormatConstraintsInfoFUCHSIA.sysmemPixelFormat );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageFormatConstraintsInfoFUCHSIA.colorSpaceCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA *, seed, imageFormatConstraintsInfoFUCHSIA.pColorSpaces );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -31074,6 +36638,33 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImageConstraintsInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFUCHSIA const & imageConstraintsInfoFUCHSIA ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageConstraintsInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageConstraintsInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageConstraintsInfoFUCHSIA.formatConstraintsCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA *,
+                             seed,
+                             imageConstraintsInfoFUCHSIA.pFormatConstraints );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA,
+                             seed,
+                             imageConstraintsInfoFUCHSIA.bufferCollectionConstraints );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFlagsFUCHSIA, seed, imageConstraintsInfoFUCHSIA.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct ImageCopy
@@ -31182,6 +36773,25 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageCopy>::value,
                             "ImageCopy is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageCopy>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageCopy const & imageCopy ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageCopy.srcSubresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageCopy.srcOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageCopy.dstSubresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageCopy.dstOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, imageCopy.extent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubresourceLayout
   {
     using NativeType = VkSubresourceLayout;
@@ -31253,6 +36863,25 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SubresourceLayout>::value,
                             "SubresourceLayout is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubresourceLayout>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SubresourceLayout const & subresourceLayout ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, subresourceLayout.offset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, subresourceLayout.size );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, subresourceLayout.rowPitch );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, subresourceLayout.arrayPitch );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, subresourceLayout.depthPitch );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageDrmFormatModifierExplicitCreateInfoEXT
   {
     using NativeType = VkImageDrmFormatModifierExplicitCreateInfoEXT;
@@ -31392,6 +37021,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageDrmFormatModifierExplicitCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierExplicitCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierExplicitCreateInfoEXT const &
+                            imageDrmFormatModifierExplicitCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, imageDrmFormatModifierExplicitCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageDrmFormatModifierExplicitCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, imageDrmFormatModifierExplicitCreateInfoEXT.drmFormatModifier );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageDrmFormatModifierExplicitCreateInfoEXT.drmFormatModifierPlaneCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::SubresourceLayout *,
+                             seed,
+                             imageDrmFormatModifierExplicitCreateInfoEXT.pPlaneLayouts );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageDrmFormatModifierListCreateInfoEXT
   {
     using NativeType = VkImageDrmFormatModifierListCreateInfoEXT;
@@ -31516,6 +37168,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageDrmFormatModifierListCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierListCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierListCreateInfoEXT const &
+                            imageDrmFormatModifierListCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageDrmFormatModifierListCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageDrmFormatModifierListCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageDrmFormatModifierListCreateInfoEXT.drmFormatModifierCount );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, imageDrmFormatModifierListCreateInfoEXT.pDrmFormatModifiers );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageDrmFormatModifierPropertiesEXT
   {
     using NativeType = VkImageDrmFormatModifierPropertiesEXT;
@@ -31591,6 +37262,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageDrmFormatModifierPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierPropertiesEXT const &
+                            imageDrmFormatModifierPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageDrmFormatModifierPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, imageDrmFormatModifierPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, imageDrmFormatModifierPropertiesEXT.drmFormatModifier );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageFormatListCreateInfo
   {
     using NativeType = VkImageFormatListCreateInfo;
@@ -31708,6 +37397,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ImageFormatListCreateInfoKHR = ImageFormatListCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageFormatListCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageFormatListCreateInfo const & imageFormatListCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageFormatListCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageFormatListCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageFormatListCreateInfo.viewFormatCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Format *, seed, imageFormatListCreateInfo.pViewFormats );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageFormatProperties2
   {
     using NativeType = VkImageFormatProperties2;
@@ -31780,6 +37488,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ImageFormatProperties2KHR = ImageFormatProperties2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageFormatProperties2>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImageFormatProperties2 const & imageFormatProperties2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageFormatProperties2.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, imageFormatProperties2.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageFormatProperties, seed, imageFormatProperties2.imageFormatProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageMemoryBarrier
   {
     using NativeType = VkImageMemoryBarrier;
@@ -31938,6 +37665,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageMemoryBarrier;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageMemoryBarrier>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImageMemoryBarrier const & imageMemoryBarrier ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageMemoryBarrier.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageMemoryBarrier.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags, seed, imageMemoryBarrier.srcAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags, seed, imageMemoryBarrier.dstAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, imageMemoryBarrier.oldLayout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, imageMemoryBarrier.newLayout );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageMemoryBarrier.srcQueueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, imageMemoryBarrier.dstQueueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, imageMemoryBarrier.image );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceRange, seed, imageMemoryBarrier.subresourceRange );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageMemoryRequirementsInfo2
   {
     using NativeType = VkImageMemoryRequirementsInfo2;
@@ -32026,6 +37778,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ImageMemoryRequirementsInfo2KHR = ImageMemoryRequirementsInfo2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageMemoryRequirementsInfo2>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::ImageMemoryRequirementsInfo2 const & imageMemoryRequirementsInfo2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageMemoryRequirementsInfo2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageMemoryRequirementsInfo2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, imageMemoryRequirementsInfo2.image );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   struct ImagePipeSurfaceCreateInfoFUCHSIA
   {
@@ -32127,6 +37897,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImagePipeSurfaceCreateInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImagePipeSurfaceCreateInfoFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImagePipeSurfaceCreateInfoFUCHSIA const &
+                            imagePipeSurfaceCreateInfoFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imagePipeSurfaceCreateInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imagePipeSurfaceCreateInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImagePipeSurfaceCreateFlagsFUCHSIA, seed, imagePipeSurfaceCreateInfoFUCHSIA.flags );
+    VULKAN_HPP_HASH_COMBINE( zx_handle_t, seed, imagePipeSurfaceCreateInfoFUCHSIA.imagePipeHandle );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct ImagePlaneMemoryRequirementsInfo
@@ -32220,6 +38011,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ImagePlaneMemoryRequirementsInfoKHR = ImagePlaneMemoryRequirementsInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImagePlaneMemoryRequirementsInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImagePlaneMemoryRequirementsInfo const & imagePlaneMemoryRequirementsInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imagePlaneMemoryRequirementsInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imagePlaneMemoryRequirementsInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageAspectFlagBits, seed, imagePlaneMemoryRequirementsInfo.planeAspect );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageResolve
   {
     using NativeType = VkImageResolve;
@@ -32328,6 +38139,25 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageResolve>::value,
                             "ImageResolve is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageResolve>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageResolve const & imageResolve ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageResolve.srcSubresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageResolve.srcOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageResolve.dstSubresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageResolve.dstOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, imageResolve.extent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageResolve2KHR
   {
     using NativeType = VkImageResolve2KHR;
@@ -32454,6 +38284,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageResolve2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageResolve2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageResolve2KHR const & imageResolve2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageResolve2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageResolve2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageResolve2KHR.srcSubresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageResolve2KHR.srcOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers, seed, imageResolve2KHR.dstSubresource );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset3D, seed, imageResolve2KHR.dstOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, imageResolve2KHR.extent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageSparseMemoryRequirementsInfo2
   {
     using NativeType = VkImageSparseMemoryRequirementsInfo2;
@@ -32546,6 +38397,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ImageSparseMemoryRequirementsInfo2KHR = ImageSparseMemoryRequirementsInfo2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageSparseMemoryRequirementsInfo2>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageSparseMemoryRequirementsInfo2 const &
+                            imageSparseMemoryRequirementsInfo2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageSparseMemoryRequirementsInfo2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageSparseMemoryRequirementsInfo2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, imageSparseMemoryRequirementsInfo2.image );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageStencilUsageCreateInfo
   {
     using NativeType = VkImageStencilUsageCreateInfo;
@@ -32635,6 +38504,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ImageStencilUsageCreateInfoEXT = ImageStencilUsageCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageStencilUsageCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageStencilUsageCreateInfo const & imageStencilUsageCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageStencilUsageCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageStencilUsageCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags, seed, imageStencilUsageCreateInfo.stencilUsage );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageSwapchainCreateInfoKHR
   {
     using NativeType = VkImageSwapchainCreateInfoKHR;
@@ -32723,6 +38610,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageSwapchainCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageSwapchainCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageSwapchainCreateInfoKHR const & imageSwapchainCreateInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageSwapchainCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageSwapchainCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SwapchainKHR, seed, imageSwapchainCreateInfoKHR.swapchain );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageViewASTCDecodeModeEXT
   {
     using NativeType = VkImageViewASTCDecodeModeEXT;
@@ -32810,6 +38715,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageViewASTCDecodeModeEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageViewASTCDecodeModeEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageViewASTCDecodeModeEXT const & imageViewASTCDecodeModeEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageViewASTCDecodeModeEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageViewASTCDecodeModeEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, imageViewASTCDecodeModeEXT.decodeMode );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageViewAddressPropertiesNVX
   {
     using NativeType = VkImageViewAddressPropertiesNVX;
@@ -32888,6 +38811,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageViewAddressPropertiesNVX;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageViewAddressPropertiesNVX>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageViewAddressPropertiesNVX const & imageViewAddressPropertiesNVX )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageViewAddressPropertiesNVX.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, imageViewAddressPropertiesNVX.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceAddress, seed, imageViewAddressPropertiesNVX.deviceAddress );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, imageViewAddressPropertiesNVX.size );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageViewCreateInfo
   {
     using NativeType = VkImageViewCreateInfo;
@@ -33023,6 +38965,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageViewCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageViewCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImageViewCreateInfo const & imageViewCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageViewCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageViewCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageViewCreateFlags, seed, imageViewCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, imageViewCreateInfo.image );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageViewType, seed, imageViewCreateInfo.viewType );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, imageViewCreateInfo.format );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ComponentMapping, seed, imageViewCreateInfo.components );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageSubresourceRange, seed, imageViewCreateInfo.subresourceRange );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageViewHandleInfoNVX
   {
     using NativeType = VkImageViewHandleInfoNVX;
@@ -33130,6 +39095,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageViewHandleInfoNVX;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageViewHandleInfoNVX>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImageViewHandleInfoNVX const & imageViewHandleInfoNVX ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageViewHandleInfoNVX.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageViewHandleInfoNVX.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageView, seed, imageViewHandleInfoNVX.imageView );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DescriptorType, seed, imageViewHandleInfoNVX.descriptorType );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Sampler, seed, imageViewHandleInfoNVX.sampler );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageViewMinLodCreateInfoEXT
   {
     using NativeType = VkImageViewMinLodCreateInfoEXT;
@@ -33214,6 +39199,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageViewMinLodCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageViewMinLodCreateInfoEXT>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::ImageViewMinLodCreateInfoEXT const & imageViewMinLodCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageViewMinLodCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageViewMinLodCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( float, seed, imageViewMinLodCreateInfoEXT.minLod );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImageViewUsageCreateInfo
   {
     using NativeType = VkImageViewUsageCreateInfo;
@@ -33301,6 +39304,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ImageViewUsageCreateInfoKHR = ImageViewUsageCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImageViewUsageCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImageViewUsageCreateInfo const & imageViewUsageCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, imageViewUsageCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, imageViewUsageCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags, seed, imageViewUsageCreateInfo.usage );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
   struct ImportAndroidHardwareBufferInfoANDROID
   {
@@ -33394,6 +39415,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImportAndroidHardwareBufferInfoANDROID;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportAndroidHardwareBufferInfoANDROID>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImportAndroidHardwareBufferInfoANDROID const &
+                            importAndroidHardwareBufferInfoANDROID ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importAndroidHardwareBufferInfoANDROID.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importAndroidHardwareBufferInfoANDROID.pNext );
+    VULKAN_HPP_HASH_COMBINE( struct AHardwareBuffer *, seed, importAndroidHardwareBufferInfoANDROID.buffer );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
   struct ImportFenceFdInfoKHR
@@ -33511,6 +39551,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImportFenceFdInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportFenceFdInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImportFenceFdInfoKHR const & importFenceFdInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importFenceFdInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importFenceFdInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Fence, seed, importFenceFdInfoKHR.fence );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FenceImportFlags, seed, importFenceFdInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits, seed, importFenceFdInfoKHR.handleType );
+    VULKAN_HPP_HASH_COMBINE( int, seed, importFenceFdInfoKHR.fd );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct ImportFenceWin32HandleInfoKHR
   {
@@ -33641,6 +39703,30 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImportFenceWin32HandleInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportFenceWin32HandleInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImportFenceWin32HandleInfoKHR const & importFenceWin32HandleInfoKHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importFenceWin32HandleInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importFenceWin32HandleInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Fence, seed, importFenceWin32HandleInfoKHR.fence );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FenceImportFlags, seed, importFenceWin32HandleInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits, seed, importFenceWin32HandleInfoKHR.handleType );
+    VULKAN_HPP_HASH_COMBINE( HANDLE, seed, importFenceWin32HandleInfoKHR.handle );
+    VULKAN_HPP_HASH_COMBINE( LPCWSTR, seed, importFenceWin32HandleInfoKHR.name );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -33744,6 +39830,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImportMemoryBufferCollectionFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportMemoryBufferCollectionFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImportMemoryBufferCollectionFUCHSIA const &
+                            importMemoryBufferCollectionFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importMemoryBufferCollectionFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importMemoryBufferCollectionFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA, seed, importMemoryBufferCollectionFUCHSIA.collection );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, importMemoryBufferCollectionFUCHSIA.index );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct ImportMemoryFdInfoKHR
@@ -33841,6 +39948,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImportMemoryFdInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportMemoryFdInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ImportMemoryFdInfoKHR const & importMemoryFdInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importMemoryFdInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importMemoryFdInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits, seed, importMemoryFdInfoKHR.handleType );
+    VULKAN_HPP_HASH_COMBINE( int, seed, importMemoryFdInfoKHR.fd );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ImportMemoryHostPointerInfoEXT
   {
     using NativeType = VkImportMemoryHostPointerInfoEXT;
@@ -33942,6 +40069,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImportMemoryHostPointerInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportMemoryHostPointerInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImportMemoryHostPointerInfoEXT const & importMemoryHostPointerInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importMemoryHostPointerInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importMemoryHostPointerInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits, seed, importMemoryHostPointerInfoEXT.handleType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, importMemoryHostPointerInfoEXT.pHostPointer );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct ImportMemoryWin32HandleInfoKHR
   {
@@ -34052,6 +40199,28 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImportMemoryWin32HandleInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportMemoryWin32HandleInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImportMemoryWin32HandleInfoKHR const & importMemoryWin32HandleInfoKHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importMemoryWin32HandleInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importMemoryWin32HandleInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits, seed, importMemoryWin32HandleInfoKHR.handleType );
+    VULKAN_HPP_HASH_COMBINE( HANDLE, seed, importMemoryWin32HandleInfoKHR.handle );
+    VULKAN_HPP_HASH_COMBINE( LPCWSTR, seed, importMemoryWin32HandleInfoKHR.name );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
@@ -34153,6 +40322,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImportMemoryWin32HandleInfoNV;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportMemoryWin32HandleInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImportMemoryWin32HandleInfoNV const & importMemoryWin32HandleInfoNV )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importMemoryWin32HandleInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importMemoryWin32HandleInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV, seed, importMemoryWin32HandleInfoNV.handleType );
+    VULKAN_HPP_HASH_COMBINE( HANDLE, seed, importMemoryWin32HandleInfoNV.handle );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -34258,6 +40448,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImportMemoryZirconHandleInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportMemoryZirconHandleInfoFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImportMemoryZirconHandleInfoFUCHSIA const &
+                            importMemoryZirconHandleInfoFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importMemoryZirconHandleInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importMemoryZirconHandleInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits, seed, importMemoryZirconHandleInfoFUCHSIA.handleType );
+    VULKAN_HPP_HASH_COMBINE( zx_handle_t, seed, importMemoryZirconHandleInfoFUCHSIA.handle );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct ImportSemaphoreFdInfoKHR
@@ -34378,6 +40589,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImportSemaphoreFdInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportSemaphoreFdInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImportSemaphoreFdInfoKHR const & importSemaphoreFdInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importSemaphoreFdInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importSemaphoreFdInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Semaphore, seed, importSemaphoreFdInfoKHR.semaphore );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SemaphoreImportFlags, seed, importSemaphoreFdInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits, seed, importSemaphoreFdInfoKHR.handleType );
+    VULKAN_HPP_HASH_COMBINE( int, seed, importSemaphoreFdInfoKHR.fd );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct ImportSemaphoreWin32HandleInfoKHR
   {
@@ -34510,6 +40743,31 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImportSemaphoreWin32HandleInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportSemaphoreWin32HandleInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImportSemaphoreWin32HandleInfoKHR const &
+                            importSemaphoreWin32HandleInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importSemaphoreWin32HandleInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importSemaphoreWin32HandleInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Semaphore, seed, importSemaphoreWin32HandleInfoKHR.semaphore );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SemaphoreImportFlags, seed, importSemaphoreWin32HandleInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits, seed, importSemaphoreWin32HandleInfoKHR.handleType );
+    VULKAN_HPP_HASH_COMBINE( HANDLE, seed, importSemaphoreWin32HandleInfoKHR.handle );
+    VULKAN_HPP_HASH_COMBINE( LPCWSTR, seed, importSemaphoreWin32HandleInfoKHR.name );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -34639,6 +40897,31 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ImportSemaphoreZirconHandleInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ImportSemaphoreZirconHandleInfoFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ImportSemaphoreZirconHandleInfoFUCHSIA const &
+                            importSemaphoreZirconHandleInfoFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, importSemaphoreZirconHandleInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, importSemaphoreZirconHandleInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Semaphore, seed, importSemaphoreZirconHandleInfoFUCHSIA.semaphore );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SemaphoreImportFlags, seed, importSemaphoreZirconHandleInfoFUCHSIA.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits,
+                             seed,
+                             importSemaphoreZirconHandleInfoFUCHSIA.handleType );
+    VULKAN_HPP_HASH_COMBINE( zx_handle_t, seed, importSemaphoreZirconHandleInfoFUCHSIA.zirconHandle );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct IndirectCommandsLayoutTokenNV
@@ -34919,6 +41202,40 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = IndirectCommandsLayoutTokenNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutTokenNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutTokenNV const & indirectCommandsLayoutTokenNV )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, indirectCommandsLayoutTokenNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, indirectCommandsLayoutTokenNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNV, seed, indirectCommandsLayoutTokenNV.tokenType );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, indirectCommandsLayoutTokenNV.stream );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, indirectCommandsLayoutTokenNV.offset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, indirectCommandsLayoutTokenNV.vertexBindingUnit );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, indirectCommandsLayoutTokenNV.vertexDynamicStride );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineLayout, seed, indirectCommandsLayoutTokenNV.pushconstantPipelineLayout );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ShaderStageFlags, seed, indirectCommandsLayoutTokenNV.pushconstantShaderStageFlags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, indirectCommandsLayoutTokenNV.pushconstantOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, indirectCommandsLayoutTokenNV.pushconstantSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::IndirectStateFlagsNV, seed, indirectCommandsLayoutTokenNV.indirectStateFlags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, indirectCommandsLayoutTokenNV.indexTypeCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::IndexType *, seed, indirectCommandsLayoutTokenNV.pIndexTypes );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, indirectCommandsLayoutTokenNV.pIndexTypeValues );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct IndirectCommandsLayoutCreateInfoNV
   {
     using NativeType = VkIndirectCommandsLayoutCreateInfoNV;
@@ -35100,6 +41417,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = IndirectCommandsLayoutCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutCreateInfoNV const &
+                            indirectCommandsLayoutCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, indirectCommandsLayoutCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, indirectCommandsLayoutCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutUsageFlagsNV, seed, indirectCommandsLayoutCreateInfoNV.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineBindPoint, seed, indirectCommandsLayoutCreateInfoNV.pipelineBindPoint );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, indirectCommandsLayoutCreateInfoNV.tokenCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutTokenNV *, seed, indirectCommandsLayoutCreateInfoNV.pTokens );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, indirectCommandsLayoutCreateInfoNV.streamCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, indirectCommandsLayoutCreateInfoNV.pStreamStrides );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct InitializePerformanceApiInfoINTEL
   {
     using NativeType = VkInitializePerformanceApiInfoINTEL;
@@ -35188,6 +41531,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = InitializePerformanceApiInfoINTEL;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::InitializePerformanceApiInfoINTEL>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::InitializePerformanceApiInfoINTEL const &
+                            initializePerformanceApiInfoINTEL ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, initializePerformanceApiInfoINTEL.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, initializePerformanceApiInfoINTEL.pNext );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, initializePerformanceApiInfoINTEL.pUserData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct InputAttachmentAspectReference
   {
     using NativeType = VkInputAttachmentAspectReference;
@@ -35281,6 +41642,24 @@ namespace VULKAN_HPP_NAMESPACE
     "InputAttachmentAspectReference is not nothrow_move_constructible!" );
   using InputAttachmentAspectReferenceKHR = InputAttachmentAspectReference;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::InputAttachmentAspectReference>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::InputAttachmentAspectReference const & inputAttachmentAspectReference )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, inputAttachmentAspectReference.subpass );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, inputAttachmentAspectReference.inputAttachmentIndex );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageAspectFlags, seed, inputAttachmentAspectReference.aspectMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct InstanceCreateInfo
   {
     using NativeType = VkInstanceCreateInfo;
@@ -35455,6 +41834,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = InstanceCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::InstanceCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::InstanceCreateInfo const & instanceCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, instanceCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, instanceCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::InstanceCreateFlags, seed, instanceCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ApplicationInfo *, seed, instanceCreateInfo.pApplicationInfo );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, instanceCreateInfo.enabledLayerCount );
+    VULKAN_HPP_HASH_COMBINE( const char * const *, seed, instanceCreateInfo.ppEnabledLayerNames );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, instanceCreateInfo.enabledExtensionCount );
+    VULKAN_HPP_HASH_COMBINE( const char * const *, seed, instanceCreateInfo.ppEnabledExtensionNames );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct LayerProperties
   {
     using NativeType = VkLayerProperties;
@@ -35524,6 +41926,30 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::LayerProperties>::value,
                             "LayerProperties is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::LayerProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::LayerProperties const & layerProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    for ( size_t i = 0; i < VK_MAX_EXTENSION_NAME_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, layerProperties.layerName[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, layerProperties.specVersion );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, layerProperties.implementationVersion );
+    for ( size_t i = 0; i < VK_MAX_DESCRIPTION_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, layerProperties.description[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_MACOS_MVK )
   struct MacOSSurfaceCreateInfoMVK
   {
@@ -35619,6 +42045,26 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = MacOSSurfaceCreateInfoMVK;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MacOSSurfaceCreateInfoMVK>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MacOSSurfaceCreateInfoMVK const & macOSSurfaceCreateInfoMVK ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, macOSSurfaceCreateInfoMVK.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, macOSSurfaceCreateInfoMVK.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::MacOSSurfaceCreateFlagsMVK, seed, macOSSurfaceCreateInfoMVK.flags );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, macOSSurfaceCreateInfoMVK.pView );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_MACOS_MVK*/
 
   struct MappedMemoryRange
@@ -35725,6 +42171,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MappedMemoryRange;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MappedMemoryRange>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MappedMemoryRange const & mappedMemoryRange ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, mappedMemoryRange.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, mappedMemoryRange.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, mappedMemoryRange.memory );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, mappedMemoryRange.offset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, mappedMemoryRange.size );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryAllocateFlagsInfo
   {
     using NativeType = VkMemoryAllocateFlagsInfo;
@@ -35821,6 +42286,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using MemoryAllocateFlagsInfoKHR = MemoryAllocateFlagsInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryAllocateFlagsInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryAllocateFlagsInfo const & memoryAllocateFlagsInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryAllocateFlagsInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryAllocateFlagsInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::MemoryAllocateFlags, seed, memoryAllocateFlagsInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, memoryAllocateFlagsInfo.deviceMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryAllocateInfo
   {
     using NativeType = VkMemoryAllocateInfo;
@@ -35915,6 +42399,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MemoryAllocateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryAllocateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::MemoryAllocateInfo const & memoryAllocateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryAllocateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryAllocateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, memoryAllocateInfo.allocationSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, memoryAllocateInfo.memoryTypeIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryBarrier
   {
     using NativeType = VkMemoryBarrier;
@@ -36010,6 +42513,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MemoryBarrier;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryBarrier>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryBarrier const & memoryBarrier ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryBarrier.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryBarrier.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags, seed, memoryBarrier.srcAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags, seed, memoryBarrier.dstAccessMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryDedicatedAllocateInfo
   {
     using NativeType = VkMemoryDedicatedAllocateInfo;
@@ -36108,6 +42629,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using MemoryDedicatedAllocateInfoKHR = MemoryDedicatedAllocateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryDedicatedAllocateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryDedicatedAllocateInfo const & memoryDedicatedAllocateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryDedicatedAllocateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryDedicatedAllocateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, memoryDedicatedAllocateInfo.image );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, memoryDedicatedAllocateInfo.buffer );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryDedicatedRequirements
   {
     using NativeType = VkMemoryDedicatedRequirements;
@@ -36187,6 +42727,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using MemoryDedicatedRequirementsKHR = MemoryDedicatedRequirements;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryDedicatedRequirements>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryDedicatedRequirements const & memoryDedicatedRequirements ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryDedicatedRequirements.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, memoryDedicatedRequirements.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, memoryDedicatedRequirements.prefersDedicatedAllocation );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, memoryDedicatedRequirements.requiresDedicatedAllocation );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryFdPropertiesKHR
   {
     using NativeType = VkMemoryFdPropertiesKHR;
@@ -36256,6 +42817,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MemoryFdPropertiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryFdPropertiesKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::MemoryFdPropertiesKHR const & memoryFdPropertiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryFdPropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, memoryFdPropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, memoryFdPropertiesKHR.memoryTypeBits );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
   struct MemoryGetAndroidHardwareBufferInfoANDROID
   {
@@ -36351,6 +42930,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = MemoryGetAndroidHardwareBufferInfoANDROID;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryGetAndroidHardwareBufferInfoANDROID>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryGetAndroidHardwareBufferInfoANDROID const &
+                            memoryGetAndroidHardwareBufferInfoANDROID ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, memoryGetAndroidHardwareBufferInfoANDROID.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryGetAndroidHardwareBufferInfoANDROID.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceMemory, seed, memoryGetAndroidHardwareBufferInfoANDROID.memory );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
   struct MemoryGetFdInfoKHR
@@ -36451,6 +43051,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MemoryGetFdInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryGetFdInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::MemoryGetFdInfoKHR const & memoryGetFdInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryGetFdInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryGetFdInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, memoryGetFdInfoKHR.memory );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits, seed, memoryGetFdInfoKHR.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryGetRemoteAddressInfoNV
   {
     using NativeType = VkMemoryGetRemoteAddressInfoNV;
@@ -36552,6 +43172,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MemoryGetRemoteAddressInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryGetRemoteAddressInfoNV>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::MemoryGetRemoteAddressInfoNV const & memoryGetRemoteAddressInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryGetRemoteAddressInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryGetRemoteAddressInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, memoryGetRemoteAddressInfoNV.memory );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits, seed, memoryGetRemoteAddressInfoNV.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct MemoryGetWin32HandleInfoKHR
   {
@@ -36653,6 +43293,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = MemoryGetWin32HandleInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryGetWin32HandleInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryGetWin32HandleInfoKHR const & memoryGetWin32HandleInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryGetWin32HandleInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryGetWin32HandleInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, memoryGetWin32HandleInfoKHR.memory );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits, seed, memoryGetWin32HandleInfoKHR.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -36757,6 +43418,28 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = MemoryGetZirconHandleInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryGetZirconHandleInfoFUCHSIA>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::MemoryGetZirconHandleInfoFUCHSIA const & memoryGetZirconHandleInfoFUCHSIA ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryGetZirconHandleInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryGetZirconHandleInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, memoryGetZirconHandleInfoFUCHSIA.memory );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits, seed, memoryGetZirconHandleInfoFUCHSIA.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct MemoryHeap
@@ -36820,6 +43503,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::MemoryHeap>::value,
                             "MemoryHeap is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryHeap>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryHeap const & memoryHeap ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, memoryHeap.size );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::MemoryHeapFlags, seed, memoryHeap.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryHostPointerPropertiesEXT
   {
     using NativeType = VkMemoryHostPointerPropertiesEXT;
@@ -36893,6 +43592,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MemoryHostPointerPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryHostPointerPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryHostPointerPropertiesEXT const & memoryHostPointerPropertiesEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryHostPointerPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, memoryHostPointerPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, memoryHostPointerPropertiesEXT.memoryTypeBits );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryOpaqueCaptureAddressAllocateInfo
   {
     using NativeType = VkMemoryOpaqueCaptureAddressAllocateInfo;
@@ -36987,6 +43704,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using MemoryOpaqueCaptureAddressAllocateInfoKHR = MemoryOpaqueCaptureAddressAllocateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryOpaqueCaptureAddressAllocateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryOpaqueCaptureAddressAllocateInfo const &
+                            memoryOpaqueCaptureAddressAllocateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryOpaqueCaptureAddressAllocateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryOpaqueCaptureAddressAllocateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, memoryOpaqueCaptureAddressAllocateInfo.opaqueCaptureAddress );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryPriorityAllocateInfoEXT
   {
     using NativeType = VkMemoryPriorityAllocateInfoEXT;
@@ -37074,6 +43809,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MemoryPriorityAllocateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryPriorityAllocateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryPriorityAllocateInfoEXT const & memoryPriorityAllocateInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryPriorityAllocateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, memoryPriorityAllocateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( float, seed, memoryPriorityAllocateInfoEXT.priority );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryRequirements
   {
     using NativeType = VkMemoryRequirements;
@@ -37138,6 +43891,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::MemoryRequirements>::value,
                             "MemoryRequirements is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryRequirements>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::MemoryRequirements const & memoryRequirements ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, memoryRequirements.size );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, memoryRequirements.alignment );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, memoryRequirements.memoryTypeBits );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryRequirements2
   {
     using NativeType = VkMemoryRequirements2;
@@ -37209,6 +43980,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using MemoryRequirements2KHR = MemoryRequirements2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryRequirements2>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::MemoryRequirements2 const & memoryRequirements2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryRequirements2.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, memoryRequirements2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::MemoryRequirements, seed, memoryRequirements2.memoryRequirements );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MemoryType
   {
     using NativeType = VkMemoryType;
@@ -37270,6 +44059,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::MemoryType>::value,
                             "MemoryType is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryType>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryType const & memoryType ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::MemoryPropertyFlags, seed, memoryType.propertyFlags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, memoryType.heapIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct MemoryWin32HandlePropertiesKHR
   {
@@ -37343,6 +44148,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = MemoryWin32HandlePropertiesKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryWin32HandlePropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryWin32HandlePropertiesKHR const & memoryWin32HandlePropertiesKHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryWin32HandlePropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, memoryWin32HandlePropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, memoryWin32HandlePropertiesKHR.memoryTypeBits );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -37420,6 +44244,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = MemoryZirconHandlePropertiesFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MemoryZirconHandlePropertiesFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MemoryZirconHandlePropertiesFUCHSIA const &
+                            memoryZirconHandlePropertiesFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, memoryZirconHandlePropertiesFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, memoryZirconHandlePropertiesFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, memoryZirconHandlePropertiesFUCHSIA.memoryTypeBits );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
 #if defined( VK_USE_PLATFORM_METAL_EXT )
@@ -37517,6 +44360,26 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = MetalSurfaceCreateInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MetalSurfaceCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MetalSurfaceCreateInfoEXT const & metalSurfaceCreateInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, metalSurfaceCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, metalSurfaceCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::MetalSurfaceCreateFlagsEXT, seed, metalSurfaceCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( const CAMetalLayer *, seed, metalSurfaceCreateInfoEXT.pLayer );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
 
   struct MultiDrawIndexedInfoEXT
@@ -37605,6 +44468,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::MultiDrawIndexedInfoEXT>::value,
                             "MultiDrawIndexedInfoEXT is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MultiDrawIndexedInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MultiDrawIndexedInfoEXT const & multiDrawIndexedInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, multiDrawIndexedInfoEXT.firstIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, multiDrawIndexedInfoEXT.indexCount );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, multiDrawIndexedInfoEXT.vertexOffset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MultiDrawInfoEXT
   {
     using NativeType = VkMultiDrawInfoEXT;
@@ -37679,6 +44560,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::MultiDrawInfoEXT>::value,
                             "MultiDrawInfoEXT is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MultiDrawInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MultiDrawInfoEXT const & multiDrawInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, multiDrawInfoEXT.firstVertex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, multiDrawInfoEXT.vertexCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MultisamplePropertiesEXT
   {
     using NativeType = VkMultisamplePropertiesEXT;
@@ -37751,6 +44648,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MultisamplePropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MultisamplePropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MultisamplePropertiesEXT const & multisamplePropertiesEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, multisamplePropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, multisamplePropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, multisamplePropertiesEXT.maxSampleLocationGridSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MultiviewPerViewAttributesInfoNVX
   {
     using NativeType = VkMultiviewPerViewAttributesInfoNVX;
@@ -37852,6 +44767,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MultiviewPerViewAttributesInfoNVX;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MultiviewPerViewAttributesInfoNVX>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MultiviewPerViewAttributesInfoNVX const &
+                            multiviewPerViewAttributesInfoNVX ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, multiviewPerViewAttributesInfoNVX.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, multiviewPerViewAttributesInfoNVX.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, multiviewPerViewAttributesInfoNVX.perViewAttributes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, multiviewPerViewAttributesInfoNVX.perViewAttributesPositionXOnly );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MutableDescriptorTypeListVALVE
   {
     using NativeType = VkMutableDescriptorTypeListVALVE;
@@ -37954,6 +44889,24 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE>::value,
     "MutableDescriptorTypeListVALVE is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE const & mutableDescriptorTypeListVALVE )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, mutableDescriptorTypeListVALVE.descriptorTypeCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DescriptorType *, seed, mutableDescriptorTypeListVALVE.pDescriptorTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct MutableDescriptorTypeCreateInfoVALVE
   {
     using NativeType = VkMutableDescriptorTypeCreateInfoVALVE;
@@ -38078,6 +45031,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MutableDescriptorTypeCreateInfoVALVE;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::MutableDescriptorTypeCreateInfoVALVE>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::MutableDescriptorTypeCreateInfoVALVE const &
+                            mutableDescriptorTypeCreateInfoVALVE ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, mutableDescriptorTypeCreateInfoVALVE.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, mutableDescriptorTypeCreateInfoVALVE.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, mutableDescriptorTypeCreateInfoVALVE.mutableDescriptorTypeListCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE *,
+                             seed,
+                             mutableDescriptorTypeCreateInfoVALVE.pMutableDescriptorTypeLists );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PastPresentationTimingGOOGLE
   {
     using NativeType = VkPastPresentationTimingGOOGLE;
@@ -38153,6 +45127,26 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PastPresentationTimingGOOGLE>::value,
     "PastPresentationTimingGOOGLE is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PastPresentationTimingGOOGLE>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::PastPresentationTimingGOOGLE const & pastPresentationTimingGOOGLE ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pastPresentationTimingGOOGLE.presentID );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, pastPresentationTimingGOOGLE.desiredPresentTime );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, pastPresentationTimingGOOGLE.actualPresentTime );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, pastPresentationTimingGOOGLE.earliestPresentTime );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, pastPresentationTimingGOOGLE.presentMargin );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PerformanceConfigurationAcquireInfoINTEL
   {
     using NativeType = VkPerformanceConfigurationAcquireInfoINTEL;
@@ -38250,6 +45244,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PerformanceConfigurationAcquireInfoINTEL;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PerformanceConfigurationAcquireInfoINTEL>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PerformanceConfigurationAcquireInfoINTEL const &
+                            performanceConfigurationAcquireInfoINTEL ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, performanceConfigurationAcquireInfoINTEL.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, performanceConfigurationAcquireInfoINTEL.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PerformanceConfigurationTypeINTEL, seed, performanceConfigurationAcquireInfoINTEL.type );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PerformanceCounterDescriptionKHR
   {
     using NativeType = VkPerformanceCounterDescriptionKHR;
@@ -38334,6 +45348,38 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PerformanceCounterDescriptionKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PerformanceCounterDescriptionKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PerformanceCounterDescriptionKHR const & performanceCounterDescriptionKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, performanceCounterDescriptionKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, performanceCounterDescriptionKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PerformanceCounterDescriptionFlagsKHR, seed, performanceCounterDescriptionKHR.flags );
+    for ( size_t i = 0; i < VK_MAX_DESCRIPTION_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, performanceCounterDescriptionKHR.name[i] );
+    }
+    for ( size_t i = 0; i < VK_MAX_DESCRIPTION_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, performanceCounterDescriptionKHR.category[i] );
+    }
+    for ( size_t i = 0; i < VK_MAX_DESCRIPTION_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, performanceCounterDescriptionKHR.description[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PerformanceCounterKHR
   {
     using NativeType = VkPerformanceCounterKHR;
@@ -38418,6 +45464,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PerformanceCounterKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PerformanceCounterKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PerformanceCounterKHR const & performanceCounterKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, performanceCounterKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, performanceCounterKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PerformanceCounterUnitKHR, seed, performanceCounterKHR.unit );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PerformanceCounterScopeKHR, seed, performanceCounterKHR.scope );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PerformanceCounterStorageKHR, seed, performanceCounterKHR.storage );
+    for ( size_t i = 0; i < VK_UUID_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint8_t, seed, performanceCounterKHR.uuid[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   union PerformanceCounterResultKHR
   {
     using NativeType = VkPerformanceCounterResultKHR;
@@ -38575,6 +45645,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PerformanceMarkerInfoINTEL;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PerformanceMarkerInfoINTEL>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PerformanceMarkerInfoINTEL const & performanceMarkerInfoINTEL ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, performanceMarkerInfoINTEL.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, performanceMarkerInfoINTEL.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, performanceMarkerInfoINTEL.marker );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PerformanceOverrideInfoINTEL
   {
     using NativeType = VkPerformanceOverrideInfoINTEL;
@@ -38685,6 +45773,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PerformanceOverrideInfoINTEL;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PerformanceOverrideInfoINTEL>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::PerformanceOverrideInfoINTEL const & performanceOverrideInfoINTEL ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, performanceOverrideInfoINTEL.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, performanceOverrideInfoINTEL.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PerformanceOverrideTypeINTEL, seed, performanceOverrideInfoINTEL.type );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, performanceOverrideInfoINTEL.enable );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, performanceOverrideInfoINTEL.parameter );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PerformanceQuerySubmitInfoKHR
   {
     using NativeType = VkPerformanceQuerySubmitInfoKHR;
@@ -38773,6 +45882,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PerformanceQuerySubmitInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PerformanceQuerySubmitInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PerformanceQuerySubmitInfoKHR const & performanceQuerySubmitInfoKHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, performanceQuerySubmitInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, performanceQuerySubmitInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, performanceQuerySubmitInfoKHR.counterPassIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PerformanceStreamMarkerInfoINTEL
   {
     using NativeType = VkPerformanceStreamMarkerInfoINTEL;
@@ -38860,6 +45987,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PerformanceStreamMarkerInfoINTEL;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PerformanceStreamMarkerInfoINTEL>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PerformanceStreamMarkerInfoINTEL const & performanceStreamMarkerInfoINTEL ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, performanceStreamMarkerInfoINTEL.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, performanceStreamMarkerInfoINTEL.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, performanceStreamMarkerInfoINTEL.marker );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   union PerformanceValueDataINTEL
   {
     using NativeType = VkPerformanceValueDataINTEL;
@@ -39122,6 +46268,31 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDevice16BitStorageFeaturesKHR = PhysicalDevice16BitStorageFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevice16BitStorageFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevice16BitStorageFeatures const &
+                            physicalDevice16BitStorageFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevice16BitStorageFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevice16BitStorageFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevice16BitStorageFeatures.storageBuffer16BitAccess );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevice16BitStorageFeatures.uniformAndStorageBuffer16BitAccess );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevice16BitStorageFeatures.storagePushConstant16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevice16BitStorageFeatures.storageInputOutput16 );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevice4444FormatsFeaturesEXT
   {
     using NativeType = VkPhysicalDevice4444FormatsFeaturesEXT;
@@ -39224,6 +46395,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevice4444FormatsFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevice4444FormatsFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevice4444FormatsFeaturesEXT const &
+                            physicalDevice4444FormatsFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevice4444FormatsFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevice4444FormatsFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevice4444FormatsFeaturesEXT.formatA4R4G4B4 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevice4444FormatsFeaturesEXT.formatA4B4G4R4 );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevice8BitStorageFeatures
   {
     using NativeType = VkPhysicalDevice8BitStorageFeatures;
@@ -39338,6 +46528,29 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDevice8BitStorageFeaturesKHR = PhysicalDevice8BitStorageFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevice8BitStorageFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevice8BitStorageFeatures const &
+                            physicalDevice8BitStorageFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevice8BitStorageFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevice8BitStorageFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevice8BitStorageFeatures.storageBuffer8BitAccess );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevice8BitStorageFeatures.uniformAndStorageBuffer8BitAccess );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevice8BitStorageFeatures.storagePushConstant8 );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceASTCDecodeFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceASTCDecodeFeaturesEXT;
@@ -39430,6 +46643,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceASTCDecodeFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceASTCDecodeFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceASTCDecodeFeaturesEXT const &
+                            physicalDeviceASTCDecodeFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceASTCDecodeFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceASTCDecodeFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceASTCDecodeFeaturesEXT.decodeModeSharedExponent );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceAccelerationStructureFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceAccelerationStructureFeaturesKHR;
@@ -39572,6 +46804,39 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceAccelerationStructureFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceAccelerationStructureFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceAccelerationStructureFeaturesKHR const &
+                            physicalDeviceAccelerationStructureFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceAccelerationStructureFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceAccelerationStructureFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceAccelerationStructureFeaturesKHR.accelerationStructure );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceAccelerationStructureFeaturesKHR.accelerationStructureCaptureReplay );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceAccelerationStructureFeaturesKHR.accelerationStructureIndirectBuild );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceAccelerationStructureFeaturesKHR.accelerationStructureHostCommands );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceAccelerationStructureFeaturesKHR.descriptorBindingAccelerationStructureUpdateAfterBind );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceAccelerationStructurePropertiesKHR
   {
     using NativeType = VkPhysicalDeviceAccelerationStructurePropertiesKHR;
@@ -39681,6 +46946,41 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceAccelerationStructurePropertiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceAccelerationStructurePropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceAccelerationStructurePropertiesKHR const &
+                            physicalDeviceAccelerationStructurePropertiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceAccelerationStructurePropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceAccelerationStructurePropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, physicalDeviceAccelerationStructurePropertiesKHR.maxGeometryCount );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, physicalDeviceAccelerationStructurePropertiesKHR.maxInstanceCount );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, physicalDeviceAccelerationStructurePropertiesKHR.maxPrimitiveCount );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceAccelerationStructurePropertiesKHR.maxPerStageDescriptorAccelerationStructures );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t,
+      seed,
+      physicalDeviceAccelerationStructurePropertiesKHR.maxPerStageDescriptorUpdateAfterBindAccelerationStructures );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceAccelerationStructurePropertiesKHR.maxDescriptorSetAccelerationStructures );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t,
+      seed,
+      physicalDeviceAccelerationStructurePropertiesKHR.maxDescriptorSetUpdateAfterBindAccelerationStructures );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceAccelerationStructurePropertiesKHR.minAccelerationStructureScratchOffsetAlignment );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceBlendOperationAdvancedFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT;
@@ -39777,6 +47077,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceBlendOperationAdvancedFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceBlendOperationAdvancedFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceBlendOperationAdvancedFeaturesEXT const &
+                            physicalDeviceBlendOperationAdvancedFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceBlendOperationAdvancedFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceBlendOperationAdvancedFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceBlendOperationAdvancedFeaturesEXT.advancedBlendCoherentOperations );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceBlendOperationAdvancedPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT;
@@ -39878,6 +47199,41 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceBlendOperationAdvancedPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceBlendOperationAdvancedPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceBlendOperationAdvancedPropertiesEXT const &
+                            physicalDeviceBlendOperationAdvancedPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceBlendOperationAdvancedPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceBlendOperationAdvancedPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendMaxColorAttachments );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendIndependentBlend );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendNonPremultipliedSrcColor );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendNonPremultipliedDstColor );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendCorrelatedOverlap );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceBlendOperationAdvancedPropertiesEXT.advancedBlendAllOperations );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceBorderColorSwizzleFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceBorderColorSwizzleFeaturesEXT;
@@ -39983,6 +47339,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceBorderColorSwizzleFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceBorderColorSwizzleFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceBorderColorSwizzleFeaturesEXT const &
+                            physicalDeviceBorderColorSwizzleFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceBorderColorSwizzleFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceBorderColorSwizzleFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceBorderColorSwizzleFeaturesEXT.borderColorSwizzle );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceBorderColorSwizzleFeaturesEXT.borderColorSwizzleFromImage );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceBufferDeviceAddressFeatures
   {
     using NativeType = VkPhysicalDeviceBufferDeviceAddressFeatures;
@@ -40100,6 +47478,30 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceBufferDeviceAddressFeaturesKHR = PhysicalDeviceBufferDeviceAddressFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceBufferDeviceAddressFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceBufferDeviceAddressFeatures const &
+                            physicalDeviceBufferDeviceAddressFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceBufferDeviceAddressFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceBufferDeviceAddressFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceBufferDeviceAddressFeatures.bufferDeviceAddress );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceBufferDeviceAddressFeatures.bufferDeviceAddressCaptureReplay );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceBufferDeviceAddressFeatures.bufferDeviceAddressMultiDevice );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceBufferDeviceAddressFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceBufferDeviceAddressFeaturesEXT;
@@ -40217,6 +47619,31 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceBufferAddressFeaturesEXT = PhysicalDeviceBufferDeviceAddressFeaturesEXT;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceBufferDeviceAddressFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceBufferDeviceAddressFeaturesEXT const &
+                            physicalDeviceBufferDeviceAddressFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceBufferDeviceAddressFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceBufferDeviceAddressFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceBufferDeviceAddressFeaturesEXT.bufferDeviceAddress );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceBufferDeviceAddressFeaturesEXT.bufferDeviceAddressCaptureReplay );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceBufferDeviceAddressFeaturesEXT.bufferDeviceAddressMultiDevice );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceCoherentMemoryFeaturesAMD
   {
     using NativeType = VkPhysicalDeviceCoherentMemoryFeaturesAMD;
@@ -40310,6 +47737,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceCoherentMemoryFeaturesAMD;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceCoherentMemoryFeaturesAMD>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceCoherentMemoryFeaturesAMD const &
+                            physicalDeviceCoherentMemoryFeaturesAMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceCoherentMemoryFeaturesAMD.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceCoherentMemoryFeaturesAMD.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceCoherentMemoryFeaturesAMD.deviceCoherentMemory );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceColorWriteEnableFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceColorWriteEnableFeaturesEXT;
@@ -40403,6 +47849,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceColorWriteEnableFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceColorWriteEnableFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceColorWriteEnableFeaturesEXT const &
+                            physicalDeviceColorWriteEnableFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceColorWriteEnableFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceColorWriteEnableFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceColorWriteEnableFeaturesEXT.colorWriteEnable );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceComputeShaderDerivativesFeaturesNV
   {
     using NativeType = VkPhysicalDeviceComputeShaderDerivativesFeaturesNV;
@@ -40510,6 +47976,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceComputeShaderDerivativesFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceComputeShaderDerivativesFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceComputeShaderDerivativesFeaturesNV const &
+                            physicalDeviceComputeShaderDerivativesFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceComputeShaderDerivativesFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceComputeShaderDerivativesFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceComputeShaderDerivativesFeaturesNV.computeDerivativeGroupQuads );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceComputeShaderDerivativesFeaturesNV.computeDerivativeGroupLinear );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceConditionalRenderingFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceConditionalRenderingFeaturesEXT;
@@ -40616,6 +48106,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceConditionalRenderingFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceConditionalRenderingFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceConditionalRenderingFeaturesEXT const &
+                            physicalDeviceConditionalRenderingFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceConditionalRenderingFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceConditionalRenderingFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceConditionalRenderingFeaturesEXT.conditionalRendering );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceConditionalRenderingFeaturesEXT.inheritedConditionalRendering );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceConservativeRasterizationPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceConservativeRasterizationPropertiesEXT;
@@ -40729,6 +48241,51 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceConservativeRasterizationPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceConservativeRasterizationPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceConservativeRasterizationPropertiesEXT const &
+                            physicalDeviceConservativeRasterizationPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceConservativeRasterizationPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceConservativeRasterizationPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      float, seed, physicalDeviceConservativeRasterizationPropertiesEXT.primitiveOverestimationSize );
+    VULKAN_HPP_HASH_COMBINE(
+      float, seed, physicalDeviceConservativeRasterizationPropertiesEXT.maxExtraPrimitiveOverestimationSize );
+    VULKAN_HPP_HASH_COMBINE(
+      float, seed, physicalDeviceConservativeRasterizationPropertiesEXT.extraPrimitiveOverestimationSizeGranularity );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceConservativeRasterizationPropertiesEXT.primitiveUnderestimation );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceConservativeRasterizationPropertiesEXT.conservativePointAndLineRasterization );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceConservativeRasterizationPropertiesEXT.degenerateTrianglesRasterized );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceConservativeRasterizationPropertiesEXT.degenerateLinesRasterized );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceConservativeRasterizationPropertiesEXT.fullyCoveredFragmentShaderInputVariable );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceConservativeRasterizationPropertiesEXT.conservativeRasterizationPostDepthCoverage );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceCooperativeMatrixFeaturesNV
   {
     using NativeType = VkPhysicalDeviceCooperativeMatrixFeaturesNV;
@@ -40834,6 +48391,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceCooperativeMatrixFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceCooperativeMatrixFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceCooperativeMatrixFeaturesNV const &
+                            physicalDeviceCooperativeMatrixFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceCooperativeMatrixFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceCooperativeMatrixFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceCooperativeMatrixFeaturesNV.cooperativeMatrix );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceCooperativeMatrixFeaturesNV.cooperativeMatrixRobustBufferAccess );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceCooperativeMatrixPropertiesNV
   {
     using NativeType = VkPhysicalDeviceCooperativeMatrixPropertiesNV;
@@ -40914,6 +48494,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceCooperativeMatrixPropertiesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceCooperativeMatrixPropertiesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceCooperativeMatrixPropertiesNV const &
+                            physicalDeviceCooperativeMatrixPropertiesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceCooperativeMatrixPropertiesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceCooperativeMatrixPropertiesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderStageFlags,
+                             seed,
+                             physicalDeviceCooperativeMatrixPropertiesNV.cooperativeMatrixSupportedStages );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceCornerSampledImageFeaturesNV
   {
     using NativeType = VkPhysicalDeviceCornerSampledImageFeaturesNV;
@@ -41008,6 +48609,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceCornerSampledImageFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceCornerSampledImageFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceCornerSampledImageFeaturesNV const &
+                            physicalDeviceCornerSampledImageFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceCornerSampledImageFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceCornerSampledImageFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceCornerSampledImageFeaturesNV.cornerSampledImage );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceCoverageReductionModeFeaturesNV
   {
     using NativeType = VkPhysicalDeviceCoverageReductionModeFeaturesNV;
@@ -41103,6 +48724,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceCoverageReductionModeFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceCoverageReductionModeFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceCoverageReductionModeFeaturesNV const &
+                            physicalDeviceCoverageReductionModeFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceCoverageReductionModeFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceCoverageReductionModeFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceCoverageReductionModeFeaturesNV.coverageReductionMode );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceCustomBorderColorFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceCustomBorderColorFeaturesEXT;
@@ -41208,6 +48849,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceCustomBorderColorFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceCustomBorderColorFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceCustomBorderColorFeaturesEXT const &
+                            physicalDeviceCustomBorderColorFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceCustomBorderColorFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceCustomBorderColorFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceCustomBorderColorFeaturesEXT.customBorderColors );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceCustomBorderColorFeaturesEXT.customBorderColorWithoutFormat );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceCustomBorderColorPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceCustomBorderColorPropertiesEXT;
@@ -41288,6 +48951,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceCustomBorderColorPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceCustomBorderColorPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceCustomBorderColorPropertiesEXT const &
+                            physicalDeviceCustomBorderColorPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceCustomBorderColorPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceCustomBorderColorPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceCustomBorderColorPropertiesEXT.maxCustomBorderColorSamplers );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV
   {
     using NativeType = VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV;
@@ -41388,6 +49071,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const &
+                            physicalDeviceDedicatedAllocationImageAliasingFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDedicatedAllocationImageAliasingFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDedicatedAllocationImageAliasingFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceDedicatedAllocationImageAliasingFeaturesNV.dedicatedAllocationImageAliasing );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDepthClipControlFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceDepthClipControlFeaturesEXT;
@@ -41481,6 +49186,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDepthClipControlFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDepthClipControlFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDepthClipControlFeaturesEXT const &
+                            physicalDeviceDepthClipControlFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDepthClipControlFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDepthClipControlFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDepthClipControlFeaturesEXT.depthClipControl );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDepthClipEnableFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceDepthClipEnableFeaturesEXT;
@@ -41575,6 +49300,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDepthClipEnableFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDepthClipEnableFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDepthClipEnableFeaturesEXT const &
+                            physicalDeviceDepthClipEnableFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDepthClipEnableFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDepthClipEnableFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDepthClipEnableFeaturesEXT.depthClipEnable );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDepthStencilResolveProperties
   {
     using NativeType = VkPhysicalDeviceDepthStencilResolveProperties;
@@ -41668,6 +49413,34 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceDepthStencilResolvePropertiesKHR = PhysicalDeviceDepthStencilResolveProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDepthStencilResolveProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDepthStencilResolveProperties const &
+                            physicalDeviceDepthStencilResolveProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDepthStencilResolveProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDepthStencilResolveProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ResolveModeFlags,
+                             seed,
+                             physicalDeviceDepthStencilResolveProperties.supportedDepthResolveModes );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ResolveModeFlags,
+                             seed,
+                             physicalDeviceDepthStencilResolveProperties.supportedStencilResolveModes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDepthStencilResolveProperties.independentResolveNone );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDepthStencilResolveProperties.independentResolve );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDescriptorIndexingFeatures
   {
     using NativeType = VkPhysicalDeviceDescriptorIndexingFeatures;
@@ -41981,6 +49754,84 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceDescriptorIndexingFeaturesEXT = PhysicalDeviceDescriptorIndexingFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDescriptorIndexingFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDescriptorIndexingFeatures const &
+                            physicalDeviceDescriptorIndexingFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDescriptorIndexingFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDescriptorIndexingFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.shaderInputAttachmentArrayDynamicIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.shaderUniformTexelBufferArrayDynamicIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.shaderStorageTexelBufferArrayDynamicIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.shaderUniformBufferArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.shaderSampledImageArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.shaderStorageBufferArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.shaderStorageImageArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.shaderInputAttachmentArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.shaderUniformTexelBufferArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.shaderStorageTexelBufferArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.descriptorBindingUniformBufferUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.descriptorBindingSampledImageUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.descriptorBindingStorageImageUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.descriptorBindingStorageBufferUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceDescriptorIndexingFeatures.descriptorBindingUniformTexelBufferUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceDescriptorIndexingFeatures.descriptorBindingStorageTexelBufferUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.descriptorBindingUpdateUnusedWhilePending );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDescriptorIndexingFeatures.descriptorBindingPartiallyBound );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingFeatures.descriptorBindingVariableDescriptorCount );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDescriptorIndexingFeatures.runtimeDescriptorArray );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDescriptorIndexingProperties
   {
     using NativeType = VkPhysicalDeviceDescriptorIndexingProperties;
@@ -42162,6 +50013,81 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceDescriptorIndexingPropertiesEXT = PhysicalDeviceDescriptorIndexingProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDescriptorIndexingProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDescriptorIndexingProperties const &
+                            physicalDeviceDescriptorIndexingProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDescriptorIndexingProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDescriptorIndexingProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxUpdateAfterBindDescriptorsInAllPools );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceDescriptorIndexingProperties.shaderUniformBufferArrayNonUniformIndexingNative );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceDescriptorIndexingProperties.shaderSampledImageArrayNonUniformIndexingNative );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceDescriptorIndexingProperties.shaderStorageBufferArrayNonUniformIndexingNative );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceDescriptorIndexingProperties.shaderStorageImageArrayNonUniformIndexingNative );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceDescriptorIndexingProperties.shaderInputAttachmentArrayNonUniformIndexingNative );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceDescriptorIndexingProperties.robustBufferAccessUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDescriptorIndexingProperties.quadDivergentImplicitLod );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxPerStageDescriptorUpdateAfterBindSamplers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxPerStageDescriptorUpdateAfterBindUniformBuffers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxPerStageDescriptorUpdateAfterBindStorageBuffers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxPerStageDescriptorUpdateAfterBindSampledImages );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxPerStageDescriptorUpdateAfterBindStorageImages );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxPerStageDescriptorUpdateAfterBindInputAttachments );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxPerStageUpdateAfterBindResources );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxDescriptorSetUpdateAfterBindSamplers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxDescriptorSetUpdateAfterBindUniformBuffers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxDescriptorSetUpdateAfterBindUniformBuffersDynamic );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxDescriptorSetUpdateAfterBindStorageBuffers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxDescriptorSetUpdateAfterBindStorageBuffersDynamic );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxDescriptorSetUpdateAfterBindSampledImages );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxDescriptorSetUpdateAfterBindStorageImages );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDescriptorIndexingProperties.maxDescriptorSetUpdateAfterBindInputAttachments );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDeviceGeneratedCommandsFeaturesNV
   {
     using NativeType = VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV;
@@ -42258,6 +50184,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDeviceGeneratedCommandsFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDeviceGeneratedCommandsFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDeviceGeneratedCommandsFeaturesNV const &
+                            physicalDeviceDeviceGeneratedCommandsFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDeviceGeneratedCommandsFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDeviceGeneratedCommandsFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDeviceGeneratedCommandsFeaturesNV.deviceGeneratedCommands );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDeviceGeneratedCommandsPropertiesNV
   {
     using NativeType = VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV;
@@ -42371,6 +50317,42 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDeviceGeneratedCommandsPropertiesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDeviceGeneratedCommandsPropertiesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDeviceGeneratedCommandsPropertiesNV const &
+                            physicalDeviceDeviceGeneratedCommandsPropertiesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.maxGraphicsShaderGroupCount );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.maxIndirectSequenceCount );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.maxIndirectCommandsTokenCount );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.maxIndirectCommandsStreamCount );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.maxIndirectCommandsTokenOffset );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.maxIndirectCommandsStreamStride );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.minSequencesCountBufferOffsetAlignment );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.minSequencesIndexBufferOffsetAlignment );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceDeviceGeneratedCommandsPropertiesNV.minIndirectCommandsBufferOffsetAlignment );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDeviceMemoryReportFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceDeviceMemoryReportFeaturesEXT;
@@ -42465,6 +50447,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDeviceMemoryReportFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDeviceMemoryReportFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDeviceMemoryReportFeaturesEXT const &
+                            physicalDeviceDeviceMemoryReportFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDeviceMemoryReportFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDeviceMemoryReportFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDeviceMemoryReportFeaturesEXT.deviceMemoryReport );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDiagnosticsConfigFeaturesNV
   {
     using NativeType = VkPhysicalDeviceDiagnosticsConfigFeaturesNV;
@@ -42559,6 +50561,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDiagnosticsConfigFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDiagnosticsConfigFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDiagnosticsConfigFeaturesNV const &
+                            physicalDeviceDiagnosticsConfigFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDiagnosticsConfigFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDiagnosticsConfigFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDiagnosticsConfigFeaturesNV.diagnosticsConfig );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDiscardRectanglePropertiesEXT
   {
     using NativeType = VkPhysicalDeviceDiscardRectanglePropertiesEXT;
@@ -42638,6 +50660,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDiscardRectanglePropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDiscardRectanglePropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDiscardRectanglePropertiesEXT const &
+                            physicalDeviceDiscardRectanglePropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDiscardRectanglePropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDiscardRectanglePropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceDiscardRectanglePropertiesEXT.maxDiscardRectangles );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDriverProperties
   {
     using NativeType = VkPhysicalDeviceDriverProperties;
@@ -42724,6 +50765,34 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceDriverPropertiesKHR = PhysicalDeviceDriverProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDriverProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDriverProperties const & physicalDeviceDriverProperties )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDriverProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDriverProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DriverId, seed, physicalDeviceDriverProperties.driverID );
+    for ( size_t i = 0; i < VK_MAX_DRIVER_NAME_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, physicalDeviceDriverProperties.driverName[i] );
+    }
+    for ( size_t i = 0; i < VK_MAX_DRIVER_INFO_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, physicalDeviceDriverProperties.driverInfo[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ConformanceVersion, seed, physicalDeviceDriverProperties.conformanceVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDrmPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceDrmPropertiesEXT;
@@ -42815,6 +50884,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDrmPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDrmPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDrmPropertiesEXT const & physicalDeviceDrmPropertiesEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDrmPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDrmPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDrmPropertiesEXT.hasPrimary );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDrmPropertiesEXT.hasRender );
+    VULKAN_HPP_HASH_COMBINE( int64_t, seed, physicalDeviceDrmPropertiesEXT.primaryMajor );
+    VULKAN_HPP_HASH_COMBINE( int64_t, seed, physicalDeviceDrmPropertiesEXT.primaryMinor );
+    VULKAN_HPP_HASH_COMBINE( int64_t, seed, physicalDeviceDrmPropertiesEXT.renderMajor );
+    VULKAN_HPP_HASH_COMBINE( int64_t, seed, physicalDeviceDrmPropertiesEXT.renderMinor );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceDynamicRenderingFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceDynamicRenderingFeaturesKHR;
@@ -42908,6 +51000,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDynamicRenderingFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDynamicRenderingFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceDynamicRenderingFeaturesKHR const &
+                            physicalDeviceDynamicRenderingFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceDynamicRenderingFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceDynamicRenderingFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceDynamicRenderingFeaturesKHR.dynamicRendering );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceExclusiveScissorFeaturesNV
   {
     using NativeType = VkPhysicalDeviceExclusiveScissorFeaturesNV;
@@ -43001,6 +51113,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceExclusiveScissorFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceExclusiveScissorFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceExclusiveScissorFeaturesNV const &
+                            physicalDeviceExclusiveScissorFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceExclusiveScissorFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceExclusiveScissorFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceExclusiveScissorFeaturesNV.exclusiveScissor );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceExtendedDynamicState2FeaturesEXT
   {
     using NativeType = VkPhysicalDeviceExtendedDynamicState2FeaturesEXT;
@@ -43119,6 +51251,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceExtendedDynamicState2FeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceExtendedDynamicState2FeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceExtendedDynamicState2FeaturesEXT const &
+                            physicalDeviceExtendedDynamicState2FeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceExtendedDynamicState2FeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceExtendedDynamicState2FeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceExtendedDynamicState2FeaturesEXT.extendedDynamicState2 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceExtendedDynamicState2FeaturesEXT.extendedDynamicState2LogicOp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceExtendedDynamicState2FeaturesEXT.extendedDynamicState2PatchControlPoints );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceExtendedDynamicStateFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceExtendedDynamicStateFeaturesEXT;
@@ -43214,6 +51371,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceExtendedDynamicStateFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceExtendedDynamicStateFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceExtendedDynamicStateFeaturesEXT const &
+                            physicalDeviceExtendedDynamicStateFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceExtendedDynamicStateFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceExtendedDynamicStateFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceExtendedDynamicStateFeaturesEXT.extendedDynamicState );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceExternalBufferInfo
   {
     using NativeType = VkPhysicalDeviceExternalBufferInfo;
@@ -43327,6 +51504,28 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceExternalBufferInfoKHR = PhysicalDeviceExternalBufferInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalBufferInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalBufferInfo const & physicalDeviceExternalBufferInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceExternalBufferInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, physicalDeviceExternalBufferInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BufferCreateFlags, seed, physicalDeviceExternalBufferInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BufferUsageFlags, seed, physicalDeviceExternalBufferInfo.usage );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits, seed, physicalDeviceExternalBufferInfo.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceExternalFenceInfo
   {
     using NativeType = VkPhysicalDeviceExternalFenceInfo;
@@ -43419,6 +51618,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceExternalFenceInfoKHR = PhysicalDeviceExternalFenceInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalFenceInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalFenceInfo const & physicalDeviceExternalFenceInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceExternalFenceInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, physicalDeviceExternalFenceInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits, seed, physicalDeviceExternalFenceInfo.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceExternalImageFormatInfo
   {
     using NativeType = VkPhysicalDeviceExternalImageFormatInfo;
@@ -43514,6 +51733,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceExternalImageFormatInfoKHR = PhysicalDeviceExternalImageFormatInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalImageFormatInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalImageFormatInfo const &
+                            physicalDeviceExternalImageFormatInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceExternalImageFormatInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, physicalDeviceExternalImageFormatInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits, seed, physicalDeviceExternalImageFormatInfo.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceExternalMemoryHostPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceExternalMemoryHostPropertiesEXT;
@@ -43594,6 +51832,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceExternalMemoryHostPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalMemoryHostPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalMemoryHostPropertiesEXT const &
+                            physicalDeviceExternalMemoryHostPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceExternalMemoryHostPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceExternalMemoryHostPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize,
+                             seed,
+                             physicalDeviceExternalMemoryHostPropertiesEXT.minImportedHostPointerAlignment );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceExternalMemoryRDMAFeaturesNV
   {
     using NativeType = VkPhysicalDeviceExternalMemoryRDMAFeaturesNV;
@@ -43688,6 +51947,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceExternalMemoryRDMAFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalMemoryRDMAFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalMemoryRDMAFeaturesNV const &
+                            physicalDeviceExternalMemoryRDMAFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceExternalMemoryRDMAFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceExternalMemoryRDMAFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceExternalMemoryRDMAFeaturesNV.externalMemoryRDMA );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceExternalSemaphoreInfo
   {
     using NativeType = VkPhysicalDeviceExternalSemaphoreInfo;
@@ -43782,6 +52061,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceExternalSemaphoreInfoKHR = PhysicalDeviceExternalSemaphoreInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalSemaphoreInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalSemaphoreInfo const &
+                            physicalDeviceExternalSemaphoreInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceExternalSemaphoreInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, physicalDeviceExternalSemaphoreInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits, seed, physicalDeviceExternalSemaphoreInfo.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFeatures2
   {
     using NativeType = VkPhysicalDeviceFeatures2;
@@ -43869,6 +52167,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceFeatures2KHR = PhysicalDeviceFeatures2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures2>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures2 const & physicalDeviceFeatures2 ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFeatures2.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFeatures2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures, seed, physicalDeviceFeatures2.features );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFloatControlsProperties
   {
     using NativeType = VkPhysicalDeviceFloatControlsProperties;
@@ -44016,6 +52332,59 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceFloatControlsPropertiesKHR = PhysicalDeviceFloatControlsProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFloatControlsProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFloatControlsProperties const &
+                            physicalDeviceFloatControlsProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFloatControlsProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFloatControlsProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence,
+                             seed,
+                             physicalDeviceFloatControlsProperties.denormBehaviorIndependence );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence,
+                             seed,
+                             physicalDeviceFloatControlsProperties.roundingModeIndependence );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderSignedZeroInfNanPreserveFloat16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderSignedZeroInfNanPreserveFloat32 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderSignedZeroInfNanPreserveFloat64 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderDenormPreserveFloat16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderDenormPreserveFloat32 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderDenormPreserveFloat64 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderDenormFlushToZeroFloat16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderDenormFlushToZeroFloat32 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderDenormFlushToZeroFloat64 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderRoundingModeRTEFloat16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderRoundingModeRTEFloat32 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderRoundingModeRTEFloat64 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderRoundingModeRTZFloat16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderRoundingModeRTZFloat32 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFloatControlsProperties.shaderRoundingModeRTZFloat64 );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentDensityMap2FeaturesEXT
   {
     using NativeType = VkPhysicalDeviceFragmentDensityMap2FeaturesEXT;
@@ -44111,6 +52480,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentDensityMap2FeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMap2FeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMap2FeaturesEXT const &
+                            physicalDeviceFragmentDensityMap2FeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentDensityMap2FeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentDensityMap2FeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFragmentDensityMap2FeaturesEXT.fragmentDensityMapDeferred );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentDensityMap2PropertiesEXT
   {
     using NativeType = VkPhysicalDeviceFragmentDensityMap2PropertiesEXT;
@@ -44202,6 +52591,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentDensityMap2PropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMap2PropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMap2PropertiesEXT const &
+                            physicalDeviceFragmentDensityMap2PropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentDensityMap2PropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentDensityMap2PropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFragmentDensityMap2PropertiesEXT.subsampledLoads );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentDensityMap2PropertiesEXT.subsampledCoarseReconstructionEarlyAccess );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceFragmentDensityMap2PropertiesEXT.maxSubsampledArrayLayers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceFragmentDensityMap2PropertiesEXT.maxDescriptorSetSubsampledSamplers );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentDensityMapFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceFragmentDensityMapFeaturesEXT;
@@ -44318,6 +52733,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentDensityMapFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMapFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMapFeaturesEXT const &
+                            physicalDeviceFragmentDensityMapFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentDensityMapFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentDensityMapFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFragmentDensityMapFeaturesEXT.fragmentDensityMap );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFragmentDensityMapFeaturesEXT.fragmentDensityMapDynamic );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentDensityMapFeaturesEXT.fragmentDensityMapNonSubsampledImages );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentDensityMapPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceFragmentDensityMapPropertiesEXT;
@@ -44406,6 +52846,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentDensityMapPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMapPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMapPropertiesEXT const &
+                            physicalDeviceFragmentDensityMapPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentDensityMapPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentDensityMapPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Extent2D, seed, physicalDeviceFragmentDensityMapPropertiesEXT.minFragmentDensityTexelSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Extent2D, seed, physicalDeviceFragmentDensityMapPropertiesEXT.maxFragmentDensityTexelSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFragmentDensityMapPropertiesEXT.fragmentDensityInvocations );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentShaderBarycentricFeaturesNV
   {
     using NativeType = VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV;
@@ -44503,6 +52967,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentShaderBarycentricFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricFeaturesNV const &
+                            physicalDeviceFragmentShaderBarycentricFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentShaderBarycentricFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentShaderBarycentricFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFragmentShaderBarycentricFeaturesNV.fragmentShaderBarycentric );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentShaderInterlockFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT;
@@ -44621,6 +53105,33 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentShaderInterlockFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderInterlockFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderInterlockFeaturesEXT const &
+                            physicalDeviceFragmentShaderInterlockFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentShaderInterlockFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentShaderInterlockFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentShaderInterlockFeaturesEXT.fragmentShaderSampleInterlock );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentShaderInterlockFeaturesEXT.fragmentShaderPixelInterlock );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentShaderInterlockFeaturesEXT.fragmentShaderShadingRateInterlock );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentShadingRateEnumsFeaturesNV
   {
     using NativeType = VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV;
@@ -44739,6 +53250,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentShadingRateEnumsFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShadingRateEnumsFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShadingRateEnumsFeaturesNV const &
+                            physicalDeviceFragmentShadingRateEnumsFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentShadingRateEnumsFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentShadingRateEnumsFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFragmentShadingRateEnumsFeaturesNV.fragmentShadingRateEnums );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentShadingRateEnumsFeaturesNV.supersampleFragmentShadingRates );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentShadingRateEnumsFeaturesNV.noInvocationFragmentShadingRates );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentShadingRateEnumsPropertiesNV
   {
     using NativeType = VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV;
@@ -44839,6 +53376,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentShadingRateEnumsPropertiesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShadingRateEnumsPropertiesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShadingRateEnumsPropertiesNV const &
+                            physicalDeviceFragmentShadingRateEnumsPropertiesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentShadingRateEnumsPropertiesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentShadingRateEnumsPropertiesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SampleCountFlagBits,
+                             seed,
+                             physicalDeviceFragmentShadingRateEnumsPropertiesNV.maxFragmentShadingRateInvocationCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentShadingRateFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceFragmentShadingRateFeaturesKHR;
@@ -44956,6 +53514,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentShadingRateFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShadingRateFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShadingRateFeaturesKHR const &
+                            physicalDeviceFragmentShadingRateFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentShadingRateFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentShadingRateFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFragmentShadingRateFeaturesKHR.pipelineFragmentShadingRate );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFragmentShadingRateFeaturesKHR.primitiveFragmentShadingRate );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceFragmentShadingRateFeaturesKHR.attachmentFragmentShadingRate );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentShadingRateKHR
   {
     using NativeType = VkPhysicalDeviceFragmentShadingRateKHR;
@@ -45036,6 +53618,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentShadingRateKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShadingRateKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShadingRateKHR const &
+                            physicalDeviceFragmentShadingRateKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentShadingRateKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentShadingRateKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, physicalDeviceFragmentShadingRateKHR.sampleCounts );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, physicalDeviceFragmentShadingRateKHR.fragmentSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceFragmentShadingRatePropertiesKHR
   {
     using NativeType = VkPhysicalDeviceFragmentShadingRatePropertiesKHR;
@@ -45186,6 +53788,79 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentShadingRatePropertiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShadingRatePropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShadingRatePropertiesKHR const &
+                            physicalDeviceFragmentShadingRatePropertiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceFragmentShadingRatePropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceFragmentShadingRatePropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D,
+                             seed,
+                             physicalDeviceFragmentShadingRatePropertiesKHR.minFragmentShadingRateAttachmentTexelSize );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D,
+                             seed,
+                             physicalDeviceFragmentShadingRatePropertiesKHR.maxFragmentShadingRateAttachmentTexelSize );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t,
+      seed,
+      physicalDeviceFragmentShadingRatePropertiesKHR.maxFragmentShadingRateAttachmentTexelSizeAspectRatio );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceFragmentShadingRatePropertiesKHR.primitiveFragmentShadingRateWithMultipleViewports );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentShadingRatePropertiesKHR.layeredShadingRateAttachments );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentShadingRatePropertiesKHR.fragmentShadingRateNonTrivialCombinerOps );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Extent2D, seed, physicalDeviceFragmentShadingRatePropertiesKHR.maxFragmentSize );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceFragmentShadingRatePropertiesKHR.maxFragmentSizeAspectRatio );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceFragmentShadingRatePropertiesKHR.maxFragmentShadingRateCoverageSamples );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlagBits,
+      seed,
+      physicalDeviceFragmentShadingRatePropertiesKHR.maxFragmentShadingRateRasterizationSamples );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceFragmentShadingRatePropertiesKHR.fragmentShadingRateWithShaderDepthStencilWrites );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentShadingRatePropertiesKHR.fragmentShadingRateWithSampleMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentShadingRatePropertiesKHR.fragmentShadingRateWithShaderSampleMask );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceFragmentShadingRatePropertiesKHR.fragmentShadingRateWithConservativeRasterization );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceFragmentShadingRatePropertiesKHR.fragmentShadingRateWithFragmentShaderInterlock );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceFragmentShadingRatePropertiesKHR.fragmentShadingRateWithCustomSampleLocations );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceFragmentShadingRatePropertiesKHR.fragmentShadingRateStrictMultiplyCombiner );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceGlobalPriorityQueryFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT;
@@ -45280,6 +53955,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceGlobalPriorityQueryFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceGlobalPriorityQueryFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceGlobalPriorityQueryFeaturesEXT const &
+                            physicalDeviceGlobalPriorityQueryFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceGlobalPriorityQueryFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceGlobalPriorityQueryFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceGlobalPriorityQueryFeaturesEXT.globalPriorityQuery );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceGroupProperties
   {
     using NativeType = VkPhysicalDeviceGroupProperties;
@@ -45363,6 +54058,30 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceGroupPropertiesKHR = PhysicalDeviceGroupProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceGroupProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceGroupProperties const & physicalDeviceGroupProperties )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceGroupProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceGroupProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceGroupProperties.physicalDeviceCount );
+    for ( size_t i = 0; i < VK_MAX_DEVICE_GROUP_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE(
+        VULKAN_HPP_NAMESPACE::PhysicalDevice, seed, physicalDeviceGroupProperties.physicalDevices[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceGroupProperties.subsetAllocation );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceHostQueryResetFeatures
   {
     using NativeType = VkPhysicalDeviceHostQueryResetFeatures;
@@ -45455,6 +54174,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceHostQueryResetFeaturesEXT = PhysicalDeviceHostQueryResetFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceHostQueryResetFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceHostQueryResetFeatures const &
+                            physicalDeviceHostQueryResetFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceHostQueryResetFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceHostQueryResetFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceHostQueryResetFeatures.hostQueryReset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceIDProperties
   {
     using NativeType = VkPhysicalDeviceIDProperties;
@@ -45542,6 +54279,37 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceIDPropertiesKHR = PhysicalDeviceIDProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceIDProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceIDProperties const & physicalDeviceIDProperties ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceIDProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceIDProperties.pNext );
+    for ( size_t i = 0; i < VK_UUID_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint8_t, seed, physicalDeviceIDProperties.deviceUUID[i] );
+    }
+    for ( size_t i = 0; i < VK_UUID_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint8_t, seed, physicalDeviceIDProperties.driverUUID[i] );
+    }
+    for ( size_t i = 0; i < VK_LUID_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint8_t, seed, physicalDeviceIDProperties.deviceLUID[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceIDProperties.deviceNodeMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceIDProperties.deviceLUIDValid );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceImageDrmFormatModifierInfoEXT
   {
     using NativeType = VkPhysicalDeviceImageDrmFormatModifierInfoEXT;
@@ -45691,6 +54459,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceImageDrmFormatModifierInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageDrmFormatModifierInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceImageDrmFormatModifierInfoEXT const &
+                            physicalDeviceImageDrmFormatModifierInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceImageDrmFormatModifierInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, physicalDeviceImageDrmFormatModifierInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, physicalDeviceImageDrmFormatModifierInfoEXT.drmFormatModifier );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SharingMode, seed, physicalDeviceImageDrmFormatModifierInfoEXT.sharingMode );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceImageDrmFormatModifierInfoEXT.queueFamilyIndexCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, physicalDeviceImageDrmFormatModifierInfoEXT.pQueueFamilyIndices );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceImageFormatInfo2
   {
     using NativeType = VkPhysicalDeviceImageFormatInfo2;
@@ -45822,6 +54613,28 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceImageFormatInfo2KHR = PhysicalDeviceImageFormatInfo2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageFormatInfo2>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceImageFormatInfo2 const & physicalDeviceImageFormatInfo2 )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceImageFormatInfo2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, physicalDeviceImageFormatInfo2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, physicalDeviceImageFormatInfo2.format );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageType, seed, physicalDeviceImageFormatInfo2.type );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageTiling, seed, physicalDeviceImageFormatInfo2.tiling );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags, seed, physicalDeviceImageFormatInfo2.usage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageCreateFlags, seed, physicalDeviceImageFormatInfo2.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceImageRobustnessFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceImageRobustnessFeaturesEXT;
@@ -45916,6 +54729,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceImageRobustnessFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageRobustnessFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceImageRobustnessFeaturesEXT const &
+                            physicalDeviceImageRobustnessFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceImageRobustnessFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceImageRobustnessFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceImageRobustnessFeaturesEXT.robustImageAccess );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceImageViewImageFormatInfoEXT
   {
     using NativeType = VkPhysicalDeviceImageViewImageFormatInfoEXT;
@@ -46011,6 +54844,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceImageViewImageFormatInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageViewImageFormatInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceImageViewImageFormatInfoEXT const &
+                            physicalDeviceImageViewImageFormatInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceImageViewImageFormatInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceImageViewImageFormatInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageViewType, seed, physicalDeviceImageViewImageFormatInfoEXT.imageViewType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceImageViewMinLodFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceImageViewMinLodFeaturesEXT;
@@ -46105,6 +54958,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceImageViewMinLodFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageViewMinLodFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceImageViewMinLodFeaturesEXT const &
+                            physicalDeviceImageViewMinLodFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceImageViewMinLodFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceImageViewMinLodFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceImageViewMinLodFeaturesEXT.minLod );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceImagelessFramebufferFeatures
   {
     using NativeType = VkPhysicalDeviceImagelessFramebufferFeatures;
@@ -46200,6 +55072,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceImagelessFramebufferFeaturesKHR = PhysicalDeviceImagelessFramebufferFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceImagelessFramebufferFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceImagelessFramebufferFeatures const &
+                            physicalDeviceImagelessFramebufferFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceImagelessFramebufferFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceImagelessFramebufferFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceImagelessFramebufferFeatures.imagelessFramebuffer );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceIndexTypeUint8FeaturesEXT
   {
     using NativeType = VkPhysicalDeviceIndexTypeUint8FeaturesEXT;
@@ -46293,6 +55185,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceIndexTypeUint8FeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceIndexTypeUint8FeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceIndexTypeUint8FeaturesEXT const &
+                            physicalDeviceIndexTypeUint8FeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceIndexTypeUint8FeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceIndexTypeUint8FeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceIndexTypeUint8FeaturesEXT.indexTypeUint8 );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceInheritedViewportScissorFeaturesNV
   {
     using NativeType = VkPhysicalDeviceInheritedViewportScissorFeaturesNV;
@@ -46389,6 +55300,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceInheritedViewportScissorFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceInheritedViewportScissorFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceInheritedViewportScissorFeaturesNV const &
+                            physicalDeviceInheritedViewportScissorFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceInheritedViewportScissorFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceInheritedViewportScissorFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceInheritedViewportScissorFeaturesNV.inheritedViewportScissor2D );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceInlineUniformBlockFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceInlineUniformBlockFeaturesEXT;
@@ -46496,6 +55427,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceInlineUniformBlockFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceInlineUniformBlockFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceInlineUniformBlockFeaturesEXT const &
+                            physicalDeviceInlineUniformBlockFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceInlineUniformBlockFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceInlineUniformBlockFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceInlineUniformBlockFeaturesEXT.inlineUniformBlock );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceInlineUniformBlockFeaturesEXT.descriptorBindingInlineUniformBlockUpdateAfterBind );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceInlineUniformBlockPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceInlineUniformBlockPropertiesEXT;
@@ -46595,6 +55550,37 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceInlineUniformBlockPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceInlineUniformBlockPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceInlineUniformBlockPropertiesEXT const &
+                            physicalDeviceInlineUniformBlockPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceInlineUniformBlockPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceInlineUniformBlockPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceInlineUniformBlockPropertiesEXT.maxInlineUniformBlockSize );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceInlineUniformBlockPropertiesEXT.maxPerStageDescriptorInlineUniformBlocks );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t,
+      seed,
+      physicalDeviceInlineUniformBlockPropertiesEXT.maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceInlineUniformBlockPropertiesEXT.maxDescriptorSetInlineUniformBlocks );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t,
+      seed,
+      physicalDeviceInlineUniformBlockPropertiesEXT.maxDescriptorSetUpdateAfterBindInlineUniformBlocks );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceInvocationMaskFeaturesHUAWEI
   {
     using NativeType = VkPhysicalDeviceInvocationMaskFeaturesHUAWEI;
@@ -46688,6 +55674,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceInvocationMaskFeaturesHUAWEI;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceInvocationMaskFeaturesHUAWEI>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceInvocationMaskFeaturesHUAWEI const &
+                            physicalDeviceInvocationMaskFeaturesHUAWEI ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceInvocationMaskFeaturesHUAWEI.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceInvocationMaskFeaturesHUAWEI.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceInvocationMaskFeaturesHUAWEI.invocationMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceLimits
   {
     using NativeType = VkPhysicalDeviceLimits;
@@ -47160,6 +56166,159 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceLimits>::value,
                             "PhysicalDeviceLimits is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceLimits>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceLimits const & physicalDeviceLimits ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxImageDimension1D );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxImageDimension2D );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxImageDimension3D );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxImageDimensionCube );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxImageArrayLayers );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTexelBufferElements );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxUniformBufferRange );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxStorageBufferRange );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxPushConstantsSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxMemoryAllocationCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxSamplerAllocationCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceLimits.bufferImageGranularity );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceLimits.sparseAddressSpaceSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxBoundDescriptorSets );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxPerStageDescriptorSamplers );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxPerStageDescriptorUniformBuffers );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxPerStageDescriptorStorageBuffers );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxPerStageDescriptorSampledImages );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxPerStageDescriptorStorageImages );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxPerStageDescriptorInputAttachments );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxPerStageResources );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxDescriptorSetSamplers );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxDescriptorSetUniformBuffers );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxDescriptorSetUniformBuffersDynamic );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxDescriptorSetStorageBuffers );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxDescriptorSetStorageBuffersDynamic );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxDescriptorSetSampledImages );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxDescriptorSetStorageImages );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxDescriptorSetInputAttachments );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxVertexInputAttributes );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxVertexInputBindings );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxVertexInputAttributeOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxVertexInputBindingStride );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxVertexOutputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTessellationGenerationLevel );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTessellationPatchSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTessellationControlPerVertexInputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTessellationControlPerVertexOutputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTessellationControlPerPatchOutputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTessellationControlTotalOutputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTessellationEvaluationInputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTessellationEvaluationOutputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxGeometryShaderInvocations );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxGeometryInputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxGeometryOutputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxGeometryOutputVertices );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxGeometryTotalOutputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxFragmentInputComponents );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxFragmentOutputAttachments );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxFragmentDualSrcAttachments );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxFragmentCombinedOutputResources );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxComputeSharedMemorySize );
+    for ( size_t i = 0; i < 3; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxComputeWorkGroupCount[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxComputeWorkGroupInvocations );
+    for ( size_t i = 0; i < 3; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxComputeWorkGroupSize[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.subPixelPrecisionBits );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.subTexelPrecisionBits );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.mipmapPrecisionBits );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxDrawIndexedIndexValue );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxDrawIndirectCount );
+    VULKAN_HPP_HASH_COMBINE( float, seed, physicalDeviceLimits.maxSamplerLodBias );
+    VULKAN_HPP_HASH_COMBINE( float, seed, physicalDeviceLimits.maxSamplerAnisotropy );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxViewports );
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxViewportDimensions[i] );
+    }
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( float, seed, physicalDeviceLimits.viewportBoundsRange[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.viewportSubPixelBits );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, physicalDeviceLimits.minMemoryMapAlignment );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceLimits.minTexelBufferOffsetAlignment );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceLimits.minUniformBufferOffsetAlignment );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceLimits.minStorageBufferOffsetAlignment );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, physicalDeviceLimits.minTexelOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTexelOffset );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, physicalDeviceLimits.minTexelGatherOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxTexelGatherOffset );
+    VULKAN_HPP_HASH_COMBINE( float, seed, physicalDeviceLimits.minInterpolationOffset );
+    VULKAN_HPP_HASH_COMBINE( float, seed, physicalDeviceLimits.maxInterpolationOffset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.subPixelInterpolationOffsetBits );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxFramebufferWidth );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxFramebufferHeight );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxFramebufferLayers );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, physicalDeviceLimits.framebufferColorSampleCounts );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, physicalDeviceLimits.framebufferDepthSampleCounts );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, physicalDeviceLimits.framebufferStencilSampleCounts );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, physicalDeviceLimits.framebufferNoAttachmentsSampleCounts );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxColorAttachments );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, physicalDeviceLimits.sampledImageColorSampleCounts );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, physicalDeviceLimits.sampledImageIntegerSampleCounts );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, physicalDeviceLimits.sampledImageDepthSampleCounts );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, physicalDeviceLimits.sampledImageStencilSampleCounts );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlags, seed, physicalDeviceLimits.storageImageSampleCounts );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxSampleMaskWords );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceLimits.timestampComputeAndGraphics );
+    VULKAN_HPP_HASH_COMBINE( float, seed, physicalDeviceLimits.timestampPeriod );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxClipDistances );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxCullDistances );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.maxCombinedClipAndCullDistances );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLimits.discreteQueuePriorities );
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( float, seed, physicalDeviceLimits.pointSizeRange[i] );
+    }
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( float, seed, physicalDeviceLimits.lineWidthRange[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( float, seed, physicalDeviceLimits.pointSizeGranularity );
+    VULKAN_HPP_HASH_COMBINE( float, seed, physicalDeviceLimits.lineWidthGranularity );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceLimits.strictLines );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceLimits.standardSampleLocations );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceLimits.optimalBufferCopyOffsetAlignment );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceLimits.optimalBufferCopyRowPitchAlignment );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceLimits.nonCoherentAtomSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceLineRasterizationFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceLineRasterizationFeaturesEXT;
@@ -47308,6 +56467,36 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceLineRasterizationFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceLineRasterizationFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceLineRasterizationFeaturesEXT const &
+                            physicalDeviceLineRasterizationFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceLineRasterizationFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceLineRasterizationFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceLineRasterizationFeaturesEXT.rectangularLines );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceLineRasterizationFeaturesEXT.bresenhamLines );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceLineRasterizationFeaturesEXT.smoothLines );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceLineRasterizationFeaturesEXT.stippledRectangularLines );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceLineRasterizationFeaturesEXT.stippledBresenhamLines );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceLineRasterizationFeaturesEXT.stippledSmoothLines );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceLineRasterizationPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceLineRasterizationPropertiesEXT;
@@ -47388,6 +56577,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceLineRasterizationPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceLineRasterizationPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceLineRasterizationPropertiesEXT const &
+                            physicalDeviceLineRasterizationPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceLineRasterizationPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceLineRasterizationPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceLineRasterizationPropertiesEXT.lineSubPixelPrecisionBits );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMaintenance3Properties
   {
     using NativeType = VkPhysicalDeviceMaintenance3Properties;
@@ -47469,6 +56677,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceMaintenance3PropertiesKHR = PhysicalDeviceMaintenance3Properties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMaintenance3Properties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMaintenance3Properties const &
+                            physicalDeviceMaintenance3Properties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMaintenance3Properties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMaintenance3Properties.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMaintenance3Properties.maxPerSetDescriptors );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceMaintenance3Properties.maxMemoryAllocationSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMaintenance4FeaturesKHR
   {
     using NativeType = VkPhysicalDeviceMaintenance4FeaturesKHR;
@@ -47561,6 +56789,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMaintenance4FeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMaintenance4FeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMaintenance4FeaturesKHR const &
+                            physicalDeviceMaintenance4FeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMaintenance4FeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMaintenance4FeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceMaintenance4FeaturesKHR.maintenance4 );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMaintenance4PropertiesKHR
   {
     using NativeType = VkPhysicalDeviceMaintenance4PropertiesKHR;
@@ -47638,6 +56884,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMaintenance4PropertiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMaintenance4PropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMaintenance4PropertiesKHR const &
+                            physicalDeviceMaintenance4PropertiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMaintenance4PropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMaintenance4PropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceMaintenance4PropertiesKHR.maxBufferSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMemoryBudgetPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceMemoryBudgetPropertiesEXT;
@@ -47720,6 +56985,33 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMemoryBudgetPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryBudgetPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryBudgetPropertiesEXT const &
+                            physicalDeviceMemoryBudgetPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMemoryBudgetPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMemoryBudgetPropertiesEXT.pNext );
+    for ( size_t i = 0; i < VK_MAX_MEMORY_HEAPS; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE(
+        VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceMemoryBudgetPropertiesEXT.heapBudget[i] );
+    }
+    for ( size_t i = 0; i < VK_MAX_MEMORY_HEAPS; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE(
+        VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceMemoryBudgetPropertiesEXT.heapUsage[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMemoryPriorityFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceMemoryPriorityFeaturesEXT;
@@ -47813,6 +57105,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMemoryPriorityFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryPriorityFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryPriorityFeaturesEXT const &
+                            physicalDeviceMemoryPriorityFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMemoryPriorityFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMemoryPriorityFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceMemoryPriorityFeaturesEXT.memoryPriority );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMemoryProperties
   {
     using NativeType = VkPhysicalDeviceMemoryProperties;
@@ -47886,6 +57197,31 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryProperties>::value,
     "PhysicalDeviceMemoryProperties is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryProperties const & physicalDeviceMemoryProperties )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMemoryProperties.memoryTypeCount );
+    for ( size_t i = 0; i < VK_MAX_MEMORY_TYPES; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::MemoryType, seed, physicalDeviceMemoryProperties.memoryTypes[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMemoryProperties.memoryHeapCount );
+    for ( size_t i = 0; i < VK_MAX_MEMORY_HEAPS; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::MemoryHeap, seed, physicalDeviceMemoryProperties.memoryHeaps[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMemoryProperties2
   {
     using NativeType = VkPhysicalDeviceMemoryProperties2;
@@ -47961,6 +57297,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceMemoryProperties2KHR = PhysicalDeviceMemoryProperties2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryProperties2>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryProperties2 const & physicalDeviceMemoryProperties2 ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMemoryProperties2.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMemoryProperties2.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryProperties, seed, physicalDeviceMemoryProperties2.memoryProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMeshShaderFeaturesNV
   {
     using NativeType = VkPhysicalDeviceMeshShaderFeaturesNV;
@@ -48063,6 +57419,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMeshShaderFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMeshShaderFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMeshShaderFeaturesNV const &
+                            physicalDeviceMeshShaderFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMeshShaderFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMeshShaderFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceMeshShaderFeaturesNV.taskShader );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceMeshShaderFeaturesNV.meshShader );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMeshShaderPropertiesNV
   {
     using NativeType = VkPhysicalDeviceMeshShaderPropertiesNV;
@@ -48188,6 +57563,42 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMeshShaderPropertiesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMeshShaderPropertiesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMeshShaderPropertiesNV const &
+                            physicalDeviceMeshShaderPropertiesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMeshShaderPropertiesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMeshShaderPropertiesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxDrawMeshTasksCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxTaskWorkGroupInvocations );
+    for ( size_t i = 0; i < 3; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxTaskWorkGroupSize[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxTaskTotalMemorySize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxTaskOutputCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxMeshWorkGroupInvocations );
+    for ( size_t i = 0; i < 3; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxMeshWorkGroupSize[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxMeshTotalMemorySize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxMeshOutputVertices );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxMeshOutputPrimitives );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.maxMeshMultiviewViewCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.meshOutputPerVertexGranularity );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMeshShaderPropertiesNV.meshOutputPerPrimitiveGranularity );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMultiDrawFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceMultiDrawFeaturesEXT;
@@ -48279,6 +57690,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMultiDrawFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiDrawFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiDrawFeaturesEXT const &
+                            physicalDeviceMultiDrawFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMultiDrawFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMultiDrawFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceMultiDrawFeaturesEXT.multiDraw );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMultiDrawPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceMultiDrawPropertiesEXT;
@@ -48354,6 +57783,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMultiDrawPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiDrawPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiDrawPropertiesEXT const &
+                            physicalDeviceMultiDrawPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMultiDrawPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMultiDrawPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMultiDrawPropertiesEXT.maxMultiDrawCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMultiviewFeatures
   {
     using NativeType = VkPhysicalDeviceMultiviewFeatures;
@@ -48466,6 +57913,29 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceMultiviewFeaturesKHR = PhysicalDeviceMultiviewFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiviewFeatures>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiviewFeatures const & physicalDeviceMultiviewFeatures ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMultiviewFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMultiviewFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceMultiviewFeatures.multiview );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceMultiviewFeatures.multiviewGeometryShader );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceMultiviewFeatures.multiviewTessellationShader );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
   {
     using NativeType = VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX;
@@ -48548,6 +58018,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const &
+                            physicalDeviceMultiviewPerViewAttributesPropertiesNVX ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMultiviewPerViewAttributesPropertiesNVX.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMultiviewPerViewAttributesPropertiesNVX.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceMultiviewPerViewAttributesPropertiesNVX.perViewPositionAllComponents );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMultiviewProperties
   {
     using NativeType = VkPhysicalDeviceMultiviewProperties;
@@ -48629,6 +58120,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceMultiviewPropertiesKHR = PhysicalDeviceMultiviewProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiviewProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiviewProperties const &
+                            physicalDeviceMultiviewProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMultiviewProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMultiviewProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMultiviewProperties.maxMultiviewViewCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceMultiviewProperties.maxMultiviewInstanceIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceMutableDescriptorTypeFeaturesVALVE
   {
     using NativeType = VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
@@ -48724,6 +58234,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceMutableDescriptorTypeFeaturesVALVE>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceMutableDescriptorTypeFeaturesVALVE const &
+                            physicalDeviceMutableDescriptorTypeFeaturesVALVE ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceMutableDescriptorTypeFeaturesVALVE.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceMutableDescriptorTypeFeaturesVALVE.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceMutableDescriptorTypeFeaturesVALVE.mutableDescriptorType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePCIBusInfoPropertiesEXT
   {
     using NativeType = VkPhysicalDevicePCIBusInfoPropertiesEXT;
@@ -48810,6 +58340,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePCIBusInfoPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePCIBusInfoPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePCIBusInfoPropertiesEXT const &
+                            physicalDevicePCIBusInfoPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePCIBusInfoPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePCIBusInfoPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDevicePCIBusInfoPropertiesEXT.pciDomain );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDevicePCIBusInfoPropertiesEXT.pciBus );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDevicePCIBusInfoPropertiesEXT.pciDevice );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDevicePCIBusInfoPropertiesEXT.pciFunction );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT
   {
     using NativeType = VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT;
@@ -48907,6 +58458,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const &
+                            physicalDevicePageableDeviceLocalMemoryFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePageableDeviceLocalMemoryFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePageableDeviceLocalMemoryFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDevicePageableDeviceLocalMemoryFeaturesEXT.pageableDeviceLocalMemory );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePerformanceQueryFeaturesKHR
   {
     using NativeType = VkPhysicalDevicePerformanceQueryFeaturesKHR;
@@ -49013,6 +58585,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePerformanceQueryFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePerformanceQueryFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePerformanceQueryFeaturesKHR const &
+                            physicalDevicePerformanceQueryFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePerformanceQueryFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePerformanceQueryFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePerformanceQueryFeaturesKHR.performanceCounterQueryPools );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDevicePerformanceQueryFeaturesKHR.performanceCounterMultipleQueryPools );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePerformanceQueryPropertiesKHR
   {
     using NativeType = VkPhysicalDevicePerformanceQueryPropertiesKHR;
@@ -49093,6 +58688,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePerformanceQueryPropertiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePerformanceQueryPropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePerformanceQueryPropertiesKHR const &
+                            physicalDevicePerformanceQueryPropertiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePerformanceQueryPropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePerformanceQueryPropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePerformanceQueryPropertiesKHR.allowCommandBufferQueryCopies );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePipelineCreationCacheControlFeaturesEXT
   {
     using NativeType = VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT;
@@ -49191,6 +58806,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePipelineCreationCacheControlFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineCreationCacheControlFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineCreationCacheControlFeaturesEXT const &
+                            physicalDevicePipelineCreationCacheControlFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePipelineCreationCacheControlFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePipelineCreationCacheControlFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDevicePipelineCreationCacheControlFeaturesEXT.pipelineCreationCacheControl );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePipelineExecutablePropertiesFeaturesKHR
   {
     using NativeType = VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR;
@@ -49289,6 +58925,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePipelineExecutablePropertiesFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineExecutablePropertiesFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineExecutablePropertiesFeaturesKHR const &
+                            physicalDevicePipelineExecutablePropertiesFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePipelineExecutablePropertiesFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePipelineExecutablePropertiesFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDevicePipelineExecutablePropertiesFeaturesKHR.pipelineExecutableInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePointClippingProperties
   {
     using NativeType = VkPhysicalDevicePointClippingProperties;
@@ -49369,6 +59026,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDevicePointClippingPropertiesKHR = PhysicalDevicePointClippingProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePointClippingProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePointClippingProperties const &
+                            physicalDevicePointClippingProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePointClippingProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePointClippingProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PointClippingBehavior, seed, physicalDevicePointClippingProperties.pointClippingBehavior );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
   struct PhysicalDevicePortabilitySubsetFeaturesKHR
   {
@@ -49615,6 +59291,56 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = PhysicalDevicePortabilitySubsetFeaturesKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePortabilitySubsetFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePortabilitySubsetFeaturesKHR const &
+                            physicalDevicePortabilitySubsetFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePortabilitySubsetFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePortabilitySubsetFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.constantAlphaColorBlendFactors );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.events );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.imageViewFormatReinterpretation );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.imageViewFormatSwizzle );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.imageView2DOn3DImage );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.multisampleArrayImage );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.mutableComparisonSamplers );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.pointPolygons );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.samplerMipLodBias );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.separateStencilMaskRef );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDevicePortabilitySubsetFeaturesKHR.shaderSampleRateInterpolationFunctions );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.tessellationIsolines );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.tessellationPointMode );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePortabilitySubsetFeaturesKHR.triangleFans );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDevicePortabilitySubsetFeaturesKHR.vertexAttributeAccessBeyondStride );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -49712,6 +59438,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = PhysicalDevicePortabilitySubsetPropertiesKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePortabilitySubsetPropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePortabilitySubsetPropertiesKHR const &
+                            physicalDevicePortabilitySubsetPropertiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePortabilitySubsetPropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePortabilitySubsetPropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDevicePortabilitySubsetPropertiesKHR.minVertexInputBindingStrideAlignment );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   struct PhysicalDevicePresentIdFeaturesKHR
@@ -49805,6 +59552,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePresentIdFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePresentIdFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePresentIdFeaturesKHR const &
+                            physicalDevicePresentIdFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePresentIdFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePresentIdFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePresentIdFeaturesKHR.presentId );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePresentWaitFeaturesKHR
   {
     using NativeType = VkPhysicalDevicePresentWaitFeaturesKHR;
@@ -49896,6 +59661,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePresentWaitFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePresentWaitFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePresentWaitFeaturesKHR const &
+                            physicalDevicePresentWaitFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePresentWaitFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePresentWaitFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePresentWaitFeaturesKHR.presentWait );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT
   {
     using NativeType = VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT;
@@ -50006,6 +59789,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT const &
+                            physicalDevicePrimitiveTopologyListRestartFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePrimitiveTopologyListRestartFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePrimitiveTopologyListRestartFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDevicePrimitiveTopologyListRestartFeaturesEXT.primitiveTopologyListRestart );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDevicePrimitiveTopologyListRestartFeaturesEXT.primitiveTopologyPatchListRestart );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePrivateDataFeaturesEXT
   {
     using NativeType = VkPhysicalDevicePrivateDataFeaturesEXT;
@@ -50097,6 +59904,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePrivateDataFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePrivateDataFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePrivateDataFeaturesEXT const &
+                            physicalDevicePrivateDataFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePrivateDataFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePrivateDataFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDevicePrivateDataFeaturesEXT.privateData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSparseProperties
   {
     using NativeType = VkPhysicalDeviceSparseProperties;
@@ -50176,6 +60001,31 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceSparseProperties>::value,
     "PhysicalDeviceSparseProperties is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSparseProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSparseProperties const & physicalDeviceSparseProperties )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSparseProperties.residencyStandard2DBlockShape );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSparseProperties.residencyStandard2DMultisampleBlockShape );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSparseProperties.residencyStandard3DBlockShape );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSparseProperties.residencyAlignedMipSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSparseProperties.residencyNonResidentStrict );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceProperties
   {
     using NativeType = VkPhysicalDeviceProperties;
@@ -50264,6 +60114,37 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceProperties>::value,
                             "PhysicalDeviceProperties is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceProperties const & physicalDeviceProperties ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceProperties.apiVersion );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceProperties.driverVersion );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceProperties.vendorID );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceProperties.deviceID );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PhysicalDeviceType, seed, physicalDeviceProperties.deviceType );
+    for ( size_t i = 0; i < VK_MAX_PHYSICAL_DEVICE_NAME_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, physicalDeviceProperties.deviceName[i] );
+    }
+    for ( size_t i = 0; i < VK_UUID_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint8_t, seed, physicalDeviceProperties.pipelineCacheUUID[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PhysicalDeviceLimits, seed, physicalDeviceProperties.limits );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PhysicalDeviceSparseProperties, seed, physicalDeviceProperties.sparseProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceProperties2
   {
     using NativeType = VkPhysicalDeviceProperties2;
@@ -50337,6 +60218,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceProperties2KHR = PhysicalDeviceProperties2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceProperties2>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceProperties2 const & physicalDeviceProperties2 ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceProperties2.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceProperties2.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PhysicalDeviceProperties, seed, physicalDeviceProperties2.properties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceProtectedMemoryFeatures
   {
     using NativeType = VkPhysicalDeviceProtectedMemoryFeatures;
@@ -50429,6 +60329,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceProtectedMemoryFeatures;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceProtectedMemoryFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceProtectedMemoryFeatures const &
+                            physicalDeviceProtectedMemoryFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceProtectedMemoryFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceProtectedMemoryFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceProtectedMemoryFeatures.protectedMemory );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceProtectedMemoryProperties
   {
     using NativeType = VkPhysicalDeviceProtectedMemoryProperties;
@@ -50507,6 +60426,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceProtectedMemoryProperties;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceProtectedMemoryProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceProtectedMemoryProperties const &
+                            physicalDeviceProtectedMemoryProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceProtectedMemoryProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceProtectedMemoryProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceProtectedMemoryProperties.protectedNoFault );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceProvokingVertexFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceProvokingVertexFeaturesEXT;
@@ -50612,6 +60550,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceProvokingVertexFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceProvokingVertexFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceProvokingVertexFeaturesEXT const &
+                            physicalDeviceProvokingVertexFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceProvokingVertexFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceProvokingVertexFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceProvokingVertexFeaturesEXT.provokingVertexLast );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceProvokingVertexFeaturesEXT.transformFeedbackPreservesProvokingVertex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceProvokingVertexPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceProvokingVertexPropertiesEXT;
@@ -50697,6 +60658,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceProvokingVertexPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceProvokingVertexPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceProvokingVertexPropertiesEXT const &
+                            physicalDeviceProvokingVertexPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceProvokingVertexPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceProvokingVertexPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceProvokingVertexPropertiesEXT.provokingVertexModePerPipeline );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceProvokingVertexPropertiesEXT.transformFeedbackPreservesTriangleFanProvokingVertex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDevicePushDescriptorPropertiesKHR
   {
     using NativeType = VkPhysicalDevicePushDescriptorPropertiesKHR;
@@ -50776,6 +60761,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePushDescriptorPropertiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePushDescriptorPropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDevicePushDescriptorPropertiesKHR const &
+                            physicalDevicePushDescriptorPropertiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDevicePushDescriptorPropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDevicePushDescriptorPropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDevicePushDescriptorPropertiesKHR.maxPushDescriptors );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceRGBA10X6FormatsFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT;
@@ -50871,6 +60875,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceRGBA10X6FormatsFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRGBA10X6FormatsFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceRGBA10X6FormatsFeaturesEXT const &
+                            physicalDeviceRGBA10X6FormatsFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceRGBA10X6FormatsFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceRGBA10X6FormatsFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceRGBA10X6FormatsFeaturesEXT.formatRgba10x6WithoutYCbCrSampler );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM
   {
     using NativeType = VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM;
@@ -50997,6 +61021,36 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const &
+                            physicalDeviceRasterizationOrderAttachmentAccessFeaturesARM ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, physicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.rasterizationOrderColorAttachmentAccess );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.rasterizationOrderDepthAttachmentAccess );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.rasterizationOrderStencilAttachmentAccess );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceRayQueryFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceRayQueryFeaturesKHR;
@@ -51087,6 +61141,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceRayQueryFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRayQueryFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceRayQueryFeaturesKHR const &
+                            physicalDeviceRayQueryFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceRayQueryFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceRayQueryFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceRayQueryFeaturesKHR.rayQuery );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceRayTracingMotionBlurFeaturesNV
   {
     using NativeType = VkPhysicalDeviceRayTracingMotionBlurFeaturesNV;
@@ -51193,6 +61265,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceRayTracingMotionBlurFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRayTracingMotionBlurFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceRayTracingMotionBlurFeaturesNV const &
+                            physicalDeviceRayTracingMotionBlurFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceRayTracingMotionBlurFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceRayTracingMotionBlurFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceRayTracingMotionBlurFeaturesNV.rayTracingMotionBlur );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceRayTracingMotionBlurFeaturesNV.rayTracingMotionBlurPipelineTraceRaysIndirect );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceRayTracingPipelineFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceRayTracingPipelineFeaturesKHR;
@@ -51335,6 +61431,39 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceRayTracingPipelineFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRayTracingPipelineFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceRayTracingPipelineFeaturesKHR const &
+                            physicalDeviceRayTracingPipelineFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceRayTracingPipelineFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceRayTracingPipelineFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceRayTracingPipelineFeaturesKHR.rayTracingPipeline );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceRayTracingPipelineFeaturesKHR.rayTracingPipelineShaderGroupHandleCaptureReplay );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceRayTracingPipelineFeaturesKHR.rayTracingPipelineShaderGroupHandleCaptureReplayMixed );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceRayTracingPipelineFeaturesKHR.rayTracingPipelineTraceRaysIndirect );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceRayTracingPipelineFeaturesKHR.rayTraversalPrimitiveCulling );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceRayTracingPipelinePropertiesKHR
   {
     using NativeType = VkPhysicalDeviceRayTracingPipelinePropertiesKHR;
@@ -51443,6 +61572,34 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceRayTracingPipelinePropertiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRayTracingPipelinePropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceRayTracingPipelinePropertiesKHR const &
+                            physicalDeviceRayTracingPipelinePropertiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceRayTracingPipelinePropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceRayTracingPipelinePropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceRayTracingPipelinePropertiesKHR.shaderGroupHandleSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceRayTracingPipelinePropertiesKHR.maxRayRecursionDepth );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceRayTracingPipelinePropertiesKHR.maxShaderGroupStride );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceRayTracingPipelinePropertiesKHR.shaderGroupBaseAlignment );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceRayTracingPipelinePropertiesKHR.shaderGroupHandleCaptureReplaySize );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceRayTracingPipelinePropertiesKHR.maxRayDispatchInvocationCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceRayTracingPipelinePropertiesKHR.shaderGroupHandleAlignment );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceRayTracingPipelinePropertiesKHR.maxRayHitAttributeSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceRayTracingPropertiesNV
   {
     using NativeType = VkPhysicalDeviceRayTracingPropertiesNV;
@@ -51546,6 +61703,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceRayTracingPropertiesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRayTracingPropertiesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceRayTracingPropertiesNV const &
+                            physicalDeviceRayTracingPropertiesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceRayTracingPropertiesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceRayTracingPropertiesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceRayTracingPropertiesNV.shaderGroupHandleSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceRayTracingPropertiesNV.maxRecursionDepth );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceRayTracingPropertiesNV.maxShaderGroupStride );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceRayTracingPropertiesNV.shaderGroupBaseAlignment );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, physicalDeviceRayTracingPropertiesNV.maxGeometryCount );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, physicalDeviceRayTracingPropertiesNV.maxInstanceCount );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, physicalDeviceRayTracingPropertiesNV.maxTriangleCount );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceRayTracingPropertiesNV.maxDescriptorSetAccelerationStructures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceRepresentativeFragmentTestFeaturesNV
   {
     using NativeType = VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV;
@@ -51643,6 +61826,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceRepresentativeFragmentTestFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRepresentativeFragmentTestFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceRepresentativeFragmentTestFeaturesNV const &
+                            physicalDeviceRepresentativeFragmentTestFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceRepresentativeFragmentTestFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceRepresentativeFragmentTestFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceRepresentativeFragmentTestFeaturesNV.representativeFragmentTest );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceRobustness2FeaturesEXT
   {
     using NativeType = VkPhysicalDeviceRobustness2FeaturesEXT;
@@ -51755,6 +61959,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceRobustness2FeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRobustness2FeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceRobustness2FeaturesEXT const &
+                            physicalDeviceRobustness2FeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceRobustness2FeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceRobustness2FeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceRobustness2FeaturesEXT.robustBufferAccess2 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceRobustness2FeaturesEXT.robustImageAccess2 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceRobustness2FeaturesEXT.nullDescriptor );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceRobustness2PropertiesEXT
   {
     using NativeType = VkPhysicalDeviceRobustness2PropertiesEXT;
@@ -51838,6 +62064,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceRobustness2PropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRobustness2PropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceRobustness2PropertiesEXT const &
+                            physicalDeviceRobustness2PropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceRobustness2PropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceRobustness2PropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize,
+                             seed,
+                             physicalDeviceRobustness2PropertiesEXT.robustStorageBufferAccessSizeAlignment );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize,
+                             seed,
+                             physicalDeviceRobustness2PropertiesEXT.robustUniformBufferAccessSizeAlignment );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSampleLocationsPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceSampleLocationsPropertiesEXT;
@@ -51934,6 +62183,37 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceSampleLocationsPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSampleLocationsPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSampleLocationsPropertiesEXT const &
+                            physicalDeviceSampleLocationsPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSampleLocationsPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceSampleLocationsPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SampleCountFlags,
+                             seed,
+                             physicalDeviceSampleLocationsPropertiesEXT.sampleLocationSampleCounts );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Extent2D, seed, physicalDeviceSampleLocationsPropertiesEXT.maxSampleLocationGridSize );
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE(
+        float, seed, physicalDeviceSampleLocationsPropertiesEXT.sampleLocationCoordinateRange[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceSampleLocationsPropertiesEXT.sampleLocationSubPixelBits );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSampleLocationsPropertiesEXT.variableSampleLocations );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSamplerFilterMinmaxProperties
   {
     using NativeType = VkPhysicalDeviceSamplerFilterMinmaxProperties;
@@ -52019,6 +62299,30 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceSamplerFilterMinmaxPropertiesEXT = PhysicalDeviceSamplerFilterMinmaxProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSamplerFilterMinmaxProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSamplerFilterMinmaxProperties const &
+                            physicalDeviceSamplerFilterMinmaxProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSamplerFilterMinmaxProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceSamplerFilterMinmaxProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceSamplerFilterMinmaxProperties.filterMinmaxSingleComponentFormats );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceSamplerFilterMinmaxProperties.filterMinmaxImageComponentMapping );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSamplerYcbcrConversionFeatures
   {
     using NativeType = VkPhysicalDeviceSamplerYcbcrConversionFeatures;
@@ -52115,6 +62419,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceSamplerYcbcrConversionFeaturesKHR = PhysicalDeviceSamplerYcbcrConversionFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSamplerYcbcrConversionFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSamplerYcbcrConversionFeatures const &
+                            physicalDeviceSamplerYcbcrConversionFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSamplerYcbcrConversionFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceSamplerYcbcrConversionFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSamplerYcbcrConversionFeatures.samplerYcbcrConversion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceScalarBlockLayoutFeatures
   {
     using NativeType = VkPhysicalDeviceScalarBlockLayoutFeatures;
@@ -52208,6 +62532,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceScalarBlockLayoutFeaturesEXT = PhysicalDeviceScalarBlockLayoutFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceScalarBlockLayoutFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceScalarBlockLayoutFeatures const &
+                            physicalDeviceScalarBlockLayoutFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceScalarBlockLayoutFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceScalarBlockLayoutFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceScalarBlockLayoutFeatures.scalarBlockLayout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSeparateDepthStencilLayoutsFeatures
   {
     using NativeType = VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures;
@@ -52306,6 +62649,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR = PhysicalDeviceSeparateDepthStencilLayoutsFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSeparateDepthStencilLayoutsFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSeparateDepthStencilLayoutsFeatures const &
+                            physicalDeviceSeparateDepthStencilLayoutsFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSeparateDepthStencilLayoutsFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceSeparateDepthStencilLayoutsFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceSeparateDepthStencilLayoutsFeatures.separateDepthStencilLayouts );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderAtomicFloat2FeaturesEXT
   {
     using NativeType = VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT;
@@ -52522,6 +62886,48 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderAtomicFloat2FeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderAtomicFloat2FeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderAtomicFloat2FeaturesEXT const &
+                            physicalDeviceShaderAtomicFloat2FeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderBufferFloat16Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderBufferFloat16AtomicAdd );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderBufferFloat16AtomicMinMax );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderBufferFloat32AtomicMinMax );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderBufferFloat64AtomicMinMax );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderSharedFloat16Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderSharedFloat16AtomicAdd );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderSharedFloat16AtomicMinMax );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderSharedFloat32AtomicMinMax );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderSharedFloat64AtomicMinMax );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.shaderImageFloat32AtomicMinMax );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloat2FeaturesEXT.sparseImageFloat32AtomicMinMax );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderAtomicFloatFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceShaderAtomicFloatFeaturesEXT;
@@ -52738,6 +63144,48 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderAtomicFloatFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderAtomicFloatFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderAtomicFloatFeaturesEXT const &
+                            physicalDeviceShaderAtomicFloatFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.shaderBufferFloat32Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.shaderBufferFloat32AtomicAdd );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.shaderBufferFloat64Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.shaderBufferFloat64AtomicAdd );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.shaderSharedFloat32Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.shaderSharedFloat32AtomicAdd );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.shaderSharedFloat64Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.shaderSharedFloat64AtomicAdd );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.shaderImageFloat32Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.shaderImageFloat32AtomicAdd );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.sparseImageFloat32Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicFloatFeaturesEXT.sparseImageFloat32AtomicAdd );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderAtomicInt64Features
   {
     using NativeType = VkPhysicalDeviceShaderAtomicInt64Features;
@@ -52844,6 +63292,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceShaderAtomicInt64FeaturesKHR = PhysicalDeviceShaderAtomicInt64Features;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderAtomicInt64Features>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderAtomicInt64Features const &
+                            physicalDeviceShaderAtomicInt64Features ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderAtomicInt64Features.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderAtomicInt64Features.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicInt64Features.shaderBufferInt64Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderAtomicInt64Features.shaderSharedInt64Atomics );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderClockFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceShaderClockFeaturesKHR;
@@ -52946,6 +63415,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderClockFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderClockFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderClockFeaturesKHR const &
+                            physicalDeviceShaderClockFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderClockFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderClockFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderClockFeaturesKHR.shaderSubgroupClock );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderClockFeaturesKHR.shaderDeviceClock );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderCoreProperties2AMD
   {
     using NativeType = VkPhysicalDeviceShaderCoreProperties2AMD;
@@ -53028,6 +63518,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderCoreProperties2AMD;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderCoreProperties2AMD>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderCoreProperties2AMD const &
+                            physicalDeviceShaderCoreProperties2AMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderCoreProperties2AMD.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderCoreProperties2AMD.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderCorePropertiesFlagsAMD,
+                             seed,
+                             physicalDeviceShaderCoreProperties2AMD.shaderCoreFeatures );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCoreProperties2AMD.activeComputeUnitCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderCorePropertiesAMD
   {
     using NativeType = VkPhysicalDeviceShaderCorePropertiesAMD;
@@ -53152,6 +63663,37 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderCorePropertiesAMD;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderCorePropertiesAMD>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderCorePropertiesAMD const &
+                            physicalDeviceShaderCorePropertiesAMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderCorePropertiesAMD.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderCorePropertiesAMD.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.shaderEngineCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.shaderArraysPerEngineCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.computeUnitsPerShaderArray );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.simdPerComputeUnit );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.wavefrontsPerSimd );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.wavefrontSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.sgprsPerSimd );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.minSgprAllocation );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.maxSgprAllocation );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.sgprAllocationGranularity );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.vgprsPerSimd );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.minVgprAllocation );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.maxVgprAllocation );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderCorePropertiesAMD.vgprAllocationGranularity );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT;
@@ -53250,6 +63792,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT const &
+                            physicalDeviceShaderDemoteToHelperInvocationFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.shaderDemoteToHelperInvocation );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderDrawParametersFeatures
   {
     using NativeType = VkPhysicalDeviceShaderDrawParametersFeatures;
@@ -53345,6 +63908,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceShaderDrawParameterFeatures = PhysicalDeviceShaderDrawParametersFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderDrawParametersFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderDrawParametersFeatures const &
+                            physicalDeviceShaderDrawParametersFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderDrawParametersFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderDrawParametersFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderDrawParametersFeatures.shaderDrawParameters );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderFloat16Int8Features
   {
     using NativeType = VkPhysicalDeviceShaderFloat16Int8Features;
@@ -53451,6 +64034,26 @@ namespace VULKAN_HPP_NAMESPACE
   using PhysicalDeviceFloat16Int8FeaturesKHR       = PhysicalDeviceShaderFloat16Int8Features;
   using PhysicalDeviceShaderFloat16Int8FeaturesKHR = PhysicalDeviceShaderFloat16Int8Features;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderFloat16Int8Features>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderFloat16Int8Features const &
+                            physicalDeviceShaderFloat16Int8Features ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderFloat16Int8Features.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderFloat16Int8Features.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderFloat16Int8Features.shaderFloat16 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderFloat16Int8Features.shaderInt8 );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderImageAtomicInt64FeaturesEXT
   {
     using NativeType = VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT;
@@ -53558,6 +64161,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderImageAtomicInt64FeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderImageAtomicInt64FeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderImageAtomicInt64FeaturesEXT const &
+                            physicalDeviceShaderImageAtomicInt64FeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderImageAtomicInt64FeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderImageAtomicInt64FeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderImageAtomicInt64FeaturesEXT.shaderImageInt64Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderImageAtomicInt64FeaturesEXT.sparseImageInt64Atomics );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderImageFootprintFeaturesNV
   {
     using NativeType = VkPhysicalDeviceShaderImageFootprintFeaturesNV;
@@ -53651,6 +64276,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderImageFootprintFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderImageFootprintFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderImageFootprintFeaturesNV const &
+                            physicalDeviceShaderImageFootprintFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderImageFootprintFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderImageFootprintFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderImageFootprintFeaturesNV.imageFootprint );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderIntegerDotProductFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR;
@@ -53747,6 +64392,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderIntegerDotProductFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderIntegerDotProductFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderIntegerDotProductFeaturesKHR const &
+                            physicalDeviceShaderIntegerDotProductFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderIntegerDotProductFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderIntegerDotProductFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderIntegerDotProductFeaturesKHR.shaderIntegerDotProduct );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderIntegerDotProductPropertiesKHR
   {
     using NativeType = VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR;
@@ -54261,6 +64926,144 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderIntegerDotProductPropertiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderIntegerDotProductPropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderIntegerDotProductPropertiesKHR const &
+                            physicalDeviceShaderIntegerDotProductPropertiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderIntegerDotProductPropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderIntegerDotProductPropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct8BitUnsignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct8BitSignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct8BitMixedSignednessAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct4x8BitPackedUnsignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct4x8BitPackedSignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct4x8BitPackedMixedSignednessAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct16BitUnsignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct16BitSignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct16BitMixedSignednessAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct32BitUnsignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct32BitSignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct32BitMixedSignednessAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct64BitUnsignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct64BitSignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProduct64BitMixedSignednessAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating8BitUnsignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderIntegerDotProductPropertiesKHR.integerDotProductAccumulatingSaturating8BitSignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating16BitUnsignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating16BitSignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating32BitUnsignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating32BitSignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating64BitUnsignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating64BitSignedAccelerated );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderIntegerDotProductPropertiesKHR
+                               .integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL
   {
     using NativeType = VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL;
@@ -54358,6 +65161,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const &
+                            physicalDeviceShaderIntegerFunctions2FeaturesINTEL ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderIntegerFunctions2FeaturesINTEL.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderIntegerFunctions2FeaturesINTEL.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderIntegerFunctions2FeaturesINTEL.shaderIntegerFunctions2 );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderSMBuiltinsFeaturesNV
   {
     using NativeType = VkPhysicalDeviceShaderSMBuiltinsFeaturesNV;
@@ -54451,6 +65274,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderSMBuiltinsFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderSMBuiltinsFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderSMBuiltinsFeaturesNV const &
+                            physicalDeviceShaderSMBuiltinsFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderSMBuiltinsFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderSMBuiltinsFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShaderSMBuiltinsFeaturesNV.shaderSMBuiltins );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderSMBuiltinsPropertiesNV
   {
     using NativeType = VkPhysicalDeviceShaderSMBuiltinsPropertiesNV;
@@ -54534,6 +65377,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderSMBuiltinsPropertiesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderSMBuiltinsPropertiesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderSMBuiltinsPropertiesNV const &
+                            physicalDeviceShaderSMBuiltinsPropertiesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderSMBuiltinsPropertiesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderSMBuiltinsPropertiesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderSMBuiltinsPropertiesNV.shaderSMCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShaderSMBuiltinsPropertiesNV.shaderWarpsPerSM );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderSubgroupExtendedTypesFeatures
   {
     using NativeType = VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures;
@@ -54632,6 +65495,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR = PhysicalDeviceShaderSubgroupExtendedTypesFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderSubgroupExtendedTypesFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderSubgroupExtendedTypesFeatures const &
+                            physicalDeviceShaderSubgroupExtendedTypesFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderSubgroupExtendedTypesFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderSubgroupExtendedTypesFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderSubgroupExtendedTypesFeatures.shaderSubgroupExtendedTypes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR;
@@ -54733,6 +65617,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR const &
+                            physicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.shaderSubgroupUniformControlFlow );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShaderTerminateInvocationFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR;
@@ -54830,6 +65736,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderTerminateInvocationFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderTerminateInvocationFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderTerminateInvocationFeaturesKHR const &
+                            physicalDeviceShaderTerminateInvocationFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShaderTerminateInvocationFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShaderTerminateInvocationFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceShaderTerminateInvocationFeaturesKHR.shaderTerminateInvocation );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShadingRateImageFeaturesNV
   {
     using NativeType = VkPhysicalDeviceShadingRateImageFeaturesNV;
@@ -54935,6 +65862,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShadingRateImageFeaturesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShadingRateImageFeaturesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShadingRateImageFeaturesNV const &
+                            physicalDeviceShadingRateImageFeaturesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShadingRateImageFeaturesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShadingRateImageFeaturesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShadingRateImageFeaturesNV.shadingRateImage );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceShadingRateImageFeaturesNV.shadingRateCoarseSampleOrder );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceShadingRateImagePropertiesNV
   {
     using NativeType = VkPhysicalDeviceShadingRateImagePropertiesNV;
@@ -55022,6 +65971,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShadingRateImagePropertiesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShadingRateImagePropertiesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceShadingRateImagePropertiesNV const &
+                            physicalDeviceShadingRateImagePropertiesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceShadingRateImagePropertiesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceShadingRateImagePropertiesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Extent2D, seed, physicalDeviceShadingRateImagePropertiesNV.shadingRateTexelSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShadingRateImagePropertiesNV.shadingRatePaletteSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceShadingRateImagePropertiesNV.shadingRateMaxCoarseSamples );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSparseImageFormatInfo2
   {
     using NativeType = VkPhysicalDeviceSparseImageFormatInfo2;
@@ -55155,6 +66126,29 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceSparseImageFormatInfo2KHR = PhysicalDeviceSparseImageFormatInfo2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSparseImageFormatInfo2>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSparseImageFormatInfo2 const &
+                            physicalDeviceSparseImageFormatInfo2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSparseImageFormatInfo2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, physicalDeviceSparseImageFormatInfo2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, physicalDeviceSparseImageFormatInfo2.format );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageType, seed, physicalDeviceSparseImageFormatInfo2.type );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleCountFlagBits, seed, physicalDeviceSparseImageFormatInfo2.samples );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags, seed, physicalDeviceSparseImageFormatInfo2.usage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageTiling, seed, physicalDeviceSparseImageFormatInfo2.tiling );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSubgroupProperties
   {
     using NativeType = VkPhysicalDeviceSubgroupProperties;
@@ -55240,6 +66234,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceSubgroupProperties;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSubgroupProperties>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSubgroupProperties const & physicalDeviceSubgroupProperties ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSubgroupProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceSubgroupProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceSubgroupProperties.subgroupSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ShaderStageFlags, seed, physicalDeviceSubgroupProperties.supportedStages );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SubgroupFeatureFlags, seed, physicalDeviceSubgroupProperties.supportedOperations );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSubgroupProperties.quadOperationsInAllStages );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSubgroupSizeControlFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceSubgroupSizeControlFeaturesEXT;
@@ -55345,6 +66364,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceSubgroupSizeControlFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSubgroupSizeControlFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSubgroupSizeControlFeaturesEXT const &
+                            physicalDeviceSubgroupSizeControlFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSubgroupSizeControlFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceSubgroupSizeControlFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSubgroupSizeControlFeaturesEXT.subgroupSizeControl );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSubgroupSizeControlFeaturesEXT.computeFullSubgroups );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSubgroupSizeControlPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceSubgroupSizeControlPropertiesEXT;
@@ -55436,6 +66477,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceSubgroupSizeControlPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSubgroupSizeControlPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSubgroupSizeControlPropertiesEXT const &
+                            physicalDeviceSubgroupSizeControlPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSubgroupSizeControlPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceSubgroupSizeControlPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceSubgroupSizeControlPropertiesEXT.minSubgroupSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceSubgroupSizeControlPropertiesEXT.maxSubgroupSize );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceSubgroupSizeControlPropertiesEXT.maxComputeWorkgroupSubgroups );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderStageFlags,
+                             seed,
+                             physicalDeviceSubgroupSizeControlPropertiesEXT.requiredSubgroupSizeStages );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSubpassShadingFeaturesHUAWEI
   {
     using NativeType = VkPhysicalDeviceSubpassShadingFeaturesHUAWEI;
@@ -55529,6 +66595,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceSubpassShadingFeaturesHUAWEI;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSubpassShadingFeaturesHUAWEI>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSubpassShadingFeaturesHUAWEI const &
+                            physicalDeviceSubpassShadingFeaturesHUAWEI ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSubpassShadingFeaturesHUAWEI.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceSubpassShadingFeaturesHUAWEI.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSubpassShadingFeaturesHUAWEI.subpassShading );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSubpassShadingPropertiesHUAWEI
   {
     using NativeType = VkPhysicalDeviceSubpassShadingPropertiesHUAWEI;
@@ -55609,6 +66695,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceSubpassShadingPropertiesHUAWEI;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSubpassShadingPropertiesHUAWEI>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSubpassShadingPropertiesHUAWEI const &
+                            physicalDeviceSubpassShadingPropertiesHUAWEI ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSubpassShadingPropertiesHUAWEI.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceSubpassShadingPropertiesHUAWEI.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceSubpassShadingPropertiesHUAWEI.maxSubpassShadingWorkgroupSizeAspectRatio );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSurfaceInfo2KHR
   {
     using NativeType = VkPhysicalDeviceSurfaceInfo2KHR;
@@ -55698,6 +66804,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceSurfaceInfo2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSurfaceInfo2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSurfaceInfo2KHR const & physicalDeviceSurfaceInfo2KHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSurfaceInfo2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, physicalDeviceSurfaceInfo2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SurfaceKHR, seed, physicalDeviceSurfaceInfo2KHR.surface );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceSynchronization2FeaturesKHR
   {
     using NativeType = VkPhysicalDeviceSynchronization2FeaturesKHR;
@@ -55791,6 +66915,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceSynchronization2FeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceSynchronization2FeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceSynchronization2FeaturesKHR const &
+                            physicalDeviceSynchronization2FeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceSynchronization2FeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceSynchronization2FeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceSynchronization2FeaturesKHR.synchronization2 );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceTexelBufferAlignmentFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT;
@@ -55886,6 +67030,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceTexelBufferAlignmentFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceTexelBufferAlignmentFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceTexelBufferAlignmentFeaturesEXT const &
+                            physicalDeviceTexelBufferAlignmentFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceTexelBufferAlignmentFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceTexelBufferAlignmentFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceTexelBufferAlignmentFeaturesEXT.texelBufferAlignment );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceTexelBufferAlignmentPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT;
@@ -55978,6 +67142,38 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceTexelBufferAlignmentPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceTexelBufferAlignmentPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceTexelBufferAlignmentPropertiesEXT const &
+                            physicalDeviceTexelBufferAlignmentPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceTexelBufferAlignmentPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceTexelBufferAlignmentPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize,
+                             seed,
+                             physicalDeviceTexelBufferAlignmentPropertiesEXT.storageTexelBufferOffsetAlignmentBytes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceTexelBufferAlignmentPropertiesEXT.storageTexelBufferOffsetSingleTexelAlignment );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize,
+                             seed,
+                             physicalDeviceTexelBufferAlignmentPropertiesEXT.uniformTexelBufferOffsetAlignmentBytes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceTexelBufferAlignmentPropertiesEXT.uniformTexelBufferOffsetSingleTexelAlignment );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT;
@@ -56075,6 +67271,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT const &
+                            physicalDeviceTextureCompressionASTCHDRFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceTextureCompressionASTCHDRFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceTextureCompressionASTCHDRFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceTextureCompressionASTCHDRFeaturesEXT.textureCompressionASTC_HDR );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceTimelineSemaphoreFeatures
   {
     using NativeType = VkPhysicalDeviceTimelineSemaphoreFeatures;
@@ -56168,6 +67385,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceTimelineSemaphoreFeaturesKHR = PhysicalDeviceTimelineSemaphoreFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceTimelineSemaphoreFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceTimelineSemaphoreFeatures const &
+                            physicalDeviceTimelineSemaphoreFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceTimelineSemaphoreFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceTimelineSemaphoreFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceTimelineSemaphoreFeatures.timelineSemaphore );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceTimelineSemaphoreProperties
   {
     using NativeType = VkPhysicalDeviceTimelineSemaphoreProperties;
@@ -56248,6 +67484,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceTimelineSemaphorePropertiesKHR = PhysicalDeviceTimelineSemaphoreProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceTimelineSemaphoreProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceTimelineSemaphoreProperties const &
+                            physicalDeviceTimelineSemaphoreProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceTimelineSemaphoreProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceTimelineSemaphoreProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint64_t, seed, physicalDeviceTimelineSemaphoreProperties.maxTimelineSemaphoreValueDifference );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceToolPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceToolPropertiesEXT;
@@ -56335,6 +67591,42 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceToolPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceToolPropertiesEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceToolPropertiesEXT const & physicalDeviceToolPropertiesEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceToolPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceToolPropertiesEXT.pNext );
+    for ( size_t i = 0; i < VK_MAX_EXTENSION_NAME_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, physicalDeviceToolPropertiesEXT.name[i] );
+    }
+    for ( size_t i = 0; i < VK_MAX_EXTENSION_NAME_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, physicalDeviceToolPropertiesEXT.version[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ToolPurposeFlagsEXT, seed, physicalDeviceToolPropertiesEXT.purposes );
+    for ( size_t i = 0; i < VK_MAX_DESCRIPTION_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, physicalDeviceToolPropertiesEXT.description[i] );
+    }
+    for ( size_t i = 0; i < VK_MAX_EXTENSION_NAME_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, physicalDeviceToolPropertiesEXT.layer[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceTransformFeedbackFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceTransformFeedbackFeaturesEXT;
@@ -56440,6 +67732,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceTransformFeedbackFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceTransformFeedbackFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceTransformFeedbackFeaturesEXT const &
+                            physicalDeviceTransformFeedbackFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceTransformFeedbackFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceTransformFeedbackFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceTransformFeedbackFeaturesEXT.transformFeedback );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceTransformFeedbackFeaturesEXT.geometryStreams );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceTransformFeedbackPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceTransformFeedbackPropertiesEXT;
@@ -56556,6 +67870,45 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceTransformFeedbackPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceTransformFeedbackPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceTransformFeedbackPropertiesEXT const &
+                            physicalDeviceTransformFeedbackPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceTransformFeedbackPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceTransformFeedbackPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceTransformFeedbackPropertiesEXT.maxTransformFeedbackStreams );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceTransformFeedbackPropertiesEXT.maxTransformFeedbackBuffers );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize,
+                             seed,
+                             physicalDeviceTransformFeedbackPropertiesEXT.maxTransformFeedbackBufferSize );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceTransformFeedbackPropertiesEXT.maxTransformFeedbackStreamDataSize );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceTransformFeedbackPropertiesEXT.maxTransformFeedbackBufferDataSize );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceTransformFeedbackPropertiesEXT.maxTransformFeedbackBufferDataStride );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceTransformFeedbackPropertiesEXT.transformFeedbackQueries );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceTransformFeedbackPropertiesEXT.transformFeedbackStreamsLinesTriangles );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceTransformFeedbackPropertiesEXT.transformFeedbackRasterizationStreamSelect );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceTransformFeedbackPropertiesEXT.transformFeedbackDraw );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceUniformBufferStandardLayoutFeatures
   {
     using NativeType = VkPhysicalDeviceUniformBufferStandardLayoutFeatures;
@@ -56654,6 +68007,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceUniformBufferStandardLayoutFeaturesKHR = PhysicalDeviceUniformBufferStandardLayoutFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceUniformBufferStandardLayoutFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceUniformBufferStandardLayoutFeatures const &
+                            physicalDeviceUniformBufferStandardLayoutFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceUniformBufferStandardLayoutFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceUniformBufferStandardLayoutFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceUniformBufferStandardLayoutFeatures.uniformBufferStandardLayout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceVariablePointersFeatures
   {
     using NativeType = VkPhysicalDeviceVariablePointersFeatures;
@@ -56762,6 +68136,27 @@ namespace VULKAN_HPP_NAMESPACE
   using PhysicalDeviceVariablePointerFeaturesKHR  = PhysicalDeviceVariablePointersFeatures;
   using PhysicalDeviceVariablePointersFeaturesKHR = PhysicalDeviceVariablePointersFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceVariablePointersFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceVariablePointersFeatures const &
+                            physicalDeviceVariablePointersFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceVariablePointersFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceVariablePointersFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVariablePointersFeatures.variablePointersStorageBuffer );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVariablePointersFeatures.variablePointers );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceVertexAttributeDivisorFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT;
@@ -56869,6 +68264,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceVertexAttributeDivisorFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceVertexAttributeDivisorFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceVertexAttributeDivisorFeaturesEXT const &
+                            physicalDeviceVertexAttributeDivisorFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceVertexAttributeDivisorFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceVertexAttributeDivisorFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVertexAttributeDivisorFeaturesEXT.vertexAttributeInstanceRateDivisor );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVertexAttributeDivisorFeaturesEXT.vertexAttributeInstanceRateZeroDivisor );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceVertexAttributeDivisorPropertiesEXT
   {
     using NativeType = VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT;
@@ -56950,6 +68369,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceVertexAttributeDivisorPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceVertexAttributeDivisorPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceVertexAttributeDivisorPropertiesEXT const &
+                            physicalDeviceVertexAttributeDivisorPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceVertexAttributeDivisorPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceVertexAttributeDivisorPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceVertexAttributeDivisorPropertiesEXT.maxVertexAttribDivisor );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceVertexInputDynamicStateFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT;
@@ -57046,6 +68484,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceVertexInputDynamicStateFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceVertexInputDynamicStateFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceVertexInputDynamicStateFeaturesEXT const &
+                            physicalDeviceVertexInputDynamicStateFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceVertexInputDynamicStateFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceVertexInputDynamicStateFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVertexInputDynamicStateFeaturesEXT.vertexInputDynamicState );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
   struct VideoProfileKHR
   {
@@ -57165,6 +68623,30 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoProfileKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoProfileKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoProfileKHR const & videoProfileKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoProfileKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, videoProfileKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoCodecOperationFlagBitsKHR, seed, videoProfileKHR.videoCodecOperation );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoChromaSubsamplingFlagsKHR, seed, videoProfileKHR.chromaSubsampling );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoComponentBitDepthFlagsKHR, seed, videoProfileKHR.lumaBitDepth );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoComponentBitDepthFlagsKHR, seed, videoProfileKHR.chromaBitDepth );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -57262,6 +68744,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoProfilesKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoProfilesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoProfilesKHR const & videoProfilesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoProfilesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, videoProfilesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoProfilesKHR.profileCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoProfileKHR *, seed, videoProfilesKHR.pProfiles );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -57342,6 +68843,28 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = PhysicalDeviceVideoFormatInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoFormatInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoFormatInfoKHR const & physicalDeviceVideoFormatInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceVideoFormatInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceVideoFormatInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags, seed, physicalDeviceVideoFormatInfoKHR.imageUsage );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::VideoProfilesKHR *, seed, physicalDeviceVideoFormatInfoKHR.pVideoProfiles );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   struct PhysicalDeviceVulkan11Features
@@ -57553,6 +69076,41 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceVulkan11Features;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceVulkan11Features>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceVulkan11Features const & physicalDeviceVulkan11Features )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceVulkan11Features.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceVulkan11Features.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.storageBuffer16BitAccess );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.uniformAndStorageBuffer16BitAccess );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.storagePushConstant16 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.storageInputOutput16 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.multiview );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.multiviewGeometryShader );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.multiviewTessellationShader );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.variablePointersStorageBuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.variablePointers );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.protectedMemory );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.samplerYcbcrConversion );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Features.shaderDrawParameters );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceVulkan11Properties
   {
     using NativeType = VkPhysicalDeviceVulkan11Properties;
@@ -57681,6 +69239,53 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceVulkan11Properties;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceVulkan11Properties>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceVulkan11Properties const & physicalDeviceVulkan11Properties ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceVulkan11Properties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceVulkan11Properties.pNext );
+    for ( size_t i = 0; i < VK_UUID_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint8_t, seed, physicalDeviceVulkan11Properties.deviceUUID[i] );
+    }
+    for ( size_t i = 0; i < VK_UUID_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint8_t, seed, physicalDeviceVulkan11Properties.driverUUID[i] );
+    }
+    for ( size_t i = 0; i < VK_LUID_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint8_t, seed, physicalDeviceVulkan11Properties.deviceLUID[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceVulkan11Properties.deviceNodeMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Properties.deviceLUIDValid );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceVulkan11Properties.subgroupSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ShaderStageFlags, seed, physicalDeviceVulkan11Properties.subgroupSupportedStages );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SubgroupFeatureFlags, seed, physicalDeviceVulkan11Properties.subgroupSupportedOperations );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Properties.subgroupQuadOperationsInAllStages );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PointClippingBehavior, seed, physicalDeviceVulkan11Properties.pointClippingBehavior );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceVulkan11Properties.maxMultiviewViewCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceVulkan11Properties.maxMultiviewInstanceIndex );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan11Properties.protectedNoFault );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceVulkan11Properties.maxPerSetDescriptors );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, physicalDeviceVulkan11Properties.maxMemoryAllocationSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceVulkan12Features
   {
     using NativeType = VkPhysicalDeviceVulkan12Features;
@@ -58277,6 +69882,111 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceVulkan12Features;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceVulkan12Features>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceVulkan12Features const & physicalDeviceVulkan12Features )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceVulkan12Features.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceVulkan12Features.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.samplerMirrorClampToEdge );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.drawIndirectCount );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.storageBuffer8BitAccess );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.uniformAndStorageBuffer8BitAccess );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.storagePushConstant8 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderBufferInt64Atomics );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderSharedInt64Atomics );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderFloat16 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderInt8 );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.descriptorIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderInputAttachmentArrayDynamicIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderUniformTexelBufferArrayDynamicIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderStorageTexelBufferArrayDynamicIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderUniformBufferArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderSampledImageArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderStorageBufferArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderStorageImageArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderInputAttachmentArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Features.shaderUniformTexelBufferArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Features.shaderStorageTexelBufferArrayNonUniformIndexing );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Features.descriptorBindingUniformBufferUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.descriptorBindingSampledImageUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.descriptorBindingStorageImageUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Features.descriptorBindingStorageBufferUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Features.descriptorBindingUniformTexelBufferUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Features.descriptorBindingStorageTexelBufferUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.descriptorBindingUpdateUnusedWhilePending );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.descriptorBindingPartiallyBound );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.descriptorBindingVariableDescriptorCount );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.runtimeDescriptorArray );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.samplerFilterMinmax );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.scalarBlockLayout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.imagelessFramebuffer );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.uniformBufferStandardLayout );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderSubgroupExtendedTypes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.separateDepthStencilLayouts );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.hostQueryReset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.timelineSemaphore );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.bufferDeviceAddress );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.bufferDeviceAddressCaptureReplay );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.bufferDeviceAddressMultiDevice );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.vulkanMemoryModel );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.vulkanMemoryModelDeviceScope );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Features.vulkanMemoryModelAvailabilityVisibilityChains );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderOutputViewportIndex );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.shaderOutputLayer );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Features.subgroupBroadcastDynamicId );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceVulkan12Properties
   {
     using NativeType = VkPhysicalDeviceVulkan12Properties;
@@ -58571,6 +70281,134 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceVulkan12Properties;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceVulkan12Properties>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceVulkan12Properties const & physicalDeviceVulkan12Properties ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceVulkan12Properties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceVulkan12Properties.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DriverId, seed, physicalDeviceVulkan12Properties.driverID );
+    for ( size_t i = 0; i < VK_MAX_DRIVER_NAME_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, physicalDeviceVulkan12Properties.driverName[i] );
+    }
+    for ( size_t i = 0; i < VK_MAX_DRIVER_INFO_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, physicalDeviceVulkan12Properties.driverInfo[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ConformanceVersion, seed, physicalDeviceVulkan12Properties.conformanceVersion );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence,
+                             seed,
+                             physicalDeviceVulkan12Properties.denormBehaviorIndependence );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence,
+                             seed,
+                             physicalDeviceVulkan12Properties.roundingModeIndependence );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderSignedZeroInfNanPreserveFloat16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderSignedZeroInfNanPreserveFloat32 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderSignedZeroInfNanPreserveFloat64 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderDenormPreserveFloat16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderDenormPreserveFloat32 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderDenormPreserveFloat64 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderDenormFlushToZeroFloat16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderDenormFlushToZeroFloat32 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderDenormFlushToZeroFloat64 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderRoundingModeRTEFloat16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderRoundingModeRTEFloat32 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderRoundingModeRTEFloat64 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderRoundingModeRTZFloat16 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderRoundingModeRTZFloat32 );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.shaderRoundingModeRTZFloat64 );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceVulkan12Properties.maxUpdateAfterBindDescriptorsInAllPools );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Properties.shaderUniformBufferArrayNonUniformIndexingNative );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Properties.shaderSampledImageArrayNonUniformIndexingNative );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Properties.shaderStorageBufferArrayNonUniformIndexingNative );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Properties.shaderStorageImageArrayNonUniformIndexingNative );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkan12Properties.shaderInputAttachmentArrayNonUniformIndexingNative );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.robustBufferAccessUpdateAfterBind );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.quadDivergentImplicitLod );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxPerStageDescriptorUpdateAfterBindSamplers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxPerStageDescriptorUpdateAfterBindUniformBuffers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxPerStageDescriptorUpdateAfterBindStorageBuffers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxPerStageDescriptorUpdateAfterBindSampledImages );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxPerStageDescriptorUpdateAfterBindStorageImages );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxPerStageDescriptorUpdateAfterBindInputAttachments );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceVulkan12Properties.maxPerStageUpdateAfterBindResources );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, physicalDeviceVulkan12Properties.maxDescriptorSetUpdateAfterBindSamplers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxDescriptorSetUpdateAfterBindUniformBuffers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxDescriptorSetUpdateAfterBindUniformBuffersDynamic );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxDescriptorSetUpdateAfterBindStorageBuffers );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxDescriptorSetUpdateAfterBindStorageBuffersDynamic );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxDescriptorSetUpdateAfterBindSampledImages );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxDescriptorSetUpdateAfterBindStorageImages );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, physicalDeviceVulkan12Properties.maxDescriptorSetUpdateAfterBindInputAttachments );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ResolveModeFlags, seed, physicalDeviceVulkan12Properties.supportedDepthResolveModes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ResolveModeFlags, seed, physicalDeviceVulkan12Properties.supportedStencilResolveModes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.independentResolveNone );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.independentResolve );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.filterMinmaxSingleComponentFormats );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkan12Properties.filterMinmaxImageComponentMapping );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, physicalDeviceVulkan12Properties.maxTimelineSemaphoreValueDifference );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SampleCountFlags,
+                             seed,
+                             physicalDeviceVulkan12Properties.framebufferIntegerColorSampleCounts );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceVulkanMemoryModelFeatures
   {
     using NativeType = VkPhysicalDeviceVulkanMemoryModelFeatures;
@@ -58687,6 +70525,30 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceVulkanMemoryModelFeaturesKHR = PhysicalDeviceVulkanMemoryModelFeatures;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceVulkanMemoryModelFeatures>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceVulkanMemoryModelFeatures const &
+                            physicalDeviceVulkanMemoryModelFeatures ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceVulkanMemoryModelFeatures.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceVulkanMemoryModelFeatures.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkanMemoryModelFeatures.vulkanMemoryModel );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceVulkanMemoryModelFeatures.vulkanMemoryModelDeviceScope );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceVulkanMemoryModelFeatures.vulkanMemoryModelAvailabilityVisibilityChains );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR;
@@ -58821,6 +70683,39 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR const &
+                            physicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             physicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.workgroupMemoryExplicitLayout );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.workgroupMemoryExplicitLayoutScalarBlockLayout );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.workgroupMemoryExplicitLayout8BitAccess );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.workgroupMemoryExplicitLayout16BitAccess );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT;
@@ -58916,6 +70811,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT const &
+                            physicalDeviceYcbcr2Plane444FormatsFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceYcbcr2Plane444FormatsFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceYcbcr2Plane444FormatsFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceYcbcr2Plane444FormatsFeaturesEXT.ycbcr2plane444Formats );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceYcbcrImageArraysFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceYcbcrImageArraysFeaturesEXT;
@@ -59009,6 +70924,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceYcbcrImageArraysFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceYcbcrImageArraysFeaturesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceYcbcrImageArraysFeaturesEXT const &
+                            physicalDeviceYcbcrImageArraysFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceYcbcrImageArraysFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceYcbcrImageArraysFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, physicalDeviceYcbcrImageArraysFeaturesEXT.ycbcrImageArrays );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR
   {
     using NativeType = VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR;
@@ -59108,6 +71043,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR const &
+                            physicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, physicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, physicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32,
+      seed,
+      physicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.shaderZeroInitializeWorkgroupMemory );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineCacheCreateInfo
   {
     using NativeType = VkPipelineCacheCreateInfo;
@@ -59231,6 +71188,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineCacheCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineCacheCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineCacheCreateInfo const & pipelineCacheCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineCacheCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineCacheCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCacheCreateFlags, seed, pipelineCacheCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, pipelineCacheCreateInfo.initialDataSize );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineCacheCreateInfo.pInitialData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineCacheHeaderVersionOne
   {
     using NativeType = VkPipelineCacheHeaderVersionOne;
@@ -59344,6 +71321,30 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PipelineCacheHeaderVersionOne>::value,
     "PipelineCacheHeaderVersionOne is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineCacheHeaderVersionOne>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineCacheHeaderVersionOne const & pipelineCacheHeaderVersionOne )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineCacheHeaderVersionOne.headerSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineCacheHeaderVersion, seed, pipelineCacheHeaderVersionOne.headerVersion );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineCacheHeaderVersionOne.vendorID );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineCacheHeaderVersionOne.deviceID );
+    for ( size_t i = 0; i < VK_UUID_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint8_t, seed, pipelineCacheHeaderVersionOne.pipelineCacheUUID[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineColorBlendAdvancedStateCreateInfoEXT
   {
     using NativeType = VkPipelineColorBlendAdvancedStateCreateInfoEXT;
@@ -59461,6 +71462,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineColorBlendAdvancedStateCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineColorBlendAdvancedStateCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineColorBlendAdvancedStateCreateInfoEXT const &
+                            pipelineColorBlendAdvancedStateCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineColorBlendAdvancedStateCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineColorBlendAdvancedStateCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineColorBlendAdvancedStateCreateInfoEXT.srcPremultiplied );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineColorBlendAdvancedStateCreateInfoEXT.dstPremultiplied );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::BlendOverlapEXT, seed, pipelineColorBlendAdvancedStateCreateInfoEXT.blendOverlap );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineColorWriteCreateInfoEXT
   {
     using NativeType = VkPipelineColorWriteCreateInfoEXT;
@@ -59580,6 +71605,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineColorWriteCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineColorWriteCreateInfoEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PipelineColorWriteCreateInfoEXT const & pipelineColorWriteCreateInfoEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineColorWriteCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineColorWriteCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineColorWriteCreateInfoEXT.attachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::Bool32 *, seed, pipelineColorWriteCreateInfoEXT.pColorWriteEnables );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineCompilerControlCreateInfoAMD
   {
     using NativeType = VkPipelineCompilerControlCreateInfoAMD;
@@ -59671,6 +71717,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineCompilerControlCreateInfoAMD;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineCompilerControlCreateInfoAMD>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineCompilerControlCreateInfoAMD const &
+                            pipelineCompilerControlCreateInfoAMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineCompilerControlCreateInfoAMD.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineCompilerControlCreateInfoAMD.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCompilerControlFlagsAMD,
+                             seed,
+                             pipelineCompilerControlCreateInfoAMD.compilerControlFlags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineCoverageModulationStateCreateInfoNV
   {
     using NativeType = VkPipelineCoverageModulationStateCreateInfoNV;
@@ -59836,6 +71902,35 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineCoverageModulationStateCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineCoverageModulationStateCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineCoverageModulationStateCreateInfoNV const &
+                            pipelineCoverageModulationStateCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineCoverageModulationStateCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineCoverageModulationStateCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCoverageModulationStateCreateFlagsNV,
+                             seed,
+                             pipelineCoverageModulationStateCreateInfoNV.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CoverageModulationModeNV,
+                             seed,
+                             pipelineCoverageModulationStateCreateInfoNV.coverageModulationMode );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineCoverageModulationStateCreateInfoNV.coverageModulationTableEnable );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineCoverageModulationStateCreateInfoNV.coverageModulationTableCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const float *, seed, pipelineCoverageModulationStateCreateInfoNV.pCoverageModulationTable );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineCoverageReductionStateCreateInfoNV
   {
     using NativeType = VkPipelineCoverageReductionStateCreateInfoNV;
@@ -59944,6 +72039,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineCoverageReductionStateCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineCoverageReductionStateCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineCoverageReductionStateCreateInfoNV const &
+                            pipelineCoverageReductionStateCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineCoverageReductionStateCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineCoverageReductionStateCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCoverageReductionStateCreateFlagsNV,
+                             seed,
+                             pipelineCoverageReductionStateCreateInfoNV.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CoverageReductionModeNV,
+                             seed,
+                             pipelineCoverageReductionStateCreateInfoNV.coverageReductionMode );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineCoverageToColorStateCreateInfoNV
   {
     using NativeType = VkPipelineCoverageToColorStateCreateInfoNV;
@@ -60061,6 +72180,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineCoverageToColorStateCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineCoverageToColorStateCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineCoverageToColorStateCreateInfoNV const &
+                            pipelineCoverageToColorStateCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineCoverageToColorStateCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineCoverageToColorStateCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCoverageToColorStateCreateFlagsNV,
+                             seed,
+                             pipelineCoverageToColorStateCreateInfoNV.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineCoverageToColorStateCreateInfoNV.coverageToColorEnable );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineCoverageToColorStateCreateInfoNV.coverageToColorLocation );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineCreationFeedbackEXT
   {
     using NativeType = VkPipelineCreationFeedbackEXT;
@@ -60126,6 +72269,24 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PipelineCreationFeedbackEXT>::value,
     "PipelineCreationFeedbackEXT is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineCreationFeedbackEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineCreationFeedbackEXT const & pipelineCreationFeedbackEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineCreationFeedbackFlagsEXT, seed, pipelineCreationFeedbackEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, pipelineCreationFeedbackEXT.duration );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineCreationFeedbackCreateInfoEXT
   {
     using NativeType = VkPipelineCreationFeedbackCreateInfoEXT;
@@ -60263,6 +72424,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineCreationFeedbackCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineCreationFeedbackCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineCreationFeedbackCreateInfoEXT const &
+                            pipelineCreationFeedbackCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineCreationFeedbackCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineCreationFeedbackCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCreationFeedbackEXT *,
+                             seed,
+                             pipelineCreationFeedbackCreateInfoEXT.pPipelineCreationFeedback );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineCreationFeedbackCreateInfoEXT.pipelineStageCreationFeedbackCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCreationFeedbackEXT *,
+                             seed,
+                             pipelineCreationFeedbackCreateInfoEXT.pPipelineStageCreationFeedbacks );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineDiscardRectangleStateCreateInfoEXT
   {
     using NativeType = VkPipelineDiscardRectangleStateCreateInfoEXT;
@@ -60415,6 +72600,33 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineDiscardRectangleStateCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineDiscardRectangleStateCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineDiscardRectangleStateCreateInfoEXT const &
+                            pipelineDiscardRectangleStateCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineDiscardRectangleStateCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineDiscardRectangleStateCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineDiscardRectangleStateCreateFlagsEXT,
+                             seed,
+                             pipelineDiscardRectangleStateCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DiscardRectangleModeEXT,
+                             seed,
+                             pipelineDiscardRectangleStateCreateInfoEXT.discardRectangleMode );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineDiscardRectangleStateCreateInfoEXT.discardRectangleCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::Rect2D *, seed, pipelineDiscardRectangleStateCreateInfoEXT.pDiscardRectangles );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineExecutableInfoKHR
   {
     using NativeType = VkPipelineExecutableInfoKHR;
@@ -60512,6 +72724,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineExecutableInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineExecutableInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineExecutableInfoKHR const & pipelineExecutableInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineExecutableInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineExecutableInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Pipeline, seed, pipelineExecutableInfoKHR.pipeline );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineExecutableInfoKHR.executableIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineExecutableInternalRepresentationKHR
   {
     using NativeType = VkPipelineExecutableInternalRepresentationKHR;
@@ -60619,6 +72850,35 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineExecutableInternalRepresentationKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineExecutableInternalRepresentationKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineExecutableInternalRepresentationKHR const &
+                            pipelineExecutableInternalRepresentationKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineExecutableInternalRepresentationKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, pipelineExecutableInternalRepresentationKHR.pNext );
+    for ( size_t i = 0; i < VK_MAX_DESCRIPTION_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, pipelineExecutableInternalRepresentationKHR.name[i] );
+    }
+    for ( size_t i = 0; i < VK_MAX_DESCRIPTION_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, pipelineExecutableInternalRepresentationKHR.description[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineExecutableInternalRepresentationKHR.isText );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, pipelineExecutableInternalRepresentationKHR.dataSize );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, pipelineExecutableInternalRepresentationKHR.pData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineExecutablePropertiesKHR
   {
     using NativeType = VkPipelineExecutablePropertiesKHR;
@@ -60703,6 +72963,34 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineExecutablePropertiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineExecutablePropertiesKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PipelineExecutablePropertiesKHR const & pipelineExecutablePropertiesKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineExecutablePropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, pipelineExecutablePropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderStageFlags, seed, pipelineExecutablePropertiesKHR.stages );
+    for ( size_t i = 0; i < VK_MAX_DESCRIPTION_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, pipelineExecutablePropertiesKHR.name[i] );
+    }
+    for ( size_t i = 0; i < VK_MAX_DESCRIPTION_SIZE; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( char, seed, pipelineExecutablePropertiesKHR.description[i] );
+    }
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineExecutablePropertiesKHR.subgroupSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   union PipelineExecutableStatisticValueKHR
   {
     using NativeType = VkPipelineExecutableStatisticValueKHR;
@@ -60961,6 +73249,35 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineFragmentShadingRateEnumStateCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineFragmentShadingRateEnumStateCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineFragmentShadingRateEnumStateCreateInfoNV const &
+                            pipelineFragmentShadingRateEnumStateCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineFragmentShadingRateEnumStateCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineFragmentShadingRateEnumStateCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FragmentShadingRateTypeNV,
+                             seed,
+                             pipelineFragmentShadingRateEnumStateCreateInfoNV.shadingRateType );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::FragmentShadingRateNV, seed, pipelineFragmentShadingRateEnumStateCreateInfoNV.shadingRate );
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FragmentShadingRateCombinerOpKHR,
+                               seed,
+                               pipelineFragmentShadingRateEnumStateCreateInfoNV.combinerOps[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineFragmentShadingRateStateCreateInfoKHR
   {
     using NativeType = VkPipelineFragmentShadingRateStateCreateInfoKHR;
@@ -61069,6 +73386,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineFragmentShadingRateStateCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineFragmentShadingRateStateCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineFragmentShadingRateStateCreateInfoKHR const &
+                            pipelineFragmentShadingRateStateCreateInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineFragmentShadingRateStateCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineFragmentShadingRateStateCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Extent2D, seed, pipelineFragmentShadingRateStateCreateInfoKHR.fragmentSize );
+    for ( size_t i = 0; i < 2; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::FragmentShadingRateCombinerOpKHR,
+                               seed,
+                               pipelineFragmentShadingRateStateCreateInfoKHR.combinerOps[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineInfoKHR
   {
     using NativeType = VkPipelineInfoKHR;
@@ -61153,6 +73496,23 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineInfoKHR const & pipelineInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Pipeline, seed, pipelineInfoKHR.pipeline );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PushConstantRange
   {
     using NativeType = VkPushConstantRange;
@@ -61238,6 +73598,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PushConstantRange>::value,
                             "PushConstantRange is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PushConstantRange>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PushConstantRange const & pushConstantRange ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderStageFlags, seed, pushConstantRange.stageFlags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pushConstantRange.offset );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pushConstantRange.size );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineLayoutCreateInfo
   {
     using NativeType = VkPipelineLayoutCreateInfo;
@@ -61403,6 +73780,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineLayoutCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineLayoutCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineLayoutCreateInfo const & pipelineLayoutCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineLayoutCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineLayoutCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineLayoutCreateFlags, seed, pipelineLayoutCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineLayoutCreateInfo.setLayoutCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DescriptorSetLayout *, seed, pipelineLayoutCreateInfo.pSetLayouts );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineLayoutCreateInfo.pushConstantRangeCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::PushConstantRange *, seed, pipelineLayoutCreateInfo.pPushConstantRanges );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineLibraryCreateInfoKHR
   {
     using NativeType = VkPipelineLibraryCreateInfoKHR;
@@ -61519,6 +73920,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineLibraryCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineLibraryCreateInfoKHR>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::PipelineLibraryCreateInfoKHR const & pipelineLibraryCreateInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineLibraryCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineLibraryCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineLibraryCreateInfoKHR.libraryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Pipeline *, seed, pipelineLibraryCreateInfoKHR.pLibraries );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineRasterizationConservativeStateCreateInfoEXT
   {
     using NativeType = VkPipelineRasterizationConservativeStateCreateInfoEXT;
@@ -61639,6 +74059,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineRasterizationConservativeStateCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineRasterizationConservativeStateCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineRasterizationConservativeStateCreateInfoEXT const &
+                            pipelineRasterizationConservativeStateCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineRasterizationConservativeStateCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineRasterizationConservativeStateCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineRasterizationConservativeStateCreateFlagsEXT,
+                             seed,
+                             pipelineRasterizationConservativeStateCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ConservativeRasterizationModeEXT,
+                             seed,
+                             pipelineRasterizationConservativeStateCreateInfoEXT.conservativeRasterizationMode );
+    VULKAN_HPP_HASH_COMBINE(
+      float, seed, pipelineRasterizationConservativeStateCreateInfoEXT.extraPrimitiveOverestimationSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineRasterizationDepthClipStateCreateInfoEXT
   {
     using NativeType = VkPipelineRasterizationDepthClipStateCreateInfoEXT;
@@ -61745,6 +74191,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineRasterizationDepthClipStateCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineRasterizationDepthClipStateCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineRasterizationDepthClipStateCreateInfoEXT const &
+                            pipelineRasterizationDepthClipStateCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineRasterizationDepthClipStateCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineRasterizationDepthClipStateCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineRasterizationDepthClipStateCreateFlagsEXT,
+                             seed,
+                             pipelineRasterizationDepthClipStateCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineRasterizationDepthClipStateCreateInfoEXT.depthClipEnable );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineRasterizationLineStateCreateInfoEXT
   {
     using NativeType = VkPipelineRasterizationLineStateCreateInfoEXT;
@@ -61875,6 +74344,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineRasterizationLineStateCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineRasterizationLineStateCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineRasterizationLineStateCreateInfoEXT const &
+                            pipelineRasterizationLineStateCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineRasterizationLineStateCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineRasterizationLineStateCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::LineRasterizationModeEXT,
+                             seed,
+                             pipelineRasterizationLineStateCreateInfoEXT.lineRasterizationMode );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineRasterizationLineStateCreateInfoEXT.stippledLineEnable );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineRasterizationLineStateCreateInfoEXT.lineStippleFactor );
+    VULKAN_HPP_HASH_COMBINE( uint16_t, seed, pipelineRasterizationLineStateCreateInfoEXT.lineStipplePattern );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineRasterizationProvokingVertexStateCreateInfoEXT
   {
     using NativeType = VkPipelineRasterizationProvokingVertexStateCreateInfoEXT;
@@ -61974,6 +74468,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineRasterizationProvokingVertexStateCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineRasterizationProvokingVertexStateCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineRasterizationProvokingVertexStateCreateInfoEXT const &
+                            pipelineRasterizationProvokingVertexStateCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineRasterizationProvokingVertexStateCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineRasterizationProvokingVertexStateCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ProvokingVertexModeEXT,
+                             seed,
+                             pipelineRasterizationProvokingVertexStateCreateInfoEXT.provokingVertexMode );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineRasterizationStateRasterizationOrderAMD
   {
     using NativeType = VkPipelineRasterizationStateRasterizationOrderAMD;
@@ -62071,6 +74586,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineRasterizationStateRasterizationOrderAMD;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineRasterizationStateRasterizationOrderAMD>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineRasterizationStateRasterizationOrderAMD const &
+                            pipelineRasterizationStateRasterizationOrderAMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineRasterizationStateRasterizationOrderAMD.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineRasterizationStateRasterizationOrderAMD.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::RasterizationOrderAMD,
+                             seed,
+                             pipelineRasterizationStateRasterizationOrderAMD.rasterizationOrder );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineRasterizationStateStreamCreateInfoEXT
   {
     using NativeType = VkPipelineRasterizationStateStreamCreateInfoEXT;
@@ -62177,6 +74713,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineRasterizationStateStreamCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineRasterizationStateStreamCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineRasterizationStateStreamCreateInfoEXT const &
+                            pipelineRasterizationStateStreamCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineRasterizationStateStreamCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineRasterizationStateStreamCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineRasterizationStateStreamCreateFlagsEXT,
+                             seed,
+                             pipelineRasterizationStateStreamCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineRasterizationStateStreamCreateInfoEXT.rasterizationStream );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineRenderingCreateInfoKHR
   {
     using NativeType = VkPipelineRenderingCreateInfoKHR;
@@ -62335,6 +74893,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineRenderingCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineRenderingCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineRenderingCreateInfoKHR const & pipelineRenderingCreateInfoKHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineRenderingCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineRenderingCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineRenderingCreateInfoKHR.viewMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineRenderingCreateInfoKHR.colorAttachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::Format *, seed, pipelineRenderingCreateInfoKHR.pColorAttachmentFormats );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, pipelineRenderingCreateInfoKHR.depthAttachmentFormat );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Format, seed, pipelineRenderingCreateInfoKHR.stencilAttachmentFormat );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineRepresentativeFragmentTestStateCreateInfoNV
   {
     using NativeType = VkPipelineRepresentativeFragmentTestStateCreateInfoNV;
@@ -62432,6 +75014,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineRepresentativeFragmentTestStateCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineRepresentativeFragmentTestStateCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineRepresentativeFragmentTestStateCreateInfoNV const &
+                            pipelineRepresentativeFragmentTestStateCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineRepresentativeFragmentTestStateCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineRepresentativeFragmentTestStateCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32,
+                             seed,
+                             pipelineRepresentativeFragmentTestStateCreateInfoNV.representativeFragmentTestEnable );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineSampleLocationsStateCreateInfoEXT
   {
     using NativeType = VkPipelineSampleLocationsStateCreateInfoEXT;
@@ -62539,6 +75142,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineSampleLocationsStateCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineSampleLocationsStateCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineSampleLocationsStateCreateInfoEXT const &
+                            pipelineSampleLocationsStateCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineSampleLocationsStateCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineSampleLocationsStateCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineSampleLocationsStateCreateInfoEXT.sampleLocationsEnable );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SampleLocationsInfoEXT,
+                             seed,
+                             pipelineSampleLocationsStateCreateInfoEXT.sampleLocationsInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT
   {
     using NativeType = VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT;
@@ -62619,6 +75245,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT const &
+                            pipelineShaderStageRequiredSubgroupSizeCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, pipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, pipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.requiredSubgroupSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineTessellationDomainOriginStateCreateInfo
   {
     using NativeType = VkPipelineTessellationDomainOriginStateCreateInfo;
@@ -62716,6 +75362,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PipelineTessellationDomainOriginStateCreateInfoKHR = PipelineTessellationDomainOriginStateCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineTessellationDomainOriginStateCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineTessellationDomainOriginStateCreateInfo const &
+                            pipelineTessellationDomainOriginStateCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineTessellationDomainOriginStateCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineTessellationDomainOriginStateCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::TessellationDomainOrigin,
+                             seed,
+                             pipelineTessellationDomainOriginStateCreateInfo.domainOrigin );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct VertexInputBindingDivisorDescriptionEXT
   {
     using NativeType = VkVertexInputBindingDivisorDescriptionEXT;
@@ -62800,6 +75467,23 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VertexInputBindingDivisorDescriptionEXT>::value,
     "VertexInputBindingDivisorDescriptionEXT is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VertexInputBindingDivisorDescriptionEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VertexInputBindingDivisorDescriptionEXT const &
+                            vertexInputBindingDivisorDescriptionEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputBindingDivisorDescriptionEXT.binding );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputBindingDivisorDescriptionEXT.divisor );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineVertexInputDivisorStateCreateInfoEXT
   {
     using NativeType = VkPipelineVertexInputDivisorStateCreateInfoEXT;
@@ -62930,6 +75614,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineVertexInputDivisorStateCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineVertexInputDivisorStateCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineVertexInputDivisorStateCreateInfoEXT const &
+                            pipelineVertexInputDivisorStateCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineVertexInputDivisorStateCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineVertexInputDivisorStateCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineVertexInputDivisorStateCreateInfoEXT.vertexBindingDivisorCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VertexInputBindingDivisorDescriptionEXT *,
+                             seed,
+                             pipelineVertexInputDivisorStateCreateInfoEXT.pVertexBindingDivisors );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineViewportCoarseSampleOrderStateCreateInfoNV
   {
     using NativeType = VkPipelineViewportCoarseSampleOrderStateCreateInfoNV;
@@ -63072,6 +75778,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineViewportCoarseSampleOrderStateCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineViewportCoarseSampleOrderStateCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineViewportCoarseSampleOrderStateCreateInfoNV const &
+                            pipelineViewportCoarseSampleOrderStateCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineViewportCoarseSampleOrderStateCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineViewportCoarseSampleOrderStateCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CoarseSampleOrderTypeNV,
+                             seed,
+                             pipelineViewportCoarseSampleOrderStateCreateInfoNV.sampleOrderType );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, pipelineViewportCoarseSampleOrderStateCreateInfoNV.customSampleOrderCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::CoarseSampleOrderCustomNV *,
+                             seed,
+                             pipelineViewportCoarseSampleOrderStateCreateInfoNV.pCustomSampleOrders );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineViewportDepthClipControlCreateInfoEXT
   {
     using NativeType = VkPipelineViewportDepthClipControlCreateInfoEXT;
@@ -63166,6 +75898,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineViewportDepthClipControlCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineViewportDepthClipControlCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineViewportDepthClipControlCreateInfoEXT const &
+                            pipelineViewportDepthClipControlCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineViewportDepthClipControlCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineViewportDepthClipControlCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineViewportDepthClipControlCreateInfoEXT.negativeOneToOne );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineViewportExclusiveScissorStateCreateInfoNV
   {
     using NativeType = VkPipelineViewportExclusiveScissorStateCreateInfoNV;
@@ -63292,6 +76044,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineViewportExclusiveScissorStateCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineViewportExclusiveScissorStateCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineViewportExclusiveScissorStateCreateInfoNV const &
+                            pipelineViewportExclusiveScissorStateCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineViewportExclusiveScissorStateCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineViewportExclusiveScissorStateCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineViewportExclusiveScissorStateCreateInfoNV.exclusiveScissorCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Rect2D *,
+                             seed,
+                             pipelineViewportExclusiveScissorStateCreateInfoNV.pExclusiveScissors );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ShadingRatePaletteNV
   {
     using NativeType = VkShadingRatePaletteNV;
@@ -63391,6 +76165,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ShadingRatePaletteNV>::value,
                             "ShadingRatePaletteNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ShadingRatePaletteNV>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ShadingRatePaletteNV const & shadingRatePaletteNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, shadingRatePaletteNV.shadingRatePaletteEntryCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV *, seed, shadingRatePaletteNV.pShadingRatePaletteEntries );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineViewportShadingRateImageStateCreateInfoNV
   {
     using NativeType = VkPipelineViewportShadingRateImageStateCreateInfoNV;
@@ -63531,6 +76323,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineViewportShadingRateImageStateCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineViewportShadingRateImageStateCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineViewportShadingRateImageStateCreateInfoNV const &
+                            pipelineViewportShadingRateImageStateCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineViewportShadingRateImageStateCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineViewportShadingRateImageStateCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineViewportShadingRateImageStateCreateInfoNV.shadingRateImageEnable );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineViewportShadingRateImageStateCreateInfoNV.viewportCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ShadingRatePaletteNV *,
+                             seed,
+                             pipelineViewportShadingRateImageStateCreateInfoNV.pShadingRatePalettes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ViewportSwizzleNV
   {
     using NativeType = VkViewportSwizzleNV;
@@ -63633,6 +76449,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ViewportSwizzleNV>::value,
                             "ViewportSwizzleNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ViewportSwizzleNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ViewportSwizzleNV const & viewportSwizzleNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV, seed, viewportSwizzleNV.x );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV, seed, viewportSwizzleNV.y );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV, seed, viewportSwizzleNV.z );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV, seed, viewportSwizzleNV.w );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineViewportSwizzleStateCreateInfoNV
   {
     using NativeType = VkPipelineViewportSwizzleStateCreateInfoNV;
@@ -63771,6 +76605,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineViewportSwizzleStateCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineViewportSwizzleStateCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineViewportSwizzleStateCreateInfoNV const &
+                            pipelineViewportSwizzleStateCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineViewportSwizzleStateCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineViewportSwizzleStateCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineViewportSwizzleStateCreateFlagsNV,
+                             seed,
+                             pipelineViewportSwizzleStateCreateInfoNV.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineViewportSwizzleStateCreateInfoNV.viewportCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ViewportSwizzleNV *,
+                             seed,
+                             pipelineViewportSwizzleStateCreateInfoNV.pViewportSwizzles );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ViewportWScalingNV
   {
     using NativeType = VkViewportWScalingNV;
@@ -63845,6 +76704,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ViewportWScalingNV>::value,
                             "ViewportWScalingNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ViewportWScalingNV>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ViewportWScalingNV const & viewportWScalingNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( float, seed, viewportWScalingNV.xcoeff );
+    VULKAN_HPP_HASH_COMBINE( float, seed, viewportWScalingNV.ycoeff );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PipelineViewportWScalingStateCreateInfoNV
   {
     using NativeType = VkPipelineViewportWScalingStateCreateInfoNV;
@@ -63984,6 +76860,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineViewportWScalingStateCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PipelineViewportWScalingStateCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PipelineViewportWScalingStateCreateInfoNV const &
+                            pipelineViewportWScalingStateCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, pipelineViewportWScalingStateCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, pipelineViewportWScalingStateCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, pipelineViewportWScalingStateCreateInfoNV.viewportWScalingEnable );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, pipelineViewportWScalingStateCreateInfoNV.viewportCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ViewportWScalingNV *,
+                             seed,
+                             pipelineViewportWScalingStateCreateInfoNV.pViewportWScalings );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_GGP )
   struct PresentFrameTokenGGP
   {
@@ -64068,6 +76968,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = PresentFrameTokenGGP;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PresentFrameTokenGGP>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PresentFrameTokenGGP const & presentFrameTokenGGP ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, presentFrameTokenGGP.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, presentFrameTokenGGP.pNext );
+    VULKAN_HPP_HASH_COMBINE( GgpFrameToken, seed, presentFrameTokenGGP.frameToken );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_GGP*/
 
   struct PresentIdKHR
@@ -64179,6 +77098,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PresentIdKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PresentIdKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PresentIdKHR const & presentIdKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, presentIdKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, presentIdKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, presentIdKHR.swapchainCount );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, presentIdKHR.pPresentIds );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PresentInfoKHR
   {
     using NativeType = VkPresentInfoKHR;
@@ -64393,6 +77330,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PresentInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PresentInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PresentInfoKHR const & presentInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, presentInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, presentInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, presentInfoKHR.waitSemaphoreCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Semaphore *, seed, presentInfoKHR.pWaitSemaphores );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, presentInfoKHR.swapchainCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::SwapchainKHR *, seed, presentInfoKHR.pSwapchains );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, presentInfoKHR.pImageIndices );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Result *, seed, presentInfoKHR.pResults );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RectLayerKHR
   {
     using NativeType = VkRectLayerKHR;
@@ -64483,6 +77442,23 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::RectLayerKHR>::value,
                             "RectLayerKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RectLayerKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RectLayerKHR const & rectLayerKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset2D, seed, rectLayerKHR.offset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, rectLayerKHR.extent );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rectLayerKHR.layer );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PresentRegionKHR
   {
     using NativeType = VkPresentRegionKHR;
@@ -64578,6 +77554,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PresentRegionKHR>::value,
                             "PresentRegionKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PresentRegionKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PresentRegionKHR const & presentRegionKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, presentRegionKHR.rectangleCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::RectLayerKHR *, seed, presentRegionKHR.pRectangles );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PresentRegionsKHR
   {
     using NativeType = VkPresentRegionsKHR;
@@ -64691,6 +77683,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PresentRegionsKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PresentRegionsKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PresentRegionsKHR const & presentRegionsKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, presentRegionsKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, presentRegionsKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, presentRegionsKHR.swapchainCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PresentRegionKHR *, seed, presentRegionsKHR.pRegions );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PresentTimeGOOGLE
   {
     using NativeType = VkPresentTimeGOOGLE;
@@ -64767,6 +77777,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PresentTimeGOOGLE>::value,
                             "PresentTimeGOOGLE is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PresentTimeGOOGLE>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::PresentTimeGOOGLE const & presentTimeGOOGLE ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, presentTimeGOOGLE.presentID );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, presentTimeGOOGLE.desiredPresentTime );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PresentTimesInfoGOOGLE
   {
     using NativeType = VkPresentTimesInfoGOOGLE;
@@ -64881,6 +77907,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PresentTimesInfoGOOGLE;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PresentTimesInfoGOOGLE>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::PresentTimesInfoGOOGLE const & presentTimesInfoGOOGLE ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, presentTimesInfoGOOGLE.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, presentTimesInfoGOOGLE.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, presentTimesInfoGOOGLE.swapchainCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PresentTimeGOOGLE *, seed, presentTimesInfoGOOGLE.pTimes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct PrivateDataSlotCreateInfoEXT
   {
     using NativeType = VkPrivateDataSlotCreateInfoEXT;
@@ -64968,6 +78013,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PrivateDataSlotCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::PrivateDataSlotCreateInfoEXT>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::PrivateDataSlotCreateInfoEXT const & privateDataSlotCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, privateDataSlotCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, privateDataSlotCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PrivateDataSlotCreateFlagsEXT, seed, privateDataSlotCreateInfoEXT.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ProtectedSubmitInfo
   {
     using NativeType = VkProtectedSubmitInfo;
@@ -65052,6 +78116,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ProtectedSubmitInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ProtectedSubmitInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ProtectedSubmitInfo const & protectedSubmitInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, protectedSubmitInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, protectedSubmitInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, protectedSubmitInfo.protectedSubmit );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct QueryPoolCreateInfo
   {
     using NativeType = VkQueryPoolCreateInfo;
@@ -65168,6 +78250,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = QueryPoolCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::QueryPoolCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::QueryPoolCreateInfo const & queryPoolCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, queryPoolCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, queryPoolCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::QueryPoolCreateFlags, seed, queryPoolCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::QueryType, seed, queryPoolCreateInfo.queryType );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, queryPoolCreateInfo.queryCount );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::QueryPipelineStatisticFlags, seed, queryPoolCreateInfo.pipelineStatistics );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct QueryPoolPerformanceCreateInfoKHR
   {
     using NativeType = VkQueryPoolPerformanceCreateInfoKHR;
@@ -65298,6 +78402,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = QueryPoolPerformanceCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::QueryPoolPerformanceCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::QueryPoolPerformanceCreateInfoKHR const &
+                            queryPoolPerformanceCreateInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, queryPoolPerformanceCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, queryPoolPerformanceCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, queryPoolPerformanceCreateInfoKHR.queueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, queryPoolPerformanceCreateInfoKHR.counterIndexCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, queryPoolPerformanceCreateInfoKHR.pCounterIndices );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct QueryPoolPerformanceQueryCreateInfoINTEL
   {
     using NativeType = VkQueryPoolPerformanceQueryCreateInfoINTEL;
@@ -65397,6 +78521,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using QueryPoolCreateInfoINTEL = QueryPoolPerformanceQueryCreateInfoINTEL;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::QueryPoolPerformanceQueryCreateInfoINTEL>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::QueryPoolPerformanceQueryCreateInfoINTEL const &
+                            queryPoolPerformanceQueryCreateInfoINTEL ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, queryPoolPerformanceQueryCreateInfoINTEL.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, queryPoolPerformanceQueryCreateInfoINTEL.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::QueryPoolSamplingModeINTEL,
+                             seed,
+                             queryPoolPerformanceQueryCreateInfoINTEL.performanceCountersSampling );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct QueueFamilyCheckpointProperties2NV
   {
     using NativeType = VkQueueFamilyCheckpointProperties2NV;
@@ -65474,6 +78619,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = QueueFamilyCheckpointProperties2NV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::QueueFamilyCheckpointProperties2NV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::QueueFamilyCheckpointProperties2NV const &
+                            queueFamilyCheckpointProperties2NV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, queueFamilyCheckpointProperties2NV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, queueFamilyCheckpointProperties2NV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR,
+                             seed,
+                             queueFamilyCheckpointProperties2NV.checkpointExecutionStageMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct QueueFamilyCheckpointPropertiesNV
   {
     using NativeType = VkQueueFamilyCheckpointPropertiesNV;
@@ -65550,6 +78715,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = QueueFamilyCheckpointPropertiesNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::QueueFamilyCheckpointPropertiesNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::QueueFamilyCheckpointPropertiesNV const &
+                            queueFamilyCheckpointPropertiesNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, queueFamilyCheckpointPropertiesNV.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, queueFamilyCheckpointPropertiesNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::PipelineStageFlags, seed, queueFamilyCheckpointPropertiesNV.checkpointExecutionStageMask );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct QueueFamilyGlobalPriorityPropertiesEXT
   {
     using NativeType = VkQueueFamilyGlobalPriorityPropertiesEXT;
@@ -65672,6 +78856,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = QueueFamilyGlobalPriorityPropertiesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::QueueFamilyGlobalPriorityPropertiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::QueueFamilyGlobalPriorityPropertiesEXT const &
+                            queueFamilyGlobalPriorityPropertiesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, queueFamilyGlobalPriorityPropertiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, queueFamilyGlobalPriorityPropertiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, queueFamilyGlobalPriorityPropertiesEXT.priorityCount );
+    for ( size_t i = 0; i < VK_MAX_GLOBAL_PRIORITY_SIZE_EXT; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE(
+        VULKAN_HPP_NAMESPACE::QueueGlobalPriorityEXT, seed, queueFamilyGlobalPriorityPropertiesEXT.priorities[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct QueueFamilyProperties
   {
     using NativeType = VkQueueFamilyProperties;
@@ -65742,6 +78949,25 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::QueueFamilyProperties>::value,
                             "QueueFamilyProperties is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::QueueFamilyProperties>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::QueueFamilyProperties const & queueFamilyProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::QueueFlags, seed, queueFamilyProperties.queueFlags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, queueFamilyProperties.queueCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, queueFamilyProperties.timestampValidBits );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, queueFamilyProperties.minImageTransferGranularity );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct QueueFamilyProperties2
   {
     using NativeType = VkQueueFamilyProperties2;
@@ -65814,6 +79040,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using QueueFamilyProperties2KHR = QueueFamilyProperties2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::QueueFamilyProperties2>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::QueueFamilyProperties2 const & queueFamilyProperties2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, queueFamilyProperties2.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, queueFamilyProperties2.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::QueueFamilyProperties, seed, queueFamilyProperties2.queueFamilyProperties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RayTracingShaderGroupCreateInfoKHR
   {
     using NativeType = VkRayTracingShaderGroupCreateInfoKHR;
@@ -65960,6 +79205,30 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RayTracingShaderGroupCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RayTracingShaderGroupCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RayTracingShaderGroupCreateInfoKHR const &
+                            rayTracingShaderGroupCreateInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, rayTracingShaderGroupCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, rayTracingShaderGroupCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeKHR, seed, rayTracingShaderGroupCreateInfoKHR.type );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingShaderGroupCreateInfoKHR.generalShader );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingShaderGroupCreateInfoKHR.closestHitShader );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingShaderGroupCreateInfoKHR.anyHitShader );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingShaderGroupCreateInfoKHR.intersectionShader );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, rayTracingShaderGroupCreateInfoKHR.pShaderGroupCaptureReplayHandle );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RayTracingPipelineInterfaceCreateInfoKHR
   {
     using NativeType = VkRayTracingPipelineInterfaceCreateInfoKHR;
@@ -66067,6 +79336,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RayTracingPipelineInterfaceCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RayTracingPipelineInterfaceCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RayTracingPipelineInterfaceCreateInfoKHR const &
+                            rayTracingPipelineInterfaceCreateInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, rayTracingPipelineInterfaceCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, rayTracingPipelineInterfaceCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingPipelineInterfaceCreateInfoKHR.maxPipelineRayPayloadSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingPipelineInterfaceCreateInfoKHR.maxPipelineRayHitAttributeSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RayTracingPipelineCreateInfoKHR
   {
     using NativeType = VkRayTracingPipelineCreateInfoKHR;
@@ -66320,6 +79609,43 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RayTracingPipelineCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RayTracingPipelineCreateInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::RayTracingPipelineCreateInfoKHR const & rayTracingPipelineCreateInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, rayTracingPipelineCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, rayTracingPipelineCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCreateFlags, seed, rayTracingPipelineCreateInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingPipelineCreateInfoKHR.stageCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateInfo *, seed, rayTracingPipelineCreateInfoKHR.pStages );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingPipelineCreateInfoKHR.groupCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::RayTracingShaderGroupCreateInfoKHR *, seed, rayTracingPipelineCreateInfoKHR.pGroups );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingPipelineCreateInfoKHR.maxPipelineRayRecursionDepth );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::PipelineLibraryCreateInfoKHR *, seed, rayTracingPipelineCreateInfoKHR.pLibraryInfo );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::RayTracingPipelineInterfaceCreateInfoKHR *,
+                             seed,
+                             rayTracingPipelineCreateInfoKHR.pLibraryInterface );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineDynamicStateCreateInfo *,
+                             seed,
+                             rayTracingPipelineCreateInfoKHR.pDynamicState );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineLayout, seed, rayTracingPipelineCreateInfoKHR.layout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Pipeline, seed, rayTracingPipelineCreateInfoKHR.basePipelineHandle );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, rayTracingPipelineCreateInfoKHR.basePipelineIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RayTracingShaderGroupCreateInfoNV
   {
     using NativeType = VkRayTracingShaderGroupCreateInfoNV;
@@ -66454,6 +79780,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RayTracingShaderGroupCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RayTracingShaderGroupCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RayTracingShaderGroupCreateInfoNV const &
+                            rayTracingShaderGroupCreateInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, rayTracingShaderGroupCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, rayTracingShaderGroupCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeKHR, seed, rayTracingShaderGroupCreateInfoNV.type );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingShaderGroupCreateInfoNV.generalShader );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingShaderGroupCreateInfoNV.closestHitShader );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingShaderGroupCreateInfoNV.anyHitShader );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingShaderGroupCreateInfoNV.intersectionShader );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RayTracingPipelineCreateInfoNV
   {
     using NativeType = VkRayTracingPipelineCreateInfoNV;
@@ -66669,6 +80018,34 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RayTracingPipelineCreateInfoNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RayTracingPipelineCreateInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RayTracingPipelineCreateInfoNV const & rayTracingPipelineCreateInfoNV )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, rayTracingPipelineCreateInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, rayTracingPipelineCreateInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineCreateFlags, seed, rayTracingPipelineCreateInfoNV.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingPipelineCreateInfoNV.stageCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateInfo *, seed, rayTracingPipelineCreateInfoNV.pStages );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingPipelineCreateInfoNV.groupCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::RayTracingShaderGroupCreateInfoNV *, seed, rayTracingPipelineCreateInfoNV.pGroups );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, rayTracingPipelineCreateInfoNV.maxRecursionDepth );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineLayout, seed, rayTracingPipelineCreateInfoNV.layout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Pipeline, seed, rayTracingPipelineCreateInfoNV.basePipelineHandle );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, rayTracingPipelineCreateInfoNV.basePipelineIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RefreshCycleDurationGOOGLE
   {
     using NativeType = VkRefreshCycleDurationGOOGLE;
@@ -66729,6 +80106,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::RefreshCycleDurationGOOGLE>::value,
                             "RefreshCycleDurationGOOGLE is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RefreshCycleDurationGOOGLE>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RefreshCycleDurationGOOGLE const & refreshCycleDurationGOOGLE ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, refreshCycleDurationGOOGLE.refreshDuration );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderPassAttachmentBeginInfo
   {
     using NativeType = VkRenderPassAttachmentBeginInfo;
@@ -66848,6 +80241,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using RenderPassAttachmentBeginInfoKHR = RenderPassAttachmentBeginInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderPassAttachmentBeginInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RenderPassAttachmentBeginInfo const & renderPassAttachmentBeginInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, renderPassAttachmentBeginInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderPassAttachmentBeginInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassAttachmentBeginInfo.attachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::ImageView *, seed, renderPassAttachmentBeginInfo.pAttachments );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderPassBeginInfo
   {
     using NativeType = VkRenderPassBeginInfo;
@@ -66999,6 +80412,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RenderPassBeginInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderPassBeginInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::RenderPassBeginInfo const & renderPassBeginInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, renderPassBeginInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderPassBeginInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::RenderPass, seed, renderPassBeginInfo.renderPass );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Framebuffer, seed, renderPassBeginInfo.framebuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Rect2D, seed, renderPassBeginInfo.renderArea );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassBeginInfo.clearValueCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ClearValue *, seed, renderPassBeginInfo.pClearValues );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubpassDescription
   {
     using NativeType = VkSubpassDescription;
@@ -67242,6 +80677,35 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SubpassDescription>::value,
                             "SubpassDescription is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubpassDescription>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SubpassDescription const & subpassDescription ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SubpassDescriptionFlags, seed, subpassDescription.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineBindPoint, seed, subpassDescription.pipelineBindPoint );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDescription.inputAttachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::AttachmentReference *, seed, subpassDescription.pInputAttachments );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDescription.colorAttachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::AttachmentReference *, seed, subpassDescription.pColorAttachments );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::AttachmentReference *, seed, subpassDescription.pResolveAttachments );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::AttachmentReference *, seed, subpassDescription.pDepthStencilAttachment );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDescription.preserveAttachmentCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, subpassDescription.pPreserveAttachments );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubpassDependency
   {
     using NativeType = VkSubpassDependency;
@@ -67371,6 +80835,27 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SubpassDependency>::value,
                             "SubpassDependency is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubpassDependency>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SubpassDependency const & subpassDependency ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDependency.srcSubpass );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDependency.dstSubpass );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags, seed, subpassDependency.srcStageMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags, seed, subpassDependency.dstStageMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags, seed, subpassDependency.srcAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags, seed, subpassDependency.dstAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DependencyFlags, seed, subpassDependency.dependencyFlags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderPassCreateInfo
   {
     using NativeType = VkRenderPassCreateInfo;
@@ -67568,6 +81053,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RenderPassCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderPassCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::RenderPassCreateInfo const & renderPassCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, renderPassCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderPassCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::RenderPassCreateFlags, seed, renderPassCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassCreateInfo.attachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::AttachmentDescription *, seed, renderPassCreateInfo.pAttachments );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassCreateInfo.subpassCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::SubpassDescription *, seed, renderPassCreateInfo.pSubpasses );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassCreateInfo.dependencyCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SubpassDependency *, seed, renderPassCreateInfo.pDependencies );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubpassDescription2
   {
     using NativeType = VkSubpassDescription2;
@@ -67841,6 +81352,38 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SubpassDescription2KHR = SubpassDescription2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubpassDescription2>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SubpassDescription2 const & subpassDescription2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, subpassDescription2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, subpassDescription2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SubpassDescriptionFlags, seed, subpassDescription2.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineBindPoint, seed, subpassDescription2.pipelineBindPoint );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDescription2.viewMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDescription2.inputAttachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::AttachmentReference2 *, seed, subpassDescription2.pInputAttachments );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDescription2.colorAttachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::AttachmentReference2 *, seed, subpassDescription2.pColorAttachments );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::AttachmentReference2 *, seed, subpassDescription2.pResolveAttachments );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::AttachmentReference2 *, seed, subpassDescription2.pDepthStencilAttachment );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDescription2.preserveAttachmentCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, subpassDescription2.pPreserveAttachments );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubpassDependency2
   {
     using NativeType = VkSubpassDependency2;
@@ -67997,6 +81540,31 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SubpassDependency2KHR = SubpassDependency2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubpassDependency2>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SubpassDependency2 const & subpassDependency2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, subpassDependency2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, subpassDependency2.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDependency2.srcSubpass );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassDependency2.dstSubpass );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags, seed, subpassDependency2.srcStageMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags, seed, subpassDependency2.dstStageMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags, seed, subpassDependency2.srcAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AccessFlags, seed, subpassDependency2.dstAccessMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DependencyFlags, seed, subpassDependency2.dependencyFlags );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, subpassDependency2.viewOffset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderPassCreateInfo2
   {
     using NativeType = VkRenderPassCreateInfo2;
@@ -68229,6 +81797,35 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using RenderPassCreateInfo2KHR = RenderPassCreateInfo2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderPassCreateInfo2>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::RenderPassCreateInfo2 const & renderPassCreateInfo2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, renderPassCreateInfo2.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderPassCreateInfo2.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::RenderPassCreateFlags, seed, renderPassCreateInfo2.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassCreateInfo2.attachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::AttachmentDescription2 *, seed, renderPassCreateInfo2.pAttachments );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassCreateInfo2.subpassCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SubpassDescription2 *, seed, renderPassCreateInfo2.pSubpasses );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassCreateInfo2.dependencyCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SubpassDependency2 *, seed, renderPassCreateInfo2.pDependencies );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassCreateInfo2.correlatedViewMaskCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, renderPassCreateInfo2.pCorrelatedViewMasks );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderPassFragmentDensityMapCreateInfoEXT
   {
     using NativeType = VkRenderPassFragmentDensityMapCreateInfoEXT;
@@ -68325,6 +81922,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RenderPassFragmentDensityMapCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderPassFragmentDensityMapCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RenderPassFragmentDensityMapCreateInfoEXT const &
+                            renderPassFragmentDensityMapCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, renderPassFragmentDensityMapCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderPassFragmentDensityMapCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::AttachmentReference,
+                             seed,
+                             renderPassFragmentDensityMapCreateInfoEXT.fragmentDensityMapAttachment );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderPassInputAttachmentAspectCreateInfo
   {
     using NativeType = VkRenderPassInputAttachmentAspectCreateInfo;
@@ -68452,6 +82070,28 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using RenderPassInputAttachmentAspectCreateInfoKHR = RenderPassInputAttachmentAspectCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderPassInputAttachmentAspectCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RenderPassInputAttachmentAspectCreateInfo const &
+                            renderPassInputAttachmentAspectCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, renderPassInputAttachmentAspectCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderPassInputAttachmentAspectCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassInputAttachmentAspectCreateInfo.aspectReferenceCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::InputAttachmentAspectReference *,
+                             seed,
+                             renderPassInputAttachmentAspectCreateInfo.pAspectReferences );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderPassMultiviewCreateInfo
   {
     using NativeType = VkRenderPassMultiviewCreateInfo;
@@ -68638,6 +82278,29 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using RenderPassMultiviewCreateInfoKHR = RenderPassMultiviewCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderPassMultiviewCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RenderPassMultiviewCreateInfo const & renderPassMultiviewCreateInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, renderPassMultiviewCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderPassMultiviewCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassMultiviewCreateInfo.subpassCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, renderPassMultiviewCreateInfo.pViewMasks );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassMultiviewCreateInfo.dependencyCount );
+    VULKAN_HPP_HASH_COMBINE( const int32_t *, seed, renderPassMultiviewCreateInfo.pViewOffsets );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassMultiviewCreateInfo.correlationMaskCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, renderPassMultiviewCreateInfo.pCorrelationMasks );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubpassSampleLocationsEXT
   {
     using NativeType = VkSubpassSampleLocationsEXT;
@@ -68717,6 +82380,24 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SubpassSampleLocationsEXT>::value,
                             "SubpassSampleLocationsEXT is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubpassSampleLocationsEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SubpassSampleLocationsEXT const & subpassSampleLocationsEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassSampleLocationsEXT.subpassIndex );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SampleLocationsInfoEXT, seed, subpassSampleLocationsEXT.sampleLocationsInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderPassSampleLocationsBeginInfoEXT
   {
     using NativeType = VkRenderPassSampleLocationsBeginInfoEXT;
@@ -68879,6 +82560,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RenderPassSampleLocationsBeginInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderPassSampleLocationsBeginInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RenderPassSampleLocationsBeginInfoEXT const &
+                            renderPassSampleLocationsBeginInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, renderPassSampleLocationsBeginInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderPassSampleLocationsBeginInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, renderPassSampleLocationsBeginInfoEXT.attachmentInitialSampleLocationsCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::AttachmentSampleLocationsEXT *,
+                             seed,
+                             renderPassSampleLocationsBeginInfoEXT.pAttachmentInitialSampleLocations );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderPassSampleLocationsBeginInfoEXT.postSubpassSampleLocationsCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::SubpassSampleLocationsEXT *,
+                             seed,
+                             renderPassSampleLocationsBeginInfoEXT.pPostSubpassSampleLocations );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderPassTransformBeginInfoQCOM
   {
     using NativeType = VkRenderPassTransformBeginInfoQCOM;
@@ -68969,6 +82676,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RenderPassTransformBeginInfoQCOM;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderPassTransformBeginInfoQCOM>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::RenderPassTransformBeginInfoQCOM const & renderPassTransformBeginInfoQCOM ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, renderPassTransformBeginInfoQCOM.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, renderPassTransformBeginInfoQCOM.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR, seed, renderPassTransformBeginInfoQCOM.transform );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderingAttachmentInfoKHR
   {
     using NativeType = VkRenderingAttachmentInfoKHR;
@@ -69219,6 +82946,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RenderingFragmentDensityMapAttachmentInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderingFragmentDensityMapAttachmentInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RenderingFragmentDensityMapAttachmentInfoEXT const &
+                            renderingFragmentDensityMapAttachmentInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, renderingFragmentDensityMapAttachmentInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderingFragmentDensityMapAttachmentInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageView, seed, renderingFragmentDensityMapAttachmentInfoEXT.imageView );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageLayout, seed, renderingFragmentDensityMapAttachmentInfoEXT.imageLayout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderingFragmentShadingRateAttachmentInfoKHR
   {
     using NativeType = VkRenderingFragmentShadingRateAttachmentInfoKHR;
@@ -69336,6 +83085,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RenderingFragmentShadingRateAttachmentInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderingFragmentShadingRateAttachmentInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RenderingFragmentShadingRateAttachmentInfoKHR const &
+                            renderingFragmentShadingRateAttachmentInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, renderingFragmentShadingRateAttachmentInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderingFragmentShadingRateAttachmentInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageView, seed, renderingFragmentShadingRateAttachmentInfoKHR.imageView );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ImageLayout, seed, renderingFragmentShadingRateAttachmentInfoKHR.imageLayout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D,
+                             seed,
+                             renderingFragmentShadingRateAttachmentInfoKHR.shadingRateAttachmentTexelSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct RenderingInfoKHR
   {
     using NativeType = VkRenderingInfoKHR;
@@ -69524,6 +83298,33 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = RenderingInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::RenderingInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::RenderingInfoKHR const & renderingInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, renderingInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, renderingInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::RenderingFlagsKHR, seed, renderingInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Rect2D, seed, renderingInfoKHR.renderArea );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderingInfoKHR.layerCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderingInfoKHR.viewMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, renderingInfoKHR.colorAttachmentCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::RenderingAttachmentInfoKHR *, seed, renderingInfoKHR.pColorAttachments );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::RenderingAttachmentInfoKHR *, seed, renderingInfoKHR.pDepthAttachment );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::RenderingAttachmentInfoKHR *, seed, renderingInfoKHR.pStencilAttachment );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ResolveImageInfo2KHR
   {
     using NativeType = VkResolveImageInfo2KHR;
@@ -69688,6 +83489,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ResolveImageInfo2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ResolveImageInfo2KHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ResolveImageInfo2KHR const & resolveImageInfo2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, resolveImageInfo2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, resolveImageInfo2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, resolveImageInfo2KHR.srcImage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, resolveImageInfo2KHR.srcImageLayout );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Image, seed, resolveImageInfo2KHR.dstImage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageLayout, seed, resolveImageInfo2KHR.dstImageLayout );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, resolveImageInfo2KHR.regionCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ImageResolve2KHR *, seed, resolveImageInfo2KHR.pRegions );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SamplerBorderColorComponentMappingCreateInfoEXT
   {
     using NativeType = VkSamplerBorderColorComponentMappingCreateInfoEXT;
@@ -69794,6 +83618,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SamplerBorderColorComponentMappingCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SamplerBorderColorComponentMappingCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SamplerBorderColorComponentMappingCreateInfoEXT const &
+                            samplerBorderColorComponentMappingCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, samplerBorderColorComponentMappingCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, samplerBorderColorComponentMappingCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ComponentMapping, seed, samplerBorderColorComponentMappingCreateInfoEXT.components );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, samplerBorderColorComponentMappingCreateInfoEXT.srgb );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SamplerCreateInfo
   {
     using NativeType = VkSamplerCreateInfo;
@@ -70032,6 +83877,38 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SamplerCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SamplerCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SamplerCreateInfo const & samplerCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, samplerCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, samplerCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SamplerCreateFlags, seed, samplerCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Filter, seed, samplerCreateInfo.magFilter );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Filter, seed, samplerCreateInfo.minFilter );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SamplerMipmapMode, seed, samplerCreateInfo.mipmapMode );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SamplerAddressMode, seed, samplerCreateInfo.addressModeU );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SamplerAddressMode, seed, samplerCreateInfo.addressModeV );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SamplerAddressMode, seed, samplerCreateInfo.addressModeW );
+    VULKAN_HPP_HASH_COMBINE( float, seed, samplerCreateInfo.mipLodBias );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, samplerCreateInfo.anisotropyEnable );
+    VULKAN_HPP_HASH_COMBINE( float, seed, samplerCreateInfo.maxAnisotropy );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, samplerCreateInfo.compareEnable );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::CompareOp, seed, samplerCreateInfo.compareOp );
+    VULKAN_HPP_HASH_COMBINE( float, seed, samplerCreateInfo.minLod );
+    VULKAN_HPP_HASH_COMBINE( float, seed, samplerCreateInfo.maxLod );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::BorderColor, seed, samplerCreateInfo.borderColor );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, samplerCreateInfo.unnormalizedCoordinates );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SamplerCustomBorderColorCreateInfoEXT
   {
     using NativeType = VkSamplerCustomBorderColorCreateInfoEXT;
@@ -70212,6 +84089,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SamplerReductionModeCreateInfoEXT = SamplerReductionModeCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SamplerReductionModeCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SamplerReductionModeCreateInfo const & samplerReductionModeCreateInfo )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, samplerReductionModeCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, samplerReductionModeCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SamplerReductionMode, seed, samplerReductionModeCreateInfo.reductionMode );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SamplerYcbcrConversionCreateInfo
   {
     using NativeType = VkSamplerYcbcrConversionCreateInfo;
@@ -70377,6 +84273,38 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SamplerYcbcrConversionCreateInfoKHR = SamplerYcbcrConversionCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversionCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversionCreateInfo const & samplerYcbcrConversionCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, samplerYcbcrConversionCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, samplerYcbcrConversionCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, samplerYcbcrConversionCreateInfo.format );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion, seed, samplerYcbcrConversionCreateInfo.ycbcrModel );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SamplerYcbcrRange, seed, samplerYcbcrConversionCreateInfo.ycbcrRange );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ComponentMapping, seed, samplerYcbcrConversionCreateInfo.components );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ChromaLocation, seed, samplerYcbcrConversionCreateInfo.xChromaOffset );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ChromaLocation, seed, samplerYcbcrConversionCreateInfo.yChromaOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Filter, seed, samplerYcbcrConversionCreateInfo.chromaFilter );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, samplerYcbcrConversionCreateInfo.forceExplicitReconstruction );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SamplerYcbcrConversionImageFormatProperties
   {
     using NativeType = VkSamplerYcbcrConversionImageFormatProperties;
@@ -70458,6 +84386,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SamplerYcbcrConversionImageFormatPropertiesKHR = SamplerYcbcrConversionImageFormatProperties;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversionImageFormatProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversionImageFormatProperties const &
+                            samplerYcbcrConversionImageFormatProperties ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, samplerYcbcrConversionImageFormatProperties.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, samplerYcbcrConversionImageFormatProperties.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      uint32_t, seed, samplerYcbcrConversionImageFormatProperties.combinedImageSamplerDescriptorCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SamplerYcbcrConversionInfo
   {
     using NativeType = VkSamplerYcbcrConversionInfo;
@@ -70546,6 +84494,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SamplerYcbcrConversionInfoKHR = SamplerYcbcrConversionInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversionInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversionInfo const & samplerYcbcrConversionInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, samplerYcbcrConversionInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, samplerYcbcrConversionInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion, seed, samplerYcbcrConversionInfo.conversion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
   struct ScreenSurfaceCreateInfoQNX
   {
@@ -70653,6 +84620,28 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ScreenSurfaceCreateInfoQNX;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ScreenSurfaceCreateInfoQNX>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ScreenSurfaceCreateInfoQNX const & screenSurfaceCreateInfoQNX ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, screenSurfaceCreateInfoQNX.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, screenSurfaceCreateInfoQNX.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ScreenSurfaceCreateFlagsQNX, seed, screenSurfaceCreateInfoQNX.flags );
+    VULKAN_HPP_HASH_COMBINE( struct _screen_context *, seed, screenSurfaceCreateInfoQNX.context );
+    VULKAN_HPP_HASH_COMBINE( struct _screen_window *, seed, screenSurfaceCreateInfoQNX.window );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
 
   struct SemaphoreCreateInfo
@@ -70740,6 +84729,24 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SemaphoreCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SemaphoreCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SemaphoreCreateInfo const & semaphoreCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, semaphoreCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, semaphoreCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SemaphoreCreateFlags, seed, semaphoreCreateInfo.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SemaphoreGetFdInfoKHR
   {
     using NativeType = VkSemaphoreGetFdInfoKHR;
@@ -70838,6 +84845,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SemaphoreGetFdInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SemaphoreGetFdInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SemaphoreGetFdInfoKHR const & semaphoreGetFdInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, semaphoreGetFdInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, semaphoreGetFdInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Semaphore, seed, semaphoreGetFdInfoKHR.semaphore );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits, seed, semaphoreGetFdInfoKHR.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct SemaphoreGetWin32HandleInfoKHR
   {
@@ -70940,6 +84967,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = SemaphoreGetWin32HandleInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SemaphoreGetWin32HandleInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SemaphoreGetWin32HandleInfoKHR const & semaphoreGetWin32HandleInfoKHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, semaphoreGetWin32HandleInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, semaphoreGetWin32HandleInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Semaphore, seed, semaphoreGetWin32HandleInfoKHR.semaphore );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits, seed, semaphoreGetWin32HandleInfoKHR.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
@@ -71046,6 +85094,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = SemaphoreGetZirconHandleInfoFUCHSIA;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SemaphoreGetZirconHandleInfoFUCHSIA>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SemaphoreGetZirconHandleInfoFUCHSIA const &
+                            semaphoreGetZirconHandleInfoFUCHSIA ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, semaphoreGetZirconHandleInfoFUCHSIA.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, semaphoreGetZirconHandleInfoFUCHSIA.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Semaphore, seed, semaphoreGetZirconHandleInfoFUCHSIA.semaphore );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits, seed, semaphoreGetZirconHandleInfoFUCHSIA.handleType );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct SemaphoreSignalInfo
@@ -71143,6 +85212,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SemaphoreSignalInfoKHR = SemaphoreSignalInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SemaphoreSignalInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SemaphoreSignalInfo const & semaphoreSignalInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, semaphoreSignalInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, semaphoreSignalInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Semaphore, seed, semaphoreSignalInfo.semaphore );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, semaphoreSignalInfo.value );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SemaphoreSubmitInfoKHR
   {
     using NativeType = VkSemaphoreSubmitInfoKHR;
@@ -71257,6 +85345,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SemaphoreSubmitInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SemaphoreSubmitInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SemaphoreSubmitInfoKHR const & semaphoreSubmitInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, semaphoreSubmitInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, semaphoreSubmitInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Semaphore, seed, semaphoreSubmitInfoKHR.semaphore );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, semaphoreSubmitInfoKHR.value );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR, seed, semaphoreSubmitInfoKHR.stageMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, semaphoreSubmitInfoKHR.deviceIndex );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SemaphoreTypeCreateInfo
   {
     using NativeType = VkSemaphoreTypeCreateInfo;
@@ -71354,6 +85463,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SemaphoreTypeCreateInfoKHR = SemaphoreTypeCreateInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SemaphoreTypeCreateInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SemaphoreTypeCreateInfo const & semaphoreTypeCreateInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, semaphoreTypeCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, semaphoreTypeCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SemaphoreType, seed, semaphoreTypeCreateInfo.semaphoreType );
+    VULKAN_HPP_HASH_COMBINE( uint64_t, seed, semaphoreTypeCreateInfo.initialValue );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SemaphoreWaitInfo
   {
     using NativeType = VkSemaphoreWaitInfo;
@@ -71512,6 +85640,26 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SemaphoreWaitInfoKHR = SemaphoreWaitInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SemaphoreWaitInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SemaphoreWaitInfo const & semaphoreWaitInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, semaphoreWaitInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, semaphoreWaitInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SemaphoreWaitFlags, seed, semaphoreWaitInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, semaphoreWaitInfo.semaphoreCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Semaphore *, seed, semaphoreWaitInfo.pSemaphores );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, semaphoreWaitInfo.pValues );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SetStateFlagsIndirectCommandNV
   {
     using NativeType = VkSetStateFlagsIndirectCommandNV;
@@ -71580,6 +85728,22 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SetStateFlagsIndirectCommandNV>::value,
     "SetStateFlagsIndirectCommandNV is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SetStateFlagsIndirectCommandNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SetStateFlagsIndirectCommandNV const & setStateFlagsIndirectCommandNV )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, setStateFlagsIndirectCommandNV.data );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ShaderModuleCreateInfo
   {
     using NativeType = VkShaderModuleCreateInfo;
@@ -71701,6 +85865,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ShaderModuleCreateInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ShaderModuleCreateInfo>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ShaderModuleCreateInfo const & shaderModuleCreateInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, shaderModuleCreateInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, shaderModuleCreateInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderModuleCreateFlags, seed, shaderModuleCreateInfo.flags );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, shaderModuleCreateInfo.codeSize );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, shaderModuleCreateInfo.pCode );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ShaderModuleValidationCacheCreateInfoEXT
   {
     using NativeType = VkShaderModuleValidationCacheCreateInfoEXT;
@@ -71796,6 +85980,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ShaderModuleValidationCacheCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ShaderModuleValidationCacheCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ShaderModuleValidationCacheCreateInfoEXT const &
+                            shaderModuleValidationCacheCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, shaderModuleValidationCacheCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, shaderModuleValidationCacheCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ValidationCacheEXT, seed, shaderModuleValidationCacheCreateInfoEXT.validationCache );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ShaderResourceUsageAMD
   {
     using NativeType = VkShaderResourceUsageAMD;
@@ -71870,6 +86074,26 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ShaderResourceUsageAMD>::value,
                             "ShaderResourceUsageAMD is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ShaderResourceUsageAMD>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ShaderResourceUsageAMD const & shaderResourceUsageAMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, shaderResourceUsageAMD.numUsedVgprs );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, shaderResourceUsageAMD.numUsedSgprs );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, shaderResourceUsageAMD.ldsSizePerLocalWorkGroup );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, shaderResourceUsageAMD.ldsUsageSizeInBytes );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, shaderResourceUsageAMD.scratchMemUsageInBytes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ShaderStatisticsInfoAMD
   {
     using NativeType = VkShaderStatisticsInfoAMD;
@@ -71952,6 +86176,32 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ShaderStatisticsInfoAMD>::value,
                             "ShaderStatisticsInfoAMD is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ShaderStatisticsInfoAMD>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::ShaderStatisticsInfoAMD const & shaderStatisticsInfoAMD ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ShaderStageFlags, seed, shaderStatisticsInfoAMD.shaderStageMask );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ShaderResourceUsageAMD, seed, shaderStatisticsInfoAMD.resourceUsage );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, shaderStatisticsInfoAMD.numPhysicalVgprs );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, shaderStatisticsInfoAMD.numPhysicalSgprs );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, shaderStatisticsInfoAMD.numAvailableVgprs );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, shaderStatisticsInfoAMD.numAvailableSgprs );
+    for ( size_t i = 0; i < 3; ++i )
+    {
+      VULKAN_HPP_HASH_COMBINE( uint32_t, seed, shaderStatisticsInfoAMD.computeWorkGroupSize[i] );
+    }
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SharedPresentSurfaceCapabilitiesKHR
   {
     using NativeType = VkSharedPresentSurfaceCapabilitiesKHR;
@@ -72029,6 +86279,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SharedPresentSurfaceCapabilitiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SharedPresentSurfaceCapabilitiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SharedPresentSurfaceCapabilitiesKHR const &
+                            sharedPresentSurfaceCapabilitiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, sharedPresentSurfaceCapabilitiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, sharedPresentSurfaceCapabilitiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags,
+                             seed,
+                             sharedPresentSurfaceCapabilitiesKHR.sharedPresentSupportedUsageFlags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SparseImageFormatProperties
   {
     using NativeType = VkSparseImageFormatProperties;
@@ -72097,6 +86367,24 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SparseImageFormatProperties>::value,
     "SparseImageFormatProperties is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SparseImageFormatProperties>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SparseImageFormatProperties const & sparseImageFormatProperties ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageAspectFlags, seed, sparseImageFormatProperties.aspectMask );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent3D, seed, sparseImageFormatProperties.imageGranularity );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SparseImageFormatFlags, seed, sparseImageFormatProperties.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SparseImageFormatProperties2
   {
     using NativeType = VkSparseImageFormatProperties2;
@@ -72171,6 +86459,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SparseImageFormatProperties2KHR = SparseImageFormatProperties2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SparseImageFormatProperties2>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::SparseImageFormatProperties2 const & sparseImageFormatProperties2 ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, sparseImageFormatProperties2.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, sparseImageFormatProperties2.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SparseImageFormatProperties, seed, sparseImageFormatProperties2.properties );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SparseImageMemoryRequirements
   {
     using NativeType = VkSparseImageMemoryRequirements;
@@ -72248,6 +86555,27 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SparseImageMemoryRequirements>::value,
     "SparseImageMemoryRequirements is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SparseImageMemoryRequirements>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SparseImageMemoryRequirements const & sparseImageMemoryRequirements )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SparseImageFormatProperties, seed, sparseImageMemoryRequirements.formatProperties );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, sparseImageMemoryRequirements.imageMipTailFirstLod );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, sparseImageMemoryRequirements.imageMipTailSize );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, sparseImageMemoryRequirements.imageMipTailOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, sparseImageMemoryRequirements.imageMipTailStride );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SparseImageMemoryRequirements2
   {
     using NativeType = VkSparseImageMemoryRequirements2;
@@ -72323,6 +86651,25 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SparseImageMemoryRequirements2KHR = SparseImageMemoryRequirements2;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SparseImageMemoryRequirements2>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SparseImageMemoryRequirements2 const & sparseImageMemoryRequirements2 )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, sparseImageMemoryRequirements2.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, sparseImageMemoryRequirements2.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SparseImageMemoryRequirements, seed, sparseImageMemoryRequirements2.memoryRequirements );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_GGP )
   struct StreamDescriptorSurfaceCreateInfoGGP
   {
@@ -72425,6 +86772,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = StreamDescriptorSurfaceCreateInfoGGP;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::StreamDescriptorSurfaceCreateInfoGGP>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::StreamDescriptorSurfaceCreateInfoGGP const &
+                            streamDescriptorSurfaceCreateInfoGGP ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, streamDescriptorSurfaceCreateInfoGGP.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, streamDescriptorSurfaceCreateInfoGGP.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StreamDescriptorSurfaceCreateFlagsGGP, seed, streamDescriptorSurfaceCreateInfoGGP.flags );
+    VULKAN_HPP_HASH_COMBINE( GgpStreamDescriptor, seed, streamDescriptorSurfaceCreateInfoGGP.streamDescriptor );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_GGP*/
 
   struct StridedDeviceAddressRegionKHR
@@ -72519,6 +86887,24 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::StridedDeviceAddressRegionKHR>::value,
     "StridedDeviceAddressRegionKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::StridedDeviceAddressRegionKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::StridedDeviceAddressRegionKHR const & stridedDeviceAddressRegionKHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceAddress, seed, stridedDeviceAddressRegionKHR.deviceAddress );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, stridedDeviceAddressRegionKHR.stride );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, stridedDeviceAddressRegionKHR.size );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubmitInfo
   {
     using NativeType = VkSubmitInfo;
@@ -72737,6 +87123,29 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SubmitInfo;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubmitInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SubmitInfo const & submitInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, submitInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, submitInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, submitInfo.waitSemaphoreCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Semaphore *, seed, submitInfo.pWaitSemaphores );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::PipelineStageFlags *, seed, submitInfo.pWaitDstStageMask );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, submitInfo.commandBufferCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::CommandBuffer *, seed, submitInfo.pCommandBuffers );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, submitInfo.signalSemaphoreCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::Semaphore *, seed, submitInfo.pSignalSemaphores );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubmitInfo2KHR
   {
     using NativeType = VkSubmitInfo2KHR;
@@ -72939,6 +87348,32 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SubmitInfo2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubmitInfo2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SubmitInfo2KHR const & submitInfo2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, submitInfo2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, submitInfo2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SubmitFlagsKHR, seed, submitInfo2KHR.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, submitInfo2KHR.waitSemaphoreInfoCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SemaphoreSubmitInfoKHR *, seed, submitInfo2KHR.pWaitSemaphoreInfos );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, submitInfo2KHR.commandBufferInfoCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::CommandBufferSubmitInfoKHR *, seed, submitInfo2KHR.pCommandBufferInfos );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, submitInfo2KHR.signalSemaphoreInfoCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::SemaphoreSubmitInfoKHR *, seed, submitInfo2KHR.pSignalSemaphoreInfos );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubpassBeginInfo
   {
     using NativeType = VkSubpassBeginInfo;
@@ -73025,6 +87460,23 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SubpassBeginInfoKHR = SubpassBeginInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubpassBeginInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SubpassBeginInfo const & subpassBeginInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, subpassBeginInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, subpassBeginInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SubpassContents, seed, subpassBeginInfo.contents );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubpassDescriptionDepthStencilResolve
   {
     using NativeType = VkSubpassDescriptionDepthStencilResolve;
@@ -73140,6 +87592,30 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SubpassDescriptionDepthStencilResolveKHR = SubpassDescriptionDepthStencilResolve;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubpassDescriptionDepthStencilResolve>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SubpassDescriptionDepthStencilResolve const &
+                            subpassDescriptionDepthStencilResolve ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, subpassDescriptionDepthStencilResolve.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, subpassDescriptionDepthStencilResolve.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ResolveModeFlagBits, seed, subpassDescriptionDepthStencilResolve.depthResolveMode );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ResolveModeFlagBits, seed, subpassDescriptionDepthStencilResolve.stencilResolveMode );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::AttachmentReference2 *,
+                             seed,
+                             subpassDescriptionDepthStencilResolve.pDepthStencilResolveAttachment );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubpassEndInfo
   {
     using NativeType = VkSubpassEndInfo;
@@ -73215,6 +87691,22 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SubpassEndInfoKHR = SubpassEndInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubpassEndInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SubpassEndInfo const & subpassEndInfo ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, subpassEndInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, subpassEndInfo.pNext );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SubpassShadingPipelineCreateInfoHUAWEI
   {
     using NativeType = VkSubpassShadingPipelineCreateInfoHUAWEI;
@@ -73296,6 +87788,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SubpassShadingPipelineCreateInfoHUAWEI;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SubpassShadingPipelineCreateInfoHUAWEI>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SubpassShadingPipelineCreateInfoHUAWEI const &
+                            subpassShadingPipelineCreateInfoHUAWEI ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, subpassShadingPipelineCreateInfoHUAWEI.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, subpassShadingPipelineCreateInfoHUAWEI.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::RenderPass, seed, subpassShadingPipelineCreateInfoHUAWEI.renderPass );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, subpassShadingPipelineCreateInfoHUAWEI.subpass );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SurfaceCapabilities2EXT
   {
     using NativeType = VkSurfaceCapabilities2EXT;
@@ -73406,6 +87918,38 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SurfaceCapabilities2EXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SurfaceCapabilities2EXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SurfaceCapabilities2EXT const & surfaceCapabilities2EXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, surfaceCapabilities2EXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, surfaceCapabilities2EXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, surfaceCapabilities2EXT.minImageCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, surfaceCapabilities2EXT.maxImageCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, surfaceCapabilities2EXT.currentExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, surfaceCapabilities2EXT.minImageExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, surfaceCapabilities2EXT.maxImageExtent );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, surfaceCapabilities2EXT.maxImageArrayLayers );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagsKHR, seed, surfaceCapabilities2EXT.supportedTransforms );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR, seed, surfaceCapabilities2EXT.currentTransform );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::CompositeAlphaFlagsKHR, seed, surfaceCapabilities2EXT.supportedCompositeAlpha );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags, seed, surfaceCapabilities2EXT.supportedUsageFlags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceCounterFlagsEXT, seed, surfaceCapabilities2EXT.supportedSurfaceCounters );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SurfaceCapabilitiesKHR
   {
     using NativeType = VkSurfaceCapabilitiesKHR;
@@ -73500,6 +88044,34 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR>::value,
                             "SurfaceCapabilitiesKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR const & surfaceCapabilitiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, surfaceCapabilitiesKHR.minImageCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, surfaceCapabilitiesKHR.maxImageCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, surfaceCapabilitiesKHR.currentExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, surfaceCapabilitiesKHR.minImageExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, surfaceCapabilitiesKHR.maxImageExtent );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, surfaceCapabilitiesKHR.maxImageArrayLayers );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagsKHR, seed, surfaceCapabilitiesKHR.supportedTransforms );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR, seed, surfaceCapabilitiesKHR.currentTransform );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::CompositeAlphaFlagsKHR, seed, surfaceCapabilitiesKHR.supportedCompositeAlpha );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags, seed, surfaceCapabilitiesKHR.supportedUsageFlags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SurfaceCapabilities2KHR
   {
     using NativeType = VkSurfaceCapabilities2KHR;
@@ -73571,6 +88143,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SurfaceCapabilities2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SurfaceCapabilities2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SurfaceCapabilities2KHR const & surfaceCapabilities2KHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, surfaceCapabilities2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, surfaceCapabilities2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR, seed, surfaceCapabilities2KHR.surfaceCapabilities );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct SurfaceCapabilitiesFullScreenExclusiveEXT
   {
@@ -73666,6 +88257,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = SurfaceCapabilitiesFullScreenExclusiveEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesFullScreenExclusiveEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesFullScreenExclusiveEXT const &
+                            surfaceCapabilitiesFullScreenExclusiveEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, surfaceCapabilitiesFullScreenExclusiveEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, surfaceCapabilitiesFullScreenExclusiveEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, surfaceCapabilitiesFullScreenExclusiveEXT.fullScreenExclusiveSupported );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   struct SurfaceFormatKHR
@@ -73731,6 +88343,22 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SurfaceFormatKHR>::value,
                             "SurfaceFormatKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SurfaceFormatKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SurfaceFormatKHR const & surfaceFormatKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, surfaceFormatKHR.format );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ColorSpaceKHR, seed, surfaceFormatKHR.colorSpace );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SurfaceFormat2KHR
   {
     using NativeType = VkSurfaceFormat2KHR;
@@ -73801,6 +88429,23 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SurfaceFormat2KHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SurfaceFormat2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SurfaceFormat2KHR const & surfaceFormat2KHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, surfaceFormat2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, surfaceFormat2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SurfaceFormatKHR, seed, surfaceFormat2KHR.surfaceFormat );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   struct SurfaceFullScreenExclusiveInfoEXT
   {
@@ -73893,6 +88538,26 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = SurfaceFullScreenExclusiveInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SurfaceFullScreenExclusiveInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SurfaceFullScreenExclusiveInfoEXT const &
+                            surfaceFullScreenExclusiveInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, surfaceFullScreenExclusiveInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, surfaceFullScreenExclusiveInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::FullScreenExclusiveEXT, seed, surfaceFullScreenExclusiveInfoEXT.fullScreenExclusive );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
@@ -73987,6 +88652,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = SurfaceFullScreenExclusiveWin32InfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SurfaceFullScreenExclusiveWin32InfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SurfaceFullScreenExclusiveWin32InfoEXT const &
+                            surfaceFullScreenExclusiveWin32InfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, surfaceFullScreenExclusiveWin32InfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, surfaceFullScreenExclusiveWin32InfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( HMONITOR, seed, surfaceFullScreenExclusiveWin32InfoEXT.hmonitor );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   struct SurfaceProtectedCapabilitiesKHR
@@ -74078,6 +88762,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SurfaceProtectedCapabilitiesKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SurfaceProtectedCapabilitiesKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SurfaceProtectedCapabilitiesKHR const & surfaceProtectedCapabilitiesKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, surfaceProtectedCapabilitiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, surfaceProtectedCapabilitiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, surfaceProtectedCapabilitiesKHR.supportsProtected );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SwapchainCounterCreateInfoEXT
   {
     using NativeType = VkSwapchainCounterCreateInfoEXT;
@@ -74167,6 +88870,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SwapchainCounterCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SwapchainCounterCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SwapchainCounterCreateInfoEXT const & swapchainCounterCreateInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, swapchainCounterCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, swapchainCounterCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceCounterFlagsEXT, seed, swapchainCounterCreateInfoEXT.surfaceCounters );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SwapchainCreateInfoKHR
   {
     using NativeType = VkSwapchainCreateInfoKHR;
@@ -74461,6 +89183,41 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SwapchainCreateInfoKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SwapchainCreateInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::SwapchainCreateInfoKHR const & swapchainCreateInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, swapchainCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, swapchainCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SwapchainCreateFlagsKHR, seed, swapchainCreateInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SurfaceKHR, seed, swapchainCreateInfoKHR.surface );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, swapchainCreateInfoKHR.minImageCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, swapchainCreateInfoKHR.imageFormat );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ColorSpaceKHR, seed, swapchainCreateInfoKHR.imageColorSpace );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, swapchainCreateInfoKHR.imageExtent );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, swapchainCreateInfoKHR.imageArrayLayers );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageUsageFlags, seed, swapchainCreateInfoKHR.imageUsage );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SharingMode, seed, swapchainCreateInfoKHR.imageSharingMode );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, swapchainCreateInfoKHR.queueFamilyIndexCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, swapchainCreateInfoKHR.pQueueFamilyIndices );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR, seed, swapchainCreateInfoKHR.preTransform );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::CompositeAlphaFlagBitsKHR, seed, swapchainCreateInfoKHR.compositeAlpha );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::PresentModeKHR, seed, swapchainCreateInfoKHR.presentMode );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, swapchainCreateInfoKHR.clipped );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::SwapchainKHR, seed, swapchainCreateInfoKHR.oldSwapchain );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct SwapchainDisplayNativeHdrCreateInfoAMD
   {
     using NativeType = VkSwapchainDisplayNativeHdrCreateInfoAMD;
@@ -74553,6 +89310,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = SwapchainDisplayNativeHdrCreateInfoAMD;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::SwapchainDisplayNativeHdrCreateInfoAMD>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::SwapchainDisplayNativeHdrCreateInfoAMD const &
+                            swapchainDisplayNativeHdrCreateInfoAMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, swapchainDisplayNativeHdrCreateInfoAMD.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, swapchainDisplayNativeHdrCreateInfoAMD.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, swapchainDisplayNativeHdrCreateInfoAMD.localDimmingEnable );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct TextureLODGatherFormatPropertiesAMD
   {
     using NativeType = VkTextureLODGatherFormatPropertiesAMD;
@@ -74630,6 +89406,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = TextureLODGatherFormatPropertiesAMD;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::TextureLODGatherFormatPropertiesAMD>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::TextureLODGatherFormatPropertiesAMD const &
+                            textureLODGatherFormatPropertiesAMD ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, textureLODGatherFormatPropertiesAMD.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, textureLODGatherFormatPropertiesAMD.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, textureLODGatherFormatPropertiesAMD.supportsTextureGatherLODBiasAMD );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct TimelineSemaphoreSubmitInfo
   {
     using NativeType = VkTimelineSemaphoreSubmitInfo;
@@ -74784,6 +89579,27 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using TimelineSemaphoreSubmitInfoKHR = TimelineSemaphoreSubmitInfo;
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::TimelineSemaphoreSubmitInfo>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::TimelineSemaphoreSubmitInfo const & timelineSemaphoreSubmitInfo ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, timelineSemaphoreSubmitInfo.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, timelineSemaphoreSubmitInfo.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, timelineSemaphoreSubmitInfo.waitSemaphoreValueCount );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, timelineSemaphoreSubmitInfo.pWaitSemaphoreValues );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, timelineSemaphoreSubmitInfo.signalSemaphoreValueCount );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, timelineSemaphoreSubmitInfo.pSignalSemaphoreValues );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct TraceRaysIndirectCommandKHR
   {
     using NativeType = VkTraceRaysIndirectCommandKHR;
@@ -74875,6 +89691,24 @@ namespace VULKAN_HPP_NAMESPACE
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::TraceRaysIndirectCommandKHR>::value,
     "TraceRaysIndirectCommandKHR is not nothrow_move_constructible!" );
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::TraceRaysIndirectCommandKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::TraceRaysIndirectCommandKHR const & traceRaysIndirectCommandKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, traceRaysIndirectCommandKHR.width );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, traceRaysIndirectCommandKHR.height );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, traceRaysIndirectCommandKHR.depth );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ValidationCacheCreateInfoEXT
   {
     using NativeType = VkValidationCacheCreateInfoEXT;
@@ -75002,6 +89836,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ValidationCacheCreateInfoEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ValidationCacheCreateInfoEXT>
+{
+  std::size_t operator()(
+    VULKAN_HPP_NAMESPACE::ValidationCacheCreateInfoEXT const & validationCacheCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, validationCacheCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, validationCacheCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ValidationCacheCreateFlagsEXT, seed, validationCacheCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( size_t, seed, validationCacheCreateInfoEXT.initialDataSize );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, validationCacheCreateInfoEXT.pInitialData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ValidationFeaturesEXT
   {
     using NativeType = VkValidationFeaturesEXT;
@@ -75156,6 +90011,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ValidationFeaturesEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ValidationFeaturesEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ValidationFeaturesEXT const & validationFeaturesEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, validationFeaturesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, validationFeaturesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, validationFeaturesEXT.enabledValidationFeatureCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ValidationFeatureEnableEXT *,
+                             seed,
+                             validationFeaturesEXT.pEnabledValidationFeatures );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, validationFeaturesEXT.disabledValidationFeatureCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ValidationFeatureDisableEXT *,
+                             seed,
+                             validationFeaturesEXT.pDisabledValidationFeatures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct ValidationFlagsEXT
   {
     using NativeType = VkValidationFlagsEXT;
@@ -75273,6 +90153,26 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ValidationFlagsEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ValidationFlagsEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ValidationFlagsEXT const & validationFlagsEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, validationFlagsEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, validationFlagsEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, validationFlagsEXT.disabledValidationCheckCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::ValidationCheckEXT *, seed, validationFlagsEXT.pDisabledValidationChecks );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct VertexInputAttributeDescription2EXT
   {
     using NativeType = VkVertexInputAttributeDescription2EXT;
@@ -75392,6 +90292,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = VertexInputAttributeDescription2EXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VertexInputAttributeDescription2EXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VertexInputAttributeDescription2EXT const &
+                            vertexInputAttributeDescription2EXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, vertexInputAttributeDescription2EXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, vertexInputAttributeDescription2EXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputAttributeDescription2EXT.location );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputAttributeDescription2EXT.binding );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, vertexInputAttributeDescription2EXT.format );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputAttributeDescription2EXT.offset );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct VertexInputBindingDescription2EXT
   {
     using NativeType = VkVertexInputBindingDescription2EXT;
@@ -75510,6 +90431,27 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = VertexInputBindingDescription2EXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VertexInputBindingDescription2EXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VertexInputBindingDescription2EXT const &
+                            vertexInputBindingDescription2EXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, vertexInputBindingDescription2EXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, vertexInputBindingDescription2EXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputBindingDescription2EXT.binding );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputBindingDescription2EXT.stride );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VertexInputRate, seed, vertexInputBindingDescription2EXT.inputRate );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, vertexInputBindingDescription2EXT.divisor );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_VI_NN )
   struct ViSurfaceCreateInfoNN
   {
@@ -75603,6 +90545,26 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = ViSurfaceCreateInfoNN;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::ViSurfaceCreateInfoNN>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::ViSurfaceCreateInfoNN const & viSurfaceCreateInfoNN ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, viSurfaceCreateInfoNN.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, viSurfaceCreateInfoNN.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ViSurfaceCreateFlagsNN, seed, viSurfaceCreateInfoNN.flags );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, viSurfaceCreateInfoNN.window );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_VI_NN*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -75722,6 +90684,28 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoPictureResourceKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoPictureResourceKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoPictureResourceKHR const & videoPictureResourceKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoPictureResourceKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoPictureResourceKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset2D, seed, videoPictureResourceKHR.codedOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, videoPictureResourceKHR.codedExtent );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoPictureResourceKHR.baseArrayLayer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::ImageView, seed, videoPictureResourceKHR.imageViewBinding );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -75819,6 +90803,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoReferenceSlotKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoReferenceSlotKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VideoReferenceSlotKHR const & videoReferenceSlotKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoReferenceSlotKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoReferenceSlotKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( int8_t, seed, videoReferenceSlotKHR.slotIndex );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::VideoPictureResourceKHR *, seed, videoReferenceSlotKHR.pPictureResource );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -75988,6 +90993,33 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoBeginCodingInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoBeginCodingInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoBeginCodingInfoKHR const & videoBeginCodingInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoBeginCodingInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoBeginCodingInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoBeginCodingFlagsKHR, seed, videoBeginCodingInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoCodingQualityPresetFlagsKHR, seed, videoBeginCodingInfoKHR.codecQualityPreset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoSessionKHR, seed, videoBeginCodingInfoKHR.videoSession );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoSessionParametersKHR, seed, videoBeginCodingInfoKHR.videoSessionParameters );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoBeginCodingInfoKHR.referenceSlotCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::VideoReferenceSlotKHR *, seed, videoBeginCodingInfoKHR.pReferenceSlots );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -76104,6 +91136,28 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoBindMemoryKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoBindMemoryKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VideoBindMemoryKHR const & videoBindMemoryKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoBindMemoryKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoBindMemoryKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoBindMemoryKHR.memoryBindIndex );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceMemory, seed, videoBindMemoryKHR.memory );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, videoBindMemoryKHR.memoryOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, videoBindMemoryKHR.memorySize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -76202,6 +91256,35 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoCapabilitiesKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoCapabilitiesKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VideoCapabilitiesKHR const & videoCapabilitiesKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoCapabilitiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, videoCapabilitiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoCapabilityFlagsKHR, seed, videoCapabilitiesKHR.capabilityFlags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, videoCapabilitiesKHR.minBitstreamBufferOffsetAlignment );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::DeviceSize, seed, videoCapabilitiesKHR.minBitstreamBufferSizeAlignment );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, videoCapabilitiesKHR.videoPictureExtentGranularity );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, videoCapabilitiesKHR.minExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, videoCapabilitiesKHR.maxExtent );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoCapabilitiesKHR.maxReferencePicturesSlotsCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoCapabilitiesKHR.maxReferencePicturesActiveCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -76291,6 +91374,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoCodingControlInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoCodingControlInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoCodingControlInfoKHR const & videoCodingControlInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoCodingControlInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoCodingControlInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoCodingControlFlagsKHR, seed, videoCodingControlInfoKHR.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -76375,6 +91477,29 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH264CapabilitiesEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH264CapabilitiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH264CapabilitiesEXT const & videoDecodeH264CapabilitiesEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH264CapabilitiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, videoDecodeH264CapabilitiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH264CapabilitiesEXT.maxLevel );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Offset2D, seed, videoDecodeH264CapabilitiesEXT.fieldOffsetGranularity );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExtensionProperties, seed, videoDecodeH264CapabilitiesEXT.stdExtensionVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -76466,6 +91591,26 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH264DpbSlotInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH264DpbSlotInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH264DpbSlotInfoEXT const & videoDecodeH264DpbSlotInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH264DpbSlotInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH264DpbSlotInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoDecodeH264ReferenceInfo *, seed, videoDecodeH264DpbSlotInfoEXT.pStdReferenceInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -76552,6 +91697,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH264MvcEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH264MvcEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH264MvcEXT const & videoDecodeH264MvcEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH264MvcEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH264MvcEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( const StdVideoDecodeH264Mvc *, seed, videoDecodeH264MvcEXT.pStdMvc );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -76682,6 +91846,28 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH264PictureInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH264PictureInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH264PictureInfoEXT const & videoDecodeH264PictureInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH264PictureInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH264PictureInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoDecodeH264PictureInfo *, seed, videoDecodeH264PictureInfoEXT.pStdPictureInfo );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH264PictureInfoEXT.slicesCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, videoDecodeH264PictureInfoEXT.pSlicesDataOffsets );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -76783,6 +91969,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH264ProfileEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH264ProfileEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH264ProfileEXT const & videoDecodeH264ProfileEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH264ProfileEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH264ProfileEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( StdVideoH264ProfileIdc, seed, videoDecodeH264ProfileEXT.stdProfileIdc );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoDecodeH264PictureLayoutFlagsEXT, seed, videoDecodeH264ProfileEXT.pictureLayout );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -76887,6 +92094,29 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH264SessionCreateInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH264SessionCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH264SessionCreateInfoEXT const &
+                            videoDecodeH264SessionCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH264SessionCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH264SessionCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoDecodeH264CreateFlagsEXT, seed, videoDecodeH264SessionCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ExtensionProperties *,
+                             seed,
+                             videoDecodeH264SessionCreateInfoEXT.pStdExtensionVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -77048,6 +92278,31 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH264SessionParametersAddInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH264SessionParametersAddInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH264SessionParametersAddInfoEXT const &
+                            videoDecodeH264SessionParametersAddInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH264SessionParametersAddInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH264SessionParametersAddInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH264SessionParametersAddInfoEXT.spsStdCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoH264SequenceParameterSet *, seed, videoDecodeH264SessionParametersAddInfoEXT.pSpsStd );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH264SessionParametersAddInfoEXT.ppsStdCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoH264PictureParameterSet *, seed, videoDecodeH264SessionParametersAddInfoEXT.pPpsStd );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -77167,6 +92422,30 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH264SessionParametersCreateInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH264SessionParametersCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH264SessionParametersCreateInfoEXT const &
+                            videoDecodeH264SessionParametersCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH264SessionParametersCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH264SessionParametersCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH264SessionParametersCreateInfoEXT.maxSpsStdCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH264SessionParametersCreateInfoEXT.maxPpsStdCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoDecodeH264SessionParametersAddInfoEXT *,
+                             seed,
+                             videoDecodeH264SessionParametersCreateInfoEXT.pParametersAddInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -77246,6 +92525,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH265CapabilitiesEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH265CapabilitiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH265CapabilitiesEXT const & videoDecodeH265CapabilitiesEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH265CapabilitiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, videoDecodeH265CapabilitiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH265CapabilitiesEXT.maxLevel );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExtensionProperties, seed, videoDecodeH265CapabilitiesEXT.stdExtensionVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -77337,6 +92637,26 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH265DpbSlotInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH265DpbSlotInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH265DpbSlotInfoEXT const & videoDecodeH265DpbSlotInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH265DpbSlotInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH265DpbSlotInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoDecodeH265ReferenceInfo *, seed, videoDecodeH265DpbSlotInfoEXT.pStdReferenceInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -77467,6 +92787,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH265PictureInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH265PictureInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH265PictureInfoEXT const & videoDecodeH265PictureInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH265PictureInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH265PictureInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( StdVideoDecodeH265PictureInfo *, seed, videoDecodeH265PictureInfoEXT.pStdPictureInfo );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH265PictureInfoEXT.slicesCount );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, videoDecodeH265PictureInfoEXT.pSlicesDataOffsets );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -77556,6 +92897,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH265ProfileEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH265ProfileEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH265ProfileEXT const & videoDecodeH265ProfileEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH265ProfileEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH265ProfileEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( StdVideoH265ProfileIdc, seed, videoDecodeH265ProfileEXT.stdProfileIdc );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -77660,6 +93020,29 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH265SessionCreateInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH265SessionCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH265SessionCreateInfoEXT const &
+                            videoDecodeH265SessionCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH265SessionCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH265SessionCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoDecodeH265CreateFlagsEXT, seed, videoDecodeH265SessionCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ExtensionProperties *,
+                             seed,
+                             videoDecodeH265SessionCreateInfoEXT.pStdExtensionVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -77821,6 +93204,31 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH265SessionParametersAddInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH265SessionParametersAddInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH265SessionParametersAddInfoEXT const &
+                            videoDecodeH265SessionParametersAddInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH265SessionParametersAddInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH265SessionParametersAddInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH265SessionParametersAddInfoEXT.spsStdCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoH265SequenceParameterSet *, seed, videoDecodeH265SessionParametersAddInfoEXT.pSpsStd );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH265SessionParametersAddInfoEXT.ppsStdCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoH265PictureParameterSet *, seed, videoDecodeH265SessionParametersAddInfoEXT.pPpsStd );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -77940,6 +93348,30 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeH265SessionParametersCreateInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeH265SessionParametersCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoDecodeH265SessionParametersCreateInfoEXT const &
+                            videoDecodeH265SessionParametersCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeH265SessionParametersCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeH265SessionParametersCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH265SessionParametersCreateInfoEXT.maxSpsStdCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeH265SessionParametersCreateInfoEXT.maxPpsStdCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoDecodeH265SessionParametersAddInfoEXT *,
+                             seed,
+                             videoDecodeH265SessionParametersCreateInfoEXT.pParametersAddInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -78158,6 +93590,37 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoDecodeInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoDecodeInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VideoDecodeInfoKHR const & videoDecodeInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoDecodeInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoDecodeInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoDecodeFlagsKHR, seed, videoDecodeInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Offset2D, seed, videoDecodeInfoKHR.codedOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, videoDecodeInfoKHR.codedExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, videoDecodeInfoKHR.srcBuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, videoDecodeInfoKHR.srcBufferOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, videoDecodeInfoKHR.srcBufferRange );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoPictureResourceKHR, seed, videoDecodeInfoKHR.dstPictureResource );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::VideoReferenceSlotKHR *, seed, videoDecodeInfoKHR.pSetupReferenceSlot );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoDecodeInfoKHR.referenceSlotCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::VideoReferenceSlotKHR *, seed, videoDecodeInfoKHR.pReferenceSlots );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -78355,6 +93818,40 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264CapabilitiesEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264CapabilitiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264CapabilitiesEXT const & videoEncodeH264CapabilitiesEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264CapabilitiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264CapabilitiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264CapabilityFlagsEXT, seed, videoEncodeH264CapabilitiesEXT.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264InputModeFlagsEXT, seed, videoEncodeH264CapabilitiesEXT.inputModeFlags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264OutputModeFlagsEXT, seed, videoEncodeH264CapabilitiesEXT.outputModeFlags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, videoEncodeH264CapabilitiesEXT.minPictureSizeInMbs );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, videoEncodeH264CapabilitiesEXT.maxPictureSizeInMbs );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Extent2D, seed, videoEncodeH264CapabilitiesEXT.inputImageDataAlignment );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH264CapabilitiesEXT.maxNumL0ReferenceForP );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH264CapabilitiesEXT.maxNumL0ReferenceForB );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH264CapabilitiesEXT.maxNumL1Reference );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH264CapabilitiesEXT.qualityLevelCount );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExtensionProperties, seed, videoEncodeH264CapabilitiesEXT.stdExtensionVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -78456,6 +93953,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264DpbSlotInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT const & videoEncodeH264DpbSlotInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264DpbSlotInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264DpbSlotInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( int8_t, seed, videoEncodeH264DpbSlotInfoEXT.slotIndex );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoEncodeH264PictureInfo *, seed, videoEncodeH264DpbSlotInfoEXT.pStdPictureInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -78605,6 +94123,29 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264EmitPictureParametersEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264EmitPictureParametersEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264EmitPictureParametersEXT const &
+                            videoEncodeH264EmitPictureParametersEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264EmitPictureParametersEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264EmitPictureParametersEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH264EmitPictureParametersEXT.spsId );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH264EmitPictureParametersEXT.emitSpsEnable );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264EmitPictureParametersEXT.ppsIdEntryCount );
+    VULKAN_HPP_HASH_COMBINE( const uint8_t *, seed, videoEncodeH264EmitPictureParametersEXT.ppsIdEntries );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -78694,6 +94235,25 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT(
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VideoEncodeH264FrameSizeEXT>::value,
     "VideoEncodeH264FrameSizeEXT is not nothrow_move_constructible!" );
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264FrameSizeEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264FrameSizeEXT const & videoEncodeH264FrameSizeEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264FrameSizeEXT.frameISize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264FrameSizeEXT.framePSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264FrameSizeEXT.frameBSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -78876,6 +94436,34 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264NaluSliceEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264NaluSliceEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264NaluSliceEXT const & videoEncodeH264NaluSliceEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264NaluSliceEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264NaluSliceEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( const StdVideoEncodeH264SliceHeader *, seed, videoEncodeH264NaluSliceEXT.pSliceHeaderStd );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264NaluSliceEXT.mbCount );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH264NaluSliceEXT.refFinalList0EntryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT *,
+                             seed,
+                             videoEncodeH264NaluSliceEXT.pRefFinalList0Entries );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH264NaluSliceEXT.refFinalList1EntryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT *,
+                             seed,
+                             videoEncodeH264NaluSliceEXT.pRefFinalList1Entries );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -78965,6 +94553,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264ProfileEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264ProfileEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264ProfileEXT const & videoEncodeH264ProfileEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264ProfileEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264ProfileEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( StdVideoH264ProfileIdc, seed, videoEncodeH264ProfileEXT.stdProfileIdc );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -79050,6 +94657,25 @@ namespace VULKAN_HPP_NAMESPACE
                             "struct wrapper is not a standard layout!" );
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VideoEncodeH264QpEXT>::value,
                             "VideoEncodeH264QpEXT is not nothrow_move_constructible!" );
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264QpEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264QpEXT const & videoEncodeH264QpEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, videoEncodeH264QpEXT.qpI );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, videoEncodeH264QpEXT.qpP );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, videoEncodeH264QpEXT.qpB );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -79175,6 +94801,30 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264RateControlInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264RateControlInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264RateControlInfoEXT const &
+                            videoEncodeH264RateControlInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264RateControlInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264RateControlInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264RateControlInfoEXT.gopFrameCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264RateControlInfoEXT.idrPeriod );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264RateControlInfoEXT.consecutiveBFrameCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoEncodeH264RateControlStructureFlagBitsEXT,
+                             seed,
+                             videoEncodeH264RateControlInfoEXT.rateControlStructure );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -79354,6 +95004,39 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264RateControlLayerInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264RateControlLayerInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264RateControlLayerInfoEXT const &
+                            videoEncodeH264RateControlLayerInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264RateControlLayerInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264RateControlLayerInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH264RateControlLayerInfoEXT.temporalLayerId );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH264RateControlLayerInfoEXT.useInitialRcQp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264QpEXT, seed, videoEncodeH264RateControlLayerInfoEXT.initialRcQp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH264RateControlLayerInfoEXT.useMinQp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264QpEXT, seed, videoEncodeH264RateControlLayerInfoEXT.minQp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH264RateControlLayerInfoEXT.useMaxQp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264QpEXT, seed, videoEncodeH264RateControlLayerInfoEXT.maxQp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH264RateControlLayerInfoEXT.useMaxFrameSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264FrameSizeEXT, seed, videoEncodeH264RateControlLayerInfoEXT.maxFrameSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -79468,6 +95151,31 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264SessionCreateInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264SessionCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264SessionCreateInfoEXT const &
+                            videoEncodeH264SessionCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264SessionCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264SessionCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264CreateFlagsEXT, seed, videoEncodeH264SessionCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Extent2D, seed, videoEncodeH264SessionCreateInfoEXT.maxPictureSizeInMbs );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ExtensionProperties *,
+                             seed,
+                             videoEncodeH264SessionCreateInfoEXT.pStdExtensionVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -79629,6 +95337,31 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264SessionParametersAddInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264SessionParametersAddInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264SessionParametersAddInfoEXT const &
+                            videoEncodeH264SessionParametersAddInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264SessionParametersAddInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264SessionParametersAddInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264SessionParametersAddInfoEXT.spsStdCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoH264SequenceParameterSet *, seed, videoEncodeH264SessionParametersAddInfoEXT.pSpsStd );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264SessionParametersAddInfoEXT.ppsStdCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoH264PictureParameterSet *, seed, videoEncodeH264SessionParametersAddInfoEXT.pPpsStd );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -79748,6 +95481,30 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264SessionParametersCreateInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264SessionParametersCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264SessionParametersCreateInfoEXT const &
+                            videoEncodeH264SessionParametersCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264SessionParametersCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264SessionParametersCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264SessionParametersCreateInfoEXT.maxSpsStdCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264SessionParametersCreateInfoEXT.maxPpsStdCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH264SessionParametersAddInfoEXT *,
+                             seed,
+                             videoEncodeH264SessionParametersCreateInfoEXT.pParametersAddInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -79957,6 +95714,39 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH264VclFrameInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH264VclFrameInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH264VclFrameInfoEXT const & videoEncodeH264VclFrameInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH264VclFrameInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH264VclFrameInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH264VclFrameInfoEXT.refDefaultFinalList0EntryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT *,
+                             seed,
+                             videoEncodeH264VclFrameInfoEXT.pRefDefaultFinalList0Entries );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH264VclFrameInfoEXT.refDefaultFinalList1EntryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT *,
+                             seed,
+                             videoEncodeH264VclFrameInfoEXT.pRefDefaultFinalList1Entries );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH264VclFrameInfoEXT.naluSliceEntryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH264NaluSliceEXT *,
+                             seed,
+                             videoEncodeH264VclFrameInfoEXT.pNaluSliceEntries );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT *,
+                             seed,
+                             videoEncodeH264VclFrameInfoEXT.pCurrentPictureInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -80154,6 +95944,41 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265CapabilitiesEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265CapabilitiesEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265CapabilitiesEXT const & videoEncodeH265CapabilitiesEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265CapabilitiesEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265CapabilitiesEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265CapabilityFlagsEXT, seed, videoEncodeH265CapabilitiesEXT.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265InputModeFlagsEXT, seed, videoEncodeH265CapabilitiesEXT.inputModeFlags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265OutputModeFlagsEXT, seed, videoEncodeH265CapabilitiesEXT.outputModeFlags );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265CtbSizeFlagsEXT, seed, videoEncodeH265CapabilitiesEXT.ctbSizes );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Extent2D, seed, videoEncodeH265CapabilitiesEXT.inputImageDataAlignment );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH265CapabilitiesEXT.maxNumL0ReferenceForP );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH265CapabilitiesEXT.maxNumL0ReferenceForB );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH265CapabilitiesEXT.maxNumL1Reference );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH265CapabilitiesEXT.maxNumSubLayers );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH265CapabilitiesEXT.qualityLevelCount );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::ExtensionProperties, seed, videoEncodeH265CapabilitiesEXT.stdExtensionVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -80254,6 +96079,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265DpbSlotInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265DpbSlotInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265DpbSlotInfoEXT const & videoEncodeH265DpbSlotInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265DpbSlotInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265DpbSlotInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( int8_t, seed, videoEncodeH265DpbSlotInfoEXT.slotIndex );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoEncodeH265ReferenceInfo *, seed, videoEncodeH265DpbSlotInfoEXT.pStdReferenceInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -80426,6 +96272,32 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265EmitPictureParametersEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265EmitPictureParametersEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265EmitPictureParametersEXT const &
+                            videoEncodeH265EmitPictureParametersEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265EmitPictureParametersEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265EmitPictureParametersEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH265EmitPictureParametersEXT.vpsId );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH265EmitPictureParametersEXT.spsId );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH265EmitPictureParametersEXT.emitVpsEnable );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH265EmitPictureParametersEXT.emitSpsEnable );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265EmitPictureParametersEXT.ppsIdEntryCount );
+    VULKAN_HPP_HASH_COMBINE( const uint8_t *, seed, videoEncodeH265EmitPictureParametersEXT.ppsIdEntries );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -80515,6 +96387,25 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT(
     std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VideoEncodeH265FrameSizeEXT>::value,
     "VideoEncodeH265FrameSizeEXT is not nothrow_move_constructible!" );
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265FrameSizeEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265FrameSizeEXT const & videoEncodeH265FrameSizeEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265FrameSizeEXT.frameISize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265FrameSizeEXT.framePSize );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265FrameSizeEXT.frameBSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -80688,6 +96579,36 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265ReferenceListsEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT const & videoEncodeH265ReferenceListsEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265ReferenceListsEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265ReferenceListsEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH265ReferenceListsEXT.referenceList0EntryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH265DpbSlotInfoEXT *,
+                             seed,
+                             videoEncodeH265ReferenceListsEXT.pReferenceList0Entries );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH265ReferenceListsEXT.referenceList1EntryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH265DpbSlotInfoEXT *,
+                             seed,
+                             videoEncodeH265ReferenceListsEXT.pReferenceList1Entries );
+    VULKAN_HPP_HASH_COMBINE( const StdVideoEncodeH265ReferenceModifications *,
+                             seed,
+                             videoEncodeH265ReferenceListsEXT.pReferenceModifications );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -80798,6 +96719,29 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265NaluSliceEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT const & videoEncodeH265NaluSliceEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265NaluSliceEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265NaluSliceEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265NaluSliceEXT.ctbCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT *,
+                             seed,
+                             videoEncodeH265NaluSliceEXT.pReferenceFinalLists );
+    VULKAN_HPP_HASH_COMBINE( const StdVideoEncodeH265SliceHeader *, seed, videoEncodeH265NaluSliceEXT.pSliceHeaderStd );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -80887,6 +96831,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265ProfileEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265ProfileEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265ProfileEXT const & videoEncodeH265ProfileEXT ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265ProfileEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265ProfileEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( StdVideoH265ProfileIdc, seed, videoEncodeH265ProfileEXT.stdProfileIdc );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -80972,6 +96935,25 @@ namespace VULKAN_HPP_NAMESPACE
                             "struct wrapper is not a standard layout!" );
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VideoEncodeH265QpEXT>::value,
                             "VideoEncodeH265QpEXT is not nothrow_move_constructible!" );
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265QpEXT>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265QpEXT const & videoEncodeH265QpEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, videoEncodeH265QpEXT.qpI );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, videoEncodeH265QpEXT.qpP );
+    VULKAN_HPP_HASH_COMBINE( int32_t, seed, videoEncodeH265QpEXT.qpB );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -81097,6 +97079,30 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265RateControlInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265RateControlInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265RateControlInfoEXT const &
+                            videoEncodeH265RateControlInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265RateControlInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265RateControlInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265RateControlInfoEXT.gopFrameCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265RateControlInfoEXT.idrPeriod );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265RateControlInfoEXT.consecutiveBFrameCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoEncodeH265RateControlStructureFlagBitsEXT,
+                             seed,
+                             videoEncodeH265RateControlInfoEXT.rateControlStructure );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -81276,6 +97282,39 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265RateControlLayerInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265RateControlLayerInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265RateControlLayerInfoEXT const &
+                            videoEncodeH265RateControlLayerInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265RateControlLayerInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265RateControlLayerInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeH265RateControlLayerInfoEXT.temporalId );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH265RateControlLayerInfoEXT.useInitialRcQp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265QpEXT, seed, videoEncodeH265RateControlLayerInfoEXT.initialRcQp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH265RateControlLayerInfoEXT.useMinQp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265QpEXT, seed, videoEncodeH265RateControlLayerInfoEXT.minQp );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH265RateControlLayerInfoEXT.useMaxQp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265QpEXT, seed, videoEncodeH265RateControlLayerInfoEXT.maxQp );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::Bool32, seed, videoEncodeH265RateControlLayerInfoEXT.useMaxFrameSize );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265FrameSizeEXT, seed, videoEncodeH265RateControlLayerInfoEXT.maxFrameSize );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -81380,6 +97419,29 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265SessionCreateInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265SessionCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265SessionCreateInfoEXT const &
+                            videoEncodeH265SessionCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265SessionCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265SessionCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265CreateFlagsEXT, seed, videoEncodeH265SessionCreateInfoEXT.flags );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::ExtensionProperties *,
+                             seed,
+                             videoEncodeH265SessionCreateInfoEXT.pStdExtensionVersion );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -81576,6 +97638,34 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265SessionParametersAddInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265SessionParametersAddInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265SessionParametersAddInfoEXT const &
+                            videoEncodeH265SessionParametersAddInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265SessionParametersAddInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265SessionParametersAddInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265SessionParametersAddInfoEXT.vpsStdCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoH265VideoParameterSet *, seed, videoEncodeH265SessionParametersAddInfoEXT.pVpsStd );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265SessionParametersAddInfoEXT.spsStdCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoH265SequenceParameterSet *, seed, videoEncodeH265SessionParametersAddInfoEXT.pSpsStd );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265SessionParametersAddInfoEXT.ppsStdCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoH265PictureParameterSet *, seed, videoEncodeH265SessionParametersAddInfoEXT.pPpsStd );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -81706,6 +97796,31 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265SessionParametersCreateInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265SessionParametersCreateInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265SessionParametersCreateInfoEXT const &
+                            videoEncodeH265SessionParametersCreateInfoEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265SessionParametersCreateInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265SessionParametersCreateInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265SessionParametersCreateInfoEXT.maxVpsStdCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265SessionParametersCreateInfoEXT.maxSpsStdCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265SessionParametersCreateInfoEXT.maxPpsStdCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH265SessionParametersAddInfoEXT *,
+                             seed,
+                             videoEncodeH265SessionParametersCreateInfoEXT.pParametersAddInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -81853,6 +97968,33 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeH265VclFrameInfoEXT;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeH265VclFrameInfoEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeH265VclFrameInfoEXT const & videoEncodeH265VclFrameInfoEXT )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeH265VclFrameInfoEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeH265VclFrameInfoEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT *,
+                             seed,
+                             videoEncodeH265VclFrameInfoEXT.pReferenceFinalLists );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeH265VclFrameInfoEXT.naluSliceEntryCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT *,
+                             seed,
+                             videoEncodeH265VclFrameInfoEXT.pNaluSliceEntries );
+    VULKAN_HPP_HASH_COMBINE(
+      const StdVideoEncodeH265PictureInfo *, seed, videoEncodeH265VclFrameInfoEXT.pCurrentPictureInfo );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -82084,6 +98226,38 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VideoEncodeInfoKHR const & videoEncodeInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoEncodeFlagsKHR, seed, videoEncodeInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeInfoKHR.qualityLevel );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, videoEncodeInfoKHR.codedExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Buffer, seed, videoEncodeInfoKHR.dstBitstreamBuffer );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, videoEncodeInfoKHR.dstBitstreamBufferOffset );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DeviceSize, seed, videoEncodeInfoKHR.dstBitstreamBufferMaxRange );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoPictureResourceKHR, seed, videoEncodeInfoKHR.srcPictureResource );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::VideoReferenceSlotKHR *, seed, videoEncodeInfoKHR.pSetupReferenceSlot );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeInfoKHR.referenceSlotCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::VideoReferenceSlotKHR *, seed, videoEncodeInfoKHR.pReferenceSlots );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeInfoKHR.precedingExternallyEncodedBytes );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -82231,6 +98405,30 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeRateControlLayerInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeRateControlLayerInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeRateControlLayerInfoKHR const &
+                            videoEncodeRateControlLayerInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeRateControlLayerInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeRateControlLayerInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeRateControlLayerInfoKHR.averageBitrate );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeRateControlLayerInfoKHR.maxBitrate );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeRateControlLayerInfoKHR.frameRateNumerator );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeRateControlLayerInfoKHR.frameRateDenominator );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeRateControlLayerInfoKHR.virtualBufferSizeInMs );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoEncodeRateControlLayerInfoKHR.initialVirtualBufferSizeInMs );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -82379,6 +98577,33 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEncodeRateControlInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEncodeRateControlInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoEncodeRateControlInfoKHR const & videoEncodeRateControlInfoKHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEncodeRateControlInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEncodeRateControlInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoEncodeRateControlFlagsKHR, seed, videoEncodeRateControlInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoEncodeRateControlModeFlagBitsKHR,
+                             seed,
+                             videoEncodeRateControlInfoKHR.rateControlMode );
+    VULKAN_HPP_HASH_COMBINE( uint8_t, seed, videoEncodeRateControlInfoKHR.layerCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::VideoEncodeRateControlLayerInfoKHR *,
+                             seed,
+                             videoEncodeRateControlInfoKHR.pLayerConfigs );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -82466,6 +98691,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoEndCodingInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoEndCodingInfoKHR>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::VideoEndCodingInfoKHR const & videoEndCodingInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoEndCodingInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoEndCodingInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoEndCodingFlagsKHR, seed, videoEndCodingInfoKHR.flags );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -82539,6 +98783,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoFormatPropertiesKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoFormatPropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoFormatPropertiesKHR const & videoFormatPropertiesKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoFormatPropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, videoFormatPropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, videoFormatPropertiesKHR.format );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -82640,6 +98903,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoGetMemoryPropertiesKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoGetMemoryPropertiesKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoGetMemoryPropertiesKHR const & videoGetMemoryPropertiesKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoGetMemoryPropertiesKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoGetMemoryPropertiesKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoGetMemoryPropertiesKHR.memoryBindIndex );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::MemoryRequirements2 *, seed, videoGetMemoryPropertiesKHR.pMemoryRequirements );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -82731,6 +99015,26 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoQueueFamilyProperties2KHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoQueueFamilyProperties2KHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoQueueFamilyProperties2KHR const & videoQueueFamilyProperties2KHR )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoQueueFamilyProperties2KHR.sType );
+    VULKAN_HPP_HASH_COMBINE( void *, seed, videoQueueFamilyProperties2KHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoCodecOperationFlagsKHR, seed, videoQueueFamilyProperties2KHR.videoCodecOperations );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -82895,6 +99199,33 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoSessionCreateInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoSessionCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoSessionCreateInfoKHR const & videoSessionCreateInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoSessionCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoSessionCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoSessionCreateInfoKHR.queueFamilyIndex );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoSessionCreateFlagsKHR, seed, videoSessionCreateInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::VideoProfileKHR *, seed, videoSessionCreateInfoKHR.pVideoProfile );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, videoSessionCreateInfoKHR.pictureFormat );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Extent2D, seed, videoSessionCreateInfoKHR.maxCodedExtent );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Format, seed, videoSessionCreateInfoKHR.referencePicturesFormat );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoSessionCreateInfoKHR.maxReferencePicturesSlotsCount );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoSessionCreateInfoKHR.maxReferencePicturesActiveCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -83000,6 +99331,29 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoSessionParametersCreateInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoSessionParametersCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoSessionParametersCreateInfoKHR const &
+                            videoSessionParametersCreateInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoSessionParametersCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoSessionParametersCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::VideoSessionParametersKHR,
+                             seed,
+                             videoSessionParametersCreateInfoKHR.videoSessionParametersTemplate );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::VideoSessionKHR, seed, videoSessionParametersCreateInfoKHR.videoSession );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -83092,6 +99446,25 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = VideoSessionParametersUpdateInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::VideoSessionParametersUpdateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::VideoSessionParametersUpdateInfoKHR const &
+                            videoSessionParametersUpdateInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, videoSessionParametersUpdateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, videoSessionParametersUpdateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, videoSessionParametersUpdateInfoKHR.updateSequenceCount );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_USE_PLATFORM_WAYLAND_KHR )
@@ -83200,6 +99573,28 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = WaylandSurfaceCreateInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::WaylandSurfaceCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::WaylandSurfaceCreateInfoKHR const & waylandSurfaceCreateInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, waylandSurfaceCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, waylandSurfaceCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::WaylandSurfaceCreateFlagsKHR, seed, waylandSurfaceCreateInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( struct wl_display *, seed, waylandSurfaceCreateInfoKHR.display );
+    VULKAN_HPP_HASH_COMBINE( struct wl_surface *, seed, waylandSurfaceCreateInfoKHR.surface );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
 
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
@@ -83462,6 +99857,33 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = Win32KeyedMutexAcquireReleaseInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::Win32KeyedMutexAcquireReleaseInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::Win32KeyedMutexAcquireReleaseInfoKHR const &
+                            win32KeyedMutexAcquireReleaseInfoKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, win32KeyedMutexAcquireReleaseInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, win32KeyedMutexAcquireReleaseInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, win32KeyedMutexAcquireReleaseInfoKHR.acquireCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DeviceMemory *, seed, win32KeyedMutexAcquireReleaseInfoKHR.pAcquireSyncs );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, win32KeyedMutexAcquireReleaseInfoKHR.pAcquireKeys );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, win32KeyedMutexAcquireReleaseInfoKHR.pAcquireTimeouts );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, win32KeyedMutexAcquireReleaseInfoKHR.releaseCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DeviceMemory *, seed, win32KeyedMutexAcquireReleaseInfoKHR.pReleaseSyncs );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, win32KeyedMutexAcquireReleaseInfoKHR.pReleaseKeys );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
@@ -83726,6 +100148,33 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = Win32KeyedMutexAcquireReleaseInfoNV;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::Win32KeyedMutexAcquireReleaseInfoNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::Win32KeyedMutexAcquireReleaseInfoNV const &
+                            win32KeyedMutexAcquireReleaseInfoNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, win32KeyedMutexAcquireReleaseInfoNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, win32KeyedMutexAcquireReleaseInfoNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, win32KeyedMutexAcquireReleaseInfoNV.acquireCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DeviceMemory *, seed, win32KeyedMutexAcquireReleaseInfoNV.pAcquireSyncs );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, win32KeyedMutexAcquireReleaseInfoNV.pAcquireKeys );
+    VULKAN_HPP_HASH_COMBINE( const uint32_t *, seed, win32KeyedMutexAcquireReleaseInfoNV.pAcquireTimeoutMilliseconds );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, win32KeyedMutexAcquireReleaseInfoNV.releaseCount );
+    VULKAN_HPP_HASH_COMBINE(
+      const VULKAN_HPP_NAMESPACE::DeviceMemory *, seed, win32KeyedMutexAcquireReleaseInfoNV.pReleaseSyncs );
+    VULKAN_HPP_HASH_COMBINE( const uint64_t *, seed, win32KeyedMutexAcquireReleaseInfoNV.pReleaseKeys );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
@@ -83833,6 +100282,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = Win32SurfaceCreateInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::Win32SurfaceCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::Win32SurfaceCreateInfoKHR const & win32SurfaceCreateInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, win32SurfaceCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, win32SurfaceCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::Win32SurfaceCreateFlagsKHR, seed, win32SurfaceCreateInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( HINSTANCE, seed, win32SurfaceCreateInfoKHR.hinstance );
+    VULKAN_HPP_HASH_COMBINE( HWND, seed, win32SurfaceCreateInfoKHR.hwnd );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   struct WriteDescriptorSet
@@ -84059,6 +100529,31 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = WriteDescriptorSet;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::WriteDescriptorSet>
+{
+  std::size_t
+    operator()( VULKAN_HPP_NAMESPACE::WriteDescriptorSet const & writeDescriptorSet ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, writeDescriptorSet.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, writeDescriptorSet.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DescriptorSet, seed, writeDescriptorSet.dstSet );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, writeDescriptorSet.dstBinding );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, writeDescriptorSet.dstArrayElement );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, writeDescriptorSet.descriptorCount );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::DescriptorType, seed, writeDescriptorSet.descriptorType );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::DescriptorImageInfo *, seed, writeDescriptorSet.pImageInfo );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::DescriptorBufferInfo *, seed, writeDescriptorSet.pBufferInfo );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::BufferView *, seed, writeDescriptorSet.pTexelBufferView );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct WriteDescriptorSetAccelerationStructureKHR
   {
     using NativeType = VkWriteDescriptorSetAccelerationStructureKHR;
@@ -84186,6 +100681,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = WriteDescriptorSetAccelerationStructureKHR;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::WriteDescriptorSetAccelerationStructureKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::WriteDescriptorSetAccelerationStructureKHR const &
+                            writeDescriptorSetAccelerationStructureKHR ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, writeDescriptorSetAccelerationStructureKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, writeDescriptorSetAccelerationStructureKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, writeDescriptorSetAccelerationStructureKHR.accelerationStructureCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::AccelerationStructureKHR *,
+                             seed,
+                             writeDescriptorSetAccelerationStructureKHR.pAccelerationStructures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct WriteDescriptorSetAccelerationStructureNV
   {
     using NativeType = VkWriteDescriptorSetAccelerationStructureNV;
@@ -84313,6 +100830,28 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = WriteDescriptorSetAccelerationStructureNV;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::WriteDescriptorSetAccelerationStructureNV>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::WriteDescriptorSetAccelerationStructureNV const &
+                            writeDescriptorSetAccelerationStructureNV ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE(
+      VULKAN_HPP_NAMESPACE::StructureType, seed, writeDescriptorSetAccelerationStructureNV.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, writeDescriptorSetAccelerationStructureNV.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, writeDescriptorSetAccelerationStructureNV.accelerationStructureCount );
+    VULKAN_HPP_HASH_COMBINE( const VULKAN_HPP_NAMESPACE::AccelerationStructureNV *,
+                             seed,
+                             writeDescriptorSetAccelerationStructureNV.pAccelerationStructures );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
   struct WriteDescriptorSetInlineUniformBlockEXT
   {
     using NativeType = VkWriteDescriptorSetInlineUniformBlockEXT;
@@ -84434,6 +100973,25 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = WriteDescriptorSetInlineUniformBlockEXT;
   };
 
+}  // namespace VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::WriteDescriptorSetInlineUniformBlockEXT>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::WriteDescriptorSetInlineUniformBlockEXT const &
+                            writeDescriptorSetInlineUniformBlockEXT ) const VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, writeDescriptorSetInlineUniformBlockEXT.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, writeDescriptorSetInlineUniformBlockEXT.pNext );
+    VULKAN_HPP_HASH_COMBINE( uint32_t, seed, writeDescriptorSetInlineUniformBlockEXT.dataSize );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, writeDescriptorSetInlineUniformBlockEXT.pData );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #if defined( VK_USE_PLATFORM_XCB_KHR )
   struct XcbSurfaceCreateInfoKHR
   {
@@ -84539,6 +101097,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = XcbSurfaceCreateInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::XcbSurfaceCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::XcbSurfaceCreateInfoKHR const & xcbSurfaceCreateInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, xcbSurfaceCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, xcbSurfaceCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::XcbSurfaceCreateFlagsKHR, seed, xcbSurfaceCreateInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( xcb_connection_t *, seed, xcbSurfaceCreateInfoKHR.connection );
+    VULKAN_HPP_HASH_COMBINE( xcb_window_t, seed, xcbSurfaceCreateInfoKHR.window );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
 
 #if defined( VK_USE_PLATFORM_XLIB_KHR )
@@ -84645,6 +101224,27 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = XlibSurfaceCreateInfoKHR;
   };
+
+}  // VULKAN_HPP_NAMESPACE
+
+template <>
+struct std::hash<VULKAN_HPP_NAMESPACE::XlibSurfaceCreateInfoKHR>
+{
+  std::size_t operator()( VULKAN_HPP_NAMESPACE::XlibSurfaceCreateInfoKHR const & xlibSurfaceCreateInfoKHR ) const
+    VULKAN_HPP_NOEXCEPT
+  {
+    std::size_t seed = 0;
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::StructureType, seed, xlibSurfaceCreateInfoKHR.sType );
+    VULKAN_HPP_HASH_COMBINE( const void *, seed, xlibSurfaceCreateInfoKHR.pNext );
+    VULKAN_HPP_HASH_COMBINE( VULKAN_HPP_NAMESPACE::XlibSurfaceCreateFlagsKHR, seed, xlibSurfaceCreateInfoKHR.flags );
+    VULKAN_HPP_HASH_COMBINE( Display *, seed, xlibSurfaceCreateInfoKHR.dpy );
+    VULKAN_HPP_HASH_COMBINE( Window, seed, xlibSurfaceCreateInfoKHR.window );
+    return seed;
+  }
+};
+
+namespace VULKAN_HPP_NAMESPACE
+{
 #endif /*VK_USE_PLATFORM_XLIB_KHR*/
 
 }  // namespace VULKAN_HPP_NAMESPACE

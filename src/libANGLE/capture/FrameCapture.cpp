@@ -68,12 +68,16 @@ constexpr char kSerializeStateVarName[] = "ANGLE_CAPTURE_SERIALIZE_STATE";
 constexpr char kValidationVarName[]     = "ANGLE_CAPTURE_VALIDATION";
 constexpr char kValidationExprVarName[] = "ANGLE_CAPTURE_VALIDATION_EXPR";
 constexpr char kTrimEnabledVarName[]    = "ANGLE_CAPTURE_TRIM_ENABLED";
+constexpr char kSourceSizeVarName[]     = "ANGLE_CAPTURE_SOURCE_SIZE";
 
 constexpr size_t kBinaryAlignment   = 16;
 constexpr size_t kFunctionSizeLimit = 5000;
 
 // Limit based on MSVC Compiler Error C2026
 constexpr size_t kStringLengthLimit = 16380;
+
+// Default limit to number of bytes in a capture source files.
+constexpr size_t kDefaultSourceFileSizeThreshold = 400000;
 
 // Android debug properties that correspond to the above environment variables
 constexpr char kAndroidEnabled[]        = "debug.angle.capture.enabled";
@@ -86,6 +90,7 @@ constexpr char kAndroidCompression[]    = "debug.angle.capture.compression";
 constexpr char kAndroidValidation[]     = "debug.angle.capture.validation";
 constexpr char kAndroidValidationExpr[] = "debug.angle.capture.validation_expr";
 constexpr char kAndroidTrimEnabled[]    = "debug.angle.capture.trim_enabled";
+constexpr char kAndroidSourceSize[]     = "debug.angle.capture.source_size";
 
 struct FramebufferCaptureFuncs
 {
@@ -350,26 +355,6 @@ std::ostream &operator<<(std::ostream &os, const FmtGetSerializedContextStateFun
 {
     os << "GetSerializedContext" << fmt.contextId << "StateFrame" << fmt.frameIndex << "Data()";
     return os;
-}
-
-std::string GetCaptureFileName(gl::ContextID contextId,
-                               const std::string &captureLabel,
-                               uint32_t frameIndex,
-                               const char *suffix)
-{
-    std::stringstream fnameStream;
-
-    if (contextId == kSharedContextId)
-    {
-        fnameStream << FmtCapturePrefix(contextId, captureLabel) << suffix;
-    }
-    else
-    {
-        fnameStream << FmtCapturePrefix(contextId, captureLabel) << "_frame" << std::setfill('0')
-                    << std::setw(3) << frameIndex << suffix;
-    }
-
-    return fnameStream.str();
 }
 
 void WriteGLFloatValue(std::ostream &out, GLfloat value)
@@ -1275,7 +1260,7 @@ void WriteAuxiliaryContextCppSetupReplay(ReplayWriter &replayWriter,
         replayWriter.addPrivateFunction(proto, headerStream, bodyStream);
     }
 
-    replayWriter.saveFrame(frameIndex);
+    replayWriter.saveFrame();
 }
 
 void WriteShareGroupCppSetupReplay(ReplayWriter &replayWriter,
@@ -1288,12 +1273,14 @@ void WriteShareGroupCppSetupReplay(ReplayWriter &replayWriter,
                                    ResourceTracker *resourceTracker,
                                    std::vector<uint8_t> *binaryData,
                                    bool serializeStateEnabled,
-                                   const FrameCaptureShared &frameCaptureShared)
+                                   gl::ContextID windowSurfaceContextID)
 {
     {
         std::stringstream include;
 
         include << "#include \"angle_trace_gl.h\"\n";
+        include << "#include \"" << FmtCapturePrefix(windowSurfaceContextID, captureLabel)
+                << ".h\"\n";
 
         std::string includeString = include.str();
 
@@ -2036,12 +2023,17 @@ void CaptureVertexArrayState(std::vector<CallCapture> *setupCalls,
         {
             // Each attribute can pull from a separate buffer, so check the binding
             gl::Buffer *buffer = binding.getBuffer().get();
-            if (buffer && buffer != replayState->getArrayBuffer())
+            if (buffer != replayState->getArrayBuffer())
             {
                 replayState->setBufferBinding(context, gl::BufferBinding::Array, buffer);
 
-                Capture(setupCalls, CaptureBindBuffer(*replayState, true, gl::BufferBinding::Array,
-                                                      buffer->id()));
+                gl::BufferID bufferID = {0};
+                if (buffer)
+                {
+                    bufferID = buffer->id();
+                }
+                Capture(setupCalls,
+                        CaptureBindBuffer(*replayState, true, gl::BufferBinding::Array, bufferID));
             }
 
             // Establish the relationship between currently bound buffer and the VAO
@@ -2665,6 +2657,13 @@ void CaptureShareGroupMidExecutionSetup(const gl::Context *context,
         }
     }
 
+    // Clear the array buffer binding.
+    if (replayState.getTargetBuffer(gl::BufferBinding::Array))
+    {
+        cap(CaptureBindBuffer(replayState, true, gl::BufferBinding::Array, {0}));
+        replayState.setBufferBinding(context, gl::BufferBinding::Array, nullptr);
+    }
+
     // Set a unpack alignment of 1. Otherwise, computeRowPitch() will compute the wrong value,
     // leading to a crash in memcpy() when capturing the texture contents.
     gl::PixelUnpackState &currentUnpackState = replayState.getUnpackState();
@@ -3159,9 +3158,6 @@ void CaptureShareGroupMidExecutionSetup(const gl::Context *context,
         CaptureFenceSyncResetCalls(replayState, resourceTracker, syncID, sync);
         resourceTracker->getStartingFenceSyncs().insert(syncID);
     }
-
-    // Allow the replayState object to be destroyed conveniently.
-    replayState.setBufferBinding(context, gl::BufferBinding::Array, nullptr);
 }
 
 void CaptureMidExecutionSetup(const gl::Context *context,
@@ -3253,6 +3249,7 @@ void CaptureMidExecutionSetup(const gl::Context *context,
             (!isArray && bufferID.value != 0))
         {
             cap(CaptureBindBuffer(replayState, true, binding, bufferID));
+            replayState.setBufferBinding(context, binding, boundBuffers[binding].get());
         }
 
         // Restore all buffer bindings for Reset
@@ -4058,6 +4055,14 @@ struct ParamValueTrait<gl::FramebufferID>
     static constexpr const char *name = "framebufferPacked";
     static const ParamType typeID     = ParamType::TFramebufferID;
 };
+
+std::string GetBaseName(const std::string &nameWithPath)
+{
+    std::vector<std::string> result = angle::SplitString(
+        nameWithPath, "/\\", WhitespaceHandling::TRIM_WHITESPACE, SplitResult::SPLIT_WANT_NONEMPTY);
+    ASSERT(!result.empty());
+    return result.back();
+}
 }  // namespace
 
 ParamCapture::ParamCapture() : type(ParamType::TGLenum), enumGroup(gl::GLenumGroup::DefaultGroup) {}
@@ -4336,6 +4341,21 @@ FrameCaptureShared::FrameCaptureShared()
     if (trimEnabledFromEnv == "0")
     {
         mTrimEnabled = false;
+    }
+
+    std::string sourceSizeFromEnv =
+        GetEnvironmentVarOrUnCachedAndroidProperty(kSourceSizeVarName, kAndroidSourceSize);
+    if (!sourceSizeFromEnv.empty())
+    {
+        int sourceSize = atoi(sourceSizeFromEnv.c_str());
+        if (sourceSize < 0)
+        {
+            WARN() << "Invalid capture source size: " << sourceSize;
+        }
+        else
+        {
+            mReplayWriter.setSourceFileSizeThreshold(sourceSize);
+        }
     }
 
     if (mFrameIndex == mCaptureStartFrame)
@@ -5328,7 +5348,7 @@ void FrameCaptureShared::maybeCapturePreCallUpdates(
         }
     }
 
-    updateResourceCounts(call);
+    updateResourceCountsFromCallCapture(call);
 }
 
 template <typename ParamValueType>
@@ -5358,36 +5378,57 @@ void FrameCaptureShared::maybeGenResourceOnBind(CallCapture &call)
     }
 }
 
-void FrameCaptureShared::updateResourceCounts(const CallCapture &call)
+void FrameCaptureShared::updateResourceCountsFromParamCapture(const ParamCapture &param,
+                                                              ResourceIDType idType)
+{
+    if (idType != ResourceIDType::InvalidEnum)
+    {
+        mHasResourceType.set(idType);
+
+        // Capture resource IDs for non-pointer types.
+        if (strcmp(ParamTypeToString(param.type), "GLuint") == 0)
+        {
+            mMaxAccessedResourceIDs[idType] =
+                std::max(mMaxAccessedResourceIDs[idType], param.value.GLuintVal);
+        }
+        // Capture resource IDs for pointer types.
+        if (strstr(ParamTypeToString(param.type), "GLuint *") != nullptr)
+        {
+            if (param.data.size() == 1u)
+            {
+                const GLuint *dataPtr = reinterpret_cast<const GLuint *>(param.data[0].data());
+                size_t numHandles     = param.data[0].size() / sizeof(GLuint);
+                for (size_t handleIndex = 0; handleIndex < numHandles; ++handleIndex)
+                {
+                    mMaxAccessedResourceIDs[idType] =
+                        std::max(mMaxAccessedResourceIDs[idType], dataPtr[handleIndex]);
+                }
+            }
+        }
+    }
+}
+
+void FrameCaptureShared::updateResourceCountsFromCallCapture(const CallCapture &call)
 {
     for (const ParamCapture &param : call.params.getParamCaptures())
     {
         ResourceIDType idType = GetResourceIDTypeFromParamType(param.type);
-        if (idType != ResourceIDType::InvalidEnum)
-        {
-            mHasResourceType.set(idType);
+        updateResourceCountsFromParamCapture(param, idType);
+    }
 
-            // Capture resource IDs for non-pointer types.
-            if (strcmp(ParamTypeToString(param.type), "GLuint") == 0)
-            {
-                mMaxAccessedResourceIDs[idType] =
-                    std::max(mMaxAccessedResourceIDs[idType], param.value.GLuintVal);
-            }
-            // Capture resource IDs for pointer types.
-            if (strstr(ParamTypeToString(param.type), "GLuint *") != nullptr)
-            {
-                if (param.data.size() == 1u)
-                {
-                    const GLuint *dataPtr = reinterpret_cast<const GLuint *>(param.data[0].data());
-                    size_t numHandles     = param.data[0].size() / sizeof(GLuint);
-                    for (size_t handleIndex = 0; handleIndex < numHandles; ++handleIndex)
-                    {
-                        mMaxAccessedResourceIDs[idType] =
-                            std::max(mMaxAccessedResourceIDs[idType], dataPtr[handleIndex]);
-                    }
-                }
-            }
-        }
+    // Update resource IDs in the return value. Return values types are not stored as resource IDs,
+    // but instead are stored as GLuints. Therefore we need to explicitly label the resource ID type
+    // when we call update. Currently only shader and program creation are explicitly tracked.
+    switch (call.entryPoint)
+    {
+        case EntryPoint::GLCreateShader:
+        case EntryPoint::GLCreateProgram:
+            updateResourceCountsFromParamCapture(call.params.getReturnValue(),
+                                                 ResourceIDType::ShaderProgram);
+            break;
+
+        default:
+            break;
     }
 }
 
@@ -5682,7 +5723,7 @@ void FrameCaptureShared::scanSetupCalls(const gl::Context *context,
     for (CallCapture &call : setupCalls)
     {
         updateReadBufferSize(call.params.getReadBufferSize());
-        updateResourceCounts(call);
+        updateResourceCountsFromCallCapture(call);
     }
 }
 
@@ -5812,7 +5853,7 @@ void FrameCaptureShared::onEndFrame(const gl::Context *context)
         // Write shared MEC after frame sequence so we can eliminate unused assets like programs
         WriteShareGroupCppSetupReplay(mReplayWriter, mCompression, mOutDirectory, mCaptureLabel, 1,
                                       1, mShareGroupSetupCalls, &mResourceTracker, &mBinaryData,
-                                      mSerializeStateEnabled, *this);
+                                      mSerializeStateEnabled, mWindowSurfaceContextID);
 
         // Save the index files after the last frame.
         writeCppReplayIndexFiles(context, false);
@@ -5971,10 +6012,13 @@ void TrackedResource::setModifiedResource(GLuint id)
 
 void ResourceTracker::setBufferMapped(GLuint id)
 {
-    // If this was a starting buffer, we may need to restore it to original state during Reset
-    TrackedResource &trackedBuffers = getTrackedResource(ResourceIDType::Buffer);
-    if (trackedBuffers.getStartingResources().find(id) !=
-        trackedBuffers.getStartingResources().end())
+    // If this was a starting buffer, we may need to restore it to original state during Reset.
+    // Skip buffers that were deleted after the starting point.
+    const TrackedResource &trackedBuffers = getTrackedResource(ResourceIDType::Buffer);
+    const ResourceSet &startingBuffers    = trackedBuffers.getStartingResources();
+    const ResourceSet &buffersToRegen     = trackedBuffers.getResourcesToRegen();
+    if (startingBuffers.find(id) != startingBuffers.end() &&
+        buffersToRegen.find(id) == buffersToRegen.end())
     {
         // Track that its current state is mapped (true)
         mStartingBuffersMappedCurrent[id] = true;
@@ -5983,10 +6027,13 @@ void ResourceTracker::setBufferMapped(GLuint id)
 
 void ResourceTracker::setBufferUnmapped(GLuint id)
 {
-    // If this was a starting buffer, we may need to restore it to original state during Reset
-    TrackedResource &trackedBuffers = getTrackedResource(ResourceIDType::Buffer);
-    if (trackedBuffers.getStartingResources().find(id) !=
-        trackedBuffers.getStartingResources().end())
+    // If this was a starting buffer, we may need to restore it to original state during Reset.
+    // Skip buffers that were deleted after the starting point.
+    const TrackedResource &trackedBuffers = getTrackedResource(ResourceIDType::Buffer);
+    const ResourceSet &startingBuffers    = trackedBuffers.getStartingResources();
+    const ResourceSet &buffersToRegen     = trackedBuffers.getResourcesToRegen();
+    if (startingBuffers.find(id) != startingBuffers.end() &&
+        buffersToRegen.find(id) == buffersToRegen.end())
     {
         // Track that its current state is unmapped (false)
         mStartingBuffersMappedCurrent[id] = false;
@@ -6065,28 +6112,24 @@ void FrameCaptureShared::replay(gl::Context *context)
     }
 }
 
-void FrameCaptureShared::writeCppReplayIndexFiles(const gl::Context *context,
-                                                  bool writeResetContextCall)
+// Serialize trace metadata into a JSON file. The JSON file will be named "trace_prefix.json".
+//
+// As of writing, it will have the format like so:
+// {
+//     "TraceMetadata":
+//     {
+//         "AreClientArraysEnabled" : 1, "CaptureRevision" : 16631, "ConfigAlphaBits" : 8,
+//             "ConfigBlueBits" : 8, "ConfigDepthBits" : 24, "ConfigGreenBits" : 8,
+// ... etc ...
+void FrameCaptureShared::writeJSON(const gl::Context *context)
 {
     const gl::ContextID contextId           = context->id();
+    const SurfaceParams &surfaceParams      = mDrawSurfaceParams.at(contextId);
+    const gl::State &glState                = context->getState();
     const egl::Config *config               = context->getConfig();
     const egl::AttributeMap &displayAttribs = context->getDisplay()->getAttributeMap();
-    const egl::ShareGroup *shareGroup       = context->getShareGroup();
 
-    unsigned frameCount = getFrameCount();
-
-    const SurfaceParams &surfaceParams = mDrawSurfaceParams.at(contextId);
-    const gl::State &glState           = context->getState();
-
-    // Serialize trace metadata into a JSON file. The JSON file will be named "trace_prefix.json".
-    //
-    // As of writing, it will have the format like so:
-    // {
-    //     "TraceMetadata":
-    //     {
-    //         "AreClientArraysEnabled" : 1, "CaptureRevision" : 16631, "ConfigAlphaBits" : 8,
-    //             "ConfigBlueBits" : 8, "ConfigDepthBits" : 24, "ConfigGreenBits" : 8,
-    // ... etc ...
+    unsigned int frameCount = getFrameCount();
 
     JsonSerializer json;
     json.startGroup("TraceMetadata");
@@ -6128,28 +6171,7 @@ void FrameCaptureShared::writeCppReplayIndexFiles(const gl::Context *context,
     json.endGroup();
 
     {
-        std::vector<std::string> traceFiles;
-        for (uint32_t frameIndex = 1; frameIndex <= frameCount; ++frameIndex)
-        {
-            traceFiles.push_back(GetCaptureFileName(contextId, mCaptureLabel, frameIndex, ".cpp"));
-        }
-
-        for (gl::Context *shareContext : shareGroup->getContexts())
-        {
-            if (shareContext->id() == contextId)
-            {
-                // We already listed all of the "main" context's files, so skip it here.
-                continue;
-            }
-            traceFiles.push_back(GetCaptureFileName(shareContext->id(), mCaptureLabel, 1, ".cpp"));
-        }
-
-        // Only save the MEC setup if we are using MEC.
-        if (mCaptureStartFrame != 1)
-        {
-            traceFiles.push_back(GetCaptureFileName(kSharedContextId, mCaptureLabel, 1, ".cpp"));
-        }
-
+        const std::vector<std::string> &traceFiles = mReplayWriter.getAndResetWrittenFiles();
         json.addVectorOfStrings("TraceFiles", traceFiles);
     }
 
@@ -6164,6 +6186,15 @@ void FrameCaptureShared::writeCppReplayIndexFiles(const gl::Context *context,
         SaveFileHelper saveData(jsonFileName);
         saveData.write(reinterpret_cast<const uint8_t *>(json.data()), json.length());
     }
+}
+
+void FrameCaptureShared::writeCppReplayIndexFiles(const gl::Context *context,
+                                                  bool writeResetContextCall)
+{
+    // Ensure the last frame is written. This will no-op if the frame is already written.
+    mReplayWriter.saveFrame();
+
+    const gl::ContextID contextId = context->id();
 
     {
         std::stringstream header;
@@ -6250,7 +6281,7 @@ void FrameCaptureShared::writeCppReplayIndexFiles(const gl::Context *context,
         source << "{\n";
         source << "    switch (frameIndex)\n";
         source << "    {\n";
-        for (uint32_t frameIndex = 1; frameIndex <= frameCount; ++frameIndex)
+        for (uint32_t frameIndex = 1; frameIndex <= getFrameCount(); ++frameIndex)
         {
             source << "        case " << frameIndex << ":\n";
             source << "            return "
@@ -6271,6 +6302,10 @@ void FrameCaptureShared::writeCppReplayIndexFiles(const gl::Context *context,
 
         mReplayWriter.setFilenamePattern(fnamePattern);
     }
+
+    // We write the json before the index files and header, to avoid duplicating sources with
+    // automatically defined sources in angle.gni.
+    writeJSON(context);
 
     mReplayWriter.saveIndexFilesAndHeader();
 }
@@ -6450,7 +6485,14 @@ void FrameCaptureShared::writeMainContextCppReplay(const gl::Context *context,
         mReplayWriter.setFilenamePattern(fnamePattern);
     }
 
-    mReplayWriter.saveFrame(frameIndex);
+    if (mFrameIndex == mCaptureEndFrame)
+    {
+        mReplayWriter.saveFrame();
+    }
+    else
+    {
+        mReplayWriter.saveFrameIfFull();
+    }
 }
 
 void FrameCaptureShared::reset()
@@ -7133,7 +7175,9 @@ void WriteParamValueReplay<ParamType::TEGLSetBlobFuncANDROID>(std::ostream &os,
 }
 
 // ReplayWriter implementation.
-ReplayWriter::ReplayWriter() {}
+ReplayWriter::ReplayWriter()
+    : mSourceFileSizeThreshold(kDefaultSourceFileSizeThreshold), mFrameIndex(1)
+{}
 
 ReplayWriter::~ReplayWriter()
 {
@@ -7145,9 +7189,20 @@ ReplayWriter::~ReplayWriter()
     ASSERT(mReplayHeaders.empty());
 }
 
+void ReplayWriter::setSourceFileSizeThreshold(size_t sourceFileSizeThreshold)
+{
+    mSourceFileSizeThreshold = sourceFileSizeThreshold;
+}
+
 void ReplayWriter::setFilenamePattern(const std::string &pattern)
 {
-    mFilenamePattern = pattern;
+    if (mFilenamePattern != pattern)
+    {
+        mFilenamePattern = pattern;
+
+        // Reset the frame counter if the filename pattern changes.
+        mFrameIndex = 1;
+    }
 }
 
 void ReplayWriter::setCaptureLabel(const std::string &label)
@@ -7240,6 +7295,24 @@ std::string ReplayWriter::getInlineStringSetVariableName(EntryPoint entryPoint,
     }
 }
 
+size_t ReplayWriter::getStoredReplaySourceSize() const
+{
+    size_t sum = 0;
+    for (const std::string &header : mReplayHeaders)
+    {
+        sum += header.size();
+    }
+    for (const std::string &publicFunc : mPublicFunctions)
+    {
+        sum += publicFunc.size();
+    }
+    for (const std::string &privateFunc : mPrivateFunctions)
+    {
+        sum += privateFunc.size();
+    }
+    return sum;
+}
+
 // static
 std::string ReplayWriter::GetVarName(EntryPoint entryPoint,
                                      const std::string &paramName,
@@ -7250,15 +7323,32 @@ std::string ReplayWriter::GetVarName(EntryPoint entryPoint,
     return strstr.str();
 }
 
-void ReplayWriter::saveFrame(uint32_t frameIndex)
+void ReplayWriter::saveFrame()
 {
+    if (mReplayHeaders.empty() && mPublicFunctions.empty() && mPrivateFunctions.empty())
+    {
+        return;
+    }
+
     std::stringstream strstr;
-    strstr << mFilenamePattern << "_frame" << std::setfill('0') << std::setw(3) << frameIndex
+    strstr << mFilenamePattern << "_" << std::setfill('0') << std::setw(3) << mFrameIndex++
            << ".cpp";
 
     std::string frameFilePath = strstr.str();
 
     writeReplaySource(frameFilePath);
+}
+
+void ReplayWriter::saveFrameIfFull()
+{
+    if (getStoredReplaySourceSize() < mSourceFileSizeThreshold)
+    {
+        INFO() << "Merging captured frame: " << getStoredReplaySourceSize()
+               << " less than threshold of " << mSourceFileSizeThreshold << " bytes";
+        return;
+    }
+
+    saveFrame();
 }
 
 void ReplayWriter::saveHeader()
@@ -7293,6 +7383,8 @@ void ReplayWriter::saveHeader()
     mPublicFunctionPrototypes.clear();
     mPrivateFunctionPrototypes.clear();
     mGlobalVariableDeclarations.clear();
+
+    addWrittenFile(headerPath);
 }
 
 void ReplayWriter::saveIndexFilesAndHeader()
@@ -7349,5 +7441,22 @@ void ReplayWriter::writeReplaySource(const std::string &filename)
     mReplayHeaders.clear();
     mPrivateFunctions.clear();
     mPublicFunctions.clear();
+
+    addWrittenFile(filename);
+}
+
+void ReplayWriter::addWrittenFile(const std::string &filename)
+{
+    std::string writtenFile = GetBaseName(filename);
+    ASSERT(std::find(mWrittenFiles.begin(), mWrittenFiles.end(), writtenFile) ==
+           mWrittenFiles.end());
+    mWrittenFiles.push_back(writtenFile);
+}
+
+std::vector<std::string> ReplayWriter::getAndResetWrittenFiles()
+{
+    std::vector<std::string> results = std::move(mWrittenFiles);
+    ASSERT(mWrittenFiles.empty());
+    return results;
 }
 }  // namespace angle
