@@ -172,8 +172,6 @@ constexpr const char *kSkippedMessages[] = {
     "VUID-VkImageViewCreateInfo-pNext-01585",
     // https://anglebug.com/6262
     "VUID-vkCmdClearAttachments-baseArrayLayer-00018",
-    // http://anglebug.com/6355
-    "VUID-vkCmdDraw-blendEnable-04727",
     // http://anglebug.com/6442
     "UNASSIGNED-CoreValidation-Shader-InterfaceTypeMismatch",
     // http://anglebug.com/6514
@@ -2848,13 +2846,17 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
 
     // Feature disabled due to driver bugs:
     //
-    // - Swiftshader on mac: http://anglebug.com/4937
+    // - Swiftshader:
+    //   * Failure on mac: http://anglebug.com/4937
+    //   * OOM: http://crbug.com/1263046
     // - Intel on windows: http://anglebug.com/5032
     // - AMD on windows: http://crbug.com/1132366
-    ANGLE_FEATURE_CONDITION(
-        &mFeatures, enableMultisampledRenderToTexture,
-        mFeatures.supportsMultisampledRenderToSingleSampled.enabled ||
-            !(IsApple() && isSwiftShader) && !(IsWindows() && (isIntel || isAMD)));
+    //
+    // Note that emulation of GL_EXT_multisampled_render_to_texture is only really useful on tiling
+    // hardware, but is exposed on desktop platforms purely to increase testing coverage.
+    ANGLE_FEATURE_CONDITION(&mFeatures, enableMultisampledRenderToTexture,
+                            mFeatures.supportsMultisampledRenderToSingleSampled.enabled ||
+                                (!isSwiftShader && !(IsWindows() && (isIntel || isAMD))));
 
     // Currently we enable cube map arrays based on the imageCubeArray Vk feature.
     // TODO: Check device caps for full cube map array support. http://anglebug.com/5143
