@@ -3906,6 +3906,20 @@ void Context::initCaps()
         INFO() << "Disabling GL_OES_depth32 during capture, which is not widely supported on "
                   "mobile";
         mState.mExtensions.depth32OES = false;
+
+        // Pixel 4 (Qualcomm) only supports 6 atomic counter buffer bindings.
+        constexpr GLint maxAtomicCounterBufferBindings = 6;
+        INFO() << "Limiting max atomic counter buffer bindings to "
+               << maxAtomicCounterBufferBindings;
+        ANGLE_LIMIT_CAP(mState.mCaps.maxAtomicCounterBufferBindings,
+                        maxAtomicCounterBufferBindings);
+
+        // SwiftShader only supports 12 shader storage buffer bindings.
+        constexpr GLint maxShaderStorageBufferBindings = 12;
+        INFO() << "Limiting max shader storage buffer bindings to "
+               << maxShaderStorageBufferBindings;
+        ANGLE_LIMIT_CAP(mState.mCaps.maxShaderStorageBufferBindings,
+                        maxShaderStorageBufferBindings);
     }
 
     // Disable support for OES_get_program_binary
@@ -8940,12 +8954,12 @@ void Context::maxShaderCompilerThreads(GLuint count)
 
 void Context::framebufferParameteriMESA(GLenum target, GLenum pname, GLint param)
 {
-    UNIMPLEMENTED();
+    framebufferParameteri(target, pname, param);
 }
 
 void Context::getFramebufferParameterivMESA(GLenum target, GLenum pname, GLint *params)
 {
-    UNIMPLEMENTED();
+    getFramebufferParameteriv(target, pname, params);
 }
 
 bool Context::isGLES1() const

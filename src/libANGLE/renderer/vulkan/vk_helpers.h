@@ -841,11 +841,26 @@ using PipelineBarrierArray = angle::PackedEnumMap<PipelineStage, PipelineBarrier
 
 class FramebufferHelper;
 
+enum class MemoryCoherency
+{
+    NonCoherent,
+    Coherent
+};
+
+enum class MemoryHostVisibility
+{
+    NonVisible,
+    Visible
+};
+
 class BufferHelper : public ReadWriteResource
 {
   public:
     BufferHelper();
     ~BufferHelper() override;
+
+    BufferHelper(BufferHelper &&other);
+    BufferHelper &operator=(BufferHelper &&other);
 
     angle::Result init(ContextVk *contextVk,
                        const VkBufferCreateInfo &createInfo,
@@ -858,6 +873,9 @@ class BufferHelper : public ReadWriteResource
                                     uint32_t memoryTypeIndex,
                                     size_t size,
                                     size_t alignment);
+
+    // Initialize a host visible buffer with alignment good for copyBuffer .
+    angle::Result initForCopyBuffer(ContextVk *contextVk, size_t size, MemoryCoherency coherency);
 
     void destroy(RendererVk *renderer);
     void release(RendererVk *renderer);
@@ -925,6 +943,7 @@ class BufferHelper : public ReadWriteResource
                             PipelineBarrier *barrier);
 
   private:
+    void initializeBarrierTracker(Context *context);
     angle::Result initializeNonZeroMemory(Context *context,
                                           VkBufferUsageFlags usage,
                                           VkDeviceSize size);
