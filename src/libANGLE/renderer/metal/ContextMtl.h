@@ -268,7 +268,7 @@ class ContextMtl : public ContextImpl, public mtl::Context
                      const char *file,
                      const char *function,
                      unsigned int line) override;
-    void handleError(NSError *_Nullable error,
+    void handleError(NSError *error,
                      const char *file,
                      const char *function,
                      unsigned int line) override;
@@ -431,6 +431,12 @@ class ContextMtl : public ContextImpl, public mtl::Context
                                        gl::DrawElementsType type,
                                        const void *indices,
                                        GLsizei instances);
+
+    angle::Result drawArraysProvokingVertexImpl(const gl::Context *context,
+                                                gl::PrimitiveMode mode,
+                                                GLsizei first,
+                                                GLsizei count,
+                                                GLsizei instances);
 
     angle::Result drawArraysImpl(const gl::Context *context,
                                  gl::PrimitiveMode mode,
