@@ -68,7 +68,6 @@
 1252169 LINUX AMD OPENGL : ComputeShaderTest.ImageBufferMapWrite/* = SKIP
 1252169 LINUX AMD OPENGL : ComputeShaderTest.BufferImageBufferMapWrite/* = SKIP
 6585 LINUX AMD VULKAN : EXTBlendFuncExtendedDrawTest.FragData/* = SKIP
-6845 LINUX AMD VULKAN : MultisampledRenderToTextureES3Test.RenderbufferDrawStencilThenUnresolveStencil/* = SKIP
 
 // Nvidia
 6115 NVIDIA OPENGL : GLSLTestLoops.DoWhileContinue/* = SKIP
@@ -99,6 +98,13 @@
 6068 INTEL VULKAN : MultiviewRenderPrimitiveTest.LineStrip/* = SKIP
 // Fails on older mesa in some sequence of test
 6563 LINUX INTEL VULKAN : TransformFeedbackTest.EndWithDifferentProgram/* = SKIP
+
+// Linux AMD
+6855 LINUX AMD OPENGL : ClearTestES3.ClearMaxAttachmentsAfterDraw/* = SKIP
+6855 LINUX AMD OPENGL : GeometryShaderTest.LayeredFramebufferClear2DArrayColor/* = SKIP
+6855 LINUX AMD OPENGL : GeometryShaderTest.LayeredFramebufferPreRenderClear2DArrayColor/* = SKIP
+6855 LINUX AMD OPENGL : SimpleStateChangeTestES3.DepthInvalidateThenClear/* = SKIP
+6855 LINUX AMD VULKAN : WebGL2ValidationStateChangeTest.MultiAttachmentDrawFramebufferNegativeAPI/* = SKIP
 
 // Mac
 
