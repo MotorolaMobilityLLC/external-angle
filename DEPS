@@ -34,7 +34,7 @@ vars = {
   'checkout_android_native_support': 'checkout_android or checkout_chromeos',
 
   # Version of Chromium our Chromium-based DEPS are mirrored from.
-  'chromium_revision': '16dc16f9ec67841801d4fc4f457a829c8eca4b75',
+  'chromium_revision': 'c764378a1f248a7f61a5bd247cd2540fd4e9f2de',
   # We never want to checkout chromium,
   # but need a dummy DEPS entry for the autoroller
   'dummy_checkout_chromium': False,
@@ -79,7 +79,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling catapult
   # and whatever else without interference from each other.
-  'catapult_revision': '76c77ba0be42ad1bb71e001722132d2ecbc5b729',
+  'catapult_revision': 'f57af59eeda216ebe3e9dc3d695b02d4a3dfe486',
 
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling luci-go
@@ -119,12 +119,12 @@ vars = {
 deps = {
 
   'build': {
-    'url': '{chromium_git}/chromium/src/build.git@bc588cf5bf7a8bcd2e08a0a52d78c14ef85b05a3',
+    'url': '{chromium_git}/chromium/src/build.git@5a7d122c228e3f72ad81475dd7ab751f0637769c',
     'condition': 'not build_with_chromium',
   },
 
   'buildtools': {
-    'url': '{chromium_git}/chromium/src/buildtools.git@d7bdd6f0386aaf20cd00a01d499e8ce1cbf6063e',
+    'url': '{chromium_git}/chromium/src/buildtools.git@f78b4b9f33bd8ef9944d5ce643daff1c31880189',
     'condition': 'not build_with_chromium',
   },
 
@@ -182,7 +182,7 @@ deps = {
   },
 
   'testing': {
-    'url': '{chromium_git}/chromium/src/testing@967ce8ec9d4b7880a98a41e5730754b680a3a7e3',
+    'url': '{chromium_git}/chromium/src/testing@440b82bae69d423b6667c7b7bdeeb0117c3c0614',
     'condition': 'not build_with_chromium',
   },
 
@@ -496,7 +496,7 @@ deps = {
   },
 
   'third_party/SwiftShader': {
-    'url': '{swiftshader_git}/SwiftShader@f354daff5a2b882fc182c8377c826aa99b30f989',
+    'url': '{swiftshader_git}/SwiftShader@433b1bf9bff2cb385f9cdfcb9be1d7f5489f357f',
     'condition': 'not build_with_chromium',
   },
 
@@ -504,7 +504,7 @@ deps = {
       'packages': [
           {
               'package': 'chromium/third_party/turbine',
-              'version': 'RGxvdzLaS73gQOXCTgq7CWKsqCgrXDPPL0Pcxz6oGbQC',
+              'version': 'tJ3VP1_iZhYyYREs6I6YHVZeA5CN6drLhywrF_DFVh0C',
           },
       ],
       'condition': 'checkout_android and not build_with_chromium',
@@ -516,7 +516,7 @@ deps = {
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@fbeca8f4ea6a6280982422028e991c2821385383',
+    'url': '{chromium_git}/vulkan-deps@09edcd7c680b2c0690587be7b47a30c8a575fd67',
     'condition': 'not build_with_chromium',
   },
 
@@ -582,7 +582,7 @@ deps = {
   },
 
   'tools/perf': {
-    'url': '{chromium_git}/chromium/src/tools/perf@5fba75ed629e980332116ef6de1b01200e6a021f',
+    'url': '{chromium_git}/chromium/src/tools/perf@d1678a659fcf9d42801a410588462604327a1d2c',
     'condition': 'not build_with_chromium',
   },
 
