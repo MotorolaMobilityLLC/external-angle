@@ -4,6 +4,12 @@
 
 // See deqp_support/README.md for format.
 
+// Thread sanitizer skips.
+6718 TSAN : MultithreadingTestES3.MultithreadFenceDraw/* = SKIP
+6718 TSAN : MultithreadingTestES3.MultithreadFenceTexImage/* = SKIP
+6746 TSAN : *AsyncQueue = SKIP
+6804 LINUX VULKAN TSAN : MultithreadingTest.MultiContextDrawWithSwapBuffers/* = SKIP
+
 // Generic
 // Fails in the flush thread when calling eglMakeCurrent.
 6063 OPENGL : SimpleStateChangeTestES31.DrawThenChangeFBOThenDrawThenFlushInAnotherThreadThenDrawIndexed/* = SKIP
@@ -105,17 +111,6 @@
 6855 LINUX AMD OPENGL : GeometryShaderTest.LayeredFramebufferPreRenderClear2DArrayColor/* = SKIP
 6855 LINUX AMD OPENGL : SimpleStateChangeTestES3.DepthInvalidateThenClear/* = SKIP
 6855 LINUX AMD VULKAN : WebGL2ValidationStateChangeTest.MultiAttachmentDrawFramebufferNegativeAPI/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureTest.2DColorDepthMultisampleDrawTest/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureTest.DepthReadWriteToggleWithStartedRenderPass/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureES3Test.ClearThenMaskedClearFramebufferTest/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureES3Test.RenderbufferClearDrawCopyThenBlendWithDepthStencilSameProgram/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureES3Test.RenderbufferDepthStencilClearDrawCopyThenBlend/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureES3Test.RenderbufferDepthStencilDrawCopyClearThenBlend/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureES3Test.RenderbufferDrawStencilThenUnresolveStencil/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureES3Test.RenderbufferDrawThenBlitDepthStencilOnly/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureES3Test.RenderbufferUnresolveColorAndDepthStencilThenTwoColors/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureES3Test.RenderbufferUnresolveColorAndDepthThenTwoColors/* = SKIP
-5380 LINUX AMD VULKAN : MultisampledRenderToTextureES3Test.RenderbufferUnresolveColorAndStencilThenTwoColors/* = SKIP
 
 // Mac
 
@@ -432,11 +427,6 @@
 6652 WIN AMD VULKAN : DrawTextureTest.ColorArrayDifferentTypes/* = SKIP
 6652 WIN AMD VULKAN : PointSpriteTest.TrianglesNotTreatedAsPointSprites/* = SKIP
 
-6718 TSAN : MultithreadingTestES3.MultithreadFenceDraw/* = SKIP
-6718 TSAN : MultithreadingTestES3.MultithreadFenceTexImage/* = SKIP
-6746 TSAN : *Vulkan_AsyncQueue = SKIP
-6804 LINUX VULKAN TSAN : MultithreadingTest.MultiContextDrawWithSwapBuffers/* = SKIP
-
 // Indexed indirect draw offset bug
 6751 METAL : MultiDrawIndirectTest.MultiDrawElementsIndirect* = SKIP
 6751 D3D11 : MultiDrawIndirectTest.MultiDrawElementsIndirect* = SKIP
@@ -446,3 +436,6 @@
 // ASAN flakes with Vulkan / SwiftShader / AsyncQueue
 6875 ASAN VULKAN SWIFTSHADER : ComputeShaderTest.*/ES3_1_Vulkan_SwiftShader_AsyncQueue = SKIP
 6875 ASAN VULKAN SWIFTSHADER : TransformFeedbackTest.SpanMultipleRenderPasses/ES3_Vulkan_SwiftShader_AsyncQueue = SKIP
+
+// Regression after a buffer change.
+6881 INTEL VULKAN LINUX : Texture2DTest.TexStorageWithPBOMiddlePixelDifferent/* = SKIP
