@@ -3224,9 +3224,9 @@ bool ValidateCopyImageSubDataTargetRegion(const Context *context,
 
         // INVALID_OPERATION is generated if either object is a texture and the texture is not
         // complete
-        // This will handle the texture completeness check. Note that this is missing
-        // completeness validation that ignores format-based compleness rules.
-        if (!texture->isSamplerComplete(context, nullptr))
+        // This will handle the texture completeness check. Note that this ignores format-based
+        // compleness rules.
+        if (!texture->isSamplerCompleteForCopyImage(context, nullptr))
         {
             context->validationError(entryPoint, GL_INVALID_OPERATION, kNotTextureComplete);
             return false;
@@ -4503,12 +4503,12 @@ bool ValidateGetUniformBase(const Context *context,
     return true;
 }
 
-static bool ValidateSizedGetUniform(const Context *context,
-                                    angle::EntryPoint entryPoint,
-                                    ShaderProgramID program,
-                                    UniformLocation location,
-                                    GLsizei bufSize,
-                                    GLsizei *length)
+bool ValidateSizedGetUniform(const Context *context,
+                             angle::EntryPoint entryPoint,
+                             ShaderProgramID program,
+                             UniformLocation location,
+                             GLsizei bufSize,
+                             GLsizei *length)
 {
     if (length)
     {
@@ -4522,7 +4522,7 @@ static bool ValidateSizedGetUniform(const Context *context,
 
     if (bufSize < 0)
     {
-        context->validationError(entryPoint, GL_INVALID_VALUE, kNegativeBufferSize);
+        context->validationError(entryPoint, GL_INVALID_OPERATION, kNegativeBufferSize);
         return false;
     }
 
