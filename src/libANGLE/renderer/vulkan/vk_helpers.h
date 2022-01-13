@@ -184,77 +184,6 @@ class DynamicBuffer : angle::NonCopyable
     BufferHelperPointerVector mBufferFreeList;
 };
 
-// Based off of the DynamicBuffer class, DynamicShadowBuffer provides
-// a similar conceptually infinitely long buffer that will only be written
-// to and read by the CPU. This can be used to provide CPU cached copies of
-// GPU-read only buffers. The value add here is that when an app requests
-// CPU access to a buffer we can fullfil such a request in O(1) time since
-// we don't need to wait for GPU to be done with in-flight commands.
-//
-// The hidden cost here is that any operation that updates a buffer, either
-// through a buffer sub data update or a buffer-to-buffer copy will have an
-// additional overhead of having to update its CPU only buffer
-class DynamicShadowBuffer : public angle::NonCopyable
-{
-  public:
-    DynamicShadowBuffer();
-    DynamicShadowBuffer(DynamicShadowBuffer &&other);
-    ~DynamicShadowBuffer();
-
-    // Initialize the DynamicShadowBuffer.
-    void init(size_t initialSize);
-
-    // Returns whether this DynamicShadowBuffer is active
-    ANGLE_INLINE bool valid() { return (mSize != 0); }
-
-    // This call will actually allocate a new CPU only memory from the heap.
-    // The size can be different than the one specified during `init`.
-    angle::Result allocate(size_t sizeInBytes);
-
-    ANGLE_INLINE void updateData(const uint8_t *data, size_t size, size_t offset)
-    {
-        ASSERT(!mBuffer.empty());
-        // Memcopy data into the buffer
-        memcpy((mBuffer.data() + offset), data, size);
-    }
-
-    // Map the CPU only buffer and return the pointer. We map the entire buffer for now.
-    ANGLE_INLINE void map(size_t offset, uint8_t **mapPtr)
-    {
-        ASSERT(mapPtr);
-        ASSERT(!mBuffer.empty());
-        *mapPtr = mBuffer.data() + offset;
-    }
-
-    // Unmap the CPU only buffer, NOOP for now
-    ANGLE_INLINE void unmap() {}
-
-    // This releases resources when they might currently be in use.
-    void release();
-
-    // This frees resources immediately.
-    void destroy(VkDevice device);
-
-    ANGLE_INLINE uint8_t *getCurrentBuffer()
-    {
-        ASSERT(!mBuffer.empty());
-        return mBuffer.data();
-    }
-
-    ANGLE_INLINE const uint8_t *getCurrentBuffer() const
-    {
-        ASSERT(!mBuffer.empty());
-        return mBuffer.data();
-    }
-
-  private:
-    void reset();
-
-    size_t mInitialSize;
-    size_t mSize;
-    angle::MemoryBuffer mBuffer;
-};
-
 // Uses DescriptorPool to allocate descriptor sets as needed. If a descriptor pool becomes full, we
 // allocate new pools internally as needed. RendererVk takes care of the lifetime of the discarded
 // pools. Note that we used a fixed layout for descriptor pools in ANGLE.
@@ -621,72 +550,6 @@ class SemaphoreHelper final : angle::NonCopyable
     const Semaphore *mSemaphore;
 };
 
-// This class' responsibility is to create index buffers needed to support line loops in Vulkan.
-// In the setup phase of drawing, the createIndexBuffer method should be called with the
-// current draw call parameters. If an element array buffer is bound for an indexed draw, use
-// createIndexBufferFromElementArrayBuffer.
-//
-// If the user wants to draw a loop between [v1, v2, v3], we will create an indexed buffer with
-// these indexes: [0, 1, 2, 3, 0] to emulate the loop.
-class LineLoopHelper final : angle::NonCopyable
-{
-  public:
-    LineLoopHelper(RendererVk *renderer);
-    ~LineLoopHelper();
-
-    angle::Result getIndexBufferForDrawArrays(ContextVk *contextVk,
-                                              uint32_t clampedVertexCount,
-                                              GLint firstVertex,
-                                              BufferHelper **bufferOut,
-                                              VkDeviceSize *offsetOut);
-
-    angle::Result getIndexBufferForElementArrayBuffer(ContextVk *contextVk,
-                                                      BufferVk *elementArrayBufferVk,
-                                                      gl::DrawElementsType glIndexType,
-                                                      int indexCount,
-                                                      intptr_t elementArrayOffset,
-                                                      BufferHelper **bufferOut,
-                                                      VkDeviceSize *bufferOffsetOut,
-                                                      uint32_t *indexCountOut);
-
-    angle::Result streamIndices(ContextVk *contextVk,
-                                gl::DrawElementsType glIndexType,
-                                GLsizei indexCount,
-                                const uint8_t *srcPtr,
-                                BufferHelper **bufferOut,
-                                VkDeviceSize *bufferOffsetOut,
-                                uint32_t *indexCountOut);
-
-    angle::Result streamIndicesIndirect(ContextVk *contextVk,
-                                        gl::DrawElementsType glIndexType,
-                                        BufferHelper *indexBuffer,
-                                        VkDeviceSize indexBufferOffset,
-                                        BufferHelper *indirectBuffer,
-                                        VkDeviceSize indirectBufferOffset,
-                                        BufferHelper **indexBufferOut,
-                                        VkDeviceSize *indexBufferOffsetOut,
-                                        BufferHelper **indirectBufferOut,
-                                        VkDeviceSize *indirectBufferOffsetOut);
-
-    angle::Result streamArrayIndirect(ContextVk *contextVk,
-                                      size_t vertexCount,
-                                      BufferHelper *arrayIndirectBuffer,
-                                      VkDeviceSize arrayIndirectBufferOffset,
-                                      BufferHelper **indexBufferOut,
-                                      VkDeviceSize *indexBufferOffsetOut,
-                                      BufferHelper **indexIndirectBufferOut,
-                                      VkDeviceSize *indexIndirectBufferOffsetOut);
-
-    void release(ContextVk *contextVk);
-    void destroy(RendererVk *renderer);
-
-    static void Draw(uint32_t count, uint32_t baseVertex, CommandBuffer *commandBuffer);
-
-  private:
-    DynamicBuffer mDynamicIndexBuffer;
-    DynamicBuffer mDynamicIndirectBuffer;
-};
-
 // This defines enum for VkPipelineStageFlagBits so that we can use it to compare and index into
 // array.
 enum class PipelineStage : uint16_t
@@ -874,8 +737,20 @@ class BufferHelper : public ReadWriteResource
                                     size_t size,
                                     size_t alignment);
 
+    // Helper functions to initialize a buffer for a specific usage
+    // Initialize a buffer with alignment good for shader storage or copyBuffer .
+    angle::Result initForVertexConversion(ContextVk *contextVk,
+                                          size_t size,
+                                          MemoryHostVisibility hostVisibility);
     // Initialize a host visible buffer with alignment good for copyBuffer .
     angle::Result initForCopyBuffer(ContextVk *contextVk, size_t size, MemoryCoherency coherency);
+    // Initialize a host visible buffer with alignment good for copyImage .
+    angle::Result initForCopyImage(ContextVk *contextVk,
+                                   size_t size,
+                                   MemoryCoherency coherency,
+                                   angle::FormatID formatId,
+                                   VkDeviceSize *offset,
+                                   uint8_t **dataPtr);
 
     void destroy(RendererVk *renderer);
     void release(RendererVk *renderer);
@@ -1528,11 +1403,6 @@ class ImageHelper final : public Resource, public angle::Subject
     ImageHelper(ImageHelper &&other);
     ~ImageHelper() override;
 
-    void initStagingBuffer(RendererVk *renderer,
-                           size_t imageCopyBufferAlignment,
-                           VkBufferUsageFlags usageFlags,
-                           size_t initialSize);
-
     angle::Result init(Context *context,
                        gl::TextureType textureType,
                        const VkExtent3D &extents,
@@ -1678,7 +1548,7 @@ class ImageHelper final : public Resource, public angle::Subject
     // Similar to releaseImage, but also notify all contexts in the same share group to stop
     // accessing to it.
     void releaseImageFromShareContexts(RendererVk *renderer, ContextVk *contextVk);
-    void releaseStagingBuffer(RendererVk *renderer);
+    void releaseStagedUpdates(RendererVk *renderer);
 
     bool valid() const { return mImage.valid(); }
 
@@ -1828,7 +1698,6 @@ class ImageHelper final : public Resource, public angle::Subject
                                              const gl::Offset &offset,
                                              const gl::InternalFormat &formatInfo,
                                              const gl::PixelUnpackState &unpack,
-                                             DynamicBuffer *stagingBufferOverride,
                                              GLenum type,
                                              const uint8_t *pixels,
                                              const Format &vkFormat,
@@ -1843,7 +1712,6 @@ class ImageHelper final : public Resource, public angle::Subject
                                          const gl::Offset &offset,
                                          const gl::InternalFormat &formatInfo,
                                          const gl::PixelUnpackState &unpack,
-                                         DynamicBuffer *stagingBufferOverride,
                                          GLenum type,
                                          const uint8_t *pixels,
                                          const Format &vkFormat,
@@ -1855,7 +1723,6 @@ class ImageHelper final : public Resource, public angle::Subject
                                                    const gl::Extents &glExtents,
                                                    const gl::Offset &offset,
                                                    uint8_t **destData,
-                                                   DynamicBuffer *stagingBufferOverride,
                                                    angle::FormatID formatID);
 
     angle::Result stageSubresourceUpdateFromFramebuffer(const gl::Context *context,
@@ -1865,8 +1732,7 @@ class ImageHelper final : public Resource, public angle::Subject
                                                         const gl::Extents &dstExtent,
                                                         const gl::InternalFormat &formatInfo,
                                                         ImageAccess access,
-                                                        FramebufferVk *framebufferVk,
-                                                        DynamicBuffer *stagingBufferOverride);
+                                                        FramebufferVk *framebufferVk);
 
     void stageSubresourceUpdateFromImage(RefCounted<ImageHelper> *image,
                                          const gl::ImageIndex &index,
@@ -2010,9 +1876,7 @@ class ImageHelper final : public Resource, public angle::Subject
                                         uint32_t layerCount,
                                         uint32_t baseLayer,
                                         const gl::Box &sourceArea,
-                                        BufferHelper **bufferOut,
-                                        size_t *bufferSize,
-                                        StagingBufferOffsetArray *bufferOffsetsOut,
+                                        BufferHelper *dstBuffer,
                                         uint8_t **outDataPtr);
 
     static angle::Result GetReadPixelsParams(ContextVk *contextVk,
@@ -2041,8 +1905,7 @@ class ImageHelper final : public Resource, public angle::Subject
                              VkImageAspectFlagBits copyAspectFlags,
                              gl::LevelIndex levelGL,
                              uint32_t layer,
-                             void *pixels,
-                             DynamicBuffer *stagingBuffer);
+                             void *pixels);
 
     angle::Result CalculateBufferInfo(ContextVk *contextVk,
                                       const gl::Extents &glExtents,
@@ -2159,7 +2022,8 @@ class ImageHelper final : public Resource, public angle::Subject
     {
         SubresourceUpdate();
         ~SubresourceUpdate();
-        SubresourceUpdate(BufferHelper *bufferHelperIn,
+        SubresourceUpdate(RefCounted<BufferHelper> *bufferIn,
+                          BufferHelper *bufferHelperIn,
                           const VkBufferImageCopy &copyRegion,
                           angle::FormatID formatID);
         SubresourceUpdate(RefCounted<ImageHelper> *imageIn,
@@ -2190,7 +2054,11 @@ class ImageHelper final : public Resource, public angle::Subject
             BufferUpdate buffer;
             ImageUpdate image;
         } data;
-        RefCounted<ImageHelper> *image;
+        union
+        {
+            RefCounted<ImageHelper> *image;
+            RefCounted<BufferHelper> *buffer;
+        } refCounted;
     };
 
     void deriveExternalImageTiling(const void *createInfoChain);
@@ -2261,10 +2129,12 @@ class ImageHelper final : public Resource, public angle::Subject
     // Whether there are any updates in [start, end).
     bool hasStagedUpdatesInLevels(gl::LevelIndex levelStart, gl::LevelIndex levelEnd) const;
 
-    // Used only for assertions, these functions verify that SubresourceUpdate::image references
-    // have the correct ref count.  This is to prevent accidental leaks.
+    // Used only for assertions, these functions verify that
+    // SubresourceUpdate::refcountedObject::image or buffer references have the correct ref count.
+    // This is to prevent accidental leaks.
     bool validateSubresourceUpdateImageRefConsistent(RefCounted<ImageHelper> *image) const;
-    bool validateSubresourceUpdateImageRefsConsistent() const;
+    bool validateSubresourceUpdateBufferRefConsistent(RefCounted<BufferHelper> *buffer) const;
+    bool validateSubresourceUpdateRefCountsConsistent() const;
 
     void resetCachedProperties();
     void setEntireContentDefined();
@@ -2352,8 +2222,6 @@ class ImageHelper final : public Resource, public angle::Subject
     uint32_t mLayerCount;
     uint32_t mLevelCount;
 
-    // Staging buffer
-    DynamicBuffer mStagingBuffer;
     std::vector<std::vector<SubresourceUpdate>> mSubresourceUpdates;
 
     // Optimization for repeated clear with the same value. If this pointer is not null, the entire
@@ -2918,6 +2786,64 @@ class CommandBufferAccess : angle::NonCopyable
     WriteBuffers mWriteBuffers;
     ReadImages mReadImages;
     WriteImages mWriteImages;
+};
+
+// This class' responsibility is to create index buffers needed to support line loops in Vulkan.
+// In the setup phase of drawing, the createIndexBuffer method should be called with the
+// current draw call parameters. If an element array buffer is bound for an indexed draw, use
+// createIndexBufferFromElementArrayBuffer.
+//
+// If the user wants to draw a loop between [v1, v2, v3], we will create an indexed buffer with
+// these indexes: [0, 1, 2, 3, 0] to emulate the loop.
+class LineLoopHelper final : angle::NonCopyable
+{
+  public:
+    LineLoopHelper(RendererVk *renderer);
+    ~LineLoopHelper();
+
+    angle::Result getIndexBufferForDrawArrays(ContextVk *contextVk,
+                                              uint32_t clampedVertexCount,
+                                              GLint firstVertex,
+                                              BufferHelper **bufferOut);
+
+    angle::Result getIndexBufferForElementArrayBuffer(ContextVk *contextVk,
+                                                      BufferVk *elementArrayBufferVk,
+                                                      gl::DrawElementsType glIndexType,
+                                                      int indexCount,
+                                                      intptr_t elementArrayOffset,
+                                                      BufferHelper **bufferOut,
+                                                      uint32_t *indexCountOut);
+
+    angle::Result streamIndices(ContextVk *contextVk,
+                                gl::DrawElementsType glIndexType,
+                                GLsizei indexCount,
+                                const uint8_t *srcPtr,
+                                BufferHelper **bufferOut,
+                                uint32_t *indexCountOut);
+
+    angle::Result streamIndicesIndirect(ContextVk *contextVk,
+                                        gl::DrawElementsType glIndexType,
+                                        BufferHelper *indexBuffer,
+                                        BufferHelper *indirectBuffer,
+                                        VkDeviceSize indirectBufferOffset,
+                                        BufferHelper **indexBufferOut,
+                                        BufferHelper **indirectBufferOut);
+
+    angle::Result streamArrayIndirect(ContextVk *contextVk,
+                                      size_t vertexCount,
+                                      BufferHelper *arrayIndirectBuffer,
+                                      VkDeviceSize arrayIndirectBufferOffset,
+                                      BufferHelper **indexBufferOut,
+                                      BufferHelper **indexIndirectBufferOut);
+
+    void release(ContextVk *contextVk);
+    void destroy(RendererVk *renderer);
+
+    static void Draw(uint32_t count, uint32_t baseVertex, CommandBuffer *commandBuffer);
+
+  private:
+    BufferHelper mDynamicIndexBuffer;
+    BufferHelper mDynamicIndirectBuffer;
 };
 }  // namespace vk
 }  // namespace rx
