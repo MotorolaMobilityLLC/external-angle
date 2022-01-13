@@ -398,8 +398,7 @@ constexpr SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
      "SYNC_IMAGE_LAYOUT_TRANSITION",
      "", false},
     // From various tests. The validation layer does not calculate the exact vertexCounts that's
-    // been
-    // accessed. http://anglebug.com/6725
+    // been accessed. http://anglebug.com/6725
     {"SYNC-HAZARD-READ_AFTER_WRITE", "vkCmdDrawIndexed: Hazard READ_AFTER_WRITE for vertex",
      "usage: SYNC_VERTEX_ATTRIBUTE_INPUT_VERTEX_ATTRIBUTE_READ", false},
     {"SYNC-HAZARD-READ_AFTER_WRITE", "vkCmdDrawIndexedIndirect: Hazard READ_AFTER_WRITE for vertex",
@@ -410,6 +409,11 @@ constexpr SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
      "usage: SYNC_INDEX_INPUT_INDEX_READ", false},
     {"SYNC-HAZARD-WRITE_AFTER_READ", "vkCmdDraw: Hazard WRITE_AFTER_READ for VkBuffer",
      "Access info (usage: SYNC_VERTEX_SHADER_SHADER_STORAGE_WRITE, prior_usage: "
+     "SYNC_VERTEX_ATTRIBUTE_INPUT_VERTEX_ATTRIBUTE_READ",
+     false},
+    {"SYNC-HAZARD-WRITE_AFTER_READ",
+     "vkCmdCopyImageToBuffer(): Hazard WRITE_AFTER_READ for dstBuffer VkBuffer",
+     "Access info (usage: SYNC_COPY_TRANSFER_WRITE, prior_usage: "
      "SYNC_VERTEX_ATTRIBUTE_INPUT_VERTEX_ATTRIBUTE_READ",
      false},
     {"SYNC-HAZARD-WRITE_AFTER_READ", "vkCmdDispatch: Hazard WRITE_AFTER_READ for VkBuffer",
@@ -1001,6 +1005,9 @@ RendererVk::RendererVk()
       mCoherentStagingBufferMemoryTypeIndex(kInvalidMemoryTypeIndex),
       mNonCoherentStagingBufferMemoryTypeIndex(kInvalidMemoryTypeIndex),
       mStagingBufferAlignment(1),
+      mHostVisibleVertexConversionBufferMemoryTypeIndex(kInvalidMemoryTypeIndex),
+      mDeviceLocalVertexConversionBufferMemoryTypeIndex(kInvalidMemoryTypeIndex),
+      mVertexConversionBufferAlignment(1),
       mPipelineCacheVkUpdateTimeout(kPipelineCacheVkUpdatePeriod),
       mPipelineCacheDirty(false),
       mPipelineCacheInitialized(false),
@@ -1517,6 +1524,25 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
         std::max(mStagingBufferAlignment,
                  static_cast<size_t>(mPhysicalDeviceProperties.limits.nonCoherentAtomSize));
     ASSERT(gl::isPow2(mStagingBufferAlignment));
+
+    // Device local vertex conversion buffer
+    createInfo.usage = vk::kVertexBufferUsageFlags;
+    requiredFlags    = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
+    preferredFlags   = 0;
+    ANGLE_VK_TRY(displayVk, mBufferMemoryAllocator.findMemoryTypeIndexForBufferInfo(
+                                this, createInfo, requiredFlags, preferredFlags, persistentlyMapped,
+                                &mDeviceLocalVertexConversionBufferMemoryTypeIndex));
+    ASSERT(mDeviceLocalVertexConversionBufferMemoryTypeIndex != kInvalidMemoryTypeIndex);
+
+    // Host visible and non-coherent vertex conversion buffer, which is the same as non-coherent
+    // staging buffer
+    mHostVisibleVertexConversionBufferMemoryTypeIndex = mNonCoherentStagingBufferMemoryTypeIndex;
+    // We may use compute shader to do conversion, so we must meet
+    // minStorageBufferOffsetAlignment requirement as well.
+    mVertexConversionBufferAlignment = std::max(
+        vk::kVertexBufferAlignment,
+        static_cast<size_t>(mPhysicalDeviceProperties.limits.minStorageBufferOffsetAlignment));
+    ASSERT(gl::isPow2(mVertexConversionBufferAlignment));
 
     {
         ANGLE_TRACE_EVENT0("gpu.angle,startup", "GlslangWarmup");
