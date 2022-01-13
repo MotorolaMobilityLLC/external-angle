@@ -292,6 +292,8 @@ INSTANTIATE_TEST_SUITE_P(
         "GL_ARB_draw_instanced.vert",
         "GL_ARB_fragment_coord_conventions.vert",
         "BestMatchFunction.vert",
+        "EndStreamPrimitive.geom",
+        "floatBitsToInt.vert",
     })),
     FileNameAsCustomTestSuffix
 );
