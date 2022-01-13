@@ -660,7 +660,6 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     void setDefaultUniformBlocksMinSizeForTesting(size_t minSize);
 
     vk::BufferHelper &getEmptyBuffer() { return mEmptyBuffer; }
-    vk::DynamicBuffer *getStagingBuffer() { return &mStagingBuffer; }
 
     const vk::PerfCounters &getPerfCounters() const { return mPerfCounters; }
     vk::PerfCounters &getPerfCounters() { return mPerfCounters; }
@@ -798,27 +797,23 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     angle::Result setupIndirectDraw(const gl::Context *context,
                                     gl::PrimitiveMode mode,
                                     DirtyBits dirtyBitMask,
-                                    vk::BufferHelper *indirectBuffer,
-                                    VkDeviceSize indirectBufferOffset);
+                                    vk::BufferHelper *indirectBuffer);
     angle::Result setupIndexedIndirectDraw(const gl::Context *context,
                                            gl::PrimitiveMode mode,
                                            gl::DrawElementsType indexType,
-                                           vk::BufferHelper *indirectBuffer,
-                                           VkDeviceSize indirectBufferOffset);
+                                           vk::BufferHelper *indirectBuffer);
 
     angle::Result setupLineLoopIndexedIndirectDraw(const gl::Context *context,
                                                    gl::PrimitiveMode mode,
                                                    gl::DrawElementsType indexType,
                                                    vk::BufferHelper *srcIndirectBuf,
                                                    VkDeviceSize indirectBufferOffset,
-                                                   vk::BufferHelper **indirectBufferOut,
-                                                   VkDeviceSize *indirectBufferOffsetOut);
+                                                   vk::BufferHelper **indirectBufferOut);
     angle::Result setupLineLoopIndirectDraw(const gl::Context *context,
                                             gl::PrimitiveMode mode,
                                             vk::BufferHelper *indirectBuffer,
                                             VkDeviceSize indirectBufferOffset,
-                                            vk::BufferHelper **indirectBufferOut,
-                                            VkDeviceSize *indirectBufferOffsetOut);
+                                            vk::BufferHelper **indirectBufferOut);
 
     angle::Result setupLineLoopDraw(const gl::Context *context,
                                     gl::PrimitiveMode mode,
@@ -1222,9 +1217,6 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     // Storage for default uniforms of ProgramVks and ProgramPipelineVks.
     vk::DynamicBuffer mDefaultUniformStorage;
-
-    // All staging buffer support is provided by a DynamicBuffer.
-    vk::DynamicBuffer mStagingBuffer;
 
     std::vector<std::string> mCommandBufferDiagnostics;
 
