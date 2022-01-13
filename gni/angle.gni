@@ -316,6 +316,10 @@ template("angle_executable") {
     if (angle_has_build && is_win) {
       data_deps += [ "//build/win:runtime_libs" ]
     }
+
+    if (is_ios) {
+      check_includes = false
+    }
   }
 }
 
