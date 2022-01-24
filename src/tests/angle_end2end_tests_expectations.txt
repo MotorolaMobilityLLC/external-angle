@@ -7,7 +7,7 @@
 // Thread sanitizer skips.
 6718 TSAN : MultithreadingTestES3.MultithreadFenceDraw/* = SKIP
 6718 TSAN : MultithreadingTestES3.MultithreadFenceTexImage/* = SKIP
-6746 TSAN : *AsyncQueue = SKIP
+6746 TSAN : *AsyncQueue* = SKIP
 6804 LINUX VULKAN TSAN : MultithreadingTest.MultiContextDrawWithSwapBuffers/* = SKIP
 
 // Generic
@@ -143,8 +143,8 @@
 
 // Failures from Transform Feedback Enablement. Passes on BigSur
 6407 MAC NVIDIA METAL : TransformFeedbackTest.OptimizedVaryings/ES3_Metal = SKIP
-6415 MAC INTEL METAL : CompressedTextureBPTCTest.Test/RGB_BPTC_SIGNED_FLOAT__ES3_Metal = SKIP
-6415 MAC INTEL METAL : CompressedTexturePVRTC1SRGBTest.Test/SRGB_PVRTC_2BPPV1__ES3_Metal = SKIP
+6415 MAC INTEL METAL : CompressedTextureBPTCTest.Test/ES3_Metal__RGB_BPTC_SIGNED_FLOAT = SKIP
+6415 MAC INTEL METAL : CompressedTexturePVRTC1SRGBTest.Test/ES3_Metal__SRGB_PVRTC_2BPPV1 = SKIP
 5345 MAC METAL AMD : TransformFeedbackTest.BufferOutOfMemory/ES3_Metal = SKIP
 5345 MAC METAL INTEL : TransformFeedbackTest.BufferOutOfMemory/ES3_Metal = SKIP
 
@@ -375,6 +375,40 @@
 6179 NEXUS5X GLES : GLSLTest_ES31.BoolInInterfaceBlocks/* = SKIP
 6179 PIXEL4ORXL GLES : GLSLTest_ES31.BoolInInterfaceBlocks/* = SKIP
 
+// Pixel 6 expectations.
+6931 PIXEL6 VULKAN : BlitFramebufferTest.OOBWrite/* = SKIP
+6931 PIXEL6 VULKAN : BufferDataTestES3.MapInvalidateThenBufferSubData/* = SKIP
+6931 PIXEL6 VULKAN : EGLSurfaceTest.ResizeWindowWithDraw/* = SKIP
+6931 PIXEL6 VULKAN : EGLSyncTest.AndroidNativeFence_ClientWait/* = SKIP
+6931 PIXEL6 VULKAN : ExternalBufferTestES31.* = SKIP
+6931 PIXEL6 VULKAN : FramebufferMultiviewLayeredClearTest.ScissoredClearBufferfi/* = SKIP
+6931 PIXEL6 VULKAN : FramebufferTest_ES31.MultipleTextureMultisampleResolveWithBlitMultipleResolves* = SKIP
+6931 PIXEL6 VULKAN : FramebufferTest_ES31.MultisampleResolveWithBlitThenDrawAttachment1/* = SKIP
+6931 PIXEL6 VULKAN : GLSLTest.PointCoordConsistency/* = SKIP
+6931 PIXEL6 VULKAN : GLSLTest_ES31.ArraysOfArraysImage/* = SKIP
+6931 PIXEL6 VULKAN : GLSLTest_ES31.BoolInInterfaceBlocks/* = SKIP
+6931 PIXEL6 VULKAN : GLSLTest_ES31.ConsecutiveArraysOfArraysImage/* = SKIP
+6931 PIXEL6 VULKAN : GeometryShaderTest.GeometryShaderImplementationDependentLimits/* = SKIP
+6931 PIXEL6 VULKAN : ImageTestES3.RGBXAHBImport* = SKIP
+6931 PIXEL6 VULKAN : IndexedBufferCopyTest.IndexRangeBug/* = SKIP
+6931 PIXEL6 VULKAN : IndexedPointsTest* = SKIP
+6931 PIXEL6 VULKAN : MultisampleTest.Point/* = SKIP
+6931 PIXEL6 VULKAN : MultithreadingTestES3.* = SKIP
+6931 PIXEL6 VULKAN : PointSpritesTest.PointCoordAndPointSizeCompliance/* = SKIP
+6931 PIXEL6 VULKAN : PointSpritesTest.PointCoordRegressionTest/* = SKIP
+6931 PIXEL6 VULKAN : PointSpritesTest.PointSizeAboveMaxIsClamped/* = SKIP
+6931 PIXEL6 VULKAN : PointSpritesTest.PointSizeEnabledCompliance/* = SKIP
+6931 PIXEL6 VULKAN : PointSpritesTest.PointSpriteAlternatingDrawTypes/* = SKIP
+6931 PIXEL6 VULKAN : PointSpritesTest.PointWithoutAttributesCompliance/* = SKIP
+6931 PIXEL6 VULKAN : PointSpritesTest.UsingPointCoordInsideFunction/* = SKIP
+6931 PIXEL6 VULKAN : ProgramInterfaceTestES31.ReloadFromCacheShouldNotCrash/* = SKIP
+6931 PIXEL6 VULKAN : ProgramPipelineTest31.ImageUniforms/* = SKIP
+6931 PIXEL6 VULKAN : ShaderStorageBufferTest31.CompoundAssignmentOperator/* = SKIP
+6931 PIXEL6 VULKAN : Texture2DTest.TexStorageWithPBOMiddlePixelDifferent/* = SKIP
+6931 PIXEL6 VULKAN : TransformFeedbackTestES32.* = SKIP
+6931 PIXEL6 VULKAN : TransformFeedbackTestIOBlocks.Separate/* = SKIP
+6931 PIXEL6 VULKAN : WebGLCompatibilityTest.FramebufferFloatColorAttachmentMRT/* = SKIP
+
 // AMD windows failures.  The GPU and driver on our bots are very old and buggy.
 // http://crbug.com/1224996
 1224996 WIN AMD VULKAN : BootAnimationTest.DefaultBootAnimation/* = SKIP
@@ -440,3 +474,27 @@
 
 // Regression after a buffer change.
 6881 INTEL VULKAN LINUX : Texture2DTest.TexStorageWithPBOMiddlePixelDifferent/* = SKIP
+
+// Cubemap sampling with explicit derivatives
+3814 PIXEL4ORXL VULKAN : CubeMapTextureTest.SampleCoordinateTransformGrad/* = SKIP
+3814 PIXEL4ORXL VULKAN : CubeMapTextureTest.SampleCoordinateTransformGrad_ES3/* = SKIP
+3814 PIXEL4ORXL GLES : CubeMapTextureTest.SampleCoordinateTransformGrad_ES3/* = SKIP
+3856 WIN D3D11 : CubeMapTextureTest.SampleCoordinateTransformGrad/* = SKIP
+3856 WIN D3D11 : CubeMapTextureTest.SampleCoordinateTransformGrad_ES3/* = SKIP
+6891 WIN D3D9 : CubeMapTextureTest.SampleCoordinateTransformGrad/* = SKIP
+6824 METAL INTEL : CubeMapTextureTest.SampleCoordinateTransformGrad/* = SKIP
+6824 METAL INTEL : CubeMapTextureTest.SampleCoordinateTransformGrad_ES3/* = SKIP
+
+2799 NVIDIA OPENGL WIN : RobustBufferAccessBehaviorTest.DrawElementsIndexOutOfRangeWithStaticDraw/* = SKIP
+2799 NVIDIA OPENGL WIN : RobustBufferAccessBehaviorTest.DrawElementsIndexOutOfRangeWithDynamicDraw/* = SKIP
+2861 ANDROID GLES : RobustBufferAccessBehaviorTest.NoBufferData/* = SKIP
+2861 ANDROID GLES : RobustBufferAccessBehaviorTest.EmptyBuffer/* = SKIP
+3099 AMD OPENGL : RobustBufferAccessBehaviorTest.EmptyBuffer/* = SKIP
+
+// Missing ETC2 support on macOS OpenGL
+3853 MAC OPENGL : Texture2DTestES3RobustInit.TextureCOMPRESSEDRGB8A1ETC2/* = SKIP
+3853 MAC OPENGL : Texture2DTestES3RobustInit.TextureCOMPRESSEDSRGB8A1ETC2/* = SKIP
+
+// Missing Vulkan image initialization
+6941 VULKAN : Texture2DTestES3RobustInit.TextureCOMPRESSEDRGB8A1ETC2/* = SKIP
+6941 VULKAN : Texture2DTestES3RobustInit.TextureCOMPRESSEDSRGB8A1ETC2/* = SKIP

@@ -374,8 +374,17 @@ angle::Result InitializeTextureContents(const gl::Context *context,
     // Intiialize the content to black
     GLint layer, startDepth;
     GetSliceAndDepth(index, &layer, &startDepth);
-    if (texture->isCPUAccessible() && index.getType() != gl::TextureType::_2DMultisample &&
-        index.getType() != gl::TextureType::_2DMultisampleArray && !forceGPUInitialization)
+
+    // Use compressed texture initialization only when both the intended and the actual ANGLE
+    // formats are compressed. Emulated opaque ETC2 formats use uncompressed fallbacks and require
+    // custom initialization.
+    if (intendedInternalFormat.compressed && textureObjFormat.actualAngleFormat().isBlock)
+    {
+        return InitializeCompressedTextureContents(context, texture, textureObjFormat, index, layer,
+                                                   startDepth);
+    }
+    else if (texture->isCPUAccessible() && index.getType() != gl::TextureType::_2DMultisample &&
+             index.getType() != gl::TextureType::_2DMultisampleArray && !forceGPUInitialization)
     {
         const angle::Format &dstFormat = angle::Format::Get(textureObjFormat.actualFormatId);
         const size_t dstRowPitch       = dstFormat.pixelBytes * size.width;
@@ -417,11 +426,6 @@ angle::Result InitializeTextureContents(const gl::Context *context,
                                          conversionRow.data(), dstRowPitch);
             }
         }
-    }
-    else if (intendedInternalFormat.compressed)
-    {
-        return InitializeCompressedTextureContents(context, texture, textureObjFormat, index, layer,
-                                                   startDepth);
     }
     else
     {
@@ -1179,6 +1183,36 @@ bool IsFormatEmulated(const mtl::Format &mtlFormat)
     bool isFormatEmulated;
     (void)GetEmulatedColorWriteMask(mtlFormat, &isFormatEmulated);
     return isFormatEmulated;
+}
+
+size_t EstimateTextureSizeInBytes(const mtl::Format &mtlFormat,
+                                  size_t width,
+                                  size_t height,
+                                  size_t depth,
+                                  size_t sampleCount,
+                                  size_t numMips)
+{
+    size_t textureSizeInBytes;
+    if (mtlFormat.getCaps().compressed)
+    {
+        GLuint textureSize;
+        gl::Extents size((int)width, (int)height, (int)depth);
+        if (!mtlFormat.intendedInternalFormat().computeCompressedImageSize(size, &textureSize))
+        {
+            return 0;
+        }
+        textureSizeInBytes = textureSize;
+    }
+    else
+    {
+        textureSizeInBytes = mtlFormat.getCaps().pixelBytes * width * height * depth * sampleCount;
+    }
+    if (numMips > 1)
+    {
+        // Estimate mipmap size.
+        textureSizeInBytes = textureSizeInBytes * 4 / 3;
+    }
+    return textureSizeInBytes;
 }
 
 MTLClearColor EmulatedAlphaClearColor(MTLClearColor color, MTLColorWriteMask colorMask)
