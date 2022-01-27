@@ -112,6 +112,8 @@ struct ProgramExecutablePerfCounters
     DescriptorSetCountList descriptorSetCacheMisses;
 };
 
+using DefaultUniformBlockMap = gl::ShaderMap<std::shared_ptr<DefaultUniformBlock>>;
+
 class ProgramExecutableVk
 {
   public:
@@ -125,10 +127,6 @@ class ProgramExecutableVk
 
     void clearVariableInfoMap();
 
-    ProgramVk *getShaderProgram(const gl::State &glState, gl::ShaderType shaderType) const;
-
-    void fillProgramStateMap(const ContextVk *contextVk,
-                             gl::ShaderMap<const gl::ProgramState *> *programStatesOut) const;
     const gl::ProgramExecutable &getGlExecutable();
 
     ProgramInfo &getGraphicsDefaultProgramInfo() { return mGraphicsProgramInfos[0]; }
@@ -163,10 +161,9 @@ class ProgramExecutableVk
         FramebufferVk *framebufferVk,
         const vk::ShaderBuffersDescriptorDesc &shaderBuffersDesc);
     angle::Result updateTransformFeedbackDescriptorSet(
-        const gl::ProgramState &programState,
-        gl::ShaderMap<DefaultUniformBlock> &defaultUniformBlocks,
-        vk::BufferHelper *defaultUniformBuffer,
         ContextVk *contextVk,
+        const gl::ProgramExecutable &executable,
+        vk::BufferHelper *defaultUniformBuffer,
         const vk::UniformsAndXfbDescriptorDesc &xfbBufferDesc);
     angle::Result updateInputAttachmentDescriptorSet(const gl::ProgramExecutable &executable,
                                                      const gl::ShaderType shaderType,
@@ -207,9 +204,32 @@ class ProgramExecutableVk
     void accumulateCacheStats(VulkanCacheType cacheType, const CacheStats &cacheStats);
     ProgramExecutablePerfCounters getAndResetObjectPerfCounters();
 
+    size_t getDefaultUniformAlignedSize(vk::Context *context, const gl::ShaderType shaderType) const
+    {
+        RendererVk *renderer = context->getRenderer();
+        size_t alignment     = static_cast<size_t>(
+            renderer->getPhysicalDeviceProperties().limits.minUniformBufferOffsetAlignment);
+        return roundUp(mDefaultUniformBlocks[shaderType]->uniformData.size(), alignment);
+    }
+
+    std::shared_ptr<DefaultUniformBlock> &getSharedDefaultUniformBlock(gl::ShaderType shaderType)
+    {
+        return mDefaultUniformBlocks[shaderType];
+    }
+
+    bool hasDirtyUniforms() const { return mDefaultUniformBlocksDirty.any(); }
+
+    void setAllDefaultUniformsDirty(const gl::ProgramExecutable &executable);
+    angle::Result updateUniforms(ContextVk *contextVk,
+                                 const gl::ProgramExecutable &glExecutable,
+                                 vk::DynamicBuffer *defaultUniformStorage);
+    void onProgramBind(const gl::ProgramExecutable &glExecutable);
+
   private:
     friend class ProgramVk;
     friend class ProgramPipelineVk;
+
+    ProgramVk *getShaderProgram(const gl::State &glState, gl::ShaderType shaderType) const;
 
     angle::Result allocUniformAndXfbDescriptorSet(
         ContextVk *contextVk,
@@ -235,7 +255,7 @@ class ProgramExecutableVk
                                              const gl::ShaderType shaderType,
                                              vk::DescriptorSetLayoutDesc *descOut);
     void addTextureDescriptorSetDesc(ContextVk *contextVk,
-                                     const gl::ProgramState &programState,
+                                     const gl::ProgramExecutable &executable,
                                      const gl::ActiveTextureArray<vk::TextureUnit> *activeTextures,
                                      vk::DescriptorSetLayoutDesc *descOut);
 
@@ -244,8 +264,8 @@ class ProgramExecutableVk
                                             const DefaultUniformBlock &defaultUniformBlock,
                                             vk::BufferHelper *defaultUniformBuffer,
                                             ContextVk *contextVk);
-    void updateTransformFeedbackDescriptorSetImpl(const gl::ProgramState &programState,
-                                                  ContextVk *contextVk);
+    void updateTransformFeedbackDescriptorSetImpl(ContextVk *contextVk,
+                                                  const gl::ProgramExecutable &executable);
     angle::Result getOrAllocateShaderResourcesDescriptorSet(
         ContextVk *contextVk,
         const vk::ShaderBuffersDescriptorDesc *shaderBuffersDesc,
@@ -259,7 +279,7 @@ class ProgramExecutableVk
         bool cacheHit);
     angle::Result updateAtomicCounterBuffersDescriptorSet(
         ContextVk *contextVk,
-        const gl::ProgramState &programState,
+        const gl::ProgramExecutable &executable,
         const gl::ShaderType shaderType,
         const vk::ShaderBuffersDescriptorDesc &shaderBuffersDesc,
         bool cacheHit);
@@ -272,6 +292,10 @@ class ProgramExecutableVk
                                              VkDescriptorSetLayout descriptorSetLayout);
 
     void outputCumulativePerfCounters();
+
+    size_t calcUniformUpdateRequiredSpace(ContextVk *contextVk,
+                                          const gl::ProgramExecutable &glExecutable,
+                                          gl::ShaderMap<VkDeviceSize> *uniformOffsets) const;
 
     // Descriptor sets for uniform blocks and textures for this program.
     vk::DescriptorSetArray<VkDescriptorSet> mDescriptorSets;
@@ -320,6 +344,9 @@ class ProgramExecutableVk
 
     ProgramVk *mProgram;
     ProgramPipelineVk *mProgramPipeline;
+
+    DefaultUniformBlockMap mDefaultUniformBlocks;
+    gl::ShaderBitSet mDefaultUniformBlocksDirty;
 
     ProgramExecutablePerfCounters mPerfCounters;
     ProgramExecutablePerfCounters mCumulativePerfCounters;
