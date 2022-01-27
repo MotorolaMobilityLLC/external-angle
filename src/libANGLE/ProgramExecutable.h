@@ -270,6 +270,8 @@ class ProgramExecutable final : public angle::Subject
 
     GLuint getUniformIndexFromImageIndex(GLuint imageIndex) const;
 
+    GLuint getUniformIndexFromSamplerIndex(GLuint samplerIndex) const;
+
     void saveLinkedStateInfo(const ProgramState &state);
     const std::vector<sh::ShaderVariable> &getLinkedOutputVaryings(ShaderType shaderType) const
     {
@@ -339,6 +341,10 @@ class ProgramExecutable final : public angle::Subject
                       std::vector<VariableLocation> *uniformLocationsOutOrNull);
 
     void copyShaderBuffersFromProgram(const ProgramState &programState);
+    void clearSamplerBindings();
+    void copySamplerBindingsFromProgram(const ProgramState &programState);
+    void copyImageBindingsFromProgram(const ProgramState &programState);
+    void copyUniformsFromProgramMap(const ShaderMap<Program *> &programs);
 
   private:
     // TODO(timvp): http://anglebug.com/3570: Investigate removing these friend
@@ -457,15 +463,6 @@ class ProgramExecutable final : public angle::Subject
 
     // An array of the images that are used by the program
     std::vector<ImageBinding> mImageBindings;
-
-    // TODO: http://anglebug.com/3570: Remove mPipelineHas*UniformBuffers once PPO's have valid data
-    // in mUniformBlocks
-    bool mPipelineHasUniformBuffers;
-    bool mPipelineHasStorageBuffers;
-    bool mPipelineHasAtomicCounterBuffers;
-    bool mPipelineHasDefaultUniforms;
-    bool mPipelineHasTextures;
-    bool mPipelineHasImages;
 
     ShaderMap<std::vector<sh::ShaderVariable>> mLinkedOutputVaryings;
     ShaderMap<std::vector<sh::ShaderVariable>> mLinkedInputVaryings;
