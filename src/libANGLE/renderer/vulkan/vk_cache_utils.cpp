@@ -1329,6 +1329,11 @@ void InitializeSpecializationInfo(
                     offsetof(vk::SpecializationConstants, drawableHeight);
                 (*specializationEntriesOut)[id].size = sizeof(specConsts.drawableHeight);
                 break;
+            case sh::vk::SpecializationConstantId::Dither:
+                (*specializationEntriesOut)[id].offset =
+                    offsetof(vk::SpecializationConstants, dither);
+                (*specializationEntriesOut)[id].size = sizeof(specConsts.dither);
+                break;
             default:
                 UNREACHABLE();
                 break;
@@ -1695,6 +1700,9 @@ void GraphicsPipelineDesc::initDefaults(const ContextVk *contextVk)
 
     mDrawableSize.width  = 1;
     mDrawableSize.height = 1;
+
+    mDither.emulatedDitherControl = 0;
+    mDither.unused                = 0;
 }
 
 angle::Result GraphicsPipelineDesc::initializePipeline(
@@ -2677,6 +2685,16 @@ uint32_t GraphicsPipelineDesc::getSubpass() const
     return mRasterizationAndMultisampleStateInfo.bits.subpass;
 }
 
+void GraphicsPipelineDesc::updateEmulatedDitherControl(GraphicsPipelineTransitionBits *transition,
+                                                       uint16_t value)
+{
+    // Make sure we don't waste time resetting this to zero in the common no-dither case.
+    ASSERT(value != 0 || mDither.emulatedDitherControl != 0);
+
+    mDither.emulatedDitherControl = value;
+    transition->set(ANGLE_GET_TRANSITION_BIT(mDither, emulatedDitherControl));
+}
+
 void GraphicsPipelineDesc::updateRenderPassDesc(GraphicsPipelineTransitionBits *transition,
                                                 const RenderPassDesc &renderPassDesc)
 {
@@ -2803,17 +2821,17 @@ bool DescriptorSetLayoutDesc::operator==(const DescriptorSetLayoutDesc &other) c
 }
 
 void DescriptorSetLayoutDesc::update(uint32_t bindingIndex,
-                                     VkDescriptorType type,
+                                     VkDescriptorType descriptorType,
                                      uint32_t count,
                                      VkShaderStageFlags stages,
                                      const Sampler *immutableSampler)
 {
-    ASSERT(static_cast<size_t>(type) < std::numeric_limits<uint16_t>::max());
+    ASSERT(static_cast<size_t>(descriptorType) < std::numeric_limits<uint16_t>::max());
     ASSERT(count < std::numeric_limits<uint16_t>::max());
 
     PackedDescriptorSetBinding &packedBinding = mPackedDescriptorSetLayout[bindingIndex];
 
-    SetBitField(packedBinding.type, type);
+    SetBitField(packedBinding.type, descriptorType);
     SetBitField(packedBinding.count, count);
     SetBitField(packedBinding.stages, stages);
     packedBinding.immutableSampler = VK_NULL_HANDLE;
