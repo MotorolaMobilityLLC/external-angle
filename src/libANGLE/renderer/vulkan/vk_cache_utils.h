@@ -519,6 +519,14 @@ struct PackedExtent final
     uint16_t height;
 };
 
+struct PackedDither final
+{
+    static_assert(gl::IMPLEMENTATION_MAX_DRAW_BUFFERS <= 8,
+                  "2 bits per draw buffer is needed for dither emulation");
+    uint16_t emulatedDitherControl;
+    uint16_t unused;
+};
+
 constexpr size_t kPackedInputAssemblyAndColorBlendStateSize =
     sizeof(PackedInputAssemblyAndColorBlendStateInfo);
 static_assert(kPackedInputAssemblyAndColorBlendStateSize == 56, "Size check failed");
@@ -526,7 +534,7 @@ static_assert(kPackedInputAssemblyAndColorBlendStateSize == 56, "Size check fail
 constexpr size_t kGraphicsPipelineDescSumOfSizes =
     kVertexInputAttributesSize + kRenderPassDescSize + kPackedRasterizationAndMultisampleStateSize +
     kPackedDepthStencilStateSize + kPackedInputAssemblyAndColorBlendStateSize +
-    sizeof(PackedExtent);
+    sizeof(PackedExtent) + sizeof(PackedDither);
 
 // Number of dirty bits in the dirty bit set.
 constexpr size_t kGraphicsPipelineDirtyBitBytes = 4;
@@ -711,6 +719,9 @@ class GraphicsPipelineDesc final
                             uint32_t height);
     const PackedExtent &getDrawableSize() const { return mDrawableSize; }
 
+    void updateEmulatedDitherControl(GraphicsPipelineTransitionBits *transition, uint16_t value);
+    uint32_t getEmulatedDitherControl() const { return mDither.emulatedDitherControl; }
+
   private:
     void updateSubpass(GraphicsPipelineTransitionBits *transition, uint32_t subpass);
 
@@ -720,6 +731,7 @@ class GraphicsPipelineDesc final
     PackedDepthStencilStateInfo mDepthStencilStateInfo;
     PackedInputAssemblyAndColorBlendStateInfo mInputAssemblyAndColorBlendStateInfo;
     PackedExtent mDrawableSize;
+    PackedDither mDither;
 };
 
 // Verify the packed pipeline description has no gaps in the packing.
@@ -751,7 +763,7 @@ class DescriptorSetLayoutDesc final
     bool operator==(const DescriptorSetLayoutDesc &other) const;
 
     void update(uint32_t bindingIndex,
-                VkDescriptorType type,
+                VkDescriptorType descriptorType,
                 uint32_t count,
                 VkShaderStageFlags stages,
                 const Sampler *immutableSampler);
