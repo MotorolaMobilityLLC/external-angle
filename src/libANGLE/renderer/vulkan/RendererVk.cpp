@@ -253,12 +253,6 @@ constexpr SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
     {"SYNC-HAZARD-WRITE_AFTER_READ",
      "depth aspect during store with storeOp VK_ATTACHMENT_STORE_OP_STORE. Access info (usage: "
      "SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
-     "SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, read_barriers: VK_PIPELINE_STAGE_2_NONE_KHR, "
-     "command: vkCmdDraw",
-     "", true},
-    {"SYNC-HAZARD-WRITE_AFTER_READ",
-     "depth aspect during store with storeOp VK_ATTACHMENT_STORE_OP_STORE. Access info (usage: "
-     "SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
      "SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, read_barriers: VK_PIPELINE_STAGE_2_NONE, "
      "command: vkCmdDraw",
      "", true},
@@ -429,11 +423,6 @@ constexpr SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
      "usage: SYNC_INDEX_INPUT_INDEX_READ", false},
     {"SYNC-HAZARD-WRITE_AFTER_READ", "vkCmdDraw: Hazard WRITE_AFTER_READ for VkBuffer",
      "Access info (usage: SYNC_VERTEX_SHADER_SHADER_STORAGE_WRITE, prior_usage: "
-     "SYNC_VERTEX_ATTRIBUTE_INPUT_VERTEX_ATTRIBUTE_READ",
-     false},
-    {"SYNC-HAZARD-WRITE_AFTER_READ",
-     "vkCmdCopyImageToBuffer(): Hazard WRITE_AFTER_READ for dstBuffer VkBuffer",
-     "Access info (usage: SYNC_COPY_TRANSFER_WRITE, prior_usage: "
      "SYNC_VERTEX_ATTRIBUTE_INPUT_VERTEX_ATTRIBUTE_READ",
      false},
     {"SYNC-HAZARD-WRITE_AFTER_READ",
@@ -1018,6 +1007,7 @@ constexpr char kEnableDebugMarkersPropertyName[] = "debug.angle.markers";
 // RendererVk implementation.
 RendererVk::RendererVk()
     : mDisplay(nullptr),
+      mLibVulkanLibrary(nullptr),
       mCapsInitialized(false),
       mApiVersion(0),
       mInstance(VK_NULL_HANDLE),
@@ -1062,12 +1052,17 @@ RendererVk::~RendererVk()
     mAllocator.release();
     mPipelineCache.release();
     ASSERT(!hasSharedGarbage());
+
+    if (mLibVulkanLibrary)
+    {
+        angle::CloseSystemLibrary(mLibVulkanLibrary);
+    }
 }
 
 bool RendererVk::hasSharedGarbage()
 {
     std::lock_guard<std::mutex> lock(mGarbageMutex);
-    return !mSharedGarbage.empty();
+    return !mSharedGarbage.empty() || !mSuballocationGarbage.empty();
 }
 
 void RendererVk::releaseSharedResources(vk::ResourceUseList *resourceList)
@@ -1171,8 +1166,9 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
     mLibVulkanLibrary = angle::vk::OpenLibVulkan();
     ANGLE_VK_CHECK(displayVk, mLibVulkanLibrary, VK_ERROR_INITIALIZATION_FAILED);
 
-    PFN_vkGetInstanceProcAddr vulkanLoaderGetInstanceProcAddr = nullptr;
-    mLibVulkanLibrary->getAs("vkGetInstanceProcAddr", &vulkanLoaderGetInstanceProcAddr);
+    PFN_vkGetInstanceProcAddr vulkanLoaderGetInstanceProcAddr =
+        reinterpret_cast<PFN_vkGetInstanceProcAddr>(
+            angle::GetLibrarySymbol(mLibVulkanLibrary, "vkGetInstanceProcAddr"));
 
     // Set all vk* function ptrs
     volkInitializeCustom(vulkanLoaderGetInstanceProcAddr);
@@ -3417,8 +3413,10 @@ bool RendererVk::haveSameFormatFeatureBits(angle::FormatID formatID1,
 
 angle::Result RendererVk::cleanupGarbage(Serial lastCompletedQueueSerial)
 {
-    vk::SharedGarbageList remainingGarbage;
     std::lock_guard<std::mutex> lock(mGarbageMutex);
+
+    // Clean up general garbages
+    vk::SharedGarbageList remainingGarbage;
     while (!mSharedGarbage.empty())
     {
         vk::SharedGarbage &garbage = mSharedGarbage.front();
@@ -3428,10 +3426,25 @@ angle::Result RendererVk::cleanupGarbage(Serial lastCompletedQueueSerial)
         }
         mSharedGarbage.pop();
     }
-
     if (!remainingGarbage.empty())
     {
         mSharedGarbage = std::move(remainingGarbage);
+    }
+
+    // Clean up suballocation garbages
+    vk::SharedBufferSuballocationGarbageList remainingSuballocationGarbage;
+    while (!mSuballocationGarbage.empty())
+    {
+        vk::SharedBufferSuballocationGarbage &garbage = mSuballocationGarbage.front();
+        if (!garbage.destroyIfComplete(this, lastCompletedQueueSerial))
+        {
+            remainingSuballocationGarbage.push(std::move(garbage));
+        }
+        mSuballocationGarbage.pop();
+    }
+    if (!remainingSuballocationGarbage.empty())
+    {
+        mSuballocationGarbage = std::move(remainingSuballocationGarbage);
     }
 
     return angle::Result::Continue;
