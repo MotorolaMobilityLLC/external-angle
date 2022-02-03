@@ -2425,7 +2425,7 @@ bool DynamicBuffer::allocateFromCurrentBuffer(size_t sizeInBytes,
     angle::base::CheckedNumeric<size_t> checkedNextWriteOffset = mNextAllocationOffset;
     checkedNextWriteOffset += sizeToAllocate;
 
-    if (!checkedNextWriteOffset.IsValid() || checkedNextWriteOffset.ValueOrDie() >= mSize)
+    if (!checkedNextWriteOffset.IsValid() || checkedNextWriteOffset.ValueOrDie() > mSize)
     {
         return false;
     }
@@ -4209,11 +4209,33 @@ void BufferHelper::release(RendererVk *renderer)
 {
     unmap(renderer);
 
-    renderer->collectGarbageAndReinit(&mReadOnlyUse, &mSuballocation,
-                                      mMemory.getExternalMemoryObject(), mMemory.getMemoryObject());
+    if (isExternalBuffer())
+    {
+        renderer->collectGarbageAndReinit(&mReadOnlyUse, &mSuballocation,
+                                          mMemory.getExternalMemoryObject(),
+                                          mMemory.getMemoryObject());
+        mReadWriteUse.release();
+        mReadWriteUse.init();
+    }
+    else if (mSuballocation.valid())
+    {
+        if (mReadOnlyUse.isCurrentlyInUse(renderer->getLastCompletedQueueSerial()))
+        {
+            renderer->collectSuballocationGarbage(std::move(mReadOnlyUse),
+                                                  std::move(mSuballocation));
+            mReadOnlyUse.init();
+        }
+        else
+        {
+            mSuballocation.destroy(renderer);
+        }
 
-    mReadWriteUse.release();
-    mReadWriteUse.init();
+        if (mReadWriteUse.isCurrentlyInUse(renderer->getLastCompletedQueueSerial()))
+        {
+            mReadWriteUse.release();
+            mReadWriteUse.init();
+        }
+    }
 }
 
 angle::Result BufferHelper::copyFromBuffer(ContextVk *contextVk,
