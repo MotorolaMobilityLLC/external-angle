@@ -223,6 +223,7 @@ class ProgramExecutableVk
 
     angle::Result allocUniformAndXfbDescriptorSet(
         ContextVk *contextVk,
+        vk::BufferHelper *defaultUniformBuffer,
         const vk::UniformsAndXfbDescriptorDesc &xfbBufferDesc,
         bool *newDescriptorSetAllocated);
 
@@ -267,6 +268,7 @@ class ProgramExecutableVk
         const vk::ShaderBuffersDescriptorDesc &shaderBuffersDesc,
         const std::vector<gl::InterfaceBlock> &blocks,
         VkDescriptorType descriptorType,
+        VkDeviceSize maxBoundBufferRange,
         bool cacheHit);
     angle::Result updateAtomicCounterBuffersDescriptorSet(
         ContextVk *contextVk,

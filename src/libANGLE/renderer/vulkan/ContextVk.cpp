@@ -138,7 +138,7 @@ constexpr gl::ShaderMap<vk::ImageLayout> kShaderWriteImageLayouts = {
 
 constexpr VkBufferUsageFlags kVertexBufferUsage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
 constexpr size_t kDefaultValueSize              = sizeof(gl::VertexAttribCurrentValueData::Values);
-constexpr size_t kDefaultBufferSize             = kDefaultValueSize * 16;
+constexpr size_t kDynamicVertexDataSize         = 16 * 1024;
 constexpr size_t kDriverUniformsAllocatorPageSize = 4 * 1024;
 
 bool CanMultiDrawIndirectUseCmd(ContextVk *contextVk,
@@ -657,7 +657,7 @@ ANGLE_INLINE void ContextVk::onRenderPassFinished(RenderPassClosureReason reason
 }
 
 ContextVk::DriverUniformsDescriptorSet::DriverUniformsDescriptorSet()
-    : descriptorSet(VK_NULL_HANDLE), dynamicOffset(0)
+    : descriptorSet(VK_NULL_HANDLE), currentBuffer(nullptr)
 {}
 
 ContextVk::DriverUniformsDescriptorSet::~DriverUniformsDescriptorSet() = default;
@@ -884,7 +884,7 @@ void ContextVk::onDestroy(const gl::Context *context)
     mDefaultUniformStorage.release(mRenderer);
     mEmptyBuffer.release(mRenderer);
 
-    for (vk::DynamicBuffer &defaultBuffer : mDefaultAttribBuffers)
+    for (vk::DynamicBuffer &defaultBuffer : mStreamedVertexBuffers)
     {
         defaultBuffer.destroy(mRenderer);
     }
@@ -1014,9 +1014,9 @@ angle::Result ContextVk::initialize()
     mGraphicsPipelineDesc->initDefaults(this);
 
     // Initialize current value/default attribute buffers.
-    for (vk::DynamicBuffer &buffer : mDefaultAttribBuffers)
+    for (vk::DynamicBuffer &buffer : mStreamedVertexBuffers)
     {
-        buffer.init(mRenderer, kVertexBufferUsage, 1, kDefaultBufferSize, true,
+        buffer.init(mRenderer, kVertexBufferUsage, 1, kDynamicVertexDataSize, true,
                     vk::DynamicBufferPolicy::FrequentSmallAllocations);
     }
 
@@ -1909,7 +1909,8 @@ angle::Result ContextVk::handleDirtyGraphicsFramebufferFetchBarrier(
 }
 
 template <typename CommandBufferHelperT>
-angle::Result ContextVk::handleDirtyShaderResourcesImpl(CommandBufferHelperT *commandBufferHelper)
+angle::Result ContextVk::handleDirtyShaderResourcesImpl(CommandBufferHelperT *commandBufferHelper,
+                                                        PipelineType pipelineType)
 {
     const gl::ProgramExecutable *executable = mState.getProgramExecutable();
     ASSERT(executable);
@@ -1931,6 +1932,8 @@ angle::Result ContextVk::handleDirtyShaderResourcesImpl(CommandBufferHelperT *co
     }
 
     handleDirtyShaderBufferResourcesImpl(commandBufferHelper);
+
+    updateShaderResourcesDescriptorDesc(pipelineType);
 
     ProgramExecutableVk *executableVk = getExecutable();
     FramebufferVk *drawFramebufferVk  = getDrawFramebuffer();
@@ -2031,12 +2034,12 @@ void ContextVk::handleDirtyShaderBufferResourcesImpl(
 angle::Result ContextVk::handleDirtyGraphicsShaderResources(DirtyBits::Iterator *dirtyBitsIterator,
                                                             DirtyBits dirtyBitMask)
 {
-    return handleDirtyShaderResourcesImpl(mRenderPassCommands);
+    return handleDirtyShaderResourcesImpl(mRenderPassCommands, PipelineType::Graphics);
 }
 
 angle::Result ContextVk::handleDirtyComputeShaderResources()
 {
-    return handleDirtyShaderResourcesImpl(mOutsideRenderPassCommands);
+    return handleDirtyShaderResourcesImpl(mOutsideRenderPassCommands, PipelineType::Compute);
 }
 
 angle::Result ContextVk::handleDirtyGraphicsTransformFeedbackBuffersEmulation(
@@ -3778,6 +3781,10 @@ angle::Result ContextVk::checkAndUpdateFramebufferFetchStatus(
     {
         drawFramebufferVk->onSwitchProgramFramebufferFetch(this,
                                                            executable->usesFramebufferFetch());
+        if (executable->usesFramebufferFetch())
+        {
+            mRenderer->onFramebufferFetchUsed();
+        }
     }
 
     return angle::Result::Continue;
@@ -4581,47 +4588,48 @@ angle::Result ContextVk::invalidateCurrentShaderResources(gl::Command command)
         mComputeDirtyBits.set(DIRTY_BIT_MEMORY_BARRIER);
     }
 
-    if (hasUniformBuffers || hasStorageBuffers)
+    return angle::Result::Continue;
+}
+
+void ContextVk::updateShaderResourcesDescriptorDesc(PipelineType pipelineType)
+{
+    const gl::ProgramExecutable *executable = mState.getProgramExecutable();
+    ASSERT(executable);
+
+    const bool hasStorageBuffers =
+        executable->hasStorageBuffers() || executable->hasAtomicCounterBuffers();
+    const bool hasUniformBuffers = executable->hasUniformBuffers();
+
+    if (!hasUniformBuffers && !hasStorageBuffers)
     {
-        mShaderBuffersDescriptorDesc.reset();
-
-        ProgramExecutableVk *executableVk = nullptr;
-        if (mState.getProgram())
-        {
-            ProgramVk *programVk = vk::GetImpl(mState.getProgram());
-            executableVk         = &programVk->getExecutable();
-        }
-        else
-        {
-            ASSERT(mState.getProgramPipeline());
-            ProgramPipelineVk *pipelineVk = vk::GetImpl(mState.getProgramPipeline());
-            executableVk                  = &pipelineVk->getExecutable();
-        }
-
-        const gl::BufferVector &uniformBuffers = mState.getOffsetBindingPointerUniformBuffers();
-        bool isDynamicDescriptor = executableVk->usesDynamicUniformBufferDescriptors();
-        bool appendOffset        = !isDynamicDescriptor;
-        AppendBufferVectorToDesc(&mShaderBuffersDescriptorDesc, uniformBuffers,
-                                 mState.getUniformBuffersMask(), isDynamicDescriptor, appendOffset);
-
-        const gl::BufferVector &shaderStorageBuffers =
-            mState.getOffsetBindingPointerShaderStorageBuffers();
-        isDynamicDescriptor = executableVk->usesDynamicShaderStorageBufferDescriptors();
-        appendOffset        = true;
-        AppendBufferVectorToDesc(&mShaderBuffersDescriptorDesc, shaderStorageBuffers,
-                                 mState.getShaderStorageBuffersMask(), isDynamicDescriptor,
-                                 appendOffset);
-
-        const gl::BufferVector &atomicCounterBuffers =
-            mState.getOffsetBindingPointerAtomicCounterBuffers();
-        isDynamicDescriptor = executableVk->usesDynamicAtomicCounterBufferDescriptors();
-        appendOffset        = true;
-        AppendBufferVectorToDesc(&mShaderBuffersDescriptorDesc, atomicCounterBuffers,
-                                 mState.getAtomicCounterBuffersMask(), isDynamicDescriptor,
-                                 appendOffset);
+        return;
     }
 
-    return angle::Result::Continue;
+    mShaderBuffersDescriptorDesc.reset();
+
+    ProgramExecutableVk *executableVk = getExecutable();
+
+    const gl::BufferVector &uniformBuffers = mState.getOffsetBindingPointerUniformBuffers();
+    bool isDynamicDescriptor               = executableVk->usesDynamicUniformBufferDescriptors();
+    bool appendOffset                      = !isDynamicDescriptor;
+    AppendBufferVectorToDesc(&mShaderBuffersDescriptorDesc, uniformBuffers,
+                             mState.getUniformBuffersMask(), isDynamicDescriptor, appendOffset);
+
+    const gl::BufferVector &shaderStorageBuffers =
+        mState.getOffsetBindingPointerShaderStorageBuffers();
+    isDynamicDescriptor = executableVk->usesDynamicShaderStorageBufferDescriptors();
+    appendOffset        = true;
+    AppendBufferVectorToDesc(&mShaderBuffersDescriptorDesc, shaderStorageBuffers,
+                             mState.getShaderStorageBuffersMask(), isDynamicDescriptor,
+                             appendOffset);
+
+    const gl::BufferVector &atomicCounterBuffers =
+        mState.getOffsetBindingPointerAtomicCounterBuffers();
+    isDynamicDescriptor = executableVk->usesDynamicAtomicCounterBufferDescriptors();
+    appendOffset        = true;
+    AppendBufferVectorToDesc(&mShaderBuffersDescriptorDesc, atomicCounterBuffers,
+                             mState.getAtomicCounterBuffersMask(), isDynamicDescriptor,
+                             appendOffset);
 }
 
 void ContextVk::invalidateGraphicsDriverUniforms()
@@ -5299,9 +5307,11 @@ void ContextVk::handleDirtyDriverUniformsBindingImpl(CommandBufferT *commandBuff
     }
 
     ProgramExecutableVk *executableVk = getExecutable();
-    commandBuffer->bindDescriptorSets(
-        executableVk->getPipelineLayout(), bindPoint, DescriptorSetIndex::Internal, 1,
-        &driverUniforms->descriptorSet, 1, &driverUniforms->dynamicOffset);
+    const uint32_t dynamicOffset =
+        static_cast<uint32_t>(driverUniforms->currentBuffer->getOffset());
+    commandBuffer->bindDescriptorSets(executableVk->getPipelineLayout(), bindPoint,
+                                      DescriptorSetIndex::Internal, 1,
+                                      &driverUniforms->descriptorSet, 1, &dynamicOffset);
 }
 
 angle::Result ContextVk::handleDirtyGraphicsDriverUniformsBinding(
@@ -5332,11 +5342,10 @@ angle::Result ContextVk::allocateDriverUniforms(size_t driverUniformsSize,
     // buffer's mInflightBuffers. During command submission time, these in-flight buffers are added
     // into context's mResourceUseList which will ensure they get tagged with queue serial number
     // before moving them into the free list.
-    VkDeviceSize offset;
-    ANGLE_TRY(driverUniforms->dynamicBuffer.allocate(this, driverUniformsSize, ptrOut, nullptr,
-                                                     &offset, newBufferOut));
+    ANGLE_TRY(driverUniforms->dynamicBuffer.allocate(this, driverUniformsSize,
+                                                     &driverUniforms->currentBuffer, newBufferOut));
 
-    driverUniforms->dynamicOffset = static_cast<uint32_t>(offset);
+    *ptrOut = driverUniforms->currentBuffer->getMappedMemory();
 
     return angle::Result::Continue;
 }
@@ -5347,15 +5356,14 @@ angle::Result ContextVk::updateDriverUniformsDescriptorSet(bool newBuffer,
 {
     DriverUniformsDescriptorSet &driverUniforms = mDriverUniforms[pipelineType];
 
-    ANGLE_TRY(driverUniforms.dynamicBuffer.flush(this));
+    ANGLE_TRY(driverUniforms.currentBuffer->flush(mRenderer));
 
     if (!newBuffer)
     {
         return angle::Result::Continue;
     }
 
-    const vk::BufferHelper *buffer = driverUniforms.dynamicBuffer.getCurrentBuffer();
-    vk::BufferSerial bufferSerial  = buffer->getBufferSerial();
+    vk::BufferSerial bufferSerial = driverUniforms.currentBuffer->getBufferSerial();
     // Look up in the cache first
     if (driverUniforms.descriptorSetCache.get(bufferSerial.getValue(),
                                               &driverUniforms.descriptorSet))
@@ -5381,7 +5389,7 @@ angle::Result ContextVk::updateDriverUniformsDescriptorSet(bool newBuffer,
 
     // Update the driver uniform descriptor set.
     VkDescriptorBufferInfo &bufferInfo = allocDescriptorBufferInfo();
-    bufferInfo.buffer                  = buffer->getBuffer().getHandle();
+    bufferInfo.buffer                  = driverUniforms.currentBuffer->getBuffer().getHandle();
     bufferInfo.offset                  = 0;
     bufferInfo.range                   = driverUniformsSize;
 
@@ -5705,6 +5713,15 @@ angle::Result ContextVk::flushAndGetSerial(const vk::Semaphore *signalSemaphore,
     }
     mDefaultUniformStorage.releaseInFlightBuffersToResourceUseList(this);
 
+    if (mHasInFlightStreamedVertexBuffers.any())
+    {
+        for (size_t attribIndex : mHasInFlightStreamedVertexBuffers)
+        {
+            mStreamedVertexBuffers[attribIndex].releaseInFlightBuffersToResourceUseList(this);
+        }
+        mHasInFlightStreamedVertexBuffers.reset();
+    }
+
     ANGLE_TRY(submitFrame(signalSemaphore, submitSerialOut));
 
     mPerfCounters.renderPasses                           = 0;
@@ -5893,27 +5910,20 @@ void ContextVk::invalidateDefaultAttributes(const gl::AttributesMask &dirtyMask)
 
 angle::Result ContextVk::updateDefaultAttribute(size_t attribIndex)
 {
-    vk::DynamicBuffer &defaultBuffer = mDefaultAttribBuffers[attribIndex];
-
-    defaultBuffer.releaseInFlightBuffers(this);
-
-    uint8_t *ptr;
-    VkBuffer bufferHandle = VK_NULL_HANDLE;
-    VkDeviceSize offset   = 0;
-    ANGLE_TRY(
-        defaultBuffer.allocate(this, kDefaultValueSize, &ptr, &bufferHandle, &offset, nullptr));
+    vk::BufferHelper *defaultBuffer;
+    ANGLE_TRY(allocateStreamedVertexBuffer(attribIndex, kDefaultValueSize, &defaultBuffer));
 
     const gl::State &glState = mState;
     const gl::VertexAttribCurrentValueData &defaultValue =
         glState.getVertexAttribCurrentValues()[attribIndex];
+    uint8_t *ptr = defaultBuffer->getMappedMemory();
     memcpy(ptr, &defaultValue.Values, kDefaultValueSize);
-    ASSERT(!defaultBuffer.isCoherent());
-    ANGLE_TRY(defaultBuffer.flush(this));
+    ANGLE_TRY(defaultBuffer->flush(mRenderer));
 
     VertexArrayVk *vertexArrayVk = getVertexArray();
-    return vertexArrayVk->updateDefaultAttrib(this, attribIndex, bufferHandle,
-                                              defaultBuffer.getCurrentBuffer(),
-                                              static_cast<uint32_t>(offset));
+    return vertexArrayVk->updateDefaultAttrib(this, attribIndex,
+                                              defaultBuffer->getBuffer().getHandle(), defaultBuffer,
+                                              static_cast<uint32_t>(defaultBuffer->getOffset()));
 }
 
 vk::DescriptorSetLayoutDesc ContextVk::getDriverUniformsDescriptorSetDesc() const
