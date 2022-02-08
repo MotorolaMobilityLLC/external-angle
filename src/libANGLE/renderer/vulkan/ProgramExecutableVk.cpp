@@ -481,10 +481,12 @@ uint32_t GetInterfaceBlockArraySize(const std::vector<gl::InterfaceBlock> &block
 
 angle::Result ProgramExecutableVk::allocUniformAndXfbDescriptorSet(
     ContextVk *contextVk,
+    vk::BufferHelper *defaultUniformBuffer,
     const vk::UniformsAndXfbDescriptorDesc &xfbBufferDesc,
     bool *newDescriptorSetAllocated)
 {
-    mCurrentDefaultUniformBufferSerial = xfbBufferDesc.getDefaultUniformBufferSerial();
+    mCurrentDefaultUniformBufferSerial =
+        defaultUniformBuffer ? defaultUniformBuffer->getBufferSerial() : vk::kInvalidBufferSerial;
 
     // Look up in the cache first
     VkDescriptorSet descriptorSet = VK_NULL_HANDLE;
@@ -1261,6 +1263,7 @@ angle::Result ProgramExecutableVk::updateBuffersDescriptorSet(
     const vk::ShaderBuffersDescriptorDesc &shaderBuffersDesc,
     const std::vector<gl::InterfaceBlock> &blocks,
     VkDescriptorType descriptorType,
+    VkDeviceSize maxBoundBufferRange,
     bool cacheHit)
 {
     // Early exit if no blocks or no update needed.
@@ -1302,15 +1305,9 @@ angle::Result ProgramExecutableVk::updateBuffersDescriptorSet(
         uint32_t binding      = info.binding;
         uint32_t arrayElement = block.isArray ? block.arrayElement : 0;
 
-        VkDeviceSize size;
-        if (!isStorageBuffer)
-        {
-            size = block.dataSize;
-        }
-        else
-        {
-            size = gl::GetBoundBufferAvailableSize(bufferBinding);
-        }
+        // Limit bound buffer size to maximum resource binding size.
+        GLsizeiptr boundBufferSize = gl::GetBoundBufferAvailableSize(bufferBinding);
+        VkDeviceSize size          = std::min<VkDeviceSize>(boundBufferSize, maxBoundBufferRange);
 
         // Make sure there's no possible under/overflow with binding size.
         static_assert(sizeof(VkDeviceSize) >= sizeof(bufferBinding.getSize()),
@@ -1592,14 +1589,17 @@ angle::Result ProgramExecutableVk::updateShaderResourcesDescriptorSet(
 
     bool cacheHit = mDescriptorSets[DescriptorSetIndex::ShaderResource] != VK_NULL_HANDLE;
 
+    const VkPhysicalDeviceLimits &limits =
+        contextVk->getRenderer()->getPhysicalDeviceProperties().limits;
+
     for (const gl::ShaderType shaderType : executable->getLinkedShaderStages())
     {
-        ANGLE_TRY(updateBuffersDescriptorSet(contextVk, shaderType, shaderBuffersDesc,
-                                             executable->getUniformBlocks(),
-                                             mUniformBufferDescriptorType, cacheHit));
-        ANGLE_TRY(updateBuffersDescriptorSet(contextVk, shaderType, shaderBuffersDesc,
-                                             executable->getShaderStorageBlocks(),
-                                             kStorageBufferDescriptorType, cacheHit));
+        ANGLE_TRY(updateBuffersDescriptorSet(
+            contextVk, shaderType, shaderBuffersDesc, executable->getUniformBlocks(),
+            mUniformBufferDescriptorType, limits.maxUniformBufferRange, cacheHit));
+        ANGLE_TRY(updateBuffersDescriptorSet(
+            contextVk, shaderType, shaderBuffersDesc, executable->getShaderStorageBlocks(),
+            kStorageBufferDescriptorType, limits.maxStorageBufferRange, cacheHit));
         ANGLE_TRY(updateAtomicCounterBuffersDescriptorSet(contextVk, *executable, shaderType,
                                                           shaderBuffersDesc, cacheHit));
         ANGLE_TRY(updateImagesDescriptorSet(contextVk, *executable, shaderType));
@@ -1680,8 +1680,8 @@ angle::Result ProgramExecutableVk::updateTransformFeedbackDescriptorSet(
     ASSERT(executable.hasTransformFeedbackOutput());
 
     bool newDescriptorSetAllocated;
-    ANGLE_TRY(
-        allocUniformAndXfbDescriptorSet(contextVk, xfbBufferDesc, &newDescriptorSetAllocated));
+    ANGLE_TRY(allocUniformAndXfbDescriptorSet(contextVk, defaultUniformBuffer, xfbBufferDesc,
+                                              &newDescriptorSetAllocated));
 
     if (newDescriptorSetAllocated)
     {
@@ -2066,11 +2066,10 @@ angle::Result ProgramExecutableVk::updateUniforms(ContextVk *contextVk,
 {
     ASSERT(hasDirtyUniforms());
 
-    uint8_t *bufferData                 = nullptr;
-    VkDeviceSize bufferOffset           = 0;
-    uint32_t offsetIndex                = 0;
+    vk::BufferHelper *defaultUniformBuffer;
     bool anyNewBufferAllocated          = false;
     gl::ShaderMap<VkDeviceSize> offsets = {};  // offset to the beginning of bufferData
+    uint32_t offsetIndex                = 0;
     size_t requiredSpace;
 
     // We usually only update uniform data for shader stages that are actually dirty. But when the
@@ -2082,16 +2081,17 @@ angle::Result ProgramExecutableVk::updateUniforms(ContextVk *contextVk,
 
     // Allocate space from dynamicBuffer. Always try to allocate from the current buffer first.
     // If that failed, we deal with fall out and try again.
-    if (!defaultUniformStorage->allocateFromCurrentBuffer(requiredSpace, &bufferData,
-                                                          &bufferOffset))
+    if (!defaultUniformStorage->allocateFromCurrentBuffer(requiredSpace, &defaultUniformBuffer))
     {
         setAllDefaultUniformsDirty(glExecutable);
 
         requiredSpace = calcUniformUpdateRequiredSpace(contextVk, glExecutable, &offsets);
-        ANGLE_TRY(defaultUniformStorage->allocate(contextVk, requiredSpace, &bufferData, nullptr,
-                                                  &bufferOffset, &anyNewBufferAllocated));
+        ANGLE_TRY(defaultUniformStorage->allocate(contextVk, requiredSpace, &defaultUniformBuffer,
+                                                  &anyNewBufferAllocated));
     }
 
+    uint8_t *bufferData       = defaultUniformBuffer->getMappedMemory();
+    VkDeviceSize bufferOffset = defaultUniformBuffer->getOffset();
     for (const gl::ShaderType shaderType : glExecutable.getLinkedShaderStages())
     {
         if (mDefaultUniformBlocksDirty[shaderType])
@@ -2104,7 +2104,7 @@ angle::Result ProgramExecutableVk::updateUniforms(ContextVk *contextVk,
         }
         ++offsetIndex;
     }
-    ANGLE_TRY(defaultUniformStorage->flush(contextVk));
+    ANGLE_TRY(defaultUniformBuffer->flush(contextVk->getRenderer()));
 
     // Because the uniform buffers are per context, we can't rely on dynamicBuffer's allocate
     // function to tell us if you have got a new buffer or not. Other program's use of the buffer
@@ -2113,7 +2113,6 @@ angle::Result ProgramExecutableVk::updateUniforms(ContextVk *contextVk,
     // use that recorded BufferSerial compare to the current uniform buffer to quickly detect if
     // there is a buffer switch or not. We need to retrieve from the descriptor set cache or
     // allocate a new descriptor set whenever there is uniform buffer switch.
-    vk::BufferHelper *defaultUniformBuffer = defaultUniformStorage->getCurrentBuffer();
     if (mCurrentDefaultUniformBufferSerial != defaultUniformBuffer->getBufferSerial())
     {
         // We need to reinitialize the descriptor sets if we newly allocated buffers since we can't
@@ -2136,7 +2135,8 @@ angle::Result ProgramExecutableVk::updateUniforms(ContextVk *contextVk,
         }
 
         bool newDescriptorSetAllocated;
-        ANGLE_TRY(allocUniformAndXfbDescriptorSet(contextVk, *uniformsAndXfbBufferDesc,
+        ANGLE_TRY(allocUniformAndXfbDescriptorSet(contextVk, defaultUniformBuffer,
+                                                  *uniformsAndXfbBufferDesc,
                                                   &newDescriptorSetAllocated));
 
         if (newDescriptorSetAllocated)
