@@ -1311,6 +1311,7 @@ void Context::useProgramStages(ProgramPipelineID pipeline,
 
     ASSERT(programPipeline);
     ANGLE_CONTEXT_TRY(programPipeline->useProgramStages(this, stages, shaderProgram));
+    mState.mDirtyBits.set(State::DirtyBitType::DIRTY_BIT_PROGRAM_EXECUTABLE);
 }
 
 void Context::bindTransformFeedback(GLenum target, TransformFeedbackID transformFeedbackHandle)
@@ -3519,10 +3520,6 @@ Extensions Context::generateSupportedExtensions() const
         supportedExtensions.drawBuffersIndexedOES        = false;
         supportedExtensions.EGLImageArrayEXT             = false;
         supportedExtensions.textureFormatSRGBOverrideEXT = false;
-
-        // The spec requires ES 3.1 but these are used for WebGL 2.0
-        supportedExtensions.baseVertexBaseInstanceANGLE              = false;
-        supportedExtensions.baseVertexBaseInstanceShaderBuiltinANGLE = false;
 
         // Requires immutable textures
         supportedExtensions.yuvInternalFormatANGLE = false;
