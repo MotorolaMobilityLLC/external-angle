@@ -282,6 +282,15 @@ std::ostream &operator<<(std::ostream &stream, const PlatformParameters &pp)
         stream << "_VulkanNoMultiDrawIndirect";
     }
 
+    if (pp.eglParameters.WithVulkanPreferCPUForBufferSubData == EGL_TRUE)
+    {
+        stream << "_VulkanPreferCPUForBufferSubData";
+    }
+    else if (pp.eglParameters.WithVulkanPreferCPUForBufferSubData == EGL_FALSE)
+    {
+        stream << "_VulkanNoPreferCPUForBufferSubData";
+    }
+
     if (pp.eglParameters.emulatedVAOs == EGL_TRUE)
     {
         stream << "_EmulatedVAOs";
@@ -315,6 +324,11 @@ std::ostream &operator<<(std::ostream &stream, const PlatformParameters &pp)
     if (pp.eglParameters.displayPowerPreference == EGL_HIGH_POWER_ANGLE)
     {
         stream << "_HighPowerGPU";
+    }
+
+    if (pp.eglParameters.forceSubmitImmutableTextureUpdates == EGL_TRUE)
+    {
+        stream << "_VulkanForceSubmitImmutableTextureUpdates";
     }
 
     return stream;

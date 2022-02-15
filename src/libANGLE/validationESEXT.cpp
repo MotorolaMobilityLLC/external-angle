@@ -1773,6 +1773,27 @@ bool ValidatePrimitiveBoundingBoxEXT(const Context *context,
     return true;
 }
 
+// GL_OES_primitive_bounding_box
+bool ValidatePrimitiveBoundingBoxOES(const Context *context,
+                                     angle::EntryPoint entryPoint,
+                                     GLfloat minX,
+                                     GLfloat minY,
+                                     GLfloat minZ,
+                                     GLfloat minW,
+                                     GLfloat maxX,
+                                     GLfloat maxY,
+                                     GLfloat maxZ,
+                                     GLfloat maxW)
+{
+    if (!context->getExtensions().primitiveBoundingBoxOES)
+    {
+        context->validationError(entryPoint, GL_INVALID_OPERATION, kExtensionNotEnabled);
+        return false;
+    }
+
+    return true;
+}
+
 // GL_EXT_separate_shader_objects
 bool ValidateActiveShaderProgramEXT(const Context *context,
                                     angle::EntryPoint entryPoint,
@@ -2607,6 +2628,34 @@ bool ValidateReleaseTexturesANGLE(const Context *context,
     }
 
     return true;
+}
+
+bool ValidateFramebufferParameteriMESA(const Context *context,
+                                       angle::EntryPoint entryPoint,
+                                       GLenum target,
+                                       GLenum pname,
+                                       GLint param)
+{
+    if (pname != GL_FRAMEBUFFER_FLIP_Y_MESA)
+    {
+        context->validationError(entryPoint, GL_INVALID_ENUM, kInvalidPname);
+        return false;
+    }
+    return ValidateFramebufferParameteriBase(context, entryPoint, target, pname, param);
+}
+
+bool ValidateGetFramebufferParameterivMESA(const Context *context,
+                                           angle::EntryPoint entryPoint,
+                                           GLenum target,
+                                           GLenum pname,
+                                           const GLint *params)
+{
+    if (pname != GL_FRAMEBUFFER_FLIP_Y_MESA)
+    {
+        context->validationError(entryPoint, GL_INVALID_ENUM, kInvalidPname);
+        return false;
+    }
+    return ValidateGetFramebufferParameterivBase(context, entryPoint, target, pname, params);
 }
 
 }  // namespace gl

@@ -289,7 +289,6 @@ angle::Result Texture::MakeTexture(ContextMtl *context,
         return angle::Result::Stop;
     }
     refOut->reset(new Texture(context, desc, mips, renderTargetOnly, allowFormatView, memoryLess));
-
     if (!refOut || !refOut->get())
     {
         ANGLE_MTL_CHECK(context, false, GL_OUT_OF_MEMORY);
@@ -297,6 +296,13 @@ angle::Result Texture::MakeTexture(ContextMtl *context,
     if (!mtlFormat.hasDepthAndStencilBits())
     {
         refOut->get()->setColorWritableMask(GetEmulatedColorWriteMask(mtlFormat));
+    }
+
+    size_t estimatedBytes = EstimateTextureSizeInBytes(
+        mtlFormat, desc.width, desc.height, desc.depth, desc.sampleCount, desc.mipmapLevelCount);
+    if (refOut)
+    {
+        refOut->get()->setEstimatedByteSize(memoryLess ? 0 : estimatedBytes);
     }
 
     return angle::Result::Continue;
@@ -310,6 +316,7 @@ angle::Result Texture::MakeTexture(ContextMtl *context,
                                    bool renderTargetOnly,
                                    TextureRef *refOut)
 {
+
     refOut->reset(new Texture(context, desc, surfaceRef, slice, renderTargetOnly));
 
     if (!(*refOut) || !(*refOut)->get())
@@ -320,6 +327,10 @@ angle::Result Texture::MakeTexture(ContextMtl *context,
     {
         refOut->get()->setColorWritableMask(GetEmulatedColorWriteMask(mtlFormat));
     }
+
+    size_t estimatedBytes = EstimateTextureSizeInBytes(
+        mtlFormat, desc.width, desc.height, desc.depth, desc.sampleCount, desc.mipmapLevelCount);
+    refOut->get()->setEstimatedByteSize(estimatedBytes);
 
     return angle::Result::Continue;
 }
@@ -402,7 +413,7 @@ Texture::Texture(ContextMtl *context,
             desc.usage = desc.usage | MTLTextureUsagePixelFormatView;
         }
 
-        set([metalDevice.newTextureWithDescriptor(desc) ANGLE_MTL_AUTORELEASE]);
+        set(metalDevice.newTextureWithDescriptor(desc));
 
         mCreationDesc.retainAssign(desc);
     }
@@ -441,8 +452,7 @@ Texture::Texture(ContextMtl *context,
                 desc.usage = desc.usage | MTLTextureUsageShaderWrite;
             }
         }
-        id<MTLTexture> iosurfTexture = metalDevice.newTextureWithDescriptor(desc, iosurface, plane);
-        set([iosurfTexture ANGLE_MTL_AUTORELEASE]);
+        set(metalDevice.newTextureWithDescriptor(desc, iosurface, plane));
     }
 }
 
@@ -455,6 +465,8 @@ Texture::Texture(Texture *original, MTLPixelFormat format)
         auto view = [original->get() newTextureViewWithPixelFormat:format];
 
         set([view ANGLE_MTL_AUTORELEASE]);
+        // Texture views consume no additional memory
+        mEstimatedByteSize = 0;
     }
 }
 
@@ -470,6 +482,8 @@ Texture::Texture(Texture *original, MTLTextureType type, NSRange mipmapLevelRang
                                                             slices:slices];
 
         set([view ANGLE_MTL_AUTORELEASE]);
+        // Texture views consume no additional memory
+        mEstimatedByteSize = 0;
     }
 }
 
@@ -488,6 +502,8 @@ Texture::Texture(Texture *original, const TextureSwizzleChannels &swizzle)
                                   swizzle:swizzle];
 
         set([view ANGLE_MTL_AUTORELEASE]);
+        // Texture views consume no additional memory
+        mEstimatedByteSize = 0;
     }
 #else
     UNREACHABLE();
@@ -754,15 +770,10 @@ angle::Result Texture::resize(ContextMtl *context, uint32_t width, uint32_t heig
         MTLTextureDescriptor *newDesc = [[mCreationDesc.get() copy] ANGLE_MTL_AUTORELEASE];
         newDesc.width                 = width;
         newDesc.height                = height;
-        id<MTLTexture> newTexture =
-            [[get().device newTextureWithDescriptor:newDesc] ANGLE_MTL_AUTORELEASE];
-
+        auto newTexture               = context->getMetalDevice().newTextureWithDescriptor(newDesc);
         ANGLE_CHECK_GL_ALLOC(context, newTexture);
-
         mCreationDesc.retainAssign(newDesc);
-
         set(newTexture);
-
         // Reset reference counter
         Resource::reset();
     }
@@ -816,9 +827,7 @@ TextureRef Texture::getReadableCopy(ContextMtl *context,
             desc.resourceOptions = MTLResourceStorageModePrivate;
             desc.sampleCount     = get().sampleCount;
             desc.usage           = MTLTextureUsageShaderRead | MTLTextureUsagePixelFormatView;
-
-            id<MTLTexture> mtlTexture = context->getMetalDevice().newTextureWithDescriptor(desc);
-            mReadCopy.reset(new Texture(mtlTexture));
+            mReadCopy.reset(new Texture(context->getMetalDevice().newTextureWithDescriptor(desc)));
         }  // ANGLE_MTL_OBJC_SCOPE
     }
 
@@ -957,27 +966,18 @@ angle::Result Buffer::resetWithResOpt(ContextMtl *context,
                                       size_t size,
                                       const uint8_t *data)
 {
-    ANGLE_MTL_OBJC_SCOPE
-    {
-        id<MTLBuffer> newBuffer;
+    set([&] {
         const mtl::ContextDevice &metalDevice = context->getMetalDevice();
-
         if (data)
         {
-            newBuffer = metalDevice.newBufferWithBytes(data, size, options);
+            return metalDevice.newBufferWithBytes(data, size, options);
         }
-        else
-        {
-            newBuffer = metalDevice.newBufferWithLength(size, options);
-        }
+        return metalDevice.newBufferWithLength(size, options);
+    }());
+    // Reset command buffer's reference serial
+    Resource::reset();
 
-        set([newBuffer ANGLE_MTL_AUTORELEASE]);
-
-        // Reset command buffer's reference serial
-        Resource::reset();
-
-        return angle::Result::Continue;
-    }
+    return angle::Result::Continue;
 }
 
 void Buffer::syncContent(ContextMtl *context, mtl::BlitCommandEncoder *blitEncoder)

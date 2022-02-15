@@ -27,7 +27,7 @@ namespace vk
 class DescriptorSetLayoutDesc;
 }
 
-class TransformFeedbackVk : public TransformFeedbackImpl
+class TransformFeedbackVk : public TransformFeedbackImpl, public angle::ObserverInterface
 {
   public:
     TransformFeedbackVk(const gl::TransformFeedbackState &state);
@@ -52,7 +52,7 @@ class TransformFeedbackVk : public TransformFeedbackImpl
                            size_t xfbBufferCount,
                            VkDescriptorSet descSet) const;
     void updateDescriptorSet(ContextVk *contextVk,
-                             const gl::ProgramState &programState,
+                             const gl::ProgramExecutable &executable,
                              const ShaderInterfaceVariableInfoMap &variableInfoMap,
                              VkDescriptorSet descSet) const;
     void getBufferOffsets(ContextVk *contextVk,
@@ -97,7 +97,9 @@ class TransformFeedbackVk : public TransformFeedbackImpl
         return mCounterBufferHandles;
     }
 
-    vk::UniformsAndXfbDescriptorDesc &getTransformFeedbackDesc() { return mXFBBuffersDesc; }
+    vk::DescriptorSetDesc &getTransformFeedbackDesc() { return mXFBBuffersDesc; }
+
+    void onSubjectStateChange(angle::SubjectIndex index, angle::SubjectMessage message) override;
 
   private:
     void writeDescriptorSet(ContextVk *contextVk,
@@ -121,15 +123,15 @@ class TransformFeedbackVk : public TransformFeedbackImpl
     gl::TransformFeedbackBuffersArray<VkDeviceSize> mBufferOffsets;
     gl::TransformFeedbackBuffersArray<VkDeviceSize> mBufferSizes;
 
-    // Aligned offset for emulation. Could be smaller than offset.
-    gl::TransformFeedbackBuffersArray<VkDeviceSize> mAlignedBufferOffsets;
-
     // Counter buffer used for pause and resume.
     gl::TransformFeedbackBuffersArray<vk::BufferHelper> mCounterBufferHelpers;
     gl::TransformFeedbackBuffersArray<VkBuffer> mCounterBufferHandles;
 
     // Keys to look up in the descriptor set cache
-    vk::UniformsAndXfbDescriptorDesc mXFBBuffersDesc;
+    vk::DescriptorSetDesc mXFBBuffersDesc;
+
+    // Buffer binding points
+    std::vector<angle::ObserverBinding> mBufferObserverBindings;
 };
 
 }  // namespace rx

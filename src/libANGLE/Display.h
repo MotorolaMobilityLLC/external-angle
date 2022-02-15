@@ -93,6 +93,7 @@ class ShareGroup final : angle::NonCopyable
 
     const ContextSet &getContexts() const { return mContexts; }
     void addSharedContext(gl::Context *context);
+    void removeSharedContext(gl::Context *context);
 
     size_t getShareGroupContextCount() const { return mContexts.size(); }
 
@@ -139,6 +140,7 @@ class Display final : public LabeledObject,
         EnumCount = InvalidEnum,
     };
     Error terminate(Thread *thread, TerminateReason terminateReason);
+    Error destroyInvalidEglObjects();
     // Called before all display state dependent EGL functions. Backends can set up, for example,
     // thread-specific backend state through this function. Not called for functions that do not
     // need the state.
@@ -348,6 +350,17 @@ class Display final : public LabeledObject,
 
     typedef std::set<Sync *> SyncSet;
     SyncSet mSyncSet;
+
+    void destroyImageImpl(Image *image, ImageSet *images);
+    void destroyStreamImpl(Stream *stream, StreamSet *streams);
+    Error destroySurfaceImpl(Surface *surface, SurfaceSet *surfaces);
+    void destroySyncImpl(Sync *sync, SyncSet *syncs);
+
+    std::mutex mInvalidEglObjectsMutex;
+    ImageSet mInvalidImageSet;
+    StreamSet mInvalidStreamSet;
+    SurfaceSet mInvalidSurfaceSet;
+    SyncSet mInvalidSyncSet;
 
     bool mInitialized;
     bool mDeviceLost;

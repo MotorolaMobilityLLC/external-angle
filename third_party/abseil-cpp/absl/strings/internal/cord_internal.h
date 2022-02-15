@@ -37,12 +37,10 @@ class CordzInfo;
 
 // Default feature enable states for cord ring buffers
 enum CordFeatureDefaults {
-  kCordEnableBtreeDefault = true,
   kCordEnableRingBufferDefault = false,
   kCordShallowSubcordsDefault = false
 };
 
-extern std::atomic<bool> cord_btree_enabled;
 extern std::atomic<bool> cord_ring_buffer_enabled;
 extern std::atomic<bool> shallow_subcords_enabled;
 
@@ -51,10 +49,6 @@ extern std::atomic<bool> shallow_subcords_enabled;
 // assertions should be relatively cheap and AssertValid() can easily lead to
 // O(n^2) complexity as recursive / full tree validation is O(n).
 extern std::atomic<bool> cord_btree_exhaustive_validation;
-
-inline void enable_cord_btree(bool enable) {
-  cord_btree_enabled.store(enable, std::memory_order_relaxed);
-}
 
 inline void enable_cord_ring_buffer(bool enable) {
   cord_ring_buffer_enabled.store(enable, std::memory_order_relaxed);
@@ -462,8 +456,8 @@ class InlineData {
   // Requires the current instance to hold a tree value.
   CordzInfo* cordz_info() const {
     assert(is_tree());
-    intptr_t info =
-        static_cast<intptr_t>(absl::big_endian::ToHost64(as_tree_.cordz_info));
+    intptr_t info = static_cast<intptr_t>(
+        absl::big_endian::ToHost64(static_cast<uint64_t>(as_tree_.cordz_info)));
     assert(info & 1);
     return reinterpret_cast<CordzInfo*>(info - 1);
   }
@@ -473,8 +467,9 @@ class InlineData {
   // Requires the current instance to hold a tree value.
   void set_cordz_info(CordzInfo* cordz_info) {
     assert(is_tree());
-    intptr_t info = reinterpret_cast<intptr_t>(cordz_info) | 1;
-    as_tree_.cordz_info = absl::big_endian::FromHost64(info);
+    uintptr_t info = reinterpret_cast<uintptr_t>(cordz_info) | 1;
+    as_tree_.cordz_info =
+        static_cast<cordz_info_t>(absl::big_endian::FromHost64(info));
   }
 
   // Resets the current cordz_info to null / empty.

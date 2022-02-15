@@ -374,8 +374,17 @@ angle::Result InitializeTextureContents(const gl::Context *context,
     // Intiialize the content to black
     GLint layer, startDepth;
     GetSliceAndDepth(index, &layer, &startDepth);
-    if (texture->isCPUAccessible() && index.getType() != gl::TextureType::_2DMultisample &&
-        index.getType() != gl::TextureType::_2DMultisampleArray && !forceGPUInitialization)
+
+    // Use compressed texture initialization only when both the intended and the actual ANGLE
+    // formats are compressed. Emulated opaque ETC2 formats use uncompressed fallbacks and require
+    // custom initialization.
+    if (intendedInternalFormat.compressed && textureObjFormat.actualAngleFormat().isBlock)
+    {
+        return InitializeCompressedTextureContents(context, texture, textureObjFormat, index, layer,
+                                                   startDepth);
+    }
+    else if (texture->isCPUAccessible() && index.getType() != gl::TextureType::_2DMultisample &&
+             index.getType() != gl::TextureType::_2DMultisampleArray && !forceGPUInitialization)
     {
         const angle::Format &dstFormat = angle::Format::Get(textureObjFormat.actualFormatId);
         const size_t dstRowPitch       = dstFormat.pixelBytes * size.width;
@@ -417,11 +426,6 @@ angle::Result InitializeTextureContents(const gl::Context *context,
                                          conversionRow.data(), dstRowPitch);
             }
         }
-    }
-    else if (intendedInternalFormat.compressed)
-    {
-        return InitializeCompressedTextureContents(context, texture, textureObjFormat, index, layer,
-                                                   startDepth);
     }
     else
     {
@@ -831,7 +835,7 @@ AutoObjCPtr<id<MTLLibrary>> CreateShaderLibrary(
         [nsSource ANGLE_MTL_AUTORELEASE];
         *errorOut = std::move(nsError);
 
-        return [library ANGLE_MTL_AUTORELEASE];
+        return library;
     }
 }
 
@@ -1181,6 +1185,36 @@ bool IsFormatEmulated(const mtl::Format &mtlFormat)
     return isFormatEmulated;
 }
 
+size_t EstimateTextureSizeInBytes(const mtl::Format &mtlFormat,
+                                  size_t width,
+                                  size_t height,
+                                  size_t depth,
+                                  size_t sampleCount,
+                                  size_t numMips)
+{
+    size_t textureSizeInBytes;
+    if (mtlFormat.getCaps().compressed)
+    {
+        GLuint textureSize;
+        gl::Extents size((int)width, (int)height, (int)depth);
+        if (!mtlFormat.intendedInternalFormat().computeCompressedImageSize(size, &textureSize))
+        {
+            return 0;
+        }
+        textureSizeInBytes = textureSize;
+    }
+    else
+    {
+        textureSizeInBytes = mtlFormat.getCaps().pixelBytes * width * height * depth * sampleCount;
+    }
+    if (numMips > 1)
+    {
+        // Estimate mipmap size.
+        textureSizeInBytes = textureSizeInBytes * 4 / 3;
+    }
+    return textureSizeInBytes;
+}
+
 MTLClearColor EmulatedAlphaClearColor(MTLClearColor color, MTLColorWriteMask colorMask)
 {
     MTLClearColor re = color;
@@ -1228,12 +1262,10 @@ bool DeviceHasMaximumRenderTargetSize(id<MTLDevice> device)
 
 bool SupportsAppleGPUFamily(id<MTLDevice> device, uint8_t appleFamily)
 {
-#if (!TARGET_OS_IOS && !TARGET_OS_TV) || TARGET_OS_MACCATALYST
-    return false;
-#else
-#    if (__IPHONE_OS_VERSION_MAX_ALLOWED >= 130000) || (__TV_OS_VERSION_MAX_ALLOWED >= 130000)
+#if (__MAC_OS_X_VERSION_MAX_ALLOWED >= 101500 || __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000) || \
+    (__TV_OS_VERSION_MAX_ALLOWED >= 130000)
     // If device supports [MTLDevice supportsFamily:], then use it.
-    if (ANGLE_APPLE_AVAILABLE_I(13.0))
+    if (ANGLE_APPLE_AVAILABLE_XC(10.15, 13.0))
     {
         MTLGPUFamily family;
         switch (appleFamily)
@@ -1253,18 +1285,21 @@ bool SupportsAppleGPUFamily(id<MTLDevice> device, uint8_t appleFamily)
             case 5:
                 family = MTLGPUFamilyApple5;
                 break;
-#        if TARGET_OS_IOS
+#    if TARGET_OS_IOS || (TARGET_OS_OSX && __MAC_OS_X_VERSION_MAX_ALLOWED >= 110000)
             case 6:
                 family = MTLGPUFamilyApple6;
                 break;
-#        endif
+#    endif
             default:
                 return false;
         }
         return [device supportsFamily:family];
-    }  // Metal 2.2
-#    endif  // __IPHONE_OS_VERSION_MAX_ALLOWED
+    }   // Metal 2.2
+#endif  // __IPHONE_OS_VERSION_MAX_ALLOWED
 
+#if (!TARGET_OS_IOS && !TARGET_OS_TV) || TARGET_OS_MACCATALYST
+    return false;
+#else
     // If device doesn't support [MTLDevice supportsFamily:], then use
     // [MTLDevice supportsFeatureSet:].
     MTLFeatureSet featureSet;
