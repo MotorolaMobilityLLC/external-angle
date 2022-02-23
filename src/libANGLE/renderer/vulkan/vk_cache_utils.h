@@ -1520,6 +1520,7 @@ class CacheStats final : angle::NonCopyable
     {
         mHitCount += stats.mHitCount;
         mMissCount += stats.mMissCount;
+        mSize = stats.mSize;
     }
 
     uint64_t getHitCount() const { return mHitCount; }
@@ -1537,15 +1538,21 @@ class CacheStats final : angle::NonCopyable
         }
     }
 
+    ANGLE_INLINE void incrementSize() { ++mSize; }
+
+    ANGLE_INLINE uint64_t getSize() const { return mSize; }
+
     void reset()
     {
         mHitCount  = 0;
         mMissCount = 0;
+        mSize      = 0;
     }
 
   private:
     uint64_t mHitCount;
     uint64_t mMissCount;
+    uint64_t mSize;
 };
 
 template <VulkanCacheType CacheType>
@@ -1779,8 +1786,11 @@ class DriverUniformsDescriptorSetCache final
 
     ANGLE_INLINE void clear() { mPayload.clear(); }
 
+    size_t getSize() const { return mPayload.size(); }
+
   private:
-    angle::FastIntegerMap<VkDescriptorSet> mPayload;
+    static constexpr uint32_t kFastMapSize = 16;
+    angle::FastUnorderedMap<uint32_t, VkDescriptorSet, kFastMapSize> mPayload;
 };
 
 // Templated Descriptors Cache
@@ -1808,6 +1818,7 @@ class DescriptorSetCache final : angle::NonCopyable
     ANGLE_INLINE void insert(const vk::DescriptorSetDesc &desc, VkDescriptorSet descriptorSet)
     {
         mPayload.emplace(desc, descriptorSet);
+        mCacheStats.incrementSize();
     }
 
     template <typename Accumulator>
