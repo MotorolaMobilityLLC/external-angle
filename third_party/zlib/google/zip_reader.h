@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <limits>
 #include <memory>
 #include <string>
 
@@ -15,6 +16,7 @@
 #include "base/files/file_path.h"
 #include "base/files/file_util.h"
 #include "base/memory/weak_ptr.h"
+#include "base/numerics/safe_conversions.h"
 #include "base/time/time.h"
 
 #if defined(USE_SYSTEM_MINIZIP)
@@ -33,19 +35,19 @@ class WriterDelegate {
 
   // Invoked once before any data is streamed out to pave the way (e.g., to open
   // the output file). Return false on failure to cancel extraction.
-  virtual bool PrepareOutput() = 0;
+  virtual bool PrepareOutput() { return true; }
 
   // Invoked to write the next chunk of data. Return false on failure to cancel
   // extraction.
-  virtual bool WriteBytes(const char* data, int num_bytes) = 0;
+  virtual bool WriteBytes(const char* data, int num_bytes) { return true; }
 
   // Sets the last-modified time of the data.
-  virtual void SetTimeModified(const base::Time& time) = 0;
+  virtual void SetTimeModified(const base::Time& time) {}
 
   // Called with the POSIX file permissions of the data; POSIX implementations
   // may apply some of the permissions (for example, the executable bit) to the
   // output file.
-  virtual void SetPosixFilePermissions(int mode) = 0;
+  virtual void SetPosixFilePermissions(int mode) {}
 };
 
 // This class is used for reading ZIP archives. A typical use case of this class
@@ -60,8 +62,7 @@ class WriterDelegate {
 //
 //   while (const ZipReader::entry* entry = reader.Next()) {
 //     auto writer = CreateFilePathWriterDelegate(extract_dir, entry->path);
-//     if (!reader.ExtractCurrentEntry(
-//         writer, std::numeric_limits<uint64_t>::max())) {
+//     if (!reader.ExtractCurrentEntry(writer)) {
 //           // Cannot extract
 //           return;
 //     }
@@ -129,22 +130,6 @@ class ZipReader {
     int posix_mode;
   };
 
-  // TODO(crbug.com/1295127) Remove this struct once transition to Entry is
-  // finished.
-  struct EntryInfo : Entry {
-    const Entry& entry() const { return *this; }
-    const std::string& file_path_in_original_encoding() const {
-      return entry().path_in_original_encoding;
-    }
-    const base::FilePath& file_path() const { return entry().path; }
-    int64_t original_size() const { return entry().original_size; }
-    base::Time last_modified() const { return entry().last_modified; }
-    bool is_directory() const { return entry().is_directory; }
-    bool is_unsafe() const { return entry().is_unsafe; }
-    bool is_encrypted() const { return entry().is_encrypted; }
-    int posix_mode() const { return entry().posix_mode; }
-  };
-
   ZipReader();
 
   ZipReader(const ZipReader&) = delete;
@@ -173,59 +158,53 @@ class ZipReader {
   // By default, paths are assumed to be in UTF-8.
   void SetEncoding(std::string encoding) { encoding_ = std::move(encoding); }
 
-  // Gets the next entry. Returns null if there is no more entry. The returned
-  // Entry is owned by this ZipReader, and is valid until Next() is called
-  // again or until this ZipReader is closed.
+  // Sets the decryption password that will be used to decrypt encrypted file in
+  // the ZIP archive.
+  void SetPassword(std::string password) { password_ = std::move(password); }
+
+  // Gets the next entry. Returns null if there is no more entry, or if an error
+  // occurred while scanning entries. The returned Entry is owned by this
+  // ZipReader, and is valid until Next() is called again or until this
+  // ZipReader is closed.
   //
-  // This function is used to scan entries:
+  // This function should be called before operations over the current entry
+  // like ExtractCurrentEntryToFile().
+  //
   // while (const ZipReader::Entry* entry = reader.Next()) {
   //   // Do something with the current entry here.
   //   ...
   // }
+  //
+  // // Finished scanning entries.
+  // // Check if the scanning stopped because of an error.
+  // if (!reader.ok()) {
+  //   // There was an error.
+  //   ...
+  // }
   const Entry* Next();
 
-  // Returns true if the enumeration of entries was successful.
+  // Returns true if the enumeration of entries was successful, or false if it
+  // stopped because of an error.
   bool ok() const { return ok_; }
-
-  // Returns true if there is at least one entry to read. This function is
-  // used to scan entries with AdvanceToNextEntry(), like:
-  //
-  // while (reader.HasMore()) {
-  //   // Do something with the current file here.
-  //   reader.AdvanceToNextEntry();
-  // }
-  //
-  // TODO(crbug.com/1295127) Remove this method.
-  bool HasMore();
-
-  // Advances the next entry. Returns true on success.
-  //
-  // TODO(crbug.com/1295127) Remove this method.
-  bool AdvanceToNextEntry();
-
-  // Opens the current entry in the ZIP archive. On success, returns true and
-  // updates the current entry state (i.e. current_entry_info() is updated).
-  // This function should be called before operations over the current entry
-  // like ExtractCurrentEntryToFile().
-  //
-  // Note that there is no CloseCurrentEntryInZip(). The current entry state is
-  // reset automatically as needed.
-  //
-  // TODO(crbug.com/1295127) Remove this method.
-  bool OpenCurrentEntryInZip();
 
   // Extracts |num_bytes_to_extract| bytes of the current entry to |delegate|,
   // starting from the beginning of the entry. Return value specifies whether
   // the entire file was extracted.
+  //
+  // Precondition: Next() returned a non-null Entry.
   bool ExtractCurrentEntry(WriterDelegate* delegate,
-                           uint64_t num_bytes_to_extract) const;
+                           uint64_t num_bytes_to_extract =
+                               std::numeric_limits<uint64_t>::max()) const;
 
-  // Asynchronously extracts the current entry to the given output file path.
-  // If the current entry is a directory it just creates the directory
-  // synchronously instead.  OpenCurrentEntryInZip() must be called beforehand.
+  // Asynchronously extracts the current entry to the given output file path. If
+  // the current entry is a directory it just creates the directory
+  // synchronously instead.
+  //
   // success_callback will be called on success and failure_callback will be
-  // called on failure.  progress_callback will be called at least once.
+  // called on failure. progress_callback will be called at least once.
   // Callbacks will be posted to the current MessageLoop in-order.
+  //
+  // Precondition: Next() returned a non-null Entry.
   void ExtractCurrentEntryToFilePathAsync(
       const base::FilePath& output_file_path,
       SuccessCallback success_callback,
@@ -233,28 +212,31 @@ class ZipReader {
       const ProgressCallback& progress_callback);
 
   // Extracts the current entry into memory. If the current entry is a
-  // directory, the |output| parameter is set to the empty string. If the
-  // current entry is a file, the |output| parameter is filled with its
-  // contents. OpenCurrentEntryInZip() must be called beforehand. Note: the
-  // |output| parameter can be filled with a big amount of data, avoid passing
-  // it around by value, but by reference or pointer. Note: the value returned
-  // by EntryInfo::original_size() cannot be trusted, so the real size of the
-  // uncompressed contents can be different. |max_read_bytes| limits the ammount
-  // of memory used to carry the entry. Returns true if the entire content is
-  // read. If the entry is bigger than |max_read_bytes|, returns false and
-  // |output| is filled with |max_read_bytes| of data. If an error occurs,
-  // returns false, and |output| is set to the empty string.
+  // directory, |*output| is set to the empty string. If the current entry is a
+  // file, |*output| is filled with its contents.
+  //
+  // The value in |Entry::original_size| cannot be trusted, so the real size of
+  // the uncompressed contents can be different. |max_read_bytes| limits the
+  // amount of memory used to carry the entry.
+  //
+  // Returns true if the entire content is read without error. If the content is
+  // bigger than |max_read_bytes|, this function returns false and |*output| is
+  // filled with |max_read_bytes| of data. If an error occurs, this function
+  // returns false and |*output| contains the content extracted so far, which
+  // might be garbage data.
+  //
+  // Precondition: Next() returned a non-null Entry.
   bool ExtractCurrentEntryToString(uint64_t max_read_bytes,
                                    std::string* output) const;
 
-  // Returns the current entry info. Returns NULL if the current entry is
-  // not yet opened. OpenCurrentEntryInZip() must be called beforehand.
-  //
-  // TODO(crbug.com/1295127) Remove this method.
-  EntryInfo* current_entry_info() const { return current_entry_; }
+  bool ExtractCurrentEntryToString(std::string* output) const {
+    return ExtractCurrentEntryToString(
+        base::checked_cast<uint64_t>(output->max_size()), output);
+  }
 
   // Returns the number of entries in the ZIP archive.
-  // Open() must be called beforehand.
+  //
+  // Precondition: one of the Open() methods returned true.
   int num_entries() const { return num_entries_; }
 
  private:
@@ -263,6 +245,13 @@ class ZipReader {
 
   // Resets the internal state.
   void Reset();
+
+  // Opens the current entry in the ZIP archive. On success, returns true and
+  // updates the current entry state |entry_|.
+  //
+  // Note that there is no matching CloseEntry(). The current entry state is
+  // reset automatically as needed.
+  bool OpenEntry();
 
   // Extracts a chunk of the file to the target.  Will post a task for the next
   // chunk and success/failure/progress callbacks as necessary.
@@ -273,13 +262,13 @@ class ZipReader {
                     const int64_t offset);
 
   std::string encoding_;
+  std::string password_;
   unzFile zip_file_;
   int num_entries_;
   int next_index_;
   bool reached_end_;
   bool ok_;
-  EntryInfo entry_ = {};
-  EntryInfo* current_entry_ = nullptr;
+  Entry entry_;
 
   base::WeakPtrFactory<ZipReader> weak_ptr_factory_{this};
 };
