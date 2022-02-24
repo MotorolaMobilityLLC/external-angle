@@ -36614,7 +36614,24 @@ namespace VULKAN_HPP_NAMESPACE
     ImageFormatConstraintsInfoFUCHSIA( VkImageFormatConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
       : ImageFormatConstraintsInfoFUCHSIA( *reinterpret_cast<ImageFormatConstraintsInfoFUCHSIA const *>( &rhs ) )
     {}
-#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    ImageFormatConstraintsInfoFUCHSIA(
+      VULKAN_HPP_NAMESPACE::ImageCreateInfo                    imageCreateInfo_,
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags                 requiredFormatFeatures_,
+      VULKAN_HPP_NAMESPACE::ImageFormatConstraintsFlagsFUCHSIA flags_,
+      uint64_t                                                 sysmemPixelFormat_,
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA> const &
+        colorSpaces_ )
+      : imageCreateInfo( imageCreateInfo_ )
+      , requiredFormatFeatures( requiredFormatFeatures_ )
+      , flags( flags_ )
+      , sysmemPixelFormat( sysmemPixelFormat_ )
+      , colorSpaceCount( static_cast<uint32_t>( colorSpaces_.size() ) )
+      , pColorSpaces( colorSpaces_.data() )
+    {}
+#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#  endif   /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
 
     ImageFormatConstraintsInfoFUCHSIA &
       operator=( ImageFormatConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
@@ -36673,7 +36690,18 @@ namespace VULKAN_HPP_NAMESPACE
       pColorSpaces = pColorSpaces_;
       return *this;
     }
-#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    ImageFormatConstraintsInfoFUCHSIA & setColorSpaces(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA> const &
+        colorSpaces_ ) VULKAN_HPP_NOEXCEPT
+    {
+      colorSpaceCount = static_cast<uint32_t>( colorSpaces_.size() );
+      pColorSpaces    = colorSpaces_.data();
+      return *this;
+    }
+#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
     explicit operator VkImageFormatConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
@@ -61198,7 +61226,7 @@ namespace VULKAN_HPP_NAMESPACE
 
 #if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM &
-                            setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+                            setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
     {
       pNext = pNext_;
       return *this;
@@ -61244,7 +61272,7 @@ namespace VULKAN_HPP_NAMESPACE
     auto
 #  else
     std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
-               const void * const &,
+               void * const &,
                VULKAN_HPP_NAMESPACE::Bool32 const &,
                VULKAN_HPP_NAMESPACE::Bool32 const &,
                VULKAN_HPP_NAMESPACE::Bool32 const &>
@@ -61283,7 +61311,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     VULKAN_HPP_NAMESPACE::StructureType sType =
       StructureType::ePhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM;
-    const void *                 pNext                                     = {};
+    void *                       pNext                                     = {};
     VULKAN_HPP_NAMESPACE::Bool32 rasterizationOrderColorAttachmentAccess   = {};
     VULKAN_HPP_NAMESPACE::Bool32 rasterizationOrderDepthAttachmentAccess   = {};
     VULKAN_HPP_NAMESPACE::Bool32 rasterizationOrderStencilAttachmentAccess = {};
@@ -97538,75 +97566,78 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
-  struct VideoEncodeH265NaluSliceEXT
+  struct VideoEncodeH265NaluSliceSegmentEXT
   {
-    using NativeType = VkVideoEncodeH265NaluSliceEXT;
+    using NativeType = VkVideoEncodeH265NaluSliceSegmentEXT;
 
     static const bool                                  allowDuplicate = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeH265NaluSliceEXT;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
+      StructureType::eVideoEncodeH265NaluSliceSegmentEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR VideoEncodeH265NaluSliceEXT(
-      uint32_t                                                       ctbCount_             = {},
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT * pReferenceFinalLists_ = {},
-      const StdVideoEncodeH265SliceHeader *                          pSliceHeaderStd_      = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR VideoEncodeH265NaluSliceSegmentEXT(
+      uint32_t                                                       ctbCount_               = {},
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT * pReferenceFinalLists_   = {},
+      const StdVideoEncodeH265SliceSegmentHeader *                   pSliceSegmentHeaderStd_ = {} ) VULKAN_HPP_NOEXCEPT
       : ctbCount( ctbCount_ )
       , pReferenceFinalLists( pReferenceFinalLists_ )
-      , pSliceHeaderStd( pSliceHeaderStd_ )
+      , pSliceSegmentHeaderStd( pSliceSegmentHeaderStd_ )
     {}
 
-    VULKAN_HPP_CONSTEXPR
-      VideoEncodeH265NaluSliceEXT( VideoEncodeH265NaluSliceEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+    VULKAN_HPP_CONSTEXPR VideoEncodeH265NaluSliceSegmentEXT( VideoEncodeH265NaluSliceSegmentEXT const & rhs )
+      VULKAN_HPP_NOEXCEPT = default;
 
-    VideoEncodeH265NaluSliceEXT( VkVideoEncodeH265NaluSliceEXT const & rhs ) VULKAN_HPP_NOEXCEPT
-      : VideoEncodeH265NaluSliceEXT( *reinterpret_cast<VideoEncodeH265NaluSliceEXT const *>( &rhs ) )
+    VideoEncodeH265NaluSliceSegmentEXT( VkVideoEncodeH265NaluSliceSegmentEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : VideoEncodeH265NaluSliceSegmentEXT( *reinterpret_cast<VideoEncodeH265NaluSliceSegmentEXT const *>( &rhs ) )
     {}
 #  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
 
-    VideoEncodeH265NaluSliceEXT & operator=( VideoEncodeH265NaluSliceEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+    VideoEncodeH265NaluSliceSegmentEXT &
+      operator=( VideoEncodeH265NaluSliceSegmentEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
-    VideoEncodeH265NaluSliceEXT & operator=( VkVideoEncodeH265NaluSliceEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    VideoEncodeH265NaluSliceSegmentEXT &
+      operator=( VkVideoEncodeH265NaluSliceSegmentEXT const & rhs ) VULKAN_HPP_NOEXCEPT
     {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT const *>( &rhs );
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceSegmentEXT const *>( &rhs );
       return *this;
     }
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265NaluSliceEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265NaluSliceSegmentEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
     {
       pNext = pNext_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265NaluSliceEXT & setCtbCount( uint32_t ctbCount_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265NaluSliceSegmentEXT & setCtbCount( uint32_t ctbCount_ ) VULKAN_HPP_NOEXCEPT
     {
       ctbCount = ctbCount_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265NaluSliceEXT & setPReferenceFinalLists(
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265NaluSliceSegmentEXT & setPReferenceFinalLists(
       const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT * pReferenceFinalLists_ ) VULKAN_HPP_NOEXCEPT
     {
       pReferenceFinalLists = pReferenceFinalLists_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265NaluSliceEXT &
-      setPSliceHeaderStd( const StdVideoEncodeH265SliceHeader * pSliceHeaderStd_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265NaluSliceSegmentEXT & setPSliceSegmentHeaderStd(
+      const StdVideoEncodeH265SliceSegmentHeader * pSliceSegmentHeaderStd_ ) VULKAN_HPP_NOEXCEPT
     {
-      pSliceHeaderStd = pSliceHeaderStd_;
+      pSliceSegmentHeaderStd = pSliceSegmentHeaderStd_;
       return *this;
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265NaluSliceEXT const &() const VULKAN_HPP_NOEXCEPT
+    explicit operator VkVideoEncodeH265NaluSliceSegmentEXT const &() const VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<const VkVideoEncodeH265NaluSliceEXT *>( this );
+      return *reinterpret_cast<const VkVideoEncodeH265NaluSliceSegmentEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265NaluSliceEXT &() VULKAN_HPP_NOEXCEPT
+    explicit operator VkVideoEncodeH265NaluSliceSegmentEXT &() VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<VkVideoEncodeH265NaluSliceEXT *>( this );
+      return *reinterpret_cast<VkVideoEncodeH265NaluSliceSegmentEXT *>( this );
     }
 
 #  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
@@ -97617,53 +97648,54 @@ namespace VULKAN_HPP_NAMESPACE
                const void * const &,
                uint32_t const &,
                const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT * const &,
-               const StdVideoEncodeH265SliceHeader * const &>
+               const StdVideoEncodeH265SliceSegmentHeader * const &>
 #    endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
-      return std::tie( sType, pNext, ctbCount, pReferenceFinalLists, pSliceHeaderStd );
+      return std::tie( sType, pNext, ctbCount, pReferenceFinalLists, pSliceSegmentHeaderStd );
     }
 #  endif
 
 #  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
-    auto operator<=>( VideoEncodeH265NaluSliceEXT const & ) const = default;
+    auto operator<=>( VideoEncodeH265NaluSliceSegmentEXT const & ) const = default;
 #  else
-    bool operator==( VideoEncodeH265NaluSliceEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator==( VideoEncodeH265NaluSliceSegmentEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
 #    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( ctbCount == rhs.ctbCount ) &&
-             ( pReferenceFinalLists == rhs.pReferenceFinalLists ) && ( pSliceHeaderStd == rhs.pSliceHeaderStd );
+             ( pReferenceFinalLists == rhs.pReferenceFinalLists ) &&
+             ( pSliceSegmentHeaderStd == rhs.pSliceSegmentHeaderStd );
 #    endif
     }
 
-    bool operator!=( VideoEncodeH265NaluSliceEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator!=( VideoEncodeH265NaluSliceSegmentEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
       return !operator==( rhs );
     }
 #  endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType                            sType = StructureType::eVideoEncodeH265NaluSliceEXT;
-    const void *                                                   pNext = {};
-    uint32_t                                                       ctbCount             = {};
-    const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT * pReferenceFinalLists = {};
-    const StdVideoEncodeH265SliceHeader *                          pSliceHeaderStd      = {};
+    VULKAN_HPP_NAMESPACE::StructureType sType    = StructureType::eVideoEncodeH265NaluSliceSegmentEXT;
+    const void *                        pNext    = {};
+    uint32_t                            ctbCount = {};
+    const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT * pReferenceFinalLists   = {};
+    const StdVideoEncodeH265SliceSegmentHeader *                   pSliceSegmentHeaderStd = {};
   };
-  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT ) ==
-                              sizeof( VkVideoEncodeH265NaluSliceEXT ),
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceSegmentEXT ) ==
+                              sizeof( VkVideoEncodeH265NaluSliceSegmentEXT ),
                             "struct and wrapper have different size!" );
-  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT>::value,
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceSegmentEXT>::value,
                             "struct wrapper is not a standard layout!" );
   VULKAN_HPP_STATIC_ASSERT(
-    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT>::value,
-    "VideoEncodeH265NaluSliceEXT is not nothrow_move_constructible!" );
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceSegmentEXT>::value,
+    "VideoEncodeH265NaluSliceSegmentEXT is not nothrow_move_constructible!" );
 
   template <>
-  struct CppType<StructureType, StructureType::eVideoEncodeH265NaluSliceEXT>
+  struct CppType<StructureType, StructureType::eVideoEncodeH265NaluSliceSegmentEXT>
   {
-    using Type = VideoEncodeH265NaluSliceEXT;
+    using Type = VideoEncodeH265NaluSliceSegmentEXT;
   };
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
@@ -98755,13 +98787,13 @@ namespace VULKAN_HPP_NAMESPACE
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoEncodeH265VclFrameInfoEXT(
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT * pReferenceFinalLists_ = {},
-      uint32_t                                                       naluSliceEntryCount_  = {},
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT *      pNaluSliceEntries_    = {},
-      const StdVideoEncodeH265PictureInfo *                          pCurrentPictureInfo_  = {} ) VULKAN_HPP_NOEXCEPT
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT *   pReferenceFinalLists_       = {},
+      uint32_t                                                         naluSliceSegmentEntryCount_ = {},
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceSegmentEXT * pNaluSliceSegmentEntries_   = {},
+      const StdVideoEncodeH265PictureInfo *                            pCurrentPictureInfo_ = {} ) VULKAN_HPP_NOEXCEPT
       : pReferenceFinalLists( pReferenceFinalLists_ )
-      , naluSliceEntryCount( naluSliceEntryCount_ )
-      , pNaluSliceEntries( pNaluSliceEntries_ )
+      , naluSliceSegmentEntryCount( naluSliceSegmentEntryCount_ )
+      , pNaluSliceSegmentEntries( pNaluSliceSegmentEntries_ )
       , pCurrentPictureInfo( pCurrentPictureInfo_ )
     {}
 
@@ -98775,12 +98807,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
     VideoEncodeH265VclFrameInfoEXT(
       const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT * pReferenceFinalLists_,
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT> const &
-                                            naluSliceEntries_,
-      const StdVideoEncodeH265PictureInfo * pCurrentPictureInfo_ = {} )
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<
+        const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceSegmentEXT> const & naluSliceSegmentEntries_,
+      const StdVideoEncodeH265PictureInfo *                                     pCurrentPictureInfo_ = {} )
       : pReferenceFinalLists( pReferenceFinalLists_ )
-      , naluSliceEntryCount( static_cast<uint32_t>( naluSliceEntries_.size() ) )
-      , pNaluSliceEntries( naluSliceEntries_.data() )
+      , naluSliceSegmentEntryCount( static_cast<uint32_t>( naluSliceSegmentEntries_.size() ) )
+      , pNaluSliceSegmentEntries( naluSliceSegmentEntries_.data() )
       , pCurrentPictureInfo( pCurrentPictureInfo_ )
     {}
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -98810,26 +98842,27 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265VclFrameInfoEXT &
-                            setNaluSliceEntryCount( uint32_t naluSliceEntryCount_ ) VULKAN_HPP_NOEXCEPT
+                            setNaluSliceSegmentEntryCount( uint32_t naluSliceSegmentEntryCount_ ) VULKAN_HPP_NOEXCEPT
     {
-      naluSliceEntryCount = naluSliceEntryCount_;
+      naluSliceSegmentEntryCount = naluSliceSegmentEntryCount_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265VclFrameInfoEXT & setPNaluSliceEntries(
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT * pNaluSliceEntries_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265VclFrameInfoEXT & setPNaluSliceSegmentEntries(
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceSegmentEXT * pNaluSliceSegmentEntries_ ) VULKAN_HPP_NOEXCEPT
     {
-      pNaluSliceEntries = pNaluSliceEntries_;
+      pNaluSliceSegmentEntries = pNaluSliceSegmentEntries_;
       return *this;
     }
 
 #    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    VideoEncodeH265VclFrameInfoEXT & setNaluSliceEntries(
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT> const &
-        naluSliceEntries_ ) VULKAN_HPP_NOEXCEPT
+    VideoEncodeH265VclFrameInfoEXT & setNaluSliceSegmentEntries(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<
+        const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceSegmentEXT> const & naluSliceSegmentEntries_ )
+      VULKAN_HPP_NOEXCEPT
     {
-      naluSliceEntryCount = static_cast<uint32_t>( naluSliceEntries_.size() );
-      pNaluSliceEntries   = naluSliceEntries_.data();
+      naluSliceSegmentEntryCount = static_cast<uint32_t>( naluSliceSegmentEntries_.size() );
+      pNaluSliceSegmentEntries   = naluSliceSegmentEntries_.data();
       return *this;
     }
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -98860,13 +98893,13 @@ namespace VULKAN_HPP_NAMESPACE
                const void * const &,
                const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT * const &,
                uint32_t const &,
-               const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT * const &,
+               const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceSegmentEXT * const &,
                const StdVideoEncodeH265PictureInfo * const &>
 #    endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
       return std::tie(
-        sType, pNext, pReferenceFinalLists, naluSliceEntryCount, pNaluSliceEntries, pCurrentPictureInfo );
+        sType, pNext, pReferenceFinalLists, naluSliceSegmentEntryCount, pNaluSliceSegmentEntries, pCurrentPictureInfo );
     }
 #  endif
 
@@ -98879,7 +98912,8 @@ namespace VULKAN_HPP_NAMESPACE
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pReferenceFinalLists == rhs.pReferenceFinalLists ) &&
-             ( naluSliceEntryCount == rhs.naluSliceEntryCount ) && ( pNaluSliceEntries == rhs.pNaluSliceEntries ) &&
+             ( naluSliceSegmentEntryCount == rhs.naluSliceSegmentEntryCount ) &&
+             ( pNaluSliceSegmentEntries == rhs.pNaluSliceSegmentEntries ) &&
              ( pCurrentPictureInfo == rhs.pCurrentPictureInfo );
 #    endif
     }
@@ -98893,10 +98927,10 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eVideoEncodeH265VclFrameInfoEXT;
     const void *                        pNext = {};
-    const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT * pReferenceFinalLists = {};
-    uint32_t                                                       naluSliceEntryCount  = {};
-    const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceEXT *      pNaluSliceEntries    = {};
-    const StdVideoEncodeH265PictureInfo *                          pCurrentPictureInfo  = {};
+    const VULKAN_HPP_NAMESPACE::VideoEncodeH265ReferenceListsEXT *   pReferenceFinalLists       = {};
+    uint32_t                                                         naluSliceSegmentEntryCount = {};
+    const VULKAN_HPP_NAMESPACE::VideoEncodeH265NaluSliceSegmentEXT * pNaluSliceSegmentEntries   = {};
+    const StdVideoEncodeH265PictureInfo *                            pCurrentPictureInfo        = {};
   };
   VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::VideoEncodeH265VclFrameInfoEXT ) ==
                               sizeof( VkVideoEncodeH265VclFrameInfoEXT ),
