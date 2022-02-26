@@ -634,7 +634,7 @@ TEST_F(ZipTest, ZipTimeStamp) {
   TestTimeStamp("02 Jan 2038 23:59:58", VALID_YEAR);
 }
 
-#if defined(OS_POSIX)
+#if defined(OS_POSIX) || defined(OS_FUCHSIA)
 TEST_F(ZipTest, ZipFiles) {
   base::FilePath src_dir = GetDataDirectory().AppendASCII("test");
 
@@ -658,7 +658,7 @@ TEST_F(ZipTest, ZipFiles) {
     EXPECT_EQ(entry->path, zip_file_list_[i]);
   }
 }
-#endif  // defined(OS_POSIX)
+#endif  // defined(OS_POSIX) || defined(OS_FUCHSIA)
 
 TEST_F(ZipTest, UnzipFilesWithIncorrectSize) {
   // test_mismatch_size.zip contains files with names from 0.txt to 7.txt with
@@ -916,12 +916,20 @@ TEST_F(ZipTest, NestedZip) {
 // are correctly enumerated (crbug.com/1298347), and that the big file can be
 // extracted.
 //
+// Because this test is dealing with big files, it tends to take a lot of disk
+// space and time (crbug.com/1299736). Therefore, it only gets run on a few bots
+// (ChromeOS and Windows).
+//
 // This test is too slow with TSAN.
 // OS Fuchsia does not seem to support large files.
-// Some Android waterfall and CQ try bots are running out of space when
+// Some 32-bit Android waterfall and CQ try bots are running out of space when
 // performing this test (android-asan, android-11-x86-rel,
 // android-marshmallow-x86-rel-non-cq).
-#if defined(THREAD_SANITIZER) || defined(OS_FUCHSIA) || defined(OS_ANDROID)
+// Some Mac, Linux and Debug (dbg) bots tend to time out when performing this
+// test (crbug.com/1299736, crbug.com/1300448).
+#if defined(THREAD_SANITIZER) || BUILDFLAG(IS_FUCHSIA) ||                \
+    BUILDFLAG(IS_ANDROID) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX) || \
+    BUILDFLAG(IS_CHROMEOS_LACROS) || !defined(NDEBUG)
 TEST_F(ZipTest, DISABLED_BigFile) {
 #else
 TEST_F(ZipTest, BigFile) {
