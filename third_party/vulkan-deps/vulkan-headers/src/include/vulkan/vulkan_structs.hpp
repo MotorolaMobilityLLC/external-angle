@@ -96,7 +96,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAabbPositionsKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -113,7 +113,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AabbPositionsKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( minX == rhs.minX ) && ( minY == rhs.minY ) && ( minZ == rhs.minZ ) && ( maxX == rhs.maxX ) &&
@@ -304,7 +304,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureGeometryTrianglesDataKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -421,7 +421,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureGeometryAabbsDataKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -527,7 +527,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureGeometryInstancesDataKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -702,7 +702,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureGeometryKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -977,7 +977,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureBuildGeometryInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -1114,7 +1114,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureBuildRangeInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -1131,7 +1131,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureBuildRangeInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( primitiveCount == rhs.primitiveCount ) && ( primitiveOffset == rhs.primitiveOffset ) &&
@@ -1237,7 +1237,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureBuildSizesInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -1258,7 +1258,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureBuildSizesInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -1399,7 +1399,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -1423,7 +1423,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( createFlags == rhs.createFlags ) &&
@@ -1605,7 +1605,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkGeometryTrianglesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -1646,7 +1646,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( GeometryTrianglesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( vertexData == rhs.vertexData ) &&
@@ -1767,7 +1767,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkGeometryAABBNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -1789,7 +1789,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( GeometryAABBNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( aabbData == rhs.aabbData ) &&
@@ -1876,7 +1876,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkGeometryDataNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -1893,7 +1893,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( GeometryDataNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( triangles == rhs.triangles ) && ( aabbs == rhs.aabbs );
@@ -1987,7 +1987,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkGeometryNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -2008,7 +2008,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( GeometryNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( geometryType == rhs.geometryType ) &&
@@ -2157,7 +2157,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -2180,7 +2180,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( type == rhs.type ) && ( flags == rhs.flags ) &&
@@ -2284,7 +2284,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -2304,7 +2304,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( compactedSize == rhs.compactedSize ) &&
@@ -2399,7 +2399,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureDeviceAddressInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -2418,7 +2418,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureDeviceAddressInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( accelerationStructure == rhs.accelerationStructure );
@@ -2513,7 +2513,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureGeometryMotionTrianglesDataNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -2592,7 +2592,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkTransformMatrixKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -2609,7 +2609,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( TransformMatrixKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( matrix == rhs.matrix );
@@ -2723,7 +2723,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureInstanceKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -2750,7 +2750,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureInstanceKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( transform == rhs.transform ) && ( instanceCustomIndex == rhs.instanceCustomIndex ) &&
@@ -2886,7 +2886,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureMatrixMotionInstanceNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -2915,7 +2915,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureMatrixMotionInstanceNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( transformT0 == rhs.transformT0 ) && ( transformT1 == rhs.transformT1 ) &&
@@ -3020,7 +3020,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureMemoryRequirementsInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -3040,7 +3040,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureMemoryRequirementsInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( type == rhs.type ) &&
@@ -3142,7 +3142,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureMotionInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -3162,7 +3162,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureMotionInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxInstances == rhs.maxInstances ) &&
@@ -3358,7 +3358,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSRTDataNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -3390,7 +3390,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SRTDataNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sx == rhs.sx ) && ( a == rhs.a ) && ( b == rhs.b ) && ( pvx == rhs.pvx ) && ( sy == rhs.sy ) &&
@@ -3533,7 +3533,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureSRTMotionInstanceNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -3562,7 +3562,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureSRTMotionInstanceNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( transformT0 == rhs.transformT0 ) && ( transformT1 == rhs.transformT1 ) &&
@@ -3730,7 +3730,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureMotionInstanceNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -3815,7 +3815,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAccelerationStructureVersionInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -3832,7 +3832,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AccelerationStructureVersionInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pVersionData == rhs.pVersionData );
@@ -3950,7 +3950,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAcquireNextImageInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -3973,7 +3973,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AcquireNextImageInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchain == rhs.swapchain ) &&
@@ -4072,7 +4072,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAcquireProfilingLockInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -4092,7 +4092,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AcquireProfilingLockInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( timeout == rhs.timeout );
@@ -4212,7 +4212,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAllocationCallbacks *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -4234,7 +4234,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AllocationCallbacks const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( pUserData == rhs.pUserData ) && ( pfnAllocation == rhs.pfnAllocation ) &&
@@ -4332,7 +4332,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkComponentMapping *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -4352,7 +4352,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ComponentMapping const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( r == rhs.r ) && ( g == rhs.g ) && ( b == rhs.b ) && ( a == rhs.a );
@@ -4439,7 +4439,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAndroidHardwareBufferFormatProperties2ANDROID *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -4474,7 +4474,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( AndroidHardwareBufferFormatProperties2ANDROID const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( format == rhs.format ) &&
@@ -4583,7 +4583,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAndroidHardwareBufferFormatPropertiesANDROID *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -4618,7 +4618,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( AndroidHardwareBufferFormatPropertiesANDROID const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( format == rhs.format ) &&
@@ -4711,7 +4711,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAndroidHardwareBufferPropertiesANDROID *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -4731,7 +4731,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( AndroidHardwareBufferPropertiesANDROID const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( allocationSize == rhs.allocationSize ) &&
@@ -4810,7 +4810,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAndroidHardwareBufferUsageANDROID *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -4827,7 +4827,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( AndroidHardwareBufferUsageANDROID const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -4925,7 +4925,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAndroidSurfaceCreateInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -4945,7 +4945,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( AndroidSurfaceCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( window == rhs.window );
@@ -5063,7 +5063,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkApplicationInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -5259,7 +5259,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAttachmentDescription *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -5285,7 +5285,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AttachmentDescription const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( flags == rhs.flags ) && ( format == rhs.format ) && ( samples == rhs.samples ) &&
@@ -5445,7 +5445,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAttachmentDescription2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -5482,7 +5482,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AttachmentDescription2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( format == rhs.format ) &&
@@ -5593,7 +5593,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAttachmentDescriptionStencilLayout *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -5613,7 +5613,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AttachmentDescriptionStencilLayout const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( stencilInitialLayout == rhs.stencilInitialLayout ) &&
@@ -5701,7 +5701,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAttachmentReference *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -5718,7 +5718,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AttachmentReference const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( attachment == rhs.attachment ) && ( layout == rhs.layout );
@@ -5812,7 +5812,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAttachmentReference2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -5833,7 +5833,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AttachmentReference2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( attachment == rhs.attachment ) &&
@@ -5924,7 +5924,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAttachmentReferenceStencilLayout *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -5941,7 +5941,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AttachmentReferenceStencilLayout const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( stencilLayout == rhs.stencilLayout );
@@ -6070,7 +6070,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAttachmentSampleCountInfoAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -6091,7 +6091,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AttachmentSampleCountInfoAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( colorAttachmentCount == rhs.colorAttachmentCount ) &&
@@ -6177,7 +6177,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExtent2D *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -6194,7 +6194,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( Extent2D const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( width == rhs.width ) && ( height == rhs.height );
@@ -6267,7 +6267,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSampleLocationEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -6284,7 +6284,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SampleLocationEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( x == rhs.x ) && ( y == rhs.y );
@@ -6413,7 +6413,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSampleLocationsInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -6436,7 +6436,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SampleLocationsInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -6528,7 +6528,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkAttachmentSampleLocationsEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -6545,7 +6545,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( AttachmentSampleLocationsEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( attachmentIndex == rhs.attachmentIndex ) && ( sampleLocationsInfo == rhs.sampleLocationsInfo );
@@ -6614,7 +6614,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBaseInStructure *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -6632,7 +6632,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BaseInStructure const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext );
@@ -6699,7 +6699,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBaseOutStructure *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -6716,7 +6716,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BaseOutStructure const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext );
@@ -6858,7 +6858,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindAccelerationStructureMemoryInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -6881,7 +6881,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindAccelerationStructureMemoryInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -7001,7 +7001,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindBufferMemoryDeviceGroupInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -7021,7 +7021,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindBufferMemoryDeviceGroupInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceIndexCount == rhs.deviceIndexCount ) &&
@@ -7126,7 +7126,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindBufferMemoryInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -7147,7 +7147,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindBufferMemoryInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( buffer == rhs.buffer ) && ( memory == rhs.memory ) &&
@@ -7229,7 +7229,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkOffset2D *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -7246,7 +7246,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( Offset2D const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( x == rhs.x ) && ( y == rhs.y );
@@ -7318,7 +7318,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRect2D *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -7335,7 +7335,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( Rect2D const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( offset == rhs.offset ) && ( extent == rhs.extent );
@@ -7474,7 +7474,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindImageMemoryDeviceGroupInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -7497,7 +7497,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindImageMemoryDeviceGroupInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceIndexCount == rhs.deviceIndexCount ) &&
@@ -7606,7 +7606,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindImageMemoryInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -7627,7 +7627,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindImageMemoryInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( image == rhs.image ) && ( memory == rhs.memory ) &&
@@ -7724,7 +7724,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindImageMemorySwapchainInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -7744,7 +7744,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindImageMemorySwapchainInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchain == rhs.swapchain ) &&
@@ -7833,7 +7833,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindImagePlaneMemoryInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -7852,7 +7852,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindImagePlaneMemoryInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( planeAspect == rhs.planeAspect );
@@ -7948,7 +7948,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindIndexBufferIndirectCommandNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -7965,7 +7965,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindIndexBufferIndirectCommandNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( bufferAddress == rhs.bufferAddress ) && ( size == rhs.size ) && ( indexType == rhs.indexType );
@@ -8036,7 +8036,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindShaderGroupIndirectCommandNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -8053,7 +8053,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindShaderGroupIndirectCommandNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( groupIndex == rhs.groupIndex );
@@ -8156,7 +8156,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSparseMemoryBind *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -8177,7 +8177,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SparseMemoryBind const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( resourceOffset == rhs.resourceOffset ) && ( size == rhs.size ) && ( memory == rhs.memory ) &&
@@ -8286,7 +8286,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSparseBufferMemoryBindInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -8305,7 +8305,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SparseBufferMemoryBindInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( buffer == rhs.buffer ) && ( bindCount == rhs.bindCount ) && ( pBinds == rhs.pBinds );
@@ -8413,7 +8413,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSparseImageOpaqueMemoryBindInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -8432,7 +8432,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SparseImageOpaqueMemoryBindInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( image == rhs.image ) && ( bindCount == rhs.bindCount ) && ( pBinds == rhs.pBinds );
@@ -8518,7 +8518,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageSubresource *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -8535,7 +8535,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageSubresource const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( aspectMask == rhs.aspectMask ) && ( mipLevel == rhs.mipLevel ) && ( arrayLayer == rhs.arrayLayer );
@@ -8616,7 +8616,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkOffset3D *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -8633,7 +8633,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( Offset3D const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( x == rhs.x ) && ( y == rhs.y ) && ( z == rhs.z );
@@ -8717,7 +8717,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExtent3D *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -8734,7 +8734,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( Extent3D const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( width == rhs.width ) && ( height == rhs.height ) && ( depth == rhs.depth );
@@ -8848,7 +8848,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSparseImageMemoryBind *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -8870,7 +8870,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SparseImageMemoryBind const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( subresource == rhs.subresource ) && ( offset == rhs.offset ) && ( extent == rhs.extent ) &&
@@ -8980,7 +8980,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSparseImageMemoryBindInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -8999,7 +8999,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SparseImageMemoryBindInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( image == rhs.image ) && ( bindCount == rhs.bindCount ) && ( pBinds == rhs.pBinds );
@@ -9235,7 +9235,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindSparseInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -9274,7 +9274,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindSparseInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( waitSemaphoreCount == rhs.waitSemaphoreCount ) &&
@@ -9380,7 +9380,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBindVertexBufferIndirectCommandNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -9397,7 +9397,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BindVertexBufferIndirectCommandNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( bufferAddress == rhs.bufferAddress ) && ( size == rhs.size ) && ( stride == rhs.stride );
@@ -9491,7 +9491,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageSubresourceLayers *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -9508,7 +9508,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageSubresourceLayers const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( aspectMask == rhs.aspectMask ) && ( mipLevel == rhs.mipLevel ) &&
@@ -9616,7 +9616,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageBlit2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -9638,7 +9638,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageBlit2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcSubresource == rhs.srcSubresource ) &&
@@ -9807,7 +9807,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBlitImageInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -9833,7 +9833,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BlitImageInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcImage == rhs.srcImage ) &&
@@ -9942,7 +9942,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferCollectionBufferCreateInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -9962,7 +9962,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( BufferCollectionBufferCreateInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( collection == rhs.collection ) &&
@@ -10094,7 +10094,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferCollectionConstraintsInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -10123,7 +10123,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( BufferCollectionConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( minBufferCount == rhs.minBufferCount ) &&
@@ -10221,7 +10221,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferCollectionCreateInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -10346,7 +10346,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferCollectionImageCreateInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -10366,7 +10366,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( BufferCollectionImageCreateInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( collection == rhs.collection ) &&
@@ -10455,7 +10455,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSysmemColorSpaceFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -10472,7 +10472,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( SysmemColorSpaceFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( colorSpace == rhs.colorSpace );
@@ -10654,7 +10654,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferCollectionPropertiesFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -10695,7 +10695,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( BufferCollectionPropertiesFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryTypeBits == rhs.memoryTypeBits ) &&
@@ -10869,7 +10869,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -10893,7 +10893,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( size == rhs.size ) &&
@@ -11007,7 +11007,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferConstraintsInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -11028,7 +11028,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( BufferConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( createInfo == rhs.createInfo ) &&
@@ -11124,7 +11124,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferCopy *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -11143,7 +11143,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( srcOffset == rhs.srcOffset ) && ( dstOffset == rhs.dstOffset ) && ( size == rhs.size );
@@ -11237,7 +11237,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferCopy2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -11258,7 +11258,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferCopy2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcOffset == rhs.srcOffset ) &&
@@ -11348,7 +11348,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferDeviceAddressCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -11367,7 +11367,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferDeviceAddressCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceAddress == rhs.deviceAddress );
@@ -11452,7 +11452,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferDeviceAddressInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -11469,7 +11469,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferDeviceAddressInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( buffer == rhs.buffer );
@@ -11589,7 +11589,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferImageCopy *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -11611,7 +11611,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferImageCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( bufferOffset == rhs.bufferOffset ) && ( bufferRowLength == rhs.bufferRowLength ) &&
@@ -11736,7 +11736,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferImageCopy2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -11761,7 +11761,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferImageCopy2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( bufferOffset == rhs.bufferOffset ) &&
@@ -11905,7 +11905,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferMemoryBarrier *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -11931,7 +11931,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferMemoryBarrier const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcAccessMask == rhs.srcAccessMask ) &&
@@ -12093,7 +12093,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferMemoryBarrier2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -12130,7 +12130,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferMemoryBarrier2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcStageMask == rhs.srcStageMask ) &&
@@ -12228,7 +12228,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferMemoryRequirementsInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -12245,7 +12245,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferMemoryRequirementsInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( buffer == rhs.buffer );
@@ -12335,7 +12335,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferOpaqueCaptureAddressCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -12352,7 +12352,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferOpaqueCaptureAddressCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( opaqueCaptureAddress == rhs.opaqueCaptureAddress );
@@ -12473,7 +12473,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkBufferViewCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -12496,7 +12496,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( BufferViewCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( buffer == rhs.buffer ) &&
@@ -12587,7 +12587,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCalibratedTimestampInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -12606,7 +12606,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CalibratedTimestampInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( timeDomain == rhs.timeDomain );
@@ -12677,7 +12677,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCheckpointData2NV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -12697,7 +12697,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CheckpointData2NV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( stage == rhs.stage ) &&
@@ -12770,7 +12770,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCheckpointDataNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -12790,7 +12790,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CheckpointDataNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( stage == rhs.stage ) &&
@@ -12919,7 +12919,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkClearDepthStencilValue *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -12936,7 +12936,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ClearDepthStencilValue const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( depth == rhs.depth ) && ( stencil == rhs.stencil );
@@ -13068,7 +13068,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkClearAttachment *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -13150,7 +13150,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkClearRect *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -13167,7 +13167,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool                     operator==( ClearRect const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( rect == rhs.rect ) && ( baseArrayLayer == rhs.baseArrayLayer ) && ( layerCount == rhs.layerCount );
@@ -13249,7 +13249,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCoarseSampleLocationNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -13266,7 +13266,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CoarseSampleLocationNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( pixelX == rhs.pixelX ) && ( pixelY == rhs.pixelY ) && ( sample == rhs.sample );
@@ -13388,7 +13388,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCoarseSampleOrderCustomNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -13408,7 +13408,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CoarseSampleOrderCustomNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( shadingRate == rhs.shadingRate ) && ( sampleCount == rhs.sampleCount ) &&
@@ -13509,7 +13509,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCommandBufferAllocateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -13530,7 +13530,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CommandBufferAllocateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( commandPool == rhs.commandPool ) &&
@@ -13663,7 +13663,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCommandBufferInheritanceInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -13688,7 +13688,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CommandBufferInheritanceInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( renderPass == rhs.renderPass ) &&
@@ -13791,7 +13791,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCommandBufferBeginInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -13811,7 +13811,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CommandBufferBeginInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -13906,7 +13906,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -13923,7 +13923,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CommandBufferInheritanceConditionalRenderingInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -14029,7 +14029,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCommandBufferInheritanceRenderPassTransformInfoQCOM *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -14049,7 +14049,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CommandBufferInheritanceRenderPassTransformInfoQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( transform == rhs.transform ) &&
@@ -14228,7 +14228,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCommandBufferInheritanceRenderingInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -14261,7 +14261,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CommandBufferInheritanceRenderingInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -14386,7 +14386,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkViewport *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -14403,7 +14403,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( Viewport const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( x == rhs.x ) && ( y == rhs.y ) && ( width == rhs.width ) && ( height == rhs.height ) &&
@@ -14510,7 +14510,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCommandBufferInheritanceViewportScissorInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -14531,7 +14531,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CommandBufferInheritanceViewportScissorInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( viewportScissor2D == rhs.viewportScissor2D ) &&
@@ -14628,7 +14628,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCommandBufferSubmitInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -14648,7 +14648,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CommandBufferSubmitInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( commandBuffer == rhs.commandBuffer ) &&
@@ -14744,7 +14744,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCommandPoolCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -14764,7 +14764,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CommandPoolCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -14854,7 +14854,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSpecializationMapEntry *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -14871,7 +14871,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SpecializationMapEntry const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( constantID == rhs.constantID ) && ( offset == rhs.offset ) && ( size == rhs.size );
@@ -14998,7 +14998,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSpecializationInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -15018,7 +15018,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SpecializationInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( mapEntryCount == rhs.mapEntryCount ) && ( pMapEntries == rhs.pMapEntries ) &&
@@ -15135,7 +15135,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineShaderStageCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -15301,7 +15301,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkComputePipelineCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -15324,7 +15324,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ComputePipelineCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( stage == rhs.stage ) &&
@@ -15435,7 +15435,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkConditionalRenderingBeginInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -15456,7 +15456,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ConditionalRenderingBeginInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( buffer == rhs.buffer ) && ( offset == rhs.offset ) &&
@@ -15558,7 +15558,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkConformanceVersion *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -15575,7 +15575,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ConformanceVersion const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( major == rhs.major ) && ( minor == rhs.minor ) && ( subminor == rhs.subminor ) && ( patch == rhs.patch );
@@ -15717,7 +15717,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCooperativeMatrixPropertiesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -15743,7 +15743,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CooperativeMatrixPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( MSize == rhs.MSize ) && ( NSize == rhs.NSize ) &&
@@ -15859,7 +15859,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCopyAccelerationStructureInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -15880,7 +15880,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CopyAccelerationStructureInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( src == rhs.src ) && ( dst == rhs.dst ) &&
@@ -15996,7 +15996,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCopyAccelerationStructureToMemoryInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -16137,7 +16137,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCopyBufferInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -16159,7 +16159,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CopyBufferInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcBuffer == rhs.srcBuffer ) &&
@@ -16308,7 +16308,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCopyBufferToImageInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -16331,7 +16331,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CopyBufferToImageInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcBuffer == rhs.srcBuffer ) &&
@@ -16425,7 +16425,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCopyCommandTransformInfoQCOM *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -16444,7 +16444,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CopyCommandTransformInfoQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( transform == rhs.transform );
@@ -16579,7 +16579,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCopyDescriptorSet *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -16605,7 +16605,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CopyDescriptorSet const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcSet == rhs.srcSet ) &&
@@ -16732,7 +16732,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageCopy2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -16755,7 +16755,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageCopy2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcSubresource == rhs.srcSubresource ) &&
@@ -16915,7 +16915,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCopyImageInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -16939,7 +16939,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CopyImageInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcImage == rhs.srcImage ) &&
@@ -17092,7 +17092,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCopyImageToBufferInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -17115,7 +17115,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CopyImageToBufferInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcImage == rhs.srcImage ) &&
@@ -17233,7 +17233,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCopyMemoryToAccelerationStructureInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -17333,7 +17333,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCuFunctionCreateInfoNVX *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -17582,7 +17582,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCuLaunchInfoNVX *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -17625,7 +17625,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CuLaunchInfoNVX const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( function == rhs.function ) &&
@@ -17747,7 +17747,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkCuModuleCreateInfoNVX *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -17764,7 +17764,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( CuModuleCreateInfoNVX const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( dataSize == rhs.dataSize ) && ( pData == rhs.pData );
@@ -17907,7 +17907,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkD3D12FenceSubmitInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -17934,7 +17934,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( D3D12FenceSubmitInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -18034,7 +18034,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDebugMarkerMarkerInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -18169,7 +18169,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDebugMarkerObjectNameInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -18350,7 +18350,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDebugMarkerObjectTagInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -18373,7 +18373,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DebugMarkerObjectTagInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( objectType == rhs.objectType ) &&
@@ -18484,7 +18484,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDebugReportCallbackCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -18505,7 +18505,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DebugReportCallbackCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -18600,7 +18600,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDebugUtilsLabelEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -18734,7 +18734,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDebugUtilsObjectNameInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -18999,7 +18999,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDebugUtilsMessengerCallbackDataEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -19202,7 +19202,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -19225,7 +19225,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DebugUtilsMessengerCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -19375,7 +19375,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDebugUtilsObjectTagInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -19398,7 +19398,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DebugUtilsObjectTagInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( objectType == rhs.objectType ) &&
@@ -19493,7 +19493,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDedicatedAllocationBufferCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -19510,7 +19510,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DedicatedAllocationBufferCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( dedicatedAllocation == rhs.dedicatedAllocation );
@@ -19600,7 +19600,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDedicatedAllocationImageCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -19617,7 +19617,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DedicatedAllocationImageCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( dedicatedAllocation == rhs.dedicatedAllocation );
@@ -19718,7 +19718,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDedicatedAllocationMemoryAllocateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -19738,7 +19738,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DedicatedAllocationMemoryAllocateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( image == rhs.image ) && ( buffer == rhs.buffer );
@@ -19852,7 +19852,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryBarrier2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -19874,7 +19874,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryBarrier2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcStageMask == rhs.srcStageMask ) &&
@@ -19986,7 +19986,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageSubresourceRange *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -20007,7 +20007,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageSubresourceRange const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( aspectMask == rhs.aspectMask ) && ( baseMipLevel == rhs.baseMipLevel ) &&
@@ -20169,7 +20169,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageMemoryBarrier2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -20208,7 +20208,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageMemoryBarrier2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcStageMask == rhs.srcStageMask ) &&
@@ -20411,7 +20411,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDependencyInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -20444,7 +20444,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DependencyInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( dependencyFlags == rhs.dependencyFlags ) &&
@@ -20547,7 +20547,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorBufferInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -20566,7 +20566,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorBufferInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( buffer == rhs.buffer ) && ( offset == rhs.offset ) && ( range == rhs.range );
@@ -20653,7 +20653,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorImageInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -20672,7 +20672,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorImageInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sampler == rhs.sampler ) && ( imageView == rhs.imageView ) && ( imageLayout == rhs.imageLayout );
@@ -20749,7 +20749,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorPoolSize *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -20766,7 +20766,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorPoolSize const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( type == rhs.type ) && ( descriptorCount == rhs.descriptorCount );
@@ -20891,7 +20891,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorPoolCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -20913,7 +20913,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorPoolCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( maxSets == rhs.maxSets ) &&
@@ -21009,7 +21009,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorPoolInlineUniformBlockCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -21026,7 +21026,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorPoolInlineUniformBlockCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -21156,7 +21156,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorSetAllocateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -21177,7 +21177,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorSetAllocateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( descriptorPool == rhs.descriptorPool ) &&
@@ -21317,7 +21317,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorSetLayoutBinding *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -21338,7 +21338,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorSetLayoutBinding const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( binding == rhs.binding ) && ( descriptorType == rhs.descriptorType ) &&
@@ -21456,7 +21456,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorSetLayoutBindingFlagsCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -21476,7 +21476,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorSetLayoutBindingFlagsCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( bindingCount == rhs.bindingCount ) &&
@@ -21606,7 +21606,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorSetLayoutCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -21627,7 +21627,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorSetLayoutCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -21701,7 +21701,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorSetLayoutSupport *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -21718,7 +21718,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorSetLayoutSupport const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( supported == rhs.supported );
@@ -21838,7 +21838,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountAllocateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -21858,7 +21858,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorSetVariableDescriptorCountAllocateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( descriptorSetCount == rhs.descriptorSetCount ) &&
@@ -21940,7 +21940,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountLayoutSupport *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -21957,7 +21957,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorSetVariableDescriptorCountLayoutSupport const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -22081,7 +22081,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorUpdateTemplateEntry *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -22103,7 +22103,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorUpdateTemplateEntry const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( dstBinding == rhs.dstBinding ) && ( dstArrayElement == rhs.dstArrayElement ) &&
@@ -22289,7 +22289,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDescriptorUpdateTemplateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -22324,7 +22324,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DescriptorUpdateTemplateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -22425,7 +22425,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceBufferMemoryRequirements *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -22444,7 +22444,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceBufferMemoryRequirements const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pCreateInfo == rhs.pCreateInfo );
@@ -22577,7 +22577,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceQueueCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -22599,7 +22599,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceQueueCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -23165,7 +23165,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -23290,7 +23290,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( robustBufferAccess == rhs.robustBufferAccess ) && ( fullDrawIndexUint32 == rhs.fullDrawIndexUint32 ) &&
@@ -23573,7 +23573,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -23772,7 +23772,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceDeviceMemoryReportCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -23793,7 +23793,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceDeviceMemoryReportCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -23885,7 +23885,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceDiagnosticsConfigCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -23904,7 +23904,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceDiagnosticsConfigCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags );
@@ -23991,7 +23991,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceEventInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -24010,7 +24010,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceEventInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceEvent == rhs.deviceEvent );
@@ -24103,7 +24103,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceGroupBindSparseInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -24120,7 +24120,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceGroupBindSparseInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( resourceDeviceIndex == rhs.resourceDeviceIndex ) &&
@@ -24210,7 +24210,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceGroupCommandBufferBeginInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -24227,7 +24227,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceGroupCommandBufferBeginInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceMask == rhs.deviceMask );
@@ -24344,7 +24344,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceGroupDeviceCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -24364,7 +24364,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceGroupDeviceCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( physicalDeviceCount == rhs.physicalDeviceCount ) &&
@@ -24443,7 +24443,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceGroupPresentCapabilitiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -24463,7 +24463,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceGroupPresentCapabilitiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( presentMask == rhs.presentMask ) &&
@@ -24591,7 +24591,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceGroupPresentInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -24612,7 +24612,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceGroupPresentInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchainCount == rhs.swapchainCount ) &&
@@ -24741,7 +24741,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceGroupRenderPassBeginInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -24762,7 +24762,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceGroupRenderPassBeginInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceMask == rhs.deviceMask ) &&
@@ -24944,7 +24944,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceGroupSubmitInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -24975,7 +24975,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceGroupSubmitInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( waitSemaphoreCount == rhs.waitSemaphoreCount ) &&
@@ -25072,7 +25072,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceGroupSwapchainCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -25091,7 +25091,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceGroupSwapchainCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( modes == rhs.modes );
@@ -25321,7 +25321,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -25366,7 +25366,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -25479,7 +25479,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceImageMemoryRequirements *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -25499,7 +25499,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceImageMemoryRequirements const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pCreateInfo == rhs.pCreateInfo ) &&
@@ -25592,7 +25592,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceMemoryOpaqueCaptureAddressInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -25611,7 +25611,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceMemoryOpaqueCaptureAddressInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memory == rhs.memory );
@@ -25705,7 +25705,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceMemoryOverallocationCreateInfoAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -25724,7 +25724,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceMemoryOverallocationCreateInfoAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -25814,7 +25814,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceMemoryReportCallbackDataEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -25839,7 +25839,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceMemoryReportCallbackDataEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( type == rhs.type ) &&
@@ -25934,7 +25934,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDevicePrivateDataCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -25951,7 +25951,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DevicePrivateDataCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -26045,7 +26045,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceQueueGlobalPriorityCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -26064,7 +26064,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceQueueGlobalPriorityCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( globalPriority == rhs.globalPriority );
@@ -26167,7 +26167,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDeviceQueueInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -26188,7 +26188,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DeviceQueueInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -26292,7 +26292,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDirectFBSurfaceCreateInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -26313,7 +26313,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( DirectFBSurfaceCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( dfb == rhs.dfb ) &&
@@ -26407,7 +26407,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDispatchIndirectCommand *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -26424,7 +26424,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DispatchIndirectCommand const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( x == rhs.x ) && ( y == rhs.y ) && ( z == rhs.z );
@@ -26504,7 +26504,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayEventInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -26523,7 +26523,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayEventInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( displayEvent == rhs.displayEvent );
@@ -26605,7 +26605,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayModeParametersKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -26622,7 +26622,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayModeParametersKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( visibleRegion == rhs.visibleRegion ) && ( refreshRate == rhs.refreshRate );
@@ -26709,7 +26709,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayModeCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -26729,7 +26729,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayModeCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -26800,7 +26800,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayModePropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -26817,7 +26817,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayModePropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( displayMode == rhs.displayMode ) && ( parameters == rhs.parameters );
@@ -26881,7 +26881,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayModeProperties2KHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -26900,7 +26900,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayModeProperties2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( displayModeProperties == rhs.displayModeProperties );
@@ -26975,7 +26975,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayNativeHdrSurfaceCapabilitiesAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -26992,7 +26992,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayNativeHdrSurfaceCapabilitiesAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( localDimmingSupport == rhs.localDimmingSupport );
@@ -27078,7 +27078,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayPlaneCapabilitiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -27111,7 +27111,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayPlaneCapabilitiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( supportedAlpha == rhs.supportedAlpha ) && ( minSrcPosition == rhs.minSrcPosition ) &&
@@ -27187,7 +27187,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayPlaneCapabilities2KHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -27206,7 +27206,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayPlaneCapabilities2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( capabilities == rhs.capabilities );
@@ -27299,7 +27299,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayPlaneInfo2KHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -27319,7 +27319,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayPlaneInfo2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( mode == rhs.mode ) &&
@@ -27389,7 +27389,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayPlanePropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -27406,7 +27406,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayPlanePropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( currentDisplay == rhs.currentDisplay ) && ( currentStackIndex == rhs.currentStackIndex );
@@ -27470,7 +27470,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayPlaneProperties2KHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -27489,7 +27489,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayPlaneProperties2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -27575,7 +27575,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayPowerInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -27594,7 +27594,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayPowerInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( powerState == rhs.powerState );
@@ -27695,7 +27695,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayPresentInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -27716,7 +27716,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayPresentInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcRect == rhs.srcRect ) &&
@@ -27797,7 +27797,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayPropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -27912,7 +27912,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplayProperties2KHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -27931,7 +27931,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplayProperties2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( displayProperties == rhs.displayProperties );
@@ -28079,7 +28079,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDisplaySurfaceCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -28106,7 +28106,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DisplaySurfaceCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -28226,7 +28226,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDrawIndexedIndirectCommand *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -28243,7 +28243,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DrawIndexedIndirectCommand const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( indexCount == rhs.indexCount ) && ( instanceCount == rhs.instanceCount ) &&
@@ -28339,7 +28339,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDrawIndirectCommand *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -28356,7 +28356,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DrawIndirectCommand const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( vertexCount == rhs.vertexCount ) && ( instanceCount == rhs.instanceCount ) &&
@@ -28435,7 +28435,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDrawMeshTasksIndirectCommandNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -28452,7 +28452,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DrawMeshTasksIndirectCommandNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( taskCount == rhs.taskCount ) && ( firstTask == rhs.firstTask );
@@ -28519,7 +28519,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDrmFormatModifierProperties2EXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -28536,7 +28536,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DrmFormatModifierProperties2EXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( drmFormatModifier == rhs.drmFormatModifier ) &&
@@ -28606,7 +28606,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDrmFormatModifierPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -28623,7 +28623,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DrmFormatModifierPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( drmFormatModifier == rhs.drmFormatModifier ) &&
@@ -28705,7 +28705,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDrmFormatModifierPropertiesList2EXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -28725,7 +28725,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DrmFormatModifierPropertiesList2EXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -28814,7 +28814,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkDrmFormatModifierPropertiesListEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -28834,7 +28834,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( DrmFormatModifierPropertiesListEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -28922,7 +28922,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkEventCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -28941,7 +28941,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( EventCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags );
@@ -29025,7 +29025,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExportFenceCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -29044,7 +29044,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExportFenceCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleTypes == rhs.handleTypes );
@@ -29147,7 +29147,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExportFenceWin32HandleInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -29168,7 +29168,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ExportFenceWin32HandleInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pAttributes == rhs.pAttributes ) &&
@@ -29258,7 +29258,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExportMemoryAllocateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -29277,7 +29277,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExportMemoryAllocateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleTypes == rhs.handleTypes );
@@ -29364,7 +29364,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExportMemoryAllocateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -29383,7 +29383,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExportMemoryAllocateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleTypes == rhs.handleTypes );
@@ -29486,7 +29486,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExportMemoryWin32HandleInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -29507,7 +29507,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ExportMemoryWin32HandleInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pAttributes == rhs.pAttributes ) &&
@@ -29607,7 +29607,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExportMemoryWin32HandleInfoNV *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -29627,7 +29627,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ExportMemoryWin32HandleInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pAttributes == rhs.pAttributes ) &&
@@ -29717,7 +29717,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExportSemaphoreCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -29736,7 +29736,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExportSemaphoreCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleTypes == rhs.handleTypes );
@@ -29841,7 +29841,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExportSemaphoreWin32HandleInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -29862,7 +29862,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ExportSemaphoreWin32HandleInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pAttributes == rhs.pAttributes ) &&
@@ -29936,7 +29936,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExtensionProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -29953,7 +29953,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExtensionProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( extensionName == rhs.extensionName ) && ( specVersion == rhs.specVersion );
@@ -30016,7 +30016,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExternalMemoryProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -30035,7 +30035,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExternalMemoryProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( externalMemoryFeatures == rhs.externalMemoryFeatures ) &&
@@ -30102,7 +30102,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExternalBufferProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -30121,7 +30121,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExternalBufferProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -30197,7 +30197,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExternalFenceProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -30218,7 +30218,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExternalFenceProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -30308,7 +30308,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExternalFormatANDROID *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -30325,7 +30325,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ExternalFormatANDROID const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( externalFormat == rhs.externalFormat );
@@ -30397,7 +30397,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExternalImageFormatProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -30416,7 +30416,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExternalImageFormatProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -30494,7 +30494,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageFormatProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -30515,7 +30515,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageFormatProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( maxExtent == rhs.maxExtent ) && ( maxMipLevels == rhs.maxMipLevels ) &&
@@ -30587,7 +30587,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExternalImageFormatPropertiesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -30608,7 +30608,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExternalImageFormatPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( imageFormatProperties == rhs.imageFormatProperties ) &&
@@ -30694,7 +30694,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExternalMemoryBufferCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -30713,7 +30713,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExternalMemoryBufferCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleTypes == rhs.handleTypes );
@@ -30802,7 +30802,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExternalMemoryImageCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -30821,7 +30821,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExternalMemoryImageCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleTypes == rhs.handleTypes );
@@ -30910,7 +30910,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExternalMemoryImageCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -30929,7 +30929,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExternalMemoryImageCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleTypes == rhs.handleTypes );
@@ -31005,7 +31005,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkExternalSemaphoreProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -31026,7 +31026,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ExternalSemaphoreProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -31117,7 +31117,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFenceCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -31136,7 +31136,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FenceCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags );
@@ -31229,7 +31229,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFenceGetFdInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -31249,7 +31249,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FenceGetFdInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( fence == rhs.fence ) &&
@@ -31348,7 +31348,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFenceGetWin32HandleInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -31368,7 +31368,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( FenceGetWin32HandleInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( fence == rhs.fence ) &&
@@ -31450,7 +31450,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFilterCubicImageViewImageFormatPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -31470,7 +31470,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FilterCubicImageViewImageFormatPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( filterCubic == rhs.filterCubic ) &&
@@ -31545,7 +31545,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFormatProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -31564,7 +31564,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FormatProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( linearTilingFeatures == rhs.linearTilingFeatures ) &&
@@ -31628,7 +31628,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFormatProperties2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -31646,7 +31646,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FormatProperties2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( formatProperties == rhs.formatProperties );
@@ -31720,7 +31720,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFormatProperties3 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -31741,7 +31741,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FormatProperties3 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( linearTilingFeatures == rhs.linearTilingFeatures ) &&
@@ -31842,7 +31842,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFragmentShadingRateAttachmentInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -31862,7 +31862,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FragmentShadingRateAttachmentInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -32033,7 +32033,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFramebufferAttachmentImageInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -32058,7 +32058,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FramebufferAttachmentImageInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( usage == rhs.usage ) &&
@@ -32184,7 +32184,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFramebufferAttachmentsCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -32204,7 +32204,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FramebufferAttachmentsCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -32372,7 +32372,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFramebufferCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -32397,7 +32397,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FramebufferCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -32486,7 +32486,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkFramebufferMixedSamplesCombinationNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -32508,7 +32508,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( FramebufferMixedSamplesCombinationNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -32600,7 +32600,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkIndirectCommandsStreamNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -32617,7 +32617,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( IndirectCommandsStreamNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( buffer == rhs.buffer ) && ( offset == rhs.offset );
@@ -32843,7 +32843,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkGeneratedCommandsInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -32888,7 +32888,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( GeneratedCommandsInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pipelineBindPoint == rhs.pipelineBindPoint ) &&
@@ -33027,7 +33027,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkGeneratedCommandsMemoryRequirementsInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -33049,7 +33049,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( GeneratedCommandsMemoryRequirementsInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pipelineBindPoint == rhs.pipelineBindPoint ) &&
@@ -33151,7 +33151,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVertexInputBindingDescription *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -33168,7 +33168,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( VertexInputBindingDescription const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( binding == rhs.binding ) && ( stride == rhs.stride ) && ( inputRate == rhs.inputRate );
@@ -33265,7 +33265,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVertexInputAttributeDescription *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -33282,7 +33282,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( VertexInputAttributeDescription const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( location == rhs.location ) && ( binding == rhs.binding ) && ( format == rhs.format ) &&
@@ -33442,7 +33442,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineVertexInputStateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -33471,7 +33471,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineVertexInputStateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -33587,7 +33587,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineInputAssemblyStateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -33608,7 +33608,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineInputAssemblyStateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -33710,7 +33710,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineTessellationStateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -33730,7 +33730,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineTessellationStateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -33891,7 +33891,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineViewportStateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -33914,7 +33914,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineViewportStateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -34099,7 +34099,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineRasterizationStateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -34140,7 +34140,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineRasterizationStateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -34300,7 +34300,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineMultisampleStateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -34333,7 +34333,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineMultisampleStateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -34469,7 +34469,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkStencilOpState *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -34492,7 +34492,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( StencilOpState const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( failOp == rhs.failOp ) && ( passOp == rhs.passOp ) && ( depthFailOp == rhs.depthFailOp ) &&
@@ -34661,7 +34661,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineDepthStencilStateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -34700,7 +34700,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineDepthStencilStateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -34855,7 +34855,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineColorBlendAttachmentState *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -34886,7 +34886,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineColorBlendAttachmentState const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( blendEnable == rhs.blendEnable ) && ( srcColorBlendFactor == rhs.srcColorBlendFactor ) &&
@@ -35050,7 +35050,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineColorBlendStateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -35074,7 +35074,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineColorBlendStateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -35209,7 +35209,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineDynamicStateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -35230,7 +35230,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineDynamicStateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -35512,7 +35512,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkGraphicsPipelineCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -35565,7 +35565,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( GraphicsPipelineCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -35726,7 +35726,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkGraphicsShaderGroupCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -35748,7 +35748,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( GraphicsShaderGroupCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( stageCount == rhs.stageCount ) &&
@@ -35907,7 +35907,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkGraphicsPipelineShaderGroupsCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -35929,7 +35929,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( GraphicsPipelineShaderGroupsCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( groupCount == rhs.groupCount ) &&
@@ -36016,7 +36016,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkXYColorEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -36033,7 +36033,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( XYColorEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( x == rhs.x ) && ( y == rhs.y );
@@ -36169,7 +36169,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkHdrMetadataEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -36204,7 +36204,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( HdrMetadataEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( displayPrimaryRed == rhs.displayPrimaryRed ) &&
@@ -36299,7 +36299,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkHeadlessSurfaceCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -36318,7 +36318,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( HeadlessSurfaceCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags );
@@ -36412,7 +36412,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkIOSSurfaceCreateInfoMVK *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -36432,7 +36432,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( IOSSurfaceCreateInfoMVK const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( pView == rhs.pView );
@@ -36536,7 +36536,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageBlit *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -36556,7 +36556,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageBlit const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( srcSubresource == rhs.srcSubresource ) && ( srcOffsets == rhs.srcOffsets ) &&
@@ -36713,7 +36713,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageFormatConstraintsInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -36744,7 +36744,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ImageFormatConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageCreateInfo == rhs.imageCreateInfo ) &&
@@ -36893,7 +36893,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageConstraintsInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -36915,7 +36915,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ImageConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -37032,7 +37032,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageCopy *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -37053,7 +37053,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( srcSubresource == rhs.srcSubresource ) && ( srcOffset == rhs.srcOffset ) &&
@@ -37123,7 +37123,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubresourceLayout *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -37144,7 +37144,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubresourceLayout const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( offset == rhs.offset ) && ( size == rhs.size ) && ( rowPitch == rhs.rowPitch ) &&
@@ -37272,7 +37272,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageDrmFormatModifierExplicitCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -37293,7 +37293,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageDrmFormatModifierExplicitCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( drmFormatModifier == rhs.drmFormatModifier ) &&
@@ -37417,7 +37417,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageDrmFormatModifierListCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -37437,7 +37437,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageDrmFormatModifierListCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -37515,7 +37515,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageDrmFormatModifierPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -37532,7 +37532,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageDrmFormatModifierPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( drmFormatModifier == rhs.drmFormatModifier );
@@ -37646,7 +37646,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageFormatListCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -37666,7 +37666,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageFormatListCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( viewFormatCount == rhs.viewFormatCount ) &&
@@ -37739,7 +37739,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageFormatProperties2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -37758,7 +37758,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageFormatProperties2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageFormatProperties == rhs.imageFormatProperties );
@@ -37906,7 +37906,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageMemoryBarrier *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -37941,7 +37941,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageMemoryBarrier const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcAccessMask == rhs.srcAccessMask ) &&
@@ -38036,7 +38036,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageMemoryRequirementsInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -38053,7 +38053,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageMemoryRequirementsInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( image == rhs.image );
@@ -38153,7 +38153,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImagePipeSurfaceCreateInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -38273,7 +38273,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImagePlaneMemoryRequirementsInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -38292,7 +38292,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImagePlaneMemoryRequirementsInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( planeAspect == rhs.planeAspect );
@@ -38405,7 +38405,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageResolve *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -38426,7 +38426,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageResolve const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( srcSubresource == rhs.srcSubresource ) && ( srcOffset == rhs.srcOffset ) &&
@@ -38542,7 +38542,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageResolve2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -38565,7 +38565,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageResolve2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcSubresource == rhs.srcSubresource ) &&
@@ -38660,7 +38660,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageSparseMemoryRequirementsInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -38677,7 +38677,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageSparseMemoryRequirementsInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( image == rhs.image );
@@ -38765,7 +38765,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageStencilUsageCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -38784,7 +38784,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageStencilUsageCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( stencilUsage == rhs.stencilUsage );
@@ -38872,7 +38872,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageSwapchainCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -38891,7 +38891,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageSwapchainCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchain == rhs.swapchain );
@@ -38978,7 +38978,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageViewASTCDecodeModeEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -38995,7 +38995,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageViewASTCDecodeModeEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( decodeMode == rhs.decodeMode );
@@ -39069,7 +39069,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageViewAddressPropertiesNVX *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -39089,7 +39089,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageViewAddressPropertiesNVX const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceAddress == rhs.deviceAddress ) &&
@@ -39220,7 +39220,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageViewCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -39244,7 +39244,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageViewCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( image == rhs.image ) &&
@@ -39353,7 +39353,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageViewHandleInfoNVX *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -39374,7 +39374,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageViewHandleInfoNVX const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageView == rhs.imageView ) &&
@@ -39459,7 +39459,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageViewMinLodCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -39476,7 +39476,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageViewMinLodCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( minLod == rhs.minLod );
@@ -39562,7 +39562,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImageViewUsageCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -39581,7 +39581,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImageViewUsageCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( usage == rhs.usage );
@@ -39673,7 +39673,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportAndroidHardwareBufferInfoANDROID *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -39690,7 +39690,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ImportAndroidHardwareBufferInfoANDROID const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( buffer == rhs.buffer );
@@ -39803,7 +39803,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportFenceFdInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -39825,7 +39825,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImportFenceFdInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( fence == rhs.fence ) && ( flags == rhs.flags ) &&
@@ -39952,7 +39952,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportFenceWin32HandleInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -39975,7 +39975,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ImportFenceWin32HandleInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( fence == rhs.fence ) && ( flags == rhs.flags ) &&
@@ -40081,7 +40081,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportMemoryBufferCollectionFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -40101,7 +40101,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ImportMemoryBufferCollectionFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( collection == rhs.collection ) &&
@@ -40198,7 +40198,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportMemoryFdInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -40218,7 +40218,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImportMemoryFdInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleType == rhs.handleType ) && ( fd == rhs.fd );
@@ -40315,7 +40315,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportMemoryHostPointerInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -40335,7 +40335,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImportMemoryHostPointerInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleType == rhs.handleType ) &&
@@ -40444,7 +40444,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportMemoryWin32HandleInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -40465,7 +40465,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ImportMemoryWin32HandleInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleType == rhs.handleType ) &&
@@ -40567,7 +40567,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportMemoryWin32HandleInfoNV *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -40587,7 +40587,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ImportMemoryWin32HandleInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleType == rhs.handleType ) &&
@@ -40690,7 +40690,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportMemoryZirconHandleInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -40835,7 +40835,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportSemaphoreFdInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -40857,7 +40857,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ImportSemaphoreFdInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( semaphore == rhs.semaphore ) &&
@@ -40986,7 +40986,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportSemaphoreWin32HandleInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -41009,7 +41009,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ImportSemaphoreWin32HandleInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( semaphore == rhs.semaphore ) &&
@@ -41137,7 +41137,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkImportSemaphoreZirconHandleInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -41436,7 +41436,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkIndirectCommandsLayoutTokenNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -41481,7 +41481,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( IndirectCommandsLayoutTokenNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( tokenType == rhs.tokenType ) &&
@@ -41673,7 +41673,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkIndirectCommandsLayoutCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -41697,7 +41697,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( IndirectCommandsLayoutCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -41792,7 +41792,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkInitializePerformanceApiInfoINTEL *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -41809,7 +41809,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( InitializePerformanceApiInfoINTEL const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pUserData == rhs.pUserData );
@@ -41905,7 +41905,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkInputAttachmentAspectReference *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -41922,7 +41922,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( InputAttachmentAspectReference const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( subpass == rhs.subpass ) && ( inputAttachmentIndex == rhs.inputAttachmentIndex ) &&
@@ -42084,7 +42084,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkInstanceCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -42237,7 +42237,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkLayerProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -42257,7 +42257,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( LayerProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( layerName == rhs.layerName ) && ( specVersion == rhs.specVersion ) &&
@@ -42346,7 +42346,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMacOSSurfaceCreateInfoMVK *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -42366,7 +42366,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( MacOSSurfaceCreateInfoMVK const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( pView == rhs.pView );
@@ -42469,7 +42469,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMappedMemoryRange *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -42490,7 +42490,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MappedMemoryRange const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memory == rhs.memory ) && ( offset == rhs.offset ) &&
@@ -42584,7 +42584,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryAllocateFlagsInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -42604,7 +42604,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryAllocateFlagsInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -42699,7 +42699,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryAllocateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -42719,7 +42719,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryAllocateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( allocationSize == rhs.allocationSize ) &&
@@ -42813,7 +42813,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryBarrier *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -42833,7 +42833,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryBarrier const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcAccessMask == rhs.srcAccessMask ) &&
@@ -42928,7 +42928,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryDedicatedAllocateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -42948,7 +42948,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryDedicatedAllocateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( image == rhs.image ) && ( buffer == rhs.buffer );
@@ -43024,7 +43024,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryDedicatedRequirements *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -43044,7 +43044,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryDedicatedRequirements const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -43118,7 +43118,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryFdPropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -43135,7 +43135,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryFdPropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryTypeBits == rhs.memoryTypeBits );
@@ -43227,7 +43227,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryGetAndroidHardwareBufferInfoANDROID *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -43246,7 +43246,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( MemoryGetAndroidHardwareBufferInfoANDROID const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memory == rhs.memory );
@@ -43344,7 +43344,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryGetFdInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -43364,7 +43364,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryGetFdInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memory == rhs.memory ) &&
@@ -43462,7 +43462,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryGetRemoteAddressInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -43482,7 +43482,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryGetRemoteAddressInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memory == rhs.memory ) &&
@@ -43583,7 +43583,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryGetWin32HandleInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -43603,7 +43603,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( MemoryGetWin32HandleInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memory == rhs.memory ) &&
@@ -43706,7 +43706,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryGetZirconHandleInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -43726,7 +43726,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( MemoryGetZirconHandleInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memory == rhs.memory ) &&
@@ -43799,7 +43799,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryHeap *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -43816,7 +43816,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryHeap const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( size == rhs.size ) && ( flags == rhs.flags );
@@ -43879,7 +43879,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryHostPointerPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -43896,7 +43896,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryHostPointerPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryTypeBits == rhs.memoryTypeBits );
@@ -43987,7 +43987,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryOpaqueCaptureAddressAllocateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -44004,7 +44004,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryOpaqueCaptureAddressAllocateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( opaqueCaptureAddress == rhs.opaqueCaptureAddress );
@@ -44092,7 +44092,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryPriorityAllocateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -44109,7 +44109,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryPriorityAllocateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( priority == rhs.priority );
@@ -44180,7 +44180,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryRequirements *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -44197,7 +44197,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryRequirements const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( size == rhs.size ) && ( alignment == rhs.alignment ) && ( memoryTypeBits == rhs.memoryTypeBits );
@@ -44260,7 +44260,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryRequirements2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -44279,7 +44279,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryRequirements2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryRequirements == rhs.memoryRequirements );
@@ -44347,7 +44347,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryType *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -44364,7 +44364,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MemoryType const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( propertyFlags == rhs.propertyFlags ) && ( heapIndex == rhs.heapIndex );
@@ -44428,7 +44428,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryWin32HandlePropertiesKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -44445,7 +44445,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( MemoryWin32HandlePropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryTypeBits == rhs.memoryTypeBits );
@@ -44521,7 +44521,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMemoryZirconHandlePropertiesFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -44538,7 +44538,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( MemoryZirconHandlePropertiesFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryTypeBits == rhs.memoryTypeBits );
@@ -44634,7 +44634,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMetalSurfaceCreateInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -44654,7 +44654,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( MetalSurfaceCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( pLayer == rhs.pLayer );
@@ -44746,7 +44746,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMultiDrawIndexedInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -44763,7 +44763,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MultiDrawIndexedInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( firstIndex == rhs.firstIndex ) && ( indexCount == rhs.indexCount ) &&
@@ -44839,7 +44839,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMultiDrawInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -44856,7 +44856,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MultiDrawInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( firstVertex == rhs.firstVertex ) && ( vertexCount == rhs.vertexCount );
@@ -44918,7 +44918,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMultisamplePropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -44935,7 +44935,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MultisamplePropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -45033,7 +45033,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMultiviewPerViewAttributesInfoNVX *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -45053,7 +45053,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MultiviewPerViewAttributesInfoNVX const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( perViewAttributes == rhs.perViewAttributes ) &&
@@ -45163,7 +45163,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMutableDescriptorTypeListVALVE *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -45180,7 +45180,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MutableDescriptorTypeListVALVE const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( descriptorTypeCount == rhs.descriptorTypeCount ) && ( pDescriptorTypes == rhs.pDescriptorTypes );
@@ -45293,7 +45293,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkMutableDescriptorTypeCreateInfoVALVE *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -45313,7 +45313,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( MutableDescriptorTypeCreateInfoVALVE const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -45392,7 +45392,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPastPresentationTimingGOOGLE *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -45409,7 +45409,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PastPresentationTimingGOOGLE const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( presentID == rhs.presentID ) && ( desiredPresentTime == rhs.desiredPresentTime ) &&
@@ -45501,7 +45501,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPerformanceConfigurationAcquireInfoINTEL *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -45520,7 +45520,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PerformanceConfigurationAcquireInfoINTEL const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( type == rhs.type );
@@ -45601,7 +45601,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPerformanceCounterDescriptionKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -45623,7 +45623,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PerformanceCounterDescriptionKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( name == rhs.name ) &&
@@ -45706,7 +45706,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPerformanceCounterKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -45728,7 +45728,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PerformanceCounterKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( unit == rhs.unit ) && ( scope == rhs.scope ) &&
@@ -45889,7 +45889,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPerformanceMarkerInfoINTEL *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -45906,7 +45906,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PerformanceMarkerInfoINTEL const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( marker == rhs.marker );
@@ -46010,7 +46010,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPerformanceOverrideInfoINTEL *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -46031,7 +46031,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PerformanceOverrideInfoINTEL const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( type == rhs.type ) && ( enable == rhs.enable ) &&
@@ -46122,7 +46122,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPerformanceQuerySubmitInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -46139,7 +46139,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PerformanceQuerySubmitInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( counterPassIndex == rhs.counterPassIndex );
@@ -46225,7 +46225,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPerformanceStreamMarkerInfoINTEL *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -46242,7 +46242,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PerformanceStreamMarkerInfoINTEL const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( marker == rhs.marker );
@@ -46400,7 +46400,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPerformanceValueINTEL *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -46508,7 +46508,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevice16BitStorageFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -46535,7 +46535,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool         operator==( PhysicalDevice16BitStorageFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -46642,7 +46642,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevice4444FormatsFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -46662,7 +46662,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevice4444FormatsFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( formatA4R4G4B4 == rhs.formatA4R4G4B4 ) &&
@@ -46771,7 +46771,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevice8BitStorageFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -46792,7 +46792,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevice8BitStorageFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -46888,7 +46888,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceASTCDecodeFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -46905,7 +46905,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceASTCDecodeFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -47036,7 +47036,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceAccelerationStructureFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -47065,7 +47065,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceAccelerationStructureFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -47168,7 +47168,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceAccelerationStructurePropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -47203,7 +47203,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceAccelerationStructurePropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxGeometryCount == rhs.maxGeometryCount ) &&
@@ -47312,7 +47312,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -47329,7 +47329,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceBlendOperationAdvancedFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -47419,7 +47419,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -47450,7 +47450,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceBlendOperationAdvancedPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -47563,7 +47563,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceBorderColorSwizzleFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -47583,7 +47583,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceBorderColorSwizzleFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( borderColorSwizzle == rhs.borderColorSwizzle ) &&
@@ -47696,7 +47696,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceBufferDeviceAddressFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -47718,7 +47718,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceBufferDeviceAddressFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( bufferDeviceAddress == rhs.bufferDeviceAddress ) &&
@@ -47834,7 +47834,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceBufferDeviceAddressFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -47856,7 +47856,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceBufferDeviceAddressFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( bufferDeviceAddress == rhs.bufferDeviceAddress ) &&
@@ -47953,7 +47953,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceCoherentMemoryFeaturesAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -47970,7 +47970,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceCoherentMemoryFeaturesAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceCoherentMemory == rhs.deviceCoherentMemory );
@@ -48062,7 +48062,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceColorWriteEnableFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -48079,7 +48079,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceColorWriteEnableFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( colorWriteEnable == rhs.colorWriteEnable );
@@ -48182,7 +48182,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceComputeShaderDerivativesFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -48202,7 +48202,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceComputeShaderDerivativesFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -48308,7 +48308,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceConditionalRenderingFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -48328,7 +48328,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceConditionalRenderingFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( conditionalRendering == rhs.conditionalRendering ) &&
@@ -48425,7 +48425,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -48462,7 +48462,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceConservativeRasterizationPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -48581,7 +48581,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceCooperativeMatrixFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -48601,7 +48601,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceCooperativeMatrixFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( cooperativeMatrix == rhs.cooperativeMatrix ) &&
@@ -48681,7 +48681,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceCooperativeMatrixPropertiesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -48699,7 +48699,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceCooperativeMatrixPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -48793,7 +48793,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceCornerSampledImageFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -48810,7 +48810,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceCornerSampledImageFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( cornerSampledImage == rhs.cornerSampledImage );
@@ -48904,7 +48904,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceCoverageReductionModeFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -48921,7 +48921,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceCoverageReductionModeFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( coverageReductionMode == rhs.coverageReductionMode );
@@ -49023,7 +49023,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceCustomBorderColorFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -49043,7 +49043,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceCustomBorderColorFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( customBorderColors == rhs.customBorderColors ) &&
@@ -49123,7 +49123,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceCustomBorderColorPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -49140,7 +49140,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceCustomBorderColorPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -49237,7 +49237,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -49254,7 +49254,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -49349,7 +49349,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDepthClipControlFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -49366,7 +49366,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDepthClipControlFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( depthClipControl == rhs.depthClipControl );
@@ -49459,7 +49459,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDepthClipEnableFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -49476,7 +49476,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDepthClipEnableFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( depthClipEnable == rhs.depthClipEnable );
@@ -49560,7 +49560,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDepthStencilResolveProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -49587,7 +49587,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDepthStencilResolveProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -49863,7 +49863,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -49922,7 +49922,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDescriptorIndexingFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -50088,7 +50088,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -50153,7 +50153,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDescriptorIndexingProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -50305,7 +50305,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -50322,7 +50322,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDeviceGeneratedCommandsFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -50418,7 +50418,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -50455,7 +50455,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDeviceGeneratedCommandsPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -50565,7 +50565,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDeviceMemoryReportFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -50582,7 +50582,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDeviceMemoryReportFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceMemoryReport == rhs.deviceMemoryReport );
@@ -50675,7 +50675,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDiagnosticsConfigFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -50692,7 +50692,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDiagnosticsConfigFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( diagnosticsConfig == rhs.diagnosticsConfig );
@@ -50770,7 +50770,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -50787,7 +50787,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDiscardRectanglePropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxDiscardRectangles == rhs.maxDiscardRectangles );
@@ -50867,7 +50867,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDriverProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -50889,7 +50889,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDriverProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( driverID == rhs.driverID ) &&
@@ -50977,7 +50977,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDrmPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -51001,7 +51001,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDrmPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( hasPrimary == rhs.hasPrimary ) &&
@@ -51100,7 +51100,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceDynamicRenderingFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -51117,7 +51117,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceDynamicRenderingFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( dynamicRendering == rhs.dynamicRendering );
@@ -51210,7 +51210,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceExclusiveScissorFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -51227,7 +51227,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceExclusiveScissorFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( exclusiveScissor == rhs.exclusiveScissor );
@@ -51339,7 +51339,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceExtendedDynamicState2FeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -51361,7 +51361,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceExtendedDynamicState2FeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -51460,7 +51460,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceExtendedDynamicStateFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -51477,7 +51477,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceExtendedDynamicStateFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( extendedDynamicState == rhs.extendedDynamicState );
@@ -51585,7 +51585,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceExternalBufferInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -51606,7 +51606,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceExternalBufferInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( usage == rhs.usage ) &&
@@ -51700,7 +51700,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceExternalFenceInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -51719,7 +51719,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceExternalFenceInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleType == rhs.handleType );
@@ -51813,7 +51813,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceExternalImageFormatInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -51832,7 +51832,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceExternalImageFormatInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleType == rhs.handleType );
@@ -51911,7 +51911,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -51928,7 +51928,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceExternalMemoryHostPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -52022,7 +52022,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceExternalMemoryRDMAFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -52039,7 +52039,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceExternalMemoryRDMAFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( externalMemoryRDMA == rhs.externalMemoryRDMA );
@@ -52131,7 +52131,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceExternalSemaphoreInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -52150,7 +52150,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceExternalSemaphoreInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( handleType == rhs.handleType );
@@ -52238,7 +52238,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFeatures2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -52257,7 +52257,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFeatures2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( features == rhs.features );
@@ -52367,7 +52367,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFloatControlsProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -52420,7 +52420,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFloatControlsProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -52548,7 +52548,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMap2FeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -52565,7 +52565,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentDensityMap2FeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -52650,7 +52650,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMap2PropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -52677,7 +52677,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentDensityMap2PropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( subsampledLoads == rhs.subsampledLoads ) &&
@@ -52794,7 +52794,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMapFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -52816,7 +52816,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentDensityMapFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( fragmentDensityMap == rhs.fragmentDensityMap ) &&
@@ -52915,7 +52915,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -52932,7 +52932,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -53012,7 +53012,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -53029,7 +53029,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -53112,7 +53112,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMapPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -53134,7 +53134,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentDensityMapPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -53234,7 +53234,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -53251,7 +53251,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -53364,7 +53364,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -53386,7 +53386,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentShaderInterlockFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -53503,7 +53503,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -53525,7 +53525,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentShadingRateEnumsFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -53627,7 +53627,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -53646,7 +53646,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentShadingRateEnumsPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -53759,7 +53759,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentShadingRateFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -53781,7 +53781,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentShadingRateFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -53864,7 +53864,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentShadingRateKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -53884,7 +53884,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentShadingRateKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( sampleCounts == rhs.sampleCounts ) &&
@@ -53996,7 +53996,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceFragmentShadingRatePropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -54049,7 +54049,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceFragmentShadingRatePropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -54180,7 +54180,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -54197,7 +54197,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceGlobalPriorityQueryFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( globalPriorityQuery == rhs.globalPriorityQuery );
@@ -54276,7 +54276,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceGroupProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -54298,7 +54298,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceGroupProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( physicalDeviceCount == rhs.physicalDeviceCount ) &&
@@ -54393,7 +54393,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceHostQueryResetFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -54410,7 +54410,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceHostQueryResetFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( hostQueryReset == rhs.hostQueryReset );
@@ -54491,7 +54491,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceIDProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -54514,7 +54514,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceIDProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceUUID == rhs.deviceUUID ) &&
@@ -54662,7 +54662,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceImageDrmFormatModifierInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -54684,7 +54684,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceImageDrmFormatModifierInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( drmFormatModifier == rhs.drmFormatModifier ) &&
@@ -54814,7 +54814,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceImageFormatInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -54837,7 +54837,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceImageFormatInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( format == rhs.format ) && ( type == rhs.type ) &&
@@ -54934,7 +54934,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceImageRobustnessFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -54951,7 +54951,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceImageRobustnessFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( robustImageAccess == rhs.robustImageAccess );
@@ -55045,7 +55045,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceImageViewImageFormatInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -55062,7 +55062,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceImageViewImageFormatInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageViewType == rhs.imageViewType );
@@ -55155,7 +55155,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceImageViewMinLodFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -55172,7 +55172,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceImageViewMinLodFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( minLod == rhs.minLod );
@@ -55265,7 +55265,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceImagelessFramebufferFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -55282,7 +55282,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceImagelessFramebufferFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imagelessFramebuffer == rhs.imagelessFramebuffer );
@@ -55375,7 +55375,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceIndexTypeUint8FeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -55392,7 +55392,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceIndexTypeUint8FeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( indexTypeUint8 == rhs.indexTypeUint8 );
@@ -55486,7 +55486,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceInheritedViewportScissorFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -55503,7 +55503,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceInheritedViewportScissorFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -55607,7 +55607,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -55627,7 +55627,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceInlineUniformBlockFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( inlineUniformBlock == rhs.inlineUniformBlock ) &&
@@ -55718,7 +55718,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -55747,7 +55747,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceInlineUniformBlockProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -55851,7 +55851,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceInvocationMaskFeaturesHUAWEI *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -55868,7 +55868,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceInvocationMaskFeaturesHUAWEI const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( invocationMask == rhs.invocationMask );
@@ -56147,7 +56147,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceLimits *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -56374,7 +56374,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceLimits const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( maxImageDimension1D == rhs.maxImageDimension1D ) && ( maxImageDimension2D == rhs.maxImageDimension2D ) &&
@@ -56704,7 +56704,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceLineRasterizationFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -56735,7 +56735,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceLineRasterizationFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( rectangularLines == rhs.rectangularLines ) &&
@@ -56822,7 +56822,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceLineRasterizationPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -56839,7 +56839,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceLineRasterizationPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -56934,7 +56934,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceLinearColorAttachmentFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -56951,7 +56951,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceLinearColorAttachmentFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( linearColorAttachment == rhs.linearColorAttachment );
@@ -57029,7 +57029,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMaintenance3Properties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -57049,7 +57049,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMaintenance3Properties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxPerSetDescriptors == rhs.maxPerSetDescriptors ) &&
@@ -57142,7 +57142,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMaintenance4Features *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -57159,7 +57159,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMaintenance4Features const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maintenance4 == rhs.maintenance4 );
@@ -57235,7 +57235,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMaintenance4Properties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -57252,7 +57252,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMaintenance4Properties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxBufferSize == rhs.maxBufferSize );
@@ -57331,7 +57331,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMemoryBudgetPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -57351,7 +57351,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMemoryBudgetPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( heapBudget == rhs.heapBudget ) &&
@@ -57445,7 +57445,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMemoryPriorityFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -57462,7 +57462,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMemoryPriorityFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryPriority == rhs.memoryPriority );
@@ -57539,7 +57539,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMemoryProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -57559,7 +57559,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMemoryProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( memoryTypeCount == rhs.memoryTypeCount ) && ( memoryTypes == rhs.memoryTypes ) &&
@@ -57628,7 +57628,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMemoryProperties2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -57647,7 +57647,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMemoryProperties2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryProperties == rhs.memoryProperties );
@@ -57747,7 +57747,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMeshShaderFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -57767,7 +57767,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMeshShaderFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( taskShader == rhs.taskShader ) &&
@@ -57868,7 +57868,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -57913,7 +57913,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMeshShaderPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -58028,7 +58028,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMultiDrawFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -58045,7 +58045,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMultiDrawFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( multiDraw == rhs.multiDraw );
@@ -58119,7 +58119,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMultiDrawPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -58136,7 +58136,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMultiDrawPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxMultiDrawCount == rhs.maxMultiDrawCount );
@@ -58242,7 +58242,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMultiviewFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -58263,7 +58263,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMultiviewFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( multiview == rhs.multiview ) &&
@@ -58346,7 +58346,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -58363,7 +58363,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -58442,7 +58442,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMultiviewProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -58459,7 +58459,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMultiviewProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -58556,7 +58556,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -58573,7 +58573,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceMutableDescriptorTypeFeaturesVALVE const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( mutableDescriptorType == rhs.mutableDescriptorType );
@@ -58655,7 +58655,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePCIBusInfoPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -58677,7 +58677,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePCIBusInfoPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pciDomain == rhs.pciDomain ) &&
@@ -58775,7 +58775,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -58792,7 +58792,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -58895,7 +58895,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePerformanceQueryFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -58915,7 +58915,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePerformanceQueryFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -58996,7 +58996,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePerformanceQueryPropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -59013,7 +59013,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePerformanceQueryPropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -59109,7 +59109,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePipelineCreationCacheControlFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -59126,7 +59126,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePipelineCreationCacheControlFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -59223,7 +59223,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -59240,7 +59240,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePipelineExecutablePropertiesFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -59320,7 +59320,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePointClippingProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -59339,7 +59339,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePointClippingProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pointClippingBehavior == rhs.pointClippingBehavior );
@@ -59560,7 +59560,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePortabilitySubsetFeaturesKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -59609,7 +59609,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( PhysicalDevicePortabilitySubsetFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -59730,7 +59730,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePortabilitySubsetPropertiesKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -59747,7 +59747,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( PhysicalDevicePortabilitySubsetPropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -59840,7 +59840,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePresentIdFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -59857,7 +59857,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePresentIdFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( presentId == rhs.presentId );
@@ -59947,7 +59947,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePresentWaitFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -59964,7 +59964,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePresentWaitFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( presentWait == rhs.presentWait );
@@ -60068,7 +60068,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -60088,7 +60088,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -60182,7 +60182,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePrivateDataFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -60199,7 +60199,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePrivateDataFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( privateData == rhs.privateData );
@@ -60278,7 +60278,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSparseProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -60303,7 +60303,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSparseProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( residencyStandard2DBlockShape == rhs.residencyStandard2DBlockShape ) &&
@@ -60388,7 +60388,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -60421,7 +60421,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( apiVersion == rhs.apiVersion ) && ( driverVersion == rhs.driverVersion ) &&
@@ -60495,7 +60495,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceProperties2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -60514,7 +60514,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceProperties2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( properties == rhs.properties );
@@ -60605,7 +60605,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -60622,7 +60622,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceProtectedMemoryFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( protectedMemory == rhs.protectedMemory );
@@ -60698,7 +60698,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -60715,7 +60715,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceProtectedMemoryProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( protectedNoFault == rhs.protectedNoFault );
@@ -60817,7 +60817,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceProvokingVertexFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -60837,7 +60837,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceProvokingVertexFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( provokingVertexLast == rhs.provokingVertexLast ) &&
@@ -60919,7 +60919,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceProvokingVertexPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -60940,7 +60940,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceProvokingVertexPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -61022,7 +61022,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDevicePushDescriptorPropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -61039,7 +61039,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDevicePushDescriptorPropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxPushDescriptors == rhs.maxPushDescriptors );
@@ -61132,7 +61132,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -61149,7 +61149,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceRGBA10X6FormatsFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -61267,7 +61267,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -61292,7 +61292,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -61390,7 +61390,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceRayQueryFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -61407,7 +61407,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceRayQueryFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( rayQuery == rhs.rayQuery );
@@ -61509,7 +61509,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceRayTracingMotionBlurFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -61529,7 +61529,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceRayTracingMotionBlurFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( rayTracingMotionBlur == rhs.rayTracingMotionBlur ) &&
@@ -61662,7 +61662,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceRayTracingPipelineFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -61691,7 +61691,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceRayTracingPipelineFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( rayTracingPipeline == rhs.rayTracingPipeline ) &&
@@ -61793,7 +61793,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceRayTracingPipelinePropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -61828,7 +61828,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceRayTracingPipelinePropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -61933,7 +61933,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceRayTracingPropertiesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -61968,7 +61968,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceRayTracingPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -62075,7 +62075,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -62092,7 +62092,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceRepresentativeFragmentTestFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -62202,7 +62202,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceRobustness2FeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -62223,7 +62223,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceRobustness2FeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( robustBufferAccess2 == rhs.robustBufferAccess2 ) &&
@@ -62304,7 +62304,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceRobustness2PropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -62324,7 +62324,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceRobustness2PropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -62413,7 +62413,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -62442,7 +62442,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSampleLocationsPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -62531,7 +62531,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSamplerFilterMinmaxProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -62551,7 +62551,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSamplerFilterMinmaxProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -62648,7 +62648,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSamplerYcbcrConversionFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -62665,7 +62665,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSamplerYcbcrConversionFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -62758,7 +62758,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceScalarBlockLayoutFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -62775,7 +62775,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceScalarBlockLayoutFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( scalarBlockLayout == rhs.scalarBlockLayout );
@@ -62871,7 +62871,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -62888,7 +62888,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSeparateDepthStencilLayoutsFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -63082,7 +63082,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -63125,7 +63125,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderAtomicFloat2FeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -63340,7 +63340,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderAtomicFloatFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -63383,7 +63383,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderAtomicFloatFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -63507,7 +63507,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderAtomicInt64Features *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -63527,7 +63527,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderAtomicInt64Features const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -63631,7 +63631,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderClockFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -63651,7 +63651,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderClockFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderSubgroupClock == rhs.shaderSubgroupClock ) &&
@@ -63731,7 +63731,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderCoreProperties2AMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -63751,7 +63751,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderCoreProperties2AMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderCoreFeatures == rhs.shaderCoreFeatures ) &&
@@ -63856,7 +63856,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -63903,7 +63903,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderCorePropertiesAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderEngineCount == rhs.shaderEngineCount ) &&
@@ -64018,7 +64018,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -64035,7 +64035,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderDemoteToHelperInvocationFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -64130,7 +64130,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderDrawParametersFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -64147,7 +64147,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderDrawParametersFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderDrawParameters == rhs.shaderDrawParameters );
@@ -64249,7 +64249,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderFloat16Int8Features *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -64269,7 +64269,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderFloat16Int8Features const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderFloat16 == rhs.shaderFloat16 ) &&
@@ -64376,7 +64376,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -64396,7 +64396,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderImageAtomicInt64FeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -64491,7 +64491,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderImageFootprintFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -64508,7 +64508,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderImageFootprintFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageFootprint == rhs.imageFootprint );
@@ -64602,7 +64602,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderIntegerDotProductFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -64619,7 +64619,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderIntegerDotProductFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -64764,284 +64764,6 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pNext = pNext_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct8BitUnsignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct8BitUnsignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct8BitUnsignedAccelerated = integerDotProduct8BitUnsignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties & setIntegerDotProduct8BitSignedAccelerated(
-      VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct8BitSignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct8BitSignedAccelerated = integerDotProduct8BitSignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct8BitMixedSignednessAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct8BitMixedSignednessAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct8BitMixedSignednessAccelerated = integerDotProduct8BitMixedSignednessAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct4x8BitPackedUnsignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct4x8BitPackedUnsignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct4x8BitPackedUnsignedAccelerated = integerDotProduct4x8BitPackedUnsignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct4x8BitPackedSignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct4x8BitPackedSignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct4x8BitPackedSignedAccelerated = integerDotProduct4x8BitPackedSignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct4x8BitPackedMixedSignednessAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct4x8BitPackedMixedSignednessAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct4x8BitPackedMixedSignednessAccelerated =
-        integerDotProduct4x8BitPackedMixedSignednessAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct16BitUnsignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct16BitUnsignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct16BitUnsignedAccelerated = integerDotProduct16BitUnsignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct16BitSignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct16BitSignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct16BitSignedAccelerated = integerDotProduct16BitSignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct16BitMixedSignednessAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct16BitMixedSignednessAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct16BitMixedSignednessAccelerated = integerDotProduct16BitMixedSignednessAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct32BitUnsignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct32BitUnsignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct32BitUnsignedAccelerated = integerDotProduct32BitUnsignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct32BitSignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct32BitSignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct32BitSignedAccelerated = integerDotProduct32BitSignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct32BitMixedSignednessAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct32BitMixedSignednessAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct32BitMixedSignednessAccelerated = integerDotProduct32BitMixedSignednessAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct64BitUnsignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct64BitUnsignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct64BitUnsignedAccelerated = integerDotProduct64BitUnsignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct64BitSignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct64BitSignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct64BitSignedAccelerated = integerDotProduct64BitSignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProduct64BitMixedSignednessAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProduct64BitMixedSignednessAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProduct64BitMixedSignednessAccelerated = integerDotProduct64BitMixedSignednessAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating8BitUnsignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating8BitUnsignedAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating8BitUnsignedAccelerated =
-        integerDotProductAccumulatingSaturating8BitUnsignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating8BitSignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating8BitSignedAccelerated_ ) VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating8BitSignedAccelerated =
-        integerDotProductAccumulatingSaturating8BitSignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated =
-        integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated =
-        integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated =
-        integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated =
-        integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating16BitUnsignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating16BitUnsignedAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating16BitUnsignedAccelerated =
-        integerDotProductAccumulatingSaturating16BitUnsignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating16BitSignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating16BitSignedAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating16BitSignedAccelerated =
-        integerDotProductAccumulatingSaturating16BitSignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated =
-        integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating32BitUnsignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating32BitUnsignedAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating32BitUnsignedAccelerated =
-        integerDotProductAccumulatingSaturating32BitUnsignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating32BitSignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating32BitSignedAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating32BitSignedAccelerated =
-        integerDotProductAccumulatingSaturating32BitSignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated =
-        integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating64BitUnsignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating64BitUnsignedAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating64BitUnsignedAccelerated =
-        integerDotProductAccumulatingSaturating64BitUnsignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating64BitSignedAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating64BitSignedAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating64BitSignedAccelerated =
-        integerDotProductAccumulatingSaturating64BitSignedAccelerated_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderIntegerDotProductProperties &
-                            setIntegerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(
-                              VULKAN_HPP_NAMESPACE::Bool32 integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated_ )
-        VULKAN_HPP_NOEXCEPT
-    {
-      integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated =
-        integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated_;
-      return *this;
-    }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
-
     explicit operator VkPhysicalDeviceShaderIntegerDotProductProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderIntegerDotProductProperties *>( this );
@@ -65052,7 +64774,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderIntegerDotProductProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -65131,7 +64853,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderIntegerDotProductProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -65307,7 +65029,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -65324,7 +65046,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -65417,7 +65139,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderSMBuiltinsFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -65434,7 +65156,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderSMBuiltinsFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderSMBuiltins == rhs.shaderSMBuiltins );
@@ -65514,7 +65236,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderSMBuiltinsPropertiesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -65531,7 +65253,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderSMBuiltinsPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderSMCount == rhs.shaderSMCount ) &&
@@ -65628,7 +65350,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -65645,7 +65367,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderSubgroupExtendedTypesFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -65744,7 +65466,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -65761,7 +65483,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -65858,7 +65580,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShaderTerminateInvocationFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -65875,7 +65597,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShaderTerminateInvocationFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -65979,7 +65701,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShadingRateImageFeaturesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -65999,7 +65721,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShadingRateImageFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shadingRateImage == rhs.shadingRateImage ) &&
@@ -66083,7 +65805,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceShadingRateImagePropertiesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -66104,7 +65826,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceShadingRateImagePropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shadingRateTexelSize == rhs.shadingRateTexelSize ) &&
@@ -66235,7 +65957,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSparseImageFormatInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -66258,7 +65980,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSparseImageFormatInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( format == rhs.format ) && ( type == rhs.type ) &&
@@ -66343,7 +66065,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSubgroupProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -66365,7 +66087,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSubgroupProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( subgroupSize == rhs.subgroupSize ) &&
@@ -66471,7 +66193,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSubgroupSizeControlFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -66491,7 +66213,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSubgroupSizeControlFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( subgroupSizeControl == rhs.subgroupSizeControl ) &&
@@ -66578,7 +66300,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSubgroupSizeControlProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -66601,7 +66323,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSubgroupSizeControlProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( minSubgroupSize == rhs.minSubgroupSize ) &&
@@ -66700,7 +66422,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSubpassShadingFeaturesHUAWEI *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -66717,7 +66439,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSubpassShadingFeaturesHUAWEI const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( subpassShading == rhs.subpassShading );
@@ -66795,7 +66517,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSubpassShadingPropertiesHUAWEI *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -66812,7 +66534,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSubpassShadingPropertiesHUAWEI const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -66902,7 +66624,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSurfaceInfo2KHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -66920,7 +66642,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSurfaceInfo2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( surface == rhs.surface );
@@ -67011,7 +66733,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceSynchronization2Features *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -67028,7 +66750,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceSynchronization2Features const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( synchronization2 == rhs.synchronization2 );
@@ -67123,7 +66845,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -67140,7 +66862,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceTexelBufferAlignmentFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( texelBufferAlignment == rhs.texelBufferAlignment );
@@ -67224,7 +66946,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceTexelBufferAlignmentProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -67251,7 +66973,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceTexelBufferAlignmentProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -67353,7 +67075,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceTextureCompressionASTCHDRFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -67370,7 +67092,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceTextureCompressionASTCHDRFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -67463,7 +67185,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceTimelineSemaphoreFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -67480,7 +67202,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceTimelineSemaphoreFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( timelineSemaphore == rhs.timelineSemaphore );
@@ -67558,7 +67280,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceTimelineSemaphoreProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -67575,7 +67297,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceTimelineSemaphoreProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -67658,7 +67380,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceToolProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -67681,7 +67403,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceToolProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( name == rhs.name ) && ( version == rhs.version ) &&
@@ -67788,7 +67510,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceTransformFeedbackFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -67808,7 +67530,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceTransformFeedbackFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( transformFeedback == rhs.transformFeedback ) &&
@@ -67906,7 +67628,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceTransformFeedbackPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -67945,7 +67667,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceTransformFeedbackPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -68059,7 +67781,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceUniformBufferStandardLayoutFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -68076,7 +67798,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceUniformBufferStandardLayoutFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -68179,7 +67901,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVariablePointersFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -68199,7 +67921,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVariablePointersFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -68308,7 +68030,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -68328,7 +68050,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVertexAttributeDivisorFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -68410,7 +68132,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -68427,7 +68149,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVertexAttributeDivisorPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -68522,7 +68244,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -68539,7 +68261,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVertexInputDynamicStateFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -68656,7 +68378,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoProfileKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -68678,7 +68400,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoProfileKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( videoCodecOperation == rhs.videoCodecOperation ) &&
@@ -68778,7 +68500,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoProfilesKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -68798,7 +68520,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoProfilesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( profileCount == rhs.profileCount ) &&
@@ -68875,7 +68597,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVideoFormatInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -68895,7 +68617,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( PhysicalDeviceVideoFormatInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageUsage == rhs.imageUsage ) &&
@@ -69085,7 +68807,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVulkan11Features *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -69128,7 +68850,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVulkan11Features const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -69251,7 +68973,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVulkan11Properties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -69300,7 +69022,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVulkan11Properties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( deviceUUID == rhs.deviceUUID ) &&
@@ -69827,7 +69549,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVulkan12Features *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -69940,7 +69662,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVulkan12Features const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -70210,7 +69932,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVulkan12Properties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -70333,7 +70055,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVulkan12Properties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( driverID == rhs.driverID ) &&
@@ -70663,7 +70385,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVulkan13Features *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -70712,7 +70434,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVulkan13Features const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( robustImageAccess == rhs.robustImageAccess ) &&
@@ -70917,7 +70639,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVulkan13Properties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -71026,7 +70748,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVulkan13Properties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( minSubgroupSize == rhs.minSubgroupSize ) &&
@@ -71246,7 +70968,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceVulkanMemoryModelFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -71268,7 +70990,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceVulkanMemoryModelFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( vulkanMemoryModel == rhs.vulkanMemoryModel ) &&
@@ -71398,7 +71120,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -71425,7 +71147,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -71527,7 +71249,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -71544,7 +71266,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( ycbcr2plane444Formats == rhs.ycbcr2plane444Formats );
@@ -71636,7 +71358,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceYcbcrImageArraysFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -71653,7 +71375,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceYcbcrImageArraysFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( ycbcrImageArrays == rhs.ycbcrImageArrays );
@@ -71749,7 +71471,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -71766,7 +71488,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -71889,7 +71611,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineCacheCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -71910,7 +71632,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineCacheCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -72025,7 +71747,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineCacheHeaderVersionOne *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -72046,7 +71768,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineCacheHeaderVersionOne const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( headerSize == rhs.headerSize ) && ( headerVersion == rhs.headerVersion ) &&
@@ -72157,7 +71879,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -72178,7 +71900,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineColorBlendAdvancedStateCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcPremultiplied == rhs.srcPremultiplied ) &&
@@ -72298,7 +72020,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineColorWriteCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -72318,7 +72040,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineColorWriteCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( attachmentCount == rhs.attachmentCount ) &&
@@ -72410,7 +72132,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineCompilerControlCreateInfoAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -72429,7 +72151,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineCompilerControlCreateInfoAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( compilerControlFlags == rhs.compilerControlFlags );
@@ -72583,7 +72305,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineCoverageModulationStateCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -72612,7 +72334,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineCoverageModulationStateCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -72725,7 +72447,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineCoverageReductionStateCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -72745,7 +72467,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineCoverageReductionStateCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -72860,7 +72582,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineCoverageToColorStateCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -72881,7 +72603,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineCoverageToColorStateCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -72955,7 +72677,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineCreationFeedback *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -72972,7 +72694,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineCreationFeedback const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( flags == rhs.flags ) && ( duration == rhs.duration );
@@ -73095,7 +72817,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineCreationFeedbackCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -73117,7 +72839,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineCreationFeedbackCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -73267,7 +72989,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineDiscardRectangleStateCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -73289,7 +73011,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineDiscardRectangleStateCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -73391,7 +73113,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineExecutableInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -73411,7 +73133,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineExecutableInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pipeline == rhs.pipeline ) &&
@@ -73511,7 +73233,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineExecutableInternalRepresentationKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -73534,7 +73256,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineExecutableInternalRepresentationKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( name == rhs.name ) &&
@@ -73620,7 +73342,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineExecutablePropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -73642,7 +73364,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineExecutablePropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( stages == rhs.stages ) && ( name == rhs.name ) &&
@@ -73791,7 +73513,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineExecutableStatisticKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -73914,7 +73636,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineFragmentShadingRateEnumStateCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -73935,7 +73657,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool     operator==( PipelineFragmentShadingRateEnumStateCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shadingRateType == rhs.shadingRateType ) &&
@@ -74045,7 +73767,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineFragmentShadingRateStateCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -74065,7 +73787,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineFragmentShadingRateStateCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( fragmentSize == rhs.fragmentSize ) &&
@@ -74153,7 +73875,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -74171,7 +73893,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pipeline == rhs.pipeline );
@@ -74261,7 +73983,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPushConstantRange *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -74278,7 +74000,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PushConstantRange const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( stageFlags == rhs.stageFlags ) && ( offset == rhs.offset ) && ( size == rhs.size );
@@ -74428,7 +74150,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineLayoutCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -74451,7 +74173,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineLayoutCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -74570,7 +74292,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineLibraryCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -74590,7 +74312,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineLibraryCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( libraryCount == rhs.libraryCount ) &&
@@ -74705,7 +74427,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -74726,7 +74448,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineRasterizationConservativeStateCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -74834,7 +74556,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineRasterizationDepthClipStateCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -74854,7 +74576,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineRasterizationDepthClipStateCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -74978,7 +74700,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineRasterizationLineStateCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -75000,7 +74722,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineRasterizationLineStateCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -75103,7 +74825,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineRasterizationProvokingVertexStateCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -75122,7 +74844,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineRasterizationProvokingVertexStateCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( provokingVertexMode == rhs.provokingVertexMode );
@@ -75219,7 +74941,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineRasterizationStateRasterizationOrderAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -75238,7 +74960,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineRasterizationStateRasterizationOrderAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( rasterizationOrder == rhs.rasterizationOrder );
@@ -75342,7 +75064,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineRasterizationStateStreamCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -75362,7 +75084,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineRasterizationStateStreamCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -75513,7 +75235,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineRenderingCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -75542,7 +75264,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineRenderingCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( viewMask == rhs.viewMask ) &&
@@ -75645,7 +75367,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineRepresentativeFragmentTestStateCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -75662,7 +75384,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineRepresentativeFragmentTestStateCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -75766,7 +75488,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineSampleLocationsStateCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -75786,7 +75508,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineSampleLocationsStateCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -75868,7 +75590,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineShaderStageRequiredSubgroupSizeCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -75885,7 +75607,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineShaderStageRequiredSubgroupSizeCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( requiredSubgroupSize == rhs.requiredSubgroupSize );
@@ -75980,7 +75702,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineTessellationDomainOriginStateCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -75999,7 +75721,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineTessellationDomainOriginStateCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( domainOrigin == rhs.domainOrigin );
@@ -76091,7 +75813,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVertexInputBindingDivisorDescriptionEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -76108,7 +75830,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( VertexInputBindingDivisorDescriptionEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( binding == rhs.binding ) && ( divisor == rhs.divisor );
@@ -76227,7 +75949,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -76247,7 +75969,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineVertexInputDivisorStateCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -76386,7 +76108,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -76407,7 +76129,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineViewportCoarseSampleOrderStateCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( sampleOrderType == rhs.sampleOrderType ) &&
@@ -76505,7 +76227,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineViewportDepthClipControlCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -76522,7 +76244,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineViewportDepthClipControlCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( negativeOneToOne == rhs.negativeOneToOne );
@@ -76645,7 +76367,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineViewportExclusiveScissorStateCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -76665,7 +76387,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineViewportExclusiveScissorStateCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -76774,7 +76496,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkShadingRatePaletteNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -76791,7 +76513,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ShadingRatePaletteNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( shadingRatePaletteEntryCount == rhs.shadingRatePaletteEntryCount ) &&
@@ -76917,7 +76639,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineViewportShadingRateImageStateCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -76938,7 +76660,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineViewportShadingRateImageStateCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -77051,7 +76773,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkViewportSwizzleNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -77071,7 +76793,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ViewportSwizzleNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( x == rhs.x ) && ( y == rhs.y ) && ( z == rhs.z ) && ( w == rhs.w );
@@ -77197,7 +76919,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineViewportSwizzleStateCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -77218,7 +76940,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineViewportSwizzleStateCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -77304,7 +77026,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkViewportWScalingNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -77321,7 +77043,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ViewportWScalingNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( xcoeff == rhs.xcoeff ) && ( ycoeff == rhs.ycoeff );
@@ -77445,7 +77167,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPipelineViewportWScalingStateCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -77466,7 +77188,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PipelineViewportWScalingStateCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -77556,7 +77278,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPresentFrameTokenGGP *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -77687,7 +77409,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPresentIdKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -77707,7 +77429,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PresentIdKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchainCount == rhs.swapchainCount ) &&
@@ -77914,7 +77636,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPresentInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -77939,7 +77661,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PresentInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( waitSemaphoreCount == rhs.waitSemaphoreCount ) &&
@@ -78042,7 +77764,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRectLayerKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -78059,7 +77781,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RectLayerKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( offset == rhs.offset ) && ( extent == rhs.extent ) && ( layer == rhs.layer );
@@ -78154,7 +77876,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPresentRegionKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -78171,7 +77893,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PresentRegionKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( rectangleCount == rhs.rectangleCount ) && ( pRectangles == rhs.pRectangles );
@@ -78274,7 +77996,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPresentRegionsKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -78294,7 +78016,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PresentRegionsKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchainCount == rhs.swapchainCount ) &&
@@ -78378,7 +78100,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPresentTimeGOOGLE *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -78395,7 +78117,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PresentTimeGOOGLE const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( presentID == rhs.presentID ) && ( desiredPresentTime == rhs.desiredPresentTime );
@@ -78498,7 +78220,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPresentTimesInfoGOOGLE *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -78518,7 +78240,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PresentTimesInfoGOOGLE const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchainCount == rhs.swapchainCount ) &&
@@ -78606,7 +78328,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkPrivateDataSlotCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -78625,7 +78347,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( PrivateDataSlotCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags );
@@ -78710,7 +78432,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkProtectedSubmitInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -78727,7 +78449,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ProtectedSubmitInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( protectedSubmit == rhs.protectedSubmit );
@@ -78837,7 +78559,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkQueryPoolCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -78859,7 +78581,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( QueryPoolCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -78988,7 +78710,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkQueryPoolPerformanceCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -79009,7 +78731,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( QueryPoolPerformanceCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( queueFamilyIndex == rhs.queueFamilyIndex ) &&
@@ -79106,7 +78828,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkQueryPoolPerformanceQueryCreateInfoINTEL *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -79125,7 +78847,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( QueryPoolPerformanceQueryCreateInfoINTEL const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -79204,7 +78926,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkQueueFamilyCheckpointProperties2NV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -79223,7 +78945,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( QueueFamilyCheckpointProperties2NV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -79298,7 +79020,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkQueueFamilyCheckpointPropertiesNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -79317,7 +79039,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( QueueFamilyCheckpointPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -79435,7 +79157,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkQueueFamilyGlobalPriorityPropertiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -79456,7 +79178,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( QueueFamilyGlobalPriorityPropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( priorityCount == rhs.priorityCount ) &&
@@ -79535,7 +79257,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkQueueFamilyProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -79555,7 +79277,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( QueueFamilyProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( queueFlags == rhs.queueFlags ) && ( queueCount == rhs.queueCount ) &&
@@ -79621,7 +79343,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkQueueFamilyProperties2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -79640,7 +79362,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( QueueFamilyProperties2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( queueFamilyProperties == rhs.queueFamilyProperties );
@@ -79733,7 +79455,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkQueueFamilyQueryResultStatusProperties2KHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -79750,7 +79472,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( QueueFamilyQueryResultStatusProperties2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( supported == rhs.supported );
@@ -79888,7 +79610,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRayTracingShaderGroupCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -79919,7 +79641,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RayTracingShaderGroupCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( type == rhs.type ) &&
@@ -80030,7 +79752,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRayTracingPipelineInterfaceCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -80047,7 +79769,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RayTracingPipelineInterfaceCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -80287,7 +80009,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRayTracingPipelineCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -80330,7 +80052,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RayTracingPipelineCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -80472,7 +80194,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRayTracingShaderGroupCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -80495,7 +80217,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RayTracingShaderGroupCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( type == rhs.type ) &&
@@ -80705,7 +80427,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRayTracingPipelineCreateInfoNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -80742,7 +80464,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RayTracingPipelineCreateInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -80821,7 +80543,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRefreshCycleDurationGOOGLE *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -80838,7 +80560,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RefreshCycleDurationGOOGLE const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( refreshDuration == rhs.refreshDuration );
@@ -80944,7 +80666,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderPassAttachmentBeginInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -80964,7 +80686,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderPassAttachmentBeginInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( attachmentCount == rhs.attachmentCount ) &&
@@ -81113,7 +80835,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderPassBeginInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -81136,7 +80858,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderPassBeginInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( renderPass == rhs.renderPass ) &&
@@ -81377,7 +81099,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubpassDescription *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -81412,7 +81134,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubpassDescription const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( flags == rhs.flags ) && ( pipelineBindPoint == rhs.pipelineBindPoint ) &&
@@ -81546,7 +81268,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubpassDependency *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -81570,7 +81292,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubpassDependency const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( srcSubpass == rhs.srcSubpass ) && ( dstSubpass == rhs.dstSubpass ) &&
@@ -81758,7 +81480,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderPassCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -81784,7 +81506,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderPassCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -82047,7 +81769,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubpassDescription2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -82088,7 +81810,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubpassDescription2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -82249,7 +81971,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubpassDependency2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -82284,7 +82006,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubpassDependency2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcSubpass == rhs.srcSubpass ) &&
@@ -82513,7 +82235,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderPassCreateInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -82550,7 +82272,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderPassCreateInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -82655,7 +82377,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderPassFragmentDensityMapCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -82674,7 +82396,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderPassFragmentDensityMapCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -82798,7 +82520,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderPassInputAttachmentAspectCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -82818,7 +82540,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderPassInputAttachmentAspectCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( aspectReferenceCount == rhs.aspectReferenceCount ) &&
@@ -82998,7 +82720,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderPassMultiviewCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -83029,7 +82751,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderPassMultiviewCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( subpassCount == rhs.subpassCount ) &&
@@ -83124,7 +82846,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubpassSampleLocationsEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -83141,7 +82863,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubpassSampleLocationsEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( subpassIndex == rhs.subpassIndex ) && ( sampleLocationsInfo == rhs.sampleLocationsInfo );
@@ -83287,7 +83009,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderPassSampleLocationsBeginInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -83314,7 +83036,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderPassSampleLocationsBeginInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -83409,7 +83131,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderPassTransformBeginInfoQCOM *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -83428,7 +83150,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderPassTransformBeginInfoQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( transform == rhs.transform );
@@ -83579,7 +83301,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderingAttachmentInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -83706,7 +83428,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderingFragmentDensityMapAttachmentInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -83726,7 +83448,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderingFragmentDensityMapAttachmentInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageView == rhs.imageView ) &&
@@ -83840,7 +83562,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderingFragmentShadingRateAttachmentInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -83861,7 +83583,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderingFragmentShadingRateAttachmentInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageView == rhs.imageView ) &&
@@ -84044,7 +83766,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkRenderingInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -84079,7 +83801,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( RenderingInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -84243,7 +83965,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkResolveImageInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -84267,7 +83989,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ResolveImageInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcImage == rhs.srcImage ) &&
@@ -84376,7 +84098,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSamplerBorderColorComponentMappingCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -84396,7 +84118,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SamplerBorderColorComponentMappingCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( components == rhs.components ) &&
@@ -84616,7 +84338,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSamplerCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -84667,7 +84389,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SamplerCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -84787,7 +84509,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSamplerCustomBorderColorCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -84879,7 +84601,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSamplerReductionModeCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -84898,7 +84620,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SamplerReductionModeCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( reductionMode == rhs.reductionMode );
@@ -85052,7 +84774,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSamplerYcbcrConversionCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -85087,7 +84809,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SamplerYcbcrConversionCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( format == rhs.format ) &&
@@ -85176,7 +84898,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSamplerYcbcrConversionImageFormatProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -85193,7 +84915,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SamplerYcbcrConversionImageFormatProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -85283,7 +85005,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSamplerYcbcrConversionInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -85302,7 +85024,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SamplerYcbcrConversionInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( conversion == rhs.conversion );
@@ -85407,7 +85129,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkScreenSurfaceCreateInfoQNX *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -85428,7 +85150,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ScreenSurfaceCreateInfoQNX const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( context == rhs.context ) &&
@@ -85517,7 +85239,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSemaphoreCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -85536,7 +85258,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SemaphoreCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags );
@@ -85630,7 +85352,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSemaphoreGetFdInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -85650,7 +85372,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SemaphoreGetFdInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( semaphore == rhs.semaphore ) &&
@@ -85750,7 +85472,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSemaphoreGetWin32HandleInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -85770,7 +85492,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( SemaphoreGetWin32HandleInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( semaphore == rhs.semaphore ) &&
@@ -85875,7 +85597,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSemaphoreGetZirconHandleInfoFUCHSIA *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -85895,7 +85617,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( SemaphoreGetZirconHandleInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( semaphore == rhs.semaphore ) &&
@@ -85992,7 +85714,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSemaphoreSignalInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -86012,7 +85734,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SemaphoreSignalInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( semaphore == rhs.semaphore ) &&
@@ -86123,7 +85845,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSemaphoreSubmitInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -86145,7 +85867,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SemaphoreSubmitInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( semaphore == rhs.semaphore ) &&
@@ -86242,7 +85964,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSemaphoreTypeCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -86262,7 +85984,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SemaphoreTypeCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( semaphoreType == rhs.semaphoreType ) &&
@@ -86417,7 +86139,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSemaphoreWaitInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -86439,7 +86161,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SemaphoreWaitInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -86518,7 +86240,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSetStateFlagsIndirectCommandNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -86535,7 +86257,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SetStateFlagsIndirectCommandNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( data == rhs.data );
@@ -86645,7 +86367,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkShaderModuleCreateInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -86666,7 +86388,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ShaderModuleCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -86761,7 +86483,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkShaderModuleValidationCacheCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -86780,7 +86502,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ShaderModuleValidationCacheCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( validationCache == rhs.validationCache );
@@ -86856,7 +86578,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkShaderResourceUsageAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -86874,7 +86596,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ShaderResourceUsageAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( numUsedVgprs == rhs.numUsedVgprs ) && ( numUsedSgprs == rhs.numUsedSgprs ) &&
@@ -86953,7 +86675,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkShaderStatisticsInfoAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -86982,7 +86704,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ShaderStatisticsInfoAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( shaderStageMask == rhs.shaderStageMask ) && ( resourceUsage == rhs.resourceUsage ) &&
@@ -87057,7 +86779,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSharedPresentSurfaceCapabilitiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -87075,7 +86797,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SharedPresentSurfaceCapabilitiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -87149,7 +86871,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSparseImageFormatProperties *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -87168,7 +86890,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SparseImageFormatProperties const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( aspectMask == rhs.aspectMask ) && ( imageGranularity == rhs.imageGranularity ) && ( flags == rhs.flags );
@@ -87234,7 +86956,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSparseImageFormatProperties2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -87253,7 +86975,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SparseImageFormatProperties2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( properties == rhs.properties );
@@ -87332,7 +87054,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSparseImageMemoryRequirements *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -87354,7 +87076,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SparseImageMemoryRequirements const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( formatProperties == rhs.formatProperties ) && ( imageMipTailFirstLod == rhs.imageMipTailFirstLod ) &&
@@ -87425,7 +87147,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSparseImageMemoryRequirements2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -87444,7 +87166,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SparseImageMemoryRequirements2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryRequirements == rhs.memoryRequirements );
@@ -87545,7 +87267,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkStreamDescriptorSurfaceCreateInfoGGP *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -87673,7 +87395,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkStridedDeviceAddressRegionKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -87692,7 +87414,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( StridedDeviceAddressRegionKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( deviceAddress == rhs.deviceAddress ) && ( stride == rhs.stride ) && ( size == rhs.size );
@@ -87896,7 +87618,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubmitInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -87929,7 +87651,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubmitInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( waitSemaphoreCount == rhs.waitSemaphoreCount ) &&
@@ -88126,7 +87848,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubmitInfo2 *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -88159,7 +87881,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubmitInfo2 const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -88256,7 +87978,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubpassBeginInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -88275,7 +87997,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubpassBeginInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( contents == rhs.contents );
@@ -88383,7 +88105,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubpassDescriptionDepthStencilResolve *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -88404,7 +88126,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubpassDescriptionDepthStencilResolve const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( depthResolveMode == rhs.depthResolveMode ) &&
@@ -88485,7 +88207,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubpassEndInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -88502,7 +88224,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubpassEndInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext );
@@ -88622,7 +88344,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubpassFragmentDensityMapOffsetEndInfoQCOM *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -88642,7 +88364,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubpassFragmentDensityMapOffsetEndInfoQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -88723,7 +88445,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSubpassShadingPipelineCreateInfoHUAWEI *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -88743,7 +88465,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SubpassShadingPipelineCreateInfoHUAWEI const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( renderPass == rhs.renderPass ) &&
@@ -88838,7 +88560,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSurfaceCapabilities2EXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -88879,7 +88601,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SurfaceCapabilities2EXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( minImageCount == rhs.minImageCount ) &&
@@ -88983,7 +88705,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSurfaceCapabilitiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -89018,7 +88740,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SurfaceCapabilitiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( minImageCount == rhs.minImageCount ) && ( maxImageCount == rhs.maxImageCount ) &&
@@ -89095,7 +88817,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSurfaceCapabilities2KHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -89114,7 +88836,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SurfaceCapabilities2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( surfaceCapabilities == rhs.surfaceCapabilities );
@@ -89206,7 +88928,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSurfaceCapabilitiesFullScreenExclusiveEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -89223,7 +88945,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( SurfaceCapabilitiesFullScreenExclusiveEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -89297,7 +89019,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSurfaceFormatKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -89314,7 +89036,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SurfaceFormatKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( format == rhs.format ) && ( colorSpace == rhs.colorSpace );
@@ -89376,7 +89098,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSurfaceFormat2KHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -89394,7 +89116,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SurfaceFormat2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( surfaceFormat == rhs.surfaceFormat );
@@ -89483,7 +89205,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSurfaceFullScreenExclusiveInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -89502,7 +89224,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( SurfaceFullScreenExclusiveInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( fullScreenExclusive == rhs.fullScreenExclusive );
@@ -89595,7 +89317,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSurfaceFullScreenExclusiveWin32InfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -89612,7 +89334,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( SurfaceFullScreenExclusiveWin32InfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( hmonitor == rhs.hmonitor );
@@ -89702,7 +89424,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSurfaceProtectedCapabilitiesKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -89719,7 +89441,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SurfaceProtectedCapabilitiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( supportsProtected == rhs.supportsProtected );
@@ -89807,7 +89529,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSwapchainCounterCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -89826,7 +89548,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SwapchainCounterCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( surfaceCounters == rhs.surfaceCounters );
@@ -90096,7 +89818,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSwapchainCreateInfoKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -90147,7 +89869,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SwapchainCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( surface == rhs.surface ) &&
@@ -90260,7 +89982,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkSwapchainDisplayNativeHdrCreateInfoAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -90277,7 +89999,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( SwapchainDisplayNativeHdrCreateInfoAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( localDimmingEnable == rhs.localDimmingEnable );
@@ -90353,7 +90075,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkTextureLODGatherFormatPropertiesAMD *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -90370,7 +90092,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( TextureLODGatherFormatPropertiesAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -90516,7 +90238,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkTimelineSemaphoreSubmitInfo *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -90543,7 +90265,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( TimelineSemaphoreSubmitInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -90647,7 +90369,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkTraceRaysIndirectCommandKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -90664,7 +90386,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( TraceRaysIndirectCommandKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( width == rhs.width ) && ( height == rhs.height ) && ( depth == rhs.depth );
@@ -90781,7 +90503,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkValidationCacheCreateInfoEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -90802,7 +90524,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ValidationCacheCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -90953,7 +90675,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkValidationFeaturesEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -90980,7 +90702,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ValidationFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -91100,7 +90822,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkValidationFlagsEXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -91120,7 +90842,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( ValidationFlagsEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -91235,7 +90957,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVertexInputAttributeDescription2EXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -91257,7 +90979,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( VertexInputAttributeDescription2EXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( location == rhs.location ) &&
@@ -91374,7 +91096,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVertexInputBindingDescription2EXT *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -91396,7 +91118,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( VertexInputBindingDescription2EXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( binding == rhs.binding ) &&
@@ -91494,7 +91216,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkViSurfaceCreateInfoNN *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -91514,7 +91236,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( ViSurfaceCreateInfoNN const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( window == rhs.window );
@@ -91627,7 +91349,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoPictureResourceKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -91649,7 +91371,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoPictureResourceKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( codedOffset == rhs.codedOffset ) &&
@@ -91749,7 +91471,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoReferenceSlotKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -91769,7 +91491,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoReferenceSlotKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( slotIndex == rhs.slotIndex ) &&
@@ -91930,7 +91652,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoBeginCodingInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -91961,7 +91683,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoBeginCodingInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -92081,7 +91803,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoBindMemoryKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -92103,7 +91825,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoBindMemoryKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryBindIndex == rhs.memoryBindIndex ) &&
@@ -92191,7 +91913,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoCapabilitiesKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -92226,7 +91948,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoCapabilitiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( capabilityFlags == rhs.capabilityFlags ) &&
@@ -92326,7 +92048,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoCodingControlInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -92345,7 +92067,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoCodingControlInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags );
@@ -92423,7 +92145,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH264CapabilitiesEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -92444,7 +92166,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH264CapabilitiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxLevel == rhs.maxLevel ) &&
@@ -92538,7 +92260,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH264DpbSlotInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -92557,7 +92279,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH264DpbSlotInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pStdReferenceInfo == rhs.pStdReferenceInfo );
@@ -92644,7 +92366,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH264MvcEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -92661,7 +92383,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH264MvcEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pStdMvc == rhs.pStdMvc );
@@ -92785,7 +92507,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH264PictureInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -92806,7 +92528,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH264PictureInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pStdPictureInfo == rhs.pStdPictureInfo ) &&
@@ -92907,7 +92629,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH264ProfileEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -93038,7 +92760,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH264SessionCreateInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -93058,7 +92780,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH264SessionCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -93215,7 +92937,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH264SessionParametersAddInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -93237,7 +92959,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH264SessionParametersAddInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( spsStdCount == rhs.spsStdCount ) &&
@@ -93356,7 +93078,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH264SessionParametersCreateInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -93377,7 +93099,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH264SessionParametersCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxSpsStdCount == rhs.maxSpsStdCount ) &&
@@ -93457,7 +93179,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH265CapabilitiesEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -93477,7 +93199,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH265CapabilitiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxLevel == rhs.maxLevel ) &&
@@ -93569,7 +93291,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH265DpbSlotInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -93588,7 +93310,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH265DpbSlotInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pStdReferenceInfo == rhs.pStdReferenceInfo );
@@ -93714,7 +93436,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH265PictureInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -93735,7 +93457,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH265PictureInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pStdPictureInfo == rhs.pStdPictureInfo ) &&
@@ -93826,7 +93548,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH265ProfileEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -93950,7 +93672,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH265SessionCreateInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -93970,7 +93692,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH265SessionCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -94127,7 +93849,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH265SessionParametersAddInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -94149,7 +93871,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH265SessionParametersAddInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( spsStdCount == rhs.spsStdCount ) &&
@@ -94268,7 +93990,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeH265SessionParametersCreateInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -94289,7 +94011,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeH265SessionParametersCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxSpsStdCount == rhs.maxSpsStdCount ) &&
@@ -94498,7 +94220,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoDecodeInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -94537,7 +94259,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoDecodeInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -94584,6 +94306,161 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
+  struct VideoEncodeCapabilitiesKHR
+  {
+    using NativeType = VkVideoEncodeCapabilitiesKHR;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeCapabilitiesKHR;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      VideoEncodeCapabilitiesKHR( VULKAN_HPP_NAMESPACE::VideoEncodeCapabilityFlagsKHR      flags_                 = {},
+                                  VULKAN_HPP_NAMESPACE::VideoEncodeRateControlModeFlagsKHR rateControlModes_      = {},
+                                  uint8_t                                                  rateControlLayerCount_ = {},
+                                  uint8_t                                                  qualityLevelCount_     = {},
+                                  VULKAN_HPP_NAMESPACE::Extent2D inputImageDataFillAlignment_ = {} ) VULKAN_HPP_NOEXCEPT
+      : flags( flags_ )
+      , rateControlModes( rateControlModes_ )
+      , rateControlLayerCount( rateControlLayerCount_ )
+      , qualityLevelCount( qualityLevelCount_ )
+      , inputImageDataFillAlignment( inputImageDataFillAlignment_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR
+      VideoEncodeCapabilitiesKHR( VideoEncodeCapabilitiesKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    VideoEncodeCapabilitiesKHR( VkVideoEncodeCapabilitiesKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      : VideoEncodeCapabilitiesKHR( *reinterpret_cast<VideoEncodeCapabilitiesKHR const *>( &rhs ) )
+    {}
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    VideoEncodeCapabilitiesKHR & operator=( VideoEncodeCapabilitiesKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    VideoEncodeCapabilitiesKHR & operator=( VkVideoEncodeCapabilitiesKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::VideoEncodeCapabilitiesKHR const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeCapabilitiesKHR & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeCapabilitiesKHR &
+                            setFlags( VULKAN_HPP_NAMESPACE::VideoEncodeCapabilityFlagsKHR flags_ ) VULKAN_HPP_NOEXCEPT
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeCapabilitiesKHR & setRateControlModes(
+      VULKAN_HPP_NAMESPACE::VideoEncodeRateControlModeFlagsKHR rateControlModes_ ) VULKAN_HPP_NOEXCEPT
+    {
+      rateControlModes = rateControlModes_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeCapabilitiesKHR &
+                            setRateControlLayerCount( uint8_t rateControlLayerCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      rateControlLayerCount = rateControlLayerCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeCapabilitiesKHR &
+                            setQualityLevelCount( uint8_t qualityLevelCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      qualityLevelCount = qualityLevelCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeCapabilitiesKHR & setInputImageDataFillAlignment(
+      VULKAN_HPP_NAMESPACE::Extent2D const & inputImageDataFillAlignment_ ) VULKAN_HPP_NOEXCEPT
+    {
+      inputImageDataFillAlignment = inputImageDataFillAlignment_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkVideoEncodeCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkVideoEncodeCapabilitiesKHR *>( this );
+    }
+
+    explicit operator VkVideoEncodeCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkVideoEncodeCapabilitiesKHR *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::VideoEncodeCapabilityFlagsKHR const &,
+               VULKAN_HPP_NAMESPACE::VideoEncodeRateControlModeFlagsKHR const &,
+               uint8_t const &,
+               uint8_t const &,
+               VULKAN_HPP_NAMESPACE::Extent2D const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie(
+        sType, pNext, flags, rateControlModes, rateControlLayerCount, qualityLevelCount, inputImageDataFillAlignment );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( VideoEncodeCapabilitiesKHR const & ) const = default;
+#  else
+    bool operator==( VideoEncodeCapabilitiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
+             ( rateControlModes == rhs.rateControlModes ) && ( rateControlLayerCount == rhs.rateControlLayerCount ) &&
+             ( qualityLevelCount == rhs.qualityLevelCount ) &&
+             ( inputImageDataFillAlignment == rhs.inputImageDataFillAlignment );
+#    endif
+    }
+
+    bool operator!=( VideoEncodeCapabilitiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                      sType = StructureType::eVideoEncodeCapabilitiesKHR;
+    const void *                                             pNext = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeCapabilityFlagsKHR      flags = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeRateControlModeFlagsKHR rateControlModes            = {};
+    uint8_t                                                  rateControlLayerCount       = {};
+    uint8_t                                                  qualityLevelCount           = {};
+    VULKAN_HPP_NAMESPACE::Extent2D                           inputImageDataFillAlignment = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::VideoEncodeCapabilitiesKHR ) ==
+                              sizeof( VkVideoEncodeCapabilitiesKHR ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::VideoEncodeCapabilitiesKHR>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VideoEncodeCapabilitiesKHR>::value,
+                            "VideoEncodeCapabilitiesKHR is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eVideoEncodeCapabilitiesKHR>
+  {
+    using Type = VideoEncodeCapabilitiesKHR;
+  };
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
   struct VideoEncodeH264CapabilitiesEXT
   {
     using NativeType = VkVideoEncodeH264CapabilitiesEXT;
@@ -94593,27 +94470,29 @@ namespace VULKAN_HPP_NAMESPACE
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264CapabilitiesEXT(
-      VULKAN_HPP_NAMESPACE::VideoEncodeH264CapabilityFlagsEXT flags_                   = {},
-      VULKAN_HPP_NAMESPACE::VideoEncodeH264InputModeFlagsEXT  inputModeFlags_          = {},
-      VULKAN_HPP_NAMESPACE::VideoEncodeH264OutputModeFlagsEXT outputModeFlags_         = {},
-      VULKAN_HPP_NAMESPACE::Extent2D                          minPictureSizeInMbs_     = {},
-      VULKAN_HPP_NAMESPACE::Extent2D                          maxPictureSizeInMbs_     = {},
-      VULKAN_HPP_NAMESPACE::Extent2D                          inputImageDataAlignment_ = {},
-      uint8_t                                                 maxNumL0ReferenceForP_   = {},
-      uint8_t                                                 maxNumL0ReferenceForB_   = {},
-      uint8_t                                                 maxNumL1Reference_       = {},
-      uint8_t                                                 qualityLevelCount_       = {},
-      VULKAN_HPP_NAMESPACE::ExtensionProperties               stdExtensionVersion_     = {} ) VULKAN_HPP_NOEXCEPT
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264CapabilityFlagsEXT flags_                              = {},
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264InputModeFlagsEXT  inputModeFlags_                     = {},
+      VULKAN_HPP_NAMESPACE::VideoEncodeH264OutputModeFlagsEXT outputModeFlags_                    = {},
+      uint8_t                                                 maxPPictureL0ReferenceCount_        = {},
+      uint8_t                                                 maxBPictureL0ReferenceCount_        = {},
+      uint8_t                                                 maxL1ReferenceCount_                = {},
+      VULKAN_HPP_NAMESPACE::Bool32                            motionVectorsOverPicBoundariesFlag_ = {},
+      uint32_t                                                maxBytesPerPicDenom_                = {},
+      uint32_t                                                maxBitsPerMbDenom_                  = {},
+      uint32_t                                                log2MaxMvLengthHorizontal_          = {},
+      uint32_t                                                log2MaxMvLengthVertical_            = {},
+      VULKAN_HPP_NAMESPACE::ExtensionProperties               stdExtensionVersion_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , inputModeFlags( inputModeFlags_ )
       , outputModeFlags( outputModeFlags_ )
-      , minPictureSizeInMbs( minPictureSizeInMbs_ )
-      , maxPictureSizeInMbs( maxPictureSizeInMbs_ )
-      , inputImageDataAlignment( inputImageDataAlignment_ )
-      , maxNumL0ReferenceForP( maxNumL0ReferenceForP_ )
-      , maxNumL0ReferenceForB( maxNumL0ReferenceForB_ )
-      , maxNumL1Reference( maxNumL1Reference_ )
-      , qualityLevelCount( qualityLevelCount_ )
+      , maxPPictureL0ReferenceCount( maxPPictureL0ReferenceCount_ )
+      , maxBPictureL0ReferenceCount( maxBPictureL0ReferenceCount_ )
+      , maxL1ReferenceCount( maxL1ReferenceCount_ )
+      , motionVectorsOverPicBoundariesFlag( motionVectorsOverPicBoundariesFlag_ )
+      , maxBytesPerPicDenom( maxBytesPerPicDenom_ )
+      , maxBitsPerMbDenom( maxBitsPerMbDenom_ )
+      , log2MaxMvLengthHorizontal( log2MaxMvLengthHorizontal_ )
+      , log2MaxMvLengthVertical( log2MaxMvLengthVertical_ )
       , stdExtensionVersion( stdExtensionVersion_ )
     {}
 
@@ -94663,51 +94542,58 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264CapabilitiesEXT &
-      setMinPictureSizeInMbs( VULKAN_HPP_NAMESPACE::Extent2D const & minPictureSizeInMbs_ ) VULKAN_HPP_NOEXCEPT
+                            setMaxPPictureL0ReferenceCount( uint8_t maxPPictureL0ReferenceCount_ ) VULKAN_HPP_NOEXCEPT
     {
-      minPictureSizeInMbs = minPictureSizeInMbs_;
+      maxPPictureL0ReferenceCount = maxPPictureL0ReferenceCount_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264CapabilitiesEXT &
-      setMaxPictureSizeInMbs( VULKAN_HPP_NAMESPACE::Extent2D const & maxPictureSizeInMbs_ ) VULKAN_HPP_NOEXCEPT
+                            setMaxBPictureL0ReferenceCount( uint8_t maxBPictureL0ReferenceCount_ ) VULKAN_HPP_NOEXCEPT
     {
-      maxPictureSizeInMbs = maxPictureSizeInMbs_;
+      maxBPictureL0ReferenceCount = maxBPictureL0ReferenceCount_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264CapabilitiesEXT &
-      setInputImageDataAlignment( VULKAN_HPP_NAMESPACE::Extent2D const & inputImageDataAlignment_ ) VULKAN_HPP_NOEXCEPT
+                            setMaxL1ReferenceCount( uint8_t maxL1ReferenceCount_ ) VULKAN_HPP_NOEXCEPT
     {
-      inputImageDataAlignment = inputImageDataAlignment_;
+      maxL1ReferenceCount = maxL1ReferenceCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264CapabilitiesEXT & setMotionVectorsOverPicBoundariesFlag(
+      VULKAN_HPP_NAMESPACE::Bool32 motionVectorsOverPicBoundariesFlag_ ) VULKAN_HPP_NOEXCEPT
+    {
+      motionVectorsOverPicBoundariesFlag = motionVectorsOverPicBoundariesFlag_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264CapabilitiesEXT &
-                            setMaxNumL0ReferenceForP( uint8_t maxNumL0ReferenceForP_ ) VULKAN_HPP_NOEXCEPT
+                            setMaxBytesPerPicDenom( uint32_t maxBytesPerPicDenom_ ) VULKAN_HPP_NOEXCEPT
     {
-      maxNumL0ReferenceForP = maxNumL0ReferenceForP_;
+      maxBytesPerPicDenom = maxBytesPerPicDenom_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264CapabilitiesEXT &
-                            setMaxNumL0ReferenceForB( uint8_t maxNumL0ReferenceForB_ ) VULKAN_HPP_NOEXCEPT
+                            setMaxBitsPerMbDenom( uint32_t maxBitsPerMbDenom_ ) VULKAN_HPP_NOEXCEPT
     {
-      maxNumL0ReferenceForB = maxNumL0ReferenceForB_;
+      maxBitsPerMbDenom = maxBitsPerMbDenom_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264CapabilitiesEXT &
-                            setMaxNumL1Reference( uint8_t maxNumL1Reference_ ) VULKAN_HPP_NOEXCEPT
+                            setLog2MaxMvLengthHorizontal( uint32_t log2MaxMvLengthHorizontal_ ) VULKAN_HPP_NOEXCEPT
     {
-      maxNumL1Reference = maxNumL1Reference_;
+      log2MaxMvLengthHorizontal = log2MaxMvLengthHorizontal_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264CapabilitiesEXT &
-                            setQualityLevelCount( uint8_t qualityLevelCount_ ) VULKAN_HPP_NOEXCEPT
+                            setLog2MaxMvLengthVertical( uint32_t log2MaxMvLengthVertical_ ) VULKAN_HPP_NOEXCEPT
     {
-      qualityLevelCount = qualityLevelCount_;
+      log2MaxMvLengthVertical = log2MaxMvLengthVertical_;
       return *this;
     }
 
@@ -94729,7 +94615,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264CapabilitiesEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -94738,13 +94624,14 @@ namespace VULKAN_HPP_NAMESPACE
                VULKAN_HPP_NAMESPACE::VideoEncodeH264CapabilityFlagsEXT const &,
                VULKAN_HPP_NAMESPACE::VideoEncodeH264InputModeFlagsEXT const &,
                VULKAN_HPP_NAMESPACE::VideoEncodeH264OutputModeFlagsEXT const &,
-               VULKAN_HPP_NAMESPACE::Extent2D const &,
-               VULKAN_HPP_NAMESPACE::Extent2D const &,
-               VULKAN_HPP_NAMESPACE::Extent2D const &,
                uint8_t const &,
                uint8_t const &,
                uint8_t const &,
-               uint8_t const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
                VULKAN_HPP_NAMESPACE::ExtensionProperties const &>
 #    endif
       reflect() const VULKAN_HPP_NOEXCEPT
@@ -94754,13 +94641,14 @@ namespace VULKAN_HPP_NAMESPACE
                        flags,
                        inputModeFlags,
                        outputModeFlags,
-                       minPictureSizeInMbs,
-                       maxPictureSizeInMbs,
-                       inputImageDataAlignment,
-                       maxNumL0ReferenceForP,
-                       maxNumL0ReferenceForB,
-                       maxNumL1Reference,
-                       qualityLevelCount,
+                       maxPPictureL0ReferenceCount,
+                       maxBPictureL0ReferenceCount,
+                       maxL1ReferenceCount,
+                       motionVectorsOverPicBoundariesFlag,
+                       maxBytesPerPicDenom,
+                       maxBitsPerMbDenom,
+                       log2MaxMvLengthHorizontal,
+                       log2MaxMvLengthVertical,
                        stdExtensionVersion );
     }
 #  endif
@@ -94770,16 +94658,19 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264CapabilitiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
              ( inputModeFlags == rhs.inputModeFlags ) && ( outputModeFlags == rhs.outputModeFlags ) &&
-             ( minPictureSizeInMbs == rhs.minPictureSizeInMbs ) && ( maxPictureSizeInMbs == rhs.maxPictureSizeInMbs ) &&
-             ( inputImageDataAlignment == rhs.inputImageDataAlignment ) &&
-             ( maxNumL0ReferenceForP == rhs.maxNumL0ReferenceForP ) &&
-             ( maxNumL0ReferenceForB == rhs.maxNumL0ReferenceForB ) && ( maxNumL1Reference == rhs.maxNumL1Reference ) &&
-             ( qualityLevelCount == rhs.qualityLevelCount ) && ( stdExtensionVersion == rhs.stdExtensionVersion );
+             ( maxPPictureL0ReferenceCount == rhs.maxPPictureL0ReferenceCount ) &&
+             ( maxBPictureL0ReferenceCount == rhs.maxBPictureL0ReferenceCount ) &&
+             ( maxL1ReferenceCount == rhs.maxL1ReferenceCount ) &&
+             ( motionVectorsOverPicBoundariesFlag == rhs.motionVectorsOverPicBoundariesFlag ) &&
+             ( maxBytesPerPicDenom == rhs.maxBytesPerPicDenom ) && ( maxBitsPerMbDenom == rhs.maxBitsPerMbDenom ) &&
+             ( log2MaxMvLengthHorizontal == rhs.log2MaxMvLengthHorizontal ) &&
+             ( log2MaxMvLengthVertical == rhs.log2MaxMvLengthVertical ) &&
+             ( stdExtensionVersion == rhs.stdExtensionVersion );
 #    endif
     }
 
@@ -94793,16 +94684,17 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::StructureType                     sType = StructureType::eVideoEncodeH264CapabilitiesEXT;
     const void *                                            pNext = {};
     VULKAN_HPP_NAMESPACE::VideoEncodeH264CapabilityFlagsEXT flags = {};
-    VULKAN_HPP_NAMESPACE::VideoEncodeH264InputModeFlagsEXT  inputModeFlags          = {};
-    VULKAN_HPP_NAMESPACE::VideoEncodeH264OutputModeFlagsEXT outputModeFlags         = {};
-    VULKAN_HPP_NAMESPACE::Extent2D                          minPictureSizeInMbs     = {};
-    VULKAN_HPP_NAMESPACE::Extent2D                          maxPictureSizeInMbs     = {};
-    VULKAN_HPP_NAMESPACE::Extent2D                          inputImageDataAlignment = {};
-    uint8_t                                                 maxNumL0ReferenceForP   = {};
-    uint8_t                                                 maxNumL0ReferenceForB   = {};
-    uint8_t                                                 maxNumL1Reference       = {};
-    uint8_t                                                 qualityLevelCount       = {};
-    VULKAN_HPP_NAMESPACE::ExtensionProperties               stdExtensionVersion     = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeH264InputModeFlagsEXT  inputModeFlags                     = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeH264OutputModeFlagsEXT outputModeFlags                    = {};
+    uint8_t                                                 maxPPictureL0ReferenceCount        = {};
+    uint8_t                                                 maxBPictureL0ReferenceCount        = {};
+    uint8_t                                                 maxL1ReferenceCount                = {};
+    VULKAN_HPP_NAMESPACE::Bool32                            motionVectorsOverPicBoundariesFlag = {};
+    uint32_t                                                maxBytesPerPicDenom                = {};
+    uint32_t                                                maxBitsPerMbDenom                  = {};
+    uint32_t                                                log2MaxMvLengthHorizontal          = {};
+    uint32_t                                                log2MaxMvLengthVertical            = {};
+    VULKAN_HPP_NAMESPACE::ExtensionProperties               stdExtensionVersion                = {};
   };
   VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::VideoEncodeH264CapabilitiesEXT ) ==
                               sizeof( VkVideoEncodeH264CapabilitiesEXT ),
@@ -94829,11 +94721,10 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeH264DpbSlotInfoEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR
-      VideoEncodeH264DpbSlotInfoEXT( int8_t                                slotIndex_       = {},
-                                     const StdVideoEncodeH264PictureInfo * pStdPictureInfo_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR VideoEncodeH264DpbSlotInfoEXT(
+      int8_t slotIndex_ = {}, const StdVideoEncodeH264ReferenceInfo * pStdReferenceInfo_ = {} ) VULKAN_HPP_NOEXCEPT
       : slotIndex( slotIndex_ )
-      , pStdPictureInfo( pStdPictureInfo_ )
+      , pStdReferenceInfo( pStdReferenceInfo_ )
     {}
 
     VULKAN_HPP_CONSTEXPR
@@ -94867,9 +94758,9 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264DpbSlotInfoEXT &
-      setPStdPictureInfo( const StdVideoEncodeH264PictureInfo * pStdPictureInfo_ ) VULKAN_HPP_NOEXCEPT
+      setPStdReferenceInfo( const StdVideoEncodeH264ReferenceInfo * pStdReferenceInfo_ ) VULKAN_HPP_NOEXCEPT
     {
-      pStdPictureInfo = pStdPictureInfo_;
+      pStdReferenceInfo = pStdReferenceInfo_;
       return *this;
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
@@ -94884,18 +94775,18 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264DpbSlotInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
     std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
                const void * const &,
                int8_t const &,
-               const StdVideoEncodeH264PictureInfo * const &>
+               const StdVideoEncodeH264ReferenceInfo * const &>
 #    endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
-      return std::tie( sType, pNext, slotIndex, pStdPictureInfo );
+      return std::tie( sType, pNext, slotIndex, pStdReferenceInfo );
     }
 #  endif
 
@@ -94904,11 +94795,11 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264DpbSlotInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( slotIndex == rhs.slotIndex ) &&
-             ( pStdPictureInfo == rhs.pStdPictureInfo );
+             ( pStdReferenceInfo == rhs.pStdReferenceInfo );
 #    endif
     }
 
@@ -94919,10 +94810,10 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType   sType           = StructureType::eVideoEncodeH264DpbSlotInfoEXT;
-    const void *                          pNext           = {};
-    int8_t                                slotIndex       = {};
-    const StdVideoEncodeH264PictureInfo * pStdPictureInfo = {};
+    VULKAN_HPP_NAMESPACE::StructureType     sType             = StructureType::eVideoEncodeH264DpbSlotInfoEXT;
+    const void *                            pNext             = {};
+    int8_t                                  slotIndex         = {};
+    const StdVideoEncodeH264ReferenceInfo * pStdReferenceInfo = {};
   };
   VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT ) ==
                               sizeof( VkVideoEncodeH264DpbSlotInfoEXT ),
@@ -95048,7 +94939,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264EmitPictureParametersEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -95070,7 +94961,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264EmitPictureParametersEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( spsId == rhs.spsId ) &&
@@ -95170,7 +95061,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264FrameSizeEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -95187,7 +95078,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264FrameSizeEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( frameISize == rhs.frameISize ) && ( framePSize == rhs.framePSize ) && ( frameBSize == rhs.frameBSize );
@@ -95216,6 +95107,207 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
+  struct VideoEncodeH264ReferenceListsEXT
+  {
+    using NativeType = VkVideoEncodeH264ReferenceListsEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoEncodeH264ReferenceListsEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR VideoEncodeH264ReferenceListsEXT(
+      uint8_t                                                     referenceList0EntryCount_ = {},
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pReferenceList0Entries_   = {},
+      uint8_t                                                     referenceList1EntryCount_ = {},
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pReferenceList1Entries_   = {},
+      const StdVideoEncodeH264RefMemMgmtCtrlOperations *          pMemMgmtCtrlOperations_   = {} ) VULKAN_HPP_NOEXCEPT
+      : referenceList0EntryCount( referenceList0EntryCount_ )
+      , pReferenceList0Entries( pReferenceList0Entries_ )
+      , referenceList1EntryCount( referenceList1EntryCount_ )
+      , pReferenceList1Entries( pReferenceList1Entries_ )
+      , pMemMgmtCtrlOperations( pMemMgmtCtrlOperations_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR
+      VideoEncodeH264ReferenceListsEXT( VideoEncodeH264ReferenceListsEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    VideoEncodeH264ReferenceListsEXT( VkVideoEncodeH264ReferenceListsEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : VideoEncodeH264ReferenceListsEXT( *reinterpret_cast<VideoEncodeH264ReferenceListsEXT const *>( &rhs ) )
+    {}
+
+#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    VideoEncodeH264ReferenceListsEXT(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
+        referenceList0Entries_,
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
+                                                         referenceList1Entries_  = {},
+      const StdVideoEncodeH264RefMemMgmtCtrlOperations * pMemMgmtCtrlOperations_ = {} )
+      : referenceList0EntryCount( static_cast<uint8_t>( referenceList0Entries_.size() ) )
+      , pReferenceList0Entries( referenceList0Entries_.data() )
+      , referenceList1EntryCount( static_cast<uint8_t>( referenceList1Entries_.size() ) )
+      , pReferenceList1Entries( referenceList1Entries_.data() )
+      , pMemMgmtCtrlOperations( pMemMgmtCtrlOperations_ )
+    {}
+#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#  endif   /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    VideoEncodeH264ReferenceListsEXT &
+      operator=( VideoEncodeH264ReferenceListsEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    VideoEncodeH264ReferenceListsEXT & operator=( VkVideoEncodeH264ReferenceListsEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264ReferenceListsEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264ReferenceListsEXT &
+                            setReferenceList0EntryCount( uint8_t referenceList0EntryCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      referenceList0EntryCount = referenceList0EntryCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264ReferenceListsEXT & setPReferenceList0Entries(
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pReferenceList0Entries_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pReferenceList0Entries = pReferenceList0Entries_;
+      return *this;
+    }
+
+#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    VideoEncodeH264ReferenceListsEXT & setReferenceList0Entries(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
+        referenceList0Entries_ ) VULKAN_HPP_NOEXCEPT
+    {
+      referenceList0EntryCount = static_cast<uint8_t>( referenceList0Entries_.size() );
+      pReferenceList0Entries   = referenceList0Entries_.data();
+      return *this;
+    }
+#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264ReferenceListsEXT &
+                            setReferenceList1EntryCount( uint8_t referenceList1EntryCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      referenceList1EntryCount = referenceList1EntryCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264ReferenceListsEXT & setPReferenceList1Entries(
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pReferenceList1Entries_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pReferenceList1Entries = pReferenceList1Entries_;
+      return *this;
+    }
+
+#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    VideoEncodeH264ReferenceListsEXT & setReferenceList1Entries(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
+        referenceList1Entries_ ) VULKAN_HPP_NOEXCEPT
+    {
+      referenceList1EntryCount = static_cast<uint8_t>( referenceList1Entries_.size() );
+      pReferenceList1Entries   = referenceList1Entries_.data();
+      return *this;
+    }
+#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264ReferenceListsEXT & setPMemMgmtCtrlOperations(
+      const StdVideoEncodeH264RefMemMgmtCtrlOperations * pMemMgmtCtrlOperations_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pMemMgmtCtrlOperations = pMemMgmtCtrlOperations_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkVideoEncodeH264ReferenceListsEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkVideoEncodeH264ReferenceListsEXT *>( this );
+    }
+
+    explicit operator VkVideoEncodeH264ReferenceListsEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkVideoEncodeH264ReferenceListsEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               uint8_t const &,
+               const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * const &,
+               uint8_t const &,
+               const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * const &,
+               const StdVideoEncodeH264RefMemMgmtCtrlOperations * const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType,
+                       pNext,
+                       referenceList0EntryCount,
+                       pReferenceList0Entries,
+                       referenceList1EntryCount,
+                       pReferenceList1Entries,
+                       pMemMgmtCtrlOperations );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( VideoEncodeH264ReferenceListsEXT const & ) const = default;
+#  else
+    bool operator==( VideoEncodeH264ReferenceListsEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
+             ( referenceList0EntryCount == rhs.referenceList0EntryCount ) &&
+             ( pReferenceList0Entries == rhs.pReferenceList0Entries ) &&
+             ( referenceList1EntryCount == rhs.referenceList1EntryCount ) &&
+             ( pReferenceList1Entries == rhs.pReferenceList1Entries ) &&
+             ( pMemMgmtCtrlOperations == rhs.pMemMgmtCtrlOperations );
+#    endif
+    }
+
+    bool operator!=( VideoEncodeH264ReferenceListsEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                    = StructureType::eVideoEncodeH264ReferenceListsEXT;
+    const void *                        pNext                    = {};
+    uint8_t                             referenceList0EntryCount = {};
+    const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pReferenceList0Entries   = {};
+    uint8_t                                                     referenceList1EntryCount = {};
+    const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pReferenceList1Entries   = {};
+    const StdVideoEncodeH264RefMemMgmtCtrlOperations *          pMemMgmtCtrlOperations   = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT ) ==
+                              sizeof( VkVideoEncodeH264ReferenceListsEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT>::value,
+    "VideoEncodeH264ReferenceListsEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eVideoEncodeH264ReferenceListsEXT>
+  {
+    using Type = VideoEncodeH264ReferenceListsEXT;
+  };
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
   struct VideoEncodeH264NaluSliceEXT
   {
     using NativeType = VkVideoEncodeH264NaluSliceEXT;
@@ -95225,18 +95317,12 @@ namespace VULKAN_HPP_NAMESPACE
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoEncodeH264NaluSliceEXT(
-      const StdVideoEncodeH264SliceHeader *                       pSliceHeaderStd_         = {},
-      uint32_t                                                    mbCount_                 = {},
-      uint8_t                                                     refFinalList0EntryCount_ = {},
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefFinalList0Entries_   = {},
-      uint8_t                                                     refFinalList1EntryCount_ = {},
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefFinalList1Entries_   = {} ) VULKAN_HPP_NOEXCEPT
-      : pSliceHeaderStd( pSliceHeaderStd_ )
-      , mbCount( mbCount_ )
-      , refFinalList0EntryCount( refFinalList0EntryCount_ )
-      , pRefFinalList0Entries( pRefFinalList0Entries_ )
-      , refFinalList1EntryCount( refFinalList1EntryCount_ )
-      , pRefFinalList1Entries( pRefFinalList1Entries_ )
+      uint32_t                                                       mbCount_              = {},
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT * pReferenceFinalLists_ = {},
+      const StdVideoEncodeH264SliceHeader *                          pSliceHeaderStd_      = {} ) VULKAN_HPP_NOEXCEPT
+      : mbCount( mbCount_ )
+      , pReferenceFinalLists( pReferenceFinalLists_ )
+      , pSliceHeaderStd( pSliceHeaderStd_ )
     {}
 
     VULKAN_HPP_CONSTEXPR
@@ -95245,24 +95331,7 @@ namespace VULKAN_HPP_NAMESPACE
     VideoEncodeH264NaluSliceEXT( VkVideoEncodeH264NaluSliceEXT const & rhs ) VULKAN_HPP_NOEXCEPT
       : VideoEncodeH264NaluSliceEXT( *reinterpret_cast<VideoEncodeH264NaluSliceEXT const *>( &rhs ) )
     {}
-
-#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    VideoEncodeH264NaluSliceEXT(
-      const StdVideoEncodeH264SliceHeader * pSliceHeaderStd_,
-      uint32_t                              mbCount_,
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
-        refFinalList0Entries_,
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
-        refFinalList1Entries_ = {} )
-      : pSliceHeaderStd( pSliceHeaderStd_ )
-      , mbCount( mbCount_ )
-      , refFinalList0EntryCount( static_cast<uint8_t>( refFinalList0Entries_.size() ) )
-      , pRefFinalList0Entries( refFinalList0Entries_.data() )
-      , refFinalList1EntryCount( static_cast<uint8_t>( refFinalList1Entries_.size() ) )
-      , pRefFinalList1Entries( refFinalList1Entries_.data() )
-    {}
-#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
-#  endif   /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
 
     VideoEncodeH264NaluSliceEXT & operator=( VideoEncodeH264NaluSliceEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
@@ -95279,69 +95348,26 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264NaluSliceEXT &
-      setPSliceHeaderStd( const StdVideoEncodeH264SliceHeader * pSliceHeaderStd_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pSliceHeaderStd = pSliceHeaderStd_;
-      return *this;
-    }
-
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264NaluSliceEXT & setMbCount( uint32_t mbCount_ ) VULKAN_HPP_NOEXCEPT
     {
       mbCount = mbCount_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264NaluSliceEXT &
-                            setRefFinalList0EntryCount( uint8_t refFinalList0EntryCount_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264NaluSliceEXT & setPReferenceFinalLists(
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT * pReferenceFinalLists_ ) VULKAN_HPP_NOEXCEPT
     {
-      refFinalList0EntryCount = refFinalList0EntryCount_;
+      pReferenceFinalLists = pReferenceFinalLists_;
       return *this;
     }
-
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264NaluSliceEXT & setPRefFinalList0Entries(
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefFinalList0Entries_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pRefFinalList0Entries = pRefFinalList0Entries_;
-      return *this;
-    }
-
-#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    VideoEncodeH264NaluSliceEXT & setRefFinalList0Entries(
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
-        refFinalList0Entries_ ) VULKAN_HPP_NOEXCEPT
-    {
-      refFinalList0EntryCount = static_cast<uint8_t>( refFinalList0Entries_.size() );
-      pRefFinalList0Entries   = refFinalList0Entries_.data();
-      return *this;
-    }
-#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264NaluSliceEXT &
-                            setRefFinalList1EntryCount( uint8_t refFinalList1EntryCount_ ) VULKAN_HPP_NOEXCEPT
+      setPSliceHeaderStd( const StdVideoEncodeH264SliceHeader * pSliceHeaderStd_ ) VULKAN_HPP_NOEXCEPT
     {
-      refFinalList1EntryCount = refFinalList1EntryCount_;
+      pSliceHeaderStd = pSliceHeaderStd_;
       return *this;
     }
-
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264NaluSliceEXT & setPRefFinalList1Entries(
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefFinalList1Entries_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pRefFinalList1Entries = pRefFinalList1Entries_;
-      return *this;
-    }
-
-#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    VideoEncodeH264NaluSliceEXT & setRefFinalList1Entries(
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
-        refFinalList1Entries_ ) VULKAN_HPP_NOEXCEPT
-    {
-      refFinalList1EntryCount = static_cast<uint8_t>( refFinalList1Entries_.size() );
-      pRefFinalList1Entries   = refFinalList1Entries_.data();
-      return *this;
-    }
-#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
-#  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
     explicit operator VkVideoEncodeH264NaluSliceEXT const &() const VULKAN_HPP_NOEXCEPT
     {
@@ -95353,29 +95379,19 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264NaluSliceEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
     std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
                const void * const &,
-               const StdVideoEncodeH264SliceHeader * const &,
                uint32_t const &,
-               uint8_t const &,
-               const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * const &,
-               uint8_t const &,
-               const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * const &>
+               const VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT * const &,
+               const StdVideoEncodeH264SliceHeader * const &>
 #    endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
-      return std::tie( sType,
-                       pNext,
-                       pSliceHeaderStd,
-                       mbCount,
-                       refFinalList0EntryCount,
-                       pRefFinalList0Entries,
-                       refFinalList1EntryCount,
-                       pRefFinalList1Entries );
+      return std::tie( sType, pNext, mbCount, pReferenceFinalLists, pSliceHeaderStd );
     }
 #  endif
 
@@ -95384,14 +95400,11 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264NaluSliceEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
-      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pSliceHeaderStd == rhs.pSliceHeaderStd ) &&
-             ( mbCount == rhs.mbCount ) && ( refFinalList0EntryCount == rhs.refFinalList0EntryCount ) &&
-             ( pRefFinalList0Entries == rhs.pRefFinalList0Entries ) &&
-             ( refFinalList1EntryCount == rhs.refFinalList1EntryCount ) &&
-             ( pRefFinalList1Entries == rhs.pRefFinalList1Entries );
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( mbCount == rhs.mbCount ) &&
+             ( pReferenceFinalLists == rhs.pReferenceFinalLists ) && ( pSliceHeaderStd == rhs.pSliceHeaderStd );
 #    endif
     }
 
@@ -95402,14 +95415,11 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType                         sType = StructureType::eVideoEncodeH264NaluSliceEXT;
-    const void *                                                pNext = {};
-    const StdVideoEncodeH264SliceHeader *                       pSliceHeaderStd         = {};
-    uint32_t                                                    mbCount                 = {};
-    uint8_t                                                     refFinalList0EntryCount = {};
-    const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefFinalList0Entries   = {};
-    uint8_t                                                     refFinalList1EntryCount = {};
-    const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefFinalList1Entries   = {};
+    VULKAN_HPP_NAMESPACE::StructureType                            sType = StructureType::eVideoEncodeH264NaluSliceEXT;
+    const void *                                                   pNext = {};
+    uint32_t                                                       mbCount              = {};
+    const VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT * pReferenceFinalLists = {};
+    const StdVideoEncodeH264SliceHeader *                          pSliceHeaderStd      = {};
   };
   VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::VideoEncodeH264NaluSliceEXT ) ==
                               sizeof( VkVideoEncodeH264NaluSliceEXT ),
@@ -95481,7 +95491,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264ProfileEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -95596,7 +95606,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264QpEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -95613,7 +95623,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264QpEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( qpI == rhs.qpI ) && ( qpP == rhs.qpP ) && ( qpB == rhs.qpB );
@@ -95732,7 +95742,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264RateControlInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -95756,7 +95766,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264RateControlInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( gopFrameCount == rhs.gopFrameCount ) &&
@@ -95928,7 +95938,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264RateControlLayerInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -95965,7 +95975,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264RateControlLayerInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( temporalLayerId == rhs.temporalLayerId ) &&
@@ -96088,7 +96098,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264SessionCreateInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -96109,7 +96119,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264SessionCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -96267,7 +96277,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264SessionParametersAddInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -96289,7 +96299,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264SessionParametersAddInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( spsStdCount == rhs.spsStdCount ) &&
@@ -96408,7 +96418,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264SessionParametersCreateInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -96429,7 +96439,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264SessionParametersCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxSpsStdCount == rhs.maxSpsStdCount ) &&
@@ -96477,17 +96487,11 @@ namespace VULKAN_HPP_NAMESPACE
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoEncodeH264VclFrameInfoEXT(
-      uint8_t                                                     refDefaultFinalList0EntryCount_ = {},
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefDefaultFinalList0Entries_   = {},
-      uint8_t                                                     refDefaultFinalList1EntryCount_ = {},
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefDefaultFinalList1Entries_   = {},
-      uint32_t                                                    naluSliceEntryCount_            = {},
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264NaluSliceEXT *   pNaluSliceEntries_              = {},
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pCurrentPictureInfo_ = {} ) VULKAN_HPP_NOEXCEPT
-      : refDefaultFinalList0EntryCount( refDefaultFinalList0EntryCount_ )
-      , pRefDefaultFinalList0Entries( pRefDefaultFinalList0Entries_ )
-      , refDefaultFinalList1EntryCount( refDefaultFinalList1EntryCount_ )
-      , pRefDefaultFinalList1Entries( pRefDefaultFinalList1Entries_ )
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT * pReferenceFinalLists_ = {},
+      uint32_t                                                       naluSliceEntryCount_  = {},
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH264NaluSliceEXT *      pNaluSliceEntries_    = {},
+      const StdVideoEncodeH264PictureInfo *                          pCurrentPictureInfo_  = {} ) VULKAN_HPP_NOEXCEPT
+      : pReferenceFinalLists( pReferenceFinalLists_ )
       , naluSliceEntryCount( naluSliceEntryCount_ )
       , pNaluSliceEntries( pNaluSliceEntries_ )
       , pCurrentPictureInfo( pCurrentPictureInfo_ )
@@ -96502,17 +96506,11 @@ namespace VULKAN_HPP_NAMESPACE
 
 #    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
     VideoEncodeH264VclFrameInfoEXT(
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
-        refDefaultFinalList0Entries_,
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
-        refDefaultFinalList1Entries_ = {},
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT * pReferenceFinalLists_,
       VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264NaluSliceEXT> const &
-                                                                  naluSliceEntries_    = {},
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pCurrentPictureInfo_ = {} )
-      : refDefaultFinalList0EntryCount( static_cast<uint8_t>( refDefaultFinalList0Entries_.size() ) )
-      , pRefDefaultFinalList0Entries( refDefaultFinalList0Entries_.data() )
-      , refDefaultFinalList1EntryCount( static_cast<uint8_t>( refDefaultFinalList1Entries_.size() ) )
-      , pRefDefaultFinalList1Entries( refDefaultFinalList1Entries_.data() )
+                                            naluSliceEntries_,
+      const StdVideoEncodeH264PictureInfo * pCurrentPictureInfo_ = {} )
+      : pReferenceFinalLists( pReferenceFinalLists_ )
       , naluSliceEntryCount( static_cast<uint32_t>( naluSliceEntries_.size() ) )
       , pNaluSliceEntries( naluSliceEntries_.data() )
       , pCurrentPictureInfo( pCurrentPictureInfo_ )
@@ -96536,55 +96534,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264VclFrameInfoEXT &
-      setRefDefaultFinalList0EntryCount( uint8_t refDefaultFinalList0EntryCount_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264VclFrameInfoEXT & setPReferenceFinalLists(
+      const VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT * pReferenceFinalLists_ ) VULKAN_HPP_NOEXCEPT
     {
-      refDefaultFinalList0EntryCount = refDefaultFinalList0EntryCount_;
+      pReferenceFinalLists = pReferenceFinalLists_;
       return *this;
     }
-
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264VclFrameInfoEXT & setPRefDefaultFinalList0Entries(
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefDefaultFinalList0Entries_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pRefDefaultFinalList0Entries = pRefDefaultFinalList0Entries_;
-      return *this;
-    }
-
-#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    VideoEncodeH264VclFrameInfoEXT & setRefDefaultFinalList0Entries(
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
-        refDefaultFinalList0Entries_ ) VULKAN_HPP_NOEXCEPT
-    {
-      refDefaultFinalList0EntryCount = static_cast<uint8_t>( refDefaultFinalList0Entries_.size() );
-      pRefDefaultFinalList0Entries   = refDefaultFinalList0Entries_.data();
-      return *this;
-    }
-#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
-
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264VclFrameInfoEXT &
-      setRefDefaultFinalList1EntryCount( uint8_t refDefaultFinalList1EntryCount_ ) VULKAN_HPP_NOEXCEPT
-    {
-      refDefaultFinalList1EntryCount = refDefaultFinalList1EntryCount_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264VclFrameInfoEXT & setPRefDefaultFinalList1Entries(
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefDefaultFinalList1Entries_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pRefDefaultFinalList1Entries = pRefDefaultFinalList1Entries_;
-      return *this;
-    }
-
-#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    VideoEncodeH264VclFrameInfoEXT & setRefDefaultFinalList1Entries(
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT> const &
-        refDefaultFinalList1Entries_ ) VULKAN_HPP_NOEXCEPT
-    {
-      refDefaultFinalList1EntryCount = static_cast<uint8_t>( refDefaultFinalList1Entries_.size() );
-      pRefDefaultFinalList1Entries   = refDefaultFinalList1Entries_.data();
-      return *this;
-    }
-#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264VclFrameInfoEXT &
                             setNaluSliceEntryCount( uint32_t naluSliceEntryCount_ ) VULKAN_HPP_NOEXCEPT
@@ -96611,8 +96566,8 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264VclFrameInfoEXT & setPCurrentPictureInfo(
-      const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pCurrentPictureInfo_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264VclFrameInfoEXT &
+      setPCurrentPictureInfo( const StdVideoEncodeH264PictureInfo * pCurrentPictureInfo_ ) VULKAN_HPP_NOEXCEPT
     {
       pCurrentPictureInfo = pCurrentPictureInfo_;
       return *this;
@@ -96629,31 +96584,21 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH264VclFrameInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
     std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
                const void * const &,
-               uint8_t const &,
-               const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * const &,
-               uint8_t const &,
-               const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * const &,
+               const VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT * const &,
                uint32_t const &,
                const VULKAN_HPP_NAMESPACE::VideoEncodeH264NaluSliceEXT * const &,
-               const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * const &>
+               const StdVideoEncodeH264PictureInfo * const &>
 #    endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
-      return std::tie( sType,
-                       pNext,
-                       refDefaultFinalList0EntryCount,
-                       pRefDefaultFinalList0Entries,
-                       refDefaultFinalList1EntryCount,
-                       pRefDefaultFinalList1Entries,
-                       naluSliceEntryCount,
-                       pNaluSliceEntries,
-                       pCurrentPictureInfo );
+      return std::tie(
+        sType, pNext, pReferenceFinalLists, naluSliceEntryCount, pNaluSliceEntries, pCurrentPictureInfo );
     }
 #  endif
 
@@ -96662,14 +96607,10 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH264VclFrameInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
-      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
-             ( refDefaultFinalList0EntryCount == rhs.refDefaultFinalList0EntryCount ) &&
-             ( pRefDefaultFinalList0Entries == rhs.pRefDefaultFinalList0Entries ) &&
-             ( refDefaultFinalList1EntryCount == rhs.refDefaultFinalList1EntryCount ) &&
-             ( pRefDefaultFinalList1Entries == rhs.pRefDefaultFinalList1Entries ) &&
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pReferenceFinalLists == rhs.pReferenceFinalLists ) &&
              ( naluSliceEntryCount == rhs.naluSliceEntryCount ) && ( pNaluSliceEntries == rhs.pNaluSliceEntries ) &&
              ( pCurrentPictureInfo == rhs.pCurrentPictureInfo );
 #    endif
@@ -96682,15 +96623,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType                         sType = StructureType::eVideoEncodeH264VclFrameInfoEXT;
-    const void *                                                pNext = {};
-    uint8_t                                                     refDefaultFinalList0EntryCount = {};
-    const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefDefaultFinalList0Entries   = {};
-    uint8_t                                                     refDefaultFinalList1EntryCount = {};
-    const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pRefDefaultFinalList1Entries   = {};
-    uint32_t                                                    naluSliceEntryCount            = {};
-    const VULKAN_HPP_NAMESPACE::VideoEncodeH264NaluSliceEXT *   pNaluSliceEntries              = {};
-    const VULKAN_HPP_NAMESPACE::VideoEncodeH264DpbSlotInfoEXT * pCurrentPictureInfo            = {};
+    VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eVideoEncodeH264VclFrameInfoEXT;
+    const void *                        pNext = {};
+    const VULKAN_HPP_NAMESPACE::VideoEncodeH264ReferenceListsEXT * pReferenceFinalLists = {};
+    uint32_t                                                       naluSliceEntryCount  = {};
+    const VULKAN_HPP_NAMESPACE::VideoEncodeH264NaluSliceEXT *      pNaluSliceEntries    = {};
+    const StdVideoEncodeH264PictureInfo *                          pCurrentPictureInfo  = {};
   };
   VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::VideoEncodeH264VclFrameInfoEXT ) ==
                               sizeof( VkVideoEncodeH264VclFrameInfoEXT ),
@@ -96718,27 +96656,47 @@ namespace VULKAN_HPP_NAMESPACE
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT(
-      VULKAN_HPP_NAMESPACE::VideoEncodeH265CapabilityFlagsEXT flags_                   = {},
-      VULKAN_HPP_NAMESPACE::VideoEncodeH265InputModeFlagsEXT  inputModeFlags_          = {},
-      VULKAN_HPP_NAMESPACE::VideoEncodeH265OutputModeFlagsEXT outputModeFlags_         = {},
-      VULKAN_HPP_NAMESPACE::VideoEncodeH265CtbSizeFlagsEXT    ctbSizes_                = {},
-      VULKAN_HPP_NAMESPACE::Extent2D                          inputImageDataAlignment_ = {},
-      uint8_t                                                 maxNumL0ReferenceForP_   = {},
-      uint8_t                                                 maxNumL0ReferenceForB_   = {},
-      uint8_t                                                 maxNumL1Reference_       = {},
-      uint8_t                                                 maxNumSubLayers_         = {},
-      uint8_t                                                 qualityLevelCount_       = {},
-      VULKAN_HPP_NAMESPACE::ExtensionProperties               stdExtensionVersion_     = {} ) VULKAN_HPP_NOEXCEPT
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265CapabilityFlagsEXT         flags_                                  = {},
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265InputModeFlagsEXT          inputModeFlags_                         = {},
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265OutputModeFlagsEXT         outputModeFlags_                        = {},
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265CtbSizeFlagsEXT            ctbSizes_                               = {},
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265TransformBlockSizeFlagsEXT transformBlockSizes_                    = {},
+      uint8_t                                                         maxPPictureL0ReferenceCount_            = {},
+      uint8_t                                                         maxBPictureL0ReferenceCount_            = {},
+      uint8_t                                                         maxL1ReferenceCount_                    = {},
+      uint8_t                                                         maxSubLayersCount_                      = {},
+      uint8_t                                                         minLog2MinLumaCodingBlockSizeMinus3_    = {},
+      uint8_t                                                         maxLog2MinLumaCodingBlockSizeMinus3_    = {},
+      uint8_t                                                         minLog2MinLumaTransformBlockSizeMinus2_ = {},
+      uint8_t                                                         maxLog2MinLumaTransformBlockSizeMinus2_ = {},
+      uint8_t                                                         minMaxTransformHierarchyDepthInter_     = {},
+      uint8_t                                                         maxMaxTransformHierarchyDepthInter_     = {},
+      uint8_t                                                         minMaxTransformHierarchyDepthIntra_     = {},
+      uint8_t                                                         maxMaxTransformHierarchyDepthIntra_     = {},
+      uint8_t                                                         maxDiffCuQpDeltaDepth_                  = {},
+      uint8_t                                                         minMaxNumMergeCand_                     = {},
+      uint8_t                                                         maxMaxNumMergeCand_                     = {},
+      VULKAN_HPP_NAMESPACE::ExtensionProperties                       stdExtensionVersion_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , inputModeFlags( inputModeFlags_ )
       , outputModeFlags( outputModeFlags_ )
       , ctbSizes( ctbSizes_ )
-      , inputImageDataAlignment( inputImageDataAlignment_ )
-      , maxNumL0ReferenceForP( maxNumL0ReferenceForP_ )
-      , maxNumL0ReferenceForB( maxNumL0ReferenceForB_ )
-      , maxNumL1Reference( maxNumL1Reference_ )
-      , maxNumSubLayers( maxNumSubLayers_ )
-      , qualityLevelCount( qualityLevelCount_ )
+      , transformBlockSizes( transformBlockSizes_ )
+      , maxPPictureL0ReferenceCount( maxPPictureL0ReferenceCount_ )
+      , maxBPictureL0ReferenceCount( maxBPictureL0ReferenceCount_ )
+      , maxL1ReferenceCount( maxL1ReferenceCount_ )
+      , maxSubLayersCount( maxSubLayersCount_ )
+      , minLog2MinLumaCodingBlockSizeMinus3( minLog2MinLumaCodingBlockSizeMinus3_ )
+      , maxLog2MinLumaCodingBlockSizeMinus3( maxLog2MinLumaCodingBlockSizeMinus3_ )
+      , minLog2MinLumaTransformBlockSizeMinus2( minLog2MinLumaTransformBlockSizeMinus2_ )
+      , maxLog2MinLumaTransformBlockSizeMinus2( maxLog2MinLumaTransformBlockSizeMinus2_ )
+      , minMaxTransformHierarchyDepthInter( minMaxTransformHierarchyDepthInter_ )
+      , maxMaxTransformHierarchyDepthInter( maxMaxTransformHierarchyDepthInter_ )
+      , minMaxTransformHierarchyDepthIntra( minMaxTransformHierarchyDepthIntra_ )
+      , maxMaxTransformHierarchyDepthIntra( maxMaxTransformHierarchyDepthIntra_ )
+      , maxDiffCuQpDeltaDepth( maxDiffCuQpDeltaDepth_ )
+      , minMaxNumMergeCand( minMaxNumMergeCand_ )
+      , maxMaxNumMergeCand( maxMaxNumMergeCand_ )
       , stdExtensionVersion( stdExtensionVersion_ )
     {}
 
@@ -96794,45 +96752,115 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
-      setInputImageDataAlignment( VULKAN_HPP_NAMESPACE::Extent2D const & inputImageDataAlignment_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT & setTransformBlockSizes(
+      VULKAN_HPP_NAMESPACE::VideoEncodeH265TransformBlockSizeFlagsEXT transformBlockSizes_ ) VULKAN_HPP_NOEXCEPT
     {
-      inputImageDataAlignment = inputImageDataAlignment_;
+      transformBlockSizes = transformBlockSizes_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
-                            setMaxNumL0ReferenceForP( uint8_t maxNumL0ReferenceForP_ ) VULKAN_HPP_NOEXCEPT
+                            setMaxPPictureL0ReferenceCount( uint8_t maxPPictureL0ReferenceCount_ ) VULKAN_HPP_NOEXCEPT
     {
-      maxNumL0ReferenceForP = maxNumL0ReferenceForP_;
+      maxPPictureL0ReferenceCount = maxPPictureL0ReferenceCount_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
-                            setMaxNumL0ReferenceForB( uint8_t maxNumL0ReferenceForB_ ) VULKAN_HPP_NOEXCEPT
+                            setMaxBPictureL0ReferenceCount( uint8_t maxBPictureL0ReferenceCount_ ) VULKAN_HPP_NOEXCEPT
     {
-      maxNumL0ReferenceForB = maxNumL0ReferenceForB_;
+      maxBPictureL0ReferenceCount = maxBPictureL0ReferenceCount_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
-                            setMaxNumL1Reference( uint8_t maxNumL1Reference_ ) VULKAN_HPP_NOEXCEPT
+                            setMaxL1ReferenceCount( uint8_t maxL1ReferenceCount_ ) VULKAN_HPP_NOEXCEPT
     {
-      maxNumL1Reference = maxNumL1Reference_;
+      maxL1ReferenceCount = maxL1ReferenceCount_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
-                            setMaxNumSubLayers( uint8_t maxNumSubLayers_ ) VULKAN_HPP_NOEXCEPT
+                            setMaxSubLayersCount( uint8_t maxSubLayersCount_ ) VULKAN_HPP_NOEXCEPT
     {
-      maxNumSubLayers = maxNumSubLayers_;
+      maxSubLayersCount = maxSubLayersCount_;
       return *this;
     }
 
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
-                            setQualityLevelCount( uint8_t qualityLevelCount_ ) VULKAN_HPP_NOEXCEPT
+      setMinLog2MinLumaCodingBlockSizeMinus3( uint8_t minLog2MinLumaCodingBlockSizeMinus3_ ) VULKAN_HPP_NOEXCEPT
     {
-      qualityLevelCount = qualityLevelCount_;
+      minLog2MinLumaCodingBlockSizeMinus3 = minLog2MinLumaCodingBlockSizeMinus3_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
+      setMaxLog2MinLumaCodingBlockSizeMinus3( uint8_t maxLog2MinLumaCodingBlockSizeMinus3_ ) VULKAN_HPP_NOEXCEPT
+    {
+      maxLog2MinLumaCodingBlockSizeMinus3 = maxLog2MinLumaCodingBlockSizeMinus3_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
+      setMinLog2MinLumaTransformBlockSizeMinus2( uint8_t minLog2MinLumaTransformBlockSizeMinus2_ ) VULKAN_HPP_NOEXCEPT
+    {
+      minLog2MinLumaTransformBlockSizeMinus2 = minLog2MinLumaTransformBlockSizeMinus2_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
+      setMaxLog2MinLumaTransformBlockSizeMinus2( uint8_t maxLog2MinLumaTransformBlockSizeMinus2_ ) VULKAN_HPP_NOEXCEPT
+    {
+      maxLog2MinLumaTransformBlockSizeMinus2 = maxLog2MinLumaTransformBlockSizeMinus2_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
+      setMinMaxTransformHierarchyDepthInter( uint8_t minMaxTransformHierarchyDepthInter_ ) VULKAN_HPP_NOEXCEPT
+    {
+      minMaxTransformHierarchyDepthInter = minMaxTransformHierarchyDepthInter_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
+      setMaxMaxTransformHierarchyDepthInter( uint8_t maxMaxTransformHierarchyDepthInter_ ) VULKAN_HPP_NOEXCEPT
+    {
+      maxMaxTransformHierarchyDepthInter = maxMaxTransformHierarchyDepthInter_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
+      setMinMaxTransformHierarchyDepthIntra( uint8_t minMaxTransformHierarchyDepthIntra_ ) VULKAN_HPP_NOEXCEPT
+    {
+      minMaxTransformHierarchyDepthIntra = minMaxTransformHierarchyDepthIntra_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
+      setMaxMaxTransformHierarchyDepthIntra( uint8_t maxMaxTransformHierarchyDepthIntra_ ) VULKAN_HPP_NOEXCEPT
+    {
+      maxMaxTransformHierarchyDepthIntra = maxMaxTransformHierarchyDepthIntra_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
+                            setMaxDiffCuQpDeltaDepth( uint8_t maxDiffCuQpDeltaDepth_ ) VULKAN_HPP_NOEXCEPT
+    {
+      maxDiffCuQpDeltaDepth = maxDiffCuQpDeltaDepth_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
+                            setMinMaxNumMergeCand( uint8_t minMaxNumMergeCand_ ) VULKAN_HPP_NOEXCEPT
+    {
+      minMaxNumMergeCand = minMaxNumMergeCand_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeH265CapabilitiesEXT &
+                            setMaxMaxNumMergeCand( uint8_t maxMaxNumMergeCand_ ) VULKAN_HPP_NOEXCEPT
+    {
+      maxMaxNumMergeCand = maxMaxNumMergeCand_;
       return *this;
     }
 
@@ -96854,7 +96882,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265CapabilitiesEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -96864,7 +96892,17 @@ namespace VULKAN_HPP_NAMESPACE
                VULKAN_HPP_NAMESPACE::VideoEncodeH265InputModeFlagsEXT const &,
                VULKAN_HPP_NAMESPACE::VideoEncodeH265OutputModeFlagsEXT const &,
                VULKAN_HPP_NAMESPACE::VideoEncodeH265CtbSizeFlagsEXT const &,
-               VULKAN_HPP_NAMESPACE::Extent2D const &,
+               VULKAN_HPP_NAMESPACE::VideoEncodeH265TransformBlockSizeFlagsEXT const &,
+               uint8_t const &,
+               uint8_t const &,
+               uint8_t const &,
+               uint8_t const &,
+               uint8_t const &,
+               uint8_t const &,
+               uint8_t const &,
+               uint8_t const &,
+               uint8_t const &,
+               uint8_t const &,
                uint8_t const &,
                uint8_t const &,
                uint8_t const &,
@@ -96880,12 +96918,22 @@ namespace VULKAN_HPP_NAMESPACE
                        inputModeFlags,
                        outputModeFlags,
                        ctbSizes,
-                       inputImageDataAlignment,
-                       maxNumL0ReferenceForP,
-                       maxNumL0ReferenceForB,
-                       maxNumL1Reference,
-                       maxNumSubLayers,
-                       qualityLevelCount,
+                       transformBlockSizes,
+                       maxPPictureL0ReferenceCount,
+                       maxBPictureL0ReferenceCount,
+                       maxL1ReferenceCount,
+                       maxSubLayersCount,
+                       minLog2MinLumaCodingBlockSizeMinus3,
+                       maxLog2MinLumaCodingBlockSizeMinus3,
+                       minLog2MinLumaTransformBlockSizeMinus2,
+                       maxLog2MinLumaTransformBlockSizeMinus2,
+                       minMaxTransformHierarchyDepthInter,
+                       maxMaxTransformHierarchyDepthInter,
+                       minMaxTransformHierarchyDepthIntra,
+                       maxMaxTransformHierarchyDepthIntra,
+                       maxDiffCuQpDeltaDepth,
+                       minMaxNumMergeCand,
+                       maxMaxNumMergeCand,
                        stdExtensionVersion );
     }
 #  endif
@@ -96895,15 +96943,25 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265CapabilitiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
              ( inputModeFlags == rhs.inputModeFlags ) && ( outputModeFlags == rhs.outputModeFlags ) &&
-             ( ctbSizes == rhs.ctbSizes ) && ( inputImageDataAlignment == rhs.inputImageDataAlignment ) &&
-             ( maxNumL0ReferenceForP == rhs.maxNumL0ReferenceForP ) &&
-             ( maxNumL0ReferenceForB == rhs.maxNumL0ReferenceForB ) && ( maxNumL1Reference == rhs.maxNumL1Reference ) &&
-             ( maxNumSubLayers == rhs.maxNumSubLayers ) && ( qualityLevelCount == rhs.qualityLevelCount ) &&
+             ( ctbSizes == rhs.ctbSizes ) && ( transformBlockSizes == rhs.transformBlockSizes ) &&
+             ( maxPPictureL0ReferenceCount == rhs.maxPPictureL0ReferenceCount ) &&
+             ( maxBPictureL0ReferenceCount == rhs.maxBPictureL0ReferenceCount ) &&
+             ( maxL1ReferenceCount == rhs.maxL1ReferenceCount ) && ( maxSubLayersCount == rhs.maxSubLayersCount ) &&
+             ( minLog2MinLumaCodingBlockSizeMinus3 == rhs.minLog2MinLumaCodingBlockSizeMinus3 ) &&
+             ( maxLog2MinLumaCodingBlockSizeMinus3 == rhs.maxLog2MinLumaCodingBlockSizeMinus3 ) &&
+             ( minLog2MinLumaTransformBlockSizeMinus2 == rhs.minLog2MinLumaTransformBlockSizeMinus2 ) &&
+             ( maxLog2MinLumaTransformBlockSizeMinus2 == rhs.maxLog2MinLumaTransformBlockSizeMinus2 ) &&
+             ( minMaxTransformHierarchyDepthInter == rhs.minMaxTransformHierarchyDepthInter ) &&
+             ( maxMaxTransformHierarchyDepthInter == rhs.maxMaxTransformHierarchyDepthInter ) &&
+             ( minMaxTransformHierarchyDepthIntra == rhs.minMaxTransformHierarchyDepthIntra ) &&
+             ( maxMaxTransformHierarchyDepthIntra == rhs.maxMaxTransformHierarchyDepthIntra ) &&
+             ( maxDiffCuQpDeltaDepth == rhs.maxDiffCuQpDeltaDepth ) &&
+             ( minMaxNumMergeCand == rhs.minMaxNumMergeCand ) && ( maxMaxNumMergeCand == rhs.maxMaxNumMergeCand ) &&
              ( stdExtensionVersion == rhs.stdExtensionVersion );
 #    endif
     }
@@ -96918,16 +96976,26 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::StructureType                     sType = StructureType::eVideoEncodeH265CapabilitiesEXT;
     const void *                                            pNext = {};
     VULKAN_HPP_NAMESPACE::VideoEncodeH265CapabilityFlagsEXT flags = {};
-    VULKAN_HPP_NAMESPACE::VideoEncodeH265InputModeFlagsEXT  inputModeFlags          = {};
-    VULKAN_HPP_NAMESPACE::VideoEncodeH265OutputModeFlagsEXT outputModeFlags         = {};
-    VULKAN_HPP_NAMESPACE::VideoEncodeH265CtbSizeFlagsEXT    ctbSizes                = {};
-    VULKAN_HPP_NAMESPACE::Extent2D                          inputImageDataAlignment = {};
-    uint8_t                                                 maxNumL0ReferenceForP   = {};
-    uint8_t                                                 maxNumL0ReferenceForB   = {};
-    uint8_t                                                 maxNumL1Reference       = {};
-    uint8_t                                                 maxNumSubLayers         = {};
-    uint8_t                                                 qualityLevelCount       = {};
-    VULKAN_HPP_NAMESPACE::ExtensionProperties               stdExtensionVersion     = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeH265InputModeFlagsEXT  inputModeFlags                                 = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeH265OutputModeFlagsEXT outputModeFlags                                = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeH265CtbSizeFlagsEXT    ctbSizes                                       = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeH265TransformBlockSizeFlagsEXT transformBlockSizes                    = {};
+    uint8_t                                                         maxPPictureL0ReferenceCount            = {};
+    uint8_t                                                         maxBPictureL0ReferenceCount            = {};
+    uint8_t                                                         maxL1ReferenceCount                    = {};
+    uint8_t                                                         maxSubLayersCount                      = {};
+    uint8_t                                                         minLog2MinLumaCodingBlockSizeMinus3    = {};
+    uint8_t                                                         maxLog2MinLumaCodingBlockSizeMinus3    = {};
+    uint8_t                                                         minLog2MinLumaTransformBlockSizeMinus2 = {};
+    uint8_t                                                         maxLog2MinLumaTransformBlockSizeMinus2 = {};
+    uint8_t                                                         minMaxTransformHierarchyDepthInter     = {};
+    uint8_t                                                         maxMaxTransformHierarchyDepthInter     = {};
+    uint8_t                                                         minMaxTransformHierarchyDepthIntra     = {};
+    uint8_t                                                         maxMaxTransformHierarchyDepthIntra     = {};
+    uint8_t                                                         maxDiffCuQpDeltaDepth                  = {};
+    uint8_t                                                         minMaxNumMergeCand                     = {};
+    uint8_t                                                         maxMaxNumMergeCand                     = {};
+    VULKAN_HPP_NAMESPACE::ExtensionProperties                       stdExtensionVersion                    = {};
   };
   VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::VideoEncodeH265CapabilitiesEXT ) ==
                               sizeof( VkVideoEncodeH265CapabilitiesEXT ),
@@ -97008,7 +97076,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265DpbSlotInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -97028,7 +97096,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265DpbSlotInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( slotIndex == rhs.slotIndex ) &&
@@ -97193,7 +97261,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265EmitPictureParametersEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -97217,7 +97285,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265EmitPictureParametersEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( vpsId == rhs.vpsId ) && ( spsId == rhs.spsId ) &&
@@ -97319,7 +97387,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265FrameSizeEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -97336,7 +97404,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265FrameSizeEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( frameISize == rhs.frameISize ) && ( framePSize == rhs.framePSize ) && ( frameBSize == rhs.frameBSize );
@@ -97493,7 +97561,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265ReferenceListsEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -97522,7 +97590,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265ReferenceListsEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -97640,7 +97708,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265NaluSliceSegmentEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -97661,7 +97729,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265NaluSliceSegmentEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( ctbCount == rhs.ctbCount ) &&
@@ -97753,7 +97821,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265ProfileEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -97868,7 +97936,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265QpEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -97885,7 +97953,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265QpEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( qpI == rhs.qpI ) && ( qpP == rhs.qpP ) && ( qpB == rhs.qpB );
@@ -98004,7 +98072,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265RateControlInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -98028,7 +98096,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265RateControlInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( gopFrameCount == rhs.gopFrameCount ) &&
@@ -98200,7 +98268,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265RateControlLayerInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -98237,7 +98305,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265RateControlLayerInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( temporalId == rhs.temporalId ) &&
@@ -98351,7 +98419,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265SessionCreateInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -98371,7 +98439,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265SessionCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -98560,7 +98628,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265SessionParametersAddInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -98584,7 +98652,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265SessionParametersAddInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( vpsStdCount == rhs.vpsStdCount ) &&
@@ -98715,7 +98783,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265SessionParametersCreateInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -98737,7 +98805,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265SessionParametersCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxVpsStdCount == rhs.maxVpsStdCount ) &&
@@ -98885,7 +98953,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeH265VclFrameInfoEXT *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -98908,7 +98976,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeH265VclFrameInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pReferenceFinalLists == rhs.pReferenceFinalLists ) &&
@@ -99129,7 +99197,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -99170,7 +99238,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -99322,7 +99390,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeRateControlLayerInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -99353,7 +99421,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeRateControlLayerInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( averageBitrate == rhs.averageBitrate ) &&
@@ -99503,7 +99571,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEncodeRateControlInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -99525,7 +99593,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEncodeRateControlInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -99619,7 +99687,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoEndCodingInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -99638,7 +99706,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoEndCodingInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags );
@@ -99709,7 +99777,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoFormatPropertiesKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -99726,7 +99794,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoFormatPropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( format == rhs.format );
@@ -99823,7 +99891,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoGetMemoryPropertiesKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -99843,7 +99911,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoGetMemoryPropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryBindIndex == rhs.memoryBindIndex ) &&
@@ -99935,7 +100003,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoQueueFamilyProperties2KHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -99954,7 +100022,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoQueueFamilyProperties2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( videoCodecOperations == rhs.videoCodecOperations );
@@ -100106,7 +100174,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoSessionCreateInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -100141,7 +100209,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoSessionCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( queueFamilyIndex == rhs.queueFamilyIndex ) &&
@@ -100253,7 +100321,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoSessionParametersCreateInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -100273,7 +100341,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoSessionParametersCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -100367,7 +100435,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkVideoSessionParametersUpdateInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -100384,7 +100452,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( VideoSessionParametersUpdateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( updateSequenceCount == rhs.updateSequenceCount );
@@ -100488,7 +100556,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkWaylandSurfaceCreateInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -100509,7 +100577,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( WaylandSurfaceCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( display == rhs.display ) &&
@@ -100764,7 +100832,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -100797,7 +100865,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( Win32KeyedMutexAcquireReleaseInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( acquireCount == rhs.acquireCount ) &&
@@ -101059,7 +101127,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoNV *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -101092,7 +101160,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( Win32KeyedMutexAcquireReleaseInfoNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( acquireCount == rhs.acquireCount ) &&
@@ -101206,7 +101274,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkWin32SurfaceCreateInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -101227,7 +101295,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  else
     bool operator==( Win32SurfaceCreateInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#    if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) &&
@@ -101444,7 +101512,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkWriteDescriptorSet *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -101479,7 +101547,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( WriteDescriptorSet const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( dstSet == rhs.dstSet ) &&
@@ -101610,7 +101678,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkWriteDescriptorSetAccelerationStructureKHR *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -101630,7 +101698,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( WriteDescriptorSetAccelerationStructureKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -101756,7 +101824,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkWriteDescriptorSetAccelerationStructureNV *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -101776,7 +101844,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( WriteDescriptorSetAccelerationStructureNV const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
@@ -101894,7 +101962,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkWriteDescriptorSetInlineUniformBlock *>( this );
     }
 
-#if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#if defined( VULKAN_HPP_USE_REFLECT )
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
@@ -101912,7 +101980,7 @@ namespace VULKAN_HPP_NAMESPACE
 #else
     bool operator==( WriteDescriptorSetInlineUniformBlock const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( dataSize == rhs.dataSize ) && ( pData == rhs.pData );
@@ -102017,7 +102085,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkXcbSurfaceCreateInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
@@ -102153,7 +102221,7 @@ namespace VULKAN_HPP_NAMESPACE
       return *reinterpret_cast<VkXlibSurfaceCreateInfoKHR *>( this );
     }
 
-#  if !defined( __GNUC__ ) || ( 70500 < GCC_VERSION )
+#  if defined( VULKAN_HPP_USE_REFLECT )
 #    if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #    else
