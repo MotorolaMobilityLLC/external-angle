@@ -91,6 +91,9 @@ EGLSurface CreatePlatformWindowSurfaceEXT(Thread *thread,
                          GetDisplayIfValid(display), EGL_NO_SURFACE);
     Surface *surface = nullptr;
 
+    // In X11, eglCreatePlatformWindowSurfaceEXT expects the native_window argument to be a pointer
+    // to a Window while the EGLNativeWindowType for X11 is its actual value.
+    // https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_platform_x11.txt
     void *actualNativeWindow = display->getImplementation()->isX11()
                                    ? *reinterpret_cast<void **>(native_window)
                                    : native_window;
@@ -897,6 +900,28 @@ EGLBoolean SetDamageRegionKHR(Thread *thread,
 
     thread->setSuccess();
     return EGL_TRUE;
+}
+
+EGLBoolean QueryDmaBufFormatsEXT(Thread *thread,
+                                 egl::Display *display,
+                                 EGLint max_formats,
+                                 EGLint *formats,
+                                 EGLint *num_formats)
+{
+    UNIMPLEMENTED();
+    return EGL_FALSE;
+}
+
+EGLBoolean QueryDmaBufModifiersEXT(Thread *thread,
+                                   egl::Display *display,
+                                   EGLint format,
+                                   EGLint max_modifiers,
+                                   EGLuint64KHR *modifiers,
+                                   EGLBoolean *external_only,
+                                   EGLint *num_modifiers)
+{
+    UNIMPLEMENTED();
+    return EGL_FALSE;
 }
 
 }  // namespace egl
