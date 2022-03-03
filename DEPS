@@ -496,7 +496,7 @@ deps = {
   },
 
   'third_party/SwiftShader': {
-    'url': '{swiftshader_git}/SwiftShader@383901609736409e9af99df975a199a10fddb768',
+    'url': '{swiftshader_git}/SwiftShader@7089ef18891d212b674a56c5077e19c99c6ff586',
     'condition': 'not build_with_chromium',
   },
 
@@ -516,7 +516,7 @@ deps = {
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@7f867484330bd8db12b72373bd771163f97f52dc',
+    'url': '{chromium_git}/vulkan-deps@a30aef1d7967e0610a668ea9b5fc7b727edeceaf',
     'condition': 'not build_with_chromium',
   },
 
