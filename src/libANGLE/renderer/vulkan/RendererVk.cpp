@@ -1139,7 +1139,8 @@ RendererVk::~RendererVk()
 bool RendererVk::hasSharedGarbage()
 {
     std::lock_guard<std::mutex> lock(mGarbageMutex);
-    return !mSharedGarbage.empty() || !mSuballocationGarbage.empty();
+    return !mSharedGarbage.empty() || !mPendingSubmissionGarbage.empty() ||
+           !mSuballocationGarbage.empty() || !mPendingSubmissionSuballocationGarbage.empty();
 }
 
 void RendererVk::releaseSharedResources(vk::ResourceUseList *resourceList)
@@ -1626,16 +1627,17 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
     VkMemoryPropertyFlags requiredFlags = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
     bool persistentlyMapped             = mFeatures.persistentlyMappedBuffers.enabled;
 
-    // Coherent staging buffer
+    // Uncached coherent staging buffer
     VkMemoryPropertyFlags preferredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
     ANGLE_VK_TRY(displayVk, mAllocator.findMemoryTypeIndexForBufferInfo(
                                 createInfo, requiredFlags, preferredFlags, persistentlyMapped,
                                 &mCoherentStagingBufferMemoryTypeIndex));
     ASSERT(mCoherentStagingBufferMemoryTypeIndex != kInvalidMemoryTypeIndex);
 
-    // Non-coherent staging buffer
+    // Cached (b/219974369) Non-coherent staging buffer
+    preferredFlags = VK_MEMORY_PROPERTY_HOST_CACHED_BIT;
     ANGLE_VK_TRY(displayVk, mAllocator.findMemoryTypeIndexForBufferInfo(
-                                createInfo, requiredFlags, 0, persistentlyMapped,
+                                createInfo, requiredFlags, preferredFlags, persistentlyMapped,
                                 &mNonCoherentStagingBufferMemoryTypeIndex));
     ASSERT(mNonCoherentStagingBufferMemoryTypeIndex != kInvalidMemoryTypeIndex);
 
@@ -1645,11 +1647,9 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
     ASSERT(gl::isPow2(mPhysicalDeviceProperties.limits.nonCoherentAtomSize));
     ASSERT(gl::isPow2(mPhysicalDeviceProperties.limits.optimalBufferCopyOffsetAlignment));
     mStagingBufferAlignment = std::max(
-        mStagingBufferAlignment,
-        static_cast<size_t>(mPhysicalDeviceProperties.limits.optimalBufferCopyOffsetAlignment));
-    mStagingBufferAlignment =
-        std::max(mStagingBufferAlignment,
-                 static_cast<size_t>(mPhysicalDeviceProperties.limits.nonCoherentAtomSize));
+        {mStagingBufferAlignment,
+         static_cast<size_t>(mPhysicalDeviceProperties.limits.optimalBufferCopyOffsetAlignment),
+         static_cast<size_t>(mPhysicalDeviceProperties.limits.nonCoherentAtomSize)});
     ASSERT(gl::isPow2(mStagingBufferAlignment));
 
     // Device local vertex conversion buffer
@@ -1665,10 +1665,12 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
     // staging buffer
     mHostVisibleVertexConversionBufferMemoryTypeIndex = mNonCoherentStagingBufferMemoryTypeIndex;
     // We may use compute shader to do conversion, so we must meet
-    // minStorageBufferOffsetAlignment requirement as well.
+    // minStorageBufferOffsetAlignment requirement as well. Also take into account non-coherent
+    // alignment requirements.
     mVertexConversionBufferAlignment = std::max(
-        vk::kVertexBufferAlignment,
-        static_cast<size_t>(mPhysicalDeviceProperties.limits.minStorageBufferOffsetAlignment));
+        {vk::kVertexBufferAlignment,
+         static_cast<size_t>(mPhysicalDeviceProperties.limits.minStorageBufferOffsetAlignment),
+         static_cast<size_t>(mPhysicalDeviceProperties.limits.nonCoherentAtomSize)});
     ASSERT(gl::isPow2(mVertexConversionBufferAlignment));
 
     {
@@ -3557,35 +3559,25 @@ angle::Result RendererVk::cleanupGarbage(Serial lastCompletedQueueSerial)
     std::lock_guard<std::mutex> lock(mGarbageMutex);
 
     // Clean up general garbages
-    vk::SharedGarbageList remainingGarbage;
     while (!mSharedGarbage.empty())
     {
         vk::SharedGarbage &garbage = mSharedGarbage.front();
         if (!garbage.destroyIfComplete(this, lastCompletedQueueSerial))
         {
-            remainingGarbage.push(std::move(garbage));
+            break;
         }
         mSharedGarbage.pop();
     }
-    if (!remainingGarbage.empty())
-    {
-        mSharedGarbage = std::move(remainingGarbage);
-    }
 
     // Clean up suballocation garbages
-    vk::SharedBufferSuballocationGarbageList remainingSuballocationGarbage;
     while (!mSuballocationGarbage.empty())
     {
         vk::SharedBufferSuballocationGarbage &garbage = mSuballocationGarbage.front();
         if (!garbage.destroyIfComplete(this, lastCompletedQueueSerial))
         {
-            remainingSuballocationGarbage.push(std::move(garbage));
+            break;
         }
         mSuballocationGarbage.pop();
-    }
-    if (!remainingSuballocationGarbage.empty())
-    {
-        mSuballocationGarbage = std::move(remainingSuballocationGarbage);
     }
 
     return angle::Result::Continue;
@@ -3594,6 +3586,51 @@ angle::Result RendererVk::cleanupGarbage(Serial lastCompletedQueueSerial)
 void RendererVk::cleanupCompletedCommandsGarbage()
 {
     (void)cleanupGarbage(getLastCompletedQueueSerial());
+}
+
+void RendererVk::cleanupPendingSubmissionGarbage()
+{
+    std::lock_guard<std::mutex> lock(mGarbageMutex);
+
+    // Check if pending garbage is still pending. If not, move them to the garbage list.
+    vk::SharedGarbageList pendingGarbage;
+    while (!mPendingSubmissionGarbage.empty())
+    {
+        vk::SharedGarbage &garbage = mPendingSubmissionGarbage.front();
+        if (!garbage.usedInRecordedCommands())
+        {
+            mSharedGarbage.push(std::move(garbage));
+        }
+        else
+        {
+            pendingGarbage.push(std::move(garbage));
+        }
+        mPendingSubmissionGarbage.pop();
+    }
+    if (!pendingGarbage.empty())
+    {
+        mPendingSubmissionGarbage = std::move(pendingGarbage);
+    }
+
+    vk::SharedBufferSuballocationGarbageList pendingSuballocationGarbage;
+    while (!mPendingSubmissionSuballocationGarbage.empty())
+    {
+        vk::SharedBufferSuballocationGarbage &suballocationGarbage =
+            mPendingSubmissionSuballocationGarbage.front();
+        if (!suballocationGarbage.usedInRecordedCommands())
+        {
+            mSuballocationGarbage.push(std::move(suballocationGarbage));
+        }
+        else
+        {
+            pendingSuballocationGarbage.push(std::move(suballocationGarbage));
+        }
+        mPendingSubmissionSuballocationGarbage.pop();
+    }
+    if (!pendingSuballocationGarbage.empty())
+    {
+        mPendingSubmissionSuballocationGarbage = std::move(pendingSuballocationGarbage);
+    }
 }
 
 void RendererVk::onNewValidationMessage(const std::string &message)
@@ -3731,7 +3768,6 @@ angle::Result RendererVk::submitFrame(vk::Context *context,
                                       std::vector<VkSemaphore> &&waitSemaphores,
                                       std::vector<VkPipelineStageFlags> &&waitSemaphoreStageMasks,
                                       const vk::Semaphore *signalSemaphore,
-                                      std::vector<vk::ResourceUseList> &&resourceUseLists,
                                       vk::GarbageList &&currentGarbage,
                                       vk::SecondaryCommandPools *commandPools,
                                       Serial *submitSerialOut)
@@ -3764,11 +3800,6 @@ angle::Result RendererVk::submitFrame(vk::Context *context,
 
     waitSemaphores.clear();
     waitSemaphoreStageMasks.clear();
-    for (vk::ResourceUseList &it : resourceUseLists)
-    {
-        it.releaseResourceUsesAndUpdateSerials(*submitSerialOut);
-    }
-    resourceUseLists.clear();
 
     return angle::Result::Continue;
 }
