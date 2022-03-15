@@ -274,7 +274,8 @@ class ZipReader {
   base::WeakPtrFactory<ZipReader> weak_ptr_factory_{this};
 };
 
-// A writer delegate that writes to a given File.
+// A writer delegate that writes to a given File. This file is expected to be
+// initially empty.
 class FileWriterDelegate : public WriterDelegate {
  public:
   // Constructs a FileWriterDelegate that manipulates |file|. The delegate will
@@ -288,12 +289,11 @@ class FileWriterDelegate : public WriterDelegate {
   FileWriterDelegate(const FileWriterDelegate&) = delete;
   FileWriterDelegate& operator=(const FileWriterDelegate&) = delete;
 
-  // Truncates the file to the number of bytes written.
   ~FileWriterDelegate() override;
 
   // WriterDelegate methods:
 
-  // Seeks to the beginning of the file, returning false if the seek fails.
+  // Returns true if the file handle passed to the constructor is valid.
   bool PrepareOutput() override;
 
   // Writes |num_bytes| bytes of |data| to the file, returning false on error or
@@ -307,10 +307,10 @@ class FileWriterDelegate : public WriterDelegate {
   // executable.
   void SetPosixFilePermissions(int mode) override;
 
-  // Return the actual size of the file.
+  // Gets the number of bytes written into the file.
   int64_t file_length() { return file_length_; }
 
- private:
+ protected:
   // The delegate can optionally own the file it modifies, in which case
   // owned_file_ is set and file_ is an alias for owned_file_.
   base::File owned_file_;
@@ -322,9 +322,9 @@ class FileWriterDelegate : public WriterDelegate {
 };
 
 // A writer delegate that writes a file at a given path.
-class FilePathWriterDelegate : public WriterDelegate {
+class FilePathWriterDelegate : public FileWriterDelegate {
  public:
-  explicit FilePathWriterDelegate(const base::FilePath& output_file_path);
+  explicit FilePathWriterDelegate(base::FilePath output_file_path);
 
   FilePathWriterDelegate(const FilePathWriterDelegate&) = delete;
   FilePathWriterDelegate& operator=(const FilePathWriterDelegate&) = delete;
@@ -336,20 +336,8 @@ class FilePathWriterDelegate : public WriterDelegate {
   // Creates the output file and any necessary intermediate directories.
   bool PrepareOutput() override;
 
-  // Writes |num_bytes| bytes of |data| to the file, returning false if not all
-  // bytes could be written.
-  bool WriteBytes(const char* data, int num_bytes) override;
-
-  // Sets the last-modified time of the data.
-  void SetTimeModified(const base::Time& time) override;
-
-  // On POSIX systems, sets the file to be executable if the source file was
-  // executable.
-  void SetPosixFilePermissions(int mode) override;
-
  private:
-  base::FilePath output_file_path_;
-  base::File file_;
+  const base::FilePath output_file_path_;
 };
 
 }  // namespace zip
