@@ -18,62 +18,12 @@
 
 #include "test_utils/gl_raii.h"
 #include "util/random_utils.h"
+#include "util/shader_utils.h"
 
 using namespace angle;
 
 namespace
 {
-constexpr char kExtensionName[] = "GL_AMD_performance_monitor";
-
-using CounterNameToIndexMap = std::map<std::string, GLuint>;
-
-CounterNameToIndexMap BuildCounterNameToIndexMap()
-{
-    GLint numCounters = 0;
-    glGetPerfMonitorCountersAMD(0, &numCounters, nullptr, 0, nullptr);
-    EXPECT_GL_NO_ERROR();
-
-    std::vector<GLuint> counterIndexes(numCounters, 0);
-    glGetPerfMonitorCountersAMD(0, nullptr, nullptr, numCounters, counterIndexes.data());
-    EXPECT_GL_NO_ERROR();
-
-    CounterNameToIndexMap indexMap;
-
-    for (GLuint counterIndex : counterIndexes)
-    {
-        static constexpr size_t kBufSize = 1000;
-        char buffer[kBufSize]            = {};
-        glGetPerfMonitorCounterStringAMD(0, counterIndex, kBufSize, nullptr, buffer);
-        EXPECT_GL_NO_ERROR();
-
-        indexMap[buffer] = counterIndex;
-    }
-
-    return indexMap;
-}
-
-void UpdatePerfCounter(const CounterNameToIndexMap &counterIndexMap,
-                       GLuint *counterOut,
-                       const char *name,
-                       std::vector<angle::PerfMonitorTriplet> &triplets)
-{
-    auto iter = counterIndexMap.find(name);
-    ASSERT(iter != counterIndexMap.end());
-    GLuint counterIndex = iter->second;
-
-    for (const angle::PerfMonitorTriplet &triplet : triplets)
-    {
-        ASSERT(triplet.group == 0);
-        if (triplet.counter == counterIndex)
-        {
-            *counterOut = triplet.value;
-            return;
-        }
-    }
-
-    UNREACHABLE();
-}
-
 class VulkanPerformanceCounterTest : public ANGLETest
 {
   protected:
@@ -213,33 +163,12 @@ class VulkanPerformanceCounterTest : public ANGLETest
 
     angle::VulkanPerfCounters getPerfCounters()
     {
-        GLuint resultSize = 0;
-        glGetPerfMonitorCounterDataAMD(0, GL_PERFMON_RESULT_SIZE_AMD, sizeof(GLuint), &resultSize,
-                                       nullptr);
-        EXPECT_GL_NO_ERROR();
-        EXPECT_GT(resultSize, 0u);
-
-        std::vector<angle::PerfMonitorTriplet> perfResults(resultSize /
-                                                           sizeof(angle::PerfMonitorTriplet));
-        glGetPerfMonitorCounterDataAMD(0, GL_PERFMON_RESULT_AMD,
-                                       perfResults.size() * sizeof(perfResults[0]),
-                                       &perfResults.data()->group, nullptr);
-
         if (mIndexMap.empty())
         {
             mIndexMap = BuildCounterNameToIndexMap();
         }
 
-        angle::VulkanPerfCounters counters;
-
-#define ANGLE_UNPACK_PERF_COUNTER(COUNTER) \
-    UpdatePerfCounter(mIndexMap, &counters.COUNTER, #COUNTER, perfResults);
-
-        ANGLE_VK_PERF_COUNTERS_X(ANGLE_UNPACK_PERF_COUNTER)
-
-#undef ANGLE_UNPACK_PERF_COUNTER
-
-        return counters;
+        return GetPerfCounters(mIndexMap);
     }
 
     CounterNameToIndexMap mIndexMap;
@@ -261,7 +190,7 @@ class VulkanPerformanceCounterTest_MSAA : public VulkanPerformanceCounterTest
 // Tests that texture updates to unused textures don't break the RP.
 TEST_P(VulkanPerformanceCounterTest, NewTextureDoesNotBreakRenderPass)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     GLColor kInitialData[4] = {GLColor::red, GLColor::blue, GLColor::green, GLColor::yellow};
 
@@ -308,10 +237,76 @@ TEST_P(VulkanPerformanceCounterTest, NewTextureDoesNotBreakRenderPass)
     EXPECT_EQ(expectedRenderPassCount, actualRenderPassCount);
 }
 
+// Tests that submitting the outside command buffer due to texture upload size does not break the
+// current render pass.
+TEST_P(VulkanPerformanceCounterTest, SubmittingOutsideCommandBufferDoesNotBreakRenderPass)
+{
+    // http://anglebug.com/6354
+
+    size_t kMaxBufferToImageCopySize  = 1 << 28;
+    uint32_t kNumSubmits              = 2;
+    uint32_t expectedRenderPassCount  = getPerfCounters().renderPasses + 1;
+    uint32_t expectedSubmitFrameCount = getPerfCounters().submittedFrames + kNumSubmits;
+
+    // Step 1: Set up a simple 2D texture.
+    GLTexture texture;
+    GLsizei texDim         = 256;
+    uint32_t pixelSizeRGBA = 4;
+    uint32_t textureSize   = texDim * texDim * pixelSizeRGBA;
+    std::vector<GLColor> kInitialData(texDim * texDim, GLColor::green);
+
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texDim, texDim, 0, GL_RGBA, GL_UNSIGNED_BYTE,
+                 kInitialData.data());
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    auto quadVerts = GetQuadVertices();
+
+    GLBuffer vertexBuffer;
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, quadVerts.size() * sizeof(quadVerts[0]), quadVerts.data(),
+                 GL_STATIC_DRAW);
+
+    ANGLE_GL_PROGRAM(program, essl1_shaders::vs::Texture2D(), essl1_shaders::fs::Texture2D());
+    glUseProgram(program);
+
+    GLint posLoc = glGetAttribLocation(program, essl1_shaders::PositionAttrib());
+    ASSERT_NE(-1, posLoc);
+
+    glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glEnableVertexAttribArray(posLoc);
+    ASSERT_GL_NO_ERROR();
+
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    ASSERT_GL_NO_ERROR();
+
+    // Step 2: Load a new 2D Texture multiple times with the same Program and Framebuffer. The total
+    // size of the loaded textures must exceed the threshold to submit the outside command buffer.
+    auto maxLoadCount =
+        static_cast<size_t>((kMaxBufferToImageCopySize / textureSize) * kNumSubmits + 1);
+    for (size_t loadCount = 0; loadCount < maxLoadCount; loadCount++)
+    {
+        GLTexture newTexture;
+        glBindTexture(GL_TEXTURE_2D, newTexture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texDim, texDim, 0, GL_RGBA, GL_UNSIGNED_BYTE,
+                     kInitialData.data());
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        ASSERT_GL_NO_ERROR();
+    }
+
+    // Verify render pass and submitted frame counts.
+    EXPECT_EQ(getPerfCounters().renderPasses, expectedRenderPassCount);
+    EXPECT_EQ(getPerfCounters().submittedFrames, expectedSubmitFrameCount);
+}
+
 // Tests that RGB texture should not break renderpass.
 TEST_P(VulkanPerformanceCounterTest, SampleFromRGBTextureDoesNotBreakRenderPass)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     ANGLE_GL_PROGRAM(program, essl1_shaders::vs::Texture2D(), essl1_shaders::fs::Texture2D());
     glUseProgram(program);
@@ -354,7 +349,7 @@ TEST_P(VulkanPerformanceCounterTest, SampleFromRGBTextureDoesNotBreakRenderPass)
 // Tests that RGB texture should not break renderpass.
 TEST_P(VulkanPerformanceCounterTest, RenderToRGBTextureDoesNotBreakRenderPass)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     ANGLE_GL_PROGRAM(program, essl1_shaders::vs::Passthrough(), essl1_shaders::fs::UniformColor());
     glUseProgram(program);
@@ -393,7 +388,7 @@ TEST_P(VulkanPerformanceCounterTest, RenderToRGBTextureDoesNotBreakRenderPass)
 // Tests that changing a Texture's max level hits the descriptor set cache.
 TEST_P(VulkanPerformanceCounterTest, ChangingMaxLevelHitsDescriptorCache)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     GLColor kInitialData[4] = {GLColor::red, GLColor::blue, GLColor::green, GLColor::yellow};
 
@@ -445,7 +440,7 @@ TEST_P(VulkanPerformanceCounterTest, ChangingMaxLevelHitsDescriptorCache)
 // Tests that two glCopyBufferSubData commands can share a barrier.
 TEST_P(VulkanPerformanceCounterTest, IndependentBufferCopiesShareSingleBarrier)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     constexpr GLint srcDataA[] = {1, 2, 3, 4};
     constexpr GLint srcDataB[] = {5, 6, 7, 8};
@@ -491,7 +486,7 @@ TEST_P(VulkanPerformanceCounterTest, IndependentBufferCopiesShareSingleBarrier)
 // used
 TEST_P(VulkanPerformanceCounterTest_ES31, MultisampleResolveWithBlit)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     constexpr int kSize = 16;
     glViewport(0, 0, kSize, kSize);
@@ -544,7 +539,7 @@ TEST_P(VulkanPerformanceCounterTest_ES31, MultisampleResolveWithBlit)
 // Ensures a read-only depth-stencil feedback loop works in a single RenderPass.
 TEST_P(VulkanPerformanceCounterTest, ReadOnlyDepthStencilFeedbackLoopUsesSingleRenderPass)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     constexpr GLsizei kSize = 4;
 
@@ -634,7 +629,7 @@ TEST_P(VulkanPerformanceCounterTest, ReadOnlyDepthStencilFeedbackLoopUsesSingleR
 // - Scenario: invalidate, disable, draw
 TEST_P(VulkanPerformanceCounterTest, InvalidateDisableDraw)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     angle::VulkanPerfCounters expected;
 
@@ -682,7 +677,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDisableDraw)
 // - Scenario: disable, invalidate, draw
 TEST_P(VulkanPerformanceCounterTest, DisableInvalidateDraw)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     angle::VulkanPerfCounters expected;
 
@@ -730,7 +725,7 @@ TEST_P(VulkanPerformanceCounterTest, DisableInvalidateDraw)
 // - Scenario: disable, draw, invalidate, enable
 TEST_P(VulkanPerformanceCounterTest, DisableDrawInvalidateEnable)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     angle::VulkanPerfCounters expected;
 
@@ -789,7 +784,7 @@ TEST_P(VulkanPerformanceCounterTest, DisableDrawInvalidateEnable)
 // - Scenario: invalidate
 TEST_P(VulkanPerformanceCounterTest, Invalidate)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     angle::VulkanPerfCounters expected;
 
@@ -828,7 +823,7 @@ TEST_P(VulkanPerformanceCounterTest, Invalidate)
 // whole framebuffer.
 TEST_P(VulkanPerformanceCounterTest, InvalidateSub)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     angle::VulkanPerfCounters expected;
 
@@ -869,7 +864,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateSub)
 // - Scenario: invalidate, draw
 TEST_P(VulkanPerformanceCounterTest, InvalidateDraw)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     angle::VulkanPerfCounters expected;
 
@@ -913,7 +908,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDraw)
 // - Scenario: invalidate, draw, disable
 TEST_P(VulkanPerformanceCounterTest, InvalidateDrawDisable)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     // http://anglebug.com/6857
     ANGLE_SKIP_TEST_IF(IsLinux() && IsAMD() && IsVulkan());
@@ -967,7 +962,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDrawDisable)
 // - Scenario: invalidate, disable, draw, enable
 TEST_P(VulkanPerformanceCounterTest, InvalidateDisableDrawEnable)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+0), stencil(Clears+0, Load+0, Stores+0)
@@ -1020,7 +1015,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDisableDrawEnable)
 // - Scenario: invalidate, disable, draw, enable, draw
 TEST_P(VulkanPerformanceCounterTest, InvalidateDisableDrawEnableDraw)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+1), stencil(Clears+0, Load+0, Stores+0)
@@ -1075,7 +1070,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDisableDrawEnableDraw)
 // - Scenario: invalidate, draw, disable, enable
 TEST_P(VulkanPerformanceCounterTest, InvalidateDrawDisableEnable)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+1), stencil(Clears+0, Load+0, Stores+0)
@@ -1131,7 +1126,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDrawDisableEnable)
 // - Scenario: invalidate, draw, disable, enable, invalidate
 TEST_P(VulkanPerformanceCounterTest, InvalidateDrawDisableEnableInvalidate)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+0), stencil(Clears+0, Load+0, Stores+0)
@@ -1189,7 +1184,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDrawDisableEnableInvalidate)
 // - Scenario: invalidate, draw, disable, enable, invalidate, draw
 TEST_P(VulkanPerformanceCounterTest, InvalidateDrawDisableEnableInvalidateDraw)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+1), stencil(Clears+0, Load+0, Stores+0)
@@ -1251,7 +1246,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDrawDisableEnableInvalidateDraw)
 // - Scenario: invalidate, disable, enable, draw
 TEST_P(VulkanPerformanceCounterTest, InvalidateDisableEnableDraw)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+1), stencil(Clears+0, Load+0, Stores+0)
@@ -1303,7 +1298,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDisableEnableDraw)
 // Tests that an in renderpass clear after invalidate keeps content stored.
 TEST_P(VulkanPerformanceCounterTest, InvalidateAndClear)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+1), stencil(Clears+0, Load+0, Stores+0)
@@ -1353,7 +1348,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateAndClear)
 // content stored.
 TEST_P(VulkanPerformanceCounterTest, InvalidateAndMaskedClear)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+1), stencil(Clears+1, Load+0, Stores+1)
@@ -1414,7 +1409,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateAndMaskedClear)
 // - Scenario: invalidate, detach D/S texture and modify it, attach D/S texture, draw with blend
 TEST_P(VulkanPerformanceCounterTest, InvalidateDetachModifyTexAttachDrawWithBlend)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+1), stencil(Clears+0, Load+0, Stores+1)
@@ -1504,7 +1499,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDetachModifyTexAttachDrawWithBlen
 // - Scenario: invalidate
 TEST_P(VulkanPerformanceCounterTest, InvalidateDrawAndDeleteRenderbuffer)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+1), stencil(Clears+0, Load+0, Stores+0)
@@ -1549,7 +1544,7 @@ TEST_P(VulkanPerformanceCounterTest, InvalidateDrawAndDeleteRenderbuffer)
 // Tests that even if the app clears depth, it should be invalidated if there is no read.
 TEST_P(VulkanPerformanceCounterTest, SwapShouldInvalidateDepthAfterClear)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     ANGLE_GL_PROGRAM(redProgram, essl1_shaders::vs::Simple(), essl1_shaders::fs::Red());
 
@@ -1574,7 +1569,7 @@ TEST_P(VulkanPerformanceCounterTest, SwapShouldInvalidateDepthAfterClear)
 // Tests that masked color clears don't break the RP.
 TEST_P(VulkanPerformanceCounterTest, MaskedColorClearDoesNotBreakRenderPass)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     GLTexture texture;
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -1614,7 +1609,7 @@ TEST_P(VulkanPerformanceCounterTest, MaskedColorClearDoesNotBreakRenderPass)
 // Tests that masked color/depth/stencil clears don't break the RP.
 TEST_P(VulkanPerformanceCounterTest, MaskedClearDoesNotBreakRenderPass)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     constexpr GLsizei kSize = 64;
 
@@ -1695,7 +1690,7 @@ TEST_P(VulkanPerformanceCounterTest, MaskedClearDoesNotBreakRenderPass)
 // Tests that clear followed by scissored draw uses loadOp to clear.
 TEST_P(VulkanPerformanceCounterTest, ClearThenScissoredDraw)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     uint32_t expectedRenderPassCount = getPerfCounters().renderPasses + 1;
     uint32_t expectedDepthClears     = getPerfCounters().depthClears + 1;
@@ -1768,7 +1763,7 @@ TEST_P(VulkanPerformanceCounterTest, ClearThenScissoredDraw)
 // Tests that scissored clears don't break the RP.
 TEST_P(VulkanPerformanceCounterTest, ScissoredClearDoesNotBreakRenderPass)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     constexpr GLsizei kSize = 64;
 
@@ -1866,7 +1861,7 @@ TEST_P(VulkanPerformanceCounterTest, ScissoredClearDoesNotBreakRenderPass)
 // Tests that draw buffer change with all color channel mask off should not break renderpass
 TEST_P(VulkanPerformanceCounterTest, DrawbufferChangeWithAllColorMaskDisabled)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     ANGLE_GL_PROGRAM(program, essl1_shaders::vs::Passthrough(), essl1_shaders::fs::UniformColor());
     glUseProgram(program);
@@ -1925,7 +1920,7 @@ TEST_P(VulkanPerformanceCounterTest, DrawbufferChangeWithAllColorMaskDisabled)
 // Tests the optimization that a glFlush call issued inside a renderpass will be skipped.
 TEST_P(VulkanPerformanceCounterTest, InRenderpassFlushShouldNotBreakRenderpass)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     uint32_t expectedRenderPassCount = getPerfCounters().renderPasses + 1;
 
     GLTexture texture;
@@ -1952,7 +1947,7 @@ TEST_P(VulkanPerformanceCounterTest, InRenderpassFlushShouldNotBreakRenderpass)
 // Tests that depth/stencil texture clear/load works correctly.
 TEST_P(VulkanPerformanceCounterTest, DepthStencilTextureClearAndLoad)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     // TODO: http://anglebug.com/5329 Flaky test
     ANGLE_SKIP_TEST_IF(IsWindows() && IsAMD() && IsVulkan());
@@ -2065,7 +2060,7 @@ TEST_P(VulkanPerformanceCounterTest, DepthStencilTextureClearAndLoad)
 // Tests that multisampled-render-to-texture depth/stencil textures don't ever load data.
 TEST_P(VulkanPerformanceCounterTest, RenderToTextureDepthStencilTextureShouldNotLoad)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     // http://anglebug.com/5083
     ANGLE_SKIP_TEST_IF(IsWindows() && IsAMD() && IsVulkan());
@@ -2193,7 +2188,7 @@ TEST_P(VulkanPerformanceCounterTest, RenderToTextureDepthStencilRenderbufferShou
     ANGLE_SKIP_TEST_IF(IsWindows7() && IsNVIDIA() && IsVulkan());
 
     ANGLE_SKIP_TEST_IF(!EnsureGLExtensionEnabled("GL_EXT_multisampled_render_to_texture"));
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     angle::VulkanPerfCounters expected;
 
@@ -2316,7 +2311,7 @@ TEST_P(VulkanPerformanceCounterTest, RenderToTextureInvalidate)
 
     ANGLE_SKIP_TEST_IF(!EnsureGLExtensionEnabled("GL_EXT_multisampled_render_to_texture"));
 
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     angle::VulkanPerfCounters expected;
 
@@ -2442,7 +2437,7 @@ TEST_P(VulkanPerformanceCounterTest, RenderToTextureUninitializedAndUnusedDepthS
 
     ANGLE_SKIP_TEST_IF(!EnsureGLExtensionEnabled("GL_EXT_multisampled_render_to_texture"));
 
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, no depth/stencil clear, load or store.
@@ -2508,7 +2503,7 @@ TEST_P(VulkanPerformanceCounterTest, RenderToTextureUninitializedAndUnusedDepthS
 // Ensures we use read-only depth layout when there is no write
 TEST_P(VulkanPerformanceCounterTest, ReadOnlyDepthBufferLayout)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     constexpr GLsizei kSize = 64;
 
@@ -2577,7 +2572,7 @@ TEST_P(VulkanPerformanceCounterTest, ReadOnlyDepthBufferLayout)
 // invalidate)
 TEST_P(VulkanPerformanceCounterTest, RenderPassAfterRenderPassWithoutDepthStencilWrite)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+0, Loads+0, Stores+0), stencil(Clears+0, Load+0, Stores+0)
@@ -2636,7 +2631,7 @@ TEST_P(VulkanPerformanceCounterTest, RenderPassAfterRenderPassWithoutDepthStenci
 // etc) don't break the render pass.
 TEST_P(VulkanPerformanceCounterTest, ClearAfterClearDoesNotBreakRenderPass)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     uint32_t expectedRenderPassCount = getPerfCounters().renderPasses + 1;
 
     constexpr GLsizei kSize = 6;
@@ -2780,7 +2775,7 @@ TEST_P(VulkanPerformanceCounterTest, ClearAfterClearDoesNotBreakRenderPass)
 // Ensures that changing the scissor size doesn't break the render pass.
 TEST_P(VulkanPerformanceCounterTest, ScissorDoesNotBreakRenderPass)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     constexpr GLsizei kSize = 16;
 
@@ -3026,7 +3021,7 @@ TEST_P(VulkanPerformanceCounterTest, ScissorDoesNotBreakRenderPass)
 // Tests that changing UBO bindings does not allocate new descriptor sets.
 TEST_P(VulkanPerformanceCounterTest, ChangingUBOsHitsDescriptorSetCache)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     // Set up two UBOs, one filled with "1" and the second with "2".
     constexpr GLsizei kCount = 64;
@@ -3155,7 +3150,7 @@ void main()
 // waiting for the GPU access to complete before returning a pointer to the buffer.
 TEST_P(VulkanPerformanceCounterTest, MappingGpuReadOnlyBufferGhostsBuffer)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     // 1. Create a buffer, map it, fill it with red
     // 2. Draw with buffer (GPU read-only)
@@ -3252,7 +3247,7 @@ void main()
 // Verifies that BufferSubData calls don't trigger state updates for non-translated formats.
 TEST_P(VulkanPerformanceCounterTest, BufferSubDataShouldNotTriggerSyncState)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     ANGLE_GL_PROGRAM(testProgram, essl1_shaders::vs::Simple(), essl1_shaders::fs::Green());
     glUseProgram(testProgram);
@@ -3294,7 +3289,7 @@ TEST_P(VulkanPerformanceCounterTest, BufferSubDataShouldNotTriggerSyncState)
 // Verifies that rendering to backbuffer discards depth/stencil.
 TEST_P(VulkanPerformanceCounterTest, SwapShouldInvalidateDepthStencil)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+0), stencil(Clears+1, Load+0, Stores+0)
@@ -3323,7 +3318,7 @@ TEST_P(VulkanPerformanceCounterTest, SwapShouldInvalidateDepthStencil)
 // Verifies that rendering to MSAA backbuffer discards depth/stencil.
 TEST_P(VulkanPerformanceCounterTest_MSAA, SwapShouldInvalidateDepthStencil)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
     angle::VulkanPerfCounters expected;
 
     // Expect rpCount+1, depth(Clears+1, Loads+0, Stores+0), stencil(Clears+1, Load+0, Stores+0)
@@ -3352,7 +3347,7 @@ TEST_P(VulkanPerformanceCounterTest_MSAA, SwapShouldInvalidateDepthStencil)
 // Tests that uniform updates eventually stop updating descriptor sets.
 TEST_P(VulkanPerformanceCounterTest, UniformUpdatesHitDescriptorSetCache)
 {
-    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
 
     ANGLE_GL_PROGRAM(testProgram, essl1_shaders::vs::Simple(), essl1_shaders::fs::UniformColor());
     glUseProgram(testProgram);
