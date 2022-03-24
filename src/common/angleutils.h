@@ -90,6 +90,8 @@ struct SaveFileHelper
 };
 
 // AMD_performance_monitor helpers.
+constexpr char kPerfMonitorExtensionName[] = "GL_AMD_performance_monitor";
+
 struct PerfMonitorCounter
 {
     PerfMonitorCounter();
@@ -131,6 +133,7 @@ struct PerfMonitorTriplet
 #define ANGLE_VK_PERF_COUNTERS_X(FN)              \
     FN(primaryBuffers)                            \
     FN(renderPasses)                              \
+    FN(submittedFrames)                           \
     FN(writeDescriptorSets)                       \
     FN(flushedOutsideRenderPassCommandBuffers)    \
     FN(resolveImageCommands)                      \
@@ -161,7 +164,8 @@ struct PerfMonitorTriplet
     FN(shaderBuffersDescriptorSetCacheTotalSize)  \
     FN(buffersGhosted)                            \
     FN(vertexArraySyncStateCalls)                 \
-    FN(allocateNewBufferBlockCalls)
+    FN(allocateNewBufferBlockCalls)               \
+    FN(dynamicBufferAllocations)
 
 #define ANGLE_DECLARE_PERF_COUNTER(COUNTER) uint32_t COUNTER;
 

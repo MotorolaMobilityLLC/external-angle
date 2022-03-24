@@ -37,6 +37,10 @@ class ShareGroupVk;
 static constexpr uint32_t kMaxGpuEventNameLen = 32;
 using EventName                               = std::array<char, kMaxGpuEventNameLen>;
 
+// If the total size of copyBufferToImage commands in the outside command buffer reaches the
+// threshold below, the latter is flushed.
+static constexpr VkDeviceSize kMaxBufferToImageCopySize = 1 << 28;
+
 using ContextVkDescriptorSetList = angle::PackedEnumMap<PipelineType, uint32_t>;
 
 struct ContextVkPerfCounters
@@ -58,6 +62,40 @@ enum class QueueSubmitType
 {
     PerformQueueSubmit,
     SkipQueueSubmit,
+};
+
+class UpdateDescriptorSetsBuilder final : angle::NonCopyable
+{
+  public:
+    UpdateDescriptorSetsBuilder();
+    ~UpdateDescriptorSetsBuilder();
+
+    VkDescriptorBufferInfo *allocDescriptorBufferInfos(size_t count);
+    VkDescriptorImageInfo *allocDescriptorImageInfos(size_t count);
+    VkWriteDescriptorSet *allocWriteDescriptorSets(size_t count);
+
+    VkDescriptorBufferInfo &allocDescriptorBufferInfo() { return *allocDescriptorBufferInfos(1); }
+    VkDescriptorImageInfo &allocDescriptorImageInfo() { return *allocDescriptorImageInfos(1); }
+    VkWriteDescriptorSet &allocWriteDescriptorSet() { return *allocWriteDescriptorSets(1); }
+
+    // Returns the number of written descriptor sets.
+    uint32_t flushDescriptorSetUpdates(VkDevice device);
+
+  private:
+    template <typename T, const T *VkWriteDescriptorSet::*pInfo>
+    T *allocDescriptorInfos(std::vector<T> *descriptorVector, size_t count);
+    template <typename T, const T *VkWriteDescriptorSet::*pInfo>
+    void growDescriptorCapacity(std::vector<T> *descriptorVector, size_t newSize);
+
+    std::vector<VkDescriptorBufferInfo> mDescriptorBufferInfos;
+    std::vector<VkDescriptorImageInfo> mDescriptorImageInfos;
+    std::vector<VkWriteDescriptorSet> mWriteDescriptorSets;
+};
+
+enum class SubmitFrameType
+{
+    OutsideAndRPCommands,
+    OutsideRPCommandsOnly,
 };
 
 class ContextVk : public ContextImpl, public vk::Context, public MultisampleTextureInitializer
@@ -345,6 +383,9 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     // EXT_shader_framebuffer_fetch_non_coherent
     void framebufferFetchBarrier() override;
 
+    // KHR_blend_equation_advanced
+    void blendBarrier() override;
+
     // GL_ANGLE_vulkan_image
     angle::Result acquireTextures(const gl::Context *context,
                                   const gl::TextureBarrierVector &textureBarriers) override;
@@ -603,6 +644,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     angle::Result startNextSubpass();
     angle::Result flushCommandsAndEndRenderPass(RenderPassClosureReason reason);
     angle::Result flushCommandsAndEndRenderPassWithoutQueueSubmit(RenderPassClosureReason reason);
+    angle::Result submitOutsideRenderPassCommandsImpl();
 
     angle::Result syncExternalMemory();
 
@@ -638,22 +680,16 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     void updateOverlayOnPresent();
     void addOverlayUsedBuffersCount(vk::CommandBufferHelperCommon *commandBuffer);
 
-    // DescriptorSet writes
-    VkDescriptorBufferInfo *allocDescriptorBufferInfos(size_t count);
-    VkDescriptorImageInfo *allocDescriptorImageInfos(size_t count);
-    VkWriteDescriptorSet *allocWriteDescriptorSets(size_t count);
-
-    VkDescriptorBufferInfo &allocDescriptorBufferInfo() { return *allocDescriptorBufferInfos(1); }
-    VkDescriptorImageInfo &allocDescriptorImageInfo() { return *allocDescriptorImageInfos(1); }
-    VkWriteDescriptorSet &allocWriteDescriptorSet() { return *allocWriteDescriptorSets(1); }
-
     // For testing only.
     void setDefaultUniformBlocksMinSizeForTesting(size_t minSize);
 
     vk::BufferHelper &getEmptyBuffer() { return mEmptyBuffer; }
 
-    const angle::VulkanPerfCounters &getPerfCounters() const { return mPerfCounters; }
-    angle::VulkanPerfCounters &getPerfCounters() { return mPerfCounters; }
+    // Keeping track of the buffer copy size. Used to determine when to submit the outside command
+    // buffer.
+    angle::Result onCopyUpdate(VkDeviceSize size);
+    void resetTotalBufferToImageCopySize() { mTotalBufferToImageCopySize = 0; }
+    VkDeviceSize getTotalBufferToImageCopySize() const { return mTotalBufferToImageCopySize; }
 
     // Implementation of MultisampleTextureInitializer
     angle::Result initializeMultisampleTextureToBlack(const gl::Context *context,
@@ -723,6 +759,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
         DIRTY_BIT_TRANSFORM_FEEDBACK_RESUME,
         DIRTY_BIT_DESCRIPTOR_SETS,
         DIRTY_BIT_FRAMEBUFFER_FETCH_BARRIER,
+        DIRTY_BIT_BLEND_BARRIER,
         // Dynamic viewport/scissor
         DIRTY_BIT_VIEWPORT,
         DIRTY_BIT_SCISSOR,
@@ -794,15 +831,6 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
                             gl::DrawElementsType indexTypeOrInvalid,
                             const void *indices,
                             DirtyBits dirtyBitMask);
-
-    angle::Result setupNonIndexedDraw(const gl::Context *context,
-                                      gl::PrimitiveMode mode,
-                                      GLint firstVertexOrInvalid,
-                                      GLsizei vertexOrIndexCount,
-                                      GLsizei instanceCount,
-                                      gl::DrawElementsType indexTypeOrInvalid,
-                                      const void *indices,
-                                      DirtyBits dirtyBitMask);
 
     angle::Result setupIndexedDraw(const gl::Context *context,
                                    gl::PrimitiveMode mode,
@@ -906,6 +934,8 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
                                                      DirtyBits dirtyBitMask);
     angle::Result handleDirtyGraphicsFramebufferFetchBarrier(DirtyBits::Iterator *dirtyBitsIterator,
                                                              DirtyBits dirtyBitMask);
+    angle::Result handleDirtyGraphicsBlendBarrier(DirtyBits::Iterator *dirtyBitsIterator,
+                                                  DirtyBits dirtyBitMask);
     angle::Result handleDirtyGraphicsTransformFeedbackBuffersEmulation(
         DirtyBits::Iterator *dirtyBitsIterator,
         DirtyBits dirtyBitMask);
@@ -964,6 +994,10 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     void writeAtomicCounterBufferDriverUniformOffsets(uint32_t *offsetsOut, size_t offsetsSize);
 
     angle::Result submitFrame(const vk::Semaphore *signalSemaphore, Serial *submitSerialOut);
+    angle::Result submitFrameOutsideCommandBufferOnly(Serial *submitSerialOut);
+    angle::Result submitFrameImpl(const vk::Semaphore *signalSemaphore,
+                                  Serial *submitSerialOut,
+                                  SubmitFrameType submitFrameType);
 
     angle::Result synchronizeCpuGpuTime();
     angle::Result traceGpuEventImpl(vk::OutsideRenderPassCommandBuffer *commandBuffer,
@@ -1015,12 +1049,6 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     void populateTransformFeedbackBufferSet(
         size_t bufferCount,
         const gl::TransformFeedbackBuffersArray<vk::BufferHelper *> &buffers);
-
-    // DescriptorSet writes
-    template <typename T, const T *VkWriteDescriptorSet::*pInfo>
-    T *allocDescriptorInfos(std::vector<T> *descriptorVector, size_t count);
-    template <typename T, const T *VkWriteDescriptorSet::*pInfo>
-    void growDesciptorCapacity(std::vector<T> *descriptorVector, size_t newSize);
 
     angle::Result updateRenderPassDepthStencilAccess();
     bool shouldSwitchToReadOnlyDepthFeedbackLoopMode(gl::Texture *texture,
@@ -1209,6 +1237,10 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     // GL_EXT_shader_framebuffer_fetch_non_coherent
     bool mLastProgramUsesFramebufferFetch;
 
+    // The size of copy commands issued between buffers and images. Used to submit the command
+    // buffer for the outside render pass.
+    VkDeviceSize mTotalBufferToImageCopySize = 0;
+
     // Semaphores that must be waited on in the next submission.
     std::vector<VkSemaphore> mWaitSemaphores;
     std::vector<VkPipelineStageFlags> mWaitSemaphoreStageMasks;
@@ -1222,7 +1254,6 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     uint64_t mGpuEventTimestampOrigin;
 
     // A mix of per-frame and per-run counters.
-    angle::VulkanPerfCounters mPerfCounters;
     angle::PerfMonitorCounterGroups mPerfMonitorCounters;
     ContextVkPerfCounters mContextPerfCounters;
     ContextVkPerfCounters mCumulativeContextPerfCounters;
@@ -1235,9 +1266,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     egl::ContextPriority mContextPriority;
 
     // Storage for vkUpdateDescriptorSets
-    std::vector<VkDescriptorBufferInfo> mDescriptorBufferInfos;
-    std::vector<VkDescriptorImageInfo> mDescriptorImageInfos;
-    std::vector<VkWriteDescriptorSet> mWriteDescriptorSets;
+    UpdateDescriptorSetsBuilder mUpdateDescriptorSetsBuilder;
 
     ShareGroupVk *mShareGroupVk;
 
