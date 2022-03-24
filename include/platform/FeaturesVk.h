@@ -353,7 +353,7 @@ struct FeaturesVk : FeatureSetBase
         "enablePrecisionQualifiers", FeatureCategory::VulkanFeatures,
         "Enable precision qualifiers in shaders", &members, "http://anglebug.com/3078"};
 
-    // Desktop (at least NVIDIA) drivers prefer combining barriers into one vkCmdPipelineBarrier
+    // Desktop (at least NVIDIA) devices prefer combining barriers into one vkCmdPipelineBarrier
     // call over issuing multiple barrier calls with fine grained dependency information to have
     // better performance. http://anglebug.com/4633
     Feature preferAggregateBarrierCalls = {
@@ -361,6 +361,15 @@ struct FeaturesVk : FeatureSetBase
         "Single barrier call is preferred over multiple calls with "
         "fine grained pipeline stage dependency information",
         &members, "http://anglebug.com/4633"};
+
+    // When dealing with emulated formats that have extra channels, it's cheaper on desktop devices
+    // to skip invalidating framebuffer attachments compared to tiling devices where it's cheaper to
+    // invalidate and re-clear them. http://anglebug.com/6860
+    Feature preferSkippingInvalidateForEmulatedFormats = {
+        "preferSkippingInvalidateForEmulatedFormats", FeatureCategory::VulkanWorkarounds,
+        "Skipping invalidate is preferred for emulated formats that have extra channels over "
+        "re-clearing the image",
+        &members, "http://anglebug.com/6860"};
 
     // Tell the Vulkan back-end to use the async command queue to dispatch work to the GPU. Command
     // buffer work will happened in a worker thread. Otherwise use Renderer::CommandQueue directly.
@@ -403,6 +412,13 @@ struct FeaturesVk : FeatureSetBase
     Feature supportsDepthClipControl = {"supportsDepthClipControl", FeatureCategory::VulkanFeatures,
                                         "VkDevice supports VK_EXT_depth_clip_control extension.",
                                         &members, "http://anglebug.com/5421"};
+
+    // Whether the VkDevice supports the VK_EXT_blend_operation_advanced extension
+    // http://anglebug.com/3586
+    Feature supportsBlendOperationAdvanced = {
+        "supportsBlendOperationAdvanced", FeatureCategory::VulkanFeatures,
+        "VkDevice supports VK_EXT_blend_operation_advanced extension.", &members,
+        "http://anglebug.com/3586"};
 
     // Force maxUniformBufferSize to 16K on Qualcomm's Adreno 540. Pixel2's Adreno540 reports
     // maxUniformBufferSize 64k but various tests failed with that size. For that specific

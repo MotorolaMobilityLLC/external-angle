@@ -47,6 +47,12 @@ constexpr bool kExposeNonConformantExtensionsAndVersions = true;
 #else
 constexpr bool kExposeNonConformantExtensionsAndVersions = false;
 #endif
+
+#if defined(ANGLE_USE_SPIRV_GENERATION_THROUGH_GLSLANG)
+constexpr bool kUseSpirvGenThroughGlslang = true;
+#else
+constexpr bool kUseSpirvGenThroughGlslang                = false;
+#endif
 }  // anonymous namespace
 
 namespace rx
@@ -183,6 +189,9 @@ constexpr const char *kSkippedMessages[] = {
     // framebuffer that's accessed by the command buffer is identically laid out.
     // http://anglebug.com/6811
     "VUID-vkCmdExecuteCommands-pCommandBuffers-00099",
+    // http://anglebug.com/7105
+    "VUID-vkCmdDraw-None-06538",
+    "VUID-vkCmdDrawIndexed-None-06538",
 };
 
 struct SkippedSyncvalMessage
@@ -1778,6 +1787,14 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     mDepthClipControlFeatures.sType =
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT;
 
+    mBlendOperationAdvancedFeatures = {};
+    mBlendOperationAdvancedFeatures.sType =
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT;
+
+    mBlendOperationAdvancedProperties = {};
+    mBlendOperationAdvancedProperties.sType =
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
+
     if (!vkGetPhysicalDeviceProperties2KHR || !vkGetPhysicalDeviceFeatures2KHR)
     {
         return;
@@ -1905,6 +1922,12 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
         vk::AddToPNextChain(&deviceFeatures, &mDepthClipControlFeatures);
     }
 
+    if (ExtensionFound(VK_EXT_BLEND_OPERATION_ADVANCED_EXTENSION_NAME, deviceExtensionNames))
+    {
+        vk::AddToPNextChain(&deviceFeatures, &mBlendOperationAdvancedFeatures);
+        vk::AddToPNextChain(&deviceProperties, &mBlendOperationAdvancedProperties);
+    }
+
     vkGetPhysicalDeviceFeatures2KHR(mPhysicalDevice, &deviceFeatures);
     vkGetPhysicalDeviceProperties2KHR(mPhysicalDevice, &deviceProperties);
 
@@ -1931,6 +1954,8 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     mProtectedMemoryProperties.pNext                 = nullptr;
     mHostQueryResetFeatures.pNext                    = nullptr;
     mDepthClipControlFeatures.pNext                  = nullptr;
+    mBlendOperationAdvancedFeatures.pNext            = nullptr;
+    mBlendOperationAdvancedProperties.pNext          = nullptr;
 }
 
 angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueFamilyIndex)
@@ -2376,6 +2401,12 @@ angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueF
         vk::AddToPNextChain(&mEnabledFeatures, &mDepthClipControlFeatures);
     }
 
+    if (getFeatures().supportsBlendOperationAdvanced.enabled)
+    {
+        mEnabledDeviceExtensions.push_back(VK_EXT_BLEND_OPERATION_ADVANCED_EXTENSION_NAME);
+        vk::AddToPNextChain(&mEnabledFeatures, &mBlendOperationAdvancedFeatures);
+    }
+
     mCurrentQueueFamilyIndex = queueFamilyIndex;
 
     vk::QueueFamily queueFamily;
@@ -2762,15 +2793,35 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     constexpr uint32_t kPixel2DriverWithRelaxedPrecision        = 0x801EA000;
     constexpr uint32_t kPixel4DriverWithWorkingSpecConstSupport = 0x80201000;
 
-    bool isAMD      = IsAMD(mPhysicalDeviceProperties.vendorID);
-    bool isARM      = IsARM(mPhysicalDeviceProperties.vendorID);
-    bool isIntel    = IsIntel(mPhysicalDeviceProperties.vendorID);
-    bool isNvidia   = IsNvidia(mPhysicalDeviceProperties.vendorID);
-    bool isPowerVR  = IsPowerVR(mPhysicalDeviceProperties.vendorID);
-    bool isQualcomm = IsQualcomm(mPhysicalDeviceProperties.vendorID);
-    bool isSamsung  = IsSamsung(mPhysicalDeviceProperties.vendorID);
-    bool isSwiftShader =
+    const bool isAMD      = IsAMD(mPhysicalDeviceProperties.vendorID);
+    const bool isARM      = IsARM(mPhysicalDeviceProperties.vendorID);
+    const bool isIntel    = IsIntel(mPhysicalDeviceProperties.vendorID);
+    const bool isNvidia   = IsNvidia(mPhysicalDeviceProperties.vendorID);
+    const bool isPowerVR  = IsPowerVR(mPhysicalDeviceProperties.vendorID);
+    const bool isQualcomm = IsQualcomm(mPhysicalDeviceProperties.vendorID);
+    const bool isBroadcom = IsBroadcom(mPhysicalDeviceProperties.vendorID);
+    const bool isSamsung  = IsSamsung(mPhysicalDeviceProperties.vendorID);
+    const bool isSwiftShader =
         IsSwiftshader(mPhysicalDeviceProperties.vendorID, mPhysicalDeviceProperties.deviceID);
+
+    // Classify devices based on general architecture:
+    //
+    // - IMR (Immediate-Mode Rendering) devices generally progress through draw calls once and use
+    //   the main GPU memory (accessed through caches) to store intermediate rendering results.
+    // - TBR (Tile-Based Rendering) devices issue a pre-rendering geometry pass, then run through
+    //   draw calls once per tile and store intermediate rendering results on the tile cache.
+    //
+    // Due to these key architectural differences, some operations improve performance on one while
+    // deteriorating performance on the other.  ANGLE will accordingly make some decisions based on
+    // the device architecture for optimal performance on both.
+    const bool isImmediateModeRenderer = isNvidia || isAMD || isIntel || isSamsung || isSwiftShader;
+    const bool isTileBasedRenderer     = isARM || isPowerVR || isQualcomm || isBroadcom;
+
+    // Make sure all known architectures are accounted for.
+    if (!isImmediateModeRenderer && !isTileBasedRenderer && !isMockICDEnabled())
+    {
+        WARN() << "Unknown GPU architecture";
+    }
 
     bool supportsNegativeViewport =
         ExtensionFound(VK_KHR_MAINTENANCE1_EXTENSION_NAME, deviceExtensionNames) ||
@@ -2938,6 +2989,10 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     ANGLE_FEATURE_CONDITION(&mFeatures, supportsDepthClipControl,
                             mDepthClipControlFeatures.depthClipControl == VK_TRUE);
 
+    ANGLE_FEATURE_CONDITION(
+        &mFeatures, supportsBlendOperationAdvanced,
+        ExtensionFound(VK_EXT_BLEND_OPERATION_ADVANCED_EXTENSION_NAME, deviceExtensionNames));
+
     ANGLE_FEATURE_CONDITION(&mFeatures, supportsTransformFeedbackExtension,
                             mTransformFeedbackFeatures.transformFeedback == VK_TRUE);
 
@@ -3034,14 +3089,16 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
           (mPhysicalDeviceProperties.driverVersion < kPixel2DriverWithRelaxedPrecision)) &&
             !IsPixel4(mPhysicalDeviceProperties.vendorID, mPhysicalDeviceProperties.deviceID));
 
-    // The following platforms are less sensitive to the src/dst stage masks in barriers, and behave
-    // more efficiently when all barriers are aggregated, rather than individually and precisely
-    // specified:
-    //
-    // - Desktop GPUs
-    // - SwiftShader
-    ANGLE_FEATURE_CONDITION(&mFeatures, preferAggregateBarrierCalls,
-                            isNvidia || isAMD || isIntel || isSwiftShader || isSamsung);
+    // IMR devices are less sensitive to the src/dst stage masks in barriers, and behave more
+    // efficiently when all barriers are aggregated, rather than individually and precisely
+    // specified.
+    ANGLE_FEATURE_CONDITION(&mFeatures, preferAggregateBarrierCalls, isImmediateModeRenderer);
+
+    // For IMR devices, it's more efficient to ignore invalidate of framebuffer attachments with
+    // emulated formats that have extra channels.  For TBR devices, the invalidate will be followed
+    // by a clear to retain valid values in said extra channels.
+    ANGLE_FEATURE_CONDITION(&mFeatures, preferSkippingInvalidateForEmulatedFormats,
+                            isImmediateModeRenderer);
 
     // Currently disabled by default: http://anglebug.com/4324
     ANGLE_FEATURE_CONDITION(&mFeatures, asyncCommandQueue, false);
@@ -3206,6 +3263,8 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
 
     // Retain debug info in SPIR-V blob.
     ANGLE_FEATURE_CONDITION(&mFeatures, retainSpirvDebugInfo, getEnableValidationLayers());
+
+    ANGLE_FEATURE_CONDITION(&mFeatures, generateSPIRVThroughGlslang, kUseSpirvGenThroughGlslang);
 
     angle::PlatformMethods *platform = ANGLEPlatformCurrent();
     platform->overrideFeaturesVk(platform, &mFeatures);
