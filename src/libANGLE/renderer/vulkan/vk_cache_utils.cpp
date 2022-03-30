@@ -886,8 +886,29 @@ angle::Result CreateRenderPass2(Context *context,
 }
 
 void UpdateRenderPassColorPerfCounters(const VkRenderPassCreateInfo &createInfo,
-                                       const VkSubpassDescription &subpass,
+                                       FramebufferAttachmentMask depthStencilAttachmentIndices,
                                        RenderPassPerfCounters *countersOut)
+{
+    for (uint32_t index = 0; index < createInfo.attachmentCount; index++)
+    {
+        if (depthStencilAttachmentIndices.test(index))
+        {
+            continue;
+        }
+
+        VkAttachmentLoadOp loadOp   = createInfo.pAttachments[index].loadOp;
+        VkAttachmentStoreOp storeOp = createInfo.pAttachments[index].storeOp;
+        countersOut->colorLoadOpClears += loadOp == VK_ATTACHMENT_LOAD_OP_CLEAR ? 1 : 0;
+        countersOut->colorLoadOpLoads += loadOp == VK_ATTACHMENT_LOAD_OP_LOAD ? 1 : 0;
+        countersOut->colorLoadOpNones += loadOp == VK_ATTACHMENT_LOAD_OP_NONE_EXT ? 1 : 0;
+        countersOut->colorStoreOpStores += storeOp == VK_ATTACHMENT_STORE_OP_STORE ? 1 : 0;
+        countersOut->colorStoreOpNones += storeOp == VK_ATTACHMENT_STORE_OP_NONE_EXT ? 1 : 0;
+    }
+}
+
+void UpdateSubpassColorPerfCounters(const VkRenderPassCreateInfo &createInfo,
+                                    const VkSubpassDescription &subpass,
+                                    RenderPassPerfCounters *countersOut)
 {
     // Color resolve counters.
     if (subpass.pResolveAttachments == nullptr)
@@ -918,15 +939,18 @@ void UpdateRenderPassDepthStencilPerfCounters(const VkRenderPassCreateInfo &crea
     // Depth/stencil ops counters.
     const VkAttachmentDescription &ds = createInfo.pAttachments[renderPassIndex];
 
-    countersOut->depthClears += ds.loadOp == VK_ATTACHMENT_LOAD_OP_CLEAR ? 1 : 0;
-    countersOut->depthLoads += ds.loadOp == VK_ATTACHMENT_LOAD_OP_LOAD ? 1 : 0;
-    countersOut->depthStores +=
-        ds.storeOp == static_cast<uint16_t>(RenderPassStoreOp::Store) ? 1 : 0;
+    countersOut->depthLoadOpClears += ds.loadOp == VK_ATTACHMENT_LOAD_OP_CLEAR ? 1 : 0;
+    countersOut->depthLoadOpLoads += ds.loadOp == VK_ATTACHMENT_LOAD_OP_LOAD ? 1 : 0;
+    countersOut->depthLoadOpNones += ds.loadOp == VK_ATTACHMENT_LOAD_OP_NONE_EXT ? 1 : 0;
+    countersOut->depthStoreOpStores += ds.storeOp == VK_ATTACHMENT_STORE_OP_STORE ? 1 : 0;
+    countersOut->depthStoreOpNones += ds.storeOp == VK_ATTACHMENT_STORE_OP_NONE_EXT ? 1 : 0;
 
-    countersOut->stencilClears += ds.stencilLoadOp == VK_ATTACHMENT_LOAD_OP_CLEAR ? 1 : 0;
-    countersOut->stencilLoads += ds.stencilLoadOp == VK_ATTACHMENT_LOAD_OP_LOAD ? 1 : 0;
-    countersOut->stencilStores +=
-        ds.stencilStoreOp == static_cast<uint16_t>(RenderPassStoreOp::Store) ? 1 : 0;
+    countersOut->stencilLoadOpClears += ds.stencilLoadOp == VK_ATTACHMENT_LOAD_OP_CLEAR ? 1 : 0;
+    countersOut->stencilLoadOpLoads += ds.stencilLoadOp == VK_ATTACHMENT_LOAD_OP_LOAD ? 1 : 0;
+    countersOut->stencilLoadOpNones += ds.stencilLoadOp == VK_ATTACHMENT_LOAD_OP_NONE_EXT ? 1 : 0;
+    countersOut->stencilStoreOpStores += ds.stencilStoreOp == VK_ATTACHMENT_STORE_OP_STORE ? 1 : 0;
+    countersOut->stencilStoreOpNones +=
+        ds.stencilStoreOp == VK_ATTACHMENT_STORE_OP_NONE_EXT ? 1 : 0;
 
     // Depth/stencil read-only mode.
     countersOut->readOnlyDepthStencil +=
@@ -954,14 +978,16 @@ void UpdateRenderPassDepthStencilResolvePerfCounters(
     const VkAttachmentDescription &dsResolve = createInfo.pAttachments[resolveRenderPassIndex];
 
     // Resolve depth/stencil ops counters.
-    countersOut->depthClears += dsResolve.loadOp == VK_ATTACHMENT_LOAD_OP_CLEAR ? 1 : 0;
-    countersOut->depthLoads += dsResolve.loadOp == VK_ATTACHMENT_LOAD_OP_LOAD ? 1 : 0;
-    countersOut->depthStores +=
+    countersOut->depthLoadOpClears += dsResolve.loadOp == VK_ATTACHMENT_LOAD_OP_CLEAR ? 1 : 0;
+    countersOut->depthLoadOpLoads += dsResolve.loadOp == VK_ATTACHMENT_LOAD_OP_LOAD ? 1 : 0;
+    countersOut->depthStoreOpStores +=
         dsResolve.storeOp == static_cast<uint16_t>(RenderPassStoreOp::Store) ? 1 : 0;
 
-    countersOut->stencilClears += dsResolve.stencilLoadOp == VK_ATTACHMENT_LOAD_OP_CLEAR ? 1 : 0;
-    countersOut->stencilLoads += dsResolve.stencilLoadOp == VK_ATTACHMENT_LOAD_OP_LOAD ? 1 : 0;
-    countersOut->stencilStores +=
+    countersOut->stencilLoadOpClears +=
+        dsResolve.stencilLoadOp == VK_ATTACHMENT_LOAD_OP_CLEAR ? 1 : 0;
+    countersOut->stencilLoadOpLoads +=
+        dsResolve.stencilLoadOp == VK_ATTACHMENT_LOAD_OP_LOAD ? 1 : 0;
+    countersOut->stencilStoreOpStores +=
         dsResolve.stencilStoreOp == static_cast<uint16_t>(RenderPassStoreOp::Store) ? 1 : 0;
 
     // Depth/stencil resolve counters.
@@ -985,9 +1011,9 @@ void UpdateRenderPassPerfCounters(
     {
         const VkSubpassDescription &subpass = createInfo.pSubpasses[subpassIndex];
 
-        // Color counters.  Note: currently there are no counters for load/store ops of color
-        // attachments, so there's no risk of double counting.
-        UpdateRenderPassColorPerfCounters(createInfo, subpass, countersOut);
+        // Color counters.
+        // NOTE: For simplicity, this will accumulate counts for all subpasses in the renderpass.
+        UpdateSubpassColorPerfCounters(createInfo, subpass, countersOut);
 
         // Record index of depth/stencil attachment.
         if (subpass.pDepthStencilAttachment != nullptr)
@@ -999,6 +1025,8 @@ void UpdateRenderPassPerfCounters(
             }
         }
     }
+
+    UpdateRenderPassColorPerfCounters(createInfo, depthStencilAttachmentIndices, countersOut);
 
     // Depth/stencil counters.  Currently, both subpasses use the same depth/stencil attachment (if
     // any).
@@ -1349,12 +1377,21 @@ void GetRenderPassAndUpdateCounters(ContextVk *contextVk,
         angle::VulkanPerfCounters &counters      = contextVk->getPerfCounters();
         const RenderPassPerfCounters &rpCounters = renderPassHelper->getPerfCounters();
 
-        counters.depthClears += rpCounters.depthClears;
-        counters.depthLoads += rpCounters.depthLoads;
-        counters.depthStores += rpCounters.depthStores;
-        counters.stencilClears += rpCounters.stencilClears;
-        counters.stencilLoads += rpCounters.stencilLoads;
-        counters.stencilStores += rpCounters.stencilStores;
+        counters.colorLoadOpClears += rpCounters.colorLoadOpClears;
+        counters.colorLoadOpLoads += rpCounters.colorLoadOpLoads;
+        counters.colorLoadOpNones += rpCounters.colorLoadOpNones;
+        counters.colorStoreOpStores += rpCounters.colorStoreOpStores;
+        counters.colorStoreOpNones += rpCounters.colorStoreOpNones;
+        counters.depthLoadOpClears += rpCounters.depthLoadOpClears;
+        counters.depthLoadOpLoads += rpCounters.depthLoadOpLoads;
+        counters.depthLoadOpNones += rpCounters.depthLoadOpNones;
+        counters.depthStoreOpStores += rpCounters.depthStoreOpStores;
+        counters.depthStoreOpNones += rpCounters.depthStoreOpNones;
+        counters.stencilLoadOpClears += rpCounters.stencilLoadOpClears;
+        counters.stencilLoadOpLoads += rpCounters.stencilLoadOpLoads;
+        counters.stencilLoadOpNones += rpCounters.stencilLoadOpNones;
+        counters.stencilStoreOpStores += rpCounters.stencilStoreOpStores;
+        counters.stencilStoreOpNones += rpCounters.stencilStoreOpNones;
         counters.colorAttachmentUnresolves += rpCounters.colorAttachmentUnresolves;
         counters.colorAttachmentResolves += rpCounters.colorAttachmentResolves;
         counters.depthAttachmentUnresolves += rpCounters.depthAttachmentUnresolves;
