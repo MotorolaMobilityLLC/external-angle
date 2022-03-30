@@ -40,7 +40,7 @@ vars = {
   'dummy_checkout_chromium': False,
 
   # Current revision of VK-GL-CTS (a.k.a dEQP).
-  'vk_gl_cts_revision': '823d49cf5f5e5622e1fade4424e92ec2f61b81a6',
+  'vk_gl_cts_revision': 'fbc38865227d59ac3ae3bdf9fe218d2bf3c62a60',
 
   # Current revision of googletest.
   # Note: this dep cannot be auto-rolled b/c of nesting.
@@ -496,7 +496,7 @@ deps = {
   },
 
   'third_party/SwiftShader': {
-    'url': '{swiftshader_git}/SwiftShader@ea9806003d9e04e3c7c5466495383009d209a08e',
+    'url': '{swiftshader_git}/SwiftShader@bc5bec05c369fca4e336de513eb3630a5d326545',
     'condition': 'not build_with_chromium',
   },
 
@@ -516,7 +516,7 @@ deps = {
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@c4109411d3f366353898aed63156ada2fa562817',
+    'url': '{chromium_git}/vulkan-deps@f9e3d5a50ca27d120be6a30adae42fb49f85db79',
     'condition': 'not build_with_chromium',
   },
 
@@ -1711,6 +1711,16 @@ deps = {
       'dep_type': 'cipd',
       'condition': 'checkout_angle_restricted_traces',
   },
+  'src/tests/restricted_traces/shadowgun_legends': {
+      'packages': [
+        {
+            'package': 'angle/traces/shadowgun_legends',
+            'version': 'version:1',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
   'src/tests/restricted_traces/slingshot_test1': {
       'packages': [
         {
@@ -1806,6 +1816,16 @@ deps = {
         {
             'package': 'angle/traces/summoners_war',
             'version': 'version:5',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/super_mario_run': {
+      'packages': [
+        {
+            'package': 'angle/traces/super_mario_run',
+            'version': 'version:1',
         },
       ],
       'dep_type': 'cipd',
