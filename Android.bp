@@ -1849,7 +1849,6 @@ cc_library_static {
         "src/image_util/imageformats.cpp",
         "src/image_util/loadimage.cpp",
         "src/image_util/loadimage_etc.cpp",
-        "src/image_util/loadtextureborder.cpp",
     ],
     sdk_version: "28",
     cflags: [
@@ -6028,7 +6027,6 @@ cc_defaults {
         "src/libANGLE/renderer/TextureImpl.cpp",
         "src/libANGLE/renderer/driver_utils.cpp",
         "src/libANGLE/renderer/load_functions_table_autogen.cpp",
-        "src/libANGLE/renderer/load_texture_border_functions_table_autogen.cpp",
         "src/libANGLE/renderer/renderer_utils.cpp",
         "src/libANGLE/validationEGL.cpp",
         "src/libANGLE/validationES.cpp",
