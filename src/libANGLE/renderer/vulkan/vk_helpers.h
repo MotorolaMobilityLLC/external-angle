@@ -790,6 +790,13 @@ class BufferHelper : public ReadWriteResource
     void fillWithColor(const angle::Color<uint8_t> &color,
                        const gl::InternalFormat &internalFormat);
 
+    // Special handling for VertexArray code so that we can create a dedicated VkBuffer for the
+    // sub-range of memory of the actual buffer data size that user requested (i.e, excluding extra
+    // paddings that we added for alignment, which will not get zero filled).
+    const Buffer &getBufferForVertexArray(ContextVk *contextVk,
+                                          VkDeviceSize actualDataSize,
+                                          VkDeviceSize *offsetOut);
+
   private:
     void initializeBarrierTracker(Context *context);
     angle::Result initializeNonZeroMemory(Context *context,
@@ -805,6 +812,11 @@ class BufferHelper : public ReadWriteResource
 
     // Suballocation object.
     BufferSuballocation mSuballocation;
+    // This normally is invalid. We always use the BufferBlock's buffer and offset combination. But
+    // when robust resource init is enabled, we may want to create a dedicated VkBuffer for the
+    // suballocation so that vulkan driver will ensure no access beyond this sub-range. In that
+    // case, this VkBuffer will be created lazily as needed.
+    Buffer mBufferForVertexArray;
 
     // For memory barriers.
     uint32_t mCurrentQueueFamilyIndex;
@@ -925,6 +937,7 @@ class RenderPassAttachment final
                            RenderPassStoreOp *storeOp,
                            bool *isInvalidatedOut);
     void restoreContent();
+    bool hasAnyAccess() const { return mAccess != ResourceAccess::Unused; }
     bool hasWriteAccess() const { return mAccess == ResourceAccess::Write; }
 
     ImageHelper *getImage() { return mImage; }
@@ -1244,6 +1257,14 @@ class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
     void onColorAccess(PackedAttachmentIndex packedAttachmentIndex, ResourceAccess access);
     void onDepthAccess(ResourceAccess access);
     void onStencilAccess(ResourceAccess access);
+
+    bool hasAnyColorAccess(PackedAttachmentIndex packedAttachmentIndex)
+    {
+        ASSERT(packedAttachmentIndex < mColorAttachmentsCount);
+        return mColorAttachments[packedAttachmentIndex].hasAnyAccess();
+    }
+    bool hasAnyDepthAccess() { return mDepthAttachment.hasAnyAccess(); }
+    bool hasAnyStencilAccess() { return mStencilAttachment.hasAnyAccess(); }
 
     void updateRenderPassForResolve(ContextVk *contextVk,
                                     Framebuffer *newFramebuffer,
