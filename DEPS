@@ -496,7 +496,7 @@ deps = {
   },
 
   'third_party/SwiftShader': {
-    'url': '{swiftshader_git}/SwiftShader@a190ceed72930fbfceff5b030490d06289af0972',
+    'url': '{swiftshader_git}/SwiftShader@7d100c5560818c84410f511671391b5129d45085',
     'condition': 'not build_with_chromium',
   },
 
@@ -846,6 +846,16 @@ deps = {
         {
             'package': 'angle/traces/candy_crush_soda_saga',
             'version': 'version:5',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/car_chase': {
+      'packages': [
+        {
+            'package': 'angle/traces/car_chase',
+            'version': 'version:1',
         },
       ],
       'dep_type': 'cipd',
@@ -1686,6 +1696,16 @@ deps = {
         {
             'package': 'angle/traces/sakura_school_simulator',
             'version': 'version:5',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/scary_teacher_3d': {
+      'packages': [
+        {
+            'package': 'angle/traces/scary_teacher_3d',
+            'version': 'version:1',
         },
       ],
       'dep_type': 'cipd',
