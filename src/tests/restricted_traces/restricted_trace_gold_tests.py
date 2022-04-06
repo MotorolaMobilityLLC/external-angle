@@ -164,55 +164,17 @@ def get_skia_gold_keys(args, env):
         logging.exception('get_skia_gold_keys may only be called once')
     get_skia_gold_keys.called = True
 
-    class Filter:
-
-        def __init__(self):
-            self.accepting_lines = True
-            self.done_accepting_lines = False
-            self.android_prefix = re.compile(ANDROID_LOGGING_PREFIX)
-            self.lines = []
-            self.is_android = False
-
-        def append(self, line):
-            if self.done_accepting_lines:
-                return
-            if 'Additional test environment' in line or 'android/test_runner.py' in line:
-                self.accepting_lines = False
-                self.is_android = True
-            if ANDROID_BEGIN_SYSTEM_INFO in line:
-                self.accepting_lines = True
-                return
-            if not self.accepting_lines:
-                return
-
-            if self.is_android:
-                line = self.android_prefix.sub('', line)
-
-            if line[0] == '}':
-                self.done_accepting_lines = True
-
-            self.lines.append(line)
-
-        def get(self):
-            return self.lines
-
-    with common.temporary_file() as tempfile_path:
+    with temporary_dir() as temp_dir:
         binary = get_binary_name('angle_system_info_test')
-        sysinfo_args = [binary, '--vulkan', '-v']
+        sysinfo_args = [binary, '--vulkan', '-v', '--render-test-output-dir=' + temp_dir]
         if args.swiftshader:
             sysinfo_args.append('--swiftshader')
+        tempfile_path = os.path.join(temp_dir, 'stdout')
         if run_wrapper(args, sysinfo_args, env, tempfile_path):
             raise Exception('Error getting system info.')
 
-        filter = Filter()
-
-        with open(tempfile_path) as f:
-            for line in f:
-                filter.append(line)
-
-        str = ''.join(filter.get())
-        logging.info(str)
-        json_data = json.loads(str)
+        with open(os.path.join(temp_dir, 'angle_system_info.json')) as f:
+            json_data = json.load(f)
 
     if len(json_data.get('gpus', [])) == 0 or not 'activeGPUIndex' in json_data:
         raise Exception('Error getting system info.')
@@ -276,8 +238,7 @@ def upload_test_result_to_skia_gold(args, gold_session_manager, gold_session, go
     png_file_name = os.path.join(screenshot_dir, prefix + image_name + '.png')
 
     if not os.path.isfile(png_file_name):
-        logging.info('Screenshot not found, test skipped.')
-        return SKIP
+        raise Exception('Screenshot not found: ' + png_file_name)
 
     status, error = gold_session.RunComparison(
         name=image_name, png_file=png_file_name, use_luci=use_luci)
@@ -369,7 +330,7 @@ def _run_tests(args, tests, extra_flags, env, screenshot_dir, results, test_resu
 
                     gtest_filter = _get_gtest_filter_for_batch(args, batch)
                     cmd = [
-                        args.test_suite,
+                        get_binary_name(args.test_suite),
                         gtest_filter,
                         '--render-test-output-dir=%s' % screenshot_dir,
                         '--one-frame-only',
@@ -379,16 +340,23 @@ def _run_tests(args, tests, extra_flags, env, screenshot_dir, results, test_resu
                     batch_result = PASS if run_wrapper(args, cmd, env,
                                                        tempfile_path) == 0 else FAIL
 
+                    with open(tempfile_path) as f:
+                        test_output = f.read() + '\n'
+
                     next_batch = []
                     for trace in batch:
                         artifacts = {}
 
                         if batch_result == PASS:
-                            logging.debug('upload test result: %s' % trace)
-                            result = upload_test_result_to_skia_gold(args, gold_session_manager,
-                                                                     gold_session, gold_properties,
-                                                                     screenshot_dir, trace,
-                                                                     artifacts)
+                            test_prefix = SWIFTSHADER_TEST_PREFIX if args.swiftshader else DEFAULT_TEST_PREFIX
+                            trace_skipped_notice = '[  SKIPPED ] ' + test_prefix + trace + '\n'
+                            if trace_skipped_notice in test_output:
+                                result = SKIP
+                            else:
+                                logging.debug('upload test result: %s' % trace)
+                                result = upload_test_result_to_skia_gold(
+                                    args, gold_session_manager, gold_session, gold_properties,
+                                    screenshot_dir, trace, artifacts)
                         else:
                             result = batch_result
 
@@ -479,11 +447,6 @@ def main():
     rc = 0
 
     try:
-        if IsWindows():
-            args.test_suite = '.\\%s.exe' % args.test_suite
-        else:
-            args.test_suite = './%s' % args.test_suite
-
         # read test set
         json_name = os.path.join(ANGLE_SRC_DIR, 'src', 'tests', 'restricted_traces',
                                  'restricted_traces.json')

@@ -14,7 +14,6 @@
 #include "base/callback.h"
 #include "base/files/file.h"
 #include "base/files/file_path.h"
-#include "base/files/file_util.h"
 #include "base/memory/weak_ptr.h"
 #include "base/numerics/safe_conversions.h"
 #include "base/time/time.h"
@@ -48,6 +47,10 @@ class WriterDelegate {
   // may apply some of the permissions (for example, the executable bit) to the
   // output file.
   virtual void SetPosixFilePermissions(int mode) {}
+
+  // Called if an error occurred while extracting the file. The WriterDelegate
+  // can then remove and clean up the partially extracted data.
+  virtual void OnError() {}
 };
 
 // This class is used for reading ZIP archives. A typical use case of this class
@@ -91,9 +94,14 @@ class ZipReader {
     // if it wants to interpret this path correctly.
     std::string path_in_original_encoding;
 
-    // Path of the entry, converted to Unicode. This path is usually relative
-    // (eg "foo/bar.txt"), but it can also be absolute (eg "/foo/bar.txt") or
-    // parent-relative (eg "../foo/bar.txt"). See also |is_unsafe|.
+    // Path of the entry, converted to Unicode. This path is relative (eg
+    // "foo/bar.txt"). Absolute paths (eg "/foo/bar.txt") or paths containing
+    // ".." or "." components (eg "../foo/bar.txt") are converted to safe
+    // relative paths. Eg:
+    // (In ZIP) -> (Entry.path)
+    // /foo/bar -> ROOT/foo/bar
+    // ../a     -> UP/a
+    // ./a      -> DOT/a
     base::FilePath path;
 
     // Size of the original uncompressed file, or 0 if the entry is a directory.
@@ -119,8 +127,8 @@ class ZipReader {
     // False if the entry is a file.
     bool is_directory;
 
-    // True if the entry path is considered unsafe, ie if it is absolute or if
-    // it contains "..".
+    // True if the entry path cannot be converted to a safe relative path. This
+    // happens if a file entry (not a directory) has a filename "." or "..".
     bool is_unsafe;
 
     // True if the file content is encrypted.
@@ -254,6 +262,10 @@ class ZipReader {
   // reset automatically as needed.
   bool OpenEntry();
 
+  // Normalizes the given path passed as UTF-16 string piece. Sets entry_.path,
+  // entry_.is_directory and entry_.is_unsafe.
+  void Normalize(base::StringPiece16 in);
+
   // Extracts a chunk of the file to the target.  Will post a task for the next
   // chunk and success/failure/progress callbacks as necessary.
   void ExtractChunk(base::File target_file,
@@ -274,7 +286,8 @@ class ZipReader {
   base::WeakPtrFactory<ZipReader> weak_ptr_factory_{this};
 };
 
-// A writer delegate that writes to a given File.
+// A writer delegate that writes to a given File. It is recommended that this
+// file be initially empty.
 class FileWriterDelegate : public WriterDelegate {
  public:
   // Constructs a FileWriterDelegate that manipulates |file|. The delegate will
@@ -283,17 +296,14 @@ class FileWriterDelegate : public WriterDelegate {
   explicit FileWriterDelegate(base::File* file);
 
   // Constructs a FileWriterDelegate that takes ownership of |file|.
-  explicit FileWriterDelegate(std::unique_ptr<base::File> file);
+  explicit FileWriterDelegate(base::File owned_file);
 
   FileWriterDelegate(const FileWriterDelegate&) = delete;
   FileWriterDelegate& operator=(const FileWriterDelegate&) = delete;
 
-  // Truncates the file to the number of bytes written.
   ~FileWriterDelegate() override;
 
-  // WriterDelegate methods:
-
-  // Seeks to the beginning of the file, returning false if the seek fails.
+  // Returns true if the file handle passed to the constructor is valid.
   bool PrepareOutput() override;
 
   // Writes |num_bytes| bytes of |data| to the file, returning false on error or
@@ -307,49 +317,44 @@ class FileWriterDelegate : public WriterDelegate {
   // executable.
   void SetPosixFilePermissions(int mode) override;
 
-  // Return the actual size of the file.
+  // Empties the file to avoid leaving garbage data in it.
+  void OnError() override;
+
+  // Gets the number of bytes written into the file.
   int64_t file_length() { return file_length_; }
 
- private:
-  // The file the delegate modifies.
-  base::File* file_;
-
+ protected:
   // The delegate can optionally own the file it modifies, in which case
   // owned_file_ is set and file_ is an alias for owned_file_.
-  std::unique_ptr<base::File> owned_file_;
+  base::File owned_file_;
+
+  // The file the delegate modifies.
+  base::File* const file_ = &owned_file_;
 
   int64_t file_length_ = 0;
 };
 
-// A writer delegate that writes a file at a given path.
-class FilePathWriterDelegate : public WriterDelegate {
+// A writer delegate that creates and writes a file at a given path. This does
+// not overwrite any existing file.
+class FilePathWriterDelegate : public FileWriterDelegate {
  public:
-  explicit FilePathWriterDelegate(const base::FilePath& output_file_path);
+  explicit FilePathWriterDelegate(base::FilePath output_file_path);
 
   FilePathWriterDelegate(const FilePathWriterDelegate&) = delete;
   FilePathWriterDelegate& operator=(const FilePathWriterDelegate&) = delete;
 
   ~FilePathWriterDelegate() override;
 
-  // WriterDelegate methods:
-
-  // Creates the output file and any necessary intermediate directories.
+  // Creates the output file and any necessary intermediate directories. Does
+  // not overwrite any existing file, and returns false if the output file
+  // cannot be created because another file conflicts with it.
   bool PrepareOutput() override;
 
-  // Writes |num_bytes| bytes of |data| to the file, returning false if not all
-  // bytes could be written.
-  bool WriteBytes(const char* data, int num_bytes) override;
-
-  // Sets the last-modified time of the data.
-  void SetTimeModified(const base::Time& time) override;
-
-  // On POSIX systems, sets the file to be executable if the source file was
-  // executable.
-  void SetPosixFilePermissions(int mode) override;
+  // Deletes the output file.
+  void OnError() override;
 
  private:
-  base::FilePath output_file_path_;
-  base::File file_;
+  const base::FilePath output_file_path_;
 };
 
 }  // namespace zip

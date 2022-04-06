@@ -782,9 +782,6 @@ class FrameCaptureShared final : angle::NonCopyable
     ShaderSourceMap mCachedShaderSource;
     ProgramSourceMap mCachedProgramSources;
 
-    // Cache a shadow copy of texture level data
-    TextureLevelDataMap mCachedTextureLevelData;
-
     gl::ContextID mWindowSurfaceContextID;
 
     std::vector<CallCapture> mShareGroupSetupCalls;
@@ -924,6 +921,11 @@ template <>
 void WriteParamValueReplay<ParamType::TGLintConstPointer>(std::ostream &os,
                                                           const CallCapture &call,
                                                           const GLint *value);
+
+template <>
+void WriteParamValueReplay<ParamType::TGLsizeiPointer>(std::ostream &os,
+                                                       const CallCapture &call,
+                                                       GLsizei *value);
 
 template <>
 void WriteParamValueReplay<ParamType::TGLuintConstPointer>(std::ostream &os,

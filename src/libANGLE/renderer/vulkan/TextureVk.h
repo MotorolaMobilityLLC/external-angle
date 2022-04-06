@@ -202,19 +202,24 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
 
     void releaseOwnershipOfImage(const gl::Context *context);
 
-    const vk::ImageView &getReadImageViewAndRecordUse(ContextVk *contextVk,
-                                                      GLenum srgbDecode,
-                                                      bool texelFetchStaticUse) const;
+    const vk::ImageView &getReadImageView(vk::Context *context,
+                                          GLenum srgbDecode,
+                                          bool texelFetchStaticUse) const;
 
     // A special view for cube maps as a 2D array, used with shaders that do texelFetch() and for
     // seamful cube map emulation.
-    const vk::ImageView &getFetchImageViewAndRecordUse(ContextVk *contextVk,
-                                                       GLenum srgbDecode,
-                                                       bool texelFetchStaticUse) const;
+    const vk::ImageView &getFetchImageView(vk::Context *context,
+                                           GLenum srgbDecode,
+                                           bool texelFetchStaticUse) const;
+
+    angle::Result getBufferViewAndRecordUse(vk::Context *context,
+                                            const vk::Format *imageUniformFormat,
+                                            bool isImage,
+                                            const vk::BufferView **viewOut);
 
     // A special view used for texture copies that shouldn't perform swizzle.
-    const vk::ImageView &getCopyImageViewAndRecordUse(ContextVk *contextVk) const;
-    angle::Result getStorageImageView(ContextVk *contextVk,
+    const vk::ImageView &getCopyImageView() const;
+    angle::Result getStorageImageView(vk::Context *context,
                                       const gl::ImageUnit &binding,
                                       const vk::ImageView **imageViewOut);
 
@@ -223,11 +228,6 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
         ASSERT(mSampler.valid());
         return mSampler.get();
     }
-
-    angle::Result getBufferViewAndRecordUse(ContextVk *contextVk,
-                                            const vk::Format *imageUniformFormat,
-                                            bool isImage,
-                                            const vk::BufferView **viewOut);
 
     // Normally, initialize the image with enabled mipmap level counts.
     angle::Result ensureImageInitialized(ContextVk *contextVk, ImageMipLevels mipLevels);
@@ -285,6 +285,8 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
 
     // Get the layer count for views.
     uint32_t getImageViewLayerCount() const;
+    // Get the level count for views.
+    uint32_t getImageViewLevelCount() const;
 
     void releaseAndDeleteImageAndViews(ContextVk *contextVk);
     angle::Result ensureImageAllocated(ContextVk *contextVk, const vk::Format &format);
@@ -443,7 +445,7 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
                                               gl::LevelIndex level,
                                               GLuint layerIndex,
                                               GLuint layerCount);
-    angle::Result getLevelLayerImageView(ContextVk *contextVk,
+    angle::Result getLevelLayerImageView(vk::Context *context,
                                          gl::LevelIndex levelGL,
                                          size_t layer,
                                          const vk::ImageView **imageViewOut);
@@ -475,7 +477,7 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
     }
 
     angle::Result refreshImageViews(ContextVk *contextVk);
-    bool shouldDecodeSRGB(ContextVk *contextVk, GLenum srgbDecode, bool texelFetchStaticUse) const;
+    bool shouldDecodeSRGB(vk::Context *context, GLenum srgbDecode, bool texelFetchStaticUse) const;
     void initImageUsageFlags(ContextVk *contextVk, angle::FormatID actualFormatID);
     void handleImmutableSamplerTransition(const vk::ImageHelper *previousImage,
                                           const vk::ImageHelper *nextImage);
@@ -490,15 +492,12 @@ class TextureVk : public TextureImpl, public angle::ObserverInterface
     vk::ImageAccess mRequiredImageAccess;
     bool mImmutableSamplerDirty;
 
-    gl::TextureType mImageNativeType;
-
-    // The layer offset to apply when converting from a frontend texture layer to a texture layer in
-    // mImage. Used when this texture sources a cube map face or 3D texture layer from an EGL image.
-    uint32_t mImageLayerOffset;
-
-    // The level offset to apply when converting from a frontend texture level to texture level in
-    // mImage.
-    uint32_t mImageLevelOffset;
+    // Only valid if this texture is an "EGLImage target" and the associated EGL Image was
+    // originally sourced from an OpenGL texture. Such EGL Images can be a slice of the underlying
+    // resource. The layer and level offsets are used to track the location of the slice.
+    gl::TextureType mEGLImageNativeType;
+    uint32_t mEGLImageLayerOffset;
+    uint32_t mEGLImageLevelOffset;
 
     // If multisampled rendering to texture, an intermediate multisampled image is created for use
     // as renderpass color attachment.  An array of images and image views are used based on the

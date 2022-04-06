@@ -183,9 +183,8 @@ struct UnzipOptions {
   // Password to decrypt the encrypted files.
   std::string password;
 
-  // If |log_skipped_files| is true, files skipped during extraction are printed
-  // to debug log.
-  bool log_skipped_files = true;
+  // Should ignore errors when extracting files?
+  bool continue_on_error = false;
 };
 
 typedef base::RepeatingCallback<std::unique_ptr<WriterDelegate>(
@@ -202,6 +201,9 @@ bool Unzip(const base::PlatformFile& zip_file,
            UnzipOptions options = {});
 
 // Unzips the contents of |zip_file| into |dest_dir|.
+// This function does not overwrite any existing file.
+// A filename collision will result in an error.
+// Therefore, |dest_dir| should initially be an empty directory.
 bool Unzip(const base::FilePath& zip_file,
            const base::FilePath& dest_dir,
            UnzipOptions options = {});

@@ -10,10 +10,12 @@
 #include "base/bind.h"
 #include "base/files/file.h"
 #include "base/files/file_enumerator.h"
+#include "base/files/file_util.h"
 #include "base/logging.h"
 #include "base/memory/ptr_util.h"
 #include "base/strings/string_util.h"
 #include "build/build_config.h"
+#include "third_party/zlib/google/redact.h"
 #include "third_party/zlib/google/zip_internal.h"
 #include "third_party/zlib/google/zip_reader.h"
 #include "third_party/zlib/google/zip_writer.h"
@@ -28,7 +30,10 @@ bool IsHiddenFile(const base::FilePath& file_path) {
 // Creates a directory at |extract_dir|/|entry_path|, including any parents.
 bool CreateDirectory(const base::FilePath& extract_dir,
                      const base::FilePath& entry_path) {
-  return base::CreateDirectory(extract_dir.Append(entry_path));
+  const base::FilePath dir = extract_dir.Append(entry_path);
+  const bool ok = base::CreateDirectory(dir);
+  PLOG_IF(ERROR, !ok) << "Cannot create directory " << Redact(dir);
+  return ok;
 }
 
 // Creates a WriterDelegate that can write a file at |extract_dir|/|entry_path|.
@@ -55,12 +60,13 @@ class DirectFileAccessor : public FileAccessor {
       const base::FilePath absolute_path = src_dir_.Append(path);
       if (base::DirectoryExists(absolute_path)) {
         files->emplace_back();
-        LOG(ERROR) << "Cannot open '" << path << "': It is a directory";
+        LOG(ERROR) << "Cannot open " << Redact(path) << ": It is a directory";
       } else {
-        files->emplace_back(absolute_path,
-                            base::File::FLAG_OPEN | base::File::FLAG_READ);
-        LOG_IF(ERROR, !files->back().IsValid())
-            << "Cannot open '" << path << "'";
+        const base::File& file = files->emplace_back(
+            absolute_path, base::File::FLAG_OPEN | base::File::FLAG_READ);
+        LOG_IF(ERROR, !file.IsValid())
+            << "Cannot open " << Redact(path) << ": "
+            << base::File::ErrorToString(file.error_details());
       }
     }
 
@@ -93,7 +99,7 @@ class DirectFileAccessor : public FileAccessor {
 
     base::File::Info file_info;
     if (!base::GetFileInfo(src_dir_.Append(path), &file_info)) {
-      LOG(ERROR) << "Cannot get info of '" << path << "'";
+      PLOG(ERROR) << "Cannot get info of " << Redact(path);
       return false;
     }
 
@@ -170,9 +176,13 @@ bool Unzip(const base::FilePath& src_file,
            UnzipOptions options) {
   base::File file(src_file, base::File::FLAG_OPEN | base::File::FLAG_READ);
   if (!file.IsValid()) {
-    DLOG(WARNING) << "Cannot open '" << src_file << "'";
+    PLOG(ERROR) << "Cannot open " << Redact(src_file) << ": "
+                << base::File::ErrorToString(file.error_details());
     return false;
   }
+
+  DLOG_IF(WARNING, !base::IsDirectoryEmpty(dest_dir))
+      << "ZIP extraction directory is not empty: " << dest_dir;
 
   return Unzip(file.GetPlatformFile(),
                base::BindRepeating(&CreateFilePathWriterDelegate, dest_dir),
@@ -189,26 +199,30 @@ bool Unzip(const base::PlatformFile& src_file,
   reader.SetPassword(std::move(options.password));
 
   if (!reader.OpenFromPlatformFile(src_file)) {
-    DLOG(WARNING) << "Cannot open ZIP from file handle " << src_file;
+    LOG(ERROR) << "Cannot open ZIP from file handle " << src_file;
     return false;
   }
 
   while (const ZipReader::Entry* const entry = reader.Next()) {
     if (entry->is_unsafe) {
-      DLOG(WARNING) << "Found unsafe entry in ZIP: " << entry->path;
-      return false;
+      LOG(ERROR) << "Found unsafe entry " << Redact(entry->path) << " in ZIP";
+      if (!options.continue_on_error)
+        return false;
+      continue;
     }
 
     if (options.filter && !options.filter.Run(entry->path)) {
-      DLOG_IF(WARNING, options.log_skipped_files)
-          << "Skipped ZIP entry " << entry->path;
+      VLOG(1) << "Skipped ZIP entry " << Redact(entry->path);
       continue;
     }
 
     if (entry->is_directory) {
       // It's a directory.
-      if (!directory_creator.Run(entry->path))
-        return false;
+      if (!directory_creator.Run(entry->path)) {
+        LOG(ERROR) << "Cannot create directory " << Redact(entry->path);
+        if (!options.continue_on_error)
+          return false;
+      }
 
       continue;
     }
@@ -216,8 +230,10 @@ bool Unzip(const base::PlatformFile& src_file,
     // It's a file.
     std::unique_ptr<WriterDelegate> writer = writer_factory.Run(entry->path);
     if (!writer || !reader.ExtractCurrentEntry(writer.get())) {
-      DLOG(WARNING) << "Cannot extract " << entry->path;
-      return false;
+      LOG(ERROR) << "Cannot extract file " << Redact(entry->path)
+                 << " from ZIP";
+      if (!options.continue_on_error)
+        return false;
     }
   }
 

@@ -110,6 +110,7 @@ class MockWriterDelegate : public zip::WriterDelegate {
   MOCK_METHOD2(WriteBytes, bool(const char*, int));
   MOCK_METHOD1(SetTimeModified, void(const base::Time&));
   MOCK_METHOD1(SetPosixFilePermissions, void(int));
+  MOCK_METHOD0(OnError, void());
 };
 
 bool ExtractCurrentEntryToFilePath(zip::ZipReader* reader,
@@ -307,19 +308,18 @@ TEST_F(ZipReaderTest, DotDotFile) {
   ZipReader reader;
   ASSERT_TRUE(reader.Open(data_dir_.AppendASCII("evil.zip")));
   base::FilePath target_path(FILE_PATH_LITERAL(
-      "../levilevilevilevilevilevilevilevilevilevilevilevil"));
+      "UP/levilevilevilevilevilevilevilevilevilevilevilevil"));
   const ZipReader::Entry* entry = LocateAndOpenEntry(&reader, target_path);
   ASSERT_TRUE(entry);
   EXPECT_EQ(target_path, entry->path);
-  // This file is unsafe because of ".." in the file name.
-  EXPECT_TRUE(entry->is_unsafe);
+  EXPECT_FALSE(entry->is_unsafe);
   EXPECT_FALSE(entry->is_directory);
 }
 
 TEST_F(ZipReaderTest, InvalidUTF8File) {
   ZipReader reader;
   ASSERT_TRUE(reader.Open(data_dir_.AppendASCII("evil_via_invalid_utf8.zip")));
-  base::FilePath target_path = base::FilePath::FromUTF8Unsafe(".�.\\evil.txt");
+  base::FilePath target_path = base::FilePath::FromUTF8Unsafe(".�.�evil.txt");
   const ZipReader::Entry* entry = LocateAndOpenEntry(&reader, target_path);
   ASSERT_TRUE(entry);
   EXPECT_EQ(target_path, entry->path);
@@ -336,7 +336,7 @@ TEST_F(ZipReaderTest, EncodingSjisAsUtf8) {
   EXPECT_THAT(
       GetPaths(data_dir_.AppendASCII("SJIS Bug 846195.zip")),
       ElementsAre(
-          base::FilePath::FromUTF8Unsafe("�V�����t�H���_/SJIS_835C_�\\.txt"),
+          base::FilePath::FromUTF8Unsafe("�V�����t�H���_/SJIS_835C_��.txt"),
           base::FilePath::FromUTF8Unsafe(
               "�V�����t�H���_/�V�����e�L�X�g �h�L�������g.txt")));
 }
@@ -348,7 +348,7 @@ TEST_F(ZipReaderTest, EncodingSjisAs1252) {
   EXPECT_THAT(
       GetPaths(data_dir_.AppendASCII("SJIS Bug 846195.zip"), "windows-1252"),
       ElementsAre(base::FilePath::FromUTF8Unsafe(
-                      "\u0090V‚µ‚¢ƒtƒHƒ‹ƒ_/SJIS_835C_ƒ\\.txt"),
+                      "\u0090V‚µ‚¢ƒtƒHƒ‹ƒ_/SJIS_835C_ƒ�.txt"),
                   base::FilePath::FromUTF8Unsafe(
                       "\u0090V‚µ‚¢ƒtƒHƒ‹ƒ_/\u0090V‚µ‚¢ƒeƒLƒXƒg "
                       "ƒhƒLƒ…ƒ\u0081ƒ“ƒg.txt")));
@@ -360,7 +360,7 @@ TEST_F(ZipReaderTest, EncodingSjisAsIbm866) {
   EXPECT_THAT(
       GetPaths(data_dir_.AppendASCII("SJIS Bug 846195.zip"), "IBM866"),
       ElementsAre(
-          base::FilePath::FromUTF8Unsafe("РVВ╡ВвГtГHГЛГ_/SJIS_835C_Г\\.txt"),
+          base::FilePath::FromUTF8Unsafe("РVВ╡ВвГtГHГЛГ_/SJIS_835C_Г�.txt"),
           base::FilePath::FromUTF8Unsafe(
               "РVВ╡ВвГtГHГЛГ_/РVВ╡ВвГeГLГXГg ГhГLГЕГБГУГg.txt")));
 }
@@ -379,12 +379,11 @@ TEST_F(ZipReaderTest, AbsoluteFile) {
   ZipReader reader;
   ASSERT_TRUE(
       reader.Open(data_dir_.AppendASCII("evil_via_absolute_file_name.zip")));
-  base::FilePath target_path(FILE_PATH_LITERAL("/evil.txt"));
+  base::FilePath target_path(FILE_PATH_LITERAL("ROOT/evil.txt"));
   const ZipReader::Entry* entry = LocateAndOpenEntry(&reader, target_path);
   ASSERT_TRUE(entry);
   EXPECT_EQ(target_path, entry->path);
-  // This file is unsafe because of the absolute file name.
-  EXPECT_TRUE(entry->is_unsafe);
+  EXPECT_FALSE(entry->is_unsafe);
   EXPECT_FALSE(entry->is_directory);
 }
 
@@ -828,13 +827,14 @@ TEST_F(ZipReaderTest, ExtractCurrentEntryPrepareFailure) {
   ASSERT_FALSE(reader.ExtractCurrentEntry(&mock_writer));
 }
 
-// Test that when WriterDelegate::WriteBytes returns false, no other methods on
-// the delegate are called and the extraction fails.
+// Test that when WriterDelegate::WriteBytes returns false, only the OnError
+// method on the delegate is called and the extraction fails.
 TEST_F(ZipReaderTest, ExtractCurrentEntryWriteBytesFailure) {
   testing::StrictMock<MockWriterDelegate> mock_writer;
 
   EXPECT_CALL(mock_writer, PrepareOutput()).WillOnce(Return(true));
   EXPECT_CALL(mock_writer, WriteBytes(_, _)).WillOnce(Return(false));
+  EXPECT_CALL(mock_writer, OnError());
 
   base::FilePath target_path(FILE_PATH_LITERAL("foo/bar/quux.txt"));
   ZipReader reader;
@@ -903,34 +903,39 @@ class FileWriterDelegateTest : public ::testing::Test {
     ASSERT_TRUE(file_.IsValid());
   }
 
-  // Writes data to the file, leaving the current position at the end of the
-  // write.
-  void PopulateFile() {
-    static const char kSomeData[] = "this sure is some data.";
-    static const size_t kSomeDataLen = sizeof(kSomeData) - 1;
-    ASSERT_NE(-1LL, file_.Write(0LL, kSomeData, kSomeDataLen));
-  }
-
   base::FilePath temp_file_path_;
   base::File file_;
 };
 
-TEST_F(FileWriterDelegateTest, WriteToStartAndTruncate) {
-  // Write stuff and advance.
-  PopulateFile();
+TEST_F(FileWriterDelegateTest, WriteToEnd) {
+  const std::string payload = "This is the actualy payload data.\n";
 
-  // This should rewind, write, then truncate.
-  static const char kSomeData[] = "short";
-  static const int kSomeDataLen = sizeof(kSomeData) - 1;
   {
     FileWriterDelegate writer(&file_);
+    EXPECT_EQ(0, writer.file_length());
     ASSERT_TRUE(writer.PrepareOutput());
-    ASSERT_TRUE(writer.WriteBytes(kSomeData, kSomeDataLen));
+    ASSERT_TRUE(writer.WriteBytes(payload.data(), payload.size()));
+    EXPECT_EQ(payload.size(), writer.file_length());
   }
-  ASSERT_EQ(kSomeDataLen, file_.GetLength());
-  char buf[kSomeDataLen] = {};
-  ASSERT_EQ(kSomeDataLen, file_.Read(0LL, buf, kSomeDataLen));
-  ASSERT_EQ(std::string(kSomeData), std::string(buf, kSomeDataLen));
+
+  EXPECT_EQ(payload.size(), file_.GetLength());
+}
+
+TEST_F(FileWriterDelegateTest, EmptyOnError) {
+  const std::string payload = "This is the actualy payload data.\n";
+
+  {
+    FileWriterDelegate writer(&file_);
+    EXPECT_EQ(0, writer.file_length());
+    ASSERT_TRUE(writer.PrepareOutput());
+    ASSERT_TRUE(writer.WriteBytes(payload.data(), payload.size()));
+    EXPECT_EQ(payload.size(), writer.file_length());
+    EXPECT_EQ(payload.size(), file_.GetLength());
+    writer.OnError();
+    EXPECT_EQ(0, writer.file_length());
+  }
+
+  EXPECT_EQ(0, file_.GetLength());
 }
 
 }  // namespace zip
