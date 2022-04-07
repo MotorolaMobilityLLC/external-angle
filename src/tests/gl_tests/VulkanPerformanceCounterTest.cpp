@@ -189,7 +189,7 @@ class VulkanPerformanceCounterTest : public ANGLETest
         // Clear and draw with depth and stencil buffer enabled
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |
                 (clearStencil ? GL_STENCIL_BUFFER_BIT : 0));
-        drawQuad(*program, essl1_shaders::PositionAttrib(), 0.5f);
+        drawQuad(*program, essl1_shaders::PositionAttrib(), 1.f);
         ASSERT_GL_NO_ERROR();
     }
 
@@ -1556,6 +1556,80 @@ TEST_P(VulkanPerformanceCounterTest, DepthStencilInvalidateSub)
     ASSERT_GL_NO_ERROR();
     swapBuffers();
     compareDepthStencilLoadOpCounters(getPerfCounters(), expected);
+}
+
+// Similar to InvalidateSub, but uses glInvalidateSubFramebuffer such that the given area does NOT
+// covers the whole framebuffer.
+TEST_P(VulkanPerformanceCounterTest, DepthStencilPartialInvalidateSub)
+{
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
+    initANGLEFeatures();
+
+    angle::VulkanPerfCounters expected;
+
+    // Expect rpCount+1, depth(Clears+1, Loads+0, LoadNones+0, Stores+1, StoreNones+0),
+    // stencil(Clears+1, Loads+0, LoadNones+0, Stores+1, StoreNones+0)
+    setExpectedCountersForDepthOps(getPerfCounters(), 1, 1, 0, 0, 1, 0, &expected);
+    setExpectedCountersForStencilOps(getPerfCounters(), 1, 0, 0, 1, 0, &expected);
+
+    // Create the framebuffer and make sure depth/stencil have valid contents.
+    ANGLE_GL_PROGRAM(drawRed, essl1_shaders::vs::Simple(), essl1_shaders::fs::Red());
+    GLFramebuffer framebuffer;
+    GLTexture texture;
+    GLRenderbuffer renderbuffer;
+    setupClearAndDrawForDepthStencilOpsTest(&drawRed, &framebuffer, &texture, &renderbuffer, true);
+
+    // Break the render pass so depth/stencil values are stored.
+    EXPECT_EQ(expected.renderPasses, getPerfCounters().renderPasses);
+    EXPECT_PIXEL_COLOR_EQ(0, 0, GLColor::red);
+    compareDepthStencilOpCounters(getPerfCounters(), expected);
+
+    // Start a new render pass that is scissored.  Depth/stencil should be loaded.  The draw call is
+    // followed by an invalidate, so store shouldn't happen.
+
+    // Expect rpCount+1, depth(Clears+0, Loads+1, LoadNones+0, Stores+0, StoreNones+0),
+    // stencil(Clears+0, Loads+1, LoadNones+0, Stores+0, StoreNones+0)
+    setExpectedCountersForDepthOps(getPerfCounters(), 1, 0, 1, 0, 0, 0, &expected);
+    setExpectedCountersForStencilOps(getPerfCounters(), 0, 1, 0, 0, 0, &expected);
+
+    glEnable(GL_SCISSOR_TEST);
+    glScissor(kOpsTestSize / 8, kOpsTestSize / 4, kOpsTestSize / 2, kOpsTestSize / 3);
+
+    glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+    glStencilFunc(GL_ALWAYS, 0x55, 0xFF);
+    glDepthFunc(GL_ALWAYS);
+
+    ANGLE_GL_PROGRAM(drawGreen, essl1_shaders::vs::Simple(), essl1_shaders::fs::Green());
+    drawQuad(drawGreen, essl1_shaders::PositionAttrib(), 0.5f);
+    ASSERT_GL_NO_ERROR();
+
+    const GLenum discards[] = {GL_DEPTH_ATTACHMENT, GL_STENCIL_ATTACHMENT};
+    glInvalidateSubFramebuffer(GL_FRAMEBUFFER, 2, discards, kOpsTestSize / 8, kOpsTestSize / 8,
+                               7 * kOpsTestSize / 8, 7 * kOpsTestSize / 8);
+
+    // Break the render pass so depth/stencil values are discarded.
+    EXPECT_EQ(expected.renderPasses, getPerfCounters().renderPasses);
+    EXPECT_PIXEL_COLOR_EQ(kOpsTestSize / 2, kOpsTestSize / 2, GLColor::green);
+    compareDepthStencilOpCounters(getPerfCounters(), expected);
+
+    // Start another render pass without scissor.  Because parts of the framebuffer attachments were
+    // not invalidated, depth/stencil should be loaded.
+
+    // Expect rpCount+1, depth(Clears+0, Loads+1, LoadNones+0, Stores+1, StoreNones+0),
+    // stencil(Clears+0, Loads+1, LoadNones+0, Stores+1, StoreNones+0)
+    setExpectedCountersForDepthOps(getPerfCounters(), 1, 0, 1, 0, 1, 0, &expected);
+    setExpectedCountersForStencilOps(getPerfCounters(), 0, 1, 0, 1, 0, &expected);
+
+    glDisable(GL_SCISSOR_TEST);
+
+    ANGLE_GL_PROGRAM(drawBlue, essl1_shaders::vs::Simple(), essl1_shaders::fs::Blue());
+    drawQuad(drawBlue, essl1_shaders::PositionAttrib(), 0.5f);
+    ASSERT_GL_NO_ERROR();
+
+    // Verify results
+    EXPECT_EQ(expected.renderPasses, getPerfCounters().renderPasses);
+    EXPECT_PIXEL_COLOR_EQ(0, 0, GLColor::blue);
+    compareDepthStencilOpCounters(getPerfCounters(), expected);
 }
 
 // Tests that another case does not break render pass, and that counts are correct:
@@ -4213,6 +4287,92 @@ TEST_P(VulkanPerformanceCounterTest_MSAA, SwapShouldInvalidateDepthStencil)
     // Swap buffers to implicitely resolve
     swapBuffers();
     compareDepthStencilOpCounters(getPerfCounters(), expected);
+}
+
+// Verifies that multisample swapchain resolve occurs in subpass.
+TEST_P(VulkanPerformanceCounterTest_MSAA, SwapShouldResolveWithSubpass)
+{
+    angle::VulkanPerfCounters expected;
+    // Expect rpCount+1, color(Clears+1, Loads+0, LoadNones+0, Stores+1, StoreNones+0)
+    setExpectedCountersForColorOps(getPerfCounters(), 1, 1, 0, 0, 1, 0, &expected);
+
+    uint32_t expectedResolvesSubpass = getPerfCounters().swapchainResolveInSubpass + 1;
+    uint32_t expectedResolvesOutside = getPerfCounters().swapchainResolveOutsideSubpass;
+
+    // Clear color.
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // Set up program
+    ANGLE_GL_PROGRAM(drawColor, essl1_shaders::vs::Simple(), essl1_shaders::fs::UniformColor());
+    glUseProgram(drawColor);
+    GLint colorUniformLocation =
+        glGetUniformLocation(drawColor, angle::essl1_shaders::ColorUniform());
+    ASSERT_NE(colorUniformLocation, -1);
+
+    // Draw green
+    glUniform4f(colorUniformLocation, 0.0f, 1.0f, 0.0f, 1.0f);
+    drawQuad(drawColor, essl1_shaders::PositionAttrib(), 0.95f);
+    ASSERT_GL_NO_ERROR();
+
+    // Swap buffers to implicitly resolve
+    swapBuffers();
+    EXPECT_EQ(getPerfCounters().swapchainResolveInSubpass, expectedResolvesSubpass);
+    EXPECT_EQ(getPerfCounters().swapchainResolveOutsideSubpass, expectedResolvesOutside);
+
+    compareColorOpCounters(getPerfCounters(), expected);
+}
+
+// Verifies that in a multisample swapchain, drawing to the default FBO followed by user FBO and
+// then swapping triggers the resolve outside the optimization subpass.
+TEST_P(VulkanPerformanceCounterTest_MSAA, SwapAfterDrawToDifferentFBOsShouldResolveOutsideSubpass)
+{
+    constexpr GLsizei kSize = 16;
+    angle::VulkanPerfCounters expected;
+    // Expect rpCount+1, color(Clears+1, Loads+0, LoadNones+0, Stores+2, StoreNones+0)
+    setExpectedCountersForColorOps(getPerfCounters(), 1, 1, 0, 0, 2, 0, &expected);
+
+    uint32_t expectedResolvesSubpass = getPerfCounters().swapchainResolveInSubpass;
+    uint32_t expectedResolvesOutside = getPerfCounters().swapchainResolveOutsideSubpass + 1;
+
+    // Create a framebuffer to clear.
+    GLTexture color;
+    glBindTexture(GL_TEXTURE_2D, color);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, kSize, kSize, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+    GLFramebuffer fbo;
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, color, 0);
+    ASSERT_GL_NO_ERROR();
+
+    // Clear color.
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // Set up program
+    ANGLE_GL_PROGRAM(drawColor, essl1_shaders::vs::Simple(), essl1_shaders::fs::UniformColor());
+    glUseProgram(drawColor);
+    GLint colorUniformLocation =
+        glGetUniformLocation(drawColor, angle::essl1_shaders::ColorUniform());
+    ASSERT_NE(colorUniformLocation, -1);
+
+    // Draw green to default framebuffer
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glUniform4f(colorUniformLocation, 0.0f, 1.0f, 0.0f, 1.0f);
+    drawQuad(drawColor, essl1_shaders::PositionAttrib(), 0.95f);
+    ASSERT_GL_NO_ERROR();
+
+    // Draw blue to the user framebuffer
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glUniform4f(colorUniformLocation, 0.0f, 0.0f, 1.0f, 1.0f);
+    drawQuad(drawColor, essl1_shaders::PositionAttrib(), 0.95f);
+    ASSERT_GL_NO_ERROR();
+
+    // Swap buffers to resolve outside the optimization subpass
+    swapBuffers();
+    EXPECT_EQ(getPerfCounters().swapchainResolveInSubpass, expectedResolvesSubpass);
+    EXPECT_EQ(getPerfCounters().swapchainResolveOutsideSubpass, expectedResolvesOutside);
+
+    compareColorOpCounters(getPerfCounters(), expected);
 }
 
 // Tests that uniform updates eventually stop updating descriptor sets.
