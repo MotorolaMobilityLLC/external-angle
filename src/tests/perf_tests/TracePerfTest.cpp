@@ -1200,7 +1200,7 @@ TracePerfTest::TracePerfTest(const TracePerfParams &params)
 
     if (traceNameIs("car_chase"))
     {
-        if (IsWindows() && IsIntelHD630Mobile())
+        if (IsWindows() && IsIntel())
         {
             skipTest("http://anglebug.com/7173 Fails on Intel HD 630 Mobile");
         }
@@ -1210,6 +1210,11 @@ TracePerfTest::TracePerfTest(const TracePerfParams &params)
         addExtensionPrerequisite("GL_EXT_tessellation_shader");
         addExtensionPrerequisite("GL_KHR_texture_compression_astc_ldr");
         addExtensionPrerequisite("GL_EXT_texture_cube_map_array");
+    }
+
+    if (traceNameIs("aztec_ruins_high"))
+    {
+        addExtensionPrerequisite("GL_KHR_texture_compression_astc_ldr");
     }
 
     ASSERT(mParams.surfaceType == SurfaceType::Window || gEnableAllTraceTests);
