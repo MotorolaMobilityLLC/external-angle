@@ -1853,10 +1853,6 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     mBlendOperationAdvancedFeatures.sType =
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT;
 
-    mBlendOperationAdvancedProperties = {};
-    mBlendOperationAdvancedProperties.sType =
-        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
-
     if (!vkGetPhysicalDeviceProperties2KHR || !vkGetPhysicalDeviceFeatures2KHR)
     {
         return;
@@ -1987,7 +1983,6 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     if (ExtensionFound(VK_EXT_BLEND_OPERATION_ADVANCED_EXTENSION_NAME, deviceExtensionNames))
     {
         vk::AddToPNextChain(&deviceFeatures, &mBlendOperationAdvancedFeatures);
-        vk::AddToPNextChain(&deviceProperties, &mBlendOperationAdvancedProperties);
     }
 
     vkGetPhysicalDeviceFeatures2KHR(mPhysicalDevice, &deviceFeatures);
@@ -2017,7 +2012,6 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     mHostQueryResetFeatures.pNext                    = nullptr;
     mDepthClipControlFeatures.pNext                  = nullptr;
     mBlendOperationAdvancedFeatures.pNext            = nullptr;
-    mBlendOperationAdvancedProperties.pNext          = nullptr;
 }
 
 angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueFamilyIndex)
@@ -3309,6 +3303,16 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // (which would require Chromium and Capture/Replay test expectations updates).
     ANGLE_FEATURE_CONDITION(&mFeatures, emulateDithering, IsAndroid());
 
+    // GL_KHR_blend_equation_advanced is emulated when the equivalent Vulkan extension is not
+    // usable.  Additionally, the following platforms don't support INPUT_ATTACHMENT usage for the
+    // swapchain, so they are excluded:
+    //
+    // - Intel
+    //
+    // Without VK_GOOGLE_surfaceless_query, there is no way to automatically deduce this support.
+    ANGLE_FEATURE_CONDITION(&mFeatures, emulateAdvancedBlendEquations,
+                            !mFeatures.supportsBlendOperationAdvanced.enabled && !isIntel);
+
     // http://anglebug.com/6933
     // Android expects VkPresentRegionsKHR rectangles with a bottom-left origin, while spec
     // states they should have a top-left origin.
@@ -3318,9 +3322,6 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     ANGLE_FEATURE_CONDITION(&mFeatures, retainSpirvDebugInfo, getEnableValidationLayers());
 
     ANGLE_FEATURE_CONDITION(&mFeatures, generateSPIRVThroughGlslang, kUseSpirvGenThroughGlslang);
-
-    angle::PlatformMethods *platform = ANGLEPlatformCurrent();
-    platform->overrideFeaturesVk(platform, &mFeatures);
 
     ApplyFeatureOverrides(&mFeatures, displayVk->getState());
 

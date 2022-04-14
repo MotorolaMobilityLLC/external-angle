@@ -70,6 +70,7 @@ typedef enum SpvSourceLanguage_ {
     SpvSourceLanguageOpenCL_CPP = 4,
     SpvSourceLanguageHLSL = 5,
     SpvSourceLanguageCPP_for_OpenCL = 6,
+    SpvSourceLanguageSYCL = 7,
     SpvSourceLanguageMax = 0x7fffffff,
 } SpvSourceLanguage;
 
@@ -184,6 +185,7 @@ typedef enum SpvExecutionMode_ {
     SpvExecutionModeNoGlobalOffsetINTEL = 5895,
     SpvExecutionModeNumSIMDWorkitemsINTEL = 5896,
     SpvExecutionModeSchedulerTargetFmaxMhzINTEL = 5903,
+    SpvExecutionModeNamedBarrierCountINTEL = 6417,
     SpvExecutionModeMax = 0x7fffffff,
 } SpvExecutionMode;
 
