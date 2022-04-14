@@ -1546,6 +1546,7 @@ cc_library_static {
         "src/compiler/translator/tree_ops/SplitSequenceOperator.cpp",
         "src/compiler/translator/tree_ops/vulkan/DeclarePerVertexBlocks.cpp",
         "src/compiler/translator/tree_ops/vulkan/EarlyFragmentTestsOptimization.cpp",
+        "src/compiler/translator/tree_ops/vulkan/EmulateAdvancedBlendEquations.cpp",
         "src/compiler/translator/tree_ops/vulkan/EmulateDithering.cpp",
         "src/compiler/translator/tree_ops/vulkan/EmulateFragColorData.cpp",
         "src/compiler/translator/tree_ops/vulkan/FlagSamplersWithTexelFetch.cpp",
