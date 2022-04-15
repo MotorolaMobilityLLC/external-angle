@@ -2885,11 +2885,6 @@ class AddMockTextureNoRenderTargetTest : public ANGLETest
         setConfigBlueBits(8);
         setConfigAlphaBits(8);
     }
-
-    void overrideWorkaroundsD3D(FeaturesD3D *features) override
-    {
-        features->overrideFeatures({"add_mock_texture_no_render_target"}, true);
-    }
 };
 
 // Test to verify workaround succeeds when no program outputs exist http://anglebug.com/2283
@@ -4545,15 +4540,18 @@ TEST_P(FramebufferTest_ES3, InvalidateClearDraw)
     EXPECT_PIXEL_COLOR_EQ(0, 0, GLColor::magenta);
 }
 
-ANGLE_INSTANTIATE_TEST_ES2(AddMockTextureNoRenderTargetTest);
+ANGLE_INSTANTIATE_TEST_ES2_AND(AddMockTextureNoRenderTargetTest,
+                               ES2_D3D9().enable(Feature::AddMockTextureNoRenderTarget),
+                               ES2_D3D11().enable(Feature::AddMockTextureNoRenderTarget));
+
 ANGLE_INSTANTIATE_TEST_ES2(FramebufferTest);
 ANGLE_INSTANTIATE_TEST_ES2_AND_ES3(FramebufferFormatsTest);
 
 GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(FramebufferTest_ES3);
 ANGLE_INSTANTIATE_TEST_ES3_AND(FramebufferTest_ES3,
-                               WithEmulatedPrerotation(ES3_VULKAN(), 90),
-                               WithEmulatedPrerotation(ES3_VULKAN(), 180),
-                               WithEmulatedPrerotation(ES3_VULKAN(), 270));
+                               ES3_VULKAN().enable(Feature::EmulatedPrerotation90),
+                               ES3_VULKAN().enable(Feature::EmulatedPrerotation180),
+                               ES3_VULKAN().enable(Feature::EmulatedPrerotation270));
 
 GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(FramebufferTest_ES31);
 ANGLE_INSTANTIATE_TEST_ES31(FramebufferTest_ES31);

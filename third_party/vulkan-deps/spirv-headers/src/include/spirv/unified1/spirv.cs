@@ -62,6 +62,7 @@ namespace Spv
             OpenCL_CPP = 4,
             HLSL = 5,
             CPP_for_OpenCL = 6,
+            SYCL = 7,
         }
 
         public enum ExecutionModel
@@ -176,6 +177,7 @@ namespace Spv
             NoGlobalOffsetINTEL = 5895,
             NumSIMDWorkitemsINTEL = 5896,
             SchedulerTargetFmaxMhzINTEL = 5903,
+            NamedBarrierCountINTEL = 6417,
         }
 
         public enum StorageClass
