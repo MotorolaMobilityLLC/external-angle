@@ -7,7 +7,7 @@
 // Thread sanitizer skips.
 6718 TSAN : MultithreadingTestES3.MultithreadFenceDraw/* = SKIP
 6718 TSAN : MultithreadingTestES3.MultithreadFenceTexImage/* = SKIP
-6746 TSAN : *AsyncQueue* = SKIP
+6746 TSAN : *_AsyncCommandQueue* = SKIP
 6804 TSAN : MultithreadingTest.MultiContextDrawWithSwapBuffers/* = SKIP
 7159 TSAN : InstancingTestES3.LargeDivisor/* = SKIP
 
@@ -49,6 +49,11 @@
 6730 VULKAN : GLSLTest_ES3.GLVertexIDIntegerTextureDrawElementsU8Line/* = SKIP
 6730 VULKAN : GLSLTest_ES3.GLVertexIDIntegerTextureDrawElementsU8LineIds/* = SKIP
 7151 VULKAN : IncompleteTextureTestES31.MultisampleTexture/* = SKIP
+7197 VULKAN : BlitFramebufferTest.ResolveWithRotation/ES3_Vulkan_EmulatedPrerotation180 = SKIP
+7197 VULKAN : BlitFramebufferTest.ResolveWithRotation/ES3_Vulkan_EmulatedPrerotation270 = SKIP
+7197 VULKAN : BlitFramebufferTest.BlitMultisampleStencilToDefault/ES3_Vulkan_EmulatedPrerotation180 = SKIP
+7198 VULKAN : BlitFramebufferTest.BlitMultisampleStencilToDefault/ES3_Vulkan_EmulatedPrerotation90 = SKIP
+7198 VULKAN : BlitFramebufferTest.BlitMultisampleStencilToDefault/ES3_Vulkan_EmulatedPrerotation270 = SKIP
 
 // Windows
 3786 WIN NVIDIA D3D11 : BufferDataOverflowTest.VertexBufferIntegerOverflow/* = SKIP
@@ -304,8 +309,8 @@
 200067929 NEXUS5X GLES : ShaderStorageBufferTest31.ShaderStorageBufferReadWriteAndBufferSubData/* = SKIP
 
 // Pixel 4 expectations.
-6344 PIXEL4ORXL : GLSLTest_ES31_InitShaderVariables.InitIOBlockWithStruct/ES3_1_Vulkan_InitShaderVars = SKIP
-6344 PIXEL4ORXL : GLSLTest_ES31_InitShaderVariables.InitIOBlockWithComplexTypes/ES3_1_Vulkan_InitShaderVars = SKIP
+6344 PIXEL4ORXL : GLSLTest_ES31_InitShaderVariables.InitIOBlockWithStruct/ES3_1_Vulkan_ForceInitShaderVariables = SKIP
+6344 PIXEL4ORXL : GLSLTest_ES31_InitShaderVariables.InitIOBlockWithComplexTypes/ES3_1_Vulkan_ForceInitShaderVariables = SKIP
 
 5981 PIXEL4ORXL GLES : BlitFramebufferTest.BlitSRGBToRGBOversizedDestArea/* = SKIP
 5981 PIXEL4ORXL GLES : CopyTexImageTest.CopyTexSubImageFrom3DTexureOES/* = SKIP
@@ -529,8 +534,8 @@
 6751 D3D11 : MultiDrawIndirectTest.MultiDrawElementsIndirect* = SKIP
 6751 D3D11 : DrawBaseVertexBaseInstanceTest.MultiDrawElementsInstancedBaseVertexBaseInstance/* = SKIP
 
-// ASAN flakes with Vulkan / SwiftShader / AsyncQueue
-6875 ASAN VULKAN SWIFTSHADER : ComputeShaderTest.*/ES3_1_Vulkan_SwiftShader_AsyncQueue = SKIP
+// ASAN flakes with Vulkan / SwiftShader / AsyncCommandQueue
+6875 ASAN VULKAN SWIFTSHADER : ComputeShaderTest.*/ES3_1_Vulkan_SwiftShader_AsyncCommandQueue = SKIP
 6875 SWIFTSHADER : TransformFeedbackTest.SpanMultipleRenderPasses/* = SKIP
 
 7112 SWIFTSHADER : TransformFeedbackTest.BaseInstance/* = SKIP

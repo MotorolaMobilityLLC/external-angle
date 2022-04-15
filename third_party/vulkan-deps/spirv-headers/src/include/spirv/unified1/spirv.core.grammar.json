@@ -9434,6 +9434,10 @@
         {
           "enumerant" : "CPP_for_OpenCL",
           "value" : 6
+        },
+        {
+          "enumerant" : "SYCL",
+          "value" : 7
         }
       ]
     },
@@ -10109,6 +10113,15 @@
             { "kind" : "LiteralInteger", "name" : "'target_fmax'" }
           ],
           "capabilities" : [ "FPGAKernelAttributesINTEL" ],
+          "version" : "None"
+        },
+        {
+          "enumerant" : "NamedBarrierCountINTEL",
+          "value" : 6417,
+          "parameters" : [
+            { "kind" : "LiteralInteger", "name" : "'Barrier Count'" }
+          ],
+          "capabilities" : [ "VectorComputeINTEL" ],
           "version" : "None"
         }
       ]
