@@ -34,13 +34,13 @@ vars = {
   'checkout_android_native_support': 'checkout_android or checkout_chromeos',
 
   # Version of Chromium our Chromium-based DEPS are mirrored from.
-  'chromium_revision': 'e6765ea8299f1aa4afbe0994f415ce3e25d24435',
+  'chromium_revision': 'e1b5a693bbfe7aa10c629797365770749dd90dcd',
   # We never want to checkout chromium,
   # but need a dummy DEPS entry for the autoroller
   'dummy_checkout_chromium': False,
 
   # Current revision of VK-GL-CTS (a.k.a dEQP).
-  'vk_gl_cts_revision': '20a474e64382e8f5144122b30b3d7cab182421b8',
+  'vk_gl_cts_revision': 'a22069b4e3b7f68cc0c161e8c93b1308bff0925f',
 
   # Current revision of googletest.
   # Note: this dep cannot be auto-rolled b/c of nesting.
@@ -79,7 +79,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling catapult
   # and whatever else without interference from each other.
-  'catapult_revision': 'e9e999a4a88a2963b60bec778f340d3c3d00fa1a',
+  'catapult_revision': '28b8ede735b79253b8689d5e270f4783e8413649',
 
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling luci-go
@@ -119,7 +119,7 @@ vars = {
 deps = {
 
   'build': {
-    'url': '{chromium_git}/chromium/src/build.git@bb1c23c67d2328cbb89966535bfca2916854bb8e',
+    'url': '{chromium_git}/chromium/src/build.git@7aeed11a9ec1ee0818210ea49573d0008a9df2bb',
     'condition': 'not build_with_chromium',
   },
 
@@ -137,7 +137,7 @@ deps = {
     'packages': [
       {
         'package': 'gn/gn/linux-amd64',
-        'version': 'git_revision:c114b7e0b3a327e854cae6b560902230436f1ac7',
+        'version': 'git_revision:1cdd270be9803dbfcdd0343f6104ad4dc30c38ce',
       }
     ],
     'dep_type': 'cipd',
@@ -148,7 +148,7 @@ deps = {
     'packages': [
       {
         'package': 'gn/gn/mac-${{arch}}',
-        'version': 'git_revision:c114b7e0b3a327e854cae6b560902230436f1ac7',
+        'version': 'git_revision:1cdd270be9803dbfcdd0343f6104ad4dc30c38ce',
       }
     ],
     'dep_type': 'cipd',
@@ -166,7 +166,7 @@ deps = {
   },
 
   'buildtools/third_party/libunwind/trunk': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libunwind.git@bbcbce996866ff1f947414a8d9db1e79bdc7dca2',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libunwind.git@1acfbbb4747081789ba48bc8c042fa3c5c8ccaa3',
     'condition': 'not build_with_chromium',
   },
 
@@ -174,7 +174,7 @@ deps = {
     'packages': [
       {
         'package': 'gn/gn/windows-amd64',
-        'version': 'git_revision:c114b7e0b3a327e854cae6b560902230436f1ac7',
+        'version': 'git_revision:1cdd270be9803dbfcdd0343f6104ad4dc30c38ce',
       }
     ],
     'dep_type': 'cipd',
@@ -182,12 +182,12 @@ deps = {
   },
 
   'testing': {
-    'url': '{chromium_git}/chromium/src/testing@533b4e6461e1c4867f9950ff7147c7e889ed97d0',
+    'url': '{chromium_git}/chromium/src/testing@e895c544f6a584dbb48f85f43bd4e117c550b3e4',
     'condition': 'not build_with_chromium',
   },
 
   'third_party/abseil-cpp': {
-    'url': '{chromium_git}/chromium/src/third_party/abseil-cpp@1f41b4fc8f4e69c27772a6ea14e534a7197568d3',
+    'url': '{chromium_git}/chromium/src/third_party/abseil-cpp@b0f34841aff13dac98725010b6ca401747d9b475',
     'condition': 'not build_with_chromium',
   },
 
@@ -332,7 +332,7 @@ deps = {
   },
 
   'third_party/depot_tools': {
-    'url': '{chromium_git}/chromium/tools/depot_tools.git@3c6f0eb95fddb6833820d3a10e80a7a2fb5d0167',
+    'url': '{chromium_git}/chromium/tools/depot_tools.git@7d2693ad8d9d304391b1c1fee9f88f258af5a211',
     'condition': 'not build_with_chromium',
   },
 
@@ -496,7 +496,7 @@ deps = {
   },
 
   'third_party/SwiftShader': {
-    'url': '{swiftshader_git}/SwiftShader@1d450ae99a0f4ade28dd55dac962f8b28d990376',
+    'url': '{swiftshader_git}/SwiftShader@103a69bd6c82980c967c2f4002c9a302ea67c716',
     'condition': 'not build_with_chromium',
   },
 
@@ -516,7 +516,7 @@ deps = {
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@c9be322642fb4c85bf70615bdbd2d206e60c19f5',
+    'url': '{chromium_git}/vulkan-deps@00e1ddd4230c7804ee732092af6dd0a79a7d9bfe',
     'condition': 'not build_with_chromium',
   },
 
@@ -531,7 +531,7 @@ deps = {
   },
 
   'third_party/zlib': {
-    'url': '{chromium_git}/chromium/src/third_party/zlib@a6d209ab932df0f1c9d5b7dc67cfa74e8a3272c0',
+    'url': '{chromium_git}/chromium/src/third_party/zlib@be2c3787c0b6fc5d7abf63b057b039a05acb94ce',
     'condition': 'not build_with_chromium',
   },
 
@@ -541,7 +541,7 @@ deps = {
   },
 
   'tools/clang': {
-    'url': '{chromium_git}/chromium/src/tools/clang.git@d82302711f8b44cb5a4adffa044343342a08118d',
+    'url': '{chromium_git}/chromium/src/tools/clang.git@7d4922aa8773389043e52575b706b94c7511d3d1',
     'condition': 'not build_with_chromium',
   },
 
@@ -572,7 +572,7 @@ deps = {
   },
 
   'tools/mb': {
-    'url': '{chromium_git}/chromium/src/tools/mb@f70aa510c468deff8c02bb15e69eababb31ea43a',
+    'url': '{chromium_git}/chromium/src/tools/mb@36b318c3885b77de69cccaa2b88eaa8b3309dbd9',
     'condition': 'not build_with_chromium',
   },
 
@@ -587,7 +587,7 @@ deps = {
   },
 
   'tools/perf': {
-    'url': '{chromium_git}/chromium/src/tools/perf@7b9534832c3f0bab0835e78a455ca4bd7d9107ec',
+    'url': '{chromium_git}/chromium/src/tools/perf@25916f0211676eabd25ed9949f7e4625981522a5',
     'condition': 'not build_with_chromium',
   },
 
@@ -1461,6 +1461,16 @@ deps = {
       'dep_type': 'cipd',
       'condition': 'checkout_angle_restricted_traces',
   },
+  'src/tests/restricted_traces/monster_strike': {
+      'packages': [
+        {
+            'package': 'angle/traces/monster_strike',
+            'version': 'version:1',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
   'src/tests/restricted_traces/my_talking_tom2': {
       'packages': [
         {
@@ -1796,6 +1806,16 @@ deps = {
         {
             'package': 'angle/traces/sonic_the_hedgehog',
             'version': 'version:5',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/special_forces_group_2': {
+      'packages': [
+        {
+            'package': 'angle/traces/special_forces_group_2',
+            'version': 'version:1',
         },
       ],
       'dep_type': 'cipd',
