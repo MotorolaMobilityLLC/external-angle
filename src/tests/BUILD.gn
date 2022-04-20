@@ -26,7 +26,7 @@ if (is_android) {
     ]
 
     deps = [
-      "//build/android:native_libraries_java",
+      "//build/android:build_java",
       "//build/android/gtest_apk:native_test_instrumentation_test_runner_java",
     ]
   }
@@ -242,6 +242,9 @@ if (is_win || is_linux || is_chromeos || is_android || is_fuchsia || is_apple) {
     }
     if (angle_use_x11) {
       sources += [ "egl_tests/EGLX11VisualTest.cpp" ]
+    }
+    if (angle_use_wayland) {
+      sources += [ "egl_tests/EGLWaylandTest.cpp" ]
     }
 
     configs += [ "${angle_root}:libANGLE_config" ]
