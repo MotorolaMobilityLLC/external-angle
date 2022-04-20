@@ -2460,22 +2460,21 @@ angle::Result ContextVk::handleDirtyDescriptorSetsImpl(CommandBufferT *commandBu
 
 void ContextVk::syncObjectPerfCounters()
 {
-    mPerfCounters.descriptorSetCacheTotalSize               = 0;
-    mPerfCounters.descriptorSetCacheKeySizeBytes            = 0;
-    mPerfCounters.uniformsAndXfbDescriptorSetCacheHits      = 0;
-    mPerfCounters.uniformsAndXfbDescriptorSetCacheMisses    = 0;
-    mPerfCounters.uniformsAndXfbDescriptorSetCacheTotalSize = 0;
-    mPerfCounters.textureDescriptorSetCacheHits             = 0;
-    mPerfCounters.textureDescriptorSetCacheMisses           = 0;
-    mPerfCounters.textureDescriptorSetCacheTotalSize        = 0;
-    mPerfCounters.shaderBuffersDescriptorSetCacheHits       = 0;
-    mPerfCounters.shaderBuffersDescriptorSetCacheMisses     = 0;
-    mPerfCounters.shaderBuffersDescriptorSetCacheTotalSize  = 0;
-    mPerfCounters.dynamicBufferAllocations                  = 0;
+    mPerfCounters.descriptorSetCacheTotalSize                = 0;
+    mPerfCounters.descriptorSetCacheKeySizeBytes             = 0;
+    mPerfCounters.uniformsAndXfbDescriptorSetCacheHits       = 0;
+    mPerfCounters.uniformsAndXfbDescriptorSetCacheMisses     = 0;
+    mPerfCounters.uniformsAndXfbDescriptorSetCacheTotalSize  = 0;
+    mPerfCounters.textureDescriptorSetCacheHits              = 0;
+    mPerfCounters.textureDescriptorSetCacheMisses            = 0;
+    mPerfCounters.textureDescriptorSetCacheTotalSize         = 0;
+    mPerfCounters.shaderResourcesDescriptorSetCacheHits      = 0;
+    mPerfCounters.shaderResourcesDescriptorSetCacheMisses    = 0;
+    mPerfCounters.shaderResourcesDescriptorSetCacheTotalSize = 0;
+    mPerfCounters.dynamicBufferAllocations                   = 0;
 
     // ProgramExecutableVk's descriptor set allocations
-    const gl::State &state                             = getState();
-    const gl::ShaderProgramManager &shadersAndPrograms = state.getShaderProgramManagerForCapture();
+    const gl::ShaderProgramManager &shadersAndPrograms = mState.getShaderProgramManagerForCapture();
     const gl::ResourceMap<gl::Program, gl::ShaderProgramID> &programs =
         shadersAndPrograms.getProgramsForCaptureAndPerf();
     for (const std::pair<GLuint, gl::Program *> &resource : programs)
@@ -2487,7 +2486,7 @@ void ContextVk::syncObjectPerfCounters()
         }
         ProgramVk *programVk = vk::GetImpl(resource.second);
         ProgramExecutablePerfCounters progPerfCounters =
-            programVk->getExecutable().getAndResetObjectPerfCounters();
+            programVk->getExecutable().getDescriptorSetPerfCounters();
 
         mPerfCounters.uniformsAndXfbDescriptorSetCacheHits +=
             progPerfCounters.cacheStats[DescriptorSetIndex::UniformsAndXfb].getHitCount();
@@ -2501,11 +2500,11 @@ void ContextVk::syncObjectPerfCounters()
             progPerfCounters.cacheStats[DescriptorSetIndex::Texture].getMissCount();
         mPerfCounters.textureDescriptorSetCacheTotalSize +=
             progPerfCounters.cacheStats[DescriptorSetIndex::Texture].getSize();
-        mPerfCounters.shaderBuffersDescriptorSetCacheHits +=
+        mPerfCounters.shaderResourcesDescriptorSetCacheHits +=
             progPerfCounters.cacheStats[DescriptorSetIndex::ShaderResource].getHitCount();
-        mPerfCounters.shaderBuffersDescriptorSetCacheMisses +=
+        mPerfCounters.shaderResourcesDescriptorSetCacheMisses +=
             progPerfCounters.cacheStats[DescriptorSetIndex::ShaderResource].getMissCount();
-        mPerfCounters.shaderBuffersDescriptorSetCacheTotalSize +=
+        mPerfCounters.shaderResourcesDescriptorSetCacheTotalSize +=
             progPerfCounters.cacheStats[DescriptorSetIndex::ShaderResource].getSize();
 
         for (uint32_t keySizeBytes : progPerfCounters.descriptorSetCacheKeySizesBytes)
@@ -2518,7 +2517,7 @@ void ContextVk::syncObjectPerfCounters()
         mPerfCounters.uniformsAndXfbDescriptorSetCacheTotalSize;
     mPerfCounters.descriptorSetCacheTotalSize += mPerfCounters.textureDescriptorSetCacheTotalSize;
     mPerfCounters.descriptorSetCacheTotalSize +=
-        mPerfCounters.shaderBuffersDescriptorSetCacheTotalSize;
+        mPerfCounters.shaderResourcesDescriptorSetCacheTotalSize;
 
     for (const DriverUniformsDescriptorSet &driverSet : mDriverUniforms)
     {
@@ -2556,18 +2555,18 @@ void ContextVk::updateOverlayOnPresent()
     }
 
     {
-        gl::RunningGraphWidget *shaderBufferHitRate =
-            overlay->getRunningGraphWidget(gl::WidgetId::VulkanShaderBufferDSHitRate);
-        size_t numCacheAccesses = mPerfCounters.shaderBuffersDescriptorSetCacheHits +
-                                  mPerfCounters.shaderBuffersDescriptorSetCacheMisses;
+        gl::RunningGraphWidget *shaderResourceHitRate =
+            overlay->getRunningGraphWidget(gl::WidgetId::VulkanShaderResourceDSHitRate);
+        size_t numCacheAccesses = mPerfCounters.shaderResourcesDescriptorSetCacheHits +
+                                  mPerfCounters.shaderResourcesDescriptorSetCacheMisses;
         if (numCacheAccesses > 0)
         {
             float hitRateFloat =
-                static_cast<float>(mPerfCounters.shaderBuffersDescriptorSetCacheHits) /
+                static_cast<float>(mPerfCounters.shaderResourcesDescriptorSetCacheHits) /
                 static_cast<float>(numCacheAccesses);
             size_t hitRate = static_cast<size_t>(hitRateFloat * 100.0f);
-            shaderBufferHitRate->add(hitRate);
-            shaderBufferHitRate->next();
+            shaderResourceHitRate->add(hitRate);
+            shaderResourceHitRate->next();
         }
     }
 
@@ -6146,8 +6145,6 @@ angle::Result ContextVk::flushAndGetSerial(const vk::Semaphore *signalSemaphore,
 
     ANGLE_TRY(submitFrame(signalSemaphore, submitSerialOut));
 
-    resetPerFramePerfCounters();
-
     ASSERT(mWaitSemaphores.empty());
     ASSERT(mWaitSemaphoreStageMasks.empty());
 
@@ -7229,5 +7226,18 @@ void ContextVk::resetPerFramePerfCounters()
     mPerfCounters.flushedOutsideRenderPassCommandBuffers = 0;
     mPerfCounters.resolveImageCommands                   = 0;
     mPerfCounters.descriptorSetAllocations               = 0;
+
+    const gl::ResourceMap<gl::Program, gl::ShaderProgramID> &programs =
+        mState.getShaderProgramManagerForCapture().getProgramsForCaptureAndPerf();
+    for (const std::pair<GLuint, gl::Program *> &resource : programs)
+    {
+        gl::Program *program = resource.second;
+        if (program->hasLinkingState())
+        {
+            continue;
+        }
+        ProgramVk *programVk = vk::GetImpl(program);
+        programVk->getExecutable().resetDescriptorSetPerfCounters();
+    }
 }
 }  // namespace rx
