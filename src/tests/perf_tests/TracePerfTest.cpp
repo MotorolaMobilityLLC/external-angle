@@ -1217,6 +1217,11 @@ TracePerfTest::TracePerfTest(const TracePerfParams &params)
         addExtensionPrerequisite("GL_KHR_texture_compression_astc_ldr");
     }
 
+    if (traceNameIs("special_forces_group_2"))
+    {
+        addExtensionPrerequisite("GL_EXT_texture_buffer");
+    }
+
     ASSERT(mParams.surfaceType == SurfaceType::Window || gEnableAllTraceTests);
     ASSERT(mParams.eglParameters.deviceType == EGL_PLATFORM_ANGLE_DEVICE_TYPE_HARDWARE_ANGLE ||
            gEnableAllTraceTests);
@@ -2063,7 +2068,7 @@ void RegisterTraceTests()
         if (gTraceTestValidation)
         {
             // Enable limits when validating traces because we usually turn off capture.
-            overrideParams.eglParameters.enable(Feature::CaptureLimits);
+            overrideParams.eglParameters.enable(Feature::EnableCaptureLimits);
 
             // This feature should also be enabled in capture to mirror the replay.
             overrideParams.eglParameters.enable(Feature::ForceInitShaderVariables);
