@@ -718,14 +718,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     vk::BufferPool *getDefaultBufferPool(VkDeviceSize size, uint32_t memoryTypeIndex)
     {
-        if (mState.hasDisplayTextureShareGroup())
-        {
-            return mRenderer->getDefaultBufferPool(size, memoryTypeIndex);
-        }
-        else
-        {
-            return mShareGroupVk->getDefaultBufferPool(mRenderer, size, memoryTypeIndex);
-        }
+        return mShareGroupVk->getDefaultBufferPool(mRenderer, size, memoryTypeIndex);
     }
 
     angle::Result allocateStreamedVertexBuffer(size_t attribIndex,
@@ -777,6 +770,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
         DIRTY_BIT_TEXTURES,
         DIRTY_BIT_VERTEX_BUFFERS,
         DIRTY_BIT_INDEX_BUFFER,
+        DIRTY_BIT_UNIFORMS,
         DIRTY_BIT_DRIVER_UNIFORMS,
         DIRTY_BIT_DRIVER_UNIFORMS_BINDING,
         // Shader resources excluding textures, which are handled separately.
@@ -834,6 +828,8 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     static_assert(DIRTY_BIT_TRANSFORM_FEEDBACK_RESUME > DIRTY_BIT_RENDER_PASS,
                   "Render pass using dirty bit must be handled after the render pass dirty bit");
     static_assert(DIRTY_BIT_DESCRIPTOR_SETS > DIRTY_BIT_RENDER_PASS,
+                  "Render pass using dirty bit must be handled after the render pass dirty bit");
+    static_assert(DIRTY_BIT_UNIFORMS > DIRTY_BIT_RENDER_PASS,
                   "Render pass using dirty bit must be handled after the render pass dirty bit");
     static_assert(DIRTY_BIT_FRAMEBUFFER_FETCH_BARRIER > DIRTY_BIT_RENDER_PASS,
                   "Render pass using dirty bit must be handled after the render pass dirty bit");
@@ -1031,6 +1027,8 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
                                                              DirtyBits dirtyBitMask);
     angle::Result handleDirtyGraphicsDescriptorSets(DirtyBits::Iterator *dirtyBitsIterator,
                                                     DirtyBits dirtyBitMask);
+    angle::Result handleDirtyGraphicsUniforms(DirtyBits::Iterator *dirtyBitsIterator,
+                                              DirtyBits dirtyBitMask);
     angle::Result handleDirtyGraphicsViewport(DirtyBits::Iterator *dirtyBitsIterator,
                                               DirtyBits dirtyBitMask);
     angle::Result handleDirtyGraphicsScissor(DirtyBits::Iterator *dirtyBitsIterator,
@@ -1046,8 +1044,10 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     angle::Result handleDirtyComputeDriverUniformsBinding();
     angle::Result handleDirtyComputeShaderResources();
     angle::Result handleDirtyComputeDescriptorSets();
+    angle::Result handleDirtyComputeUniforms();
 
     // Common parts of the common dirty bit handlers.
+    angle::Result handleDirtyUniformsImpl();
     angle::Result handleDirtyMemoryBarrierImpl(DirtyBits::Iterator *dirtyBitsIterator,
                                                DirtyBits dirtyBitMask);
     template <typename CommandBufferT>
@@ -1164,8 +1164,6 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     void updateShaderResourcesDescriptorDesc(PipelineType pipelineType);
 
-    bool isDueForBufferPoolPrune() const;
-    void pruneDefaultBufferPools();
     void resetPerFramePerfCounters();
 
     std::array<GraphicsDirtyBitHandler, DIRTY_BIT_MAX> mGraphicsDirtyBitHandlers;

@@ -23,24 +23,18 @@ import tempfile
 import time
 import traceback
 
-# Add //src/testing into sys.path for importing xvfb and test_env, and
-# //src/testing/scripts for importing common.
-d = os.path.dirname
-THIS_DIR = d(os.path.abspath(__file__))
-sys.path.insert(0, d(THIS_DIR))
 
+def _AddToPathIfNeeded(path):
+    if path not in sys.path:
+        sys.path.insert(0, path)
+
+
+_AddToPathIfNeeded(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'py_utils')))
+import angle_path_util
 from skia_gold import angle_skia_gold_properties
 from skia_gold import angle_skia_gold_session_manager
 
-ANGLE_SRC_DIR = d(d(d(THIS_DIR)))
-sys.path.insert(0, os.path.join(ANGLE_SRC_DIR, 'testing'))
-sys.path.insert(0, os.path.join(ANGLE_SRC_DIR, 'testing', 'scripts'))
-# Handle the Chromium-relative directory as well. As long as one directory
-# is valid, Python is happy.
-CHROMIUM_SRC_DIR = d(d(ANGLE_SRC_DIR))
-sys.path.insert(0, os.path.join(CHROMIUM_SRC_DIR, 'testing'))
-sys.path.insert(0, os.path.join(CHROMIUM_SRC_DIR, 'testing', 'scripts'))
-
+angle_path_util.AddDepsDirToPath('testing/scripts')
 import common
 import test_env
 import xvfb
@@ -57,6 +51,7 @@ DEFAULT_SCREENSHOT_PREFIX = 'angle_vulkan_'
 SWIFTSHADER_SCREENSHOT_PREFIX = 'angle_vulkan_swiftshader_'
 DEFAULT_BATCH_SIZE = 5
 DEFAULT_LOG = 'info'
+DEFAULT_GOLD_INSTANCE = 'angle'
 
 # Filters out stuff like: " I   72.572s run_tests_on_device(96071FFAZ00096) "
 ANDROID_LOGGING_PREFIX = r'I +\d+.\d+s \w+\(\w+\)  '
@@ -300,7 +295,7 @@ def _run_tests(args, tests, extra_flags, env, screenshot_dir, results, test_resu
         gold_properties = angle_skia_gold_properties.ANGLESkiaGoldProperties(args)
         gold_session_manager = angle_skia_gold_session_manager.ANGLESkiaGoldSessionManager(
             skia_gold_temp_dir, gold_properties)
-        gold_session = gold_session_manager.GetSkiaGoldSession(keys)
+        gold_session = gold_session_manager.GetSkiaGoldSession(keys, instance=args.instance)
 
         traces = [trace.split(' ')[0] for trace in tests]
 
@@ -410,6 +405,13 @@ def main():
     parser.add_argument(
         '-l', '--log', help='Log output level. Default is %s.' % DEFAULT_LOG, default=DEFAULT_LOG)
     parser.add_argument('--swiftshader', help='Test with SwiftShader.', action='store_true')
+    parser.add_argument(
+        '-i',
+        '--instance',
+        '--gold-instance',
+        '--skia-gold-instance',
+        help='Skia Gold instance. Default is "%s".' % DEFAULT_GOLD_INSTANCE,
+        default=DEFAULT_GOLD_INSTANCE)
 
     add_skia_gold_args(parser)
 
@@ -448,8 +450,8 @@ def main():
 
     try:
         # read test set
-        json_name = os.path.join(ANGLE_SRC_DIR, 'src', 'tests', 'restricted_traces',
-                                 'restricted_traces.json')
+        json_name = os.path.join(angle_path_util.ANGLE_ROOT_DIR, 'src', 'tests',
+                                 'restricted_traces', 'restricted_traces.json')
         with open(json_name) as fp:
             tests = json.load(fp)
 
