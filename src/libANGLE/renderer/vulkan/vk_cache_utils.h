@@ -1118,6 +1118,12 @@ struct ImageOrBufferViewSubresourceSerial
     ImageSubresourceRange subresource;
 };
 
+inline bool operator==(const ImageOrBufferViewSubresourceSerial &a,
+                       const ImageOrBufferViewSubresourceSerial &b)
+{
+    return a.viewSerial == b.viewSerial && a.subresource == b.subresource;
+}
+
 constexpr ImageOrBufferViewSubresourceSerial kInvalidImageOrBufferViewSubresourceSerial = {
     kInvalidImageOrBufferViewSerial, kInvalidImageSubresourceRange};
 
@@ -1564,6 +1570,12 @@ class CacheStats final : angle::NonCopyable
         mHitCount  = 0;
         mMissCount = 0;
         mSize      = 0;
+    }
+
+    void resetHitAndMissCount()
+    {
+        mHitCount  = 0;
+        mMissCount = 0;
     }
 
   private:

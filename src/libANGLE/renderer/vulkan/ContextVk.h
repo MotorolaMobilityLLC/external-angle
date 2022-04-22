@@ -447,6 +447,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
                                                vk::ImageViewHelper *colorImageView,
                                                vk::ImageHelper *colorImage,
                                                vk::ImageHelper *colorImageMS,
+                                               VkPresentModeKHR presentMode,
                                                bool *imageResolved);
 
     vk::DynamicQueryPool *getQueryPool(gl::QueryType queryType);
@@ -736,6 +737,8 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     }
 
     const angle::PerfMonitorCounterGroups &getPerfMonitorCounters() override;
+
+    void resetPerFramePerfCounters();
 
   private:
     // Dirty bits.
@@ -1163,8 +1166,6 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     void updateGraphicsPipelineDescWithSpecConstUsageBits(SpecConstUsageBits usageBits);
 
     void updateShaderResourcesDescriptorDesc(PipelineType pipelineType);
-
-    void resetPerFramePerfCounters();
 
     std::array<GraphicsDirtyBitHandler, DIRTY_BIT_MAX> mGraphicsDirtyBitHandlers;
     std::array<ComputeDirtyBitHandler, DIRTY_BIT_MAX> mComputeDirtyBitHandlers;
