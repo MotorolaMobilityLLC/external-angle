@@ -303,9 +303,7 @@ TextureVk::TextureVk(const gl::TextureState &state, RendererVk *renderer)
       mImageCreateFlags(0),
       mImageObserverBinding(this, kTextureImageSubjectIndex),
       mCurrentBaseLevel(state.getBaseLevel()),
-      mCurrentMaxLevel(state.getMaxLevel()),
-      mCachedImageViewSubresourceSerialSRGBDecode{},
-      mCachedImageViewSubresourceSerialSkipDecode{}
+      mCurrentMaxLevel(state.getMaxLevel())
 {}
 
 TextureVk::~TextureVk() = default;
@@ -1430,8 +1428,9 @@ angle::Result TextureVk::setEGLImageTarget(const gl::Context *context,
         }
 
         vk::OutsideRenderPassCommandBuffer *commandBuffer;
-        ANGLE_TRY(contextVk->getOutsideRenderPassCommandBuffer({}, &commandBuffer));
-        mImage->retain(&contextVk->getResourceUseList());
+        vk::CommandBufferAccess access;
+        access.onExternalAcquireRelease(mImage);
+        ANGLE_TRY(contextVk->getOutsideRenderPassCommandBuffer(access, &commandBuffer));
         mImage->changeLayoutAndQueue(contextVk, mImage->getAspectFlags(), newLayout,
                                      rendererQueueFamilyIndex, commandBuffer);
     }
@@ -1950,9 +1949,6 @@ angle::Result TextureVk::generateMipmap(const gl::Context *context)
                                      mImage->getSamples(), mOwnsImage))
     {
         ASSERT((mImageUsageFlags & VK_IMAGE_USAGE_STORAGE_BIT) != 0);
-
-        mImage->retain(&contextVk->getResourceUseList());
-
         return generateMipmapsWithCompute(contextVk);
     }
     else if (renderer->hasImageFormatFeatureBits(mImage->getActualFormatID(), kBlitFeatureFlags))
@@ -2268,8 +2264,6 @@ angle::Result TextureVk::respecifyImageStorage(ContextVk *contextVk)
         // levels, base level, and max level.
         releaseImage(contextVk);
     }
-
-    mImage->retain(&contextVk->getResourceUseList());
 
     return angle::Result::Continue;
 }
@@ -2755,12 +2749,11 @@ angle::Result TextureVk::syncState(const gl::Context *context,
                                 &mImage->getYcbcrConversionDesc(), mImage->getIntendedFormatID());
     ANGLE_TRY(renderer->getSamplerCache().getSampler(contextVk, samplerDesc, &mSampler));
 
-    updateCachedImageViewSerials();
-
     return angle::Result::Continue;
 }
 
 angle::Result TextureVk::initializeContents(const gl::Context *context,
+                                            GLenum binding,
                                             const gl::ImageIndex &imageIndex)
 {
     ContextVk *contextVk      = vk::GetImpl(context);
@@ -3039,8 +3032,6 @@ angle::Result TextureVk::initImageViews(ContextVk *contextVk,
         contextVk, mState.getType(), *mImage, format, formatSwizzle, readSwizzle, baseLevelVk,
         levelCount, baseLayer, layerCount, createExtraSRGBViews,
         mImageUsageFlags & ~VK_IMAGE_USAGE_STORAGE_BIT, mState.getSamplerState()));
-
-    updateCachedImageViewSerials();
 
     return angle::Result::Continue;
 }
@@ -3328,17 +3319,18 @@ void TextureVk::onSubjectStateChange(angle::SubjectIndex index, angle::SubjectMe
     onStateChange(message);
 }
 
-vk::ImageOrBufferViewSubresourceSerial TextureVk::getImageViewSubresourceSerialImpl(
-    GLenum srgbDecode) const
+vk::ImageOrBufferViewSubresourceSerial TextureVk::getImageViewSubresourceSerial(
+    const gl::SamplerState &samplerState) const
 {
     gl::LevelIndex baseLevel(mState.getEffectiveBaseLevel());
     // getMipmapMaxLevel will clamp to the max level if it is smaller than the number of mips.
     uint32_t levelCount = gl::LevelIndex(mState.getMipmapMaxLevel()) - baseLevel + 1;
 
-    const angle::Format &angleFormat  = mImage->getActualFormat();
-    vk::SrgbDecodeMode srgbDecodeMode = (angleFormat.isSRGB && (srgbDecode == GL_DECODE_EXT))
-                                            ? vk::SrgbDecodeMode::SrgbDecode
-                                            : vk::SrgbDecodeMode::SkipDecode;
+    const angle::Format &angleFormat = mImage->getActualFormat();
+    vk::SrgbDecodeMode srgbDecodeMode =
+        (angleFormat.isSRGB && (samplerState.getSRGBDecode() == GL_DECODE_EXT))
+            ? vk::SrgbDecodeMode::SrgbDecode
+            : vk::SrgbDecodeMode::SkipDecode;
     gl::SrgbOverride srgbOverrideMode =
         (!angleFormat.isSRGB && (mState.getSRGBOverride() == gl::SrgbOverride::SRGB))
             ? gl::SrgbOverride::SRGB
@@ -3508,10 +3500,4 @@ void TextureVk::stageSelfAsSubresourceUpdates(ContextVk *contextVk)
     mImage->stageSelfAsSubresourceUpdates(contextVk, mImage->getLevelCount(), mRedefinedLevels);
 }
 
-void TextureVk::updateCachedImageViewSerials()
-{
-    mCachedImageViewSubresourceSerialSRGBDecode = getImageViewSubresourceSerialImpl(GL_DECODE_EXT);
-    mCachedImageViewSubresourceSerialSkipDecode =
-        getImageViewSubresourceSerialImpl(GL_SKIP_DECODE_EXT);
-}
 }  // namespace rx
