@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.211",
-    "comment": "from git branch: github-main commit: 2a31e99cbaa07dba4e2036c0bfe76aa3ebe8b2a4",
-    "date": "2022-04-05 10:29:26Z"
+    "api version": "1.3.212",
+    "comment": "from git branch: github-main commit: 0a80073e9078eae4266ca779d91e36e91c49a54c",
+    "date": "2022-04-21 07:33:36Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -11513,8 +11513,12 @@
           "text": " If <a href=\"#VkGraphicsPipelineLibraryCreateInfoEXT\">VkGraphicsPipelineLibraryCreateInfoEXT</a>::<code>flags</code> includes <code>VK_GRAPHICS_PIPELINE_LIBRARY_PRE_RASTERIZATION_SHADERS_BIT_EXT</code> or <code>VK_GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_SHADER_BIT_EXT</code>, <code>stageCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         },
         {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06650",
-          "text": " If <code>flags</code> includes <code>VK_PIPELINE_CREATE_LINK_TIME_OPTIMIZATION_BIT_EXT</code> and the pipeline includes a <a href=\"#pipelines-graphics-subsets-complete\">complete set of state</a> specified entirely by libraries, <code>pipelineLayout</code> <strong class=\"purple\">must</strong> be either <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, or a <a href=\"#VkPipelineLayout\">VkPipelineLayout</a> that was created without <code>VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</code> but would be compatible with the union of the pipeline layouts used in the libraries if it had included <code>VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</code>"
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06729",
+          "text": " If <code>flags</code> includes <code>VK_PIPELINE_CREATE_LINK_TIME_OPTIMIZATION_BIT_EXT</code>, the pipeline includes a <a href=\"#pipelines-graphics-subsets-complete\">complete set of state</a> specified entirely by libraries, and each library was created with a <a href=\"#VkPipelineLayout\">VkPipelineLayout</a> created with <code>VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</code>, then <code>pipelineLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPipelineLayout\">VkPipelineLayout</a> that is <a href=\"#descriptorsets-compatibility\">compatible</a> with the union of the libraries' pipeline layouts other than the inclusion/exclusion of <code>VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06730",
+          "text": " If <code>flags</code> does not include <code>VK_PIPELINE_CREATE_LINK_TIME_OPTIMIZATION_BIT_EXT</code>, the pipeline includes a <a href=\"#pipelines-graphics-subsets-complete\">complete set of state</a> specified entirely by libraries, and each library was created with a <a href=\"#VkPipelineLayout\">VkPipelineLayout</a> created with <code>VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</code>, then <code>pipelineLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPipelineLayout\">VkPipelineLayout</a> that is <a href=\"#descriptorsets-compatibility\">compatible</a> with the union of the libraries' pipeline layouts"
         }
       ],
       "(VK_EXT_graphics_pipeline_library)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)": [
