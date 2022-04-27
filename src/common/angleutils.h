@@ -131,7 +131,6 @@ struct PerfMonitorTriplet
 };
 
 #define ANGLE_VK_PERF_COUNTERS_X(FN)               \
-    FN(primaryBuffers)                             \
     FN(renderPasses)                               \
     FN(submittedCommands)                          \
     FN(writeDescriptorSets)                        \
@@ -461,6 +460,19 @@ class ConditionalMutex final : angle::NonCopyable
 #    define ANGLE_SCOPED_DISABLE_LSAN() __lsan::ScopedDisabler lsanDisabler
 #else
 #    define ANGLE_SCOPED_DISABLE_LSAN()
+#endif
+
+#if defined(ANGLE_WITH_MSAN)
+class MsanScopedDisableInterceptorChecks final : angle::NonCopyable
+{
+  public:
+    MsanScopedDisableInterceptorChecks() { __msan_scoped_disable_interceptor_checks(); }
+    ~MsanScopedDisableInterceptorChecks() { __msan_scoped_enable_interceptor_checks(); }
+};
+#    define ANGLE_SCOPED_DISABLE_MSAN() \
+        MsanScopedDisableInterceptorChecks msanScopedDisableInterceptorChecks
+#else
+#    define ANGLE_SCOPED_DISABLE_MSAN()
 #endif
 
 // The ANGLE_NO_SANITIZE_MEMORY macro suppresses MemorySanitizer checks for
