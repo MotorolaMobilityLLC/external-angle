@@ -318,7 +318,7 @@ bool IsEmptyScissor(const State &glState)
 
 bool IsColorMaskedOut(const BlendStateExt &blendStateExt, const GLint drawbuffer)
 {
-    ASSERT(static_cast<size_t>(drawbuffer) < blendStateExt.mMaxDrawBuffers);
+    ASSERT(static_cast<size_t>(drawbuffer) < blendStateExt.getDrawBufferCount());
     return blendStateExt.getColorMaskIndexed(static_cast<size_t>(drawbuffer)) == 0;
 }
 
@@ -3552,7 +3552,7 @@ void Context::beginTransformFeedback(PrimitiveMode primitiveMode)
     ASSERT(transformFeedback != nullptr);
     ASSERT(!transformFeedback->isPaused());
 
-    // TODO: http://anglebug.com/3570: Handle PPOs
+    // TODO: http://anglebug.com/7232: Handle PPOs
     ANGLE_CONTEXT_TRY(transformFeedback->begin(this, primitiveMode, mState.getProgram()));
     mStateCache.onActiveTransformFeedbackChange(this);
 }
@@ -5862,6 +5862,11 @@ void Context::sampleMaski(GLuint maskNumber, GLbitfield mask)
 void Context::scissor(GLint x, GLint y, GLsizei width, GLsizei height)
 {
     mState.setScissorParams(x, y, width, height);
+}
+
+void Context::shadingRateQCOM(GLenum rate)
+{
+    mState.setShadingRate(rate);
 }
 
 void Context::stencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask)
@@ -8949,8 +8954,6 @@ void Context::importSemaphoreZirconHandle(SemaphoreID semaphore,
 
 void Context::eGLImageTargetTexStorage(GLenum target, GLeglImageOES image, const GLint *attrib_list)
 {
-    setShared();
-
     Texture *texture        = getTextureByType(FromGLenum<TextureType>(target));
     egl::Image *imageObject = static_cast<egl::Image *>(image);
     ANGLE_CONTEXT_TRY(texture->setStorageEGLImageTarget(this, FromGLenum<TextureType>(target),
@@ -8961,15 +8964,11 @@ void Context::eGLImageTargetTextureStorage(GLuint texture,
                                            GLeglImageOES image,
                                            const GLint *attrib_list)
 {
-    setShared();
-
     return;
 }
 
 void Context::eGLImageTargetTexture2D(TextureType target, GLeglImageOES image)
 {
-    setShared();
-
     Texture *texture        = getTextureByType(target);
     egl::Image *imageObject = static_cast<egl::Image *>(image);
     ANGLE_CONTEXT_TRY(texture->setEGLImageTarget(this, target, imageObject));
@@ -8977,8 +8976,6 @@ void Context::eGLImageTargetTexture2D(TextureType target, GLeglImageOES image)
 
 void Context::eGLImageTargetRenderbufferStorage(GLenum target, GLeglImageOES image)
 {
-    setShared();
-
     Renderbuffer *renderbuffer = mState.getCurrentRenderbuffer();
     egl::Image *imageObject    = static_cast<egl::Image *>(image);
     ANGLE_CONTEXT_TRY(renderbuffer->setStorageEGLImageTarget(this, imageObject));
@@ -9318,7 +9315,7 @@ egl::Error Context::setDefaultFramebuffer(egl::Surface *drawSurface, egl::Surfac
     ASSERT(mCurrentDrawSurface == nullptr);
     ASSERT(mCurrentReadSurface == nullptr);
 
-    Framebuffer *newDefaultFramebuffer = nullptr;
+    UniqueFramebufferPointer newDefaultFramebuffer;
 
     mCurrentDrawSurface = drawSurface;
     mCurrentReadSurface = readSurface;
@@ -9326,11 +9323,11 @@ egl::Error Context::setDefaultFramebuffer(egl::Surface *drawSurface, egl::Surfac
     if (drawSurface != nullptr)
     {
         ANGLE_TRY(drawSurface->makeCurrent(this));
-        newDefaultFramebuffer = drawSurface->createDefaultFramebuffer(this, readSurface);
+        newDefaultFramebuffer = {new Framebuffer(this, drawSurface, readSurface), this};
     }
     else
     {
-        newDefaultFramebuffer = new Framebuffer(this, mImplementation.get(), readSurface);
+        newDefaultFramebuffer = {new Framebuffer(this, mImplementation.get(), readSurface), this};
     }
     ASSERT(newDefaultFramebuffer);
 
@@ -9341,14 +9338,15 @@ egl::Error Context::setDefaultFramebuffer(egl::Surface *drawSurface, egl::Surfac
 
     // Update default framebuffer, the binding of the previous default
     // framebuffer (or lack of) will have a nullptr.
-    mState.mFramebufferManager->setDefaultFramebuffer(newDefaultFramebuffer);
+    Framebuffer *framebuffer = newDefaultFramebuffer.get();
+    mState.mFramebufferManager->setDefaultFramebuffer(newDefaultFramebuffer.release());
     if (mState.getDrawFramebuffer() == nullptr)
     {
-        bindDrawFramebuffer(newDefaultFramebuffer->id());
+        bindDrawFramebuffer(framebuffer->id());
     }
     if (mState.getReadFramebuffer() == nullptr)
     {
-        bindReadFramebuffer(newDefaultFramebuffer->id());
+        bindReadFramebuffer(framebuffer->id());
     }
 
     return egl::NoError();
