@@ -707,8 +707,6 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     // Keeping track of the buffer copy size. Used to determine when to submit the outside command
     // buffer.
     angle::Result onCopyUpdate(VkDeviceSize size);
-    void resetTotalBufferToImageCopySize() { mTotalBufferToImageCopySize = 0; }
-    VkDeviceSize getTotalBufferToImageCopySize() const { return mTotalBufferToImageCopySize; }
 
     // Implementation of MultisampleTextureInitializer
     angle::Result initializeMultisampleTextureToBlack(const gl::Context *context,
@@ -1341,11 +1339,20 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     // framebuffer is bound.
     gl::DrawBufferMask mCachedDrawFramebufferColorAttachmentMask;
 
+    // Whether a flush was requested, but is deferred as an optimization to avoid breaking the
+    // render pass.
     bool mHasDeferredFlush;
+
+    // Whether this context has produced any commands so far.  While the renderer already skips
+    // vkQueueSubmit when there is no command recorded, this variable allows glFlush itself to be
+    // entirely skipped.  This is particularly needed for an optimization where the Surface is in
+    // shared-present mode, and the app is unnecessarily calling eglSwapBuffers (which equates
+    // glFlush in that mode).
+    bool mHasAnyCommandsPendingSubmission;
 
     // The size of copy commands issued between buffers and images. Used to submit the command
     // buffer for the outside render pass.
-    VkDeviceSize mTotalBufferToImageCopySize = 0;
+    VkDeviceSize mTotalBufferToImageCopySize;
 
     // Semaphores that must be waited on in the next submission.
     std::vector<VkSemaphore> mWaitSemaphores;
