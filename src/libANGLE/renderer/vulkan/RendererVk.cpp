@@ -192,6 +192,8 @@ constexpr const char *kSkippedMessages[] = {
     // http://anglebug.com/7105
     "VUID-vkCmdDraw-None-06538",
     "VUID-vkCmdDrawIndexed-None-06538",
+    // http://anglebug.com/7231
+    "UNASSIGNED-BestPractices-SemaphoreCount",
 };
 
 struct SkippedSyncvalMessage
@@ -344,14 +346,7 @@ constexpr SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
         "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
         "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
         "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdDraw, seq_no: 6",
-    },
-    {
-        "SYNC-HAZARD-READ_AFTER_WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
-        "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdDraw, seq_no: 7",
+        "command: vkCmdDraw",
     },
     // From: FramebufferTest_ES3.FramebufferBindToNewLevelAfterMaxIncreaseShouldntCrash/ES3_Vulkan
     {
@@ -478,6 +473,12 @@ constexpr SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
     {
         "SYNC-HAZARD-WRITE_AFTER_READ",
         "vkCmdCopyImageToBuffer: Hazard WRITE_AFTER_READ for dstBuffer VkBuffer",
+        "Access info (usage: SYNC_COPY_TRANSFER_WRITE, prior_usage: "
+        "SYNC_VERTEX_ATTRIBUTE_INPUT_VERTEX_ATTRIBUTE_READ",
+    },
+    {
+        "SYNC-HAZARD-WRITE_AFTER_READ",
+        "vkCmdCopyBuffer: Hazard WRITE_AFTER_READ for dstBuffer VkBuffer",
         "Access info (usage: SYNC_COPY_TRANSFER_WRITE, prior_usage: "
         "SYNC_VERTEX_ATTRIBUTE_INPUT_VERTEX_ATTRIBUTE_READ",
     },
@@ -1108,6 +1109,32 @@ angle::Result GetAndDecompressPipelineCacheVk(VkPhysicalDeviceProperties physica
 // Environment variable (and associated Android property) to enable Vulkan debug-utils markers
 constexpr char kEnableDebugMarkersVarName[]      = "ANGLE_ENABLE_DEBUG_MARKERS";
 constexpr char kEnableDebugMarkersPropertyName[] = "debug.angle.markers";
+
+ANGLE_INLINE gl::ShadingRate GetShadingRateFromVkExtent(const VkExtent2D &extent)
+{
+    if (extent.width == 1 && extent.height == 2)
+    {
+        return gl::ShadingRate::_1x2;
+    }
+    else if (extent.width == 2 && extent.height == 1)
+    {
+        return gl::ShadingRate::_2x1;
+    }
+    else if (extent.width == 2 && extent.height == 2)
+    {
+        return gl::ShadingRate::_2x2;
+    }
+    else if (extent.width == 4 && extent.height == 2)
+    {
+        return gl::ShadingRate::_4x2;
+    }
+    else if (extent.width == 4 && extent.height == 4)
+    {
+        return gl::ShadingRate::_4x4;
+    }
+
+    return gl::ShadingRate::_1x1;
+}
 }  // namespace
 
 // RendererVk implementation.
@@ -1292,24 +1319,27 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
 {
     bool canLoadDebugUtils = true;
 #if defined(ANGLE_SHARED_LIBVULKAN)
-    mLibVulkanLibrary = angle::vk::OpenLibVulkan();
-    ANGLE_VK_CHECK(displayVk, mLibVulkanLibrary, VK_ERROR_INITIALIZATION_FAILED);
-
-    PFN_vkGetInstanceProcAddr vulkanLoaderGetInstanceProcAddr =
-        reinterpret_cast<PFN_vkGetInstanceProcAddr>(
-            angle::GetLibrarySymbol(mLibVulkanLibrary, "vkGetInstanceProcAddr"));
-
-    // Set all vk* function ptrs
-    volkInitializeCustom(vulkanLoaderGetInstanceProcAddr);
-
-    uint32_t ver = volkGetInstanceVersion();
-    if (!IsAndroid() && VK_API_VERSION_MAJOR(ver) == 1 &&
-        (VK_API_VERSION_MINOR(ver) < 1 ||
-         (VK_API_VERSION_MINOR(ver) == 1 && VK_API_VERSION_PATCH(ver) < 91)))
     {
-        // http://crbug.com/1205999 - non-Android Vulkan Loader versions before 1.1.91 have a bug
-        // which prevents loading VK_EXT_debug_utils function pointers.
-        canLoadDebugUtils = false;
+        ANGLE_SCOPED_DISABLE_MSAN();
+        mLibVulkanLibrary = angle::vk::OpenLibVulkan();
+        ANGLE_VK_CHECK(displayVk, mLibVulkanLibrary, VK_ERROR_INITIALIZATION_FAILED);
+
+        PFN_vkGetInstanceProcAddr vulkanLoaderGetInstanceProcAddr =
+            reinterpret_cast<PFN_vkGetInstanceProcAddr>(
+                angle::GetLibrarySymbol(mLibVulkanLibrary, "vkGetInstanceProcAddr"));
+
+        // Set all vk* function ptrs
+        volkInitializeCustom(vulkanLoaderGetInstanceProcAddr);
+
+        uint32_t ver = volkGetInstanceVersion();
+        if (!IsAndroid() && VK_API_VERSION_MAJOR(ver) == 1 &&
+            (VK_API_VERSION_MINOR(ver) < 1 ||
+             (VK_API_VERSION_MINOR(ver) == 1 && VK_API_VERSION_PATCH(ver) < 91)))
+        {
+            // http://crbug.com/1205999 - non-Android Vulkan Loader versions before 1.1.91 have a
+            // bug which prevents loading VK_EXT_debug_utils function pointers.
+            canLoadDebugUtils = false;
+        }
     }
 #endif  // defined(ANGLE_SHARED_LIBVULKAN)
 
@@ -1324,6 +1354,7 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
     uint32_t instanceLayerCount = 0;
     {
         ANGLE_SCOPED_DISABLE_LSAN();
+        ANGLE_SCOPED_DISABLE_MSAN();
         ANGLE_VK_TRY(displayVk, vkEnumerateInstanceLayerProperties(&instanceLayerCount, nullptr));
     }
 
@@ -1331,6 +1362,7 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
     if (instanceLayerCount > 0)
     {
         ANGLE_SCOPED_DISABLE_LSAN();
+        ANGLE_SCOPED_DISABLE_MSAN();
         ANGLE_VK_TRY(displayVk, vkEnumerateInstanceLayerProperties(&instanceLayerCount,
                                                                    instanceLayerProps.data()));
     }
@@ -1354,6 +1386,7 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
     uint32_t instanceExtensionCount = 0;
     {
         ANGLE_SCOPED_DISABLE_LSAN();
+        ANGLE_SCOPED_DISABLE_MSAN();
         ANGLE_VK_TRY(displayVk, vkEnumerateInstanceExtensionProperties(
                                     nullptr, &instanceExtensionCount, nullptr));
     }
@@ -1362,6 +1395,7 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
     if (instanceExtensionCount > 0)
     {
         ANGLE_SCOPED_DISABLE_LSAN();
+        ANGLE_SCOPED_DISABLE_MSAN();
         ANGLE_VK_TRY(displayVk,
                      vkEnumerateInstanceExtensionProperties(nullptr, &instanceExtensionCount,
                                                             instanceExtensionProps.data()));
@@ -1374,12 +1408,14 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
         uint32_t instanceLayerExtensionCount = 0;
         {
             ANGLE_SCOPED_DISABLE_LSAN();
+            ANGLE_SCOPED_DISABLE_MSAN();
             ANGLE_VK_TRY(displayVk, vkEnumerateInstanceExtensionProperties(
                                         layerName, &instanceLayerExtensionCount, nullptr));
         }
         instanceExtensionProps.resize(previousExtensionCount + instanceLayerExtensionCount);
         {
             ANGLE_SCOPED_DISABLE_LSAN();
+            ANGLE_SCOPED_DISABLE_MSAN();
             ANGLE_VK_TRY(displayVk, vkEnumerateInstanceExtensionProperties(
                                         layerName, &instanceLayerExtensionCount,
                                         instanceExtensionProps.data() + previousExtensionCount));
@@ -1485,6 +1521,7 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
         uint32_t apiVersion = VK_API_VERSION_1_0;
         {
             ANGLE_SCOPED_DISABLE_LSAN();
+            ANGLE_SCOPED_DISABLE_MSAN();
             ANGLE_VK_TRY(displayVk, enumerateInstanceVersion(&apiVersion));
         }
         if ((VK_VERSION_MAJOR(apiVersion) > 1) || (VK_VERSION_MINOR(apiVersion) >= 1))
@@ -1536,11 +1573,14 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
         vk::AddToPNextChain(&instanceInfo, &validationFeatures);
     }
 
-    ANGLE_VK_TRY(displayVk, vkCreateInstance(&instanceInfo, nullptr, &mInstance));
+    {
+        ANGLE_SCOPED_DISABLE_MSAN();
+        ANGLE_VK_TRY(displayVk, vkCreateInstance(&instanceInfo, nullptr, &mInstance));
 #if defined(ANGLE_SHARED_LIBVULKAN)
-    // Load volk if we are linking dynamically
-    volkLoadInstance(mInstance);
+        // Load volk if we are linking dynamically
+        volkLoadInstance(mInstance);
 #endif  // defined(ANGLE_SHARED_LIBVULKAN)
+    }
 
     if (mEnableDebugUtils)
     {
@@ -1853,6 +1893,10 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     mBlendOperationAdvancedFeatures.sType =
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT;
 
+    mFragmentShadingRateFeatures = {};
+    mFragmentShadingRateFeatures.sType =
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR;
+
     if (!vkGetPhysicalDeviceProperties2KHR || !vkGetPhysicalDeviceFeatures2KHR)
     {
         return;
@@ -1985,6 +2029,11 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
         vk::AddToPNextChain(&deviceFeatures, &mBlendOperationAdvancedFeatures);
     }
 
+    if (ExtensionFound(VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME, deviceExtensionNames))
+    {
+        vk::AddToPNextChain(&deviceFeatures, &mFragmentShadingRateFeatures);
+    }
+
     vkGetPhysicalDeviceFeatures2KHR(mPhysicalDevice, &deviceFeatures);
     vkGetPhysicalDeviceProperties2KHR(mPhysicalDevice, &deviceProperties);
 
@@ -2012,6 +2061,7 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     mHostQueryResetFeatures.pNext                    = nullptr;
     mDepthClipControlFeatures.pNext                  = nullptr;
     mBlendOperationAdvancedFeatures.pNext            = nullptr;
+    mFragmentShadingRateFeatures.pNext               = nullptr;
 }
 
 angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueFamilyIndex)
@@ -2463,6 +2513,12 @@ angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueF
         vk::AddToPNextChain(&mEnabledFeatures, &mBlendOperationAdvancedFeatures);
     }
 
+    if (getFeatures().supportsFragmentShadingRate.enabled)
+    {
+        mEnabledDeviceExtensions.push_back(VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME);
+        vk::AddToPNextChain(&mEnabledFeatures, &mFragmentShadingRateFeatures);
+    }
+
     mCurrentQueueFamilyIndex = queueFamilyIndex;
 
     vk::QueueFamily queueFamily;
@@ -2837,6 +2893,61 @@ gl::Version RendererVk::getMaxConformantESVersion() const
     return maxSupportedESVersion;
 }
 
+bool RendererVk::canSupportFragmentShadingRate(const vk::ExtensionNameList &deviceExtensionNames)
+{
+    // Device needs to support VK_KHR_fragment_shading_rate and specifically
+    // pipeline fragment shading rate.
+    if (mFragmentShadingRateFeatures.pipelineFragmentShadingRate != VK_TRUE)
+    {
+        return false;
+    }
+
+    // Init required functions
+#if !defined(ANGLE_SHARED_LIBVULKAN)
+    InitFragmentShadingRateKHRFunctions(mDevice);
+#endif  // !defined(ANGLE_SHARED_LIBVULKAN)
+    ASSERT(vkGetPhysicalDeviceFragmentShadingRatesKHR);
+    ASSERT(vkCmdSetFragmentShadingRateKHR);
+
+    // Query supported shading rates
+    constexpr uint32_t kShadingRatesCount                                               = 6;
+    uint32_t shadingRatesCount                                                          = 6;
+    std::array<VkPhysicalDeviceFragmentShadingRateKHR, kShadingRatesCount> shadingRates = {
+        {{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR, nullptr, 0, {1, 1}},
+         {VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR, nullptr, 0, {1, 2}},
+         {VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR, nullptr, 0, {2, 1}},
+         {VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR, nullptr, 0, {2, 2}},
+         {VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR, nullptr, 0, {4, 2}},
+         {VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR, nullptr, 0, {4, 4}}}};
+
+    VkResult result = vkGetPhysicalDeviceFragmentShadingRatesKHR(
+        mPhysicalDevice, &shadingRatesCount, shadingRates.data());
+    ASSERT(result == VK_SUCCESS || result == VK_INCOMPLETE);
+    ASSERT(shadingRatesCount > 0 && shadingRatesCount <= kShadingRatesCount);
+
+    // Cache supported fragment shading rates
+    mSupportedFragmentShadingRates.reset();
+    for (const VkPhysicalDeviceFragmentShadingRateKHR &shadingRate : shadingRates)
+    {
+        if (shadingRate.sampleCounts == 0)
+        {
+            continue;
+        }
+        mSupportedFragmentShadingRates.set(GetShadingRateFromVkExtent(shadingRate.fragmentSize));
+    }
+
+    // To implement GL_QCOM_shading_rate extension the Vulkan ICD needs to support at least the
+    // following shading rates -
+    //     {1, 1}
+    //     {1, 2}
+    //     {2, 1}
+    //     {2, 2}
+    return mSupportedFragmentShadingRates.test(gl::ShadingRate::_1x1) &&
+           mSupportedFragmentShadingRates.test(gl::ShadingRate::_1x2) &&
+           mSupportedFragmentShadingRates.test(gl::ShadingRate::_2x1) &&
+           mSupportedFragmentShadingRates.test(gl::ShadingRate::_2x2);
+}
+
 void RendererVk::initFeatures(DisplayVk *displayVk,
                               const vk::ExtensionNameList &deviceExtensionNames)
 {
@@ -2872,6 +2983,9 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // the device architecture for optimal performance on both.
     const bool isImmediateModeRenderer = isNvidia || isAMD || isIntel || isSamsung || isSwiftShader;
     const bool isTileBasedRenderer     = isARM || isPowerVR || isQualcomm || isBroadcom;
+
+    bool isDiscreteGPU =
+        mPhysicalDeviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU;
 
     // Make sure all known architectures are accounted for.
     if (!isImmediateModeRenderer && !isTileBasedRenderer && !isMockICDEnabled())
@@ -3322,6 +3436,14 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     ANGLE_FEATURE_CONDITION(&mFeatures, retainSPIRVDebugInfo, getEnableValidationLayers());
 
     ANGLE_FEATURE_CONDITION(&mFeatures, generateSPIRVThroughGlslang, kUseSpirvGenThroughGlslang);
+
+    // For discrete GPUs, most of device local memory is host invisible. We should not force the
+    // host visible flag for them and result in allocation failure.
+    ANGLE_FEATURE_CONDITION(&mFeatures, preferDeviceLocalMemoryHostVisible, !isDiscreteGPU);
+
+    // Support GL_QCOM_shading_rate extension
+    ANGLE_FEATURE_CONDITION(&mFeatures, supportsFragmentShadingRate,
+                            canSupportFragmentShadingRate(deviceExtensionNames));
 
     ApplyFeatureOverrides(&mFeatures, displayVk->getState());
 
