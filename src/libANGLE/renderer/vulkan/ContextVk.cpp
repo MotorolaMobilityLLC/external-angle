@@ -1192,7 +1192,7 @@ angle::Result ContextVk::finish(const gl::Context *context)
         ANGLE_TRY(finishImpl(RenderPassClosureReason::GLFinish));
     }
 
-    syncObjectPerfCounters();
+    syncObjectPerfCounters(mRenderer->getCommandQueuePerfCounters());
     return angle::Result::Continue;
 }
 
@@ -2537,7 +2537,7 @@ angle::Result ContextVk::handleDirtyDescriptorSetsImpl(CommandBufferHelperT *com
                                               pipelineType);
 }
 
-void ContextVk::syncObjectPerfCounters()
+void ContextVk::syncObjectPerfCounters(const angle::VulkanPerfCounters &commandQueuePerfCounters)
 {
     mPerfCounters.descriptorSetCacheTotalSize                = 0;
     mPerfCounters.descriptorSetCacheKeySizeBytes             = 0;
@@ -2604,7 +2604,12 @@ void ContextVk::syncObjectPerfCounters()
     }
 
     // Update perf counters from the renderer as well
-    mPerfCounters.submittedCommands = mRenderer->getCommandQueuePerfCounters().submittedCommands;
+    mPerfCounters.commandQueueSubmitCallsTotal =
+        commandQueuePerfCounters.commandQueueSubmitCallsTotal;
+    mPerfCounters.commandQueueSubmitCallsPerFrame =
+        commandQueuePerfCounters.commandQueueSubmitCallsPerFrame;
+    mPerfCounters.vkQueueSubmitCallsTotal    = commandQueuePerfCounters.vkQueueSubmitCallsTotal;
+    mPerfCounters.vkQueueSubmitCallsPerFrame = commandQueuePerfCounters.vkQueueSubmitCallsPerFrame;
 }
 
 void ContextVk::updateOverlayOnPresent()
@@ -2612,7 +2617,8 @@ void ContextVk::updateOverlayOnPresent()
     const gl::OverlayType *overlay = mState.getOverlay();
     ASSERT(overlay->isEnabled());
 
-    syncObjectPerfCounters();
+    angle::VulkanPerfCounters commandQueuePerfCounters = mRenderer->getCommandQueuePerfCounters();
+    syncObjectPerfCounters(commandQueuePerfCounters);
 
     // Update overlay if active.
     {
@@ -2669,6 +2675,18 @@ void ContextVk::updateOverlayOnPresent()
         gl::RunningGraphWidget *dynamicBufferAllocations =
             overlay->getRunningGraphWidget(gl::WidgetId::VulkanDynamicBufferAllocations);
         dynamicBufferAllocations->add(mPerfCounters.dynamicBufferAllocations);
+    }
+
+    {
+        gl::RunningGraphWidget *attemptedSubmissionsWidget =
+            overlay->getRunningGraphWidget(gl::WidgetId::VulkanAttemptedSubmissions);
+        attemptedSubmissionsWidget->add(commandQueuePerfCounters.commandQueueSubmitCallsPerFrame);
+        attemptedSubmissionsWidget->next();
+
+        gl::RunningGraphWidget *actualSubmissionsWidget =
+            overlay->getRunningGraphWidget(gl::WidgetId::VulkanActualSubmissions);
+        actualSubmissionsWidget->add(commandQueuePerfCounters.vkQueueSubmitCallsPerFrame);
+        actualSubmissionsWidget->next();
     }
 }
 
@@ -3629,6 +3647,12 @@ angle::Result ContextVk::optimizeRenderPassForPresent(VkFramebuffer framebufferH
             dsState, mRenderPassCommands->getRenderArea());
     }
 
+    // Use finalLayout instead of extra barrier for layout change to present
+    if (colorImage != nullptr)
+    {
+        mRenderPassCommands->setImageOptimizeForPresent(colorImage);
+    }
+
     // Resolve the multisample image
     if (colorImageMS->valid())
     {
@@ -3676,11 +3700,6 @@ angle::Result ContextVk::optimizeRenderPassForPresent(VkFramebuffer framebufferH
         mPerfCounters.swapchainResolveInSubpass++;
     }
 
-    // Use finalLayout instead of extra barrier for layout change to present
-    if (colorImage != nullptr)
-    {
-        mRenderPassCommands->setImageOptimizeForPresent(colorImage);
-    }
     return angle::Result::Continue;
 }
 
@@ -7217,7 +7236,7 @@ ProgramExecutableVk *ContextVk::getExecutable() const
 
 const angle::PerfMonitorCounterGroups &ContextVk::getPerfMonitorCounters()
 {
-    syncObjectPerfCounters();
+    syncObjectPerfCounters(mRenderer->getCommandQueuePerfCounters());
 
     angle::PerfMonitorCounters &counters =
         angle::GetPerfMonitorCounterGroup(mPerfMonitorCounters, "vulkan").counters;
@@ -7341,5 +7360,7 @@ void ContextVk::resetPerFramePerfCounters()
         ProgramVk *programVk = vk::GetImpl(program);
         programVk->getExecutable().resetDescriptorSetPerfCounters();
     }
+
+    mRenderer->resetCommandQueuePerFrameCounters();
 }
 }  // namespace rx
