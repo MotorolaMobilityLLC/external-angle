@@ -107,13 +107,17 @@
 /* Local functions. */
 local z_crc_t multmodp OF((z_crc_t a, z_crc_t b));
 local z_crc_t x2nmodp OF((z_off64_t n, unsigned k));
+#ifdef W
+   local z_word_t byte_swap OF((z_word_t word));
+   local z_crc_t crc_word OF((z_word_t data));
+   local z_word_t crc_word_big OF((z_word_t data));
+#endif /* W */
 
 /* CRC polynomial. */
 #define POLY 0xedb88320         /* p(x) reflected, with x^32 implied */
 
 #ifdef DYNAMIC_CRC_TABLE
 
-local volatile int crc_table_empty = 1;
 local z_crc_t FAR crc_table[256];
 local z_crc_t FAR x2n_table[32];
 local void make_crc_table OF((void));
@@ -130,6 +134,94 @@ local void make_crc_table OF((void));
 #endif /* MAKECRCH */
 
 /*
+  Define a once() function depending on the availability of atomics. If this is
+  compiled with DYNAMIC_CRC_TABLE defined, and if CRCs will be computed in
+  multiple threads, and if atomics are not available, then get_crc_table() must
+  be called to initialize the tables and must return before any threads are
+  allowed to compute or combine CRCs.
+ */
+
+/* Definition of once functionality. */
+typedef struct once_s once_t;
+local void once OF((once_t *, void (*)(void)));
+
+/* Check for the availability of atomics. */
+#if defined(__STDC__) && __STDC_VERSION__ >= 201112L && \
+    !defined(__STDC_NO_ATOMICS__)
+
+#include <stdatomic.h>
+
+/* Structure for once(), which must be initialized with ONCE_INIT. */
+struct once_s {
+    atomic_flag begun;
+    atomic_int done;
+};
+#define ONCE_INIT {ATOMIC_FLAG_INIT, 0}
+
+/*
+  Run the provided init() function exactly once, even if multiple threads
+  invoke once() at the same time. The state must be a once_t initialized with
+  ONCE_INIT.
+ */
+local void once(state, init)
+    once_t *state;
+    void (*init)(void);
+{
+    if (!atomic_load(&state->done)) {
+        if (atomic_flag_test_and_set(&state->begun))
+            while (!atomic_load(&state->done))
+                ;
+        else {
+            init();
+            atomic_store(&state->done, 1);
+        }
+    }
+}
+
+#else   /* no atomics */
+
+/* Structure for once(), which must be initialized with ONCE_INIT. */
+struct once_s {
+    volatile int begun;
+    volatile int done;
+};
+#define ONCE_INIT {0, 0}
+
+/* Test and set. Alas, not atomic, but tries to minimize the period of
+   vulnerability. */
+local int test_and_set OF((int volatile *));
+local int test_and_set(flag)
+    int volatile *flag;
+{
+    int was;
+
+    was = *flag;
+    *flag = 1;
+    return was;
+}
+
+/* Run the provided init() function once. This is not thread-safe. */
+local void once(state, init)
+    once_t *state;
+    void (*init)(void);
+{
+    if (!state->done) {
+        if (test_and_set(&state->begun))
+            while (!state->done)
+                ;
+        else {
+            init();
+            state->done = 1;
+        }
+    }
+}
+
+#endif
+
+/* State for once(). */
+local once_t made = ONCE_INIT;
+
+/*
   Generate tables for a byte-wise 32-bit CRC calculation on the polynomial:
   x^32+x^26+x^23+x^22+x^16+x^12+x^11+x^10+x^8+x^7+x^5+x^4+x^2+x+1.
 
@@ -138,7 +230,7 @@ local void make_crc_table OF((void));
   is just exclusive-or, and multiplying a polynomial by x is a right shift by
   one. If we call the above polynomial p, and represent a byte as the
   polynomial q, also with the lowest power in the most significant bit (so the
-  byte 0xb1 is the polynomial x^7+x^3+x+1), then the CRC is (q*x^32) mod p,
+  byte 0xb1 is the polynomial x^7+x^3+x^2+1), then the CRC is (q*x^32) mod p,
   where a mod b means the remainder after dividing a by b.
 
   This calculation is done using the shift-register method of multiplying and
@@ -155,45 +247,31 @@ local void make_crc_table OF((void));
  */
 local void make_crc_table()
 {
+    unsigned i, j, n;
     z_crc_t p;
-    static volatile int first = 1;      /* flag to limit concurrent making */
 
-    /* See if another task is already doing this (not thread-safe, but better
-       than nothing -- significantly reduces duration of vulnerability in
-       case the advice about DYNAMIC_CRC_TABLE is ignored) */
-    if (first) {
-        unsigned i, j, n;
-        first = 0;
-
-        /* initialize the CRC of bytes tables */
-        for (i = 0; i < 256; i++) {
-            p = i;
-            for (j = 0; j < 8; j++)
-                p = p & 1 ? (p >> 1) ^ POLY : p >> 1;
-            crc_table[i] = p;
+    /* initialize the CRC of bytes tables */
+    for (i = 0; i < 256; i++) {
+        p = i;
+        for (j = 0; j < 8; j++)
+            p = p & 1 ? (p >> 1) ^ POLY : p >> 1;
+        crc_table[i] = p;
 #ifdef W
-            crc_big_table[i] = byte_swap(p);
+        crc_big_table[i] = byte_swap(p);
 #endif
-        }
+    }
 
-        /* initialize the x^2^n mod p(x) table */
-        p = (z_crc_t)1 << 30;         /* x^1 */
-        x2n_table[0] = p;
-        for (n = 1; n < 32; n++)
-            x2n_table[n] = p = multmodp(p, p);
+    /* initialize the x^2^n mod p(x) table */
+    p = (z_crc_t)1 << 30;         /* x^1 */
+    x2n_table[0] = p;
+    for (n = 1; n < 32; n++)
+        x2n_table[n] = p = multmodp(p, p);
+
 #ifdef W
-        /* initialize the braiding tables -- needs x2n_table[] */
-        braid(crc_braid_table, crc_braid_big_table, N, W);
+    /* initialize the braiding tables -- needs x2n_table[] */
+    braid(crc_braid_table, crc_braid_big_table, N, W);
 #endif
 
-        /* mark tables as complete, in case someone else is waiting */
-        crc_table_empty = 0;
-    }
-    else {      /* not first */
-        /* wait for the other guy to finish (not efficient, but rare) */
-        while (crc_table_empty)
-            ;
-    }
 #ifdef MAKECRCH
     {
         /*
@@ -457,7 +535,8 @@ local z_crc_t multmodp(a, b)
 }
 
 /*
-  Return x^(n+k) modulo p(x). Requires that x2n_table[] has been initialized.
+  Return x^(n * 2^k) modulo p(x). Requires that x2n_table[] has been
+  initialized.
  */
 local z_crc_t x2nmodp(n, k)
     z_off64_t n;
@@ -532,16 +611,133 @@ local z_word_t crc_word_big(data)
 #endif /* W */
 
 /* =========================================================================
- * This function can be used by asm versions of crc32()
+ * This function can be used by asm versions of crc32(), and to force the
+ * generation of the CRC tables in a threaded application.
  */
 const z_crc_t FAR * ZEXPORT get_crc_table()
 {
 #ifdef DYNAMIC_CRC_TABLE
-    if (crc_table_empty)
-        make_crc_table();
+    once(&made, make_crc_table);
 #endif /* DYNAMIC_CRC_TABLE */
     return (const z_crc_t FAR *)crc_table;
 }
+
+/* =========================================================================
+ * Use ARM machine instructions if available. This will compute the CRC about
+ * ten times faster than the braided calculation. This code does not check for
+ * the presence of the CRC instruction at run time. __ARM_FEATURE_CRC32 will
+ * only be defined if the compilation specifies an ARM processor architecture
+ * that has the instructions. For example, compiling with -march=armv8.1-a or
+ * -march=armv8-a+crc, or -march=native if the compile machine has the crc32
+ * instructions.
+ */
+#if defined(__aarch64__) && defined(__ARM_FEATURE_CRC32) && W == 8 \
+    && defined(USE_CANONICAL_ARMV8_CRC32)
+
+/*
+   Constants empirically determined to maximize speed. These values are from
+   measurements on a Cortex-A57. Your mileage may vary.
+ */
+#define Z_BATCH 3990                /* number of words in a batch */
+#define Z_BATCH_ZEROS 0xa10d3d0c    /* computed from Z_BATCH = 3990 */
+#define Z_BATCH_MIN 800             /* fewest words in a final batch */
+
+unsigned long ZEXPORT crc32_z(crc, buf, len)
+    unsigned long crc;
+    const unsigned char FAR *buf;
+    z_size_t len;
+{
+    z_crc_t val;
+    z_word_t crc1, crc2;
+    const z_word_t *word;
+    z_word_t val0, val1, val2;
+    z_size_t last, last2, i;
+    z_size_t num;
+
+    /* Return initial CRC, if requested. */
+    if (buf == Z_NULL) return 0;
+
+#ifdef DYNAMIC_CRC_TABLE
+    once(&made, make_crc_table);
+#endif /* DYNAMIC_CRC_TABLE */
+
+    /* Pre-condition the CRC */
+    crc ^= 0xffffffff;
+
+    /* Compute the CRC up to a word boundary. */
+    while (len && ((z_size_t)buf & 7) != 0) {
+        len--;
+        val = *buf++;
+        __asm__ volatile("crc32b %w0, %w0, %w1" : "+r"(crc) : "r"(val));
+    }
+
+    /* Prepare to compute the CRC on full 64-bit words word[0..num-1]. */
+    word = (z_word_t const *)buf;
+    num = len >> 3;
+    len &= 7;
+
+    /* Do three interleaved CRCs to realize the throughput of one crc32x
+       instruction per cycle. Each CRC is calcuated on Z_BATCH words. The three
+       CRCs are combined into a single CRC after each set of batches. */
+    while (num >= 3 * Z_BATCH) {
+        crc1 = 0;
+        crc2 = 0;
+        for (i = 0; i < Z_BATCH; i++) {
+            val0 = word[i];
+            val1 = word[i + Z_BATCH];
+            val2 = word[i + 2 * Z_BATCH];
+            __asm__ volatile("crc32x %w0, %w0, %x1" : "+r"(crc) : "r"(val0));
+            __asm__ volatile("crc32x %w0, %w0, %x1" : "+r"(crc1) : "r"(val1));
+            __asm__ volatile("crc32x %w0, %w0, %x1" : "+r"(crc2) : "r"(val2));
+        }
+        word += 3 * Z_BATCH;
+        num -= 3 * Z_BATCH;
+        crc = multmodp(Z_BATCH_ZEROS, crc) ^ crc1;
+        crc = multmodp(Z_BATCH_ZEROS, crc) ^ crc2;
+    }
+
+    /* Do one last smaller batch with the remaining words, if there are enough
+       to pay for the combination of CRCs. */
+    last = num / 3;
+    if (last >= Z_BATCH_MIN) {
+        last2 = last << 1;
+        crc1 = 0;
+        crc2 = 0;
+        for (i = 0; i < last; i++) {
+            val0 = word[i];
+            val1 = word[i + last];
+            val2 = word[i + last2];
+            __asm__ volatile("crc32x %w0, %w0, %x1" : "+r"(crc) : "r"(val0));
+            __asm__ volatile("crc32x %w0, %w0, %x1" : "+r"(crc1) : "r"(val1));
+            __asm__ volatile("crc32x %w0, %w0, %x1" : "+r"(crc2) : "r"(val2));
+        }
+        word += 3 * last;
+        num -= 3 * last;
+        val = x2nmodp(last, 6);
+        crc = multmodp(val, crc) ^ crc1;
+        crc = multmodp(val, crc) ^ crc2;
+    }
+
+    /* Compute the CRC on any remaining words. */
+    for (i = 0; i < num; i++) {
+        val0 = word[i];
+        __asm__ volatile("crc32x %w0, %w0, %x1" : "+r"(crc) : "r"(val0));
+    }
+    word += num;
+
+    /* Complete the CRC on any remaining bytes. */
+    buf = (const unsigned char FAR *)word;
+    while (len) {
+        len--;
+        val = *buf++;
+        __asm__ volatile("crc32b %w0, %w0, %w1" : "+r"(crc) : "r"(val));
+    }
+
+    /* Return the CRC, post-conditioned. */
+    return crc ^ 0xffffffff;
+}
+
+#else
 
 /* ========================================================================= */
 unsigned long ZEXPORT crc32_z(crc, buf, len)
@@ -584,8 +780,7 @@ unsigned long ZEXPORT crc32_z(crc, buf, len)
 #endif /* CRC32_SIMD_SSE42_PCLMUL */
 
 #ifdef DYNAMIC_CRC_TABLE
-    if (crc_table_empty)
-        make_crc_table();
+    once(&made, make_crc_table);
 #endif /* DYNAMIC_CRC_TABLE */
     /* Pre-condition the CRC */
     crc ^= 0xffffffff;
@@ -896,6 +1091,8 @@ unsigned long ZEXPORT crc32_z(crc, buf, len)
     return crc ^ 0xffffffff;
 }
 
+#endif
+
 /* ========================================================================= */
 unsigned long ZEXPORT crc32(crc, buf, len)
     unsigned long crc;
@@ -930,8 +1127,7 @@ uLong ZEXPORT crc32_combine64(crc1, crc2, len2)
     int n;
 
 #ifdef DYNAMIC_CRC_TABLE
-    if (crc_table_empty)
-        make_crc_table();
+    once(&made, make_crc_table);
 #endif /* DYNAMIC_CRC_TABLE */
     return multmodp(x2nmodp(len2, 3), crc1) ^ crc2;
 }
@@ -949,8 +1145,7 @@ uLong ZEXPORT crc32_combine_gen64(len2)
     z_off64_t len2;
 {
 #ifdef DYNAMIC_CRC_TABLE
-    if (crc_table_empty)
-        make_crc_table();
+    once(&made, make_crc_table);
 #endif /* DYNAMIC_CRC_TABLE */
     return x2nmodp(len2, 3);
 }

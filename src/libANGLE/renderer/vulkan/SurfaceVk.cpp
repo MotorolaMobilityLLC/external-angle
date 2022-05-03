@@ -65,6 +65,7 @@ VkPresentModeKHR GetDesiredPresentMode(const std::vector<VkPresentModeKHR> &pres
 
     bool mailboxAvailable   = false;
     bool immediateAvailable = false;
+    bool sharedPresent      = false;
 
     for (VkPresentModeKHR presentMode : presentModes)
     {
@@ -75,6 +76,9 @@ VkPresentModeKHR GetDesiredPresentMode(const std::vector<VkPresentModeKHR> &pres
                 break;
             case VK_PRESENT_MODE_IMMEDIATE_KHR:
                 immediateAvailable = true;
+                break;
+            case VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR:
+                sharedPresent = true;
                 break;
             default:
                 break;
@@ -89,6 +93,11 @@ VkPresentModeKHR GetDesiredPresentMode(const std::vector<VkPresentModeKHR> &pres
     if (mailboxAvailable)
     {
         return VK_PRESENT_MODE_MAILBOX_KHR;
+    }
+
+    if (sharedPresent)
+    {
+        return VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR;
     }
 
     // Note again that VK_PRESENT_MODE_FIFO_KHR is guaranteed to be available.
@@ -134,7 +143,7 @@ angle::Result InitImageHelper(DisplayVk *displayVk,
     const angle::Format &textureFormat = vkFormat.getActualRenderableImageFormat();
     bool isDepthOrStencilFormat = textureFormat.depthBits > 0 || textureFormat.stencilBits > 0;
     VkImageUsageFlags usage     = isDepthOrStencilFormat ? kSurfaceVkDepthStencilImageUsageFlags
-                                                     : kSurfaceVkColorImageUsageFlags;
+                                                         : kSurfaceVkColorImageUsageFlags;
 
     RendererVk *rendererVk = displayVk->getRenderer();
     // If shaders may be fetching from this, we need this image to be an input
@@ -1030,7 +1039,7 @@ angle::Result WindowSurfaceVk::initializeImpl(DisplayVk *displayVk)
 
     bool surfaceFormatSupported = false;
     VkColorSpaceKHR colorSpace  = MapEglColorSpaceToVkColorSpace(
-        static_cast<EGLenum>(mState.attributes.get(EGL_GL_COLORSPACE, EGL_NONE)));
+         static_cast<EGLenum>(mState.attributes.get(EGL_GL_COLORSPACE, EGL_NONE)));
 
     if (renderer->getFeatures().supportsSurfaceCapabilities2Extension.enabled)
     {
@@ -1067,6 +1076,14 @@ angle::Result WindowSurfaceVk::initializeImpl(DisplayVk *displayVk)
     }
     ANGLE_VK_CHECK(displayVk, (mSurfaceCaps.supportedCompositeAlpha & mCompositeAlpha) != 0,
                    VK_ERROR_INITIALIZATION_FAILED);
+
+    // Single buffer, if supported
+    if ((mState.attributes.getAsInt(EGL_RENDER_BUFFER, EGL_BACK_BUFFER) == EGL_SINGLE_BUFFER) &&
+        supportsPresentMode(VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR))
+    {
+        std::vector<VkPresentModeKHR> presentModes = {VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR};
+        mDesiredSwapchainPresentMode               = GetDesiredPresentMode(presentModes, 0);
+    }
 
     ANGLE_TRY(createSwapChain(displayVk, extents, VK_NULL_HANDLE));
 
@@ -1600,13 +1617,12 @@ egl::Error WindowSurfaceVk::prepareSwap(const gl::Context *context)
 angle::Result WindowSurfaceVk::prepareSwapImpl(const gl::Context *context)
 {
     ANGLE_TRACE_EVENT0("gpu.angle", "WindowSurfaceVk::prepareSwap");
-    ContextVk *contextVk = vk::GetImpl(context);
     if (mNeedToAcquireNextSwapchainImage)
     {
         // Acquire the next image (previously deferred). The image may not have been already
         // acquired if there was no rendering done at all to the default framebuffer in this frame,
         // for example if all rendering was done to FBOs.
-        ANGLE_VK_TRACE_EVENT_AND_MARKER(contextVk, "Acquire Swap Image Before Swap");
+        ANGLE_TRACE_EVENT0("gpu.angle", "Acquire Swap Image Before Swap");
         ANGLE_TRY(doDeferredAcquireNextImage(context, false));
     }
     return angle::Result::Continue;
@@ -1616,16 +1632,29 @@ egl::Error WindowSurfaceVk::swapWithDamage(const gl::Context *context,
                                            const EGLint *rects,
                                            EGLint n_rects)
 {
-    DisplayVk *displayVk = vk::GetImpl(context->getDisplay());
-    angle::Result result;
-    result = swapImpl(context, rects, n_rects, nullptr);
+    DisplayVk *displayVk       = vk::GetImpl(context->getDisplay());
+    const angle::Result result = swapImpl(context, rects, n_rects, nullptr);
     return angle::ToEGL(result, displayVk, EGL_BAD_SURFACE);
 }
 
 egl::Error WindowSurfaceVk::swap(const gl::Context *context)
 {
     DisplayVk *displayVk = vk::GetImpl(context->getDisplay());
-    angle::Result result = swapImpl(context, nullptr, 0, nullptr);
+
+    // When in shared present mode, eglSwapBuffers is unnecessary except for mode change.  When mode
+    // change is not expected, the eglSwapBuffers call is forwarded to the context as a glFlush.
+    // This allows the context to skip it if there's nothing to flush.  Otherwise control is bounced
+    // back swapImpl().
+    //
+    // Some apps issue eglSwapBuffers after glFlush unnecessary, causing the CPU throttling logic to
+    // effectively wait for the just submitted commands.
+    if (isSharedPresentMode() && mSwapchainPresentMode == mDesiredSwapchainPresentMode)
+    {
+        const angle::Result result = vk::GetImpl(context)->flush(context);
+        return angle::ToEGL(result, displayVk, EGL_BAD_SURFACE);
+    }
+
+    const angle::Result result = swapImpl(context, nullptr, 0, nullptr);
     return angle::ToEGL(result, displayVk, EGL_BAD_SURFACE);
 }
 
@@ -1695,8 +1724,6 @@ angle::Result WindowSurfaceVk::present(ContextVk *contextVk,
     SwapchainImage &image               = mSwapchainImages[mCurrentSwapchainImageIndex];
     vk::Framebuffer &currentFramebuffer = chooseFramebuffer(SwapchainResolveMode::Disabled);
 
-    updateOverlay(contextVk);
-
     // Make sure deferred clears are applied, if any.
     ANGLE_TRY(
         image.image.flushStagedUpdates(contextVk, gl::LevelIndex(0), gl::LevelIndex(1), 0, 1, {}));
@@ -1705,7 +1732,7 @@ angle::Result WindowSurfaceVk::present(ContextVk *contextVk,
     // swapchain image. MSAA resolve and overlay will insert another renderpass which disqualifies
     // the optimization.
     bool imageResolved = false;
-    if (currentFramebuffer.valid() && !overlayHasEnabledWidget(contextVk))
+    if (currentFramebuffer.valid())
     {
         ANGLE_TRY(contextVk->optimizeRenderPassForPresent(
             currentFramebuffer.getHandle(), &image.imageViews, &image.image, &mColorImageMS,
@@ -1745,12 +1772,6 @@ angle::Result WindowSurfaceVk::present(ContextVk *contextVk,
         contextVk->getPerfCounters().swapchainResolveOutsideSubpass++;
     }
 
-    if (overlayHasEnabledWidget(contextVk))
-    {
-        ANGLE_TRY(drawOverlay(contextVk, &image));
-        ANGLE_TRY(contextVk->getOutsideRenderPassCommandBuffer({}, &commandBuffer));
-    }
-
     // This does nothing if it's already in the requested layout
     image.image.recordReadBarrier(contextVk, VK_IMAGE_ASPECT_COLOR_BIT, vk::ImageLayout::Present,
                                   commandBuffer);
@@ -1776,8 +1797,20 @@ angle::Result WindowSurfaceVk::present(ContextVk *contextVk,
     // present can be destroyed.
     presentHistory.oldSwapchains = std::move(mOldSwapchains);
 
-    ANGLE_TRY(contextVk->flushAndGetSerial(presentSemaphore, swapSerial,
-                                           RenderPassClosureReason::EGLSwapBuffers));
+    // The overlay is drawn after this.  This ensures that drawing the overlay does not interfere
+    // with other functionality, especially counters used to validate said functionality.
+    const bool shouldDrawOverlay = overlayHasEnabledWidget(contextVk);
+
+    ANGLE_TRY(contextVk->flushAndGetSerial(shouldDrawOverlay ? nullptr : presentSemaphore,
+                                           swapSerial, RenderPassClosureReason::EGLSwapBuffers));
+
+    if (shouldDrawOverlay)
+    {
+        updateOverlay(contextVk);
+        ANGLE_TRY(drawOverlay(contextVk, &image));
+        ANGLE_TRY(contextVk->flushAndGetSerial(presentSemaphore, swapSerial,
+                                               RenderPassClosureReason::AlreadySpecifiedElsewhere));
+    }
 
     VkPresentInfoKHR presentInfo   = {};
     presentInfo.sType              = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
@@ -2082,6 +2115,12 @@ egl::Error WindowSurfaceVk::getMscRate(EGLint * /*numerator*/, EGLint * /*denomi
 
 void WindowSurfaceVk::setSwapInterval(EGLint interval)
 {
+    // Don't let setSwapInterval change presentation mode if using SHARED present.
+    if (mSwapchainPresentMode == VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR)
+    {
+        return;
+    }
+
     const EGLint minSwapInterval = mState.config->minSwapInterval;
     const EGLint maxSwapInterval = mState.config->maxSwapInterval;
     ASSERT(minSwapInterval == 0 || minSwapInterval == 1);
@@ -2447,16 +2486,20 @@ egl::Error WindowSurfaceVk::getBufferAge(const gl::Context *context, EGLint *age
     return egl::NoError();
 }
 
+bool WindowSurfaceVk::supportsPresentMode(VkPresentModeKHR presentMode) const
+{
+    return (std::find(mPresentModes.begin(), mPresentModes.end(), presentMode) !=
+            mPresentModes.end());
+}
+
 egl::Error WindowSurfaceVk::setRenderBuffer(EGLint renderBuffer)
 {
-    if (std::find(mPresentModes.begin(), mPresentModes.end(),
-                  VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR) == mPresentModes.end())
-    {
-        return egl::EglBadMatch();
-    }
-
     if (renderBuffer == EGL_SINGLE_BUFFER)
     {
+        if (!supportsPresentMode(VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR))
+        {
+            return egl::EglBadMatch();
+        }
         mDesiredSwapchainPresentMode = VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR;
     }
     else  // EGL_BACK_BUFFER

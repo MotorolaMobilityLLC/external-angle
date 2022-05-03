@@ -33,7 +33,7 @@ void InitializeSubmitInfo(VkSubmitInfo *submitInfo,
     submitInfo->commandBufferCount = commandBuffer.valid() ? 1 : 0;
     submitInfo->pCommandBuffers    = commandBuffer.ptr();
     submitInfo->waitSemaphoreCount = static_cast<uint32_t>(waitSemaphores.size());
-    submitInfo->pWaitSemaphores    = waitSemaphores.data();
+    submitInfo->pWaitSemaphores    = waitSemaphores.empty() ? nullptr : waitSemaphores.data();
     submitInfo->pWaitDstStageMask  = waitSemaphoreStageMasks.data();
 
     if (signalSemaphore)
@@ -1107,6 +1107,9 @@ angle::Result CommandQueue::submitFrame(
     RendererVk *renderer = context->getRenderer();
     VkDevice device      = renderer->getDevice();
 
+    ++mPerfCounters.commandQueueSubmitCallsTotal;
+    ++mPerfCounters.commandQueueSubmitCallsPerFrame;
+
     DeviceScoped<CommandBatch> scopedBatch(device);
     CommandBatch &batch = scopedBatch.get();
 
@@ -1324,10 +1327,17 @@ angle::Result CommandQueue::queueSubmit(Context *context,
     ANGLE_VK_TRY(context, vkQueueSubmit(queue, 1, &submitInfo, fenceHandle));
     mLastSubmittedQueueSerial = submitQueueSerial;
 
-    ++mPerfCounters.submittedCommands;
+    ++mPerfCounters.vkQueueSubmitCallsTotal;
+    ++mPerfCounters.vkQueueSubmitCallsPerFrame;
 
     // Now that we've submitted work, clean up RendererVk garbage
     return renderer->cleanupGarbage(mLastCompletedQueueSerial);
+}
+
+void CommandQueue::resetPerFramePerfCounters()
+{
+    mPerfCounters.commandQueueSubmitCallsPerFrame = 0;
+    mPerfCounters.vkQueueSubmitCallsPerFrame      = 0;
 }
 
 VkResult CommandQueue::queuePresent(egl::ContextPriority contextPriority,
