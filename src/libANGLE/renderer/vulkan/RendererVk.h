@@ -82,6 +82,15 @@ class MemoryReport final : angle::NonCopyable
     VkDeviceSize mMaxTotalImportedMemory;
     angle::HashMap<uint64_t, int> mUniqueIDCounts;
 };
+
+// Information used to accurately skip known synchronization issues in ANGLE.
+struct SkippedSyncvalMessage
+{
+    const char *messageId;
+    const char *messageContents1;
+    const char *messageContents2                      = "";
+    bool isDueToNonConformantCoherentFramebufferFetch = false;
+};
 }  // namespace vk
 
 // Supports one semaphore from current surface, and one semaphore passed to
@@ -350,6 +359,11 @@ class RendererVk : angle::NonCopyable
     void onNewValidationMessage(const std::string &message);
     std::string getAndClearLastValidationMessage(uint32_t *countSinceLastClear);
 
+    const std::vector<vk::SkippedSyncvalMessage> &getSkippedSyncvalMessages() const
+    {
+        return mSkippedSyncvalMessages;
+    }
+
     void onFramebufferFetchUsed();
     bool isFramebufferFetchUsed() const { return mIsFramebufferFetchUsed; }
 
@@ -363,7 +377,6 @@ class RendererVk : angle::NonCopyable
         }
         else
         {
-            vk::ScopedCommandQueueLock lock(this, mCommandQueueMutex);
             return mCommandQueue.getLastCompletedQueueSerial();
         }
     }
@@ -717,6 +730,10 @@ class RendererVk : angle::NonCopyable
     // Latest validation data for debug overlay.
     std::string mLastValidationMessage;
     uint32_t mValidationMessageCount;
+
+    // Syncval skipped messages.  The exact contents of the list depends on the availability of
+    // certain extensions.
+    std::vector<vk::SkippedSyncvalMessage> mSkippedSyncvalMessages;
 
     // Whether framebuffer fetch has been used, for the purposes of more accurate syncval error
     // filtering.

@@ -76,8 +76,6 @@
 6654 : UniformTest.UnusedStructInlineUniform/* = SKIP_FOR_CAPTURE
 6654 : UniformTest.UnusedStructInlineUniformWithSampler/* = SKIP_FOR_CAPTURE
 
-7153 : InstancingTestES3.LargestDivisor/* = COMPILE_FAIL
-
 # Fails because of unsupported combined depth/stencil GetImage.
 4688 ASAN : DepthStencilTest.DepthOnlyEmulatedWithPacked/* = FAIL
 
@@ -102,10 +100,6 @@
 6513 : TransformFeedbackTest.MultiContext/* = FLAKY
 6180 WIN : TransformFeedbackTest.BufferOutOfMemory/* = FLAKY
 6180 : VertexAttributeTestES3.DrawWithUnalignedData/* = FLAKY
-
-6180 : UniformBufferTest.BlockArrayContainingArrayOfStructs/* = FAIL
-6180 : UniformBufferTest.ManyBlocks/* = FAIL
-
 
 # Skip because crashes
 6313 : CopyTextureTestES3.InvalidateBlitThenBlend1000Layers/* = CRASH
