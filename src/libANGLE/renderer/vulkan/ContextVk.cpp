@@ -3665,7 +3665,11 @@ angle::Result ContextVk::optimizeRenderPassForPresent(VkFramebuffer framebufferH
     }
 
     // Resolve the multisample image
-    if (colorImageMS->valid())
+    vk::RenderPassCommandBufferHelper &commandBufferHelper = getStartedRenderPassCommands();
+    gl::Rectangle renderArea                               = commandBufferHelper.getRenderArea();
+    const gl::Rectangle invalidateArea(0, 0, colorImageMS->getExtents().width,
+                                       colorImageMS->getExtents().height);
+    if (colorImageMS->valid() && renderArea == invalidateArea)
     {
         vk::ImageOrBufferViewSubresourceSerial resolveImageViewSerial =
             colorImageView->getSubresourceSerial(gl::LevelIndex(0), 1, 0, vk::LayerMode::All,
@@ -3683,7 +3687,6 @@ angle::Result ContextVk::optimizeRenderPassForPresent(VkFramebuffer framebufferH
         ANGLE_TRY(drawFramebufferVk->getFramebuffer(this, &newFramebuffer, resolveImageView,
                                                     kSwapchainResolveMode));
 
-        vk::RenderPassCommandBufferHelper &commandBufferHelper = getStartedRenderPassCommands();
         commandBufferHelper.updateRenderPassForResolve(this, newFramebuffer,
                                                        drawFramebufferVk->getRenderPassDesc());
 
@@ -3694,8 +3697,6 @@ angle::Result ContextVk::optimizeRenderPassForPresent(VkFramebuffer framebufferH
         // why this is not done when in DEMAND_REFRESH mode.
         if (presentMode != VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR)
         {
-            const gl::Rectangle invalidateArea(0, 0, colorImageMS->getExtents().width,
-                                               colorImageMS->getExtents().height);
             commandBufferHelper.invalidateRenderPassColorAttachment(
                 mState, 0, vk::PackedAttachmentIndex(0), invalidateArea);
         }
@@ -4127,9 +4128,23 @@ void ContextVk::updateSampleShadingWithRasterizationSamples(const uint32_t raste
 {
     bool sampleShadingEnable =
         (rasterizationSamples <= 1 ? false : mState.isSampleShadingEnabled());
+    float minSampleShading = mState.getMinSampleShading();
+
+    // If sample shading is not enabled, check if it should be implicitly enabled according to the
+    // program.  Normally the driver should do this, but some drivers don't.
+    if (rasterizationSamples > 1 && !sampleShadingEnable &&
+        getFeatures().explicitlyEnablePerSampleShading.enabled)
+    {
+        const gl::ProgramExecutable *executable = mState.getProgramExecutable();
+        if (executable && executable->enablesPerSampleShading())
+        {
+            sampleShadingEnable = true;
+            minSampleShading    = 1.0;
+        }
+    }
 
     mGraphicsPipelineDesc->updateSampleShading(&mGraphicsPipelineTransition, sampleShadingEnable,
-                                               mState.getMinSampleShading());
+                                               minSampleShading);
 }
 
 // If the target is switched between a single-sampled and multisample, the dependency related to the
@@ -4621,6 +4636,15 @@ angle::Result ContextVk::syncState(const gl::Context *context,
                               "Dirty bit order");
                 iter.setLaterBit(gl::State::DIRTY_BIT_ATOMIC_COUNTER_BUFFER_BINDING);
                 ANGLE_TRY(invalidateProgramExecutableHelper(context));
+
+                static_assert(
+                    gl::State::DIRTY_BIT_SAMPLE_SHADING > gl::State::DIRTY_BIT_PROGRAM_EXECUTABLE,
+                    "Dirty bit order");
+                if (getFeatures().explicitlyEnablePerSampleShading.enabled)
+                {
+                    iter.setLaterBit(gl::State::DIRTY_BIT_SAMPLE_SHADING);
+                }
+
                 break;
             }
             case gl::State::DIRTY_BIT_SAMPLER_BINDINGS:
