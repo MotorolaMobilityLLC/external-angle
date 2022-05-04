@@ -1139,14 +1139,7 @@ void RenderPassAttachment::finalizeLoadStore(Context *context,
 
     if (mAccess == ResourceAccess::Unused)
     {
-        if (*storeOp == RenderPassStoreOp::DontCare)
-        {
-            // If we are loading or clearing the attachment, but the attachment has not been used,
-            // and the data has also not been stored back into attachment, then just skip the
-            // load/clear op.
-            *loadOp = RenderPassLoadOp::DontCare;
-        }
-        else
+        if (*storeOp != RenderPassStoreOp::DontCare)
         {
             switch (*loadOp)
             {
@@ -1167,12 +1160,33 @@ void RenderPassAttachment::finalizeLoadStore(Context *context,
                     }
                     break;
                 case RenderPassLoadOp::DontCare:
+                    // loadOp=DontCare should be covered by storeOp=DontCare below.
+                    break;
                 case RenderPassLoadOp::None:
                 default:
-                    // loadOp=DontCare should be covered by storeOp=DontCare above.
                     // loadOp=None is never decided upfront.
                     UNREACHABLE();
                     break;
+            }
+        }
+    }
+
+    if (mAccess == ResourceAccess::Unused || (mAccess == ResourceAccess::ReadOnly && notLoaded))
+    {
+        if (*storeOp == RenderPassStoreOp::DontCare)
+        {
+            // If we are loading or clearing the attachment, but the attachment has not been used,
+            // and the data has also not been stored back into attachment, then just skip the
+            // load/clear op.  If loadOp/storeOp=None is supported, prefer that to reduce the amount
+            // of synchronization; DontCare is a write operation, while None is not.
+            if (supportsLoadStoreOpNone)
+            {
+                *loadOp  = RenderPassLoadOp::None;
+                *storeOp = RenderPassStoreOp::None;
+            }
+            else
+            {
+                *loadOp = RenderPassLoadOp::DontCare;
             }
         }
     }
@@ -2731,7 +2745,8 @@ BufferPool::BufferPool()
       mUsage(0),
       mHostVisible(false),
       mSize(0),
-      mMemoryTypeIndex(0)
+      mMemoryTypeIndex(0),
+      mTotalMemorySize(0)
 {}
 
 BufferPool::BufferPool(BufferPool &&other)
@@ -2791,6 +2806,7 @@ void BufferPool::pruneEmptyBuffers(RendererVk *renderer)
         if ((*iter)->getMemorySize() < mSize || countRemainsEmpty >= kMaxCountRemainsEmpty ||
             emptyBufferCount >= kMaxEmptyBufferCount)
         {
+            mTotalMemorySize -= (*iter)->getMemorySize();
             (*iter)->destroy(renderer);
             (*iter).reset();
             ++freedBufferCount;
@@ -2870,6 +2886,7 @@ angle::Result BufferPool::allocateNewBuffer(Context *context, VkDeviceSize sizeI
         ANGLE_VK_TRY(context, block->map(context->getDevice()));
     }
 
+    mTotalMemorySize += block->getMemorySize();
     // Append the bufferBlock into the pool
     mBufferBlocks.push_back(std::move(block));
     context->getPerfCounters().allocateNewBufferBlockCalls++;
@@ -2976,6 +2993,23 @@ void BufferPool::destroy(RendererVk *renderer, bool orphanNonEmptyBufferBlock)
         }
     }
     mBufferBlocks.clear();
+}
+
+void BufferPool::addStats(std::ostringstream *out) const
+{
+    VkDeviceSize totalUnusedBytes = 0;
+    VkDeviceSize totalMemorySize  = 0;
+    *out << "[ ";
+    for (const std::unique_ptr<BufferBlock> &block : mBufferBlocks)
+    {
+        vma::StatInfo statInfo;
+        block->calculateStats(&statInfo);
+        *out << statInfo.unusedBytes / 1024 << "/" << block->getMemorySize() / 1024 << " ";
+        totalUnusedBytes += statInfo.unusedBytes;
+        totalMemorySize += block->getMemorySize();
+    }
+    *out << "]"
+         << " total: " << totalUnusedBytes << "/" << totalMemorySize;
 }
 
 // DescriptorPoolHelper implementation.
@@ -4875,18 +4909,18 @@ angle::Result ImageHelper::initExternal(Context *context,
         VkFormatFeatureFlags supportedChromaSubSampleFeatureBits =
             rendererVk->getImageFormatFeatureBits(mActualFormatID, kChromaSubSampleFeatureBits);
 
-        VkChromaLocation supportedLocation = ((supportedChromaSubSampleFeatureBits &
+        VkChromaLocation supportedLocation            = ((supportedChromaSubSampleFeatureBits &
                                                VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT) != 0)
-                                                 ? VK_CHROMA_LOCATION_COSITED_EVEN
-                                                 : VK_CHROMA_LOCATION_MIDPOINT;
+                                                            ? VK_CHROMA_LOCATION_COSITED_EVEN
+                                                            : VK_CHROMA_LOCATION_MIDPOINT;
         VkSamplerYcbcrModelConversion conversionModel = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601;
         VkSamplerYcbcrRange colorRange                = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW;
         VkFilter chromaFilter                         = VK_FILTER_NEAREST;
         VkComponentMapping components                 = {
-            VK_COMPONENT_SWIZZLE_IDENTITY,
-            VK_COMPONENT_SWIZZLE_IDENTITY,
-            VK_COMPONENT_SWIZZLE_IDENTITY,
-            VK_COMPONENT_SWIZZLE_IDENTITY,
+                            VK_COMPONENT_SWIZZLE_IDENTITY,
+                            VK_COMPONENT_SWIZZLE_IDENTITY,
+                            VK_COMPONENT_SWIZZLE_IDENTITY,
+                            VK_COMPONENT_SWIZZLE_IDENTITY,
         };
 
         // Create the VkSamplerYcbcrConversion to associate with image views and samplers
