@@ -20,6 +20,9 @@ vars = {
   # This variable is overrided in Chromium's DEPS file.
   'build_with_chromium': False,
 
+  # By default, download the fuchsia sdk from the public sdk directory.
+  'fuchsia_sdk_cipd_prefix': 'fuchsia/sdk/gn/',
+
   # We don't use location metadata in our test isolates.
   'generate_location_tags': False,
 
@@ -34,13 +37,13 @@ vars = {
   'checkout_android_native_support': 'checkout_android or checkout_chromeos',
 
   # Version of Chromium our Chromium-based DEPS are mirrored from.
-  'chromium_revision': '7a60295b6324c65af9012e0acd22df1b693b6198',
+  'chromium_revision': '3bc34dd4d819e8e5ca06b9117fce0fff404e4fb7',
   # We never want to checkout chromium,
   # but need a dummy DEPS entry for the autoroller
   'dummy_checkout_chromium': False,
 
   # Current revision of VK-GL-CTS (a.k.a dEQP).
-  'vk_gl_cts_revision': '106df412229768d9c45c4bf19151c9b1e4086b8c',
+  'vk_gl_cts_revision': 'acf70aaf3fdb856cd993accbd83b27a59a3eb2e3',
 
   # Current revision of googletest.
   # Note: this dep cannot be auto-rolled b/c of nesting.
@@ -79,7 +82,11 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling catapult
   # and whatever else without interference from each other.
-  'catapult_revision': '81c0ef0a068c73d64462bd0f926daff1fb865bfa',
+  'catapult_revision': '778ecbcb2ae1bc13df4e34a82f96451a55c8a782',
+
+  # the commit queue can handle CLs rolling Fuchsia sdk
+  # and whatever else without interference from each other.
+  'fuchsia_version': 'version:8.20220504.0.1',
 
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling luci-go
@@ -119,7 +126,7 @@ vars = {
 deps = {
 
   'build': {
-    'url': '{chromium_git}/chromium/src/build.git@d59764ea23d8c111e838092475b339dfa48ffa1a',
+    'url': '{chromium_git}/chromium/src/build.git@129f40a5dbffa32dcd741a044e560b180377369d',
     'condition': 'not build_with_chromium',
   },
 
@@ -161,7 +168,7 @@ deps = {
   },
 
   'buildtools/third_party/libc++abi/trunk': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxxabi.git@ce96725bdddd44e1302417f22634e369531ff25c',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxxabi.git@fb82ddb71cd5bbeee7367086dd76d4ca9b0ff240',
     'condition': 'not build_with_chromium',
   },
 
@@ -182,7 +189,7 @@ deps = {
   },
 
   'testing': {
-    'url': '{chromium_git}/chromium/src/testing@4b60cffe3e5d6773a40c7ed44263b2a773c2eb23',
+    'url': '{chromium_git}/chromium/src/testing@75ef0df86b7a616106b05042723439acdb0af8ea',
     'condition': 'not build_with_chromium',
   },
 
@@ -230,7 +237,7 @@ deps = {
   },
 
   'third_party/android_deps': {
-    'url': '{chromium_git}/chromium/src/third_party/android_deps@8bb2630eef89d7868bf9dfe1b0a056b8f8a06294',
+    'url': '{chromium_git}/chromium/src/third_party/android_deps@49fe556aa12a576854d637c13ec338375e5bcdcb',
     'condition': 'checkout_android and not build_with_chromium',
   },
 
@@ -328,7 +335,7 @@ deps = {
   },
 
   'third_party/depot_tools': {
-    'url': '{chromium_git}/chromium/tools/depot_tools.git@b9dca865afd7b639bad61a124f888b7405a2cd55',
+    'url': '{chromium_git}/chromium/tools/depot_tools.git@6a1494e5d76a4d03d4a0ba1847110df1a8d1c868',
     'condition': 'not build_with_chromium',
   },
 
@@ -339,9 +346,15 @@ deps = {
     'condition': 'dummy_checkout_chromium',
   },
 
-  'third_party/fuchsia-sdk': {
-    'url': '{chromium_git}/chromium/src/third_party/fuchsia-sdk.git@1785f0ac8e1fe81cb25e260acbe7de8f62fa3e44',
-    'condition': 'checkout_fuchsia and not build_with_chromium',
+  'third_party/fuchsia-sdk/sdk': {
+      'packages': [
+          {
+              'package': Var('fuchsia_sdk_cipd_prefix') + '${{platform}}',
+              'version': Var('fuchsia_version'),
+          },
+      ],
+      'condition': 'checkout_fuchsia and not build_with_chromium',
+      'dep_type': 'cipd',
   },
 
   # Closed-source OpenGL ES 1.1 Conformance tests.
@@ -492,7 +505,7 @@ deps = {
   },
 
   'third_party/SwiftShader': {
-    'url': '{swiftshader_git}/SwiftShader@643179694ec75904ae26664bf43d30cf4cd99909',
+    'url': '{swiftshader_git}/SwiftShader@74e34ab97aeb2a6b68d52a9e0112968b33b509ea',
     'condition': 'not build_with_chromium',
   },
 
@@ -568,7 +581,7 @@ deps = {
   },
 
   'tools/mb': {
-    'url': '{chromium_git}/chromium/src/tools/mb@f5c731071f8a9d4c066307855342a834e1cf9d21',
+    'url': '{chromium_git}/chromium/src/tools/mb@159461b27b6a1696ac1df083cca61e07fed27989',
     'condition': 'not build_with_chromium',
   },
 
@@ -583,7 +596,7 @@ deps = {
   },
 
   'tools/perf': {
-    'url': '{chromium_git}/chromium/src/tools/perf@4b070df729ea69d1dac34403a07efc6d0d236cce',
+    'url': '{chromium_git}/chromium/src/tools/perf@2103a9a85a2e79c951bb4203ab512794eda9b6b5',
     'condition': 'not build_with_chromium',
   },
 
@@ -962,6 +975,16 @@ deps = {
         {
             'package': 'angle/traces/dead_by_daylight',
             'version': 'version:2',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/dead_cells': {
+      'packages': [
+        {
+            'package': 'angle/traces/dead_cells',
+            'version': 'version:1',
         },
       ],
       'dep_type': 'cipd',
@@ -1507,6 +1530,16 @@ deps = {
       'dep_type': 'cipd',
       'condition': 'checkout_angle_restricted_traces',
   },
+  'src/tests/restricted_traces/monument_valley': {
+      'packages': [
+        {
+            'package': 'angle/traces/monument_valley',
+            'version': 'version:1',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
   'src/tests/restricted_traces/my_talking_tom2': {
       'packages': [
         {
@@ -1632,6 +1665,16 @@ deps = {
         {
             'package': 'angle/traces/pubg_mobile_skydive',
             'version': 'version:5',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/puzzles_and_survival': {
+      'packages': [
+        {
+            'package': 'angle/traces/puzzles_and_survival',
+            'version': 'version:1',
         },
       ],
       'dep_type': 'cipd',
@@ -3942,16 +3985,6 @@ hooks = [
                 '--bucket', 'chromium-browser-clang/rc',
                 '-s', 'build/toolchain/win/rc/linux64/rc.sha1',
     ]
-  },
-
-  {
-    'name': 'fuchsia_sdk',
-    'pattern': '.',
-    'condition': 'checkout_fuchsia and not build_with_chromium',
-    'action': [
-      'python3',
-      'build/fuchsia/update_sdk.py',
-    ],
   },
 
   # Download glslang validator binary for Linux.
