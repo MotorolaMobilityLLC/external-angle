@@ -19,8 +19,9 @@
 
 namespace rx
 {
-class RendererVk;
+constexpr VkDeviceSize kMaxTotalEmptyBufferBytes = 16 * 1024 * 1024;
 
+class RendererVk;
 using ContextVkSet = std::set<ContextVk *>;
 
 class ShareGroupVk : public ShareGroupImpl
@@ -46,7 +47,7 @@ class ShareGroupVk : public ShareGroupImpl
                                          VkDeviceSize size,
                                          uint32_t memoryTypeIndex);
     void pruneDefaultBufferPools(RendererVk *renderer);
-    bool isDueForBufferPoolPrune();
+    bool isDueForBufferPoolPrune(RendererVk *renderer);
 
     void calculateTotalBufferCount(size_t *bufferCount, VkDeviceSize *totalSize) const;
     void logBufferPools() const;
