@@ -2746,7 +2746,7 @@ BufferPool::BufferPool()
       mHostVisible(false),
       mSize(0),
       mMemoryTypeIndex(0),
-      mTotalMemorySize(0)
+      mNumberOfNewBuffersNeededSinceLastPrune(0)
 {}
 
 BufferPool::BufferPool(BufferPool &&other)
@@ -2783,54 +2783,68 @@ void BufferPool::initWithFlags(RendererVk *renderer,
 BufferPool::~BufferPool()
 {
     ASSERT(mBufferBlocks.empty());
+    ASSERT(mEmptyBufferBlocks.empty());
 }
 
 void BufferPool::pruneEmptyBuffers(RendererVk *renderer)
 {
-    int emptyBufferCount = 0;
-    int freedBufferCount = 0;
-    for (auto iter = mBufferBlocks.rbegin(); iter != mBufferBlocks.rend();)
+    // First try to walk through mBuffers and move empty buffers to mEmptyBuffer and remove null
+    // pointers for allocation performance.
+    // The expectation is that we will find none needs to be compacted in most calls.
+    bool needsCompact = false;
+    for (std::unique_ptr<BufferBlock> &block : mBufferBlocks)
     {
-        if (!(*iter)->isEmpty())
+        if (block->isEmpty())
         {
-            ++iter;
-            continue;
+            // We will always free empty buffers that has smaller size. Or if the empty buffer has
+            // been found empty for long enough time, or we accumulated too many empty buffers, we
+            // also free it.
+            if (block->getMemorySize() < mSize)
+            {
+                mTotalMemorySize -= block->getMemorySize();
+                block->destroy(renderer);
+                block.reset();
+            }
+            else
+            {
+                mEmptyBufferBlocks.push_back(std::move(block));
+            }
+            needsCompact = true;
         }
-
-        // Record how many times this buffer block has found to be empty  seqentially.
-        int32_t countRemainsEmpty = (*iter)->getAndIncrementEmptyCounter();
-
-        // We will always free empty buffers that has smaller size. Or if the empty buffer has been
-        // found empty for long enough time, or we accumulated too many empty buffers, we also free
-        // it.
-        if ((*iter)->getMemorySize() < mSize || countRemainsEmpty >= kMaxCountRemainsEmpty ||
-            emptyBufferCount >= kMaxEmptyBufferCount)
-        {
-            mTotalMemorySize -= (*iter)->getMemorySize();
-            (*iter)->destroy(renderer);
-            (*iter).reset();
-            ++freedBufferCount;
-        }
-        else
-        {
-            ++emptyBufferCount;
-        }
-        ++iter;
     }
 
-    // Remove the null pointers all at once, if any.
-    if (freedBufferCount)
+    // Now remove the null pointers that left by empty buffers all at once, if any.
+    if (needsCompact)
     {
         BufferBlockPointerVector compactedBlocks;
-        for (auto iter = mBufferBlocks.begin(); iter != mBufferBlocks.end(); ++iter)
+        for (std::unique_ptr<BufferBlock> &block : mBufferBlocks)
         {
-            if (*iter)
+            if (block)
             {
-                compactedBlocks.push_back(std::move(*iter));
+                compactedBlocks.push_back(std::move(block));
             }
         }
         mBufferBlocks = std::move(compactedBlocks);
     }
+
+    // Decide how many empty buffers to keep around and trim down the excessive empty buffers. We
+    // keep track of how many buffers are needed since last prune. Assume we are in stable state,
+    // which means we may still need that many empty buffers in next prune cycle. To reduce chance
+    // to call into vulkan driver to allocate new buffers, we try to keep that many empty buffers
+    // around, subject to the maximum cap. If we overestimate, next cycle they used fewer buffers,
+    // we will trim excessive empty buffers at next prune call. Or if we underestimate, we will end
+    // up have to call into vulkan driver allocate new buffers, but next cycle we should correct
+    // ourselves to keep enough number of empty buffers around.
+    size_t buffersToKeep = std::min(mNumberOfNewBuffersNeededSinceLastPrune,
+                                    static_cast<size_t>(kMaxTotalEmptyBufferBytes / mSize));
+    while (mEmptyBufferBlocks.size() > buffersToKeep)
+    {
+        std::unique_ptr<BufferBlock> &block = mEmptyBufferBlocks.back();
+        mTotalMemorySize -= block->getMemorySize();
+        block->destroy(renderer);
+        mEmptyBufferBlocks.pop_back();
+    }
+    mNumberOfNewBuffersNeededSinceLastPrune = 0;
 }
 
 angle::Result BufferPool::allocateNewBuffer(Context *context, VkDeviceSize sizeInBytes)
@@ -2944,7 +2958,7 @@ angle::Result BufferPool::allocateBuffer(Context *context,
         return angle::Result::Continue;
     }
 
-    // We always allocate from reverse order so that older buffers have a chance to age out. The
+    // We always allocate from reverse order so that older buffers have a chance to be empty. The
     // assumption is that to allocate from new buffers first may have a better chance to leave the
     // older buffers completely empty and we may able to free it.
     for (auto iter = mBufferBlocks.rbegin(); iter != mBufferBlocks.rend();)
@@ -2966,6 +2980,28 @@ angle::Result BufferPool::allocateBuffer(Context *context,
         ++iter;
     }
 
+    // Try to allocate from empty buffers
+    while (!mEmptyBufferBlocks.empty())
+    {
+        std::unique_ptr<BufferBlock> &block = mEmptyBufferBlocks.back();
+        if (block->getMemorySize() < mSize)
+        {
+            mTotalMemorySize -= block->getMemorySize();
+            block->destroy(context->getRenderer());
+            mEmptyBufferBlocks.pop_back();
+        }
+        else
+        {
+            ANGLE_VK_TRY(context, block->allocate(alignedSize, alignment, &offset));
+            suballocation->init(context->getDevice(), block.get(), offset, alignedSize);
+            mBufferBlocks.push_back(std::move(block));
+            mEmptyBufferBlocks.pop_back();
+            mNumberOfNewBuffersNeededSinceLastPrune++;
+            return angle::Result::Continue;
+        }
+    }
+
+    // Failed to allocate from empty buffer. Now try to allocate a new buffer.
     ANGLE_TRY(allocateNewBuffer(context, alignedSize));
 
     // Sub-allocate from the bufferBlock.
@@ -2973,6 +3009,7 @@ angle::Result BufferPool::allocateBuffer(Context *context,
     ANGLE_VK_CHECK(context, block->allocate(alignedSize, alignment, &offset) == VK_SUCCESS,
                    VK_ERROR_OUT_OF_DEVICE_MEMORY);
     suballocation->init(context->getDevice(), block.get(), offset, alignedSize);
+    mNumberOfNewBuffersNeededSinceLastPrune++;
 
     return angle::Result::Continue;
 }
@@ -2993,6 +3030,22 @@ void BufferPool::destroy(RendererVk *renderer, bool orphanNonEmptyBufferBlock)
         }
     }
     mBufferBlocks.clear();
+
+    for (std::unique_ptr<BufferBlock> &block : mEmptyBufferBlocks)
+    {
+        block->destroy(renderer);
+    }
+    mEmptyBufferBlocks.clear();
+}
+
+VkDeviceSize BufferPool::getTotalEmptyMemorySize() const
+{
+    VkDeviceSize totalMemorySize = 0;
+    for (const std::unique_ptr<BufferBlock> &block : mEmptyBufferBlocks)
+    {
+        totalMemorySize += block->getMemorySize();
+    }
+    return totalMemorySize;
 }
 
 void BufferPool::addStats(std::ostringstream *out) const
@@ -3010,6 +3063,9 @@ void BufferPool::addStats(std::ostringstream *out) const
     }
     *out << "]"
          << " total: " << totalUnusedBytes << "/" << totalMemorySize;
+    *out << " emptyBuffers [memorySize:" << getTotalEmptyMemorySize()
+         << " count:" << mEmptyBufferBlocks.size()
+         << " needed: " << mNumberOfNewBuffersNeededSinceLastPrune << "]";
 }
 
 // DescriptorPoolHelper implementation.
@@ -4409,18 +4465,8 @@ void BufferHelper::release(RendererVk *renderer)
 
     if (mSuballocation.valid())
     {
-        if (mReadOnlyUse.isCurrentlyInUse(renderer->getLastCompletedQueueSerial()))
-        {
-            renderer->collectSuballocationGarbage(std::move(mReadOnlyUse),
-                                                  std::move(mSuballocation),
-                                                  std::move(mBufferForVertexArray));
-            mReadOnlyUse.init();
-        }
-        else
-        {
-            mBufferForVertexArray.destroy(renderer->getDevice());
-            mSuballocation.destroy(renderer);
-        }
+        renderer->collectSuballocationGarbage(mReadOnlyUse, std::move(mSuballocation),
+                                              std::move(mBufferForVertexArray));
 
         if (mReadWriteUse.isCurrentlyInUse(renderer->getLastCompletedQueueSerial()))
         {
@@ -5321,7 +5367,7 @@ angle::Result ImageHelper::initLayerImageView(Context *context,
 
     return initLayerImageViewImpl(context, textureType, aspectMask, swizzleMap, imageViewOut,
                                   baseMipLevelVk, levelCount, baseArrayLayer, layerCount,
-                                  GetVkFormatFromFormatID(actualFormat), nullptr, nullptr);
+                                  GetVkFormatFromFormatID(actualFormat), nullptr);
 }
 
 angle::Result ImageHelper::initLayerImageViewWithFormat(Context *context,
@@ -5333,12 +5379,11 @@ angle::Result ImageHelper::initLayerImageViewWithFormat(Context *context,
                                                         LevelIndex baseMipLevelVk,
                                                         uint32_t levelCount,
                                                         uint32_t baseArrayLayer,
-                                                        uint32_t layerCount,
-                                                        const gl::SamplerState &samplerState) const
+                                                        uint32_t layerCount) const
 {
     return initLayerImageViewImpl(context, textureType, aspectMask, swizzleMap, imageViewOut,
                                   baseMipLevelVk, levelCount, baseArrayLayer, layerCount,
-                                  imageFormat, nullptr, &samplerState);
+                                  imageFormat, nullptr);
 }
 
 angle::Result ImageHelper::initLayerImageViewImpl(
@@ -5352,8 +5397,7 @@ angle::Result ImageHelper::initLayerImageViewImpl(
     uint32_t baseArrayLayer,
     uint32_t layerCount,
     VkFormat imageFormat,
-    const VkImageViewUsageCreateInfo *imageViewUsageCreateInfo,
-    const gl::SamplerState *samplerState) const
+    const VkImageViewUsageCreateInfo *imageViewUsageCreateInfo) const
 {
     VkImageViewCreateInfo viewInfo = {};
     viewInfo.sType                 = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
@@ -5387,19 +5431,6 @@ angle::Result ImageHelper::initLayerImageViewImpl(
     VkSamplerYcbcrConversionInfo yuvConversionInfo = {};
     if (mYcbcrConversionDesc.valid())
     {
-        // VUID-VkSamplerCreateInfo-minFilter VkCreateSampler:
-        // VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT
-        // specifies that the format can have different chroma, min, and mag filters. However,
-        // VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT is
-        // not supported for VkSamplerYcbcrConversionCreateInfo.format = VK_FORMAT_UNDEFINED so
-        // chromaFilter needs to be equal to minFilter/magFilter.
-        if (samplerState && mYcbcrConversionDesc.mIsExternalFormat)
-        {
-            ASSERT(samplerState->getMinFilter() == samplerState->getMagFilter());
-            const_cast<YcbcrConversionDesc &>(mYcbcrConversionDesc).mChromaFilter =
-                gl_vk::GetFilter(samplerState->getMinFilter());
-        }
-
         ASSERT((context->getRenderer()->getFeatures().supportsYUVSamplerConversion.enabled));
         yuvConversionInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
         yuvConversionInfo.pNext = nullptr;
@@ -5409,7 +5440,7 @@ angle::Result ImageHelper::initLayerImageViewImpl(
 
         // VUID-VkImageViewCreateInfo-image-02399
         // If image has an external format, format must be VK_FORMAT_UNDEFINED
-        if (mYcbcrConversionDesc.mIsExternalFormat)
+        if (mYcbcrConversionDesc.getExternalFormat() != 0)
         {
             viewInfo.format = VK_FORMAT_UNDEFINED;
         }
@@ -5438,7 +5469,7 @@ angle::Result ImageHelper::initReinterpretedLayerImageView(Context *context,
     return initLayerImageViewImpl(context, textureType, aspectMask, swizzleMap, imageViewOut,
                                   baseMipLevelVk, levelCount, baseArrayLayer, layerCount,
                                   vk::GetVkFormatFromFormatID(imageViewFormat),
-                                  &imageViewUsageCreateInfo, nullptr);
+                                  &imageViewUsageCreateInfo);
 }
 
 void ImageHelper::destroy(RendererVk *renderer)
@@ -6782,6 +6813,21 @@ void ImageHelper::onWrite(gl::LevelIndex levelStart,
 
     // Mark contents of the given subresource as defined.
     setContentDefined(toVkLevel(levelStart), levelCount, layerStart, layerCount, aspectFlags);
+}
+
+void ImageHelper::updateImmutableSamplerState(const gl::SamplerState &samplerState)
+{
+    // VUID-VkSamplerCreateInfo-minFilter VkCreateSampler:
+    // VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT
+    // specifies that the format can have different chroma, min, and mag filters. However,
+    // VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT is
+    // not supported for VkSamplerYcbcrConversionCreateInfo.format = VK_FORMAT_UNDEFINED so
+    // chromaFilter needs to be equal to minFilter/magFilter.
+    if (mYcbcrConversionDesc.getExternalFormat() != 0)
+    {
+        ASSERT(samplerState.getMinFilter() == samplerState.getMagFilter());
+        mYcbcrConversionDesc.updateChromaFilter(gl_vk::GetFilter(samplerState.getMinFilter()));
+    }
 }
 
 bool ImageHelper::hasSubresourceDefinedContent(gl::LevelIndex level,
@@ -9193,8 +9239,7 @@ angle::Result ImageViewHelper::initReadViews(ContextVk *contextVk,
                                              uint32_t baseLayer,
                                              uint32_t layerCount,
                                              bool requiresSRGBViews,
-                                             VkImageUsageFlags imageUsageFlags,
-                                             const gl::SamplerState &samplerState)
+                                             VkImageUsageFlags imageUsageFlags)
 {
     ASSERT(levelCount > 0);
 
@@ -9224,7 +9269,7 @@ angle::Result ImageViewHelper::initReadViews(ContextVk *contextVk,
 
     // Since we don't have a readImageView, we must create ImageViews for the new max level
     ANGLE_TRY(initReadViewsImpl(contextVk, viewType, image, format, formatSwizzle, readSwizzle,
-                                baseLevel, levelCount, baseLayer, layerCount, samplerState));
+                                baseLevel, levelCount, baseLayer, layerCount));
 
     if (requiresSRGBViews)
     {
@@ -9245,8 +9290,7 @@ angle::Result ImageViewHelper::initReadViewsImpl(ContextVk *contextVk,
                                                  LevelIndex baseLevel,
                                                  uint32_t levelCount,
                                                  uint32_t baseLayer,
-                                                 uint32_t layerCount,
-                                                 const gl::SamplerState &samplerState)
+                                                 uint32_t layerCount)
 {
     ASSERT(mImageViewSerial.valid());
 
@@ -9258,17 +9302,17 @@ angle::Result ImageViewHelper::initReadViewsImpl(ContextVk *contextVk,
     {
         ANGLE_TRY(image.initLayerImageViewWithFormat(
             contextVk, viewType, vkFormat, VK_IMAGE_ASPECT_DEPTH_BIT, readSwizzle,
-            &getReadImageView(), baseLevel, levelCount, baseLayer, layerCount, samplerState));
+            &getReadImageView(), baseLevel, levelCount, baseLayer, layerCount));
         ANGLE_TRY(image.initLayerImageViewWithFormat(
             contextVk, viewType, vkFormat, VK_IMAGE_ASPECT_STENCIL_BIT, readSwizzle,
             &mPerLevelRangeStencilReadImageViews[mCurrentBaseMaxLevelHash], baseLevel, levelCount,
-            baseLayer, layerCount, samplerState));
+            baseLayer, layerCount));
     }
     else
     {
-        ANGLE_TRY(image.initLayerImageViewWithFormat(
-            contextVk, viewType, vkFormat, aspectFlags, readSwizzle, &getReadImageView(), baseLevel,
-            levelCount, baseLayer, layerCount, samplerState));
+        ANGLE_TRY(image.initLayerImageViewWithFormat(contextVk, viewType, vkFormat, aspectFlags,
+                                                     readSwizzle, &getReadImageView(), baseLevel,
+                                                     levelCount, baseLayer, layerCount));
     }
 
     gl::TextureType fetchType = viewType;
@@ -9278,14 +9322,14 @@ angle::Result ImageViewHelper::initReadViewsImpl(ContextVk *contextVk,
     {
         fetchType = Get2DTextureType(layerCount, image.getSamples());
 
-        ANGLE_TRY(image.initLayerImageViewWithFormat(
-            contextVk, fetchType, vkFormat, aspectFlags, readSwizzle, &getFetchImageView(),
-            baseLevel, levelCount, baseLayer, layerCount, samplerState));
+        ANGLE_TRY(image.initLayerImageViewWithFormat(contextVk, fetchType, vkFormat, aspectFlags,
+                                                     readSwizzle, &getFetchImageView(), baseLevel,
+                                                     levelCount, baseLayer, layerCount));
     }
 
     ANGLE_TRY(image.initLayerImageViewWithFormat(contextVk, fetchType, vkFormat, aspectFlags,
                                                  formatSwizzle, &getCopyImageView(), baseLevel,
-                                                 levelCount, baseLayer, layerCount, samplerState));
+                                                 levelCount, baseLayer, layerCount));
 
     return angle::Result::Continue;
 }

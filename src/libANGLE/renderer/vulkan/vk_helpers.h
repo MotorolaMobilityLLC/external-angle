@@ -857,11 +857,12 @@ class BufferPool : angle::NonCopyable
     bool valid() const { return mSize != 0; }
 
     void addStats(std::ostringstream *out) const;
-    size_t getBufferCount() const { return mBufferBlocks.size(); }
+    size_t getBufferCount() const { return mBufferBlocks.size() + mEmptyBufferBlocks.size(); }
     VkDeviceSize getMemorySize() const { return mTotalMemorySize; }
 
   private:
     angle::Result allocateNewBuffer(Context *context, VkDeviceSize sizeInBytes);
+    VkDeviceSize getTotalEmptyMemorySize() const;
 
     vma::VirtualBlockCreateFlags mVirtualBlockCreateFlags;
     VkBufferUsageFlags mUsage;
@@ -870,13 +871,10 @@ class BufferPool : angle::NonCopyable
     uint32_t mMemoryTypeIndex;
     VkDeviceSize mTotalMemorySize;
     BufferBlockPointerVector mBufferBlocks;
-    // When pruneDefaultBufferPools gets called, we do not immediately free all empty buffers. Only
-    // buffers that we found are empty for kMaxCountRemainsEmpty number of times consecutively, or
-    // we have more than kMaxEmptyBufferCount number of empty buffers, we will actually free it.
-    // That way we avoid the situation that a buffer just becomes empty and gets freed right after
-    // and only to find out that we have to allocate a new one next frame.
-    static constexpr int32_t kMaxCountRemainsEmpty = 4;
-    static constexpr int32_t kMaxEmptyBufferCount  = 16;
+    BufferBlockPointerVector mEmptyBufferBlocks;
+    // Tracks the number of new buffers needed for suballocation since last pruneEmptyBuffers call.
+    // We will use this heuristic information to decide how many empty buffers to keep around.
+    size_t mNumberOfNewBuffersNeededSinceLastPrune;
     // max size to go down the suballocation code path. Any allocation greater or equal this size
     // will call into vulkan directly to allocate a dedicated VkDeviceMemory.
     static constexpr size_t kMaxBufferSizeForSuballocation = 4 * 1024 * 1024;
@@ -1614,8 +1612,7 @@ class ImageHelper final : public Resource, public angle::Subject
                                                LevelIndex baseMipLevelVk,
                                                uint32_t levelCount,
                                                uint32_t baseArrayLayer,
-                                               uint32_t layerCount,
-                                               const gl::SamplerState &samplerState) const;
+                                               uint32_t layerCount) const;
     angle::Result initReinterpretedLayerImageView(Context *context,
                                                   gl::TextureType textureType,
                                                   VkImageAspectFlags aspectMask,
@@ -2102,11 +2099,7 @@ class ImageHelper final : public Resource, public angle::Subject
                  uint32_t layerCount,
                  VkImageAspectFlags aspectFlags);
     bool hasImmutableSampler() const { return mYcbcrConversionDesc.valid(); }
-    uint64_t getExternalFormat() const
-    {
-        return mYcbcrConversionDesc.mIsExternalFormat ? mYcbcrConversionDesc.mExternalOrVkFormat
-                                                      : 0;
-    }
+    uint64_t getExternalFormat() const { return mYcbcrConversionDesc.getExternalFormat(); }
     const YcbcrConversionDesc &getYcbcrConversionDesc() const { return mYcbcrConversionDesc; }
     void updateYcbcrConversionDesc(RendererVk *rendererVk,
                                    uint64_t externalFormat,
@@ -2122,6 +2115,8 @@ class ImageHelper final : public Resource, public angle::Subject
                                     xChromaOffset, yChromaOffset, chromaFilter, components,
                                     intendedFormatID);
     }
+
+    void updateImmutableSamplerState(const gl::SamplerState &samplerState);
 
     // Used by framebuffer and render pass functions to decide loadOps and invalidate/un-invalidate
     // render target contents.
@@ -2156,7 +2151,7 @@ class ImageHelper final : public Resource, public angle::Subject
     ANGLE_ENABLE_STRUCT_PADDING_WARNINGS
     struct ClearUpdate
     {
-        bool operator==(const ClearUpdate &rhs)
+        bool operator==(const ClearUpdate &rhs) const
         {
             return memcmp(this, &rhs, sizeof(ClearUpdate)) == 0;
         }
@@ -2345,18 +2340,18 @@ class ImageHelper final : public Resource, public angle::Subject
     const LevelContentDefinedMask &getLevelContentDefined(LevelIndex level) const;
     const LevelContentDefinedMask &getLevelStencilContentDefined(LevelIndex level) const;
 
-    angle::Result initLayerImageViewImpl(Context *context,
-                                         gl::TextureType textureType,
-                                         VkImageAspectFlags aspectMask,
-                                         const gl::SwizzleState &swizzleMap,
-                                         ImageView *imageViewOut,
-                                         LevelIndex baseMipLevelVk,
-                                         uint32_t levelCount,
-                                         uint32_t baseArrayLayer,
-                                         uint32_t layerCount,
-                                         VkFormat imageFormat,
-                                         const VkImageViewUsageCreateInfo *imageViewUsageCreateInfo,
-                                         const gl::SamplerState *samplerState) const;
+    angle::Result initLayerImageViewImpl(
+        Context *context,
+        gl::TextureType textureType,
+        VkImageAspectFlags aspectMask,
+        const gl::SwizzleState &swizzleMap,
+        ImageView *imageViewOut,
+        LevelIndex baseMipLevelVk,
+        uint32_t levelCount,
+        uint32_t baseArrayLayer,
+        uint32_t layerCount,
+        VkFormat imageFormat,
+        const VkImageViewUsageCreateInfo *imageViewUsageCreateInfo) const;
 
     bool canCopyWithTransformForReadPixels(const PackPixelsParams &packPixelsParams,
                                            const angle::Format *readFormat);
@@ -2560,8 +2555,7 @@ class ImageViewHelper final : angle::NonCopyable
                                 uint32_t baseLayer,
                                 uint32_t layerCount,
                                 bool requiresSRGBViews,
-                                VkImageUsageFlags imageUsageFlags,
-                                const gl::SamplerState &samplerState);
+                                VkImageUsageFlags imageUsageFlags);
 
     // Creates a storage view with all layers of the level.
     angle::Result getLevelStorageImageView(Context *context,
@@ -2661,8 +2655,7 @@ class ImageViewHelper final : angle::NonCopyable
                                     LevelIndex baseLevel,
                                     uint32_t levelCount,
                                     uint32_t baseLayer,
-                                    uint32_t layerCount,
-                                    const gl::SamplerState &samplerState);
+                                    uint32_t layerCount);
 
     // Create SRGB-reinterpreted read views
     angle::Result initSRGBReadViewsImpl(ContextVk *contextVk,

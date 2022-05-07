@@ -332,20 +332,33 @@ class RendererVk : angle::NonCopyable
         }
     }
 
-    void collectSuballocationGarbage(vk::SharedResourceUse &&use,
+    void collectSuballocationGarbage(vk::SharedResourceUse &use,
                                      vk::BufferSuballocation &&suballocation,
                                      vk::Buffer &&buffer)
     {
-        std::lock_guard<std::mutex> lock(mGarbageMutex);
-        if (use.usedInRecordedCommands())
+        if (use.isCurrentlyInUse(getLastCompletedQueueSerial()))
         {
-            mPendingSubmissionSuballocationGarbage.emplace(std::move(use), std::move(suballocation),
-                                                           std::move(buffer));
+            std::lock_guard<std::mutex> lock(mGarbageMutex);
+            if (use.usedInRecordedCommands())
+            {
+                mPendingSubmissionSuballocationGarbage.emplace(
+                    std::move(use), std::move(suballocation), std::move(buffer));
+            }
+            else
+            {
+                mSuballocationGarbageSizeInBytes += suballocation.getSize();
+                mSuballocationGarbage.emplace(std::move(use), std::move(suballocation),
+                                              std::move(buffer));
+            }
+            use.init();
         }
         else
         {
-            mSuballocationGarbage.emplace(std::move(use), std::move(suballocation),
-                                          std::move(buffer));
+            // mSuballocationGarbageDestroyed is atomic, so we dont need mGarbageMutex to protect
+            // it.
+            mSuballocationGarbageDestroyed += suballocation.getSize();
+            buffer.destroy(mDevice);
+            suballocation.destroy(this);
         }
     }
 
@@ -457,7 +470,7 @@ class RendererVk : angle::NonCopyable
 
     bool haveSameFormatFeatureBits(angle::FormatID formatID1, angle::FormatID formatID2) const;
 
-    angle::Result cleanupGarbage(Serial lastCompletedQueueSerial);
+    void cleanupGarbage(Serial lastCompletedQueueSerial);
     void cleanupCompletedCommandsGarbage();
     void cleanupPendingSubmissionGarbage();
 
@@ -593,6 +606,16 @@ class RendererVk : angle::NonCopyable
         return mSupportedFragmentShadingRates.test(shadingRate);
     }
 
+    VkDeviceSize getSuballocationDestroyedSize() const
+    {
+        return mSuballocationGarbageDestroyed.load(std::memory_order_consume);
+    }
+    void onBufferPoolPrune() { mSuballocationGarbageDestroyed = 0; }
+    VkDeviceSize getSuballocationGarbageSize() const
+    {
+        return mSuballocationGarbageSizeInBytesCachedAtomic.load(std::memory_order_consume);
+    }
+
   private:
     angle::Result initializeDevice(DisplayVk *displayVk, uint32_t queueFamilyIndex);
     void ensureCapsInitialized() const;
@@ -696,6 +719,16 @@ class RendererVk : angle::NonCopyable
     vk::SharedGarbageList mPendingSubmissionGarbage;
     vk::SharedBufferSuballocationGarbageList mSuballocationGarbage;
     vk::SharedBufferSuballocationGarbageList mPendingSubmissionSuballocationGarbage;
+    // Total suballocation garbage size in bytes.
+    VkDeviceSize mSuballocationGarbageSizeInBytes;
+
+    // Total bytes of suballocation that been destroyed since last prune call. This can be accessed
+    // without mGarbageMutex, thus needs to be atomic to avoid tsan complain.
+    std::atomic<VkDeviceSize> mSuballocationGarbageDestroyed;
+    // This is the cached value of mSuballocationGarbageSizeInBytes but is accessed with atomic
+    // operation. This can be accessed from different threads without mGarbageMutex, so that thread
+    // sanitizer won't complain.
+    std::atomic<VkDeviceSize> mSuballocationGarbageSizeInBytesCachedAtomic;
 
     vk::FormatTable mFormatTable;
     // A cache of VkFormatProperties as queried from the device over time.
