@@ -1352,9 +1352,7 @@ angle::Result TextureVk::setStorageExternalMemory(const gl::Context *context,
     }
 
     gl::Format glFormat(internalFormat);
-    ANGLE_TRY(initImageViews(contextVk, format.getActualImageFormat(getRequiredImageAccess()),
-                             glFormat.info->sized, static_cast<uint32_t>(levels),
-                             getImageViewLayerCount()));
+    ANGLE_TRY(initImageViews(contextVk, glFormat.info->sized, getImageViewLevelCount()));
 
     return angle::Result::Continue;
 }
@@ -1406,9 +1404,7 @@ angle::Result TextureVk::setEGLImageTarget(const gl::Context *context,
     setImageHelper(contextVk, imageVk->getImage(), imageVk->getImageTextureType(), format,
                    imageVk->getImageLevel().get(), imageVk->getImageLayer(), false);
 
-    ANGLE_TRY(initImageViews(contextVk, format.getActualImageFormat(getRequiredImageAccess()),
-                             image->getFormat().info->sized, getImageViewLevelCount(),
-                             getImageViewLayerCount()));
+    ANGLE_TRY(initImageViews(contextVk, image->getFormat().info->sized, getImageViewLevelCount()));
 
     // Transfer the image to this queue if needed
     uint32_t rendererQueueFamilyIndex = renderer->getQueueFamilyIndex();
@@ -2021,8 +2017,8 @@ angle::Result TextureVk::maybeUpdateBaseMaxLevels(ContextVk *contextVk,
 
     // Update the current max level in ImageViewHelper
     const gl::ImageDesc &baseLevelDesc = mState.getBaseLevelDesc();
-    ANGLE_TRY(initImageViews(contextVk, mImage->getActualFormat(), baseLevelDesc.format.info->sized,
-                             newMaxLevel - newBaseLevel + 1, getImageViewLayerCount()));
+    ANGLE_TRY(initImageViews(contextVk, baseLevelDesc.format.info->sized,
+                             newMaxLevel - newBaseLevel + 1));
 
     mCurrentBaseLevel = newBaseLevel;
     mCurrentMaxLevel  = newMaxLevel;
@@ -2286,8 +2282,7 @@ angle::Result TextureVk::bindTexImage(const gl::Context *context, egl::Surface *
                    gl::TextureType::InvalidEnum, format, 0, 0, false);
 
     ASSERT(mImage->getLayerCount() == 1);
-    return initImageViews(contextVk, format.getActualImageFormat(getRequiredImageAccess()),
-                          glInternalFormat.sized, 1, 1);
+    return initImageViews(contextVk, glInternalFormat.sized, getImageViewLevelCount());
 }
 
 angle::Result TextureVk::releaseTexImage(const gl::Context *context)
@@ -3003,8 +2998,7 @@ angle::Result TextureVk::initImage(ContextVk *contextVk,
 
     const uint32_t viewLevelCount =
         mState.getImmutableFormat() ? getMipLevelCount(ImageMipLevels::EnabledLevels) : levelCount;
-    ANGLE_TRY(initImageViews(contextVk, angle::Format::Get(actualImageFormatID), sized,
-                             viewLevelCount, layerCount));
+    ANGLE_TRY(initImageViews(contextVk, sized, viewLevelCount));
 
     mCurrentBaseLevel = gl::LevelIndex(mState.getBaseLevel());
     mCurrentMaxLevel  = gl::LevelIndex(mState.getMaxLevel());
@@ -3012,11 +3006,7 @@ angle::Result TextureVk::initImage(ContextVk *contextVk,
     return angle::Result::Continue;
 }
 
-angle::Result TextureVk::initImageViews(ContextVk *contextVk,
-                                        const angle::Format &format,
-                                        const bool sized,
-                                        uint32_t levelCount,
-                                        uint32_t layerCount)
+angle::Result TextureVk::initImageViews(ContextVk *contextVk, const bool sized, uint32_t levelCount)
 {
     ASSERT(mImage != nullptr && mImage->valid());
 
@@ -3037,9 +3027,9 @@ angle::Result TextureVk::initImageViews(ContextVk *contextVk,
         mImage->updateImmutableSamplerState(mState.getSamplerState());
     }
 
-    ANGLE_TRY(getImageViews().initReadViews(contextVk, mState.getType(), *mImage, format,
-                                            formatSwizzle, readSwizzle, baseLevelVk, levelCount,
-                                            baseLayer, layerCount, createExtraSRGBViews,
+    ANGLE_TRY(getImageViews().initReadViews(contextVk, mState.getType(), *mImage, formatSwizzle,
+                                            readSwizzle, baseLevelVk, levelCount, baseLayer,
+                                            getImageViewLayerCount(), createExtraSRGBViews,
                                             mImageUsageFlags & ~VK_IMAGE_USAGE_STORAGE_BIT));
 
     updateCachedImageViewSerials();
@@ -3384,8 +3374,8 @@ angle::Result TextureVk::refreshImageViews(ContextVk *contextVk)
 
     const gl::ImageDesc &baseLevelDesc = mState.getBaseLevelDesc();
 
-    ANGLE_TRY(initImageViews(contextVk, mImage->getActualFormat(), baseLevelDesc.format.info->sized,
-                             getImageViewLevelCount(), getImageViewLayerCount()));
+    ANGLE_TRY(
+        initImageViews(contextVk, baseLevelDesc.format.info->sized, getImageViewLevelCount()));
 
     // Let any Framebuffers know we need to refresh the RenderTarget cache.
     onStateChange(angle::SubjectMessage::SubjectChanged);
