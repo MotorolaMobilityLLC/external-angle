@@ -209,15 +209,22 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
 
         for (PackageInfo packageInfo : pkgs)
         {
-            if (packageInfo.applicationInfo.uid == Process.SYSTEM_UID)
+            // We need to be able to see the following system applications until ANGLE supports YUV
+            // b/232149402
+            if (!(packageInfo.packageName.equals("com.google.android.GoogleCamera") ||
+                  packageInfo.packageName.equals("com.google.android.videos") ||
+                  packageInfo.packageName.equals("com.google.android.youtube")))
             {
-                continue;
-            }
+                if (packageInfo.applicationInfo.uid == Process.SYSTEM_UID)
+                {
+                    continue;
+                }
 
-            // Filter out apps that are system apps
-            if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
-            {
-                continue;
+                // Filter out apps that are system apps
+                if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
+                {
+                    continue;
+                }
             }
 
             mInstalledPkgs.add(packageInfo);
