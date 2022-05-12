@@ -6358,7 +6358,11 @@ license {
 }
 filegroup {
     srcs: [
-        "src/android_system_settings/src/com/android/angle/EmptyMainActivity.java",
+        "src/android_system_settings/src/com/android/angle/MainActivity.java",
+        "src/android_system_settings/src/com/android/angle/common/GlobalSettings.java",
+        "src/android_system_settings/src/com/android/angle/common/MainFragment.java",
+        "src/android_system_settings/src/com/android/angle/common/Receiver.java",
+        "src/android_system_settings/src/com/android/angle/common/SearchProvider.java",
     ],
     name: "ANGLE_srcs",
 }
@@ -6382,9 +6386,22 @@ java_defaults {
     sdk_version: "system_current",
     aaptflags: [
         "-0 .json",
+        "--extra-packages com.android.angle.common",
     ],
     compile_multilib: "both",
     privileged: true,
+}
+android_library {
+    name: "ANGLE_library",
+    sdk_version: "system_current",
+    min_sdk_version: "28",
+    resource_dirs: ["src/android_system_settings/res",],
+    asset_dirs: ["src/android_system_settings/assets",],
+    aaptflags: [
+        "-0 .json",
+    ],
+    manifest: "src/android_system_settings/src/com/android/angle/AndroidManifest.xml",
+    static_libs: ["androidx.preference_preference",],
 }
 android_app {
     asset_dirs: [
@@ -6394,5 +6411,6 @@ android_app {
     defaults: [
         "ANGLE_java_defaults",
     ],
-    manifest: "android/AndroidManifest.xml",
+    static_libs: ["ANGLE_library"],
+    manifest: "src/android_system_settings/src/com/android/angle/AndroidManifest.xml",
 }
