@@ -428,7 +428,7 @@ rx::DisplayImpl *CreateDisplayFromAttribs(EGLAttrib displayType,
             break;
 #    elif defined(ANGLE_PLATFORM_LINUX)
 #        if defined(ANGLE_USE_GBM)
-            if (platformType == EGL_PLATFORM_GBM_KHR)
+            if (platformType == EGL_PLATFORM_GBM_KHR && rx::IsVulkanGbmDisplayAvailable())
             {
                 impl = rx::CreateVulkanGbmDisplay(state);
                 break;
