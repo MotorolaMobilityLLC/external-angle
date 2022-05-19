@@ -36,15 +36,16 @@ class ShareGroupVk : public ShareGroupImpl
     PipelineLayoutCache &getPipelineLayoutCache() { return mPipelineLayoutCache; }
     DescriptorSetLayoutCache &getDescriptorSetLayoutCache() { return mDescriptorSetLayoutCache; }
     const ContextVkSet &getContexts() const { return mContexts; }
+    vk::MetaDescriptorPool &getMetaDescriptorPool(DescriptorSetIndex descriptorSetIndex)
+    {
+        return mMetaDescriptorPools[descriptorSetIndex];
+    }
 
     void releaseResourceUseLists(const Serial &submitSerial);
     void acquireResourceUseList(vk::ResourceUseList &&resourceUseList)
     {
         mResourceUseLists.emplace_back(std::move(resourceUseList));
     }
-
-    // Used to flush the mutable textures more often.
-    angle::Result onMutableTextureUpload(ContextVk *contextVk, TextureVk *newTexture);
 
     vk::BufferPool *getDefaultBufferPool(RendererVk *renderer,
                                          VkDeviceSize size,
@@ -58,16 +59,15 @@ class ShareGroupVk : public ShareGroupImpl
     void addContext(ContextVk *contextVk);
     void removeContext(ContextVk *contextVk);
 
-    void onTextureRelease(TextureVk *textureVk);
-
   private:
-    void resetPrevTexture() { mPrevUploadedMutableTexture = nullptr; }
-
     // ANGLE uses a PipelineLayout cache to store compatible pipeline layouts.
     PipelineLayoutCache mPipelineLayoutCache;
 
     // DescriptorSetLayouts are also managed in a cache.
     DescriptorSetLayoutCache mDescriptorSetLayoutCache;
+
+    // Descriptor set caches
+    vk::DescriptorSetArray<vk::MetaDescriptorPool> mMetaDescriptorPools;
 
     // The list of contexts within the share group
     ContextVkSet mContexts;
@@ -85,9 +85,6 @@ class ShareGroupVk : public ShareGroupImpl
 
     // The system time when last pruneEmptyBuffer gets called.
     double mLastPruneTime;
-
-    // Keep track of the previously stored texture. Used to flush mutable textures.
-    TextureVk *mPrevUploadedMutableTexture;
 
     // If true, it is expected that a BufferBlock may still in used by textures that outlived
     // ShareGroup. The non-empty BufferBlock will be put into RendererVk's orphan list instead.
