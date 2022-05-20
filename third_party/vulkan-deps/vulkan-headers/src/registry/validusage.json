@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.212",
-    "comment": "from git branch: github-main commit: 0a80073e9078eae4266ca779d91e36e91c49a54c",
-    "date": "2022-04-21 07:33:36Z"
+    "api version": "1.3.213",
+    "comment": "from git branch: github-main commit: 71decb7f868d3891974eab139f03c7c6c87fea4d",
+    "date": "2022-05-10 09:06:33Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -652,7 +652,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfo\">VkDevicePrivateDataCreateInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBorderColorSwizzleFeaturesEXT\">VkPhysicalDeviceBorderColorSwizzleFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipControlFeaturesEXT\">VkPhysicalDeviceDepthClipControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE\">VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDynamicRenderingFeatures\">VkPhysicalDeviceDynamicRenderingFeatures</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryRDMAFeaturesNV\">VkPhysicalDeviceExternalMemoryRDMAFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM\">VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR\">VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT\">VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImage2DViewOf3DFeaturesEXT\">VkPhysicalDeviceImage2DViewOf3DFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeatures\">VkPhysicalDeviceImageRobustnessFeatures</a>, <a href=\"#VkPhysicalDeviceImageViewMinLodFeaturesEXT\">VkPhysicalDeviceImageViewMinLodFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeatures\">VkPhysicalDeviceInlineUniformBlockFeatures</a>, <a href=\"#VkPhysicalDeviceInvocationMaskFeaturesHUAWEI\">VkPhysicalDeviceInvocationMaskFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLinearColorAttachmentFeaturesNV\">VkPhysicalDeviceLinearColorAttachmentFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMaintenance4Features\">VkPhysicalDeviceMaintenance4Features</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawFeaturesEXT\">VkPhysicalDeviceMultiDrawFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT\">VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeatures\">VkPhysicalDevicePipelineCreationCacheControlFeatures</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentIdFeaturesKHR\">VkPhysicalDevicePresentIdFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentWaitFeaturesKHR\">VkPhysicalDevicePresentWaitFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT\">VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT\">VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrivateDataFeatures\">VkPhysicalDevicePrivateDataFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT\">VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM\">VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMotionBlurFeaturesNV\">VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT\">VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerDotProductFeatures\">VkPhysicalDeviceShaderIntegerDotProductFeatures</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeatures\">VkPhysicalDeviceShaderTerminateInvocationFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeatures\">VkPhysicalDeviceSubgroupSizeControlFeatures</a>, <a href=\"#VkPhysicalDeviceSubpassShadingFeaturesHUAWEI\">VkPhysicalDeviceSubpassShadingFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceSynchronization2Features\">VkPhysicalDeviceSynchronization2Features</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeatures\">VkPhysicalDeviceTextureCompressionASTCHDRFeatures</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkan13Features\">VkPhysicalDeviceVulkan13Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfo\">VkDevicePrivateDataCreateInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBorderColorSwizzleFeaturesEXT\">VkPhysicalDeviceBorderColorSwizzleFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipControlFeaturesEXT\">VkPhysicalDeviceDepthClipControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE\">VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDynamicRenderingFeatures\">VkPhysicalDeviceDynamicRenderingFeatures</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryRDMAFeaturesNV\">VkPhysicalDeviceExternalMemoryRDMAFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM\">VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR\">VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT\">VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImage2DViewOf3DFeaturesEXT\">VkPhysicalDeviceImage2DViewOf3DFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImageCompressionControlFeaturesEXT\">VkPhysicalDeviceImageCompressionControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT\">VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeatures\">VkPhysicalDeviceImageRobustnessFeatures</a>, <a href=\"#VkPhysicalDeviceImageViewMinLodFeaturesEXT\">VkPhysicalDeviceImageViewMinLodFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeatures\">VkPhysicalDeviceInlineUniformBlockFeatures</a>, <a href=\"#VkPhysicalDeviceInvocationMaskFeaturesHUAWEI\">VkPhysicalDeviceInvocationMaskFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLinearColorAttachmentFeaturesNV\">VkPhysicalDeviceLinearColorAttachmentFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMaintenance4Features\">VkPhysicalDeviceMaintenance4Features</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawFeaturesEXT\">VkPhysicalDeviceMultiDrawFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT\">VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeatures\">VkPhysicalDevicePipelineCreationCacheControlFeatures</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelinePropertiesFeaturesEXT\">VkPhysicalDevicePipelinePropertiesFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentIdFeaturesKHR\">VkPhysicalDevicePresentIdFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentWaitFeaturesKHR\">VkPhysicalDevicePresentWaitFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT\">VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT\">VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrivateDataFeatures\">VkPhysicalDevicePrivateDataFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT\">VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM\">VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR\">VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMotionBlurFeaturesNV\">VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT\">VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerDotProductFeatures\">VkPhysicalDeviceShaderIntegerDotProductFeatures</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeatures\">VkPhysicalDeviceShaderTerminateInvocationFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeatures\">VkPhysicalDeviceSubgroupSizeControlFeatures</a>, <a href=\"#VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT\">VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingFeaturesHUAWEI\">VkPhysicalDeviceSubpassShadingFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceSynchronization2Features\">VkPhysicalDeviceSynchronization2Features</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeatures\">VkPhysicalDeviceTextureCompressionASTCHDRFeatures</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkan13Features\">VkPhysicalDeviceVulkan13Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -7856,7 +7856,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkRenderPassCreationControlEXT\">VkRenderPassCreationControlEXT</a>, <a href=\"#VkRenderPassCreationFeedbackInfoEXT\">VkRenderPassCreationFeedbackInfoEXT</a>, or <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2-sType-unique",
@@ -8210,7 +8210,7 @@
         },
         {
           "vuid": "VUID-VkSubpassDescription2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkFragmentShadingRateAttachmentInfoKHR\">VkFragmentShadingRateAttachmentInfoKHR</a> or <a href=\"#VkSubpassDescriptionDepthStencilResolve\">VkSubpassDescriptionDepthStencilResolve</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkFragmentShadingRateAttachmentInfoKHR\">VkFragmentShadingRateAttachmentInfoKHR</a>, <a href=\"#VkRenderPassCreationControlEXT\">VkRenderPassCreationControlEXT</a>, <a href=\"#VkRenderPassSubpassFeedbackInfoEXT\">VkRenderPassSubpassFeedbackInfoEXT</a>, or <a href=\"#VkSubpassDescriptionDepthStencilResolve\">VkSubpassDescriptionDepthStencilResolve</a>"
         },
         {
           "vuid": "VUID-VkSubpassDescription2-sType-unique",
@@ -9741,6 +9741,38 @@
         {
           "vuid": "VUID-VkSubpassFragmentDensityMapOffsetEndInfoQCOM-pFragmentDensityOffsets-parameter",
           "text": " If <code>fragmentDensityOffsetCount</code> is not <code>0</code>, <code>pFragmentDensityOffsets</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>fragmentDensityOffsetCount</code> <a href=\"#VkOffset2D\">VkOffset2D</a> structures"
+        }
+      ]
+    },
+    "VkRenderPassCreationControlEXT": {
+      "(VK_EXT_subpass_merge_feedback)": [
+        {
+          "vuid": "VUID-VkRenderPassCreationControlEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT</code>"
+        }
+      ]
+    },
+    "VkRenderPassCreationFeedbackInfoEXT": {
+      "(VK_EXT_subpass_merge_feedback)": [
+        {
+          "vuid": "VUID-VkRenderPassCreationFeedbackInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT</code>"
+        }
+      ]
+    },
+    "VkRenderPassSubpassFeedbackInfoEXT": {
+      "(VK_EXT_subpass_merge_feedback)": [
+        {
+          "vuid": "VUID-VkRenderPassSubpassFeedbackInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassSubpassFeedbackInfoEXT-subpassMergeStatus-parameter",
+          "text": " <code>subpassMergeStatus</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSubpassMergeStatusEXT\">VkSubpassMergeStatusEXT</a> value"
+        },
+        {
+          "vuid": "VUID-VkRenderPassSubpassFeedbackInfoEXT-description-parameter",
+          "text": " <code>description</code> <strong class=\"purple\">must</strong> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE"
         }
       ]
     },
@@ -12934,6 +12966,20 @@
           "vuid": "VUID-VkPipelineInfoKHR-pipeline-parameter",
           "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPipeline\">VkPipeline</a> handle"
         }
+      ],
+      "(VK_EXT_pipeline_properties)+!(VK_KHR_pipeline_executable_properties)": [
+        {
+          "vuid": "VUID-VkPipelineInfoKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineInfoKHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineInfoKHR-pipeline-parameter",
+          "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPipeline\">VkPipeline</a> handle"
+        }
       ]
     },
     "VkPipelineExecutablePropertiesKHR": {
@@ -13113,6 +13159,38 @@
         {
           "vuid": "VUID-VkPipelineCreationFeedbackCreateInfo-pPipelineStageCreationFeedbacks-parameter",
           "text": " If <code>pipelineStageCreationFeedbackCount</code> is not <code>0</code>, <code>pPipelineStageCreationFeedbacks</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pipelineStageCreationFeedbackCount</code> <a href=\"#VkPipelineCreationFeedback\">VkPipelineCreationFeedback</a> structures"
+        }
+      ]
+    },
+    "vkGetPipelinePropertiesEXT": {
+      "(VK_EXT_pipeline_properties)": [
+        {
+          "vuid": "VUID-vkGetPipelinePropertiesEXT-pipeline-06738",
+          "text": " <code>pipeline</code> member of <code>pPipelineInfo</code> must have been created with <code>device</code>"
+        },
+        {
+          "vuid": "VUID-vkGetPipelinePropertiesEXT-pPipelineProperties-06739",
+          "text": " <code>pPipelineProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkPipelinePropertiesIdentifierEXT\">VkPipelinePropertiesIdentifierEXT</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetPipelinePropertiesEXT-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPipelinePropertiesEXT-pPipelineInfo-parameter",
+          "text": " <code>pPipelineInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineInfoEXT\">VkPipelineInfoEXT</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetPipelinePropertiesEXT-pPipelineProperties-parameter",
+          "text": " <code>pPipelineProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkBaseOutStructure\">VkBaseOutStructure</a> structure"
+        }
+      ]
+    },
+    "VkPipelinePropertiesIdentifierEXT": {
+      "(VK_EXT_pipeline_properties)": [
+        {
+          "vuid": "VUID-VkPipelinePropertiesIdentifierEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT</code>"
         }
       ]
     },
@@ -15152,7 +15230,7 @@
         },
         {
           "vuid": "VUID-VkImageCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a>, <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>, <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>, <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a>, <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>, <a href=\"#VkVideoDecodeH264ProfileEXT\">VkVideoDecodeH264ProfileEXT</a>, <a href=\"#VkVideoDecodeH265ProfileEXT\">VkVideoDecodeH265ProfileEXT</a>, <a href=\"#VkVideoEncodeH264ProfileEXT\">VkVideoEncodeH264ProfileEXT</a>, <a href=\"#VkVideoEncodeH265ProfileEXT\">VkVideoEncodeH265ProfileEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a>, <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>, <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>, <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a>, <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>, <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>, <a href=\"#VkVideoDecodeH264ProfileEXT\">VkVideoDecodeH264ProfileEXT</a>, <a href=\"#VkVideoDecodeH265ProfileEXT\">VkVideoDecodeH265ProfileEXT</a>, <a href=\"#VkVideoEncodeH264ProfileEXT\">VkVideoEncodeH264ProfileEXT</a>, <a href=\"#VkVideoEncodeH265ProfileEXT\">VkVideoEncodeH265ProfileEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-sType-unique",
@@ -15518,6 +15596,28 @@
           "vuid": "VUID-VkImageCreateInfo-pNext-06390",
           "text": " If the <a href=\"#VkImage\">VkImage</a> is to be used to import memory from a <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a>, a <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a> structure <strong class=\"purple\">must</strong> be chained to <code>pNext</code>."
         }
+      ],
+      "(VK_EXT_image_compression_control)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-06743",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a> structure, <code>format</code> is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format, and <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>::<code>flags</code> includes <code>VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT</code>, then <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>::<code>compressionControlPlaneCount</code> <strong class=\"purple\">must</strong> be equal to the number of planes in <code>format</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-06744",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a> structure, <code>format</code> is a not <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format, and <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>::<code>flags</code> includes <code>VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT</code>, then <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>::<code>compressionControlPlaneCount</code> <strong class=\"purple\">must</strong> be 1"
+        }
+      ],
+      "(VK_EXT_image_compression_control)+!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-06745",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a> structure, and <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>::<code>flags</code> includes <code>VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT</code>, then <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>::<code>compressionControlPlaneCount</code> <strong class=\"purple\">must</strong> be 1"
+        }
+      ],
+      "(VK_EXT_image_compression_control)+(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-06746",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a> structure, it <strong class=\"purple\">must</strong> not contain a <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a> structure"
+        }
       ]
     },
     "VkBufferCollectionImageCreateInfoFUCHSIA": {
@@ -15684,6 +15784,30 @@
         }
       ]
     },
+    "VkImageCompressionControlEXT": {
+      "(VK_EXT_image_compression_control)": [
+        {
+          "vuid": "VUID-VkImageCompressionControlEXT-flags-06747",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be one of <code>VK_IMAGE_COMPRESSION_DEFAULT_EXT</code>, <code>VK_IMAGE_COMPRESSION_FIXED_RATE_DEFAULT_EXT</code>, <code>VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT</code>, or <code>VK_IMAGE_COMPRESSION_DISABLED_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCompressionControlEXT-flags-06748",
+          "text": " If <code>flags</code> includes <code>VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT</code>, <code>pFixedRateFlags</code> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCompressionControlEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT</code>"
+        }
+      ]
+    },
+    "VkImageCompressionPropertiesEXT": {
+      "(VK_EXT_image_compression_control)": [
+        {
+          "vuid": "VUID-VkImageCompressionPropertiesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT</code>"
+        }
+      ]
+    },
     "vkGetImageSubresourceLayout": {
       "!(VK_EXT_image_drm_format_modifier)": [
         {
@@ -15777,6 +15901,122 @@
         {
           "vuid": "VUID-VkImageSubresource-aspectMask-requiredbitmask",
           "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
+      ]
+    },
+    "vkGetImageSubresourceLayout2EXT": {
+      "(VK_EXT_image_compression_control)+!(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-image-00996",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>tiling</code> equal to <code>VK_IMAGE_TILING_LINEAR</code>"
+        }
+      ],
+      "(VK_EXT_image_compression_control)+(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-image-02270",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>tiling</code> equal to <code>VK_IMAGE_TILING_LINEAR</code> or <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-tiling-02271",
+          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>{ibit}</em>BIT_EXT</code> and the index <em>i</em> <strong class=\"purple\">must</strong> be less than the <a href=\"#VkDrmFormatModifierPropertiesEXT\">VkDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifierPlaneCount</code> associated with the image&#8217;s <code>format</code> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\">VkImageDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifier</code>"
+        }
+      ],
+      "(VK_EXT_image_compression_control)": [
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-aspectMask-00997",
+          "text": " The <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> only have a single bit set"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-mipLevel-01716",
+          "text": " The <code>mipLevel</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-arrayLayer-01717",
+          "text": " The <code>arrayLayer</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be less than the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-format-04461",
+          "text": " If <code>format</code> is a color format, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_COLOR_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-format-04462",
+          "text": " If <code>format</code> has a depth component, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> contain <code>VK_IMAGE_ASPECT_DEPTH_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-format-04463",
+          "text": " If <code>format</code> has a stencil component, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> contain <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-format-04464",
+          "text": " If <code>format</code> does not contain a stencil or depth component, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> or <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-image-parameter",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-pSubresource-parameter",
+          "text": " <code>pSubresource</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkImageSubresource2EXT\">VkImageSubresource2EXT</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-pLayout-parameter",
+          "text": " <code>pLayout</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkSubresourceLayout2EXT\">VkSubresourceLayout2EXT</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-image-parent",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ],
+      "(VK_EXT_image_compression_control)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-format-01581",
+          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_LINEAR</code> and its <code>format</code> is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a> with two planes, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-format-01582",
+          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_LINEAR</code> and its <code>format</code> is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a> with three planes, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+        }
+      ],
+      "(VK_EXT_image_compression_control)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout2EXT-image-01895",
+          "text": " If <code>image</code> was created with the <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code> external memory handle type, then <code>image</code> <strong class=\"purple\">must</strong> be bound to memory"
+        }
+      ]
+    },
+    "VkImageSubresource2EXT": {
+      "(VK_EXT_image_compression_control)": [
+        {
+          "vuid": "VUID-VkImageSubresource2EXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageSubresource2EXT-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImageSubresource2EXT-imageSubresource-parameter",
+          "text": " <code>imageSubresource</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageSubresource\">VkImageSubresource</a> structure"
+        }
+      ]
+    },
+    "VkSubresourceLayout2EXT": {
+      "(VK_EXT_image_compression_control)": [
+        {
+          "vuid": "VUID-VkSubresourceLayout2EXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkSubresourceLayout2EXT-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageCompressionPropertiesEXT\">VkImageCompressionPropertiesEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkSubresourceLayout2EXT-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -21212,6 +21452,22 @@
         }
       ]
     },
+    "CullMaskKHR": {
+      "(VK_KHR_ray_tracing_pipeline,VK_KHR_ray_tracing_maintenance1)": [
+        {
+          "vuid": "VUID-CullMaskKHR-CullMaskKHR-06735",
+          "text": " The <code>CullMaskKHR</code> decoration <strong class=\"purple\">must</strong> be used only within the <code>IntersectionKHR</code>, <code>AnyHitKHR</code>, <code>ClosestHitKHR</code>, or <code>MissKHR</code> {ExecutionModel}"
+        },
+        {
+          "vuid": "VUID-CullMaskKHR-CullMaskKHR-06736",
+          "text": " The variable decorated with <code>CullMaskKHR</code> <strong class=\"purple\">must</strong> be declared using the <code>Input</code> {StorageClass}"
+        },
+        {
+          "vuid": "VUID-CullMaskKHR-CullMaskKHR-06737",
+          "text": " The variable decorated with <code>CullMaskKHR</code> <strong class=\"purple\">must</strong> be declared as a scalar 32-bit integer value"
+        }
+      ]
+    },
     "CurrentRayTimeNV": {
       "(VK_NV_ray_tracing_motion_blur)": [
         {
@@ -22783,6 +23039,12 @@
           "text": " The <code>queryType</code> used to create <code>queryPool</code> <strong class=\"purple\">must</strong> not be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code> or <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR</code>"
         }
       ],
+      "(VK_KHR_ray_tracing_maintenance1)": [
+        {
+          "vuid": "VUID-vkCmdBeginQuery-queryType-06741",
+          "text": " The <code>queryType</code> used to create <code>queryPool</code> <strong class=\"purple\">must</strong> not be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR</code> or <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR</code>"
+        }
+      ],
       "(VK_NV_ray_tracing)": [
         {
           "vuid": "VUID-vkCmdBeginQuery-queryType-04729",
@@ -22925,6 +23187,12 @@
         {
           "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-04728",
           "text": " The <code>queryType</code> used to create <code>queryPool</code> <strong class=\"purple\">must</strong> not be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code> or <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR</code>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)+(VK_KHR_ray_tracing_maintenance1)": [
+        {
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-06741",
+          "text": " The <code>queryType</code> used to create <code>queryPool</code> <strong class=\"purple\">must</strong> not be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR</code> or <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR</code>"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_NV_ray_tracing)": [
@@ -39951,6 +40219,10 @@
           "text": " <code>alphaMode</code> <strong class=\"purple\">must</strong> be one of the bits present in the <code>supportedAlpha</code> member of <code>VkDisplayPlaneCapabilitiesKHR</code> for the display plane corresponding to <code>displayMode</code>"
         },
         {
+          "vuid": "VUID-VkDisplaySurfaceCreateInfoKHR-transform-06740",
+          "text": " <code>transform</code> <strong class=\"purple\">must</strong> be one of the bits present in the <code>supportedTransforms</code> member of <code>VkDisplayPropertiesKHR</code> for the display corresponding to <code>displayMode</code>"
+        },
+        {
           "vuid": "VUID-VkDisplaySurfaceCreateInfoKHR-width-01256",
           "text": " The <code>width</code> and <code>height</code> members of <code>imageExtent</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxImageDimension2D</code>"
         },
@@ -40437,6 +40709,18 @@
       ]
     },
     "VkSurfaceFormat2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_EXT_image_compression_control)+!(VK_EXT_image_compression_control_swapchain)": [
+        {
+          "vuid": "VUID-VkSurfaceFormat2KHR-pNext-06749",
+          "text": " The <code>pNext</code> chain <strong class=\"purple\">must</strong> not include an <a href=\"#VkImageCompressionPropertiesEXT\">VkImageCompressionPropertiesEXT</a> structure"
+        }
+      ],
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_EXT_image_compression_control)+(VK_EXT_image_compression_control_swapchain)": [
+        {
+          "vuid": "VUID-VkSurfaceFormat2KHR-pNext-06750",
+          "text": " If the <code><a href=\"#VK_EXT_image_compression_control_swapchain\">VK_EXT_image_compression_control_swapchain</a></code> extension is not enabled, the <code>pNext</code> chain <strong class=\"purple\">must</strong> not include an <a href=\"#VkImageCompressionPropertiesEXT\">VkImageCompressionPropertiesEXT</a> structure"
+        }
+      ],
       "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)": [
         {
           "vuid": "VUID-VkSurfaceFormat2KHR-sType-sType",
@@ -40444,7 +40728,11 @@
         },
         {
           "vuid": "VUID-VkSurfaceFormat2KHR-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageCompressionPropertiesEXT\">VkImageCompressionPropertiesEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkSurfaceFormat2KHR-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -40812,7 +41100,7 @@
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupSwapchainCreateInfoKHR\">VkDeviceGroupSwapchainCreateInfoKHR</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a>, <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a>, <a href=\"#VkSwapchainCounterCreateInfoEXT\">VkSwapchainCounterCreateInfoEXT</a>, or <a href=\"#VkSwapchainDisplayNativeHdrCreateInfoAMD\">VkSwapchainDisplayNativeHdrCreateInfoAMD</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupSwapchainCreateInfoKHR\">VkDeviceGroupSwapchainCreateInfoKHR</a>, <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a>, <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a>, <a href=\"#VkSwapchainCounterCreateInfoEXT\">VkSwapchainCounterCreateInfoEXT</a>, or <a href=\"#VkSwapchainDisplayNativeHdrCreateInfoAMD\">VkSwapchainDisplayNativeHdrCreateInfoAMD</a>"
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-sType-unique",
@@ -40941,6 +41229,18 @@
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-pNext-02679",
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a> structure with its <code>fullScreenExclusive</code> member set to <code>VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT</code>, and <code>surface</code> was created using <a href=\"#vkCreateWin32SurfaceKHR\">vkCreateWin32SurfaceKHR</a>, a <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a> structure <strong class=\"purple\">must</strong> be included in the <code>pNext</code> chain"
+        }
+      ],
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_EXT_image_compression_control)+!(VK_EXT_image_compression_control_swapchain)": [
+        {
+          "vuid": "VUID-VkSwapchainCreateInfoKHR-pNext-06751",
+          "text": " The <code>pNext</code> chain <strong class=\"purple\">must</strong> not include an <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a> structure"
+        }
+      ],
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_EXT_image_compression_control)+(VK_EXT_image_compression_control_swapchain)": [
+        {
+          "vuid": "VUID-VkSwapchainCreateInfoKHR-pNext-06752",
+          "text": " If the <code><a href=\"#VK_EXT_image_compression_control_swapchain\">VK_EXT_image_compression_control_swapchain</a></code> extension is not enabled, the <code>pNext</code> chain <strong class=\"purple\">must</strong> not include an <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a> structure"
         }
       ]
     },
@@ -42823,10 +43123,6 @@
           "text": " All acceleration structures in <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> have been built with <code>VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR</code> if <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code>"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesKHR-queryType-03432",
-          "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code> or <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR</code>"
-        },
-        {
           "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesKHR-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
         },
@@ -42861,6 +43157,18 @@
         {
           "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesKHR-commonparent",
           "text": " Each of <code>commandBuffer</code>, <code>queryPool</code>, and the elements of <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_acceleration_structure)+(VK_KHR_ray_tracing_maintenance1)": [
+        {
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesKHR-queryType-06742",
+          "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR</code>, <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR</code>, <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code> or <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_acceleration_structure)+!(VK_KHR_ray_tracing_maintenance1)": [
+        {
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesKHR-queryType-03432",
+          "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code> or <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR</code>"
         }
       ]
     },
@@ -43653,16 +43961,12 @@
           "text": " All acceleration structures in <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> have been built with <code>VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR</code> if <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code>"
         },
         {
-          "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-03432",
-          "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code> or <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR</code>"
-        },
-        {
           "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-03448",
           "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code>, then <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of the size of <code>VkDeviceSize</code>"
         },
         {
           "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-03449",
-          "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code>, then <code>data</code> <strong class=\"purple\">must</strong> point to a <code>VkDeviceSize</code>"
+          "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code>, then <code>pData</code> <strong class=\"purple\">must</strong> point to a <code>VkDeviceSize</code>"
         },
         {
           "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-03450",
@@ -43670,7 +43974,7 @@
         },
         {
           "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-03451",
-          "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR</code>, then <code>data</code> <strong class=\"purple\">must</strong> point to a <code>VkDeviceSize</code>"
+          "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR</code>, then <code>pData</code> <strong class=\"purple\">must</strong> point to a <code>VkDeviceSize</code>"
         },
         {
           "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-dataSize-03452",
@@ -43711,6 +44015,34 @@
         {
           "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-pAccelerationStructures-parent",
           "text": " Each element of <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_acceleration_structure)+(VK_KHR_ray_tracing_maintenance1)": [
+        {
+          "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-06742",
+          "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR</code>, <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR</code>, <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code> or <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-06731",
+          "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR</code>, then <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of the size of <code>VkDeviceSize</code>"
+        },
+        {
+          "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-06732",
+          "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR</code>, then <code>pData</code> <strong class=\"purple\">must</strong> point to a <code>VkDeviceSize</code>"
+        },
+        {
+          "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-06733",
+          "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR</code>, then <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of the size of <code>VkDeviceSize</code>"
+        },
+        {
+          "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-06734",
+          "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR</code>, then <code>pData</code> <strong class=\"purple\">must</strong> point to a <code>VkDeviceSize</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_acceleration_structure)+!(VK_KHR_ray_tracing_maintenance1)": [
+        {
+          "vuid": "VUID-vkWriteAccelerationStructuresPropertiesKHR-queryType-03432",
+          "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR</code> or <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR</code>"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_acceleration_structure)+(VK_KHR_device_group,VK_VERSION_1_1)": [
@@ -44089,131 +44421,131 @@
           "text": " This command <strong class=\"purple\">must</strong> not cause a shader call instruction to be executed from a shader invocation with a <a href=\"#ray-tracing-recursion-depth\">recursion depth</a> greater than the value of <code>maxPipelineRayRecursionDepth</code> used to create the bound ray tracing pipeline"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysKHR-pRayGenShaderBindingTable-03680",
-          "text": " If the buffer from which <code>pRayGenShaderBindingTable-&gt;deviceAddress</code> was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
-        },
-        {
-          "vuid": "VUID-vkCmdTraceRaysKHR-pRayGenShaderBindingTable-03681",
-          "text": " The buffer from which the <code>pRayGenShaderBindingTable-&gt;deviceAddress</code> is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
-        },
-        {
-          "vuid": "VUID-vkCmdTraceRaysKHR-pRayGenShaderBindingTable-03682",
-          "text": " <code>pRayGenShaderBindingTable-&gt;deviceAddress</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+          "vuid": "VUID-vkCmdTraceRaysKHR-commandBuffer-03635",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-size-04023",
           "text": " The <code>size</code> member of <code>pRayGenShaderBindingTable</code> <strong class=\"purple\">must</strong> be equal to its <code>stride</code> member"
         },
         {
+          "vuid": "VUID-vkCmdTraceRaysKHR-pRayGenShaderBindingTable-03680",
+          "text": " If the buffer from which {rayGenShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-pRayGenShaderBindingTable-03681",
+          "text": " The buffer from which the {rayGenShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-pRayGenShaderBindingTable-03682",
+          "text": " {rayGenShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+        },
+        {
           "vuid": "VUID-vkCmdTraceRaysKHR-pMissShaderBindingTable-03683",
-          "text": " If the buffer from which <code>pMissShaderBindingTable-&gt;deviceAddress</code> was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+          "text": " If the buffer from which {missShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pMissShaderBindingTable-03684",
-          "text": " The buffer from which the <code>pMissShaderBindingTable-&gt;deviceAddress</code> is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+          "text": " The buffer from which the {missShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pMissShaderBindingTable-03685",
-          "text": " <code>pMissShaderBindingTable-&gt;deviceAddress</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+          "text": " {missShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-stride-03686",
-          "text": " The <code>stride</code> member of <code>pMissShaderBindingTable</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
+          "text": " {missShaderBindingTableStride} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-stride-04029",
-          "text": " The <code>stride</code> member of <code>pMissShaderBindingTable</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
+          "text": " {missShaderBindingTableStride} <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pHitShaderBindingTable-03687",
-          "text": " If the buffer from which <code>pHitShaderBindingTable-&gt;deviceAddress</code> was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+          "text": " If the buffer from which {hitShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pHitShaderBindingTable-03688",
-          "text": " The buffer from which the <code>pHitShaderBindingTable-&gt;deviceAddress</code> is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+          "text": " The buffer from which the {hitShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pHitShaderBindingTable-03689",
-          "text": " <code>pHitShaderBindingTable-&gt;deviceAddress</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+          "text": " {hitShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-stride-03690",
-          "text": " The <code>stride</code> member of <code>pHitShaderBindingTable</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
+          "text": " {hitShaderBindingTableStride} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-stride-04035",
-          "text": " The <code>stride</code> member of <code>pHitShaderBindingTable</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
+          "text": " {hitShaderBindingTableStride} <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pCallableShaderBindingTable-03691",
-          "text": " If the buffer from which <code>pCallableShaderBindingTable-&gt;deviceAddress</code> was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+          "text": " If the buffer from which {callableShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pCallableShaderBindingTable-03692",
-          "text": " The buffer from which the <code>pCallableShaderBindingTable-&gt;deviceAddress</code> is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+          "text": " The buffer from which the {callableShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pCallableShaderBindingTable-03693",
-          "text": " <code>pCallableShaderBindingTable-&gt;deviceAddress</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+          "text": " {callableShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-stride-03694",
-          "text": " The <code>stride</code> member of <code>pCallableShaderBindingTable</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
+          "text": " {callableShaderBindingTableStride} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-stride-04041",
-          "text": " The <code>stride</code> member of <code>pCallableShaderBindingTable</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
+          "text": " {callableShaderBindingTableStride} <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-flags-03696",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR</code>, the <code>deviceAddress</code> member of <code>pHitShaderBindingTable</code> <strong class=\"purple\">must</strong> not be zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR</code>, {hitShaderBindingTableAddress} <strong class=\"purple\">must</strong> not be zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-flags-03697",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR</code>, the <code>deviceAddress</code> member of <code>pHitShaderBindingTable</code> <strong class=\"purple\">must</strong> not be zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR</code>, {hitShaderBindingTableAddress} <strong class=\"purple\">must</strong> not be zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-flags-03511",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR</code>, the shader group handle identified by <code>pMissShaderBindingTable</code> <strong class=\"purple\">must</strong> not be set to zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR</code>, the shader group handle identified by {missShaderBindingTableAddress} <strong class=\"purple\">must</strong> not be set to zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-flags-03512",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR</code>, entries in <code>pHitShaderBindingTable</code> accessed as a result of this command in order to execute an any-hit shader <strong class=\"purple\">must</strong> not be set to zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR</code>, entries in the table identified by {hitShaderBindingTableAddress} accessed as a result of this command in order to execute an any-hit shader <strong class=\"purple\">must</strong> not be set to zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-flags-03513",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR</code>, entries in <code>pHitShaderBindingTable</code> accessed as a result of this command in order to execute a closest hit shader <strong class=\"purple\">must</strong> not be set to zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR</code>, entries in the table identified by {hitShaderBindingTableAddress} accessed as a result of this command in order to execute a closest hit shader <strong class=\"purple\">must</strong> not be set to zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-flags-03514",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR</code>, entries in <code>pHitShaderBindingTable</code> accessed as a result of this command in order to execute an intersection shader <strong class=\"purple\">must</strong> not be set to zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR</code>, entries in the table identified by {hitShaderBindingTableAddress} accessed as a result of this command in order to execute an intersection shader <strong class=\"purple\">must</strong> not be set to zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pHitShaderBindingTable-04735",
-          "text": " Any non-zero hit shader group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR</code>"
+          "text": " Any non-zero hit shader group entries in the table identified by {hitShaderBindingTableAddress} accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pHitShaderBindingTable-04736",
-          "text": " Any non-zero hit shader group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_AABBS_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR</code>"
+          "text": " Any non-zero hit shader group entries in the table identified by {hitShaderBindingTableAddress} accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_AABBS_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR</code>"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysKHR-commandBuffer-04625",
-          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
-        },
-        {
-          "vuid": "VUID-vkCmdTraceRaysKHR-width-03626",
+          "vuid": "VUID-vkCmdTraceRaysKHR-width-03638",
           "text": " <code>width</code> <strong class=\"purple\">must</strong> be less than or equal to <span class=\"eq\"><code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[0] {times} <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[0]</span>"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysKHR-height-03627",
+          "vuid": "VUID-vkCmdTraceRaysKHR-height-03639",
           "text": " <code>height</code> <strong class=\"purple\">must</strong> be less than or equal to <span class=\"eq\"><code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[1] {times} <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[1]</span>"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysKHR-depth-03628",
+          "vuid": "VUID-vkCmdTraceRaysKHR-depth-03640",
           "text": " <code>depth</code> <strong class=\"purple\">must</strong> be less than or equal to <span class=\"eq\"><code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[2] {times} <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[2]</span>"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysKHR-width-03629",
+          "vuid": "VUID-vkCmdTraceRaysKHR-width-03641",
           "text": " <span class=\"eq\"><code>width</code> {times} <code>height</code> {times} <code>depth</code></span> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxRayDispatchInvocationCount</code>"
         },
         {
@@ -44499,112 +44831,116 @@
           "text": " This command <strong class=\"purple\">must</strong> not cause a shader call instruction to be executed from a shader invocation with a <a href=\"#ray-tracing-recursion-depth\">recursion depth</a> greater than the value of <code>maxPipelineRayRecursionDepth</code> used to create the bound ray tracing pipeline"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pRayGenShaderBindingTable-03680",
-          "text": " If the buffer from which <code>pRayGenShaderBindingTable-&gt;deviceAddress</code> was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
-        },
-        {
-          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pRayGenShaderBindingTable-03681",
-          "text": " The buffer from which the <code>pRayGenShaderBindingTable-&gt;deviceAddress</code> is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
-        },
-        {
-          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pRayGenShaderBindingTable-03682",
-          "text": " <code>pRayGenShaderBindingTable-&gt;deviceAddress</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-commandBuffer-03635",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-size-04023",
           "text": " The <code>size</code> member of <code>pRayGenShaderBindingTable</code> <strong class=\"purple\">must</strong> be equal to its <code>stride</code> member"
         },
         {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pRayGenShaderBindingTable-03680",
+          "text": " If the buffer from which {rayGenShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pRayGenShaderBindingTable-03681",
+          "text": " The buffer from which the {rayGenShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pRayGenShaderBindingTable-03682",
+          "text": " {rayGenShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+        },
+        {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pMissShaderBindingTable-03683",
-          "text": " If the buffer from which <code>pMissShaderBindingTable-&gt;deviceAddress</code> was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+          "text": " If the buffer from which {missShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pMissShaderBindingTable-03684",
-          "text": " The buffer from which the <code>pMissShaderBindingTable-&gt;deviceAddress</code> is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+          "text": " The buffer from which the {missShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pMissShaderBindingTable-03685",
-          "text": " <code>pMissShaderBindingTable-&gt;deviceAddress</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+          "text": " {missShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-stride-03686",
-          "text": " The <code>stride</code> member of <code>pMissShaderBindingTable</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
+          "text": " {missShaderBindingTableStride} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-stride-04029",
-          "text": " The <code>stride</code> member of <code>pMissShaderBindingTable</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
+          "text": " {missShaderBindingTableStride} <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pHitShaderBindingTable-03687",
-          "text": " If the buffer from which <code>pHitShaderBindingTable-&gt;deviceAddress</code> was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+          "text": " If the buffer from which {hitShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pHitShaderBindingTable-03688",
-          "text": " The buffer from which the <code>pHitShaderBindingTable-&gt;deviceAddress</code> is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+          "text": " The buffer from which the {hitShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pHitShaderBindingTable-03689",
-          "text": " <code>pHitShaderBindingTable-&gt;deviceAddress</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+          "text": " {hitShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-stride-03690",
-          "text": " The <code>stride</code> member of <code>pHitShaderBindingTable</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
+          "text": " {hitShaderBindingTableStride} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-stride-04035",
-          "text": " The <code>stride</code> member of <code>pHitShaderBindingTable</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
+          "text": " {hitShaderBindingTableStride} <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pCallableShaderBindingTable-03691",
-          "text": " If the buffer from which <code>pCallableShaderBindingTable-&gt;deviceAddress</code> was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+          "text": " If the buffer from which {callableShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pCallableShaderBindingTable-03692",
-          "text": " The buffer from which the <code>pCallableShaderBindingTable-&gt;deviceAddress</code> is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+          "text": " The buffer from which the {callableShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pCallableShaderBindingTable-03693",
-          "text": " <code>pCallableShaderBindingTable-&gt;deviceAddress</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+          "text": " {callableShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-stride-03694",
-          "text": " The <code>stride</code> member of <code>pCallableShaderBindingTable</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
+          "text": " {callableShaderBindingTableStride} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-stride-04041",
-          "text": " The <code>stride</code> member of <code>pCallableShaderBindingTable</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
+          "text": " {callableShaderBindingTableStride} <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-flags-03696",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR</code>, the <code>deviceAddress</code> member of <code>pHitShaderBindingTable</code> <strong class=\"purple\">must</strong> not be zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR</code>, {hitShaderBindingTableAddress} <strong class=\"purple\">must</strong> not be zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-flags-03697",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR</code>, the <code>deviceAddress</code> member of <code>pHitShaderBindingTable</code> <strong class=\"purple\">must</strong> not be zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR</code>, {hitShaderBindingTableAddress} <strong class=\"purple\">must</strong> not be zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-flags-03511",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR</code>, the shader group handle identified by <code>pMissShaderBindingTable</code> <strong class=\"purple\">must</strong> not be set to zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR</code>, the shader group handle identified by {missShaderBindingTableAddress} <strong class=\"purple\">must</strong> not be set to zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-flags-03512",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR</code>, entries in <code>pHitShaderBindingTable</code> accessed as a result of this command in order to execute an any-hit shader <strong class=\"purple\">must</strong> not be set to zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR</code>, entries in the table identified by {hitShaderBindingTableAddress} accessed as a result of this command in order to execute an any-hit shader <strong class=\"purple\">must</strong> not be set to zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-flags-03513",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR</code>, entries in <code>pHitShaderBindingTable</code> accessed as a result of this command in order to execute a closest hit shader <strong class=\"purple\">must</strong> not be set to zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR</code>, entries in the table identified by {hitShaderBindingTableAddress} accessed as a result of this command in order to execute a closest hit shader <strong class=\"purple\">must</strong> not be set to zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-flags-03514",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR</code>, entries in <code>pHitShaderBindingTable</code> accessed as a result of this command in order to execute an intersection shader <strong class=\"purple\">must</strong> not be set to zero"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR</code>, entries in the table identified by {hitShaderBindingTableAddress} accessed as a result of this command in order to execute an intersection shader <strong class=\"purple\">must</strong> not be set to zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pHitShaderBindingTable-04735",
-          "text": " Any non-zero hit shader group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR</code>"
+          "text": " Any non-zero hit shader group entries in the table identified by {hitShaderBindingTableAddress} accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pHitShaderBindingTable-04736",
-          "text": " Any non-zero hit shader group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_AABBS_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR</code>"
+          "text": " Any non-zero hit shader group entries in the table identified by {hitShaderBindingTableAddress} accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_AABBS_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-indirectDeviceAddress-03632",
@@ -44619,16 +44955,12 @@
           "text": " <code>indirectDeviceAddress</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-commandBuffer-03635",
-          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
-        },
-        {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-indirectDeviceAddress-03636",
-          "text": " All device addresses between <code>indirectDeviceAddress</code> and <span class=\"eq\"><code>indirectDeviceAddress</code> &#43; <code>sizeof</code>(<code>VkTraceRaysIndirectCommandKHR</code>) - 1</span> <strong class=\"purple\">must</strong> be in the buffer device address range of the same buffer"
+          "text": " All device addresses between <code>indirectDeviceAddress</code> and <span class=\"eq\"><code>indirectDeviceAddress</code> &#43; <code>sizeof</code>(sname:{cmdstruct}) - 1</span> <strong class=\"purple\">must</strong> be in the buffer device address range of the same buffer"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-rayTracingPipelineTraceRaysIndirect-03637",
-          "text": " The <a href=\"#features-rayTracingPipelineTraceRaysIndirect\"><code>VkPhysicalDeviceRayTracingPipelineFeaturesKHR</code>::<code>rayTracingPipelineTraceRaysIndirect</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-{feature}-03637",
+          "text": " The <a href=\"#features-{feature}\">pname:{feature}</a> feature <strong class=\"purple\">must</strong> be enabled"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-commandBuffer-parameter",
@@ -44788,6 +45120,350 @@
         },
         {
           "vuid": "VUID-VkTraceRaysIndirectCommandKHR-width-03641",
+          "text": " <span class=\"eq\"><code>width</code> {times} <code>height</code> {times} <code>depth</code></span> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxRayDispatchInvocationCount</code>"
+        }
+      ]
+    },
+    "vkCmdTraceRaysIndirect2KHR": {
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-magFilter-04553",
+          "text": " If a <a href=\"#VkSampler\">VkSampler</a> created with <code>magFilter</code> or <code>minFilter</code> equal to <code>VK_FILTER_LINEAR</code> and <code>compareEnable</code> equal to <code>VK_FALSE</code> is used to sample a <a href=\"#VkImageView\">VkImageView</a> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-mipmapMode-04770",
+          "text": " If a <a href=\"#VkSampler\">VkSampler</a> created with <code>mipmapMode</code> equal to <code>VK_SAMPLER_MIPMAP_MODE_LINEAR</code> and <code>compareEnable</code> equal to <code>VK_FALSE</code> is used to sample a <a href=\"#VkImageView\">VkImageView</a> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02691",
+          "text": " If a <code>VkImageView</code> is accessed using atomic operations as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02697",
+          "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02699",
+          "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02700",
+          "text": " A valid pipeline <strong class=\"purple\">must</strong> be bound to the pipeline bind point used by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-commandBuffer-02701",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02702",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> object that uses unnormalized coordinates, that sampler <strong class=\"purple\">must</strong> not be used to sample from any <code>VkImage</code> with a <code>VkImageView</code> of the type <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, <code>VK_IMAGE_VIEW_TYPE_1D_ARRAY</code>, <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02703",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> object that uses unnormalized coordinates, that sampler <strong class=\"purple\">must</strong> not be used with any of the SPIR-V <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions with <code>ImplicitLod</code>, <code>Dref</code> or <code>Proj</code> in their name, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02704",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> object that uses unnormalized coordinates, that sampler <strong class=\"purple\">must</strong> not be used with any of the SPIR-V <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions that includes a LOD bias or any offset values, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02705",
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and if the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02706",
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and if the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-04115",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-03429",
+          "text": " Any shader group handle referenced by this call <strong class=\"purple\">must</strong> have been queried from the currently bound ray tracing pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-maxPipelineRayRecursionDepth-03679",
+          "text": " This command <strong class=\"purple\">must</strong> not cause a shader call instruction to be executed from a shader invocation with a <a href=\"#ray-tracing-recursion-depth\">recursion depth</a> greater than the value of <code>maxPipelineRayRecursionDepth</code> used to create the bound ray tracing pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-commandBuffer-03635",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-indirectDeviceAddress-03632",
+          "text": " If the buffer from which <code>indirectDeviceAddress</code> was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-indirectDeviceAddress-03633",
+          "text": " The buffer from which <code>indirectDeviceAddress</code> was queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-indirectDeviceAddress-03634",
+          "text": " <code>indirectDeviceAddress</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-indirectDeviceAddress-03636",
+          "text": " All device addresses between <code>indirectDeviceAddress</code> and <span class=\"eq\"><code>indirectDeviceAddress</code> &#43; <code>sizeof</code>(sname:{cmdstruct}) - 1</span> <strong class=\"purple\">must</strong> be in the buffer device address range of the same buffer"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-{feature}-03637",
+          "text": " The <a href=\"#features-{feature}\">pname:{feature}</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support compute operations"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-renderpass",
+          "text": " This command <strong class=\"purple\">must</strong> only be called outside of a render pass instance"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+!(VK_VERSION_1_3,VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-aspectMask-06478",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is sampled with <a href=\"#textures-depth-compare-operation\">depth comparison</a>, the image view <strong class=\"purple\">must</strong> have been created with an <code>aspectMask</code> that contains <code>VK_IMAGE_ASPECT_DEPTH_BIT</code>."
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+(VK_VERSION_1_3,VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-06479",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is sampled with <a href=\"#textures-depth-compare-operation\">depth comparison</a>, the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02692",
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_EXT</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)+!(VK_EXT_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02693",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> as a result of this command <strong class=\"purple\">must</strong> not have a <a href=\"#VkImageViewType\">VkImageViewType</a> of <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)+(VK_EXT_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-filterCubic-02694",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubic</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-filterCubicMinmax-02695",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either <code>VK_SAMPLER_REDUCTION_MODE_MIN</code> or <code>VK_SAMPLER_REDUCTION_MODE_MAX</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+(VK_NV_corner_sampled_image)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-flags-02696",
+          "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+!(VK_VERSION_1_3,VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+(VK_VERSION_1_3,VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-commandBuffer-02707",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)+(VK_NV_ray_tracing_motion_blur)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirect2KHR-rayTracingMotionBlurPipelineTraceRaysIndirect-04951",
+          "text": " If the bound ray tracing pipeline was created with <code>VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV</code> <code>VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</code>::<code>rayTracingMotionBlurPipelineTraceRaysIndirect</code> feature <strong class=\"purple\">must</strong> be enabled"
+        }
+      ]
+    },
+    "VkTraceRaysIndirectCommand2KHR": {
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_maintenance1)": [
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pRayGenShaderBindingTable-03680",
+          "text": " If the buffer from which {rayGenShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pRayGenShaderBindingTable-03681",
+          "text": " The buffer from which the {rayGenShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pRayGenShaderBindingTable-03682",
+          "text": " {rayGenShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pMissShaderBindingTable-03683",
+          "text": " If the buffer from which {missShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pMissShaderBindingTable-03684",
+          "text": " The buffer from which the {missShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pMissShaderBindingTable-03685",
+          "text": " {missShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-stride-03686",
+          "text": " {missShaderBindingTableStride} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-stride-04029",
+          "text": " {missShaderBindingTableStride} <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pHitShaderBindingTable-03687",
+          "text": " If the buffer from which {hitShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pHitShaderBindingTable-03688",
+          "text": " The buffer from which the {hitShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pHitShaderBindingTable-03689",
+          "text": " {hitShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-stride-03690",
+          "text": " {hitShaderBindingTableStride} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-stride-04035",
+          "text": " {hitShaderBindingTableStride} <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pCallableShaderBindingTable-03691",
+          "text": " If the buffer from which {callableShaderBindingTableAddress} was queried is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pCallableShaderBindingTable-03692",
+          "text": " The buffer from which the {callableShaderBindingTableAddress} is queried <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pCallableShaderBindingTable-03693",
+          "text": " {callableShaderBindingTableAddress} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupBaseAlignment</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-stride-03694",
+          "text": " {callableShaderBindingTableStride} <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>shaderGroupHandleAlignment</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-stride-04041",
+          "text": " {callableShaderBindingTableStride} <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxShaderGroupStride</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-flags-03696",
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR</code>, {hitShaderBindingTableAddress} <strong class=\"purple\">must</strong> not be zero"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-flags-03697",
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR</code>, {hitShaderBindingTableAddress} <strong class=\"purple\">must</strong> not be zero"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-flags-03511",
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR</code>, the shader group handle identified by {missShaderBindingTableAddress} <strong class=\"purple\">must</strong> not be set to zero"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-flags-03512",
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR</code>, entries in the table identified by {hitShaderBindingTableAddress} accessed as a result of this command in order to execute an any-hit shader <strong class=\"purple\">must</strong> not be set to zero"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-flags-03513",
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR</code>, entries in the table identified by {hitShaderBindingTableAddress} accessed as a result of this command in order to execute a closest hit shader <strong class=\"purple\">must</strong> not be set to zero"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-flags-03514",
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR</code>, entries in the table identified by {hitShaderBindingTableAddress} accessed as a result of this command in order to execute an intersection shader <strong class=\"purple\">must</strong> not be set to zero"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pHitShaderBindingTable-04735",
+          "text": " Any non-zero hit shader group entries in the table identified by {hitShaderBindingTableAddress} accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-pHitShaderBindingTable-04736",
+          "text": " Any non-zero hit shader group entries in the table identified by {hitShaderBindingTableAddress} accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_AABBS_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-width-03638",
+          "text": " <code>width</code> <strong class=\"purple\">must</strong> be less than or equal to <span class=\"eq\"><code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[0] {times} <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[0]</span>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-height-03639",
+          "text": " <code>height</code> <strong class=\"purple\">must</strong> be less than or equal to <span class=\"eq\"><code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[1] {times} <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[1]</span>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-depth-03640",
+          "text": " <code>depth</code> <strong class=\"purple\">must</strong> be less than or equal to <span class=\"eq\"><code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[2] {times} <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[2]</span>"
+        },
+        {
+          "vuid": "VUID-VkTraceRaysIndirectCommand2KHR-width-03641",
           "text": " <span class=\"eq\"><code>width</code> {times} <code>height</code> {times} <code>depth</code></span> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPipelinePropertiesKHR</code>::<code>maxRayDispatchInvocationCount</code>"
         }
       ]
@@ -46992,6 +47668,14 @@
         }
       ]
     },
+    "VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR": {
+      "(VK_KHR_ray_tracing_maintenance1)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR</code>"
+        }
+      ]
+    },
     "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT": {
       "(VK_EXT_extended_dynamic_state)": [
         {
@@ -47228,6 +47912,14 @@
         }
       ]
     },
+    "VkPhysicalDevicePipelinePropertiesFeaturesEXT": {
+      "(VK_EXT_pipeline_properties)": [
+        {
+          "vuid": "VUID-VkPhysicalDevicePipelinePropertiesFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT</code>"
+        }
+      ]
+    },
     "VkPhysicalDeviceProvokingVertexFeaturesEXT": {
       "(VK_EXT_provoking_vertex)": [
         {
@@ -47340,6 +48032,14 @@
         }
       ]
     },
+    "VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT": {
+      "(VK_EXT_subpass_merge_feedback)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT</code>"
+        }
+      ]
+    },
     "VkPhysicalDeviceLinearColorAttachmentFeaturesNV": {
       "(VK_NV_linear_color_attachment)": [
         {
@@ -47361,6 +48061,22 @@
         {
           "vuid": "VUID-VkPhysicalDeviceImage2DViewOf3DFeaturesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceImageCompressionControlFeaturesEXT": {
+      "(VK_EXT_image_compression_control)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceImageCompressionControlFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT": {
+      "(VK_EXT_image_compression_control)+(VK_EXT_image_compression_control_swapchain)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT</code>"
         }
       ]
     },
@@ -47966,7 +48682,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceImageFormatInfo2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkPhysicalDeviceExternalImageFormatInfo\">VkPhysicalDeviceExternalImageFormatInfo</a>, <a href=\"#VkPhysicalDeviceImageDrmFormatModifierInfoEXT\">VkPhysicalDeviceImageDrmFormatModifierInfoEXT</a>, or <a href=\"#VkPhysicalDeviceImageViewImageFormatInfoEXT\">VkPhysicalDeviceImageViewImageFormatInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkPhysicalDeviceExternalImageFormatInfo\">VkPhysicalDeviceExternalImageFormatInfo</a>, <a href=\"#VkPhysicalDeviceImageDrmFormatModifierInfoEXT\">VkPhysicalDeviceImageDrmFormatModifierInfoEXT</a>, or <a href=\"#VkPhysicalDeviceImageViewImageFormatInfoEXT\">VkPhysicalDeviceImageViewImageFormatInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceImageFormatInfo2-sType-unique",
@@ -48006,7 +48722,7 @@
         },
         {
           "vuid": "VUID-VkImageFormatProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkAndroidHardwareBufferUsageANDROID\">VkAndroidHardwareBufferUsageANDROID</a>, <a href=\"#VkExternalImageFormatProperties\">VkExternalImageFormatProperties</a>, <a href=\"#VkFilterCubicImageViewImageFormatPropertiesEXT\">VkFilterCubicImageViewImageFormatPropertiesEXT</a>, <a href=\"#VkSamplerYcbcrConversionImageFormatProperties\">VkSamplerYcbcrConversionImageFormatProperties</a>, or <a href=\"#VkTextureLODGatherFormatPropertiesAMD\">VkTextureLODGatherFormatPropertiesAMD</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkAndroidHardwareBufferUsageANDROID\">VkAndroidHardwareBufferUsageANDROID</a>, <a href=\"#VkExternalImageFormatProperties\">VkExternalImageFormatProperties</a>, <a href=\"#VkFilterCubicImageViewImageFormatPropertiesEXT\">VkFilterCubicImageViewImageFormatPropertiesEXT</a>, <a href=\"#VkImageCompressionPropertiesEXT\">VkImageCompressionPropertiesEXT</a>, <a href=\"#VkSamplerYcbcrConversionImageFormatProperties\">VkSamplerYcbcrConversionImageFormatProperties</a>, or <a href=\"#VkTextureLODGatherFormatPropertiesAMD\">VkTextureLODGatherFormatPropertiesAMD</a>"
         },
         {
           "vuid": "VUID-VkImageFormatProperties2-sType-unique",
