@@ -190,20 +190,14 @@ uint32_t GetCoverageSampleCount(const gl::State &glState, FramebufferVk *drawFra
     return static_cast<uint32_t>(glState.getSampleCoverageValue() * drawFramebuffer->getSamples());
 }
 
-void ApplySampleCoverage(const gl::State &glState,
-                         uint32_t coverageSampleCount,
-                         uint32_t maskNumber,
-                         uint32_t *maskOut)
+void ApplySampleCoverage(const gl::State &glState, uint32_t coverageSampleCount, uint32_t *maskOut)
 {
     if (!glState.isSampleCoverageEnabled())
     {
         return;
     }
 
-    uint32_t maskBitOffset = maskNumber * 32;
-    uint32_t coverageMask  = coverageSampleCount >= (maskBitOffset + 32)
-                                 ? std::numeric_limits<uint32_t>::max()
-                                 : (1u << (coverageSampleCount - maskBitOffset)) - 1;
+    uint32_t coverageMask = angle::BitMask<uint32_t>(coverageSampleCount);
 
     if (glState.getSampleCoverageInvert())
     {
@@ -627,6 +621,17 @@ VkDependencyFlags GetLocalDependencyFlags(ContextVk *contextVk)
     }
     return dependencyFlags;
 }
+
+void DumpPipelineCacheGraph(const std::ostringstream &graph)
+{
+    std::ostream &out = std::cout;
+
+    out << "digraph {\n"
+        << " node [shape=point]\n";
+    out << graph.str();
+    out << "}\n";
+}
+
 }  // anonymous namespace
 
 // Not necessary once upgraded to C++17.
@@ -774,10 +779,22 @@ ContextVk::ContextVk(const gl::State &state, gl::ErrorSet *errorSet, RendererVk 
     if (getFeatures().supportsExtendedDynamicState.enabled)
     {
         mDynamicStateDirtyBits |= DirtyBits{
-            DIRTY_BIT_DYNAMIC_CULL_MODE,         DIRTY_BIT_DYNAMIC_FRONT_FACE,
-            DIRTY_BIT_DYNAMIC_DEPTH_TEST_ENABLE, DIRTY_BIT_DYNAMIC_DEPTH_WRITE_ENABLE,
-            DIRTY_BIT_DYNAMIC_DEPTH_COMPARE_OP,  DIRTY_BIT_DYNAMIC_STENCIL_TEST_ENABLE,
+            DIRTY_BIT_DYNAMIC_CULL_MODE,
+            DIRTY_BIT_DYNAMIC_FRONT_FACE,
+            DIRTY_BIT_VERTEX_BUFFERS,
+            DIRTY_BIT_DYNAMIC_DEPTH_TEST_ENABLE,
+            DIRTY_BIT_DYNAMIC_DEPTH_WRITE_ENABLE,
+            DIRTY_BIT_DYNAMIC_DEPTH_COMPARE_OP,
+            DIRTY_BIT_DYNAMIC_STENCIL_TEST_ENABLE,
             DIRTY_BIT_DYNAMIC_STENCIL_OP,
+        };
+    }
+    if (getFeatures().supportsExtendedDynamicState2.enabled)
+    {
+        mDynamicStateDirtyBits |= DirtyBits{
+            DIRTY_BIT_DYNAMIC_RASTERIZER_DISCARD_ENABLE,
+            DIRTY_BIT_DYNAMIC_DEPTH_BIAS_ENABLE,
+            DIRTY_BIT_DYNAMIC_PRIMITIVE_RESTART_ENABLE,
         };
     }
     if (getFeatures().supportsFragmentShadingRate.enabled)
@@ -863,6 +880,12 @@ ContextVk::ContextVk(const gl::State &state, gl::ErrorSet *errorSet, RendererVk 
         &ContextVk::handleDirtyGraphicsDynamicStencilTestEnable;
     mGraphicsDirtyBitHandlers[DIRTY_BIT_DYNAMIC_STENCIL_OP] =
         &ContextVk::handleDirtyGraphicsDynamicStencilOp;
+    mGraphicsDirtyBitHandlers[DIRTY_BIT_DYNAMIC_RASTERIZER_DISCARD_ENABLE] =
+        &ContextVk::handleDirtyGraphicsDynamicRasterizerDiscardEnable;
+    mGraphicsDirtyBitHandlers[DIRTY_BIT_DYNAMIC_DEPTH_BIAS_ENABLE] =
+        &ContextVk::handleDirtyGraphicsDynamicDepthBiasEnable;
+    mGraphicsDirtyBitHandlers[DIRTY_BIT_DYNAMIC_PRIMITIVE_RESTART_ENABLE] =
+        &ContextVk::handleDirtyGraphicsDynamicPrimitiveRestartEnable;
     mGraphicsDirtyBitHandlers[DIRTY_BIT_DYNAMIC_FRAGMENT_SHADING_RATE] =
         &ContextVk::handleDirtyGraphicsDynamicFragmentShadingRate;
 
@@ -943,6 +966,13 @@ ContextVk::ContextVk(const gl::State &state, gl::ErrorSet *errorSet, RendererVk 
         mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_STENCIL_OPS_BACK);
     }
 
+    if (getFeatures().supportsExtendedDynamicState2.enabled)
+    {
+        mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_RASTERIZER_DISCARD_ENABLED);
+        mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_POLYGON_OFFSET_FILL_ENABLED);
+        mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_PRIMITIVE_RESTART_ENABLED);
+    }
+
     angle::PerfMonitorCounterGroup vulkanGroup;
     vulkanGroup.name = "vulkan";
 
@@ -961,7 +991,13 @@ ContextVk::ContextVk(const gl::State &state, gl::ErrorSet *errorSet, RendererVk 
     mPerfMonitorCounters.push_back(vulkanGroup);
 }
 
-ContextVk::~ContextVk() = default;
+ContextVk::~ContextVk()
+{
+    if (!mPipelineCacheGraph.str().empty())
+    {
+        DumpPipelineCacheGraph(mPipelineCacheGraph);
+    }
+}
 
 void ContextVk::onDestroy(const gl::Context *context)
 {
@@ -2074,21 +2110,60 @@ angle::Result ContextVk::handleDirtyComputeTextures()
 angle::Result ContextVk::handleDirtyGraphicsVertexBuffers(DirtyBits::Iterator *dirtyBitsIterator,
                                                           DirtyBits dirtyBitMask)
 {
-    VertexArrayVk *vertexArrayVk = getVertexArray();
-    uint32_t maxAttrib           = mState.getProgramExecutable()->getMaxActiveAttribLocation();
+    const gl::ProgramExecutable *executable = mState.getProgramExecutable();
+    VertexArrayVk *vertexArrayVk            = getVertexArray();
+    uint32_t maxAttrib = mState.getProgramExecutable()->getMaxActiveAttribLocation();
     const gl::AttribArray<VkBuffer> &bufferHandles = vertexArrayVk->getCurrentArrayBufferHandles();
     const gl::AttribArray<VkDeviceSize> &bufferOffsets =
         vertexArrayVk->getCurrentArrayBufferOffsets();
 
-    mRenderPassCommandBuffer->bindVertexBuffers(0, maxAttrib, bufferHandles.data(),
-                                                bufferOffsets.data());
+    if (getFeatures().supportsExtendedDynamicState.enabled)
+    {
+        const gl::AttribArray<GLuint> &bufferStrides =
+            vertexArrayVk->getCurrentArrayBufferStrides();
+        const gl::AttribArray<angle::FormatID> &bufferFormats =
+            vertexArrayVk->getCurrentArrayBufferFormats();
+        gl::AttribArray<VkDeviceSize> strides = {};
+
+        // Set stride to 0 for mismatching formats between the program's declared attribute and that
+        // which is specified in glVertexAttribPointer.  See comment in vk_cache_utils.cpp
+        // (initializePipeline) for more details.
+        const gl::AttributesMask &activeAttribLocations =
+            executable->getNonBuiltinAttribLocationsMask();
+        const gl::ComponentTypeMask &programAttribsTypeMask = executable->getAttributesTypeMask();
+
+        for (size_t attribIndex : activeAttribLocations)
+        {
+            const angle::Format &intendedFormat =
+                mRenderer->getFormat(bufferFormats[attribIndex]).getIntendedFormat();
+
+            const gl::ComponentType attribType = GetVertexAttributeComponentType(
+                intendedFormat.isPureInt(), intendedFormat.vertexAttribType);
+            const gl::ComponentType programAttribType =
+                gl::GetComponentTypeMask(programAttribsTypeMask, attribIndex);
+
+            const bool mismatchingType =
+                attribType != programAttribType && (programAttribType == gl::ComponentType::Float ||
+                                                    attribType == gl::ComponentType::Float);
+            strides[attribIndex] = mismatchingType ? 0 : bufferStrides[attribIndex];
+        }
+
+        // TODO: Use the sizes parameters here to fix the robustness issue worked around in
+        // crbug.com/1310038
+        mRenderPassCommandBuffer->bindVertexBuffers2(0, maxAttrib, bufferHandles.data(),
+                                                     bufferOffsets.data(), nullptr, strides.data());
+    }
+    else
+    {
+        mRenderPassCommandBuffer->bindVertexBuffers(0, maxAttrib, bufferHandles.data(),
+                                                    bufferOffsets.data());
+    }
 
     const gl::AttribArray<vk::BufferHelper *> &arrayBufferResources =
         vertexArrayVk->getCurrentArrayBuffers();
 
     // Mark all active vertex buffers as accessed.
-    const gl::ProgramExecutable *executable = mState.getProgramExecutable();
-    gl::AttributesMask attribsMask          = executable->getActiveAttribLocationsMask();
+    const gl::AttributesMask attribsMask = executable->getActiveAttribLocationsMask();
     for (size_t attribIndex : attribsMask)
     {
         vk::BufferHelper *arrayBuffer = arrayBufferResources[attribIndex];
@@ -2618,11 +2693,47 @@ angle::Result ContextVk::handleDirtyGraphicsDynamicStencilOp(DirtyBits::Iterator
     return angle::Result::Continue;
 }
 
+angle::Result ContextVk::handleDirtyGraphicsDynamicRasterizerDiscardEnable(
+    DirtyBits::Iterator *dirtyBitsIterator,
+    DirtyBits dirtyBitMask)
+{
+    const bool isEmulatingRasterizerDiscard =
+        isEmulatingRasterizerDiscardDuringPrimitivesGeneratedQuery(
+            mState.isQueryActive(gl::QueryType::PrimitivesGenerated));
+    const bool isRasterizerDiscardEnabled = mState.isRasterizerDiscardEnabled();
+
+    mRenderPassCommandBuffer->setRasterizerDiscardEnable(isRasterizerDiscardEnabled &&
+                                                         !isEmulatingRasterizerDiscard);
+    return angle::Result::Continue;
+}
+
+angle::Result ContextVk::handleDirtyGraphicsDynamicDepthBiasEnable(
+    DirtyBits::Iterator *dirtyBitsIterator,
+    DirtyBits dirtyBitMask)
+{
+    mRenderPassCommandBuffer->setDepthBiasEnable(mState.isPolygonOffsetFillEnabled());
+    return angle::Result::Continue;
+}
+
+angle::Result ContextVk::handleDirtyGraphicsDynamicPrimitiveRestartEnable(
+    DirtyBits::Iterator *dirtyBitsIterator,
+    DirtyBits dirtyBitMask)
+{
+    mRenderPassCommandBuffer->setPrimitiveRestartEnable(mState.isPrimitiveRestartEnabled());
+    return angle::Result::Continue;
+}
+
 angle::Result ContextVk::handleDirtyGraphicsDynamicFragmentShadingRate(
     DirtyBits::Iterator *dirtyBitsIterator,
     DirtyBits dirtyBitMask)
 {
-    gl::ShadingRate shadingRate     = getState().getShadingRate();
+    gl::ShadingRate shadingRate = getState().getShadingRate();
+    if (shadingRate == gl::ShadingRate::Undefined)
+    {
+        // Shading rate has not been set. Nothing to do, early return.
+        return angle::Result::Continue;
+    }
+
     const bool shadingRateSupported = mRenderer->isShadingRateSupported(shadingRate);
     VkExtent2D fragmentSize         = {};
     VkFragmentShadingRateCombinerOpKHR shadingRateCombinerOp[2] = {
@@ -3806,7 +3917,7 @@ angle::Result ContextVk::optimizeRenderPassForPresent(VkFramebuffer framebufferH
                                                       vk::ImageViewHelper *colorImageView,
                                                       vk::ImageHelper *colorImage,
                                                       vk::ImageHelper *colorImageMS,
-                                                      VkPresentModeKHR presentMode,
+                                                      vk::PresentMode presentMode,
                                                       bool *imageResolved)
 {
     if (!mRenderPassCommands->started())
@@ -3870,7 +3981,7 @@ angle::Result ContextVk::optimizeRenderPassForPresent(VkFramebuffer framebufferH
 
         // Invalidate the surface.  See comment in WindowSurfaceVk::doDeferredAcquireNextImage on
         // why this is not done when in DEMAND_REFRESH mode.
-        if (presentMode != VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR)
+        if (presentMode != vk::PresentMode::SharedDemandRefreshKHR)
         {
             commandBufferHelper.invalidateRenderPassColorAttachment(
                 mState, 0, vk::PackedAttachmentIndex(0), invalidateArea);
@@ -4156,16 +4267,17 @@ void ContextVk::updateSampleMaskWithRasterizationSamples(const uint32_t rasteriz
     uint32_t coverageSampleCount = GetCoverageSampleCount(mState, drawFramebuffer);
 
     static_assert(sizeof(uint32_t) == sizeof(GLbitfield), "Vulkan assumes 32-bit sample masks");
-    for (uint32_t maskNumber = 0; maskNumber < mState.getMaxSampleMaskWords(); ++maskNumber)
+    ASSERT(mState.getMaxSampleMaskWords() == 1);
+
+    uint32_t mask = std::numeric_limits<uint16_t>::max();
+    if (mState.isSampleMaskEnabled() && rasterizationSamples > 1)
     {
-        uint32_t mask = mState.isSampleMaskEnabled() && rasterizationSamples > 1
-                            ? mState.getSampleMaskWord(maskNumber)
-                            : std::numeric_limits<uint32_t>::max();
-
-        ApplySampleCoverage(mState, coverageSampleCount, maskNumber, &mask);
-
-        mGraphicsPipelineDesc->updateSampleMask(&mGraphicsPipelineTransition, maskNumber, mask);
+        mask = mState.getSampleMaskWord(0) & angle::BitMask<uint32_t>(rasterizationSamples);
     }
+
+    ApplySampleCoverage(mState, coverageSampleCount, &mask);
+
+    mGraphicsPipelineDesc->updateSampleMask(&mGraphicsPipelineTransition, 0, mask);
 }
 
 gl::Rectangle ContextVk::getCorrectedViewport(const gl::Rectangle &viewport) const
@@ -4408,25 +4520,30 @@ void ContextVk::updateRasterizerDiscardEnabled(bool isPrimitivesGeneratedQueryAc
 
     // If the primitives generated query implementation supports rasterizer discard, just set
     // rasterizer discard as requested.  Otherwise disable it.
-    bool isRasterizerDiscardEnabled   = mState.isRasterizerDiscardEnabled();
-    bool isEmulatingRasterizerDiscard = isEmulatingRasterizerDiscardDuringPrimitivesGeneratedQuery(
-        isPrimitivesGeneratedQueryActive);
+    const bool isEmulatingRasterizerDiscard =
+        isEmulatingRasterizerDiscardDuringPrimitivesGeneratedQuery(
+            isPrimitivesGeneratedQueryActive);
 
-    mGraphicsPipelineDesc->updateRasterizerDiscardEnabled(
-        &mGraphicsPipelineTransition, isRasterizerDiscardEnabled && !isEmulatingRasterizerDiscard);
-
-    invalidateCurrentGraphicsPipeline();
-
-    if (!isEmulatingRasterizerDiscard)
+    if (getFeatures().supportsExtendedDynamicState2.enabled)
     {
-        return;
+        mGraphicsDirtyBits.set(DIRTY_BIT_DYNAMIC_RASTERIZER_DISCARD_ENABLE);
+    }
+    else
+    {
+        const bool isRasterizerDiscardEnabled = mState.isRasterizerDiscardEnabled();
+
+        mGraphicsPipelineDesc->updateRasterizerDiscardEnabled(
+            &mGraphicsPipelineTransition,
+            isRasterizerDiscardEnabled && !isEmulatingRasterizerDiscard);
+
+        invalidateCurrentGraphicsPipeline();
     }
 
-    // If we are emulating rasterizer discard, update the scissor if in render pass.  If not in
-    // render pass, DIRTY_BIT_DYNAMIC_SCISSOR will be set when the render pass next starts.
-    if (hasStartedRenderPass())
+    if (isEmulatingRasterizerDiscard)
     {
-        handleDirtyGraphicsDynamicScissorImpl(isPrimitivesGeneratedQueryActive);
+        // If we are emulating rasterizer discard, update the scissor to use an empty one if
+        // rasterizer discard is enabled.
+        mGraphicsDirtyBits.set(DIRTY_BIT_DYNAMIC_SCISSOR);
     }
 }
 
@@ -4564,10 +4681,6 @@ angle::Result ContextVk::invalidateProgramExecutableHelper(const gl::Context *co
         mIndexedDirtyBitsMask.set(DIRTY_BIT_VERTEX_BUFFERS, useVertexBuffer);
         mCurrentGraphicsPipeline = nullptr;
         mGraphicsPipelineTransition.reset();
-
-        ProgramExecutableVk *executableVk = getExecutable();
-        ASSERT(executableVk);
-        executableVk->updateEarlyFragmentTestsOptimization(this, *executable);
 
         if (getDrawFramebuffer()->getRenderPassDesc().getFramebufferFetchMode() !=
             executable->usesFramebufferFetch())
@@ -4750,8 +4863,15 @@ angle::Result ContextVk::syncState(const gl::Context *context,
                 updateFrontFace();
                 break;
             case gl::State::DIRTY_BIT_POLYGON_OFFSET_FILL_ENABLED:
-                mGraphicsPipelineDesc->updatePolygonOffsetFillEnabled(
-                    &mGraphicsPipelineTransition, glState.isPolygonOffsetFillEnabled());
+                if (getFeatures().supportsExtendedDynamicState2.enabled)
+                {
+                    mGraphicsDirtyBits.set(DIRTY_BIT_DYNAMIC_DEPTH_BIAS_ENABLE);
+                }
+                else
+                {
+                    mGraphicsPipelineDesc->updatePolygonOffsetFillEnabled(
+                        &mGraphicsPipelineTransition, glState.isPolygonOffsetFillEnabled());
+                }
                 break;
             case gl::State::DIRTY_BIT_POLYGON_OFFSET:
                 mGraphicsDirtyBits.set(DIRTY_BIT_DYNAMIC_DEPTH_BIAS);
@@ -4765,8 +4885,23 @@ angle::Result ContextVk::syncState(const gl::Context *context,
                 mGraphicsDirtyBits.set(DIRTY_BIT_DYNAMIC_LINE_WIDTH);
                 break;
             case gl::State::DIRTY_BIT_PRIMITIVE_RESTART_ENABLED:
-                mGraphicsPipelineDesc->updatePrimitiveRestartEnabled(
-                    &mGraphicsPipelineTransition, glState.isPrimitiveRestartEnabled());
+                if (getFeatures().supportsExtendedDynamicState2.enabled)
+                {
+                    mGraphicsDirtyBits.set(DIRTY_BIT_DYNAMIC_PRIMITIVE_RESTART_ENABLE);
+                }
+                else
+                {
+                    mGraphicsPipelineDesc->updatePrimitiveRestartEnabled(
+                        &mGraphicsPipelineTransition, glState.isPrimitiveRestartEnabled());
+                }
+                // Additionally set the index buffer dirty if conversion from uint8 might have been
+                // necessary.  Otherwise if primitive restart is enabled and the index buffer is
+                // translated to uint16_t with a value of 0xFFFF, it cannot be reused when primitive
+                // restart is disabled.
+                if (!mRenderer->getFeatures().supportsIndexTypeUint8.enabled)
+                {
+                    mGraphicsDirtyBits.set(DIRTY_BIT_INDEX_BUFFER);
+                }
                 break;
             case gl::State::DIRTY_BIT_CLEAR_COLOR:
                 mClearColorValue.color.float32[0] = glState.getColorClearValue().red;

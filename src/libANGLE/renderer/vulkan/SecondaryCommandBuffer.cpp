@@ -44,6 +44,8 @@ const char *GetCommandString(CommandID id)
             return "BindTransformFeedbackBuffers";
         case CommandID::BindVertexBuffers:
             return "BindVertexBuffers";
+        case CommandID::BindVertexBuffers2:
+            return "BindVertexBuffers2";
         case CommandID::BlitImage:
             return "BlitImage";
         case CommandID::BufferBarrier:
@@ -118,6 +120,8 @@ const char *GetCommandString(CommandID id)
             return "SetCullMode";
         case CommandID::SetDepthBias:
             return "SetDepthBias";
+        case CommandID::SetDepthBiasEnable:
+            return "SetDepthBiasEnable";
         case CommandID::SetDepthCompareOp:
             return "SetDepthCompareOp";
         case CommandID::SetDepthTestEnable:
@@ -132,6 +136,10 @@ const char *GetCommandString(CommandID id)
             return "SetFrontFace";
         case CommandID::SetLineWidth:
             return "SetLineWidth";
+        case CommandID::SetPrimitiveRestartEnable:
+            return "SetPrimitiveRestartEnable";
+        case CommandID::SetRasterizerDiscardEnable:
+            return "SetRasterizerDiscardEnable";
         case CommandID::SetScissor:
             return "SetScissor";
         case CommandID::SetStencilCompareMask:
@@ -269,6 +277,20 @@ void SecondaryCommandBuffer::executeCommands(PrimaryCommandBuffer *primary)
                     const VkDeviceSize *offsets =
                         Offset<VkDeviceSize>(buffers, sizeof(VkBuffer) * params->bindingCount);
                     vkCmdBindVertexBuffers(cmdBuffer, 0, params->bindingCount, buffers, offsets);
+                    break;
+                }
+                case CommandID::BindVertexBuffers2:
+                {
+                    const BindVertexBuffers2Params *params =
+                        getParamPtr<BindVertexBuffers2Params>(currentCommand);
+                    const VkBuffer *buffers =
+                        Offset<VkBuffer>(params, sizeof(BindVertexBuffers2Params));
+                    const VkDeviceSize *offsets =
+                        Offset<VkDeviceSize>(buffers, sizeof(VkBuffer) * params->bindingCount);
+                    const VkDeviceSize *strides =
+                        Offset<VkDeviceSize>(offsets, sizeof(VkDeviceSize) * params->bindingCount);
+                    vkCmdBindVertexBuffers2EXT(cmdBuffer, 0, params->bindingCount, buffers, offsets,
+                                               nullptr, strides);
                     break;
                 }
                 case CommandID::BlitImage:
@@ -579,6 +601,13 @@ void SecondaryCommandBuffer::executeCommands(PrimaryCommandBuffer *primary)
                                       params->depthBiasClamp, params->depthBiasSlopeFactor);
                     break;
                 }
+                case CommandID::SetDepthBiasEnable:
+                {
+                    const SetDepthBiasEnableParams *params =
+                        getParamPtr<SetDepthBiasEnableParams>(currentCommand);
+                    vkCmdSetDepthBiasEnableEXT(cmdBuffer, params->depthBiasEnable);
+                    break;
+                }
                 case CommandID::SetDepthCompareOp:
                 {
                     const SetDepthCompareOpParams *params =
@@ -629,6 +658,20 @@ void SecondaryCommandBuffer::executeCommands(PrimaryCommandBuffer *primary)
                     const SetLineWidthParams *params =
                         getParamPtr<SetLineWidthParams>(currentCommand);
                     vkCmdSetLineWidth(cmdBuffer, params->lineWidth);
+                    break;
+                }
+                case CommandID::SetPrimitiveRestartEnable:
+                {
+                    const SetPrimitiveRestartEnableParams *params =
+                        getParamPtr<SetPrimitiveRestartEnableParams>(currentCommand);
+                    vkCmdSetPrimitiveRestartEnableEXT(cmdBuffer, params->primitiveRestartEnable);
+                    break;
+                }
+                case CommandID::SetRasterizerDiscardEnable:
+                {
+                    const SetRasterizerDiscardEnableParams *params =
+                        getParamPtr<SetRasterizerDiscardEnableParams>(currentCommand);
+                    vkCmdSetRasterizerDiscardEnableEXT(cmdBuffer, params->rasterizerDiscardEnable);
                     break;
                 }
                 case CommandID::SetScissor:
