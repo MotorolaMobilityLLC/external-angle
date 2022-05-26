@@ -2058,6 +2058,11 @@ TEST_P(Texture2DTestWithDrawScale, MipmapsTwice)
                  pixelsBlue.data());
     glGenerateMipmap(GL_TEXTURE_2D);
 
+    drawQuad(mProgram, "position", 0.5f);
+
+    EXPECT_GL_NO_ERROR();
+    EXPECT_PIXEL_COLOR_EQ(px, py, GLColor::blue);
+
     std::vector<GLColor> pixelsGreen(16u * 16u, GLColor::green);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE,
@@ -3347,26 +3352,6 @@ TEST_P(Texture2DTest, SubImageValidationOverflow)
     EXPECT_GL_ERROR(GL_INVALID_VALUE);
 }
 
-// Test that when a mutable texture is deleted, its corresponding pointer in the Vulkan backend,
-// which is used for mutable texture flushing, is also deleted, and is not accessed by the new
-// mutable texture after it.
-TEST_P(Texture2DTest, MutableUploadThenDeleteThenMutableUpload)
-{
-    GLTexture texture1;
-    glBindTexture(GL_TEXTURE_2D, texture1);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE,
-                 GLColor::red.data());
-    texture1.reset();
-    EXPECT_GL_NO_ERROR();
-
-    GLTexture texture2;
-    glBindTexture(GL_TEXTURE_2D, texture2);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE,
-                 GLColor::green.data());
-    texture2.reset();
-    EXPECT_GL_NO_ERROR();
-}
-
 // Test to ensure that glTexStorage3D accepts ASTC sliced 3D. https://crbug.com/1060012
 TEST_P(Texture3DTestES3, ImmutableASTCSliced3D)
 {
@@ -4228,24 +4213,24 @@ void Texture2DBaseMaxTestES3::testGenerateMipmapAfterRebase(bool immutable)
         drawQuad(mProgram, essl3_shaders::PositionAttrib(), 0.5f);
         if (lod == 0)
         {
-            EXPECT_PIXEL_COLOR_EQ(0, 0, kMipColors[lod]);
-            EXPECT_PIXEL_COLOR_EQ(w, 0, kMipColors[lod]);
-            EXPECT_PIXEL_COLOR_EQ(0, h, kMipColors[lod]);
-            EXPECT_PIXEL_COLOR_EQ(w, h, kMipColors[lod]);
+            EXPECT_PIXEL_COLOR_EQ(0, 0, kMipColors[lod]) << "lod " << lod;
+            EXPECT_PIXEL_COLOR_EQ(w, 0, kMipColors[lod]) << "lod " << lod;
+            EXPECT_PIXEL_COLOR_EQ(0, h, kMipColors[lod]) << "lod " << lod;
+            EXPECT_PIXEL_COLOR_EQ(w, h, kMipColors[lod]) << "lod " << lod;
         }
         else if (lod == kMipCount - 1)
         {
-            EXPECT_PIXEL_COLOR_EQ(0, 0, kMipColors[lod]);
-            EXPECT_PIXEL_COLOR_EQ(w, 0, kMipColors[lod]);
-            EXPECT_PIXEL_COLOR_EQ(0, h, kMipColors[lod]);
-            EXPECT_PIXEL_COLOR_EQ(w, h, kMipColors[lod]);
+            EXPECT_PIXEL_COLOR_EQ(0, 0, kMipColors[lod]) << "lod " << lod;
+            EXPECT_PIXEL_COLOR_EQ(w, 0, kMipColors[lod]) << "lod " << lod;
+            EXPECT_PIXEL_COLOR_EQ(0, h, kMipColors[lod]) << "lod " << lod;
+            EXPECT_PIXEL_COLOR_EQ(w, h, kMipColors[lod]) << "lod " << lod;
         }
         else
         {
-            EXPECT_PIXEL_COLOR_EQ(0, 0, kNewMipColor);
-            EXPECT_PIXEL_COLOR_EQ(w, 0, kNewMipColor);
-            EXPECT_PIXEL_COLOR_EQ(0, h, kNewMipColor);
-            EXPECT_PIXEL_COLOR_EQ(w, h, kNewMipColor);
+            EXPECT_PIXEL_COLOR_EQ(0, 0, kNewMipColor) << "lod " << lod;
+            EXPECT_PIXEL_COLOR_EQ(w, 0, kNewMipColor) << "lod " << lod;
+            EXPECT_PIXEL_COLOR_EQ(0, h, kNewMipColor) << "lod " << lod;
+            EXPECT_PIXEL_COLOR_EQ(w, h, kNewMipColor) << "lod " << lod;
         }
     }
 }
@@ -10334,12 +10319,59 @@ void main()
                                           GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
     memcpy(mappedBuffer, kUpdateData.data(), sizeof(kInitialData));
 
+    glUnmapBuffer(GL_TEXTURE_BUFFER);
+
     // Draw with the updated buffer data.
     ANGLE_GL_PROGRAM(updateSamplerBuffer, essl31_shaders::vs::Simple(), kSamplerBuffer);
     drawQuad(updateSamplerBuffer, essl31_shaders::PositionAttrib(), 0.5);
     EXPECT_GL_NO_ERROR();
 
     // Make sure both draw calls succeed
+    EXPECT_PIXEL_COLOR_EQ(0, 0, GLColor::blue);
+}
+
+// Test that calling glBufferData on a buffer that is used as texture buffer still works correctly.
+TEST_P(TextureBufferTestES31, TextureBufferThenBufferData)
+{
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled("GL_OES_texture_buffer"));
+
+    const std::array<GLColor, 4> kInitialData = {GLColor::red, GLColor::red, GLColor::red,
+                                                 GLColor::red};
+    const std::array<GLColor, 4> kUpdateData  = {GLColor::blue, GLColor::blue, GLColor::blue,
+                                                 GLColor::blue};
+    // Create buffer and initialize with data
+    GLBuffer buffer;
+    glBindBuffer(GL_TEXTURE_BUFFER, buffer);
+    glBufferData(GL_TEXTURE_BUFFER, sizeof(kInitialData), kInitialData.data(), GL_DYNAMIC_DRAW);
+
+    // Bind as texture buffer
+    GLTexture texture;
+    glBindTexture(GL_TEXTURE_BUFFER, texture);
+    glTexBufferEXT(GL_TEXTURE_BUFFER, GL_RGBA8, buffer);
+    EXPECT_GL_NO_ERROR();
+
+    constexpr char kSamplerBuffer[] = R"(#version 310 es
+#extension GL_OES_texture_buffer : require
+precision mediump float;
+uniform highp samplerBuffer s;
+out vec4 colorOut;
+void main()
+{
+    colorOut = texelFetch(s, 0);
+})";
+
+    ANGLE_GL_PROGRAM(initialSamplerBuffer, essl31_shaders::vs::Simple(), kSamplerBuffer);
+    drawQuad(initialSamplerBuffer, essl31_shaders::PositionAttrib(), 0.5);
+
+    // Don't read back, so we keep the original buffer busy. Issue a glBufferData call with same
+    // size and nullptr so that the old buffer storage gets orphaned.
+    glBufferData(GL_TEXTURE_BUFFER, sizeof(kUpdateData), nullptr, GL_DYNAMIC_DRAW);
+    glBufferSubData(GL_TEXTURE_BUFFER, 0, sizeof(kUpdateData), kUpdateData.data());
+
+    // Draw with the updated buffer data.
+    ANGLE_GL_PROGRAM(updateSamplerBuffer, essl31_shaders::vs::Simple(), kSamplerBuffer);
+    drawQuad(updateSamplerBuffer, essl31_shaders::PositionAttrib(), 0.5);
+    EXPECT_GL_NO_ERROR();
     EXPECT_PIXEL_COLOR_EQ(0, 0, GLColor::blue);
 }
 
