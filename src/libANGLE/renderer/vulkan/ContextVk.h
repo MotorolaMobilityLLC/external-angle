@@ -447,7 +447,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
                                                vk::ImageViewHelper *colorImageView,
                                                vk::ImageHelper *colorImage,
                                                vk::ImageHelper *colorImageMS,
-                                               VkPresentModeKHR presentMode,
+                                               vk::PresentMode presentMode,
                                                bool *imageResolved);
 
     vk::DynamicQueryPool *getQueryPool(gl::QueryType queryType);
@@ -526,14 +526,6 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     RenderPassCache &getRenderPassCache() { return mRenderPassCache; }
 
     vk::DescriptorSetLayoutDesc getDriverUniformsDescriptorSetDesc() const;
-
-    void updateScissor(const gl::State &glState);
-
-    void updateDepthStencil(const gl::State &glState);
-    void updateDepthTestEnabled(const gl::State &glState);
-    void updateDepthWriteEnabled(const gl::State &glState);
-    void updateDepthFunc(const gl::State &glState);
-    void updateStencilTestEnabled(const gl::State &glState);
 
     bool emulateSeamfulCubeMapSampling() const { return mEmulateSeamfulCubeMapSampling; }
 
@@ -757,6 +749,8 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
         mVulkanCacheStats[cache].accumulate(stats);
     }
 
+    std::ostringstream &getPipelineCacheGraphStream() { return mPipelineCacheGraph; }
+
   private:
     // Dirty bits.
     enum DirtyBitType : size_t
@@ -819,6 +813,10 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
         DIRTY_BIT_DYNAMIC_DEPTH_COMPARE_OP,
         DIRTY_BIT_DYNAMIC_STENCIL_TEST_ENABLE,
         DIRTY_BIT_DYNAMIC_STENCIL_OP,
+        // - In VK_EXT_extended_dynamic_state2
+        DIRTY_BIT_DYNAMIC_RASTERIZER_DISCARD_ENABLE,
+        DIRTY_BIT_DYNAMIC_DEPTH_BIAS_ENABLE,
+        DIRTY_BIT_DYNAMIC_PRIMITIVE_RESTART_ENABLE,
         // - In VK_KHR_fragment_shading_rate
         DIRTY_BIT_DYNAMIC_FRAGMENT_SHADING_RATE,
 
@@ -903,6 +901,12 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     static_assert(DIRTY_BIT_DYNAMIC_STENCIL_TEST_ENABLE > DIRTY_BIT_RENDER_PASS,
                   "Render pass using dirty bit must be handled after the render pass dirty bit");
     static_assert(DIRTY_BIT_DYNAMIC_STENCIL_OP > DIRTY_BIT_RENDER_PASS,
+                  "Render pass using dirty bit must be handled after the render pass dirty bit");
+    static_assert(DIRTY_BIT_DYNAMIC_RASTERIZER_DISCARD_ENABLE > DIRTY_BIT_RENDER_PASS,
+                  "Render pass using dirty bit must be handled after the render pass dirty bit");
+    static_assert(DIRTY_BIT_DYNAMIC_DEPTH_BIAS_ENABLE > DIRTY_BIT_RENDER_PASS,
+                  "Render pass using dirty bit must be handled after the render pass dirty bit");
+    static_assert(DIRTY_BIT_DYNAMIC_PRIMITIVE_RESTART_ENABLE > DIRTY_BIT_RENDER_PASS,
                   "Render pass using dirty bit must be handled after the render pass dirty bit");
     static_assert(DIRTY_BIT_DYNAMIC_FRAGMENT_SHADING_RATE > DIRTY_BIT_RENDER_PASS,
                   "Render pass using dirty bit must be handled after the render pass dirty bit");
@@ -1128,6 +1132,14 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
         DirtyBits dirtyBitMask);
     angle::Result handleDirtyGraphicsDynamicStencilOp(DirtyBits::Iterator *dirtyBitsIterator,
                                                       DirtyBits dirtyBitMask);
+    angle::Result handleDirtyGraphicsDynamicRasterizerDiscardEnable(
+        DirtyBits::Iterator *dirtyBitsIterator,
+        DirtyBits dirtyBitMask);
+    angle::Result handleDirtyGraphicsDynamicDepthBiasEnable(DirtyBits::Iterator *dirtyBitsIterator,
+                                                            DirtyBits dirtyBitMask);
+    angle::Result handleDirtyGraphicsDynamicPrimitiveRestartEnable(
+        DirtyBits::Iterator *dirtyBitsIterator,
+        DirtyBits dirtyBitMask);
     angle::Result handleDirtyGraphicsDynamicFragmentShadingRate(
         DirtyBits::Iterator *dirtyBitsIterator,
         DirtyBits dirtyBitMask);
@@ -1249,6 +1261,14 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     angle::Result pushDebugGroupImpl(GLenum source, GLuint id, const char *message);
     angle::Result popDebugGroupImpl();
+
+    void updateScissor(const gl::State &glState);
+
+    void updateDepthStencil(const gl::State &glState);
+    void updateDepthTestEnabled(const gl::State &glState);
+    void updateDepthWriteEnabled(const gl::State &glState);
+    void updateDepthFunc(const gl::State &glState);
+    void updateStencilTestEnabled(const gl::State &glState);
 
     void updateSampleShadingWithRasterizationSamples(const uint32_t rasterizationSamples);
     void updateRasterizationSamples(const uint32_t rasterizationSamples);
@@ -1482,6 +1502,9 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     VkRect2D mScissor;
 
     VulkanCacheStats mVulkanCacheStats;
+
+    // A graph built from pipeline descs and their transitions.
+    std::ostringstream mPipelineCacheGraph;
 };
 
 ANGLE_INLINE angle::Result ContextVk::endRenderPassIfTransformFeedbackBuffer(
@@ -1517,10 +1540,13 @@ ANGLE_INLINE angle::Result ContextVk::onVertexAttributeChange(size_t attribIndex
                                                               GLuint relativeOffset,
                                                               const vk::BufferHelper *vertexBuffer)
 {
+    const GLuint staticStride = getFeatures().supportsExtendedDynamicState.enabled ? 0 : stride;
+
     invalidateCurrentGraphicsPipeline();
+
     // Set divisor to 1 for attribs with emulated divisor
     mGraphicsPipelineDesc->updateVertexInput(
-        &mGraphicsPipelineTransition, static_cast<uint32_t>(attribIndex), stride,
+        this, &mGraphicsPipelineTransition, static_cast<uint32_t>(attribIndex), staticStride,
         divisor > mRenderer->getMaxVertexAttribDivisor() ? 1 : divisor, format, compressed,
         relativeOffset);
     return onVertexBufferChange(vertexBuffer);
