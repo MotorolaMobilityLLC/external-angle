@@ -11,11 +11,11 @@
 #include "common/PackedEnums.h"
 #include "common/string_utils.h"
 #include "common/system_utils.h"
-#include "restricted_traces/restricted_traces_export.h"
 #include "tests/perf_tests/ANGLEPerfTest.h"
 #include "tests/perf_tests/ANGLEPerfTestArgs.h"
 #include "tests/perf_tests/DrawCallPerfParams.h"
 #include "util/capture/frame_capture_test_utils.h"
+#include "util/capture/traces_export.h"
 #include "util/egl_loader_autogen.h"
 #include "util/png_utils.h"
 #include "util/test_utils.h"
@@ -835,27 +835,11 @@ TracePerfTest::TracePerfTest(const TracePerfParams &params)
 
     if (traceNameIs("efootball_pes_2021"))
     {
-        if (mParams.isVulkan() && ((IsLinux() && IsIntel()) || IsPixel2()))
+        if (mParams.isVulkan() && IsLinux() && IsIntel())
         {
             skipTest(
-                "TODO: https://anglebug.com/5517 Linux+Intel and Pixel 2 generate 'Framebuffer is "
+                "TODO: https://anglebug.com/5517 Linux+Intel generate 'Framebuffer is "
                 "incomplete' errors with the Vulkan backend");
-        }
-    }
-
-    if (traceNameIs("manhattan_31"))
-    {
-        if (IsPixel2() && mParams.isVulkan())
-        {
-            skipTest("TODO: http://anglebug.com/5591 Trace crashes on Pixel 2 in vulkan driver");
-        }
-    }
-
-    if (traceNameIs("idle_heroes"))
-    {
-        if (IsPixel2())
-        {
-            skipTest("TODO: http://anglebug.com/5591 Trace crashes on Pixel 2");
         }
     }
 
@@ -924,14 +908,6 @@ TracePerfTest::TracePerfTest(const TracePerfParams &params)
         }
     }
 
-    if (traceNameIs("rope_hero_vice_town"))
-    {
-        if (IsPixel2() && mParams.isVulkan())
-        {
-            skipTest("TODO: http://anglebug.com/5716 Trace crashes on Pixel 2 in vulkan driver");
-        }
-    }
-
     if (traceNameIs("extreme_car_driving_simulator"))
     {
         addExtensionPrerequisite("GL_KHR_texture_compression_astc_ldr");
@@ -954,13 +930,6 @@ TracePerfTest::TracePerfTest(const TracePerfParams &params)
     {
         addExtensionPrerequisite("GL_OES_EGL_image_external");
         addExtensionPrerequisite("GL_KHR_texture_compression_astc_ldr");
-
-        if (IsPixel2() && mParams.isVulkan())
-        {
-            skipTest(
-                "TODO: http://anglebug.com/5772 Pixel 2 errors with 'Framebuffer is incomplete' on "
-                "Vulkan");
-        }
     }
 
     if (traceNameIs("real_cricket_20"))
@@ -985,30 +954,23 @@ TracePerfTest::TracePerfTest(const TracePerfParams &params)
     if (traceNameIs("aztec_ruins"))
     {
         addExtensionPrerequisite("GL_KHR_texture_compression_astc_ldr");
-
-        if (IsPixel2() && mParams.isVulkan())
-        {
-            skipTest(
-                "TODO: http://anglebug.com/5553 Pixel 2 errors with 'Framebuffer is incomplete' on "
-                "Vulkan");
-        }
     }
 
     if (traceNameIs("dragon_raja"))
     {
         addExtensionPrerequisite("GL_OES_EGL_image_external");
 
-        if (((IsLinux() && IsIntel()) || IsPixel2()) && mParams.isVulkan())
+        if ((IsLinux() && IsIntel()) && mParams.isVulkan())
         {
             skipTest(
-                "TODO: http://anglebug.com/5807 Intel Linux and Pixel 2 error with 'Framebuffer is "
+                "TODO: http://anglebug.com/5807 Intel Linux errors with 'Framebuffer is "
                 "incomplete' on Vulkan");
         }
     }
 
     if (traceNameIs("hill_climb_racing") || traceNameIs("dead_trigger_2"))
     {
-        if (IsAndroid() && (IsPixel2() || IsPixel4() || IsPixel4XL()) &&
+        if (IsAndroid() && (IsPixel4() || IsPixel4XL()) &&
             mParams.driver == GLESDriverType::SystemEGL)
         {
             skipTest(
@@ -1039,14 +1001,6 @@ TracePerfTest::TracePerfTest(const TracePerfParams &params)
             skipTest(
                 "TODO: http://anglebug.com/5837 Intel Linux Vulkan errors with 'Framebuffer is "
                 "incomplete'");
-        }
-    }
-
-    if (traceNameIs("slingshot_test1") || traceNameIs("slingshot_test2"))
-    {
-        if (IsPixel2() && mParams.isVulkan())
-        {
-            skipTest("TODO: http://anglebug.com/5877 Trace crashes on Pixel 2 in vulkan driver");
         }
     }
 
@@ -1093,11 +1047,6 @@ TracePerfTest::TracePerfTest(const TracePerfParams &params)
     if (traceNameIs("genshin_impact"))
     {
         addExtensionPrerequisite("GL_KHR_texture_compression_astc_ldr");
-
-        if (IsPixel2() && mParams.isVulkan())
-        {
-            skipTest("TODO: http://anglebug.com/6023 Crashes on Pixel 2 in vulkan driver");
-        }
 
         if ((IsLinux() && IsIntel()) && mParams.isVulkan())
         {
@@ -1325,7 +1274,7 @@ void TracePerfTest::initializeBenchmark()
     mStartingDirectory = angle::GetCWD().value();
 
     std::stringstream traceNameStr;
-    traceNameStr << "angle_restricted_trace_" << traceInfo.name;
+    traceNameStr << "angle_restricted_traces_" << traceInfo.name;
     std::string traceName = traceNameStr.str();
     mTraceLibrary.reset(new TraceLibrary(traceName.c_str()));
 
