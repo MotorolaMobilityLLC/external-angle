@@ -13,11 +13,20 @@
 
 #include "common/Color.h"
 #include "common/FixedVector.h"
+#include "libANGLE/Uniform.h"
+#include "libANGLE/renderer/ShaderInterfaceVariableInfoMap.h"
 #include "libANGLE/renderer/vulkan/ResourceVk.h"
 #include "libANGLE/renderer/vulkan/vk_utils.h"
 
+namespace gl
+{
+class ProgramExecutable;
+}  // namespace gl
+
 namespace rx
 {
+class ShaderInterfaceVariableInfoMap;
+class UpdateDescriptorSetsBuilder;
 
 // Some descriptor set and pipeline layout constants.
 //
@@ -49,22 +58,15 @@ enum class DescriptorSetIndex : uint32_t
 
 namespace vk
 {
+class BufferHelper;
 class DynamicDescriptorPool;
 class ImageHelper;
+class SamplerHelper;
 enum class ImageLayout;
 
 using RefCountedDescriptorSetLayout    = RefCounted<DescriptorSetLayout>;
 using RefCountedPipelineLayout         = RefCounted<PipelineLayout>;
 using RefCountedSamplerYcbcrConversion = RefCounted<SamplerYcbcrConversion>;
-
-// Helper macro that casts to a bitfield type then verifies no bits were dropped.
-#define SetBitField(lhs, rhs)                                                         \
-    do                                                                                \
-    {                                                                                 \
-        auto ANGLE_LOCAL_VAR = rhs;                                                   \
-        lhs = static_cast<typename std::decay<decltype(lhs)>::type>(ANGLE_LOCAL_VAR); \
-        ASSERT(static_cast<decltype(ANGLE_LOCAL_VAR)>(lhs) == ANGLE_LOCAL_VAR);       \
-    } while (0)
 
 // Packed Vk resource descriptions.
 // Most Vk types use many more bits than required to represent the underlying data.
@@ -220,7 +222,7 @@ class alignas(4) RenderPassDesc final
     uint8_t mSamples;
     uint8_t mColorAttachmentRange;
 
-    // Multivew
+    // Multiview
     uint8_t mViewCount;
 
     // sRGB
@@ -455,14 +457,12 @@ struct PackedDepthStencilStateInfo final
     DepthCompareOpAndSurfaceRotation depthCompareOpAndSurfaceRotation;
     uint16_t padding;
 
-    float minDepthBounds;
-    float maxDepthBounds;
     PackedStencilOpState front;
     PackedStencilOpState back;
 };
 
 constexpr size_t kPackedDepthStencilStateSize = sizeof(PackedDepthStencilStateInfo);
-static_assert(kPackedDepthStencilStateSize == 16, "Size check failed");
+static_assert(kPackedDepthStencilStateSize == 8, "Size check failed");
 static_assert(static_cast<int>(SurfaceRotation::EnumCount) <= 8, "Size check failed");
 
 struct LogicOpState final
@@ -596,7 +596,6 @@ class GraphicsPipelineDesc final
     void updateDepthClipControl(GraphicsPipelineTransitionBits *transition, bool negativeOneToOne);
 
     // Raster states
-    void setCullMode(VkCullModeFlagBits cullMode);
     void updateCullMode(GraphicsPipelineTransitionBits *transition,
                         const gl::RasterizerState &rasterState);
     void updateFrontFace(GraphicsPipelineTransitionBits *transition,
@@ -762,6 +761,8 @@ class DescriptorSetLayoutDesc final
 
     void unpackBindings(DescriptorSetLayoutBindingVector *bindings,
                         std::vector<VkSampler> *immutableSamplers) const;
+
+    bool empty() const { return *this == DescriptorSetLayoutDesc(); }
 
   private:
     // There is a small risk of an issue if the sampler cache is evicted but not the descriptor
@@ -1112,152 +1113,235 @@ inline bool operator==(const ImageOrBufferViewSubresourceSerial &a,
 constexpr ImageOrBufferViewSubresourceSerial kInvalidImageOrBufferViewSubresourceSerial = {
     kInvalidImageOrBufferViewSerial, kInvalidImageSubresourceRange};
 
+// Always starts with array element zero, with descriptorCount descriptors.
+struct WriteDescriptorDesc
+{
+    uint8_t binding;              // Redundant: determined by the containing WriteDesc array.
+    uint8_t descriptorCount;      // Number of array elements in this descriptor write.
+    uint8_t descriptorType;       // Packed VkDescriptorType.
+    uint8_t descriptorInfoIndex;  // Base index into an array of DescriptorInfoDescs.
+};
+
+static_assert(sizeof(WriteDescriptorDesc) == 4, "Size mismatch");
+
+struct DescriptorInfoDesc
+{
+    uint32_t samplerOrBufferSerial;
+    uint32_t imageViewSerialOrOffset;
+    uint32_t imageLayoutOrRange;  // Packed VkImageLayout
+    uint32_t imageSubresourceRange;
+};
+
+static_assert(sizeof(DescriptorInfoDesc) == 16, "Size mismatch");
+
 // Generic description of a descriptor set. Used as a key when indexing descriptor set caches. The
 // key storage is an angle:FixedVector. Beyond a certain fixed size we'll end up using heap memory
 // to store keys. Currently we specialize the structure for three use cases: uniforms, textures,
 // and other shader resources. Because of the way the specialization works we can't currently cache
 // programs that use some types of resources.
+static constexpr size_t kFastDescriptorSetDescLimit = 8;
+
+struct DescriptorDescHandles
+{
+    VkBuffer buffer;
+    VkSampler sampler;
+    VkImageView imageView;
+    VkBufferView bufferView;
+};
+
 class DescriptorSetDesc
 {
   public:
     DescriptorSetDesc()  = default;
     ~DescriptorSetDesc() = default;
 
-    DescriptorSetDesc(const DescriptorSetDesc &other) : mPayload(other.mPayload) {}
+    DescriptorSetDesc(const DescriptorSetDesc &other)
+        : mWriteDescriptors(other.mWriteDescriptors), mDescriptorInfos(other.mDescriptorInfos)
+    {}
 
     DescriptorSetDesc &operator=(const DescriptorSetDesc &other)
     {
-        mPayload = other.mPayload;
+        mWriteDescriptors = other.mWriteDescriptors;
+        mDescriptorInfos  = other.mDescriptorInfos;
         return *this;
     }
 
     size_t hash() const;
 
-    void reset() { mPayload.clear(); }
+    void reset()
+    {
+        mWriteDescriptors.clear();
+        mDescriptorInfos.clear();
+    }
 
-    size_t getKeySizeBytes() const { return mPayload.size() * sizeof(uint32_t); }
+    size_t getKeySizeBytes() const
+    {
+        return mWriteDescriptors.size() * sizeof(WriteDescriptorDesc) +
+               mDescriptorInfos.size() * sizeof(DescriptorInfoDesc);
+    }
 
     bool operator==(const DescriptorSetDesc &other) const
     {
-        return (mPayload.size() == other.mPayload.size()) &&
-               (memcmp(mPayload.data(), other.mPayload.data(),
-                       mPayload.size() * sizeof(mPayload[0])) == 0);
+        ASSERT(mWriteDescriptors == other.mWriteDescriptors);
+        return (mDescriptorInfos == other.mDescriptorInfos);
     }
 
-    // Specific helpers for uniforms/xfb descriptors.
-    static constexpr size_t kDefaultUniformBufferWordOffset = 0;
-    static constexpr size_t kXfbBufferSerialWordOffset      = 1;
-    static constexpr size_t kXfbBufferOffsetWordOffset      = 2;
-    static constexpr size_t kXfbWordStride                  = 2;
-
-    void updateDefaultUniformBuffer(BufferSerial bufferSerial)
+    bool hasWriteDescAtIndex(uint32_t bindingIndex) const
     {
-        setBufferSerial(kDefaultUniformBufferWordOffset, 1, 0, bufferSerial);
+        return bindingIndex < mWriteDescriptors.size() &&
+               mWriteDescriptors[bindingIndex].descriptorCount > 0;
     }
 
-    void updateTransformFeedbackBuffer(size_t xfbIndex,
-                                       BufferSerial bufferSerial,
-                                       VkDeviceSize bufferOffset)
+    // Returns the info desc offset.
+    void updateWriteDesc(const WriteDescriptorDesc &writeDesc);
+
+    void updateInfoDesc(uint32_t infoDescIndex, const DescriptorInfoDesc &infoDesc)
     {
-        setBufferSerial(kXfbBufferSerialWordOffset, kXfbWordStride, xfbIndex, bufferSerial);
-        setClamped64BitValue(kXfbBufferOffsetWordOffset, kXfbWordStride, xfbIndex, bufferOffset);
+        mDescriptorInfos[infoDescIndex] = infoDesc;
     }
 
-    // Specific helpers for texture descriptors.
-    static constexpr size_t kImageOrBufferViewWordOffset     = 0;
-    static constexpr size_t kImageSubresourceRangeWordOffset = 1;
-    static constexpr size_t kSamplerSerialWordOffset         = 2;
-    static constexpr size_t kTextureWordStride               = 3;
-    void updateTexture(size_t textureUnit,
-                       ImageOrBufferViewSubresourceSerial imageOrBufferViewSubresource,
-                       SamplerSerial samplerSerial)
+    void incrementDescriptorCount(uint32_t bindingIndex, uint32_t count)
     {
-        setImageOrBufferViewSerial(kImageOrBufferViewWordOffset, kTextureWordStride, textureUnit,
-                                   imageOrBufferViewSubresource.viewSerial);
-        setImageSubresourceRange(kImageSubresourceRangeWordOffset, kTextureWordStride, textureUnit,
-                                 imageOrBufferViewSubresource.subresource);
-        setSamplerSerial(kSamplerSerialWordOffset, kTextureWordStride, textureUnit, samplerSerial);
+        // Validate we have no subsequent writes.
+        ASSERT(hasWriteDescAtIndex(bindingIndex));
+        mWriteDescriptors[bindingIndex].descriptorCount += count;
     }
 
-    // Specific helpers for the shader resources descriptors.
-    void appendBufferSerial(BufferSerial bufferSerial)
+    uint32_t getDescriptorSetCount(uint32_t bindingIndex) const
     {
-        append32BitValue(bufferSerial.getValue());
+        ASSERT(hasWriteDescAtIndex(bindingIndex));
+        return mWriteDescriptors[bindingIndex].descriptorCount;
     }
 
-    void append32BitValue(uint32_t value) { mPayload.push_back(value); }
+    void updateDescriptorSet(UpdateDescriptorSetsBuilder *updateBuilder,
+                             const DescriptorDescHandles *handles,
+                             VkDescriptorSet descriptorSet) const;
 
-    void appendClamped64BitValue(uint64_t value)
+    bool empty() const { return mWriteDescriptors.size() == 0; }
+
+    void streamOut(std::ostream &os) const;
+
+    uint32_t getInfoDescIndex(uint32_t bindingIndex) const
     {
-        ASSERT(value <= static_cast<uint64_t>(std::numeric_limits<uint32_t>::max()));
-        append32BitValue(static_cast<uint32_t>(value));
+        return mWriteDescriptors[bindingIndex].descriptorInfoIndex;
     }
 
   private:
-    void setBufferSerial(size_t wordOffset,
-                         size_t wordStride,
-                         size_t elementIndex,
-                         BufferSerial bufferSerial)
-    {
-        set32BitValue(wordOffset, wordStride, elementIndex, bufferSerial.getValue());
-    }
-
-    void setImageOrBufferViewSerial(size_t wordOffset,
-                                    size_t wordStride,
-                                    size_t elementIndex,
-                                    ImageOrBufferViewSerial imageOrBufferViewSerial)
-    {
-        set32BitValue(wordOffset, wordStride, elementIndex, imageOrBufferViewSerial.getValue());
-    }
-
-    void setImageSubresourceRange(size_t wordOffset,
-                                  size_t wordStride,
-                                  size_t elementIndex,
-                                  ImageSubresourceRange subresourceRange)
-    {
-        static_assert(sizeof(ImageSubresourceRange) == sizeof(uint32_t));
-
-        uint32_t value32bits;
-        memcpy(&value32bits, &subresourceRange, sizeof(uint32_t));
-        set32BitValue(wordOffset, wordStride, elementIndex, value32bits);
-    }
-
-    void setSamplerSerial(size_t wordOffset,
-                          size_t wordStride,
-                          size_t elementIndex,
-                          SamplerSerial samplerSerial)
-    {
-        set32BitValue(wordOffset, wordStride, elementIndex, samplerSerial.getValue());
-    }
-
-    void set32BitValue(size_t wordOffset, size_t wordStride, size_t elementIndex, uint32_t value)
-    {
-        size_t wordIndex = wordOffset + wordStride * elementIndex;
-        ensureCapacity(wordIndex + 1);
-        mPayload[wordIndex] = value;
-    }
-
-    void setClamped64BitValue(size_t wordOffset,
-                              size_t wordStride,
-                              size_t elementIndex,
-                              uint64_t value)
-    {
-        ASSERT(value <= static_cast<uint64_t>(std::numeric_limits<uint32_t>::max()));
-        set32BitValue(wordOffset, wordStride, elementIndex, static_cast<uint32_t>(value));
-    }
-
-    void ensureCapacity(size_t capacity)
-    {
-        if (mPayload.size() < capacity)
-        {
-            mPayload.resize(capacity, 0);
-        }
-    }
-
     // After a preliminary minimum size, use heap memory.
-    static constexpr size_t kFastBufferWordLimit = 32;
-    angle::FastVector<uint32_t, kFastBufferWordLimit> mPayload;
+    angle::FastMap<WriteDescriptorDesc, kFastDescriptorSetDescLimit> mWriteDescriptors;
+    angle::FastMap<DescriptorInfoDesc, kFastDescriptorSetDescLimit> mDescriptorInfos;
 };
+
+constexpr VkDescriptorType kStorageBufferDescriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+
+// Manages a descriptor set desc with a few helper routines and also stores object handles.
+class DescriptorSetDescBuilder final
+{
+  public:
+    DescriptorSetDescBuilder();
+    ~DescriptorSetDescBuilder();
+
+    DescriptorSetDescBuilder(const DescriptorSetDescBuilder &other);
+    DescriptorSetDescBuilder &operator=(const DescriptorSetDescBuilder &other);
+
+    const DescriptorSetDesc &getDesc() const { return mDesc; }
+
+    void reset();
+
+    // Specific helpers for uniforms/xfb descriptors.
+    void updateUniformWrite(uint32_t shaderStageCount);
+    void updateUniformBuffer(uint32_t shaderIndex,
+                             const BufferHelper &bufferHelper,
+                             VkDeviceSize bufferRange);
+    void updateTransformFeedbackWrite(const ShaderInterfaceVariableInfoMap &variableInfoMap,
+                                      uint32_t xfbBufferCount);
+    void updateTransformFeedbackBuffer(const Context *context,
+                                       const ShaderInterfaceVariableInfoMap &variableInfoMap,
+                                       uint32_t xfbBufferIndex,
+                                       const BufferHelper &bufferHelper,
+                                       VkDeviceSize bufferOffset,
+                                       VkDeviceSize bufferRange);
+
+    void updateUniformsAndXfb(Context *context,
+                              const gl::ProgramExecutable &executable,
+                              const ProgramExecutableVk &executableVk,
+                              const BufferHelper *currentUniformBuffer,
+                              const BufferHelper &emptyBuffer,
+                              bool activeUnpaused,
+                              TransformFeedbackVk *transformFeedbackVk);
+
+    // Specific helpers for shader resource descriptors.
+    void updateShaderBuffers(gl::ShaderType shaderType,
+                             ShaderVariableType variableType,
+                             const ShaderInterfaceVariableInfoMap &variableInfoMap,
+                             const gl::BufferVector &buffers,
+                             const std::vector<gl::InterfaceBlock> &blocks,
+                             VkDescriptorType descriptorType,
+                             VkDeviceSize maxBoundBufferRange,
+                             const BufferHelper &emptyBuffer);
+    void updateAtomicCounters(gl::ShaderType shaderType,
+                              const ShaderInterfaceVariableInfoMap &variableInfoMap,
+                              const gl::BufferVector &buffers,
+                              const std::vector<gl::AtomicCounterBuffer> &atomicCounterBuffers,
+                              const VkDeviceSize requiredOffsetAlignment,
+                              vk::BufferHelper *emptyBuffer);
+    angle::Result updateImages(Context *context,
+                               gl::ShaderType shaderType,
+                               const gl::ProgramExecutable &executable,
+                               const ShaderInterfaceVariableInfoMap &variableInfoMap,
+                               const gl::ActiveTextureArray<TextureVk *> &activeImages,
+                               const std::vector<gl::ImageUnit> &imageUnits);
+    angle::Result updateInputAttachments(vk::Context *context,
+                                         gl::ShaderType shaderType,
+                                         const gl::ProgramExecutable &executable,
+                                         const ShaderInterfaceVariableInfoMap &variableInfoMap,
+                                         FramebufferVk *framebufferVk);
+
+    // Specific helpers for image descriptors.
+    void updatePreCacheActiveTextures(const gl::ActiveTextureMask &activeTextures,
+                                      const gl::ActiveTextureArray<TextureVk *> &textures,
+                                      const gl::SamplerBindingVector &samplers);
+
+    angle::Result updateFullActiveTextures(Context *context,
+                                           const ShaderInterfaceVariableInfoMap &variableInfoMap,
+                                           const gl::ProgramExecutable &executable,
+                                           const gl::ActiveTextureArray<TextureVk *> &textures,
+                                           const gl::SamplerBindingVector &samplers,
+                                           bool emulateSeamfulCubeMapSampling,
+                                           PipelineType pipelineType);
+
+    void updateDescriptorSet(UpdateDescriptorSetsBuilder *updateBuilder,
+                             VkDescriptorSet descriptorSet) const;
+
+    const uint32_t *getDynamicOffsets() const { return mDynamicOffsets.data(); }
+    size_t getDynamicOffsetsSize() const { return mDynamicOffsets.size(); }
+
+  private:
+    angle::Result updateExecutableActiveTexturesForShader(
+        Context *context,
+        gl::ShaderType shaderType,
+        const ShaderInterfaceVariableInfoMap &variableInfoMap,
+        const gl::ProgramExecutable &executable,
+        const gl::ActiveTextureArray<TextureVk *> &textures,
+        const gl::SamplerBindingVector &samplers,
+        bool emulateSeamfulCubeMapSampling,
+        PipelineType pipelineType);
+
+    void updateWriteDesc(uint32_t bindingIndex,
+                         VkDescriptorType descriptorType,
+                         uint32_t descriptorCount);
+
+    DescriptorSetDesc mDesc;
+    angle::FastMap<DescriptorDescHandles, kFastDescriptorSetDescLimit> mHandles;
+    angle::FastMap<uint32_t, kFastDescriptorSetDescLimit> mDynamicOffsets;
+    uint32_t mCurrentInfoIndex = 0;
+};
+
+// Specialized update for textures.
+void UpdatePreCacheActiveTextures(const gl::ActiveTextureMask &activeTextures,
+                                  const gl::ActiveTextureArray<TextureVk *> &textures,
+                                  const gl::SamplerBindingVector &samplers,
+                                  DescriptorSetDesc *desc);
 
 // In the FramebufferDesc object:
 //  - Depth/stencil serial is at index 0
@@ -1501,8 +1585,9 @@ enum class VulkanCacheType
     DriverUniformsDescriptors,
     TextureDescriptors,
     UniformsAndXfbDescriptors,
-    ShaderBuffersDescriptors,
+    ShaderResourcesDescriptors,
     Framebuffer,
+    DescriptorMetaCache,
     EnumCount
 };
 
@@ -1527,15 +1612,21 @@ class CacheStats final : angle::NonCopyable
 
     ANGLE_INLINE void hit() { mHitCount++; }
     ANGLE_INLINE void miss() { mMissCount++; }
+    ANGLE_INLINE void incrementSize() { mSize++; }
+    ANGLE_INLINE void missAndIncrementSize()
+    {
+        mMissCount++;
+        mSize++;
+    }
     ANGLE_INLINE void accumulate(const CacheStats &stats)
     {
         mHitCount += stats.mHitCount;
         mMissCount += stats.mMissCount;
-        mSize = stats.mSize;
+        mSize += stats.mSize;
     }
 
-    uint64_t getHitCount() const { return mHitCount; }
-    uint64_t getMissCount() const { return mMissCount; }
+    uint32_t getHitCount() const { return mHitCount; }
+    uint32_t getMissCount() const { return mMissCount; }
 
     ANGLE_INLINE double getHitRatio() const
     {
@@ -1549,9 +1640,7 @@ class CacheStats final : angle::NonCopyable
         }
     }
 
-    ANGLE_INLINE void incrementSize() { ++mSize; }
-
-    ANGLE_INLINE uint64_t getSize() const { return mSize; }
+    ANGLE_INLINE uint32_t getSize() const { return mSize; }
 
     void reset()
     {
@@ -1566,10 +1655,16 @@ class CacheStats final : angle::NonCopyable
         mMissCount = 0;
     }
 
+    void accumulateCacheStats(VulkanCacheType cacheType, const CacheStats &cacheStats)
+    {
+        mHitCount += cacheStats.getHitCount();
+        mMissCount += cacheStats.getMissCount();
+    }
+
   private:
-    uint64_t mHitCount;
-    uint64_t mMissCount;
-    uint64_t mSize;
+    uint32_t mHitCount;
+    uint32_t mMissCount;
+    uint32_t mSize;
 };
 
 template <VulkanCacheType CacheType>
@@ -1583,12 +1678,16 @@ class HasCacheStats : angle::NonCopyable
         mCacheStats.reset();
     }
 
+    void getCacheStats(CacheStats *accum) const { accum->accumulate(mCacheStats); }
+
   protected:
     HasCacheStats()          = default;
     virtual ~HasCacheStats() = default;
 
     CacheStats mCacheStats;
 };
+
+using VulkanCacheStats = angle::PackedEnumMap<VulkanCacheType, CacheStats>;
 
 // TODO(jmadill): Add cache trimming/eviction.
 class RenderPassCache final : angle::NonCopyable
@@ -1615,7 +1714,7 @@ class RenderPassCache final : angle::NonCopyable
             return angle::Result::Continue;
         }
 
-        mCompatibleRenderPassCacheStats.miss();
+        mCompatibleRenderPassCacheStats.missAndIncrementSize();
         return addRenderPass(contextVk, desc, renderPassOut);
     }
 
@@ -1680,7 +1779,7 @@ class GraphicsPipelineCache final : public HasCacheStats<VulkanCacheType::Graphi
             return angle::Result::Continue;
         }
 
-        mCacheStats.miss();
+        mCacheStats.missAndIncrementSize();
         return insertPipeline(contextVk, pipelineCacheVk, compatibleRenderPass, pipelineLayout,
                               activeAttribLocationsMask, programAttribsTypeMask, missingOutputsMask,
                               shaders, specConsts, desc, descPtrOut, pipelineOut);
@@ -1778,71 +1877,42 @@ class SamplerYcbcrConversionCache final
     SamplerYcbcrConversionMap mVkFormatPayload;
 };
 
-// DescriptorSet Cache
-class DriverUniformsDescriptorSetCache final
-    : public HasCacheStats<VulkanCacheType::DriverUniformsDescriptors>
-{
-  public:
-    DriverUniformsDescriptorSetCache() = default;
-    ~DriverUniformsDescriptorSetCache() override { ASSERT(mPayload.empty()); }
-
-    void destroy(RendererVk *rendererVk);
-
-    ANGLE_INLINE bool get(uint32_t serial, VkDescriptorSet *descriptorSet)
-    {
-        if (mPayload.get(serial, descriptorSet))
-        {
-            mCacheStats.hit();
-            return true;
-        }
-        mCacheStats.miss();
-        return false;
-    }
-
-    ANGLE_INLINE void insert(uint32_t serial, VkDescriptorSet descriptorSet)
-    {
-        mPayload.insert(serial, descriptorSet);
-    }
-
-    ANGLE_INLINE void clear() { mPayload.clear(); }
-
-    size_t getSize() const { return mPayload.size(); }
-
-  private:
-    static constexpr uint32_t kFlatMapSize = 16;
-    angle::FlatUnorderedMap<uint32_t, VkDescriptorSet, kFlatMapSize> mPayload;
-};
-
-// Templated Descriptors Cache
+// Descriptor Set Cache
 class DescriptorSetCache final : angle::NonCopyable
 {
   public:
     DescriptorSetCache() = default;
     ~DescriptorSetCache() { ASSERT(mPayload.empty()); }
 
-    ANGLE_INLINE void clear() { mPayload.clear(); }
+    DescriptorSetCache(DescriptorSetCache &&other) : DescriptorSetCache()
+    {
+        *this = std::move(other);
+    }
 
-    ANGLE_INLINE bool get(const vk::DescriptorSetDesc &desc,
-                          VkDescriptorSet *descriptorSet,
-                          CacheStats *cacheStats)
+    DescriptorSetCache &operator=(DescriptorSetCache &&other)
+    {
+        std::swap(mPayload, other.mPayload);
+        return *this;
+    }
+
+    void resetCache() { mPayload.clear(); }
+
+    ANGLE_INLINE bool getDescriptorSet(const vk::DescriptorSetDesc &desc,
+                                       VkDescriptorSet *descriptorSet)
     {
         auto iter = mPayload.find(desc);
         if (iter != mPayload.end())
         {
             *descriptorSet = iter->second;
-            cacheStats->hit();
             return true;
         }
-        cacheStats->miss();
         return false;
     }
 
-    ANGLE_INLINE void insert(const vk::DescriptorSetDesc &desc,
-                             VkDescriptorSet descriptorSet,
-                             CacheStats *cacheStats)
+    ANGLE_INLINE void insertDescriptorSet(const vk::DescriptorSetDesc &desc,
+                                          VkDescriptorSet descriptorSet)
     {
         mPayload.emplace(desc, descriptorSet);
-        cacheStats->incrementSize();
     }
 
     size_t getTotalCacheKeySizeBytes() const
