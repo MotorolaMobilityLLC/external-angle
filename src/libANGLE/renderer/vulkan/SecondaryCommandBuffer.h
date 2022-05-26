@@ -44,6 +44,7 @@ enum class CommandID : uint16_t
     BindIndexBuffer,
     BindTransformFeedbackBuffers,
     BindVertexBuffers,
+    BindVertexBuffers2,
     BlitImage,
     BufferBarrier,
     ClearAttachments,
@@ -81,6 +82,7 @@ enum class CommandID : uint16_t
     SetBlendConstants,
     SetCullMode,
     SetDepthBias,
+    SetDepthBiasEnable,
     SetDepthCompareOp,
     SetDepthTestEnable,
     SetDepthWriteEnable,
@@ -88,6 +90,8 @@ enum class CommandID : uint16_t
     SetFragmentShadingRate,
     SetFrontFace,
     SetLineWidth,
+    SetPrimitiveRestartEnable,
+    SetRasterizerDiscardEnable,
     SetScissor,
     SetStencilCompareMask,
     SetStencilOp,
@@ -151,7 +155,8 @@ struct BindTransformFeedbackBuffersParams
 };
 VERIFY_4_BYTE_ALIGNMENT(BindTransformFeedbackBuffersParams)
 
-using BindVertexBuffersParams = BindTransformFeedbackBuffersParams;
+using BindVertexBuffersParams  = BindTransformFeedbackBuffersParams;
+using BindVertexBuffers2Params = BindVertexBuffersParams;
 
 struct BlitImageParams
 {
@@ -444,6 +449,12 @@ struct SetDepthBiasParams
 };
 VERIFY_4_BYTE_ALIGNMENT(SetDepthBiasParams)
 
+struct SetDepthBiasEnableParams
+{
+    VkBool32 depthBiasEnable;
+};
+VERIFY_4_BYTE_ALIGNMENT(SetDepthBiasEnableParams)
+
 struct SetDepthCompareOpParams
 {
     VkCompareOp depthCompareOp;
@@ -476,17 +487,29 @@ struct SetFragmentShadingRateParams
 };
 VERIFY_4_BYTE_ALIGNMENT(SetFragmentShadingRateParams)
 
+struct SetFrontFaceParams
+{
+    VkFrontFace frontFace;
+};
+VERIFY_4_BYTE_ALIGNMENT(SetFrontFaceParams)
+
 struct SetLineWidthParams
 {
     float lineWidth;
 };
 VERIFY_4_BYTE_ALIGNMENT(SetLineWidthParams)
 
-struct SetFrontFaceParams
+struct SetPrimitiveRestartEnableParams
 {
-    VkFrontFace frontFace;
+    VkBool32 primitiveRestartEnable;
 };
-VERIFY_4_BYTE_ALIGNMENT(SetFrontFaceParams)
+VERIFY_4_BYTE_ALIGNMENT(SetPrimitiveRestartEnableParams)
+
+struct SetRasterizerDiscardEnableParams
+{
+    VkBool32 rasterizerDiscardEnable;
+};
+VERIFY_4_BYTE_ALIGNMENT(SetRasterizerDiscardEnableParams)
 
 struct SetScissorParams
 {
@@ -639,6 +662,13 @@ class SecondaryCommandBuffer final : angle::NonCopyable
                            const VkBuffer *buffers,
                            const VkDeviceSize *offsets);
 
+    void bindVertexBuffers2(uint32_t firstBinding,
+                            uint32_t bindingCount,
+                            const VkBuffer *buffers,
+                            const VkDeviceSize *offsets,
+                            const VkDeviceSize *sizes,
+                            const VkDeviceSize *strides);
+
     void blitImage(const Image &srcImage,
                    VkImageLayout srcImageLayout,
                    const Image &dstImage,
@@ -783,6 +813,7 @@ class SecondaryCommandBuffer final : angle::NonCopyable
     void setDepthBias(float depthBiasConstantFactor,
                       float depthBiasClamp,
                       float depthBiasSlopeFactor);
+    void setDepthBiasEnable(VkBool32 depthBiasEnable);
     void setDepthCompareOp(VkCompareOp depthCompareOp);
     void setDepthTestEnable(VkBool32 depthTestEnable);
     void setDepthWriteEnable(VkBool32 depthWriteEnable);
@@ -791,6 +822,8 @@ class SecondaryCommandBuffer final : angle::NonCopyable
                                 VkFragmentShadingRateCombinerOpKHR ops[2]);
     void setFrontFace(VkFrontFace frontFace);
     void setLineWidth(float lineWidth);
+    void setPrimitiveRestartEnable(VkBool32 primitiveRestartEnable);
+    void setRasterizerDiscardEnable(VkBool32 rasterizerDiscardEnable);
     void setScissor(uint32_t firstScissor, uint32_t scissorCount, const VkRect2D *scissors);
     void setStencilCompareMask(uint32_t compareFrontMask, uint32_t compareBackMask);
     void setStencilOp(VkStencilFaceFlags faceMask,
@@ -1122,6 +1155,28 @@ ANGLE_INLINE void SecondaryCommandBuffer::bindVertexBuffers(uint32_t firstBindin
     paramStruct->bindingCount = bindingCount;
     writePtr                  = storePointerParameter(writePtr, buffers, buffersSize);
     storePointerParameter(writePtr, offsets, offsetsSize);
+}
+
+ANGLE_INLINE void SecondaryCommandBuffer::bindVertexBuffers2(uint32_t firstBinding,
+                                                             uint32_t bindingCount,
+                                                             const VkBuffer *buffers,
+                                                             const VkDeviceSize *offsets,
+                                                             const VkDeviceSize *sizes,
+                                                             const VkDeviceSize *strides)
+{
+    ASSERT(firstBinding == 0);
+    ASSERT(sizes == nullptr);
+    uint8_t *writePtr;
+    size_t buffersSize                    = bindingCount * sizeof(VkBuffer);
+    size_t offsetsSize                    = bindingCount * sizeof(VkDeviceSize);
+    size_t stridesSize                    = bindingCount * sizeof(VkDeviceSize);
+    BindVertexBuffers2Params *paramStruct = initCommand<BindVertexBuffers2Params>(
+        CommandID::BindVertexBuffers2, buffersSize + offsetsSize + stridesSize, &writePtr);
+    // Copy params
+    paramStruct->bindingCount = bindingCount;
+    writePtr                  = storePointerParameter(writePtr, buffers, buffersSize);
+    writePtr                  = storePointerParameter(writePtr, offsets, offsetsSize);
+    storePointerParameter(writePtr, strides, stridesSize);
 }
 
 ANGLE_INLINE void SecondaryCommandBuffer::blitImage(const Image &srcImage,
@@ -1595,6 +1650,13 @@ ANGLE_INLINE void SecondaryCommandBuffer::setDepthBias(float depthBiasConstantFa
     paramStruct->depthBiasSlopeFactor    = depthBiasSlopeFactor;
 }
 
+ANGLE_INLINE void SecondaryCommandBuffer::setDepthBiasEnable(VkBool32 depthBiasEnable)
+{
+    SetDepthBiasEnableParams *paramStruct =
+        initCommand<SetDepthBiasEnableParams>(CommandID::SetDepthBiasEnable);
+    paramStruct->depthBiasEnable = depthBiasEnable;
+}
+
 ANGLE_INLINE void SecondaryCommandBuffer::setDepthCompareOp(VkCompareOp depthCompareOp)
 {
     SetDepthCompareOpParams *paramStruct =
@@ -1653,6 +1715,21 @@ ANGLE_INLINE void SecondaryCommandBuffer::setLineWidth(float lineWidth)
 {
     SetLineWidthParams *paramStruct = initCommand<SetLineWidthParams>(CommandID::SetLineWidth);
     paramStruct->lineWidth          = lineWidth;
+}
+
+ANGLE_INLINE void SecondaryCommandBuffer::setPrimitiveRestartEnable(VkBool32 primitiveRestartEnable)
+{
+    SetPrimitiveRestartEnableParams *paramStruct =
+        initCommand<SetPrimitiveRestartEnableParams>(CommandID::SetPrimitiveRestartEnable);
+    paramStruct->primitiveRestartEnable = primitiveRestartEnable;
+}
+
+ANGLE_INLINE void SecondaryCommandBuffer::setRasterizerDiscardEnable(
+    VkBool32 rasterizerDiscardEnable)
+{
+    SetRasterizerDiscardEnableParams *paramStruct =
+        initCommand<SetRasterizerDiscardEnableParams>(CommandID::SetRasterizerDiscardEnable);
+    paramStruct->rasterizerDiscardEnable = rasterizerDiscardEnable;
 }
 
 ANGLE_INLINE void SecondaryCommandBuffer::setScissor(uint32_t firstScissor,
