@@ -1073,6 +1073,12 @@ void ResetDynamicState(ContextVk *contextVk, vk::RenderPassCommandBuffer *comman
         commandBuffer->setDepthTestEnable(VK_FALSE);
         commandBuffer->setStencilTestEnable(VK_FALSE);
     }
+    if (contextVk->getFeatures().supportsExtendedDynamicState2.enabled)
+    {
+        commandBuffer->setRasterizerDiscardEnable(VK_FALSE);
+        commandBuffer->setDepthBiasEnable(VK_FALSE);
+        commandBuffer->setPrimitiveRestartEnable(VK_FALSE);
+    }
     if (contextVk->getFeatures().supportsFragmentShadingRate.enabled)
     {
         VkExtent2D fragmentSize                                     = {1, 1};
@@ -2081,7 +2087,11 @@ angle::Result UtilsVk::clearFramebuffer(ContextVk *contextVk,
                                           SwapchainResolveMode::Disabled));
     if (contextVk->hasStartedRenderPassWithFramebuffer(currentFramebuffer))
     {
-        commandBuffer = &contextVk->getStartedRenderPassCommands().getCommandBuffer();
+        vk::RenderPassCommandBufferHelper *renderPassCommands =
+            &contextVk->getStartedRenderPassCommands();
+        renderPassCommands->growRenderArea(contextVk, scissoredRenderArea);
+
+        commandBuffer = &renderPassCommands->getCommandBuffer();
     }
     else
     {
