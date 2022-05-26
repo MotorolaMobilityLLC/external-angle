@@ -319,16 +319,27 @@ class CommandBuffer : public WrappedObject<CommandBuffer, VkCommandBuffer>
                        const void *data);
 
     void setBlendConstants(const float blendConstants[4]);
+    void setCullMode(VkCullModeFlags cullMode);
     void setDepthBias(float depthBiasConstantFactor,
                       float depthBiasClamp,
                       float depthBiasSlopeFactor);
+    void setDepthCompareOp(VkCompareOp depthCompareOp);
+    void setDepthTestEnable(VkBool32 depthTestEnable);
+    void setDepthWriteEnable(VkBool32 depthWriteEnable);
     void setEvent(VkEvent event, VkPipelineStageFlags stageMask);
     void setFragmentShadingRate(const VkExtent2D *fragmentSize,
                                 VkFragmentShadingRateCombinerOpKHR ops[2]);
+    void setFrontFace(VkFrontFace frontFace);
     void setLineWidth(float lineWidth);
     void setScissor(uint32_t firstScissor, uint32_t scissorCount, const VkRect2D *scissors);
     void setStencilCompareMask(uint32_t compareFrontMask, uint32_t compareBackMask);
+    void setStencilOp(VkStencilFaceFlags faceMask,
+                      VkStencilOp failOp,
+                      VkStencilOp passOp,
+                      VkStencilOp depthFailOp,
+                      VkCompareOp compareOp);
     void setStencilReference(uint32_t frontReference, uint32_t backReference);
+    void setStencilTestEnable(VkBool32 stencilTestEnable);
     void setStencilWriteMask(uint32_t writeFrontMask, uint32_t writeBackMask);
     void setViewport(uint32_t firstViewport, uint32_t viewportCount, const VkViewport *viewports);
     VkResult reset();
@@ -964,12 +975,36 @@ ANGLE_INLINE void CommandBuffer::setBlendConstants(const float blendConstants[4]
     vkCmdSetBlendConstants(mHandle, blendConstants);
 }
 
+ANGLE_INLINE void CommandBuffer::setCullMode(VkCullModeFlags cullMode)
+{
+    ASSERT(valid());
+    vkCmdSetCullModeEXT(mHandle, cullMode);
+}
+
 ANGLE_INLINE void CommandBuffer::setDepthBias(float depthBiasConstantFactor,
                                               float depthBiasClamp,
                                               float depthBiasSlopeFactor)
 {
     ASSERT(valid());
     vkCmdSetDepthBias(mHandle, depthBiasConstantFactor, depthBiasClamp, depthBiasSlopeFactor);
+}
+
+ANGLE_INLINE void CommandBuffer::setDepthCompareOp(VkCompareOp depthCompareOp)
+{
+    ASSERT(valid());
+    vkCmdSetDepthCompareOpEXT(mHandle, depthCompareOp);
+}
+
+ANGLE_INLINE void CommandBuffer::setDepthTestEnable(VkBool32 depthTestEnable)
+{
+    ASSERT(valid());
+    vkCmdSetDepthTestEnableEXT(mHandle, depthTestEnable);
+}
+
+ANGLE_INLINE void CommandBuffer::setDepthWriteEnable(VkBool32 depthWriteEnable)
+{
+    ASSERT(valid());
+    vkCmdSetDepthWriteEnableEXT(mHandle, depthWriteEnable);
 }
 
 ANGLE_INLINE void CommandBuffer::setEvent(VkEvent event, VkPipelineStageFlags stageMask)
@@ -983,6 +1018,12 @@ ANGLE_INLINE void CommandBuffer::setFragmentShadingRate(const VkExtent2D *fragme
 {
     ASSERT(valid() && fragmentSize != nullptr);
     vkCmdSetFragmentShadingRateKHR(mHandle, fragmentSize, ops);
+}
+
+ANGLE_INLINE void CommandBuffer::setFrontFace(VkFrontFace frontFace)
+{
+    ASSERT(valid());
+    vkCmdSetFrontFaceEXT(mHandle, frontFace);
 }
 
 ANGLE_INLINE void CommandBuffer::setLineWidth(float lineWidth)
@@ -1007,12 +1048,28 @@ ANGLE_INLINE void CommandBuffer::setStencilCompareMask(uint32_t compareFrontMask
     vkCmdSetStencilCompareMask(mHandle, VK_STENCIL_FACE_BACK_BIT, compareBackMask);
 }
 
+ANGLE_INLINE void CommandBuffer::setStencilOp(VkStencilFaceFlags faceMask,
+                                              VkStencilOp failOp,
+                                              VkStencilOp passOp,
+                                              VkStencilOp depthFailOp,
+                                              VkCompareOp compareOp)
+{
+    ASSERT(valid());
+    vkCmdSetStencilOpEXT(mHandle, faceMask, failOp, passOp, depthFailOp, compareOp);
+}
+
 ANGLE_INLINE void CommandBuffer::setStencilReference(uint32_t frontReference,
                                                      uint32_t backReference)
 {
     ASSERT(valid());
     vkCmdSetStencilReference(mHandle, VK_STENCIL_FACE_FRONT_BIT, frontReference);
     vkCmdSetStencilReference(mHandle, VK_STENCIL_FACE_BACK_BIT, backReference);
+}
+
+ANGLE_INLINE void CommandBuffer::setStencilTestEnable(VkBool32 stencilTestEnable)
+{
+    ASSERT(valid());
+    vkCmdSetStencilTestEnableEXT(mHandle, stencilTestEnable);
 }
 
 ANGLE_INLINE void CommandBuffer::setStencilWriteMask(uint32_t writeFrontMask,
