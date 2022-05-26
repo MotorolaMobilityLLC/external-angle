@@ -35,12 +35,14 @@ class VulkanPipelineCachePerfTest : public ANGLEPerfTest
     std::vector<vk::GraphicsPipelineDesc> mCacheMisses;
     size_t mMissIndex = 0;
 
+    bool mWithDynamicState;
+
   private:
     void randomizeDesc(vk::GraphicsPipelineDesc *desc);
 };
 
 VulkanPipelineCachePerfTest::VulkanPipelineCachePerfTest()
-    : ANGLEPerfTest("VulkanPipelineCachePerf", "", "", kIterationsPerStep)
+    : ANGLEPerfTest("VulkanPipelineCachePerf", "", "", kIterationsPerStep), mWithDynamicState(false)
 {}
 
 VulkanPipelineCachePerfTest::~VulkanPipelineCachePerfTest()
@@ -77,6 +79,8 @@ void VulkanPipelineCachePerfTest::randomizeDesc(vk::GraphicsPipelineDesc *desc)
     std::vector<uint8_t> bytes(sizeof(vk::GraphicsPipelineDesc));
     FillVectorWithRandomUBytes(&mRNG, &bytes);
     memcpy(desc, bytes.data(), sizeof(vk::GraphicsPipelineDesc));
+
+    desc->setSupportsDynamicStateForTest(mWithDynamicState);
 }
 
 void VulkanPipelineCachePerfTest::step()
@@ -130,5 +134,11 @@ void VulkanPipelineCachePerfTest::step()
 
 TEST_F(VulkanPipelineCachePerfTest, Run)
 {
+    run();
+}
+
+TEST_F(VulkanPipelineCachePerfTest, Run_WithDynamicState)
+{
+    mWithDynamicState = true;
     run();
 }

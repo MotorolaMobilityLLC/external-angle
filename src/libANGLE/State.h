@@ -244,10 +244,7 @@ class State : angle::NonCopyable
         ASSERT(maskNumber < mMaxSampleMaskWords);
         return mSampleMaskValues[maskNumber];
     }
-    std::array<GLbitfield, MAX_SAMPLE_MASK_WORDS> getSampleMaskValues() const
-    {
-        return mSampleMaskValues;
-    }
+    SampleMaskArray<GLbitfield> getSampleMaskValues() const { return mSampleMaskValues; }
     GLuint getMaxSampleMaskWords() const { return mMaxSampleMaskWords; }
 
     // Multisampling/alpha to one manipulation.
@@ -876,11 +873,6 @@ class State : angle::NonCopyable
         return mNoSimultaneousConstantColorAndAlphaBlendFunc;
     }
 
-    bool canEnableEarlyFragmentTestsOptimization() const
-    {
-        return !isSampleAlphaToCoverageEnabled();
-    }
-
     const BufferVector &getOffsetBindingPointerUniformBuffers() const { return mUniformBuffers; }
 
     const BufferVector &getOffsetBindingPointerAtomicCounterBuffers() const
@@ -1021,7 +1013,7 @@ class State : angle::NonCopyable
     bool mSampleCoverageInvert;
     bool mSampleMask;
     GLuint mMaxSampleMaskWords;
-    std::array<GLbitfield, MAX_SAMPLE_MASK_WORDS> mSampleMaskValues;
+    SampleMaskArray<GLbitfield> mSampleMaskValues;
     bool mIsSampleShadingEnabled;
     float mMinSampleShading;
 
