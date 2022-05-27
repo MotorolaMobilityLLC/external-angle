@@ -211,7 +211,12 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         {
             // We need to be able to see the following system applications until ANGLE supports YUV
             // b/232149402
-            if (!(packageInfo.packageName.equals("com.google.android.GoogleCamera") ||
+            if (!(packageInfo.packageName.equals("com.google.android.calendar") ||
+                  packageInfo.packageName.equals("com.android.chrome") ||
+                  packageInfo.packageName.equals("com.google.android.gm") ||
+                  packageInfo.packageName.equals("com.google.android.GoogleCamera") ||
+                  packageInfo.packageName.equals("com.google.android.apps.maps") ||
+                  packageInfo.packageName.equals("com.google.android.apps.messaging") ||
                   packageInfo.packageName.equals("com.google.android.videos") ||
                   packageInfo.packageName.equals("com.google.android.youtube")))
             {

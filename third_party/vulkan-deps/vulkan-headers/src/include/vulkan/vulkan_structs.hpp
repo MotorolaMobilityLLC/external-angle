@@ -51647,47 +51647,47 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceFragmentDensityMapPropertiesEXT;
   };
 
-  struct PhysicalDeviceFragmentShaderBarycentricFeaturesNV
+  struct PhysicalDeviceFragmentShaderBarycentricFeaturesKHR
   {
-    using NativeType = VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV;
+    using NativeType = VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
 
     static const bool                                  allowDuplicate = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceFragmentShaderBarycentricFeaturesNV;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR PhysicalDeviceFragmentShaderBarycentricFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 fragmentShaderBarycentric_ = {},
-                                                                            void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceFragmentShaderBarycentricFeaturesKHR( VULKAN_HPP_NAMESPACE::Bool32 fragmentShaderBarycentric_ = {},
+                                                                             void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
       : pNext( pNext_ )
       , fragmentShaderBarycentric( fragmentShaderBarycentric_ )
     {
     }
 
     VULKAN_HPP_CONSTEXPR
-      PhysicalDeviceFragmentShaderBarycentricFeaturesNV( PhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+      PhysicalDeviceFragmentShaderBarycentricFeaturesKHR( PhysicalDeviceFragmentShaderBarycentricFeaturesKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
-    PhysicalDeviceFragmentShaderBarycentricFeaturesNV( VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs ) VULKAN_HPP_NOEXCEPT
-      : PhysicalDeviceFragmentShaderBarycentricFeaturesNV( *reinterpret_cast<PhysicalDeviceFragmentShaderBarycentricFeaturesNV const *>( &rhs ) )
+    PhysicalDeviceFragmentShaderBarycentricFeaturesKHR( VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceFragmentShaderBarycentricFeaturesKHR( *reinterpret_cast<PhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *>( &rhs ) )
     {
     }
 #endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
 
-    PhysicalDeviceFragmentShaderBarycentricFeaturesNV &
-      operator=( PhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+    PhysicalDeviceFragmentShaderBarycentricFeaturesKHR &
+      operator=( PhysicalDeviceFragmentShaderBarycentricFeaturesKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
-    PhysicalDeviceFragmentShaderBarycentricFeaturesNV & operator=( VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs ) VULKAN_HPP_NOEXCEPT
+    PhysicalDeviceFragmentShaderBarycentricFeaturesKHR & operator=( VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const & rhs ) VULKAN_HPP_NOEXCEPT
     {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricFeaturesNV const *>( &rhs );
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *>( &rhs );
       return *this;
     }
 
 #if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceFragmentShaderBarycentricFeaturesNV & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceFragmentShaderBarycentricFeaturesKHR & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
     {
       pNext = pNext_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceFragmentShaderBarycentricFeaturesNV &
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceFragmentShaderBarycentricFeaturesKHR &
                             setFragmentShaderBarycentric( VULKAN_HPP_NAMESPACE::Bool32 fragmentShaderBarycentric_ ) VULKAN_HPP_NOEXCEPT
     {
       fragmentShaderBarycentric = fragmentShaderBarycentric_;
@@ -51695,14 +51695,14 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    explicit operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<const VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV *>( this );
+      return *reinterpret_cast<const VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    explicit operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV *>( this );
+      return *reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR *>( this );
     }
 
 #if defined( VULKAN_HPP_USE_REFLECT )
@@ -51718,9 +51718,9 @@ namespace VULKAN_HPP_NAMESPACE
 #endif
 
 #if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
-    auto operator<=>( PhysicalDeviceFragmentShaderBarycentricFeaturesNV const & ) const = default;
+    auto operator<=>( PhysicalDeviceFragmentShaderBarycentricFeaturesKHR const & ) const = default;
 #else
-    bool operator==( PhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator==( PhysicalDeviceFragmentShaderBarycentricFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
 #  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
@@ -51729,29 +51729,124 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif
     }
 
-    bool operator!=( PhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator!=( PhysicalDeviceFragmentShaderBarycentricFeaturesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
       return !operator==( rhs );
     }
 #endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType sType                     = StructureType::ePhysicalDeviceFragmentShaderBarycentricFeaturesNV;
+    VULKAN_HPP_NAMESPACE::StructureType sType                     = StructureType::ePhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
     void *                              pNext                     = {};
     VULKAN_HPP_NAMESPACE::Bool32        fragmentShaderBarycentric = {};
   };
-  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricFeaturesNV ) ==
-                              sizeof( VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV ),
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricFeaturesKHR ) ==
+                              sizeof( VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR ),
                             "struct and wrapper have different size!" );
-  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricFeaturesNV>::value,
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricFeaturesKHR>::value,
                             "struct wrapper is not a standard layout!" );
-  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricFeaturesNV>::value,
-                            "PhysicalDeviceFragmentShaderBarycentricFeaturesNV is not nothrow_move_constructible!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricFeaturesKHR>::value,
+                            "PhysicalDeviceFragmentShaderBarycentricFeaturesKHR is not nothrow_move_constructible!" );
 
   template <>
-  struct CppType<StructureType, StructureType::ePhysicalDeviceFragmentShaderBarycentricFeaturesNV>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceFragmentShaderBarycentricFeaturesKHR>
   {
-    using Type = PhysicalDeviceFragmentShaderBarycentricFeaturesNV;
+    using Type = PhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
+  };
+  using PhysicalDeviceFragmentShaderBarycentricFeaturesNV = PhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
+
+  struct PhysicalDeviceFragmentShaderBarycentricPropertiesKHR
+  {
+    using NativeType = VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceFragmentShaderBarycentricPropertiesKHR;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      PhysicalDeviceFragmentShaderBarycentricPropertiesKHR( VULKAN_HPP_NAMESPACE::Bool32 triStripVertexOrderIndependentOfProvokingVertex_ = {},
+                                                            void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , triStripVertexOrderIndependentOfProvokingVertex( triStripVertexOrderIndependentOfProvokingVertex_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      PhysicalDeviceFragmentShaderBarycentricPropertiesKHR( PhysicalDeviceFragmentShaderBarycentricPropertiesKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceFragmentShaderBarycentricPropertiesKHR( VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceFragmentShaderBarycentricPropertiesKHR( *reinterpret_cast<PhysicalDeviceFragmentShaderBarycentricPropertiesKHR const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceFragmentShaderBarycentricPropertiesKHR &
+      operator=( PhysicalDeviceFragmentShaderBarycentricPropertiesKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceFragmentShaderBarycentricPropertiesKHR & operator=( VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricPropertiesKHR const *>( &rhs );
+      return *this;
+    }
+
+    explicit operator VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR *>( this );
+    }
+
+    explicit operator VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, triStripVertexOrderIndependentOfProvokingVertex );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceFragmentShaderBarycentricPropertiesKHR const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceFragmentShaderBarycentricPropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
+             ( triStripVertexOrderIndependentOfProvokingVertex == rhs.triStripVertexOrderIndependentOfProvokingVertex );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceFragmentShaderBarycentricPropertiesKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                                           = StructureType::ePhysicalDeviceFragmentShaderBarycentricPropertiesKHR;
+    void *                              pNext                                           = {};
+    VULKAN_HPP_NAMESPACE::Bool32        triStripVertexOrderIndependentOfProvokingVertex = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricPropertiesKHR ) ==
+                              sizeof( VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricPropertiesKHR>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentShaderBarycentricPropertiesKHR>::value,
+                            "PhysicalDeviceFragmentShaderBarycentricPropertiesKHR is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceFragmentShaderBarycentricPropertiesKHR>
+  {
+    using Type = PhysicalDeviceFragmentShaderBarycentricPropertiesKHR;
   };
 
   struct PhysicalDeviceFragmentShaderInterlockFeaturesEXT
@@ -62959,6 +63054,114 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderDrawParametersFeatures;
   };
   using PhysicalDeviceShaderDrawParameterFeatures = PhysicalDeviceShaderDrawParametersFeatures;
+
+  struct PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD
+  {
+    using NativeType = VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD( VULKAN_HPP_NAMESPACE::Bool32 shaderEarlyAndLateFragmentTests_ = {},
+                                                                                   void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , shaderEarlyAndLateFragmentTests( shaderEarlyAndLateFragmentTests_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD( PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const & rhs )
+      VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD( VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD( *reinterpret_cast<PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD &
+      operator=( PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD &
+      operator=( VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD &
+                            setShaderEarlyAndLateFragmentTests( VULKAN_HPP_NAMESPACE::Bool32 shaderEarlyAndLateFragmentTests_ ) VULKAN_HPP_NOEXCEPT
+    {
+      shaderEarlyAndLateFragmentTests = shaderEarlyAndLateFragmentTests_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD *>( this );
+    }
+
+    explicit operator VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, shaderEarlyAndLateFragmentTests );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderEarlyAndLateFragmentTests == rhs.shaderEarlyAndLateFragmentTests );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                           = StructureType::ePhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD;
+    void *                              pNext                           = {};
+    VULKAN_HPP_NAMESPACE::Bool32        shaderEarlyAndLateFragmentTests = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD ) ==
+                              sizeof( VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD>::value,
+                            "PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD>
+  {
+    using Type = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD;
+  };
 
   struct PhysicalDeviceShaderFloat16Int8Features
   {
@@ -86576,21 +86779,6 @@ namespace VULKAN_HPP_NAMESPACE
       *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SubresourceLayout2EXT const *>( &rhs );
       return *this;
     }
-
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 SubresourceLayout2EXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pNext = pNext_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 SubresourceLayout2EXT &
-                            setSubresourceLayout( VULKAN_HPP_NAMESPACE::SubresourceLayout const & subresourceLayout_ ) VULKAN_HPP_NOEXCEPT
-    {
-      subresourceLayout = subresourceLayout_;
-      return *this;
-    }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
     explicit operator VkSubresourceLayout2EXT const &() const VULKAN_HPP_NOEXCEPT
     {

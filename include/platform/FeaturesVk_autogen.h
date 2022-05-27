@@ -599,6 +599,16 @@ struct FeaturesVk : FeatureSetBase
         "Prefer adding HOST_VISIBLE flag for DEVICE_LOCAL memory when picking memory types",
         &members, "http://anglebug.com/7047"};
 
+    FeatureInfo supportsExtendedDynamicState = {
+        "supportsExtendedDynamicState", FeatureCategory::VulkanFeatures,
+        "VkDevice supports VK_EXT_extended_dynamic_state extension", &members,
+        "http://anglebug.com/5906"};
+
+    FeatureInfo supportsExtendedDynamicState2 = {
+        "supportsExtendedDynamicState2", FeatureCategory::VulkanFeatures,
+        "VkDevice supports VK_EXT_extended_dynamic_state2 extension", &members,
+        "http://anglebug.com/5906"};
+
     FeatureInfo supportsFragmentShadingRate = {
         "supportsFragmentShadingRate", FeatureCategory::VulkanFeatures,
         "VkDevice supports VK_KHR_fragment_shading_rate extension", &members,
@@ -614,6 +624,10 @@ struct FeaturesVk : FeatureSetBase
         "forceContinuousRefreshOnSharedPresent", FeatureCategory::VulkanFeatures,
         "Force to create vulkan swapchain with continuous refresh on shared present", &members,
         "https://issuetracker.google.com/229267970"};
+
+    FeatureInfo supportsImage2dViewOf3d = {
+        "supportsImage2dViewOf3d", FeatureCategory::VulkanFeatures,
+        "VkDevice supports VK_EXT_image_2d_view_of_3d", &members, "https://anglebug.com/7320"};
 };
 
 inline FeaturesVk::FeaturesVk()  = default;

@@ -798,6 +798,22 @@
             "issue": "http://anglebug.com/7047"
         },
         {
+            "name": "supports_extended_dynamic_state",
+            "category": "Features",
+            "description": [
+                "VkDevice supports VK_EXT_extended_dynamic_state extension"
+            ],
+            "issue": "http://anglebug.com/5906"
+        },
+        {
+            "name": "supports_extended_dynamic_state2",
+            "category": "Features",
+            "description": [
+                "VkDevice supports VK_EXT_extended_dynamic_state2 extension"
+            ],
+            "issue": "http://anglebug.com/5906"
+        },
+        {
             "name": "supports_fragment_shading_rate",
             "category": "Features",
             "description": [
@@ -821,6 +837,14 @@
                 "Force to create vulkan swapchain with continuous refresh on shared present"
             ],
             "issue": "https://issuetracker.google.com/229267970"
+        },
+        {
+            "name": "supports_image_2d_view_of_3d",
+            "category": "Features",
+            "description": [
+                "VkDevice supports VK_EXT_image_2d_view_of_3d"
+            ],
+            "issue": "https://anglebug.com/7320"
         }
     ]
 }

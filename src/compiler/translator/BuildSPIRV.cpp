@@ -538,6 +538,10 @@ SpirvType SPIRVBuilder::getSpirvType(const TType &type, const SpirvTypeSpec &typ
         case EbtSamplerVideoWEBGL:
             spirvType.type = EbtSampler2D;
             break;
+        // yuvCscStandardEXT is just a uint under the hood.
+        case EbtYuvCscStandardEXT:
+            spirvType.type = EbtUInt;
+            break;
         default:
             break;
     }
@@ -2157,8 +2161,7 @@ void SPIRVBuilder::writeExecutionModes(spirv::Blob *blob)
         case gl::ShaderType::Fragment:
             spirv::WriteExecutionMode(blob, mEntryPointId, spv::ExecutionModeOriginUpperLeft, {});
 
-            if (mCompiler->isEarlyFragmentTestsSpecified() ||
-                mCompiler->isEarlyFragmentTestsOptimized())
+            if (mCompiler->isEarlyFragmentTestsSpecified())
             {
                 spirv::WriteExecutionMode(blob, mEntryPointId, spv::ExecutionModeEarlyFragmentTests,
                                           {});
