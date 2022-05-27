@@ -6453,5 +6453,10 @@ android_app {
         "ANGLE_java_defaults",
     ],
     static_libs: ["ANGLE_library"],
+    optimize: {
+        enabled: true,
+        shrink: true,
+        proguard_compatibility: false,
+    },
     manifest: "src/android_system_settings/src/com/android/angle/AndroidManifest.xml",
 }
