@@ -5046,6 +5046,53 @@ void main(void)
     glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 }
 
+// Check that imageLoad gives the correct color after clearing the texture -- anglebug.com/7355
+TEST_P(GLSLTest_ES31, ImageLoadAfterClear)
+{
+    ANGLE_GL_PROGRAM(program,
+                     R"(#version 310 es
+                     precision highp float;
+                     void main() {
+                         gl_Position.x = ((gl_VertexID & 1) == 0 ? -1.0 : 1.0);
+                         gl_Position.y = ((gl_VertexID & 2) == 0 ? -1.0 : 1.0);
+                         gl_Position.zw = vec2(0, 1);
+                     })",
+
+                     R"(#version 310 es
+                     precision highp float;
+                     layout(binding=0, rgba8) readonly highp uniform image2D img;
+                     out vec4 fragColor;
+                     void main() {
+                         ivec2 imgcoord = ivec2(floor(gl_FragCoord.xy));
+                         fragColor = vec4(1, 0, 0, 0) + imageLoad(img, imgcoord);
+                     })");
+    ASSERT_TRUE(program.valid());
+    glUseProgram(program.get());
+
+    GLTexture tex;
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, getWindowWidth(), getWindowHeight());
+    glBindImageTexture(0, tex, 0, GL_FALSE, 0, GL_READ_ONLY, GL_RGBA8);
+
+    // Clear the texture to green.
+    GLFramebuffer fbo;
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
+    EXPECT_GL_FRAMEBUFFER_COMPLETE(GL_FRAMEBUFFER);
+    glClearColor(0, 1, 0, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_FRAMEBUFFER_BARRIER_BIT);
+
+    // Draw the texture via imageLoad, plus red, into the main framebuffer. Make sure the texture
+    // was still green. (green + red == yellow.)
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    EXPECT_GL_FRAMEBUFFER_COMPLETE(GL_FRAMEBUFFER);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    EXPECT_PIXEL_RECT_EQ(0, 0, getWindowWidth(), getWindowHeight(), GLColor::yellow);
+    ASSERT_GL_NO_ERROR();
+}
+
 // Test that structs containing arrays of samplers work as expected.
 TEST_P(GLSLTest_ES31, StructArraySampler)
 {
@@ -12312,6 +12359,64 @@ void main(){
                              static_cast<uint32_t>(ssbo140Expect.size())));
     EXPECT_TRUE(VerifyBuffer(ssboStd430, ssbo430Expect.data(),
                              static_cast<uint32_t>(ssbo430Expect.size())));
+}
+
+// Verify that uint in interface block cast to bool works.
+TEST_P(GLSLTest_ES3, UintCastToBoolFromInterfaceBlocks)
+{
+    constexpr char kFS[] = R"(#version 300 es
+precision mediump float;
+
+uniform uvec4 uv4;
+uniform uvec2 uv2;
+uniform uint u1;
+uniform uint u2;
+
+out vec4 colorOut;
+
+void main()
+{
+    bvec4 bv4 = bvec4(uv4);
+    bvec2 bv2 = bvec2(uv2);
+    bool b1 = bool(u1);
+    bool b2 = bool(u2);
+
+    vec4 vv4 = mix(vec4(0), vec4(0.4), bv4);
+    vec2 vv2 = mix(vec2(0), vec2(0.7), bv2);
+    float v1 = b1 ? 1.0 : 0.0;
+    float v2 = b2 ? 0.0 : 1.0;
+
+    colorOut = vec4(vv4.x - vv4.y + vv4.z + vv4.w,
+                        (vv2.y - vv2.x) * 1.5,
+                        v1,
+                        v2);
+})";
+
+    ANGLE_GL_PROGRAM(program, essl3_shaders::vs::Simple(), kFS);
+    EXPECT_GL_NO_ERROR();
+
+    glUseProgram(program);
+    GLint uv4 = glGetUniformLocation(program, "uv4");
+    GLint uv2 = glGetUniformLocation(program, "uv2");
+    GLint u1  = glGetUniformLocation(program, "u1");
+    GLint u2  = glGetUniformLocation(program, "u2");
+    ASSERT_NE(uv4, -1);
+    ASSERT_NE(uv2, -1);
+    ASSERT_NE(u1, -1);
+    ASSERT_NE(u2, -1);
+
+    glUniform4ui(uv4, 123, 0, 9, 8297312);
+    glUniform2ui(uv2, 0, 90812);
+    glUniform1ui(u1, 8979421);
+    glUniform1ui(u2, 0);
+
+    glClearColor(0, 0, 0, 0);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    drawQuad(program, essl3_shaders::PositionAttrib(), 0.5f);
+    EXPECT_GL_NO_ERROR();
+
+    EXPECT_PIXEL_COLOR_EQ(0, 0, GLColor::white);
 }
 
 // Test that the precise keyword is not reserved before ES3.1.
