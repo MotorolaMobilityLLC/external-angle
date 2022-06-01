@@ -26,7 +26,7 @@
 
 // Version number for shader translation API.
 // It is incremented every time the API changes.
-#define ANGLE_SH_VERSION 274
+#define ANGLE_SH_VERSION 277
 
 enum ShShaderSpec
 {
@@ -323,8 +323,7 @@ const ShCompileOptions SH_IGNORE_PRECISION_QUALIFIERS = UINT64_C(1) << 50;
 
 // Bit 51 is unused.
 
-// Allow compiler to insert Android pre-rotation code.
-const ShCompileOptions SH_ADD_PRE_ROTATION = UINT64_C(1) << 52;
+// Note: bit 52 is unused
 
 const ShCompileOptions SH_FORCE_SHADER_PRECISION_HIGHP_TO_MEDIUMP = UINT64_C(1) << 53;
 
@@ -834,38 +833,19 @@ enum class SpecializationConstantId : uint32_t
 {
     LineRasterEmulation = 0,
     SurfaceRotation     = 1,
-    DrawableWidth       = 2,
-    DrawableHeight      = 3,
-    Dither              = 4,
+    Dither              = 2,
 
-    InvalidEnum = 5,
+    InvalidEnum = 3,
     EnumCount   = InvalidEnum,
-};
-
-enum class SurfaceRotation : uint32_t
-{
-    Identity,
-    Rotated90Degrees,
-    Rotated180Degrees,
-    Rotated270Degrees,
-    FlippedIdentity,
-    FlippedRotated90Degrees,
-    FlippedRotated180Degrees,
-    FlippedRotated270Degrees,
-
-    InvalidEnum,
-    EnumCount = InvalidEnum,
 };
 
 enum class SpecConstUsage : uint32_t
 {
     LineRasterEmulation = 0,
-    YFlip               = 1,
-    Rotation            = 2,
-    DrawableSize        = 3,
-    Dither              = 4,
+    Rotation            = 1,
+    Dither              = 2,
 
-    InvalidEnum = 5,
+    InvalidEnum = 3,
     EnumCount   = InvalidEnum,
 };
 
@@ -890,6 +870,20 @@ extern const char kDefaultUniformsNameCS[];
 extern const char kDriverUniformsBlockName[];
 extern const char kDriverUniformsVarName[];
 
+// Packing information for driver uniform's misc field:
+// - 1 bit for whether surface rotation results in swapped axes
+// - 5 bits for advanced blend equation
+// - 6 bits for sample count
+// - 8 bits for enabled clip planes
+// - 12 bits unused
+constexpr uint32_t kDriverUniformsMiscSwapXYMask                  = 0x1;
+constexpr uint32_t kDriverUniformsMiscAdvancedBlendEquationOffset = 1;
+constexpr uint32_t kDriverUniformsMiscAdvancedBlendEquationMask   = 0x1F;
+constexpr uint32_t kDriverUniformsMiscSampleCountOffset           = 6;
+constexpr uint32_t kDriverUniformsMiscSampleCountMask             = 0x3F;
+constexpr uint32_t kDriverUniformsMiscEnabledClipPlanesOffset     = 12;
+constexpr uint32_t kDriverUniformsMiscEnabledClipPlanesMask       = 0xFF;
+
 // Interface block array name used for atomic counter emulation
 extern const char kAtomicCountersBlockName[];
 
@@ -905,6 +899,9 @@ extern const char kXfbEmulationBufferFieldName[];
 
 // Transform feedback extension support
 extern const char kXfbExtensionPositionOutName[];
+
+// Pre-rotation support
+extern const char kPreRotationRotatePositionFunctionName[];
 
 // EXT_shader_framebuffer_fetch and EXT_shader_framebuffer_fetch_non_coherent
 extern const char kInputAttachmentName[];
