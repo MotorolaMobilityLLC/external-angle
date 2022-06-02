@@ -707,7 +707,7 @@ void DisplayMtl::ensureCapsInitialized() const
 #endif
 
     mNativeCaps.maxArrayTextureLayers = 2048;
-    mNativeCaps.maxLODBias            = 2.0;  // default GLES3 limit
+    mNativeCaps.maxLODBias            = std::log2(mNativeCaps.max2DTextureSize) + 1;
     mNativeCaps.maxCubeMapTextureSize = mNativeCaps.max2DTextureSize;
     mNativeCaps.maxRenderbufferSize   = mNativeCaps.max2DTextureSize;
     mNativeCaps.minAliasedPointSize   = 1;
@@ -727,10 +727,21 @@ void DisplayMtl::ensureCapsInitialized() const
     mNativeCaps.minAliasedLineWidth = 1.0f;
     mNativeCaps.maxAliasedLineWidth = 1.0f;
 
-    mNativeCaps.maxDrawBuffers       = mtl::kMaxRenderTargets;
+    if (supportsEitherGPUFamily(2, 1) && !mFeatures.limitMaxDrawBuffersForTesting.enabled)
+    {
+        mNativeCaps.maxDrawBuffers      = mtl::kMaxRenderTargets;
+        mNativeCaps.maxColorAttachments = mtl::kMaxRenderTargets;
+    }
+    else
+    {
+        mNativeCaps.maxDrawBuffers      = mtl::kMaxRenderTargetsOlderGPUFamilies;
+        mNativeCaps.maxColorAttachments = mtl::kMaxRenderTargetsOlderGPUFamilies;
+    }
+    ASSERT(static_cast<uint32_t>(mNativeCaps.maxDrawBuffers) <= mtl::kMaxRenderTargets);
+    ASSERT(static_cast<uint32_t>(mNativeCaps.maxColorAttachments) <= mtl::kMaxRenderTargets);
+
     mNativeCaps.maxFramebufferWidth  = mNativeCaps.max2DTextureSize;
     mNativeCaps.maxFramebufferHeight = mNativeCaps.max2DTextureSize;
-    mNativeCaps.maxColorAttachments  = mtl::kMaxRenderTargets;
     mNativeCaps.maxViewportWidth     = mNativeCaps.max2DTextureSize;
     mNativeCaps.maxViewportHeight    = mNativeCaps.max2DTextureSize;
 
