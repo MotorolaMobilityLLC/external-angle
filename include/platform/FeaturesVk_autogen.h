@@ -494,6 +494,11 @@ struct FeaturesVk : FeatureSetBase
                                           "VkDevice supports VK_EXT_host_query_reset extension",
                                           &members, "http://anglebug.com/6692"};
 
+    FeatureInfo supportsPipelineCreationCacheControl = {
+        "supportsPipelineCreationCacheControl", FeatureCategory::VulkanFeatures,
+        "VkDevice supports VK_EXT_pipeline_creation_cache_control extension", &members,
+        "http://anglebug.com/5881"};
+
     FeatureInfo supportsPipelineCreationFeedback = {
         "supportsPipelineCreationFeedback", FeatureCategory::VulkanFeatures,
         "VkDevice supports VK_EXT_pipeline_creation_feedback extension", &members,
@@ -633,6 +638,13 @@ struct FeaturesVk : FeatureSetBase
     FeatureInfo supportsImage2dViewOf3d = {
         "supportsImage2dViewOf3d", FeatureCategory::VulkanFeatures,
         "VkDevice supports VK_EXT_image_2d_view_of_3d", &members, "https://anglebug.com/7320"};
+
+    FeatureInfo preferLinearFilterForYUV = {
+        "preferLinearFilterForYUV",
+        FeatureCategory::VulkanFeatures,
+        "Prefer to use VK_FILTER_LINEAR for VkSamplerYcbcrConversion",
+        &members,
+    };
 };
 
 inline FeaturesVk::FeaturesVk()  = default;
