@@ -87,7 +87,7 @@ struct GraphicsDriverUniforms
     uint32_t misc;
 };
 static_assert(sizeof(GraphicsDriverUniforms) % (sizeof(uint32_t) * 4) == 0,
-              "GraphicsDriverUniforms should 16bytes aligned");
+              "GraphicsDriverUniforms should be 16bytes aligned");
 
 // Only used under the following conditions:
 //
@@ -108,7 +108,7 @@ struct GraphicsDriverUniformsExtended
     int32_t padding[3];
 };
 static_assert(sizeof(GraphicsDriverUniformsExtended) % (sizeof(uint32_t) * 4) == 0,
-              "GraphicsDriverUniformsExtended should 16bytes aligned");
+              "GraphicsDriverUniformsExtended should be 16bytes aligned");
 
 struct ComputeDriverUniforms
 {
@@ -275,10 +275,11 @@ SurfaceRotation DetermineSurfaceRotation(gl::Framebuffer *framebuffer,
 }
 
 // Should not generate a copy with modern C++.
-EventName GetTraceEventName(const char *title, uint32_t counter)
+EventName GetTraceEventName(const char *title, uint64_t counter)
 {
     EventName buf;
-    snprintf(buf.data(), kMaxGpuEventNameLen - 1, "%s %u", title, counter);
+    snprintf(buf.data(), kMaxGpuEventNameLen - 1, "%s %llu", title,
+             static_cast<unsigned long long>(counter));
     return buf;
 }
 
@@ -622,7 +623,7 @@ void DumpPipelineCacheGraph(const std::ostringstream &graph)
     std::ostream &out = std::cout;
 
     out << "digraph {\n"
-        << " node [shape=point]\n";
+        << " node [shape=box]\n";
     out << graph.str();
     out << "}\n";
 }
@@ -2932,8 +2933,8 @@ void ContextVk::updateOverlayOnPresent()
     {
         gl::RunningGraphWidget *shaderResourceHitRate =
             overlay->getRunningGraphWidget(gl::WidgetId::VulkanShaderResourceDSHitRate);
-        size_t numCacheAccesses = mPerfCounters.shaderResourcesDescriptorSetCacheHits +
-                                  mPerfCounters.shaderResourcesDescriptorSetCacheMisses;
+        uint64_t numCacheAccesses = mPerfCounters.shaderResourcesDescriptorSetCacheHits +
+                                    mPerfCounters.shaderResourcesDescriptorSetCacheMisses;
         if (numCacheAccesses > 0)
         {
             float hitRateFloat =
