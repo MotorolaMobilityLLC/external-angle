@@ -56,6 +56,8 @@ enum class DescriptorSetIndex : uint32_t
     EnumCount = InvalidEnum,
 };
 
+class PipelineCacheAccess;
+
 namespace vk
 {
 class BufferHelper;
@@ -284,6 +286,15 @@ bool operator==(const RenderPassDesc &lhs, const RenderPassDesc &rhs);
 
 constexpr size_t kRenderPassDescSize = sizeof(RenderPassDesc);
 static_assert(kRenderPassDescSize == 16, "Size check failed");
+
+enum class CacheLookUpFeedback
+{
+    None,
+    Hit,
+    Miss,
+    WarmUpHit,
+    WarmUpMiss,
+};
 
 struct PackedAttachmentOpsDesc final
 {
@@ -566,7 +577,7 @@ class GraphicsPipelineDesc final
     }
 
     angle::Result initializePipeline(ContextVk *contextVk,
-                                     const PipelineCache &pipelineCacheVk,
+                                     PipelineCacheAccess *pipelineCache,
                                      const RenderPass &compatibleRenderPass,
                                      const PipelineLayout &pipelineLayout,
                                      const gl::AttributesMask &activeAttribLocationsMask,
@@ -574,7 +585,8 @@ class GraphicsPipelineDesc final
                                      const gl::DrawBufferMask &missingOutputsMask,
                                      const ShaderAndSerialMap &shaders,
                                      const SpecializationConstants &specConsts,
-                                     Pipeline *pipelineOut) const;
+                                     Pipeline *pipelineOut,
+                                     CacheLookUpFeedback *feedbackOut) const;
 
     // Vertex input state. For ES 3.1 this should be separated into binding and attribute.
     void updateVertexInput(ContextVk *contextVk,
@@ -1040,9 +1052,10 @@ class PipelineHelper final : public Resource
   public:
     PipelineHelper();
     ~PipelineHelper() override;
-    inline explicit PipelineHelper(Pipeline &&pipeline);
+    inline explicit PipelineHelper(Pipeline &&pipeline, CacheLookUpFeedback feedback);
 
     void destroy(VkDevice device);
+    void release(ContextVk *contextVk);
 
     bool valid() const { return mPipeline.valid(); }
     Pipeline &getPipeline() { return mPipeline; }
@@ -1070,12 +1083,22 @@ class PipelineHelper final : public Resource
 
     const std::vector<GraphicsPipelineTransition> getTransitions() const { return mTransitions; }
 
+    void setCacheLookUpFeedback(CacheLookUpFeedback feedback)
+    {
+        ASSERT(mCacheLookUpFeedback == CacheLookUpFeedback::None);
+        mCacheLookUpFeedback = feedback;
+    }
+    CacheLookUpFeedback getCacheLookUpFeedback() const { return mCacheLookUpFeedback; }
+
   private:
     std::vector<GraphicsPipelineTransition> mTransitions;
     Pipeline mPipeline;
+    CacheLookUpFeedback mCacheLookUpFeedback = CacheLookUpFeedback::None;
 };
 
-ANGLE_INLINE PipelineHelper::PipelineHelper(Pipeline &&pipeline) : mPipeline(std::move(pipeline)) {}
+ANGLE_INLINE PipelineHelper::PipelineHelper(Pipeline &&pipeline, CacheLookUpFeedback feedback)
+    : mPipeline(std::move(pipeline)), mCacheLookUpFeedback(feedback)
+{}
 
 struct ImageSubresourceRange
 {
@@ -1760,6 +1783,41 @@ class RenderPassCache final : angle::NonCopyable
     CacheStats mRenderPassWithOpsCacheStats;
 };
 
+// A class that encapsulates the vk::PipelineCache and associated mutex.  The mutex may be nullptr
+// if synchronization is not necessary.
+class PipelineCacheAccess
+{
+  public:
+    PipelineCacheAccess()  = default;
+    ~PipelineCacheAccess() = default;
+
+    void init(const vk::PipelineCache *pipelineCache, std::mutex *mutex)
+    {
+        mPipelineCache = pipelineCache;
+        mMutex         = mutex;
+    }
+
+    angle::Result createGraphicsPipeline(vk::Context *context,
+                                         const VkGraphicsPipelineCreateInfo &createInfo,
+                                         vk::Pipeline *pipelineOut);
+    angle::Result createComputePipeline(vk::Context *context,
+                                        const VkComputePipelineCreateInfo &createInfo,
+                                        vk::Pipeline *pipelineOut);
+
+  private:
+    std::unique_lock<std::mutex> getLock();
+
+    const vk::PipelineCache *mPipelineCache = nullptr;
+    std::mutex *mMutex;
+};
+
+enum class PipelineSource
+{
+    WarmUp,
+    Draw,
+    Utils,
+};
+
 // TODO(jmadill): Add cache trimming/eviction.
 class GraphicsPipelineCache final : public HasCacheStats<VulkanCacheType::GraphicsPipeline>
 {
@@ -1773,7 +1831,7 @@ class GraphicsPipelineCache final : public HasCacheStats<VulkanCacheType::Graphi
     void populate(const vk::GraphicsPipelineDesc &desc, vk::Pipeline &&pipeline);
 
     ANGLE_INLINE angle::Result getPipeline(ContextVk *contextVk,
-                                           const vk::PipelineCache &pipelineCacheVk,
+                                           PipelineCacheAccess *pipelineCache,
                                            const vk::RenderPass &compatibleRenderPass,
                                            const vk::PipelineLayout &pipelineLayout,
                                            const gl::AttributesMask &activeAttribLocationsMask,
@@ -1781,6 +1839,7 @@ class GraphicsPipelineCache final : public HasCacheStats<VulkanCacheType::Graphi
                                            const gl::DrawBufferMask &missingOutputsMask,
                                            const vk::ShaderAndSerialMap &shaders,
                                            const vk::SpecializationConstants &specConsts,
+                                           PipelineSource source,
                                            const vk::GraphicsPipelineDesc &desc,
                                            const vk::GraphicsPipelineDesc **descPtrOut,
                                            vk::PipelineHelper **pipelineOut)
@@ -1795,9 +1854,9 @@ class GraphicsPipelineCache final : public HasCacheStats<VulkanCacheType::Graphi
         }
 
         mCacheStats.missAndIncrementSize();
-        return insertPipeline(contextVk, pipelineCacheVk, compatibleRenderPass, pipelineLayout,
+        return insertPipeline(contextVk, pipelineCache, compatibleRenderPass, pipelineLayout,
                               activeAttribLocationsMask, programAttribsTypeMask, missingOutputsMask,
-                              shaders, specConsts, desc, descPtrOut, pipelineOut);
+                              shaders, specConsts, source, desc, descPtrOut, pipelineOut);
     }
 
     // Helper for VulkanPipelineCachePerf that resets the object without destroying any object.
@@ -1805,7 +1864,7 @@ class GraphicsPipelineCache final : public HasCacheStats<VulkanCacheType::Graphi
 
   private:
     angle::Result insertPipeline(ContextVk *contextVk,
-                                 const vk::PipelineCache &pipelineCacheVk,
+                                 PipelineCacheAccess *pipelineCache,
                                  const vk::RenderPass &compatibleRenderPass,
                                  const vk::PipelineLayout &pipelineLayout,
                                  const gl::AttributesMask &activeAttribLocationsMask,
@@ -1813,6 +1872,7 @@ class GraphicsPipelineCache final : public HasCacheStats<VulkanCacheType::Graphi
                                  const gl::DrawBufferMask &missingOutputsMask,
                                  const vk::ShaderAndSerialMap &shaders,
                                  const vk::SpecializationConstants &specConsts,
+                                 PipelineSource source,
                                  const vk::GraphicsPipelineDesc &desc,
                                  const vk::GraphicsPipelineDesc **descPtrOut,
                                  vk::PipelineHelper **pipelineOut);

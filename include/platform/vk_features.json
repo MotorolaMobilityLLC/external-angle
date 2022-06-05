@@ -661,6 +661,14 @@
             "issue": "http://anglebug.com/6692"
         },
         {
+            "name": "supports_pipeline_creation_cache_control",
+            "category": "Features",
+            "description": [
+                "VkDevice supports VK_EXT_pipeline_creation_cache_control extension"
+            ],
+            "issue": "http://anglebug.com/5881"
+        },
+        {
             "name": "supports_pipeline_creation_feedback",
             "category": "Features",
             "description": [
@@ -853,6 +861,13 @@
                 "VkDevice supports VK_EXT_image_2d_view_of_3d"
             ],
             "issue": "https://anglebug.com/7320"
+        },
+        {
+            "name": "prefer_linear_filter_for_YUV",
+            "category": "Features",
+            "description": [
+                "Prefer to use VK_FILTER_LINEAR for VkSamplerYcbcrConversion"
+            ]
         }
     ]
 }
