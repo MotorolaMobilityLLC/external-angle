@@ -47,10 +47,13 @@ enum class WidgetType
 
 namespace overlay
 {
+class Text;
 class Widget
 {
   public:
     virtual ~Widget() {}
+
+    virtual const Text *getDescriptionWidget() const;
 
   protected:
     WidgetType type;
@@ -81,6 +84,7 @@ class Count : public Widget
   public:
     ~Count() override {}
     void add(uint64_t n) { count += n; }
+    void set(uint64_t n) { count = n; }
     void reset() { count = 0; }
 
   protected:
@@ -142,6 +146,8 @@ class RunningGraph : public Widget
         }
     }
 
+    const Text *getDescriptionWidget() const override;
+
   protected:
     std::vector<uint64_t> runningValues;
     size_t lastValueIndex = 0;
@@ -158,6 +164,7 @@ class RunningHistogram : public RunningGraph
   public:
     RunningHistogram(size_t n) : RunningGraph(n) {}
     ~RunningHistogram() override {}
+
     void set(float n)
     {
         ASSERT(n >= 0.0f && n <= 1.0f);
@@ -166,6 +173,10 @@ class RunningHistogram : public RunningGraph
 
         runningValues[lastValueIndex] = rank;
     }
+
+  private:
+    // Do not use the add() function from RunningGraph
+    using RunningGraph::add;
 };
 
 // If overlay is disabled, all the above classes would be replaced with Mock, turning them into

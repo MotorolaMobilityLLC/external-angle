@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.215",
-    "comment": "from git branch: github-main commit: 9b5562187a8ad72c171410b036ceedbc450153ba",
-    "date": "2022-05-24 09:04:58Z"
+    "api version": "1.3.216",
+    "comment": "from git branch: github-main commit: 899dd1c16d5de69bd24e108f393d134fa2989512",
+    "date": "2022-06-02 11:59:52Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -7868,7 +7868,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkRenderPassCreationControlEXT\">VkRenderPassCreationControlEXT</a>, <a href=\"#VkRenderPassCreationFeedbackInfoEXT\">VkRenderPassCreationFeedbackInfoEXT</a>, or <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkRenderPassCreationControlEXT\">VkRenderPassCreationControlEXT</a>, <a href=\"#VkRenderPassCreationFeedbackCreateInfoEXT\">VkRenderPassCreationFeedbackCreateInfoEXT</a>, or <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2-sType-unique",
@@ -8222,7 +8222,7 @@
         },
         {
           "vuid": "VUID-VkSubpassDescription2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkFragmentShadingRateAttachmentInfoKHR\">VkFragmentShadingRateAttachmentInfoKHR</a>, <a href=\"#VkRenderPassCreationControlEXT\">VkRenderPassCreationControlEXT</a>, <a href=\"#VkRenderPassSubpassFeedbackInfoEXT\">VkRenderPassSubpassFeedbackInfoEXT</a>, or <a href=\"#VkSubpassDescriptionDepthStencilResolve\">VkSubpassDescriptionDepthStencilResolve</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkFragmentShadingRateAttachmentInfoKHR\">VkFragmentShadingRateAttachmentInfoKHR</a>, <a href=\"#VkRenderPassCreationControlEXT\">VkRenderPassCreationControlEXT</a>, <a href=\"#VkRenderPassSubpassFeedbackCreateInfoEXT\">VkRenderPassSubpassFeedbackCreateInfoEXT</a>, or <a href=\"#VkSubpassDescriptionDepthStencilResolve\">VkSubpassDescriptionDepthStencilResolve</a>"
         },
         {
           "vuid": "VUID-VkSubpassDescription2-sType-unique",
@@ -9764,27 +9764,27 @@
         }
       ]
     },
-    "VkRenderPassCreationFeedbackInfoEXT": {
+    "VkRenderPassCreationFeedbackCreateInfoEXT": {
       "(VK_EXT_subpass_merge_feedback)": [
         {
-          "vuid": "VUID-VkRenderPassCreationFeedbackInfoEXT-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT</code>"
+          "vuid": "VUID-VkRenderPassCreationFeedbackCreateInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreationFeedbackCreateInfoEXT-pRenderPassFeedback-parameter",
+          "text": " <code>pRenderPassFeedback</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkRenderPassCreationFeedbackInfoEXT\">VkRenderPassCreationFeedbackInfoEXT</a> structure"
         }
       ]
     },
-    "VkRenderPassSubpassFeedbackInfoEXT": {
+    "VkRenderPassSubpassFeedbackCreateInfoEXT": {
       "(VK_EXT_subpass_merge_feedback)": [
         {
-          "vuid": "VUID-VkRenderPassSubpassFeedbackInfoEXT-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT</code>"
+          "vuid": "VUID-VkRenderPassSubpassFeedbackCreateInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT</code>"
         },
         {
-          "vuid": "VUID-VkRenderPassSubpassFeedbackInfoEXT-subpassMergeStatus-parameter",
-          "text": " <code>subpassMergeStatus</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSubpassMergeStatusEXT\">VkSubpassMergeStatusEXT</a> value"
-        },
-        {
-          "vuid": "VUID-VkRenderPassSubpassFeedbackInfoEXT-description-parameter",
-          "text": " <code>description</code> <strong class=\"purple\">must</strong> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE"
+          "vuid": "VUID-VkRenderPassSubpassFeedbackCreateInfoEXT-pSubpassFeedback-parameter",
+          "text": " <code>pSubpassFeedback</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkRenderPassSubpassFeedbackInfoEXT\">VkRenderPassSubpassFeedbackInfoEXT</a> structure"
         }
       ]
     },
@@ -12992,36 +12992,6 @@
         }
       ]
     },
-    "VkPipelineInfoKHR": {
-      "(VK_KHR_pipeline_executable_properties)": [
-        {
-          "vuid": "VUID-VkPipelineInfoKHR-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR</code>"
-        },
-        {
-          "vuid": "VUID-VkPipelineInfoKHR-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
-        },
-        {
-          "vuid": "VUID-VkPipelineInfoKHR-pipeline-parameter",
-          "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPipeline\">VkPipeline</a> handle"
-        }
-      ],
-      "(VK_EXT_pipeline_properties)+!(VK_KHR_pipeline_executable_properties)": [
-        {
-          "vuid": "VUID-VkPipelineInfoKHR-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR</code>"
-        },
-        {
-          "vuid": "VUID-VkPipelineInfoKHR-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
-        },
-        {
-          "vuid": "VUID-VkPipelineInfoKHR-pipeline-parameter",
-          "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPipeline\">VkPipeline</a> handle"
-        }
-      ]
-    },
     "VkPipelineExecutablePropertiesKHR": {
       "(VK_KHR_pipeline_executable_properties)": [
         {
@@ -13031,6 +13001,54 @@
         {
           "vuid": "VUID-VkPipelineExecutablePropertiesKHR-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
+    "vkGetPipelinePropertiesEXT": {
+      "(VK_EXT_pipeline_properties)": [
+        {
+          "vuid": "VUID-vkGetPipelinePropertiesEXT-pipeline-06738",
+          "text": " <code>pipeline</code> member of <code>pPipelineInfo</code> must have been created with <code>device</code>"
+        },
+        {
+          "vuid": "VUID-vkGetPipelinePropertiesEXT-pPipelineProperties-06739",
+          "text": " <code>pPipelineProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkPipelinePropertiesIdentifierEXT\">VkPipelinePropertiesIdentifierEXT</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetPipelinePropertiesEXT-None-06766",
+          "text": " The <a href=\"#features-pipelinePropertiesIdentifier\">pipelinePropertiesIdentifier</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkGetPipelinePropertiesEXT-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPipelinePropertiesEXT-pPipelineInfo-parameter",
+          "text": " <code>pPipelineInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineInfoEXT\">VkPipelineInfoEXT</a> structure"
+        }
+      ]
+    },
+    "VkPipelinePropertiesIdentifierEXT": {
+      "(VK_EXT_pipeline_properties)": [
+        {
+          "vuid": "VUID-VkPipelinePropertiesIdentifierEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT</code>"
+        }
+      ]
+    },
+    "VkPipelineInfoKHR": {
+      "(VK_KHR_pipeline_executable_properties,VK_EXT_pipeline_properties)": [
+        {
+          "vuid": "VUID-VkPipelineInfoKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineInfoKHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineInfoKHR-pipeline-parameter",
+          "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPipeline\">VkPipeline</a> handle"
         }
       ]
     },
@@ -13199,38 +13217,6 @@
         {
           "vuid": "VUID-VkPipelineCreationFeedbackCreateInfo-pPipelineStageCreationFeedbacks-parameter",
           "text": " If <code>pipelineStageCreationFeedbackCount</code> is not <code>0</code>, <code>pPipelineStageCreationFeedbacks</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pipelineStageCreationFeedbackCount</code> <a href=\"#VkPipelineCreationFeedback\">VkPipelineCreationFeedback</a> structures"
-        }
-      ]
-    },
-    "vkGetPipelinePropertiesEXT": {
-      "(VK_EXT_pipeline_properties)": [
-        {
-          "vuid": "VUID-vkGetPipelinePropertiesEXT-pipeline-06738",
-          "text": " <code>pipeline</code> member of <code>pPipelineInfo</code> must have been created with <code>device</code>"
-        },
-        {
-          "vuid": "VUID-vkGetPipelinePropertiesEXT-pPipelineProperties-06739",
-          "text": " <code>pPipelineProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkPipelinePropertiesIdentifierEXT\">VkPipelinePropertiesIdentifierEXT</a> structure"
-        },
-        {
-          "vuid": "VUID-vkGetPipelinePropertiesEXT-None-06766",
-          "text": " The <a href=\"#features-pipelinePropertiesIdentifier\">pipelinePropertiesIdentifier</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
-        {
-          "vuid": "VUID-vkGetPipelinePropertiesEXT-device-parameter",
-          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
-        },
-        {
-          "vuid": "VUID-vkGetPipelinePropertiesEXT-pPipelineInfo-parameter",
-          "text": " <code>pPipelineInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineInfoEXT\">VkPipelineInfoEXT</a> structure"
-        }
-      ]
-    },
-    "VkPipelinePropertiesIdentifierEXT": {
-      "(VK_EXT_pipeline_properties)": [
-        {
-          "vuid": "VUID-VkPipelinePropertiesIdentifierEXT-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT</code>"
         }
       ]
     },
