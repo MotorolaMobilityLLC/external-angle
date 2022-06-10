@@ -341,6 +341,12 @@ struct FeaturesVk : FeatureSetBase
         "VkDevice supports VK_EXT_load_store_op_none extension.", &members,
         "http://anglebug.com/5371"};
 
+    FeatureInfo disallowMixedDepthStencilLoadOpNoneAndLoad = {
+        "disallowMixedDepthStencilLoadOpNoneAndLoad", FeatureCategory::VulkanWorkarounds,
+        "Disallow use of LOAD_OP_NONE for only one of the depth or stencil aspects of a "
+        "depth/stencil attachment",
+        &members, "http://anglebug.com/7370"};
+
     FeatureInfo supportsDepthClipControl = {
         "supportsDepthClipControl", FeatureCategory::VulkanFeatures,
         "VkDevice supports VK_EXT_depth_clip_control extension.", &members,
@@ -449,10 +455,10 @@ struct FeaturesVk : FeatureSetBase
         "generateSPIRVThroughGlslang", FeatureCategory::VulkanFeatures,
         "Translate SPIR-V through glslang.", &members, "http://anglebug.com/4889"};
 
-    FeatureInfo forceDriverUniformOverSpecConst = {
-        "forceDriverUniformOverSpecConst", FeatureCategory::VulkanWorkarounds,
-        "Forces using driver uniforms instead of specialization constants.", &members,
-        "http://issuetracker.google.com/173636783"};
+    FeatureInfo preferDriverUniformOverSpecConst = {
+        "preferDriverUniformOverSpecConst", FeatureCategory::VulkanFeatures,
+        "Prefer using driver uniforms instead of specialization constants.", &members,
+        "http://anglebug.com/7406"};
 
     FeatureInfo exposeNonConformantExtensionsAndVersions = {
         "exposeNonConformantExtensionsAndVersions", FeatureCategory::VulkanWorkarounds,
