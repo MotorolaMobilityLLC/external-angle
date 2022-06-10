@@ -6760,6 +6760,25 @@ void Context::drawArraysInstancedBaseInstance(PrimitiveMode mode,
     MarkTransformFeedbackBufferUsage(this, count, 1);
 }
 
+void Context::drawArraysInstancedBaseInstanceANGLE(PrimitiveMode mode,
+                                                   GLint first,
+                                                   GLsizei count,
+                                                   GLsizei instanceCount,
+                                                   GLuint baseInstance)
+{
+    drawArraysInstancedBaseInstance(mode, first, count, instanceCount, baseInstance);
+}
+
+void Context::drawElementsInstancedBaseInstance(GLenum mode,
+                                                GLsizei count,
+                                                GLenum type,
+                                                const void *indices,
+                                                GLsizei instancecount,
+                                                GLuint baseinstance)
+{
+    UNIMPLEMENTED();
+}
+
 void Context::drawElementsInstancedBaseVertexBaseInstance(PrimitiveMode mode,
                                                           GLsizei count,
                                                           DrawElementsType type,
@@ -6793,6 +6812,18 @@ void Context::drawElementsInstancedBaseVertexBaseInstance(PrimitiveMode mode,
 
     ANGLE_CONTEXT_TRY(mImplementation->drawElementsInstancedBaseVertexBaseInstance(
         this, mode, count, type, indices, instanceCount, baseVertex, baseInstance));
+}
+
+void Context::drawElementsInstancedBaseVertexBaseInstanceANGLE(PrimitiveMode mode,
+                                                               GLsizei count,
+                                                               DrawElementsType type,
+                                                               const GLvoid *indices,
+                                                               GLsizei instanceCount,
+                                                               GLint baseVertex,
+                                                               GLuint baseInstance)
+{
+    drawElementsInstancedBaseVertexBaseInstance(mode, count, type, indices, instanceCount,
+                                                baseVertex, baseInstance);
 }
 
 void Context::multiDrawArraysInstancedBaseInstance(PrimitiveMode mode,
@@ -9705,9 +9736,9 @@ void ErrorSet::handleError(GLenum errorCode,
     ASSERT(errorCode != GL_NO_ERROR);
     mErrors.insert(errorCode);
 
-    mContext->getState().getDebug().insertMessage(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_ERROR,
-                                                  errorCode, GL_DEBUG_SEVERITY_HIGH, message,
-                                                  gl::LOG_WARN, angle::EntryPoint::GLInvalid);
+    mContext->getState().getDebug().insertMessage(
+        GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_ERROR, errorCode, GL_DEBUG_SEVERITY_HIGH,
+        std::move(formattedMessage), gl::LOG_WARN, angle::EntryPoint::GLInvalid);
 }
 
 void ErrorSet::validationError(angle::EntryPoint entryPoint, GLenum errorCode, const char *message)

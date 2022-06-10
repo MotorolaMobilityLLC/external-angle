@@ -80665,13 +80665,9 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassCreationFeedbackInfoEXT;
 
-    static const bool                                  allowDuplicate = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRenderPassCreationFeedbackInfoEXT;
-
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR RenderPassCreationFeedbackInfoEXT( uint32_t postMergeSubpassCount_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
-      : pNext( pNext_ )
-      , postMergeSubpassCount( postMergeSubpassCount_ )
+    VULKAN_HPP_CONSTEXPR RenderPassCreationFeedbackInfoEXT( uint32_t postMergeSubpassCount_ = {} ) VULKAN_HPP_NOEXCEPT
+      : postMergeSubpassCount( postMergeSubpassCount_ )
     {
     }
 
@@ -80691,20 +80687,6 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 RenderPassCreationFeedbackInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pNext = pNext_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 RenderPassCreationFeedbackInfoEXT & setPostMergeSubpassCount( uint32_t postMergeSubpassCount_ ) VULKAN_HPP_NOEXCEPT
-    {
-      postMergeSubpassCount = postMergeSubpassCount_;
-      return *this;
-    }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
-
     explicit operator VkRenderPassCreationFeedbackInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassCreationFeedbackInfoEXT *>( this );
@@ -80719,11 +80701,11 @@ namespace VULKAN_HPP_NAMESPACE
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
-    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, uint32_t const &>
+    std::tuple<uint32_t const &>
 #  endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
-      return std::tie( sType, pNext, postMergeSubpassCount );
+      return std::tie( postMergeSubpassCount );
     }
 #endif
 
@@ -80735,7 +80717,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
-      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( postMergeSubpassCount == rhs.postMergeSubpassCount );
+      return ( postMergeSubpassCount == rhs.postMergeSubpassCount );
 #  endif
     }
 
@@ -80746,9 +80728,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType sType                 = StructureType::eRenderPassCreationFeedbackInfoEXT;
-    const void *                        pNext                 = {};
-    uint32_t                            postMergeSubpassCount = {};
+    uint32_t postMergeSubpassCount = {};
   };
   VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::RenderPassCreationFeedbackInfoEXT ) == sizeof( VkRenderPassCreationFeedbackInfoEXT ),
                             "struct and wrapper have different size!" );
@@ -80757,10 +80737,108 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::RenderPassCreationFeedbackInfoEXT>::value,
                             "RenderPassCreationFeedbackInfoEXT is not nothrow_move_constructible!" );
 
-  template <>
-  struct CppType<StructureType, StructureType::eRenderPassCreationFeedbackInfoEXT>
+  struct RenderPassCreationFeedbackCreateInfoEXT
   {
-    using Type = RenderPassCreationFeedbackInfoEXT;
+    using NativeType = VkRenderPassCreationFeedbackCreateInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRenderPassCreationFeedbackCreateInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR RenderPassCreationFeedbackCreateInfoEXT( VULKAN_HPP_NAMESPACE::RenderPassCreationFeedbackInfoEXT * pRenderPassFeedback_ = {},
+                                                                  const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , pRenderPassFeedback( pRenderPassFeedback_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR RenderPassCreationFeedbackCreateInfoEXT( RenderPassCreationFeedbackCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    RenderPassCreationFeedbackCreateInfoEXT( VkRenderPassCreationFeedbackCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : RenderPassCreationFeedbackCreateInfoEXT( *reinterpret_cast<RenderPassCreationFeedbackCreateInfoEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    RenderPassCreationFeedbackCreateInfoEXT & operator=( RenderPassCreationFeedbackCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    RenderPassCreationFeedbackCreateInfoEXT & operator=( VkRenderPassCreationFeedbackCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::RenderPassCreationFeedbackCreateInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 RenderPassCreationFeedbackCreateInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 RenderPassCreationFeedbackCreateInfoEXT &
+                            setPRenderPassFeedback( VULKAN_HPP_NAMESPACE::RenderPassCreationFeedbackInfoEXT * pRenderPassFeedback_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pRenderPassFeedback = pRenderPassFeedback_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkRenderPassCreationFeedbackCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkRenderPassCreationFeedbackCreateInfoEXT *>( this );
+    }
+
+    explicit operator VkRenderPassCreationFeedbackCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkRenderPassCreationFeedbackCreateInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::RenderPassCreationFeedbackInfoEXT * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, pRenderPassFeedback );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( RenderPassCreationFeedbackCreateInfoEXT const & ) const = default;
+#else
+    bool operator==( RenderPassCreationFeedbackCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pRenderPassFeedback == rhs.pRenderPassFeedback );
+#  endif
+    }
+
+    bool operator!=( RenderPassCreationFeedbackCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                       sType               = StructureType::eRenderPassCreationFeedbackCreateInfoEXT;
+    const void *                                              pNext               = {};
+    VULKAN_HPP_NAMESPACE::RenderPassCreationFeedbackInfoEXT * pRenderPassFeedback = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::RenderPassCreationFeedbackCreateInfoEXT ) == sizeof( VkRenderPassCreationFeedbackCreateInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::RenderPassCreationFeedbackCreateInfoEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::RenderPassCreationFeedbackCreateInfoEXT>::value,
+                            "RenderPassCreationFeedbackCreateInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eRenderPassCreationFeedbackCreateInfoEXT>
+  {
+    using Type = RenderPassCreationFeedbackCreateInfoEXT;
   };
 
   struct RenderPassFragmentDensityMapCreateInfoEXT
@@ -81481,17 +81559,12 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassSubpassFeedbackInfoEXT;
 
-    static const bool                                  allowDuplicate = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRenderPassSubpassFeedbackInfoEXT;
-
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14
       RenderPassSubpassFeedbackInfoEXT( VULKAN_HPP_NAMESPACE::SubpassMergeStatusEXT subpassMergeStatus_ = VULKAN_HPP_NAMESPACE::SubpassMergeStatusEXT::eMerged,
                                         std::array<char, VK_MAX_DESCRIPTION_SIZE> const & description_  = {},
-                                        uint32_t                                          postMergeIndex_ = {},
-                                        const void *                                      pNext_          = nullptr ) VULKAN_HPP_NOEXCEPT
-      : pNext( pNext_ )
-      , subpassMergeStatus( subpassMergeStatus_ )
+                                        uint32_t                                          postMergeIndex_ = {} ) VULKAN_HPP_NOEXCEPT
+      : subpassMergeStatus( subpassMergeStatus_ )
       , description( description_ )
       , postMergeIndex( postMergeIndex_ )
     {
@@ -81513,33 +81586,6 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 RenderPassSubpassFeedbackInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pNext = pNext_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 RenderPassSubpassFeedbackInfoEXT &
-                            setSubpassMergeStatus( VULKAN_HPP_NAMESPACE::SubpassMergeStatusEXT subpassMergeStatus_ ) VULKAN_HPP_NOEXCEPT
-    {
-      subpassMergeStatus = subpassMergeStatus_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 RenderPassSubpassFeedbackInfoEXT & setDescription( std::array<char, VK_MAX_DESCRIPTION_SIZE> description_ ) VULKAN_HPP_NOEXCEPT
-    {
-      description = description_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 RenderPassSubpassFeedbackInfoEXT & setPostMergeIndex( uint32_t postMergeIndex_ ) VULKAN_HPP_NOEXCEPT
-    {
-      postMergeIndex = postMergeIndex_;
-      return *this;
-    }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
-
     explicit operator VkRenderPassSubpassFeedbackInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassSubpassFeedbackInfoEXT *>( this );
@@ -81554,15 +81600,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  if 14 <= VULKAN_HPP_CPP_VERSION
     auto
 #  else
-    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
-               const void * const &,
-               VULKAN_HPP_NAMESPACE::SubpassMergeStatusEXT const &,
-               VULKAN_HPP_NAMESPACE::ArrayWrapper1D<char, VK_MAX_DESCRIPTION_SIZE> const &,
-               uint32_t const &>
+    std::
+      tuple<VULKAN_HPP_NAMESPACE::SubpassMergeStatusEXT const &, VULKAN_HPP_NAMESPACE::ArrayWrapper1D<char, VK_MAX_DESCRIPTION_SIZE> const &, uint32_t const &>
 #  endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
-      return std::tie( sType, pNext, subpassMergeStatus, description, postMergeIndex );
+      return std::tie( subpassMergeStatus, description, postMergeIndex );
     }
 #endif
 
@@ -81574,8 +81617,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #  else
-      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( subpassMergeStatus == rhs.subpassMergeStatus ) && ( description == rhs.description ) &&
-             ( postMergeIndex == rhs.postMergeIndex );
+      return ( subpassMergeStatus == rhs.subpassMergeStatus ) && ( description == rhs.description ) && ( postMergeIndex == rhs.postMergeIndex );
 #  endif
     }
 
@@ -81586,8 +81628,6 @@ namespace VULKAN_HPP_NAMESPACE
 #endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType                                 sType              = StructureType::eRenderPassSubpassFeedbackInfoEXT;
-    const void *                                                        pNext              = {};
     VULKAN_HPP_NAMESPACE::SubpassMergeStatusEXT                         subpassMergeStatus = VULKAN_HPP_NAMESPACE::SubpassMergeStatusEXT::eMerged;
     VULKAN_HPP_NAMESPACE::ArrayWrapper1D<char, VK_MAX_DESCRIPTION_SIZE> description        = {};
     uint32_t                                                            postMergeIndex     = {};
@@ -81599,10 +81639,108 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::RenderPassSubpassFeedbackInfoEXT>::value,
                             "RenderPassSubpassFeedbackInfoEXT is not nothrow_move_constructible!" );
 
-  template <>
-  struct CppType<StructureType, StructureType::eRenderPassSubpassFeedbackInfoEXT>
+  struct RenderPassSubpassFeedbackCreateInfoEXT
   {
-    using Type = RenderPassSubpassFeedbackInfoEXT;
+    using NativeType = VkRenderPassSubpassFeedbackCreateInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRenderPassSubpassFeedbackCreateInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR_14 RenderPassSubpassFeedbackCreateInfoEXT( VULKAN_HPP_NAMESPACE::RenderPassSubpassFeedbackInfoEXT * pSubpassFeedback_ = {},
+                                                                    const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , pSubpassFeedback( pSubpassFeedback_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 RenderPassSubpassFeedbackCreateInfoEXT( RenderPassSubpassFeedbackCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    RenderPassSubpassFeedbackCreateInfoEXT( VkRenderPassSubpassFeedbackCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : RenderPassSubpassFeedbackCreateInfoEXT( *reinterpret_cast<RenderPassSubpassFeedbackCreateInfoEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    RenderPassSubpassFeedbackCreateInfoEXT & operator=( RenderPassSubpassFeedbackCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    RenderPassSubpassFeedbackCreateInfoEXT & operator=( VkRenderPassSubpassFeedbackCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::RenderPassSubpassFeedbackCreateInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 RenderPassSubpassFeedbackCreateInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 RenderPassSubpassFeedbackCreateInfoEXT &
+                            setPSubpassFeedback( VULKAN_HPP_NAMESPACE::RenderPassSubpassFeedbackInfoEXT * pSubpassFeedback_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pSubpassFeedback = pSubpassFeedback_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkRenderPassSubpassFeedbackCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkRenderPassSubpassFeedbackCreateInfoEXT *>( this );
+    }
+
+    explicit operator VkRenderPassSubpassFeedbackCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkRenderPassSubpassFeedbackCreateInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::RenderPassSubpassFeedbackInfoEXT * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, pSubpassFeedback );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( RenderPassSubpassFeedbackCreateInfoEXT const & ) const = default;
+#else
+    bool operator==( RenderPassSubpassFeedbackCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pSubpassFeedback == rhs.pSubpassFeedback );
+#  endif
+    }
+
+    bool operator!=( RenderPassSubpassFeedbackCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                      sType            = StructureType::eRenderPassSubpassFeedbackCreateInfoEXT;
+    const void *                                             pNext            = {};
+    VULKAN_HPP_NAMESPACE::RenderPassSubpassFeedbackInfoEXT * pSubpassFeedback = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::RenderPassSubpassFeedbackCreateInfoEXT ) == sizeof( VkRenderPassSubpassFeedbackCreateInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::RenderPassSubpassFeedbackCreateInfoEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::RenderPassSubpassFeedbackCreateInfoEXT>::value,
+                            "RenderPassSubpassFeedbackCreateInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eRenderPassSubpassFeedbackCreateInfoEXT>
+  {
+    using Type = RenderPassSubpassFeedbackCreateInfoEXT;
   };
 
   struct RenderPassTransformBeginInfoQCOM
