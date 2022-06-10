@@ -58,6 +58,7 @@
 7291 VULKAN : BlitFramebufferTest.Blit2DArrayTo3D/* = SKIP
 234769934 VULKAN : VulkanPerformanceCounterTest.ResizeFBOAttachedTexture/* = SKIP
 234602034 VULKAN : VulkanPerformanceCounterTest.SetTextureSwizzleWithDifferentValueOnFBOAttachedTexture/* = SKIP
+234602034 VULKAN : VulkanPerformanceCounterTest.Source2DAndRepeatedlyRespecifyTarget2DWithSameParameter/* = SKIP
 
 // Windows
 3786 WIN NVIDIA D3D11 : BufferDataOverflowTest.VertexBufferIntegerOverflow/* = SKIP
@@ -75,6 +76,7 @@
 6826 WIN NVIDIA GLES : GLSLTest.VectorAndMatrixScalarizationDoesNotAffectRendering/* = SKIP
 4716 WIN NVIDIA GLES : CopyTextureTest.CopyOutsideMipmap/* = SKIP
 7298 WIN INTEL D3D11 : BlitFramebufferTest.Blit3DTo2DArray/* = SKIP
+7413 WIN NVIDIA VULKAN : DebugTestES3.MessageControl1/* = SKIP
 
 // Linux
 6065 LINUX INTEL VULKAN : SimpleStateChangeTestES31.DrawThenUpdateUBOThenDrawThenDrawIndexed/* = SKIP
@@ -634,3 +636,11 @@
 // imageLoad isn't fully implemented for fragment shaders on D3D11.
 7355 INTEL OPENGL : GLSLTest_ES31.ImageLoadAfterClear/* = SKIP
 7355 D3D11 : GLSLTest_ES31.ImageLoadAfterClear/* = SKIP
+
+// UAVs don't allow aliasing.
+// Windows GLES also has an issue with this test.
+3032 D3D11 : GLSLTest_ES31.AliasedLoadStore/* = SKIP
+7398 WIN OpenGL : GLSLTest_ES31.AliasedLoadStore/* = SKIP
+
+// imageLoad after imageStore with barrier is not coherent on Pixel 4 GLES.
+7388 ANDROID GLES : PixelLocalStorageTest.*/ES3_1_OpenGLES = SKIP
