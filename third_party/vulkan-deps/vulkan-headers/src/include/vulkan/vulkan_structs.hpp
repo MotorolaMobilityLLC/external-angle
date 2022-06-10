@@ -28585,6 +28585,919 @@ namespace VULKAN_HPP_NAMESPACE
   };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ExportMetalBufferInfoEXT
+  {
+    using NativeType = VkExportMetalBufferInfoEXT;
+
+    static const bool                                  allowDuplicate = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMetalBufferInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ExportMetalBufferInfoEXT( VULKAN_HPP_NAMESPACE::DeviceMemory memory_    = {},
+                                                   MTLBuffer_id                       mtlBuffer_ = {},
+                                                   const void *                       pNext_     = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , memory( memory_ )
+      , mtlBuffer( mtlBuffer_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ExportMetalBufferInfoEXT( ExportMetalBufferInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalBufferInfoEXT( VkExportMetalBufferInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ExportMetalBufferInfoEXT( *reinterpret_cast<ExportMetalBufferInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ExportMetalBufferInfoEXT & operator=( ExportMetalBufferInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalBufferInfoEXT & operator=( VkExportMetalBufferInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ExportMetalBufferInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalBufferInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalBufferInfoEXT & setMemory( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ ) VULKAN_HPP_NOEXCEPT
+    {
+      memory = memory_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalBufferInfoEXT & setMtlBuffer( MTLBuffer_id mtlBuffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      mtlBuffer = mtlBuffer_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkExportMetalBufferInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkExportMetalBufferInfoEXT *>( this );
+    }
+
+    explicit operator VkExportMetalBufferInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkExportMetalBufferInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::DeviceMemory const &, MTLBuffer_id const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, memory, mtlBuffer );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ExportMetalBufferInfoEXT const & ) const = default;
+#  else
+    bool operator==( ExportMetalBufferInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memory == rhs.memory ) && ( mtlBuffer == rhs.mtlBuffer );
+#    endif
+    }
+
+    bool operator!=( ExportMetalBufferInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType     = StructureType::eExportMetalBufferInfoEXT;
+    const void *                        pNext     = {};
+    VULKAN_HPP_NAMESPACE::DeviceMemory  memory    = {};
+    MTLBuffer_id                        mtlBuffer = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ExportMetalBufferInfoEXT ) == sizeof( VkExportMetalBufferInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ExportMetalBufferInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ExportMetalBufferInfoEXT>::value,
+                            "ExportMetalBufferInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eExportMetalBufferInfoEXT>
+  {
+    using Type = ExportMetalBufferInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ExportMetalCommandQueueInfoEXT
+  {
+    using NativeType = VkExportMetalCommandQueueInfoEXT;
+
+    static const bool                                  allowDuplicate = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMetalCommandQueueInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ExportMetalCommandQueueInfoEXT( VULKAN_HPP_NAMESPACE::Queue queue_           = {},
+                                                         MTLCommandQueue_id          mtlCommandQueue_ = {},
+                                                         const void *                pNext_           = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , queue( queue_ )
+      , mtlCommandQueue( mtlCommandQueue_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ExportMetalCommandQueueInfoEXT( ExportMetalCommandQueueInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalCommandQueueInfoEXT( VkExportMetalCommandQueueInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ExportMetalCommandQueueInfoEXT( *reinterpret_cast<ExportMetalCommandQueueInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ExportMetalCommandQueueInfoEXT & operator=( ExportMetalCommandQueueInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalCommandQueueInfoEXT & operator=( VkExportMetalCommandQueueInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ExportMetalCommandQueueInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalCommandQueueInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalCommandQueueInfoEXT & setQueue( VULKAN_HPP_NAMESPACE::Queue queue_ ) VULKAN_HPP_NOEXCEPT
+    {
+      queue = queue_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalCommandQueueInfoEXT & setMtlCommandQueue( MTLCommandQueue_id mtlCommandQueue_ ) VULKAN_HPP_NOEXCEPT
+    {
+      mtlCommandQueue = mtlCommandQueue_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkExportMetalCommandQueueInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkExportMetalCommandQueueInfoEXT *>( this );
+    }
+
+    explicit operator VkExportMetalCommandQueueInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkExportMetalCommandQueueInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::Queue const &, MTLCommandQueue_id const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, queue, mtlCommandQueue );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ExportMetalCommandQueueInfoEXT const & ) const = default;
+#  else
+    bool operator==( ExportMetalCommandQueueInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( queue == rhs.queue ) && ( mtlCommandQueue == rhs.mtlCommandQueue );
+#    endif
+    }
+
+    bool operator!=( ExportMetalCommandQueueInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType           = StructureType::eExportMetalCommandQueueInfoEXT;
+    const void *                        pNext           = {};
+    VULKAN_HPP_NAMESPACE::Queue         queue           = {};
+    MTLCommandQueue_id                  mtlCommandQueue = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ExportMetalCommandQueueInfoEXT ) == sizeof( VkExportMetalCommandQueueInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ExportMetalCommandQueueInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ExportMetalCommandQueueInfoEXT>::value,
+                            "ExportMetalCommandQueueInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eExportMetalCommandQueueInfoEXT>
+  {
+    using Type = ExportMetalCommandQueueInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ExportMetalDeviceInfoEXT
+  {
+    using NativeType = VkExportMetalDeviceInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMetalDeviceInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ExportMetalDeviceInfoEXT( MTLDevice_id mtlDevice_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , mtlDevice( mtlDevice_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ExportMetalDeviceInfoEXT( ExportMetalDeviceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalDeviceInfoEXT( VkExportMetalDeviceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ExportMetalDeviceInfoEXT( *reinterpret_cast<ExportMetalDeviceInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ExportMetalDeviceInfoEXT & operator=( ExportMetalDeviceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalDeviceInfoEXT & operator=( VkExportMetalDeviceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ExportMetalDeviceInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalDeviceInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalDeviceInfoEXT & setMtlDevice( MTLDevice_id mtlDevice_ ) VULKAN_HPP_NOEXCEPT
+    {
+      mtlDevice = mtlDevice_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkExportMetalDeviceInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkExportMetalDeviceInfoEXT *>( this );
+    }
+
+    explicit operator VkExportMetalDeviceInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkExportMetalDeviceInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, MTLDevice_id const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, mtlDevice );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ExportMetalDeviceInfoEXT const & ) const = default;
+#  else
+    bool operator==( ExportMetalDeviceInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( mtlDevice == rhs.mtlDevice );
+#    endif
+    }
+
+    bool operator!=( ExportMetalDeviceInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType     = StructureType::eExportMetalDeviceInfoEXT;
+    const void *                        pNext     = {};
+    MTLDevice_id                        mtlDevice = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ExportMetalDeviceInfoEXT ) == sizeof( VkExportMetalDeviceInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ExportMetalDeviceInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ExportMetalDeviceInfoEXT>::value,
+                            "ExportMetalDeviceInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eExportMetalDeviceInfoEXT>
+  {
+    using Type = ExportMetalDeviceInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ExportMetalIOSurfaceInfoEXT
+  {
+    using NativeType = VkExportMetalIOSurfaceInfoEXT;
+
+    static const bool                                  allowDuplicate = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMetalIoSurfaceInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      ExportMetalIOSurfaceInfoEXT( VULKAN_HPP_NAMESPACE::Image image_ = {}, IOSurfaceRef ioSurface_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , image( image_ )
+      , ioSurface( ioSurface_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ExportMetalIOSurfaceInfoEXT( ExportMetalIOSurfaceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalIOSurfaceInfoEXT( VkExportMetalIOSurfaceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ExportMetalIOSurfaceInfoEXT( *reinterpret_cast<ExportMetalIOSurfaceInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ExportMetalIOSurfaceInfoEXT & operator=( ExportMetalIOSurfaceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalIOSurfaceInfoEXT & operator=( VkExportMetalIOSurfaceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ExportMetalIOSurfaceInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalIOSurfaceInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalIOSurfaceInfoEXT & setImage( VULKAN_HPP_NAMESPACE::Image image_ ) VULKAN_HPP_NOEXCEPT
+    {
+      image = image_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalIOSurfaceInfoEXT & setIoSurface( IOSurfaceRef ioSurface_ ) VULKAN_HPP_NOEXCEPT
+    {
+      ioSurface = ioSurface_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkExportMetalIOSurfaceInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkExportMetalIOSurfaceInfoEXT *>( this );
+    }
+
+    explicit operator VkExportMetalIOSurfaceInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkExportMetalIOSurfaceInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::Image const &, IOSurfaceRef const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, image, ioSurface );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ExportMetalIOSurfaceInfoEXT const & ) const = default;
+#  else
+    bool operator==( ExportMetalIOSurfaceInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( image == rhs.image ) && ( ioSurface == rhs.ioSurface );
+#    endif
+    }
+
+    bool operator!=( ExportMetalIOSurfaceInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType     = StructureType::eExportMetalIoSurfaceInfoEXT;
+    const void *                        pNext     = {};
+    VULKAN_HPP_NAMESPACE::Image         image     = {};
+    IOSurfaceRef                        ioSurface = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ExportMetalIOSurfaceInfoEXT ) == sizeof( VkExportMetalIOSurfaceInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ExportMetalIOSurfaceInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ExportMetalIOSurfaceInfoEXT>::value,
+                            "ExportMetalIOSurfaceInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eExportMetalIoSurfaceInfoEXT>
+  {
+    using Type = ExportMetalIOSurfaceInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ExportMetalObjectCreateInfoEXT
+  {
+    using NativeType = VkExportMetalObjectCreateInfoEXT;
+
+    static const bool                                  allowDuplicate = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMetalObjectCreateInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ExportMetalObjectCreateInfoEXT(
+      VULKAN_HPP_NAMESPACE::ExportMetalObjectTypeFlagBitsEXT exportObjectType_ = VULKAN_HPP_NAMESPACE::ExportMetalObjectTypeFlagBitsEXT::eMetalDevice,
+      const void *                                           pNext_            = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , exportObjectType( exportObjectType_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ExportMetalObjectCreateInfoEXT( ExportMetalObjectCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalObjectCreateInfoEXT( VkExportMetalObjectCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ExportMetalObjectCreateInfoEXT( *reinterpret_cast<ExportMetalObjectCreateInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ExportMetalObjectCreateInfoEXT & operator=( ExportMetalObjectCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalObjectCreateInfoEXT & operator=( VkExportMetalObjectCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ExportMetalObjectCreateInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalObjectCreateInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalObjectCreateInfoEXT &
+                            setExportObjectType( VULKAN_HPP_NAMESPACE::ExportMetalObjectTypeFlagBitsEXT exportObjectType_ ) VULKAN_HPP_NOEXCEPT
+    {
+      exportObjectType = exportObjectType_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkExportMetalObjectCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkExportMetalObjectCreateInfoEXT *>( this );
+    }
+
+    explicit operator VkExportMetalObjectCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkExportMetalObjectCreateInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::ExportMetalObjectTypeFlagBitsEXT const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, exportObjectType );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ExportMetalObjectCreateInfoEXT const & ) const = default;
+#  else
+    bool operator==( ExportMetalObjectCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( exportObjectType == rhs.exportObjectType );
+#    endif
+    }
+
+    bool operator!=( ExportMetalObjectCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                    sType            = StructureType::eExportMetalObjectCreateInfoEXT;
+    const void *                                           pNext            = {};
+    VULKAN_HPP_NAMESPACE::ExportMetalObjectTypeFlagBitsEXT exportObjectType = VULKAN_HPP_NAMESPACE::ExportMetalObjectTypeFlagBitsEXT::eMetalDevice;
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ExportMetalObjectCreateInfoEXT ) == sizeof( VkExportMetalObjectCreateInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ExportMetalObjectCreateInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ExportMetalObjectCreateInfoEXT>::value,
+                            "ExportMetalObjectCreateInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eExportMetalObjectCreateInfoEXT>
+  {
+    using Type = ExportMetalObjectCreateInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ExportMetalObjectsInfoEXT
+  {
+    using NativeType = VkExportMetalObjectsInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMetalObjectsInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ExportMetalObjectsInfoEXT( const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT : pNext( pNext_ ) {}
+
+    VULKAN_HPP_CONSTEXPR ExportMetalObjectsInfoEXT( ExportMetalObjectsInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalObjectsInfoEXT( VkExportMetalObjectsInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ExportMetalObjectsInfoEXT( *reinterpret_cast<ExportMetalObjectsInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ExportMetalObjectsInfoEXT & operator=( ExportMetalObjectsInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalObjectsInfoEXT & operator=( VkExportMetalObjectsInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalObjectsInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkExportMetalObjectsInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkExportMetalObjectsInfoEXT *>( this );
+    }
+
+    explicit operator VkExportMetalObjectsInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkExportMetalObjectsInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ExportMetalObjectsInfoEXT const & ) const = default;
+#  else
+    bool operator==( ExportMetalObjectsInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext );
+#    endif
+    }
+
+    bool operator!=( ExportMetalObjectsInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eExportMetalObjectsInfoEXT;
+    const void *                        pNext = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT ) == sizeof( VkExportMetalObjectsInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT>::value,
+                            "ExportMetalObjectsInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eExportMetalObjectsInfoEXT>
+  {
+    using Type = ExportMetalObjectsInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ExportMetalSharedEventInfoEXT
+  {
+    using NativeType = VkExportMetalSharedEventInfoEXT;
+
+    static const bool                                  allowDuplicate = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMetalSharedEventInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ExportMetalSharedEventInfoEXT( VULKAN_HPP_NAMESPACE::Semaphore semaphore_      = {},
+                                                        VULKAN_HPP_NAMESPACE::Event     event_          = {},
+                                                        MTLSharedEvent_id               mtlSharedEvent_ = {},
+                                                        const void *                    pNext_          = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , semaphore( semaphore_ )
+      , event( event_ )
+      , mtlSharedEvent( mtlSharedEvent_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ExportMetalSharedEventInfoEXT( ExportMetalSharedEventInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalSharedEventInfoEXT( VkExportMetalSharedEventInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ExportMetalSharedEventInfoEXT( *reinterpret_cast<ExportMetalSharedEventInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ExportMetalSharedEventInfoEXT & operator=( ExportMetalSharedEventInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalSharedEventInfoEXT & operator=( VkExportMetalSharedEventInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ExportMetalSharedEventInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalSharedEventInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalSharedEventInfoEXT & setSemaphore( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ ) VULKAN_HPP_NOEXCEPT
+    {
+      semaphore = semaphore_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalSharedEventInfoEXT & setEvent( VULKAN_HPP_NAMESPACE::Event event_ ) VULKAN_HPP_NOEXCEPT
+    {
+      event = event_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalSharedEventInfoEXT & setMtlSharedEvent( MTLSharedEvent_id mtlSharedEvent_ ) VULKAN_HPP_NOEXCEPT
+    {
+      mtlSharedEvent = mtlSharedEvent_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkExportMetalSharedEventInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkExportMetalSharedEventInfoEXT *>( this );
+    }
+
+    explicit operator VkExportMetalSharedEventInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkExportMetalSharedEventInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::Semaphore const &,
+               VULKAN_HPP_NAMESPACE::Event const &,
+               MTLSharedEvent_id const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, semaphore, event, mtlSharedEvent );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ExportMetalSharedEventInfoEXT const & ) const = default;
+#  else
+    bool operator==( ExportMetalSharedEventInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( semaphore == rhs.semaphore ) && ( event == rhs.event ) &&
+             ( mtlSharedEvent == rhs.mtlSharedEvent );
+#    endif
+    }
+
+    bool operator!=( ExportMetalSharedEventInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType          = StructureType::eExportMetalSharedEventInfoEXT;
+    const void *                        pNext          = {};
+    VULKAN_HPP_NAMESPACE::Semaphore     semaphore      = {};
+    VULKAN_HPP_NAMESPACE::Event         event          = {};
+    MTLSharedEvent_id                   mtlSharedEvent = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ExportMetalSharedEventInfoEXT ) == sizeof( VkExportMetalSharedEventInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ExportMetalSharedEventInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ExportMetalSharedEventInfoEXT>::value,
+                            "ExportMetalSharedEventInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eExportMetalSharedEventInfoEXT>
+  {
+    using Type = ExportMetalSharedEventInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ExportMetalTextureInfoEXT
+  {
+    using NativeType = VkExportMetalTextureInfoEXT;
+
+    static const bool                                  allowDuplicate = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMetalTextureInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ExportMetalTextureInfoEXT( VULKAN_HPP_NAMESPACE::Image               image_      = {},
+                                                    VULKAN_HPP_NAMESPACE::ImageView           imageView_  = {},
+                                                    VULKAN_HPP_NAMESPACE::BufferView          bufferView_ = {},
+                                                    VULKAN_HPP_NAMESPACE::ImageAspectFlagBits plane_      = VULKAN_HPP_NAMESPACE::ImageAspectFlagBits::eColor,
+                                                    MTLTexture_id                             mtlTexture_ = {},
+                                                    const void *                              pNext_      = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , image( image_ )
+      , imageView( imageView_ )
+      , bufferView( bufferView_ )
+      , plane( plane_ )
+      , mtlTexture( mtlTexture_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ExportMetalTextureInfoEXT( ExportMetalTextureInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalTextureInfoEXT( VkExportMetalTextureInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ExportMetalTextureInfoEXT( *reinterpret_cast<ExportMetalTextureInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ExportMetalTextureInfoEXT & operator=( ExportMetalTextureInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ExportMetalTextureInfoEXT & operator=( VkExportMetalTextureInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ExportMetalTextureInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalTextureInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalTextureInfoEXT & setImage( VULKAN_HPP_NAMESPACE::Image image_ ) VULKAN_HPP_NOEXCEPT
+    {
+      image = image_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalTextureInfoEXT & setImageView( VULKAN_HPP_NAMESPACE::ImageView imageView_ ) VULKAN_HPP_NOEXCEPT
+    {
+      imageView = imageView_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalTextureInfoEXT & setBufferView( VULKAN_HPP_NAMESPACE::BufferView bufferView_ ) VULKAN_HPP_NOEXCEPT
+    {
+      bufferView = bufferView_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalTextureInfoEXT & setPlane( VULKAN_HPP_NAMESPACE::ImageAspectFlagBits plane_ ) VULKAN_HPP_NOEXCEPT
+    {
+      plane = plane_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ExportMetalTextureInfoEXT & setMtlTexture( MTLTexture_id mtlTexture_ ) VULKAN_HPP_NOEXCEPT
+    {
+      mtlTexture = mtlTexture_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkExportMetalTextureInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkExportMetalTextureInfoEXT *>( this );
+    }
+
+    explicit operator VkExportMetalTextureInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkExportMetalTextureInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::Image const &,
+               VULKAN_HPP_NAMESPACE::ImageView const &,
+               VULKAN_HPP_NAMESPACE::BufferView const &,
+               VULKAN_HPP_NAMESPACE::ImageAspectFlagBits const &,
+               MTLTexture_id const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, image, imageView, bufferView, plane, mtlTexture );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ExportMetalTextureInfoEXT const & ) const = default;
+#  else
+    bool operator==( ExportMetalTextureInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( image == rhs.image ) && ( imageView == rhs.imageView ) && ( bufferView == rhs.bufferView ) &&
+             ( plane == rhs.plane ) && ( mtlTexture == rhs.mtlTexture );
+#    endif
+    }
+
+    bool operator!=( ExportMetalTextureInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType       sType      = StructureType::eExportMetalTextureInfoEXT;
+    const void *                              pNext      = {};
+    VULKAN_HPP_NAMESPACE::Image               image      = {};
+    VULKAN_HPP_NAMESPACE::ImageView           imageView  = {};
+    VULKAN_HPP_NAMESPACE::BufferView          bufferView = {};
+    VULKAN_HPP_NAMESPACE::ImageAspectFlagBits plane      = VULKAN_HPP_NAMESPACE::ImageAspectFlagBits::eColor;
+    MTLTexture_id                             mtlTexture = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ExportMetalTextureInfoEXT ) == sizeof( VkExportMetalTextureInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ExportMetalTextureInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ExportMetalTextureInfoEXT>::value,
+                            "ExportMetalTextureInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eExportMetalTextureInfoEXT>
+  {
+    using Type = ExportMetalTextureInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
   struct ExportSemaphoreCreateInfo
   {
     using NativeType = VkExportSemaphoreCreateInfo;
@@ -39680,6 +40593,428 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImportMemoryZirconHandleInfoFUCHSIA;
   };
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ImportMetalBufferInfoEXT
+  {
+    using NativeType = VkImportMetalBufferInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportMetalBufferInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImportMetalBufferInfoEXT( MTLBuffer_id mtlBuffer_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , mtlBuffer( mtlBuffer_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ImportMetalBufferInfoEXT( ImportMetalBufferInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMetalBufferInfoEXT( VkImportMetalBufferInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImportMetalBufferInfoEXT( *reinterpret_cast<ImportMetalBufferInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImportMetalBufferInfoEXT & operator=( ImportMetalBufferInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMetalBufferInfoEXT & operator=( VkImportMetalBufferInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImportMetalBufferInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ImportMetalBufferInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImportMetalBufferInfoEXT & setMtlBuffer( MTLBuffer_id mtlBuffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      mtlBuffer = mtlBuffer_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkImportMetalBufferInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImportMetalBufferInfoEXT *>( this );
+    }
+
+    explicit operator VkImportMetalBufferInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImportMetalBufferInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, MTLBuffer_id const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, mtlBuffer );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImportMetalBufferInfoEXT const & ) const = default;
+#  else
+    bool operator==( ImportMetalBufferInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( mtlBuffer == rhs.mtlBuffer );
+#    endif
+    }
+
+    bool operator!=( ImportMetalBufferInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType     = StructureType::eImportMetalBufferInfoEXT;
+    const void *                        pNext     = {};
+    MTLBuffer_id                        mtlBuffer = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ImportMetalBufferInfoEXT ) == sizeof( VkImportMetalBufferInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ImportMetalBufferInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImportMetalBufferInfoEXT>::value,
+                            "ImportMetalBufferInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eImportMetalBufferInfoEXT>
+  {
+    using Type = ImportMetalBufferInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ImportMetalIOSurfaceInfoEXT
+  {
+    using NativeType = VkImportMetalIOSurfaceInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportMetalIoSurfaceInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImportMetalIOSurfaceInfoEXT( IOSurfaceRef ioSurface_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , ioSurface( ioSurface_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ImportMetalIOSurfaceInfoEXT( ImportMetalIOSurfaceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMetalIOSurfaceInfoEXT( VkImportMetalIOSurfaceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImportMetalIOSurfaceInfoEXT( *reinterpret_cast<ImportMetalIOSurfaceInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImportMetalIOSurfaceInfoEXT & operator=( ImportMetalIOSurfaceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMetalIOSurfaceInfoEXT & operator=( VkImportMetalIOSurfaceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImportMetalIOSurfaceInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ImportMetalIOSurfaceInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImportMetalIOSurfaceInfoEXT & setIoSurface( IOSurfaceRef ioSurface_ ) VULKAN_HPP_NOEXCEPT
+    {
+      ioSurface = ioSurface_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkImportMetalIOSurfaceInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImportMetalIOSurfaceInfoEXT *>( this );
+    }
+
+    explicit operator VkImportMetalIOSurfaceInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImportMetalIOSurfaceInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, IOSurfaceRef const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, ioSurface );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImportMetalIOSurfaceInfoEXT const & ) const = default;
+#  else
+    bool operator==( ImportMetalIOSurfaceInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( ioSurface == rhs.ioSurface );
+#    endif
+    }
+
+    bool operator!=( ImportMetalIOSurfaceInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType     = StructureType::eImportMetalIoSurfaceInfoEXT;
+    const void *                        pNext     = {};
+    IOSurfaceRef                        ioSurface = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ImportMetalIOSurfaceInfoEXT ) == sizeof( VkImportMetalIOSurfaceInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ImportMetalIOSurfaceInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImportMetalIOSurfaceInfoEXT>::value,
+                            "ImportMetalIOSurfaceInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eImportMetalIoSurfaceInfoEXT>
+  {
+    using Type = ImportMetalIOSurfaceInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ImportMetalSharedEventInfoEXT
+  {
+    using NativeType = VkImportMetalSharedEventInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportMetalSharedEventInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImportMetalSharedEventInfoEXT( MTLSharedEvent_id mtlSharedEvent_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , mtlSharedEvent( mtlSharedEvent_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ImportMetalSharedEventInfoEXT( ImportMetalSharedEventInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMetalSharedEventInfoEXT( VkImportMetalSharedEventInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImportMetalSharedEventInfoEXT( *reinterpret_cast<ImportMetalSharedEventInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImportMetalSharedEventInfoEXT & operator=( ImportMetalSharedEventInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMetalSharedEventInfoEXT & operator=( VkImportMetalSharedEventInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImportMetalSharedEventInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ImportMetalSharedEventInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImportMetalSharedEventInfoEXT & setMtlSharedEvent( MTLSharedEvent_id mtlSharedEvent_ ) VULKAN_HPP_NOEXCEPT
+    {
+      mtlSharedEvent = mtlSharedEvent_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkImportMetalSharedEventInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImportMetalSharedEventInfoEXT *>( this );
+    }
+
+    explicit operator VkImportMetalSharedEventInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImportMetalSharedEventInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, MTLSharedEvent_id const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, mtlSharedEvent );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImportMetalSharedEventInfoEXT const & ) const = default;
+#  else
+    bool operator==( ImportMetalSharedEventInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( mtlSharedEvent == rhs.mtlSharedEvent );
+#    endif
+    }
+
+    bool operator!=( ImportMetalSharedEventInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType          = StructureType::eImportMetalSharedEventInfoEXT;
+    const void *                        pNext          = {};
+    MTLSharedEvent_id                   mtlSharedEvent = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ImportMetalSharedEventInfoEXT ) == sizeof( VkImportMetalSharedEventInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ImportMetalSharedEventInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImportMetalSharedEventInfoEXT>::value,
+                            "ImportMetalSharedEventInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eImportMetalSharedEventInfoEXT>
+  {
+    using Type = ImportMetalSharedEventInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  struct ImportMetalTextureInfoEXT
+  {
+    using NativeType = VkImportMetalTextureInfoEXT;
+
+    static const bool                                  allowDuplicate = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportMetalTextureInfoEXT;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImportMetalTextureInfoEXT( VULKAN_HPP_NAMESPACE::ImageAspectFlagBits plane_      = VULKAN_HPP_NAMESPACE::ImageAspectFlagBits::eColor,
+                                                    MTLTexture_id                             mtlTexture_ = {},
+                                                    const void *                              pNext_      = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , plane( plane_ )
+      , mtlTexture( mtlTexture_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ImportMetalTextureInfoEXT( ImportMetalTextureInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMetalTextureInfoEXT( VkImportMetalTextureInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImportMetalTextureInfoEXT( *reinterpret_cast<ImportMetalTextureInfoEXT const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImportMetalTextureInfoEXT & operator=( ImportMetalTextureInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMetalTextureInfoEXT & operator=( VkImportMetalTextureInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImportMetalTextureInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ImportMetalTextureInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImportMetalTextureInfoEXT & setPlane( VULKAN_HPP_NAMESPACE::ImageAspectFlagBits plane_ ) VULKAN_HPP_NOEXCEPT
+    {
+      plane = plane_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImportMetalTextureInfoEXT & setMtlTexture( MTLTexture_id mtlTexture_ ) VULKAN_HPP_NOEXCEPT
+    {
+      mtlTexture = mtlTexture_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkImportMetalTextureInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImportMetalTextureInfoEXT *>( this );
+    }
+
+    explicit operator VkImportMetalTextureInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImportMetalTextureInfoEXT *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::ImageAspectFlagBits const &, MTLTexture_id const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, plane, mtlTexture );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImportMetalTextureInfoEXT const & ) const = default;
+#  else
+    bool operator==( ImportMetalTextureInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( plane == rhs.plane ) && ( mtlTexture == rhs.mtlTexture );
+#    endif
+    }
+
+    bool operator!=( ImportMetalTextureInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType       sType      = StructureType::eImportMetalTextureInfoEXT;
+    const void *                              pNext      = {};
+    VULKAN_HPP_NAMESPACE::ImageAspectFlagBits plane      = VULKAN_HPP_NAMESPACE::ImageAspectFlagBits::eColor;
+    MTLTexture_id                             mtlTexture = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ImportMetalTextureInfoEXT ) == sizeof( VkImportMetalTextureInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ImportMetalTextureInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImportMetalTextureInfoEXT>::value,
+                            "ImportMetalTextureInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eImportMetalTextureInfoEXT>
+  {
+    using Type = ImportMetalTextureInfoEXT;
+  };
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
 
   struct ImportSemaphoreFdInfoKHR
   {
@@ -57441,6 +58776,111 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE>
   {
     using Type = PhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
+  };
+
+  struct PhysicalDeviceNonSeamlessCubeMapFeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceNonSeamlessCubeMapFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceNonSeamlessCubeMapFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 nonSeamlessCubeMap_ = {},
+                                                                      void *                       pNext_              = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , nonSeamlessCubeMap( nonSeamlessCubeMap_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceNonSeamlessCubeMapFeaturesEXT( PhysicalDeviceNonSeamlessCubeMapFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceNonSeamlessCubeMapFeaturesEXT( VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceNonSeamlessCubeMapFeaturesEXT( *reinterpret_cast<PhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceNonSeamlessCubeMapFeaturesEXT & operator=( PhysicalDeviceNonSeamlessCubeMapFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceNonSeamlessCubeMapFeaturesEXT & operator=( VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceNonSeamlessCubeMapFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceNonSeamlessCubeMapFeaturesEXT &
+                            setNonSeamlessCubeMap( VULKAN_HPP_NAMESPACE::Bool32 nonSeamlessCubeMap_ ) VULKAN_HPP_NOEXCEPT
+    {
+      nonSeamlessCubeMap = nonSeamlessCubeMap_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT *>( this );
+    }
+
+    explicit operator VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, nonSeamlessCubeMap );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceNonSeamlessCubeMapFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceNonSeamlessCubeMapFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( nonSeamlessCubeMap == rhs.nonSeamlessCubeMap );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceNonSeamlessCubeMapFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType              = StructureType::ePhysicalDeviceNonSeamlessCubeMapFeaturesEXT;
+    void *                              pNext              = {};
+    VULKAN_HPP_NAMESPACE::Bool32        nonSeamlessCubeMap = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceNonSeamlessCubeMapFeaturesEXT ) ==
+                              sizeof( VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceNonSeamlessCubeMapFeaturesEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceNonSeamlessCubeMapFeaturesEXT>::value,
+                            "PhysicalDeviceNonSeamlessCubeMapFeaturesEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceNonSeamlessCubeMapFeaturesEXT>
+  {
+    using Type = PhysicalDeviceNonSeamlessCubeMapFeaturesEXT;
   };
 
   struct PhysicalDevicePCIBusInfoPropertiesEXT
