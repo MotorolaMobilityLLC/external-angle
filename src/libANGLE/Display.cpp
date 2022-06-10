@@ -1911,6 +1911,10 @@ static ClientExtensions GenerateClientExtensions()
     extensions.platformGbmKHR = true;
 #endif
 
+#if defined(ANGLE_USE_WAYLAND)
+    extensions.platformWaylandEXT = true;
+#endif
+
 #if defined(ANGLE_ENABLE_D3D11)
 #    if defined(ANGLE_ENABLE_WINDOWS_UWP)
     extensions.platformANGLED3D11ON12 = true;
@@ -2007,8 +2011,8 @@ void Display::initDisplayExtensions()
     mDisplayExtensions = mImplementation->getExtensions();
 
     // Some extensions are always available because they are implemented in the EGL layer.
-    mDisplayExtensions.createContext                      = true;
-    mDisplayExtensions.createContextNoError               = true;
+    mDisplayExtensions.createContext        = true;
+    mDisplayExtensions.createContextNoError = !mFrontendFeatures.forceGlErrorChecking.enabled;
     mDisplayExtensions.createContextWebGLCompatibility    = true;
     mDisplayExtensions.createContextBindGeneratesResource = true;
     mDisplayExtensions.createContextClientArrays          = true;
