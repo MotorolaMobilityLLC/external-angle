@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.216",
-    "comment": "from git branch: github-main commit: 899dd1c16d5de69bd24e108f393d134fa2989512",
-    "date": "2022-06-02 11:59:52Z"
+    "api version": "1.3.217",
+    "comment": "from git branch: github-main commit: 307906bddb5fab543dcf6d7fff737abeb15f8b10",
+    "date": "2022-06-09 10:45:42Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -71,6 +71,12 @@
           "text": " If the <code>pNext</code> chain of <code>VkInstanceCreateInfo</code> includes a <code>VkDebugUtilsMessengerCreateInfoEXT</code> structure, the list of enabled extensions in <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> contain <a href=\"#VK_EXT_debug_utils\">VK_EXT_debug_utils</a>"
         }
       ],
+      "(VK_EXT_debug_report,VK_EXT_debug_utils,VK_KHR_portability_enumeration)+(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkInstanceCreateInfo-pNext-06779",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure, its <code>exportObjectType</code> member <strong class=\"purple\">must</strong> be either <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_DEVICE_BIT_EXT</code> or <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_COMMAND_QUEUE_BIT_EXT</code>."
+        }
+      ],
       "(VK_EXT_debug_report,VK_EXT_debug_utils,VK_KHR_portability_enumeration)+(VK_KHR_portability_enumeration)": [
         {
           "vuid": "VUID-VkInstanceCreateInfo-flags-06559",
@@ -84,11 +90,11 @@
         },
         {
           "vuid": "VUID-VkInstanceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDebugReportCallbackCreateInfoEXT\">VkDebugReportCallbackCreateInfoEXT</a>, <a href=\"#VkDebugUtilsMessengerCreateInfoEXT\">VkDebugUtilsMessengerCreateInfoEXT</a>, <a href=\"#VkValidationFeaturesEXT\">VkValidationFeaturesEXT</a>, or <a href=\"#VkValidationFlagsEXT\">VkValidationFlagsEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDebugReportCallbackCreateInfoEXT\">VkDebugReportCallbackCreateInfoEXT</a>, <a href=\"#VkDebugUtilsMessengerCreateInfoEXT\">VkDebugUtilsMessengerCreateInfoEXT</a>, <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>, <a href=\"#VkValidationFeaturesEXT\">VkValidationFeaturesEXT</a>, or <a href=\"#VkValidationFlagsEXT\">VkValidationFlagsEXT</a>"
         },
         {
           "vuid": "VUID-VkInstanceCreateInfo-sType-unique",
-          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkDebugUtilsMessengerCreateInfoEXT\">VkDebugUtilsMessengerCreateInfoEXT</a>"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkDebugUtilsMessengerCreateInfoEXT\">VkDebugUtilsMessengerCreateInfoEXT</a> or <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkInstanceCreateInfo-flags-parameter",
@@ -656,7 +662,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfo\">VkDevicePrivateDataCreateInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBorderColorSwizzleFeaturesEXT\">VkPhysicalDeviceBorderColorSwizzleFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipControlFeaturesEXT\">VkPhysicalDeviceDepthClipControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE\">VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDynamicRenderingFeatures\">VkPhysicalDeviceDynamicRenderingFeatures</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryRDMAFeaturesNV\">VkPhysicalDeviceExternalMemoryRDMAFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM\">VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR\">VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT\">VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImage2DViewOf3DFeaturesEXT\">VkPhysicalDeviceImage2DViewOf3DFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImageCompressionControlFeaturesEXT\">VkPhysicalDeviceImageCompressionControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT\">VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeatures\">VkPhysicalDeviceImageRobustnessFeatures</a>, <a href=\"#VkPhysicalDeviceImageViewMinLodFeaturesEXT\">VkPhysicalDeviceImageViewMinLodFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeatures\">VkPhysicalDeviceInlineUniformBlockFeatures</a>, <a href=\"#VkPhysicalDeviceInvocationMaskFeaturesHUAWEI\">VkPhysicalDeviceInvocationMaskFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLinearColorAttachmentFeaturesNV\">VkPhysicalDeviceLinearColorAttachmentFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMaintenance4Features\">VkPhysicalDeviceMaintenance4Features</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawFeaturesEXT\">VkPhysicalDeviceMultiDrawFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT\">VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeatures\">VkPhysicalDevicePipelineCreationCacheControlFeatures</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelinePropertiesFeaturesEXT\">VkPhysicalDevicePipelinePropertiesFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentIdFeaturesKHR\">VkPhysicalDevicePresentIdFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentWaitFeaturesKHR\">VkPhysicalDevicePresentWaitFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT\">VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT\">VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrivateDataFeatures\">VkPhysicalDevicePrivateDataFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT\">VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM\">VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR\">VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMotionBlurFeaturesNV\">VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT\">VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD\">VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerDotProductFeatures\">VkPhysicalDeviceShaderIntegerDotProductFeatures</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeatures\">VkPhysicalDeviceShaderTerminateInvocationFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeatures\">VkPhysicalDeviceSubgroupSizeControlFeatures</a>, <a href=\"#VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT\">VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingFeaturesHUAWEI\">VkPhysicalDeviceSubpassShadingFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceSynchronization2Features\">VkPhysicalDeviceSynchronization2Features</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeatures\">VkPhysicalDeviceTextureCompressionASTCHDRFeatures</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkan13Features\">VkPhysicalDeviceVulkan13Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfo\">VkDevicePrivateDataCreateInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBorderColorSwizzleFeaturesEXT\">VkPhysicalDeviceBorderColorSwizzleFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipControlFeaturesEXT\">VkPhysicalDeviceDepthClipControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE\">VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDynamicRenderingFeatures\">VkPhysicalDeviceDynamicRenderingFeatures</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryRDMAFeaturesNV\">VkPhysicalDeviceExternalMemoryRDMAFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM\">VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR\">VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT\">VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImage2DViewOf3DFeaturesEXT\">VkPhysicalDeviceImage2DViewOf3DFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImageCompressionControlFeaturesEXT\">VkPhysicalDeviceImageCompressionControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT\">VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeatures\">VkPhysicalDeviceImageRobustnessFeatures</a>, <a href=\"#VkPhysicalDeviceImageViewMinLodFeaturesEXT\">VkPhysicalDeviceImageViewMinLodFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeatures\">VkPhysicalDeviceInlineUniformBlockFeatures</a>, <a href=\"#VkPhysicalDeviceInvocationMaskFeaturesHUAWEI\">VkPhysicalDeviceInvocationMaskFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLinearColorAttachmentFeaturesNV\">VkPhysicalDeviceLinearColorAttachmentFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMaintenance4Features\">VkPhysicalDeviceMaintenance4Features</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawFeaturesEXT\">VkPhysicalDeviceMultiDrawFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT\">VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT\">VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeatures\">VkPhysicalDevicePipelineCreationCacheControlFeatures</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelinePropertiesFeaturesEXT\">VkPhysicalDevicePipelinePropertiesFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentIdFeaturesKHR\">VkPhysicalDevicePresentIdFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentWaitFeaturesKHR\">VkPhysicalDevicePresentWaitFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT\">VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT\">VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrivateDataFeatures\">VkPhysicalDevicePrivateDataFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT\">VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM\">VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR\">VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMotionBlurFeaturesNV\">VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT\">VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD\">VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerDotProductFeatures\">VkPhysicalDeviceShaderIntegerDotProductFeatures</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeatures\">VkPhysicalDeviceShaderTerminateInvocationFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeatures\">VkPhysicalDeviceSubgroupSizeControlFeatures</a>, <a href=\"#VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT\">VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingFeaturesHUAWEI\">VkPhysicalDeviceSubpassShadingFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceSynchronization2Features\">VkPhysicalDeviceSynchronization2Features</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeatures\">VkPhysicalDeviceTextureCompressionASTCHDRFeatures</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkan13Features\">VkPhysicalDeviceVulkan13Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -2943,6 +2949,12 @@
       ]
     },
     "VkSemaphoreCreateInfo": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkSemaphoreCreateInfo-pNext-06789",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure, its <code>exportObjectType</code> member <strong class=\"purple\">must</strong> be <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT</code>."
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkSemaphoreCreateInfo-sType-sType",
@@ -2950,11 +2962,11 @@
         },
         {
           "vuid": "VUID-VkSemaphoreCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportSemaphoreCreateInfo\">VkExportSemaphoreCreateInfo</a>, <a href=\"#VkExportSemaphoreWin32HandleInfoKHR\">VkExportSemaphoreWin32HandleInfoKHR</a>, or <a href=\"#VkSemaphoreTypeCreateInfo\">VkSemaphoreTypeCreateInfo</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>, <a href=\"#VkExportSemaphoreCreateInfo\">VkExportSemaphoreCreateInfo</a>, <a href=\"#VkExportSemaphoreWin32HandleInfoKHR\">VkExportSemaphoreWin32HandleInfoKHR</a>, <a href=\"#VkImportMetalSharedEventInfoEXT\">VkImportMetalSharedEventInfoEXT</a>, or <a href=\"#VkSemaphoreTypeCreateInfo\">VkSemaphoreTypeCreateInfo</a>"
         },
         {
           "vuid": "VUID-VkSemaphoreCreateInfo-sType-unique",
-          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkSemaphoreCreateInfo-flags-zerobitmask",
@@ -3565,6 +3577,12 @@
       ]
     },
     "VkEventCreateInfo": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkEventCreateInfo-pNext-06790",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure, its <code>exportObjectType</code> member <strong class=\"purple\">must</strong> be <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT</code>."
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkEventCreateInfo-sType-sType",
@@ -3572,7 +3590,11 @@
         },
         {
           "vuid": "VUID-VkEventCreateInfo-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> or <a href=\"#VkImportMetalSharedEventInfoEXT\">VkImportMetalSharedEventInfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkEventCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkEventCreateInfo-flags-parameter",
@@ -6589,6 +6611,22 @@
           "text": " If <code>pStencilAttachment</code> is not <code>NULL</code>, <code>pStencilAttachment-&gt;imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and <code>pStencilAttachment-&gt;resolveMode</code> is not <code>VK_RESOLVE_MODE_NONE</code>, <code>pStencilAttachment-&gt;resolveImageLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</code>"
         },
         {
+          "vuid": "VUID-VkRenderingInfo-pDepthAttachment-06102",
+          "text": " If <code>pDepthAttachment</code> is not <code>NULL</code> and <code>pDepthAttachment-&gt;imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>pDepthAttachment-&gt;resolveMode</code> <strong class=\"purple\">must</strong> be one of the bits set in <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>::<code>supportedDepthResolveModes</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderingInfo-pStencilAttachment-06103",
+          "text": " If <code>pStencilAttachment</code> is not <code>NULL</code> and <code>pStencilAttachment-&gt;imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>pStencilAttachment-&gt;resolveMode</code> <strong class=\"purple\">must</strong> be one of the bits set in <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>::<code>supportedStencilResolveModes</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderingInfo-pDepthAttachment-06104",
+          "text": " If <code>pDepthAttachment</code> or <code>pStencilAttachment</code> are both not <code>NULL</code>, <code>pDepthAttachment-&gt;imageView</code> and <code>pStencilAttachment-&gt;imageView</code> are both not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>::<code>independentResolveNone</code> is <code>VK_FALSE</code>, the <code>resolveMode</code> of both structures <strong class=\"purple\">must</strong> be the same value"
+        },
+        {
+          "vuid": "VUID-VkRenderingInfo-pDepthAttachment-06105",
+          "text": " If <code>pDepthAttachment</code> or <code>pStencilAttachment</code> are both not <code>NULL</code>, <code>pDepthAttachment-&gt;imageView</code> and <code>pStencilAttachment-&gt;imageView</code> are both not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>::<code>independentResolve</code> is <code>VK_FALSE</code>, and the <code>resolveMode</code> of neither structure is <code>VK_RESOLVE_MODE_NONE</code>, the <code>resolveMode</code> of both structures <strong class=\"purple\">must</strong> be the same value"
+        },
+        {
           "vuid": "VUID-VkRenderingInfo-colorAttachmentCount-06106",
           "text": " <code>colorAttachmentCount</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxColorAttachments</code>"
         },
@@ -6711,24 +6749,6 @@
         {
           "vuid": "VUID-VkRenderingInfo-colorAttachmentCount-06101",
           "text": " If <code>colorAttachmentCount</code> is not <code>0</code> and the <code>imageView</code> member of an element of <code>pColorAttachments</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, if the <code>resolveMode</code> member of that element of <code>pColorAttachments</code> is not <code>VK_RESOLVE_MODE_NONE</code>, its <code>resolveImageLayout</code> member <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>"
-        }
-      ],
-      "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_depth_stencil_resolve,VK_VERSION_1_2)": [
-        {
-          "vuid": "VUID-VkRenderingInfo-pDepthAttachment-06102",
-          "text": " If <code>pDepthAttachment</code> is not <code>NULL</code> and <code>pDepthAttachment-&gt;imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>pDepthAttachment-&gt;resolveMode</code> <strong class=\"purple\">must</strong> be one of the bits set in <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>::<code>supportedDepthResolveModes</code>"
-        },
-        {
-          "vuid": "VUID-VkRenderingInfo-pStencilAttachment-06103",
-          "text": " If <code>pStencilAttachment</code> is not <code>NULL</code> and <code>pStencilAttachment-&gt;imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>pStencilAttachment-&gt;resolveMode</code> <strong class=\"purple\">must</strong> be one of the bits set in <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>::<code>supportedStencilResolveModes</code>"
-        },
-        {
-          "vuid": "VUID-VkRenderingInfo-pDepthAttachment-06104",
-          "text": " If <code>pDepthAttachment</code> or <code>pStencilAttachment</code> are both not <code>NULL</code>, <code>pDepthAttachment-&gt;imageView</code> and <code>pStencilAttachment-&gt;imageView</code> are both not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>::<code>independentResolveNone</code> is <code>VK_FALSE</code>, the <code>resolveMode</code> of both structures <strong class=\"purple\">must</strong> be the same value"
-        },
-        {
-          "vuid": "VUID-VkRenderingInfo-pDepthAttachment-06105",
-          "text": " If <code>pDepthAttachment</code> or <code>pStencilAttachment</code> are both not <code>NULL</code>, <code>pDepthAttachment-&gt;imageView</code> and <code>pStencilAttachment-&gt;imageView</code> are both not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>::<code>independentResolve</code> is <code>VK_FALSE</code>, and the <code>resolveMode</code> of neither structure is <code>VK_RESOLVE_MODE_NONE</code>, the <code>resolveMode</code> of both structures <strong class=\"purple\">must</strong> be the same value"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_fragment_density_map)": [
@@ -6909,12 +6929,6 @@
           "text": " Both of <code>imageView</code>, and <code>resolveImageView</code> that are valid handles of non-ignored parameters <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
       ],
-      "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+!(VK_KHR_depth_stencil_resolve,VK_VERSION_1_2)": [
-        {
-          "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06131",
-          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> and has a depth or stencil format, <code>resolveMode</code> <strong class=\"purple\">must</strong> be <code>VK_RESOLVE_MODE_NONE</code>"
-        }
-      ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_separate_depth_stencil_layouts,VK_VERSION_1_2)": [
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06137",
@@ -7083,6 +7097,12 @@
         {
           "vuid": "VUID-vkCmdEndRendering-renderpass",
           "text": " This command <strong class=\"purple\">must</strong> only be called inside of a render pass instance"
+        }
+      ],
+      "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_transform_feedback)": [
+        {
+          "vuid": "VUID-vkCmdEndRendering-None-06781",
+          "text": " This command <strong class=\"purple\">must</strong> not be recorded when transform feedback is active"
         }
       ]
     },
@@ -11342,7 +11362,7 @@
       "(VK_ARM_rasterization_order_attachment_access)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06591",
-          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-fragment-shader\">fragment shader state</a>, and the fragment shader code enables <a href=\"#shaders-fragment-earlytest\">early fragment tests</a>, the <code>flags</code> member of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a> <strong class=\"purple\">must</strong> not include <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM</code> or <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM</code>"
+          "text": " If <code>pStages</code> includes a fragment shader stage, and the fragment shader declares the <code>EarlyFragmentTests</code> execution mode, the <code>flags</code> member of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a> <strong class=\"purple\">must</strong> not include <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM</code> or <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM</code>"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06484",
@@ -13338,11 +13358,11 @@
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>, <a href=\"#VkExportMemoryAllocateInfoNV\">VkExportMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryWin32HandleInfoKHR\">VkExportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkExportMemoryWin32HandleInfoNV\">VkExportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a>, <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a>, <a href=\"#VkImportMemoryFdInfoKHR\">VkImportMemoryFdInfoKHR</a>, <a href=\"#VkImportMemoryHostPointerInfoEXT\">VkImportMemoryHostPointerInfoEXT</a>, <a href=\"#VkImportMemoryWin32HandleInfoKHR\">VkImportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkImportMemoryWin32HandleInfoNV\">VkImportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportMemoryZirconHandleInfoFUCHSIA\">VkImportMemoryZirconHandleInfoFUCHSIA</a>, <a href=\"#VkMemoryAllocateFlagsInfo\">VkMemoryAllocateFlagsInfo</a>, <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>, <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfo\">VkMemoryOpaqueCaptureAddressAllocateInfo</a>, or <a href=\"#VkMemoryPriorityAllocateInfoEXT\">VkMemoryPriorityAllocateInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>, <a href=\"#VkExportMemoryAllocateInfoNV\">VkExportMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryWin32HandleInfoKHR\">VkExportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkExportMemoryWin32HandleInfoNV\">VkExportMemoryWin32HandleInfoNV</a>, <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>, <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a>, <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a>, <a href=\"#VkImportMemoryFdInfoKHR\">VkImportMemoryFdInfoKHR</a>, <a href=\"#VkImportMemoryHostPointerInfoEXT\">VkImportMemoryHostPointerInfoEXT</a>, <a href=\"#VkImportMemoryWin32HandleInfoKHR\">VkImportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkImportMemoryWin32HandleInfoNV\">VkImportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportMemoryZirconHandleInfoFUCHSIA\">VkImportMemoryZirconHandleInfoFUCHSIA</a>, <a href=\"#VkImportMetalBufferInfoEXT\">VkImportMetalBufferInfoEXT</a>, <a href=\"#VkMemoryAllocateFlagsInfo\">VkMemoryAllocateFlagsInfo</a>, <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>, <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfo\">VkMemoryOpaqueCaptureAddressAllocateInfo</a>, or <a href=\"#VkMemoryPriorityAllocateInfoEXT\">VkMemoryPriorityAllocateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-sType-unique",
-          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>"
         }
       ],
       "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
@@ -13535,6 +13555,12 @@
         {
           "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-04750",
           "text": " If the parameters define an import operation and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA</code>, the value of <code>allocationSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code> and <strong class=\"purple\">must</strong> be less than or equal to the size of the VMO as determined by <code>zx_vmo_get_size</code>(<code>handle</code>) where <code>handle</code> is the VMO handle to the imported external memory"
+        }
+      ],
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-06780",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure, its <code>exportObjectType</code> member <strong class=\"purple\">must</strong> be <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT</code>."
         }
       ]
     },
@@ -14392,6 +14418,238 @@
         }
       ]
     },
+    "VkExportMetalObjectCreateInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkExportMetalObjectCreateInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_METAL_OBJECT_CREATE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectCreateInfoEXT-exportObjectType-parameter",
+          "text": " If <code>exportObjectType</code> is not <code>0</code>, <code>exportObjectType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExportMetalObjectTypeFlagBitsEXT\">VkExportMetalObjectTypeFlagBitsEXT</a> value"
+        }
+      ]
+    },
+    "vkExportMetalObjectsEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-vkExportMetalObjectsEXT-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkExportMetalObjectsEXT-pMetalObjectsInfo-parameter",
+          "text": " <code>pMetalObjectsInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkExportMetalObjectsInfoEXT\">VkExportMetalObjectsInfoEXT</a> structure"
+        }
+      ]
+    },
+    "VkExportMetalObjectsInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06791",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalDeviceInfoEXT\">VkExportMetalDeviceInfoEXT</a> structure, the <a href=\"#VkInstance\">VkInstance</a> <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_DEVICE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkInstanceCreateInfo\">VkInstanceCreateInfo</a> structure in the <a href=\"#vkCreateInstance\">vkCreateInstance</a> command."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06792",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalCommandQueueInfoEXT\">VkExportMetalCommandQueueInfoEXT</a> structure, the <a href=\"#VkInstance\">VkInstance</a> <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_COMMAND_QUEUE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkInstanceCreateInfo\">VkInstanceCreateInfo</a> structure in the <a href=\"#vkCreateInstance\">vkCreateInstance</a> command."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06793",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalBufferInfoEXT\">VkExportMetalBufferInfoEXT</a> structure, the <a href=\"#VkDeviceMemory\">VkDeviceMemory</a> in its <code>memory</code> member <strong class=\"purple\">must</strong> have been allocated with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkMemoryAllocateInfo\">VkMemoryAllocateInfo</a> structure in the <a href=\"#vkAllocateMemory\">vkAllocateMemory</a> command."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06794",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, exactly one of its <code>image</code>, <code>imageView</code>, or <code>bufferView</code> members <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06795",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and its <code>image</code> member is not <code>VK_NULL_HANDLE</code>, the <a href=\"#VkImage\">VkImage</a> in its <code>image</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure in the <a href=\"#vkCreateImage\">vkCreateImage</a> command."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06796",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and its <code>imageView</code> member is not <code>VK_NULL_HANDLE</code>, the <a href=\"#VkImageView\">VkImageView</a> in its <code>imageView</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkImageViewCreateInfo\">VkImageViewCreateInfo</a> structure in the <a href=\"#vkCreateImageView\">vkCreateImageView</a> command."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06797",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and its <code>bufferView</code> member is not <code>VK_NULL_HANDLE</code>, the <a href=\"#VkBufferView\">VkBufferView</a> in its <code>bufferView</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkBufferViewCreateInfo\">VkBufferViewCreateInfo</a> structure in the <a href=\"#vkCreateBufferView\">vkCreateBufferView</a> command."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06798",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and if either its <code>image</code> or <code>imageView</code> member is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>plane</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06799",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and if the <a href=\"#VkImage\">VkImage</a> in its <code>image</code> member does not have a multi-planar format, then its <code>plane</code> member <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06800",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and if the <a href=\"#VkImage\">VkImage</a> in its <code>image</code> member has a multi-planar format with only two planes, then its <code>plane</code> member <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06801",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and if the <a href=\"#VkImageView\">VkImageView</a> in its <code>imageView</code> member does not have a multi-planar format, then its <code>plane</code> member <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06802",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and if the <a href=\"#VkImageView\">VkImageView</a> in its <code>imageView</code> member has a multi-planar format with only two planes, then its <code>plane</code> member <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06803",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalIOSurfaceInfoEXT\">VkExportMetalIOSurfaceInfoEXT</a> structure, the <a href=\"#VkImage\">VkImage</a> in its <code>image</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_IOSURFACE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure in the <a href=\"#vkCreateImage\">vkCreateImage</a> command."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06804",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalSharedEventInfoEXT\">VkExportMetalSharedEventInfoEXT</a> structure, exactly one of its <code>semaphore</code> or <code>event</code> members <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06805",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalSharedEventInfoEXT\">VkExportMetalSharedEventInfoEXT</a> structure, and its <code>semaphore</code> member is not <code>VK_NULL_HANDLE</code>, the <a href=\"#VkSemaphore\">VkSemaphore</a> in its <code>semaphore</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkSemaphoreCreateInfo\">VkSemaphoreCreateInfo</a> structure in the <a href=\"#vkCreateSemaphore\">vkCreateSemaphore</a> command."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06806",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalSharedEventInfoEXT\">VkExportMetalSharedEventInfoEXT</a> structure, and its <code>event</code> member is not <code>VK_NULL_HANDLE</code>, the <a href=\"#VkEvent\">VkEvent</a> in its <code>event</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkEventCreateInfo\">VkEventCreateInfo</a> structure in the <a href=\"#vkCreateEvent\">vkCreateEvent</a> command."
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_METAL_OBJECTS_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-pNext",
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportMetalBufferInfoEXT\">VkExportMetalBufferInfoEXT</a>, <a href=\"#VkExportMetalCommandQueueInfoEXT\">VkExportMetalCommandQueueInfoEXT</a>, <a href=\"#VkExportMetalDeviceInfoEXT\">VkExportMetalDeviceInfoEXT</a>, <a href=\"#VkExportMetalIOSurfaceInfoEXT\">VkExportMetalIOSurfaceInfoEXT</a>, <a href=\"#VkExportMetalSharedEventInfoEXT\">VkExportMetalSharedEventInfoEXT</a>, or <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkExportMetalObjectsInfoEXT-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkExportMetalBufferInfoEXT\">VkExportMetalBufferInfoEXT</a>, <a href=\"#VkExportMetalCommandQueueInfoEXT\">VkExportMetalCommandQueueInfoEXT</a>, <a href=\"#VkExportMetalIOSurfaceInfoEXT\">VkExportMetalIOSurfaceInfoEXT</a>, <a href=\"#VkExportMetalSharedEventInfoEXT\">VkExportMetalSharedEventInfoEXT</a>, or <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a>"
+        }
+      ]
+    },
+    "VkExportMetalDeviceInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkExportMetalDeviceInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT</code>"
+        }
+      ]
+    },
+    "VkExportMetalCommandQueueInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkExportMetalCommandQueueInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_METAL_COMMAND_QUEUE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkExportMetalCommandQueueInfoEXT-queue-parameter",
+          "text": " <code>queue</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkQueue\">VkQueue</a> handle"
+        }
+      ]
+    },
+    "VkExportMetalBufferInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkExportMetalBufferInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_METAL_BUFFER_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkExportMetalBufferInfoEXT-memory-parameter",
+          "text": " <code>memory</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceMemory\">VkDeviceMemory</a> handle"
+        }
+      ]
+    },
+    "VkImportMetalBufferInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkImportMetalBufferInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT</code>"
+        }
+      ]
+    },
+    "VkExportMetalTextureInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkExportMetalTextureInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_METAL_TEXTURE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkExportMetalTextureInfoEXT-image-parameter",
+          "text": " If <code>image</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>image</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-VkExportMetalTextureInfoEXT-imageView-parameter",
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageView</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageView\">VkImageView</a> handle"
+        },
+        {
+          "vuid": "VUID-VkExportMetalTextureInfoEXT-bufferView-parameter",
+          "text": " If <code>bufferView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>bufferView</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferView\">VkBufferView</a> handle"
+        },
+        {
+          "vuid": "VUID-VkExportMetalTextureInfoEXT-plane-parameter",
+          "text": " <code>plane</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageAspectFlagBits\">VkImageAspectFlagBits</a> value"
+        },
+        {
+          "vuid": "VUID-VkExportMetalTextureInfoEXT-commonparent",
+          "text": " Each of <code>bufferView</code>, <code>image</code>, and <code>imageView</code> that are valid handles of non-ignored parameters <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ]
+    },
+    "VkImportMetalTextureInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkImportMetalTextureInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMPORT_METAL_TEXTURE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkImportMetalTextureInfoEXT-plane-parameter",
+          "text": " <code>plane</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageAspectFlagBits\">VkImageAspectFlagBits</a> value"
+        }
+      ]
+    },
+    "VkExportMetalIOSurfaceInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkExportMetalIOSurfaceInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_METAL_IO_SURFACE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkExportMetalIOSurfaceInfoEXT-image-parameter",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        }
+      ]
+    },
+    "VkImportMetalIOSurfaceInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkImportMetalIOSurfaceInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT</code>"
+        }
+      ]
+    },
+    "VkExportMetalSharedEventInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkExportMetalSharedEventInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkExportMetalSharedEventInfoEXT-semaphore-parameter",
+          "text": " If <code>semaphore</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>semaphore</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSemaphore\">VkSemaphore</a> handle"
+        },
+        {
+          "vuid": "VUID-VkExportMetalSharedEventInfoEXT-event-parameter",
+          "text": " If <code>event</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>event</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkEvent\">VkEvent</a> handle"
+        },
+        {
+          "vuid": "VUID-VkExportMetalSharedEventInfoEXT-commonparent",
+          "text": " Both of <code>event</code>, and <code>semaphore</code> that are valid handles of non-ignored parameters <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ]
+    },
+    "VkImportMetalSharedEventInfoEXT": {
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkImportMetalSharedEventInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMPORT_METAL_SHARED_EVENT_INFO_EXT</code>"
+        }
+      ]
+    },
     "VkMemoryAllocateFlagsInfo": {
       "(VK_VERSION_1_1,VK_KHR_device_group)": [
         {
@@ -14994,7 +15252,11 @@
         },
         {
           "vuid": "VUID-VkBufferViewCreateInfo-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkBufferViewCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkBufferViewCreateInfo-flags-zerobitmask",
@@ -15027,6 +15289,12 @@
         {
           "vuid": "VUID-VkBufferViewCreateInfo-buffer-02751",
           "text": " If the <a href=\"#features-texelBufferAlignment\">texelBufferAlignment</a> feature is enabled and if <code>buffer</code> was created with <code>usage</code> containing <code>VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT</code>, <code>offset</code> <strong class=\"purple\">must</strong> be a multiple of the lesser of <a href=\"#VkPhysicalDeviceTexelBufferAlignmentProperties\">VkPhysicalDeviceTexelBufferAlignmentProperties</a>::<code>uniformTexelBufferOffsetAlignmentBytes</code> or, if <a href=\"#VkPhysicalDeviceTexelBufferAlignmentProperties\">VkPhysicalDeviceTexelBufferAlignmentProperties</a>::<code>uniformTexelBufferOffsetSingleTexelAlignment</code> is <code>VK_TRUE</code>, the size of a texel of the requested <code>format</code>. If the size of a texel is a multiple of three bytes, then the size of a single component of <code>format</code> is used instead"
+        }
+      ],
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkBufferViewCreateInfo-pNext-06782",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure, its <code>exportObjectType</code> member <strong class=\"purple\">must</strong> be <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code>."
         }
       ]
     },
@@ -15256,11 +15524,11 @@
         },
         {
           "vuid": "VUID-VkImageCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a>, <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>, <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>, <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a>, <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>, <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>, <a href=\"#VkVideoDecodeH264ProfileEXT\">VkVideoDecodeH264ProfileEXT</a>, <a href=\"#VkVideoDecodeH265ProfileEXT\">VkVideoDecodeH265ProfileEXT</a>, <a href=\"#VkVideoEncodeH264ProfileEXT\">VkVideoEncodeH264ProfileEXT</a>, <a href=\"#VkVideoEncodeH265ProfileEXT\">VkVideoEncodeH265ProfileEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a>, <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>, <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>, <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>, <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a>, <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>, <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>, <a href=\"#VkImportMetalIOSurfaceInfoEXT\">VkImportMetalIOSurfaceInfoEXT</a>, <a href=\"#VkImportMetalTextureInfoEXT\">VkImportMetalTextureInfoEXT</a>, <a href=\"#VkVideoDecodeH264ProfileEXT\">VkVideoDecodeH264ProfileEXT</a>, <a href=\"#VkVideoDecodeH265ProfileEXT\">VkVideoDecodeH265ProfileEXT</a>, <a href=\"#VkVideoEncodeH264ProfileEXT\">VkVideoEncodeH264ProfileEXT</a>, <a href=\"#VkVideoEncodeH265ProfileEXT\">VkVideoEncodeH265ProfileEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-sType-unique",
-          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> or <a href=\"#VkImportMetalTextureInfoEXT\">VkImportMetalTextureInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-flags-parameter",
@@ -15643,6 +15911,24 @@
         {
           "vuid": "VUID-VkImageCreateInfo-pNext-06746",
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a> structure, it <strong class=\"purple\">must</strong> not contain a <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a> structure"
+        }
+      ],
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-06783",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure, its <code>exportObjectType</code> member <strong class=\"purple\">must</strong> be either <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code> or <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_IOSURFACE_BIT_EXT</code>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-06784",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImportMetalTextureInfoEXT\">VkImportMetalTextureInfoEXT</a> structure its <code>plane</code> member <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-06785",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImportMetalTextureInfoEXT\">VkImportMetalTextureInfoEXT</a> structure and the image does not have a multi-planar format, then <a href=\"#VkImportMetalTextureInfoEXT\">VkImportMetalTextureInfoEXT</a>::<code>plane</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-06786",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImportMetalTextureInfoEXT\">VkImportMetalTextureInfoEXT</a> structure and the image has a multi-planar format with only two planes, then <a href=\"#VkImportMetalTextureInfoEXT\">VkImportMetalTextureInfoEXT</a>::<code>plane</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>."
         }
       ]
     },
@@ -16224,11 +16510,11 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageViewASTCDecodeModeEXT\">VkImageViewASTCDecodeModeEXT</a>, <a href=\"#VkImageViewMinLodCreateInfoEXT\">VkImageViewMinLodCreateInfoEXT</a>, <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a>, <a href=\"#VkVideoDecodeH264ProfileEXT\">VkVideoDecodeH264ProfileEXT</a>, <a href=\"#VkVideoDecodeH265ProfileEXT\">VkVideoDecodeH265ProfileEXT</a>, <a href=\"#VkVideoEncodeH264ProfileEXT\">VkVideoEncodeH264ProfileEXT</a>, <a href=\"#VkVideoEncodeH265ProfileEXT\">VkVideoEncodeH265ProfileEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>, <a href=\"#VkImageViewASTCDecodeModeEXT\">VkImageViewASTCDecodeModeEXT</a>, <a href=\"#VkImageViewMinLodCreateInfoEXT\">VkImageViewMinLodCreateInfoEXT</a>, <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a>, <a href=\"#VkVideoDecodeH264ProfileEXT\">VkVideoDecodeH264ProfileEXT</a>, <a href=\"#VkVideoDecodeH265ProfileEXT\">VkVideoDecodeH265ProfileEXT</a>, <a href=\"#VkVideoEncodeH264ProfileEXT\">VkVideoEncodeH264ProfileEXT</a>, <a href=\"#VkVideoEncodeH265ProfileEXT\">VkVideoEncodeH265ProfileEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-sType-unique",
-          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-flags-parameter",
@@ -16519,6 +16805,12 @@
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-04818",
           "text": " If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</code>, then the <code>viewType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> and all members of <code>components</code> <strong class=\"purple\">must</strong> have the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a>"
+        }
+      ],
+      "(VK_EXT_metal_objects)": [
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-pNext-06787",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure, its <code>exportObjectType</code> member <strong class=\"purple\">must</strong> be <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code>."
         }
       ]
     },
@@ -17632,7 +17924,7 @@
       "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_VERSION_1_3,VK_KHR_maintenance4)+(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkDeviceImageMemoryRequirements-pCreateInfo-06776",
-          "text": " The <code>pCreateInfo</code>::<code>pNext</code> chain <strong class=\"purple\">must</strong> not contain a <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a> structure."
+          "text": " The <code>pCreateInfo</code>::<code>pNext</code> chain <strong class=\"purple\">must</strong> not contain a <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a> structure"
         },
         {
           "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06420",
@@ -18921,6 +19213,12 @@
         {
           "vuid": "VUID-VkSamplerCreateInfo-flags-02580",
           "text": " If <code>flags</code> includes <code>VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT</code>, then <code>unnormalizedCoordinates</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+        }
+      ],
+      "(VK_EXT_non_seamless_cube_map)": [
+        {
+          "vuid": "VUID-VkSamplerCreateInfo-nonSeamlessCubeMap-06788",
+          "text": " If the <a href=\"#features-nonSeamlessCubeMap\"><code>nonSeamlessCubeMap</code></a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_SAMPLER_CREATE_NON_SEAMLESS_CUBE_MAP_BIT_EXT</code>"
         }
       ],
       "(VK_EXT_custom_border_color)": [
@@ -48150,6 +48448,14 @@
         }
       ]
     },
+    "VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT": {
+      "(VK_EXT_non_seamless_cube_map)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT</code>"
+        }
+      ]
+    },
     "VkPhysicalDevicePushDescriptorPropertiesKHR": {
       "(VK_KHR_push_descriptor)": [
         {
@@ -49899,6 +50205,14 @@
           "text": " Any variable in the <code>UniformConstant</code> storage class <strong class=\"purple\">must</strong> be typed as either <code>OpTypeImage</code>, <code>OpTypeSampler</code>, <code>OpTypeSampledImage</code>, <code>OpTypeAccelerationStructureKHR</code>, or an array of one of these types"
         },
         {
+          "vuid": "VUID-StandaloneSpirv-Uniform-06807",
+          "text": " Any variable in the <code>Uniform</code> or <code>StorageBuffer</code> storage class <strong class=\"purple\">must</strong> be typed as <code>OpTypeStruct</code> or an array of this type"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-PushConstant-06808",
+          "text": " Any variable in the <code>PushConstant</code> storage class <strong class=\"purple\">must</strong> be typed as <code>OpTypeStruct</code>"
+        },
+        {
           "vuid": "VUID-StandaloneSpirv-OpTypeImage-04656",
           "text": " <code>OpTypeImage</code> <strong class=\"purple\">must</strong> declare a scalar 32-bit float, 64-bit integer, or 32-bit integer type for the &#8220;Sampled Type&#8221; (<code>RelaxedPrecision</code> <strong class=\"purple\">can</strong> be applied to a sampling instruction and to the variable holding the result of a sampling instruction)"
         },
@@ -50196,7 +50510,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04745",
-          "text": " All variables with a storage class of <strong>PushConstant</strong> declared as an array <strong class=\"purple\">must</strong> only be accessed by dynamically uniform indices"
+          "text": " All block members in a variable with a storage class of <strong>PushConstant</strong> declared as an array <strong class=\"purple\">must</strong> only be accessed by dynamically uniform indices"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpVariable-06673",
@@ -50233,18 +50547,16 @@
         {
           "vuid": "VUID-StandaloneSpirv-DescriptorSet-06491",
           "text": " If a variable is decorated by <code>DescriptorSet</code> or <code>Binding</code>, the storage class <strong class=\"purple\">must</strong> correspond to an entry in <a href=\"#interfaces-resources-storage-class-correspondence\">Shader Resource and Storage Class Correspondence</a>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Input-06778",
+          "text": " Variables with a storage class of <code>Input</code> in a fragment shader stage that are decorated with <code>PerVertexKHR</code> <strong class=\"purple\">must</strong> be declared as arrays"
         }
       ],
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-StandaloneSpirv-None-04642",
           "text": " <strong>Scope</strong> for <a href=\"#shaders-group-operations\">group operations</a> <strong class=\"purple\">must</strong> be limited to <strong>Subgroup</strong>"
-        }
-      ],
-      "(VK_NV_fragment_shader_barycentric,VK_KHR_fragment_shader_barycentric)": [
-        {
-          "vuid": "VUID-StandaloneSpirv-Input-06778",
-          "text": " Variables with a storage class of <code>Input</code> in a fragment shader stage that are decorated with <code>perVertexKHR</code> <strong class=\"purple\">must</strong> be declared as arrays"
         }
       ]
     },
