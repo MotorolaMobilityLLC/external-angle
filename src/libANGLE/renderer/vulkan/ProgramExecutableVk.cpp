@@ -69,12 +69,11 @@ bool ValidateTransformedSpirV(const gl::ShaderBitSet &linkedShaderStages,
     for (gl::ShaderType shaderType : linkedShaderStages)
     {
         GlslangSpirvOptions options;
-        options.shaderType                         = shaderType;
-        options.negativeViewportSupported          = false;
-        options.transformPositionToVulkanClipSpace = true;
-        options.removeDebugInfo                    = true;
-        options.isLastPreFragmentStage             = shaderType == lastPreFragmentStage;
-        options.isTransformFeedbackStage           = shaderType == lastPreFragmentStage;
+        options.shaderType                = shaderType;
+        options.negativeViewportSupported = false;
+        options.removeDebugInfo           = true;
+        options.isLastPreFragmentStage    = shaderType == lastPreFragmentStage;
+        options.isTransformFeedbackStage  = shaderType == lastPreFragmentStage;
 
         angle::spirv::Blob transformed;
         if (GlslangWrapperVk::TransformSpirV(options, variableInfoMap, spirvBlobs[shaderType],
@@ -190,13 +189,6 @@ angle::Result ProgramInfo::initProgram(ContextVk *contextVk,
     options.isTransformFeedbackEmulated = contextVk->getFeatures().emulateTransformFeedback.enabled;
     options.negativeViewportSupported   = contextVk->getFeatures().supportsNegativeViewport.enabled;
 
-    if (isLastPreFragmentStage)
-    {
-        options.transformPositionToVulkanClipSpace =
-            optionBits.enableDepthCorrection &&
-            !contextVk->getFeatures().supportsDepthClipControl.enabled;
-    }
-
     ANGLE_TRY(GlslangWrapperVk::TransformSpirV(options, variableInfoMap, originalSpirvBlob,
                                                &transformedSpirvBlob));
     ANGLE_TRY(vk::InitShaderAndSerial(contextVk, &mShaders[shaderType].get(),
@@ -205,8 +197,6 @@ angle::Result ProgramInfo::initProgram(ContextVk *contextVk,
 
     mProgramHelper.setShader(shaderType, &mShaders[shaderType]);
 
-    mProgramHelper.setSpecializationConstant(sh::vk::SpecializationConstantId::LineRasterEmulation,
-                                             optionBits.enableLineRasterEmulation);
     mProgramHelper.setSpecializationConstant(sh::vk::SpecializationConstantId::SurfaceRotation,
                                              optionBits.surfaceRotation);
 
@@ -748,9 +738,7 @@ angle::Result ProgramExecutableVk::getGraphicsPipeline(ContextVk *contextVk,
 
     ASSERT(glExecutable.hasLinkedShaderStage(gl::ShaderType::Vertex));
 
-    mTransformOptions.enableLineRasterEmulation = contextVk->isBresenhamEmulationEnabled(mode);
-    mTransformOptions.surfaceRotation           = desc.getSurfaceRotation();
-    mTransformOptions.enableDepthCorrection     = !glState.isClipControlDepthZeroToOne();
+    mTransformOptions.surfaceRotation = desc.getSurfaceRotation();
     mTransformOptions.removeTransformFeedbackEmulation =
         contextVk->getFeatures().emulateTransformFeedback.enabled &&
         !glState.isTransformFeedbackActiveUnpaused();

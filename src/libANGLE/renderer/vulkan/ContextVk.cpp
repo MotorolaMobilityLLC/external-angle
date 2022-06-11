@@ -84,6 +84,7 @@ struct GraphicsDriverUniforms
     // - Advanced blend equation
     // - Sample count
     // - Enabled clip planes
+    // - Depth transformation
     uint32_t misc;
 };
 static_assert(sizeof(GraphicsDriverUniforms) % (sizeof(uint32_t) * 4) == 0,
@@ -584,6 +585,8 @@ constexpr angle::PackedEnumMap<RenderPassClosureReason, const char *> kRenderPas
      "Render pass closed due to sync object client wait"},
     {RenderPassClosureReason::SyncObjectServerWait,
      "Render pass closed due to sync object server wait"},
+    {RenderPassClosureReason::SyncObjectGetStatus,
+     "Render pass closed due to sync object get status"},
     {RenderPassClosureReason::XfbPause, "Render pass closed due to transform feedback pause"},
     {RenderPassClosureReason::FramebufferFetchEmulation,
      "Render pass closed due to framebuffer fetch emulation"},
@@ -2992,6 +2995,24 @@ void ContextVk::updateOverlayOnPresent()
         actualSubmissionsWidget->add(commandQueuePerfCounters.vkQueueSubmitCallsPerFrame);
         actualSubmissionsWidget->next();
     }
+
+    {
+        gl::RunningGraphWidget *cacheLookupsWidget =
+            overlay->getRunningGraphWidget(gl::WidgetId::VulkanPipelineCacheLookups);
+        cacheLookupsWidget->add(mPerfCounters.pipelineCreationCacheHits +
+                                mPerfCounters.pipelineCreationCacheMisses);
+        cacheLookupsWidget->next();
+
+        gl::RunningGraphWidget *cacheMissesWidget =
+            overlay->getRunningGraphWidget(gl::WidgetId::VulkanPipelineCacheMisses);
+        cacheMissesWidget->add(mPerfCounters.pipelineCreationCacheMisses);
+        cacheMissesWidget->next();
+
+        overlay->getCountWidget(gl::WidgetId::VulkanTotalPipelineCacheHitTimeMs)
+            ->set(mPerfCounters.pipelineCreationTotalCacheHitsDurationNs / 1000'000);
+        overlay->getCountWidget(gl::WidgetId::VulkanTotalPipelineCacheMissTimeMs)
+            ->set(mPerfCounters.pipelineCreationTotalCacheMissesDurationNs / 1000'000);
+    }
 }
 
 void ContextVk::addOverlayUsedBuffersCount(vk::CommandBufferHelperCommon *commandBuffer)
@@ -3002,8 +3023,8 @@ void ContextVk::addOverlayUsedBuffersCount(vk::CommandBufferHelperCommon *comman
         return;
     }
 
-    gl::RunningHistogramWidget *widget =
-        overlay->getRunningHistogramWidget(gl::WidgetId::VulkanRenderPassBufferCount);
+    gl::RunningGraphWidget *widget =
+        overlay->getRunningGraphWidget(gl::WidgetId::VulkanRenderPassBufferCount);
     size_t buffersCount = commandBuffer->getUsedBuffersCount();
     if (buffersCount > 0)
     {
@@ -3927,6 +3948,10 @@ angle::Result ContextVk::optimizeRenderPassForPresent(VkFramebuffer framebufferH
                                                       vk::PresentMode presentMode,
                                                       bool *imageResolved)
 {
+    // Note: mRenderPassCommandBuffer may be nullptr because the render pass is marked for closure.
+    // That doesn't matter and the render pass can continue to be modified.  This function shouldn't
+    // rely on mRenderPassCommandBuffer.
+
     if (!mRenderPassCommands->started())
     {
         return angle::Result::Continue;
@@ -5130,6 +5155,10 @@ angle::Result ContextVk::syncState(const gl::Context *context,
                                     &mGraphicsPipelineTransition,
                                     !glState.isClipControlDepthZeroToOne());
                             }
+                            else
+                            {
+                                invalidateGraphicsDriverUniforms();
+                            }
                             break;
                         case gl::State::ExtendedDirtyBitType::EXTENDED_DIRTY_BIT_CLIP_DISTANCES:
                             invalidateGraphicsDriverUniforms();
@@ -5206,7 +5235,7 @@ angle::Result ContextVk::onMakeCurrent(const gl::Context *context)
     updateSurfaceRotationReadFramebuffer(glState);
 
     invalidateDriverUniforms();
-    if (!getFeatures().forceDriverUniformOverSpecConst.enabled)
+    if (!getFeatures().preferDriverUniformOverSpecConst.enabled)
     {
         // Force update mGraphicsPipelineDesc
         mCurrentGraphicsPipeline = nullptr;
@@ -6177,6 +6206,8 @@ angle::Result ContextVk::handleDirtyGraphicsDriverUniforms(DirtyBits::Iterator *
 
     const uint32_t swapXY               = IsRotatedAspectRatio(mCurrentRotationDrawFramebuffer);
     const uint32_t enabledClipDistances = mState.getEnabledClipDistances().bits();
+    const uint32_t transformDepth =
+        getFeatures().supportsDepthClipControl.enabled ? 0 : !mState.isClipControlDepthZeroToOne();
 
     static_assert(angle::BitMask<uint32_t>(gl::IMPLEMENTATION_MAX_CLIP_DISTANCES) <=
                       sh::vk::kDriverUniformsMiscEnabledClipPlanesMask,
@@ -6186,11 +6217,13 @@ angle::Result ContextVk::handleDirtyGraphicsDriverUniforms(DirtyBits::Iterator *
     ASSERT((advancedBlendEquation & ~sh::vk::kDriverUniformsMiscAdvancedBlendEquationMask) == 0);
     ASSERT((numSamples & ~sh::vk::kDriverUniformsMiscSampleCountMask) == 0);
     ASSERT((enabledClipDistances & ~sh::vk::kDriverUniformsMiscEnabledClipPlanesMask) == 0);
+    ASSERT((transformDepth & ~sh::vk::kDriverUniformsMiscTransformDepthMask) == 0);
 
     const uint32_t misc =
         swapXY | advancedBlendEquation << sh::vk::kDriverUniformsMiscAdvancedBlendEquationOffset |
         numSamples << sh::vk::kDriverUniformsMiscSampleCountOffset |
-        enabledClipDistances << sh::vk::kDriverUniformsMiscEnabledClipPlanesOffset;
+        enabledClipDistances << sh::vk::kDriverUniformsMiscEnabledClipPlanesOffset |
+        transformDepth << sh::vk::kDriverUniformsMiscTransformDepthOffset;
 
     // Copy and flush to the device.
     *driverUniforms = {
@@ -7073,6 +7106,61 @@ angle::Result ContextVk::syncExternalMemory()
     return angle::Result::Continue;
 }
 
+angle::Result ContextVk::onSyncObjectInit(vk::SyncHelper *syncHelper, bool isEGLSyncObject)
+{
+    const bool isRenderPassStarted = mRenderPassCommands->started();
+
+    if (isRenderPassStarted)
+    {
+        mRenderPassCommands->retainResource(syncHelper);
+    }
+    else
+    {
+        mOutsideRenderPassCommands->retainResource(syncHelper);
+    }
+
+    // Submit the commands:
+    //
+    // - This breaks the current render pass to ensure the proper ordering of the sync object in the
+    //   commands,
+    // - The sync object has a valid serial when it's waited on later,
+    // - After waiting on the sync object, every resource that's used so far (and is being synced)
+    //   will also be aware that it's finished (based on the serial) and won't incur a further wait
+    //   (for example when a buffer is mapped).
+    //
+    // The submission is done immediately for EGL sync objects, and when no render pass is open.  If
+    // a render pass is open, the submission is deferred.  This is done to be able to optimize
+    // scenarios such as sync object init followed by eglSwapBuffers() (that would otherwise incur
+    // another submission, as well as not being able to optimize the render-to-swapchain render
+    // pass).
+    if (isEGLSyncObject || !isRenderPassStarted)
+    {
+        return flushImpl(nullptr, RenderPassClosureReason::SyncObjectInit);
+    }
+
+    onRenderPassFinished(RenderPassClosureReason::SyncObjectInit);
+
+    // Mark the context as having a deffered flush.  This is later used to close the render pass and
+    // cause a submission in this context if another context wants to wait on the fence while the
+    // original context never issued a submission naturally.  Note that this also takes care of
+    // contexts that think they issued a submission (through glFlush) but that the submission got
+    // deferred (due to the deferFlushUntilEndRenderPass feature).
+    mHasDeferredFlush = true;
+
+    return angle::Result::Continue;
+}
+
+angle::Result ContextVk::flushCommandsAndEndRenderPassIfDeferredSyncInit(
+    RenderPassClosureReason reason)
+{
+    if (!mHasDeferredFlush)
+    {
+        return angle::Result::Continue;
+    }
+
+    return flushCommandsAndEndRenderPassImpl(QueueSubmitType::PerformQueueSubmit, reason);
+}
+
 void ContextVk::addCommandBufferDiagnostics(const std::string &commandBufferDiagnostics)
 {
     mCommandBufferDiagnostics.push_back(commandBufferDiagnostics);
@@ -7788,6 +7876,8 @@ void ContextVk::resetPerFramePerfCounters()
     mPerfCounters.flushedOutsideRenderPassCommandBuffers = 0;
     mPerfCounters.resolveImageCommands                   = 0;
     mPerfCounters.descriptorSetAllocations               = 0;
+    mPerfCounters.pipelineCreationCacheHits              = 0;
+    mPerfCounters.pipelineCreationCacheMisses            = 0;
 
     mRenderer->resetCommandQueuePerFrameCounters();
 
