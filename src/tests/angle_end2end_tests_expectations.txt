@@ -186,6 +186,10 @@
 7206 MAC NVIDIA OPENGL : DrawBuffersTest.BlendWithGaps/ES3_OpenGL = SKIP
 7293 MAC INTEL OPENGL : StateChangeTestES3.PolygonOffset/* = SKIP
 7314 MAC NVIDIA OPENGL : DepthStencilFormatsTestES3.DrawWithLargeViewport/ES3_OpenGL = SKIP
+5001 MAC NVIDIA OPENGL : BlitFramebufferTest.NonZeroBaseSource/ES3_OpenGL = SKIP
+5001 MAC NVIDIA OPENGL : BlitFramebufferTest.NonZeroBaseSourceStencil/ES3_OpenGL = SKIP
+5155 MAC NVIDIA OPENGL : CopyTextureTestES3.InvalidateCopyThenBlend/ES3_OpenGL = SKIP
+5155 MAC NVIDIA OPENGL : CopyTextureTestES3.InvalidateBlitThenBlend3Layers/ES3_OpenGL = SKIP
 
 // BlitFramebufferTest.ScissoredMultisampleStencil failures
 3496 MAC INTEL OPENGL : BlitFramebufferTest.ScissoredMultisampleStencil/* = SKIP
@@ -642,10 +646,10 @@
 7355 INTEL OPENGL : GLSLTest_ES31.ImageLoadAfterClear/* = SKIP
 7355 D3D11 : GLSLTest_ES31.ImageLoadAfterClear/* = SKIP
 
-// UAVs don't allow aliasing.
-// Windows GLES also has an issue with this test.
+// On D3D: UAVs don't allow aliasing.
+// On OpenGL, there's also an issue with this test.
 3032 D3D11 : GLSLTest_ES31.AliasedLoadStore/* = SKIP
-7398 WIN OpenGL : GLSLTest_ES31.AliasedLoadStore/* = SKIP
+7398 OpenGL : GLSLTest_ES31.AliasedLoadStore/* = SKIP
 
 // imageLoad after imageStore with barrier is not coherent on Pixel 4 GLES.
 7388 ANDROID GLES : PixelLocalStorageTest.*/ES3_1_OpenGLES = SKIP
