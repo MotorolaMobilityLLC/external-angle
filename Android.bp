@@ -4328,6 +4328,7 @@ cc_defaults {
     srcs: [
         "third_party/abseil-cpp/absl/strings/cord.cc",
         "third_party/abseil-cpp/absl/strings/cord_analysis.cc",
+        "third_party/abseil-cpp/absl/strings/cord_buffer.cc",
     ],
     sdk_version: "28",
     cflags: [
