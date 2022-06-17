@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.217",
-    "comment": "from git branch: github-main commit: 307906bddb5fab543dcf6d7fff737abeb15f8b10",
-    "date": "2022-06-09 10:45:42Z"
+    "api version": "1.3.218",
+    "comment": "from git branch: github-main commit: 067a92d083e6a7ec97ef3bcc34e5b75fa71eec79",
+    "date": "2022-06-16 09:19:14Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -6878,7 +6878,7 @@
         },
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06135",
-          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>layout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_UNDEFINED</code>, <code>VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_PREINITIALIZED</code>"
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_UNDEFINED</code>, <code>VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_PREINITIALIZED</code>"
         },
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06136",
@@ -6938,7 +6938,7 @@
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_NV_shading_rate_image)": [
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06138",
-          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>layout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV</code>"
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV</code>"
         },
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06139",
@@ -6948,7 +6948,7 @@
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_fragment_density_map)": [
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06140",
-          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>layout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT</code>"
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT</code>"
         },
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06141",
@@ -6964,7 +6964,7 @@
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06143",
-          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>layout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR</code>"
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR</code>"
         },
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06144",
@@ -6974,7 +6974,7 @@
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_swapchain)": [
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06145",
-          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>layout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_PRESENT_SRC_KHR</code>"
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_PRESENT_SRC_KHR</code>"
         },
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06146",
@@ -7671,8 +7671,8 @@
           "text": " <code>srcSubpass</code> and <code>dstSubpass</code> <strong class=\"purple\">must</strong> not both be equal to <code>VK_SUBPASS_EXTERNAL</code>"
         },
         {
-          "vuid": "VUID-VkSubpassDependency-srcSubpass-00867",
-          "text": " If <code>srcSubpass</code> is equal to <code>dstSubpass</code> and not all of the stages in <code>srcStageMask</code> and <code>dstStageMask</code> are <a href=\"#synchronization-framebuffer-regions\">framebuffer-space stages</a>, the <a href=\"#synchronization-pipeline-stages-order\">logically latest</a> pipeline stage in <code>srcStageMask</code> <strong class=\"purple\">must</strong> be <a href=\"#synchronization-pipeline-stages-order\">logically earlier</a> than or equal to the <a href=\"#synchronization-pipeline-stages-order\">logically earliest</a> pipeline stage in <code>dstStageMask</code>"
+          "vuid": "VUID-VkSubpassDependency-srcSubpass-06809",
+          "text": " If <code>srcSubpass</code> is equal to <code>dstSubpass</code> and <code>srcStageMask</code> includes a <a href=\"#synchronization-framebuffer-regions\">framebuffer-space stage</a>, <code>dstStageMask</code> <strong class=\"purple\">must</strong> only contain <a href=\"#synchronization-framebuffer-regions\">framebuffer-space stages</a>"
         },
         {
           "vuid": "VUID-VkSubpassDependency-srcAccessMask-00868",
@@ -8513,8 +8513,8 @@
           "text": " <code>srcSubpass</code> and <code>dstSubpass</code> <strong class=\"purple\">must</strong> not both be equal to <code>VK_SUBPASS_EXTERNAL</code>"
         },
         {
-          "vuid": "VUID-VkSubpassDependency2-srcSubpass-03087",
-          "text": " If <code>srcSubpass</code> is equal to <code>dstSubpass</code> and not all of the stages in <code>srcStageMask</code> and <code>dstStageMask</code> are <a href=\"#synchronization-framebuffer-regions\">framebuffer-space stages</a>, the <a href=\"#synchronization-pipeline-stages-order\">logically latest</a> pipeline stage in <code>srcStageMask</code> <strong class=\"purple\">must</strong> be <a href=\"#synchronization-pipeline-stages-order\">logically earlier</a> than or equal to the <a href=\"#synchronization-pipeline-stages-order\">logically earliest</a> pipeline stage in <code>dstStageMask</code>"
+          "vuid": "VUID-VkSubpassDependency2-srcSubpass-06810",
+          "text": " If <code>srcSubpass</code> is equal to <code>dstSubpass</code> and <code>srcStageMask</code> includes a <a href=\"#synchronization-framebuffer-regions\">framebuffer-space stage</a>, <code>dstStageMask</code> <strong class=\"purple\">must</strong> only contain <a href=\"#synchronization-framebuffer-regions\">framebuffer-space stages</a>"
         },
         {
           "vuid": "VUID-VkSubpassDependency2-srcAccessMask-03088",
@@ -8744,11 +8744,11 @@
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-flags-04533",
-          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of <code>pAttachments</code> that is used as an input, color, resolve, or depth/stencil attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> have been created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>width</code> greater than or equal to <code>width</code>"
+          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of <code>pAttachments</code> that is used as an input, color, resolve, or depth/stencil attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> have been created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>extent.width</code> greater than or equal to <code>width</code>"
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-flags-04534",
-          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of <code>pAttachments</code> that is used as an input, color, resolve, or depth/stencil attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> have been created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>height</code> greater than or equal to <code>height</code>"
+          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of <code>pAttachments</code> that is used as an input, color, resolve, or depth/stencil attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> have been created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>extent.height</code> greater than or equal to <code>height</code>"
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-flags-04535",
@@ -11339,10 +11339,6 @@
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06059",
           "text": " If <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipeline-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and the <code>viewMask</code> member of a <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a> structure included in the <code>pNext</code> chain is not <code>0</code>, shaders in <code>pStages</code> <strong class=\"purple\">must</strong> not include variables decorated with the <code>Layer</code> built-in decoration in their interfaces"
-        },
-        {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06060",
-          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-fragment-output\">fragment output interface state</a> and <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>pColorBlendState-&gt;attachmentCount</code> <strong class=\"purple\">must</strong> be equal to the <code>colorAttachmentCount</code> member of the <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a> structure included in the <code>pNext</code> chain"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06061",
@@ -15002,7 +14998,7 @@
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a>, <a href=\"#VkBufferDeviceAddressCreateInfoEXT\">VkBufferDeviceAddressCreateInfoEXT</a>, <a href=\"#VkBufferOpaqueCaptureAddressCreateInfo\">VkBufferOpaqueCaptureAddressCreateInfo</a>, <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>, <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>, <a href=\"#VkVideoDecodeH264ProfileEXT\">VkVideoDecodeH264ProfileEXT</a>, <a href=\"#VkVideoDecodeH265ProfileEXT\">VkVideoDecodeH265ProfileEXT</a>, <a href=\"#VkVideoEncodeH264ProfileEXT\">VkVideoEncodeH264ProfileEXT</a>, <a href=\"#VkVideoEncodeH265ProfileEXT\">VkVideoEncodeH265ProfileEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a>, <a href=\"#VkBufferDeviceAddressCreateInfoEXT\">VkBufferDeviceAddressCreateInfoEXT</a>, <a href=\"#VkBufferOpaqueCaptureAddressCreateInfo\">VkBufferOpaqueCaptureAddressCreateInfo</a>, <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>, <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-sType-unique",
@@ -15084,13 +15080,13 @@
       "(VK_KHR_video_decode_queue)": [
         {
           "vuid": "VUID-VkBufferCreateInfo-usage-04813",
-          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR</code>, <code>VK_BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a decode codec-operation"
+          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR</code>, <code>VK_BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure with <code>profileCount</code> greater than <code>0</code> and <code>pProfiles</code> including at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>::<code>videoCodecOperation</code> specifying a decode operation"
         }
       ],
       "(VK_KHR_video_encode_queue)": [
         {
           "vuid": "VUID-VkBufferCreateInfo-usage-04814",
-          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a encode codec-operation"
+          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure with <code>profileCount</code> greater than <code>0</code> and <code>pProfiles</code> including at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>::<code>videoCodecOperation</code> specifying an encode operation"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_maintenance4)": [
@@ -15524,7 +15520,7 @@
         },
         {
           "vuid": "VUID-VkImageCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a>, <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>, <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>, <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>, <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a>, <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>, <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>, <a href=\"#VkImportMetalIOSurfaceInfoEXT\">VkImportMetalIOSurfaceInfoEXT</a>, <a href=\"#VkImportMetalTextureInfoEXT\">VkImportMetalTextureInfoEXT</a>, <a href=\"#VkVideoDecodeH264ProfileEXT\">VkVideoDecodeH264ProfileEXT</a>, <a href=\"#VkVideoDecodeH265ProfileEXT\">VkVideoDecodeH265ProfileEXT</a>, <a href=\"#VkVideoEncodeH264ProfileEXT\">VkVideoEncodeH264ProfileEXT</a>, <a href=\"#VkVideoEncodeH265ProfileEXT\">VkVideoEncodeH265ProfileEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a>, <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>, <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>, <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>, <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a>, <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>, <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>, <a href=\"#VkImportMetalIOSurfaceInfoEXT\">VkImportMetalIOSurfaceInfoEXT</a>, <a href=\"#VkImportMetalTextureInfoEXT\">VkImportMetalTextureInfoEXT</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-sType-unique",
@@ -15876,13 +15872,19 @@
       "(VK_KHR_video_decode_queue)": [
         {
           "vuid": "VUID-VkImageCreateInfo-usage-04815",
-          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a decode codec-operation"
+          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure with <code>profileCount</code> greater than <code>0</code> and <code>pProfiles</code> including at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>::<code>videoCodecOperation</code> specifying a decode operation"
         }
       ],
       "(VK_KHR_video_encode_queue)": [
         {
           "vuid": "VUID-VkImageCreateInfo-usage-04816",
-          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a encode codec-operation"
+          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure with <code>profileCount</code> greater than <code>0</code> and <code>pProfiles</code> including at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>::<code>videoCodecOperation</code> specifying an encode operation"
+        }
+      ],
+      "(VK_KHR_video_queue)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-06811",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure then <code>supportedVideoFormat</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
         }
       ],
       "(VK_FUCHSIA_buffer_collection)": [
@@ -16510,7 +16512,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>, <a href=\"#VkImageViewASTCDecodeModeEXT\">VkImageViewASTCDecodeModeEXT</a>, <a href=\"#VkImageViewMinLodCreateInfoEXT\">VkImageViewMinLodCreateInfoEXT</a>, <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a>, <a href=\"#VkVideoDecodeH264ProfileEXT\">VkVideoDecodeH264ProfileEXT</a>, <a href=\"#VkVideoDecodeH265ProfileEXT\">VkVideoDecodeH265ProfileEXT</a>, <a href=\"#VkVideoEncodeH264ProfileEXT\">VkVideoEncodeH264ProfileEXT</a>, <a href=\"#VkVideoEncodeH265ProfileEXT\">VkVideoEncodeH265ProfileEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a>, <a href=\"#VkImageViewASTCDecodeModeEXT\">VkImageViewASTCDecodeModeEXT</a>, <a href=\"#VkImageViewMinLodCreateInfoEXT\">VkImageViewMinLodCreateInfoEXT</a>, <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, or <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-sType-unique",
@@ -28876,7 +28878,11 @@
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDraw-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -29350,7 +29356,11 @@
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawIndexed-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -29836,7 +29846,11 @@
       "(VK_EXT_multi_draw)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -30330,7 +30344,11 @@
       "(VK_EXT_multi_draw)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -30836,7 +30854,11 @@
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawIndirect-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -31370,7 +31392,11 @@
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -31882,7 +31908,11 @@
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -32420,7 +32450,11 @@
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -32920,7 +32954,11 @@
       "(VK_EXT_transform_feedback)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -33446,7 +33484,11 @@
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -33902,7 +33944,11 @@
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -34386,7 +34432,11 @@
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -38758,7 +38808,11 @@
       "(VK_NV_device_generated_commands)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-attachmentCount-06667",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-attachmentCount-06815",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         }
       ],
       "(VK_NV_device_generated_commands)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -45915,8 +45969,8 @@
     "vkGetPhysicalDeviceVideoFormatPropertiesKHR": {
       "(VK_KHR_video_queue)": [
         {
-          "vuid": "VUID-vkGetPhysicalDeviceVideoFormatPropertiesKHR-imageUsage-04844",
-          "text": " The <code>imageUsage</code> enum of <a href=\"#VkPhysicalDeviceVideoFormatInfoKHR\">VkPhysicalDeviceVideoFormatInfoKHR</a> <strong class=\"purple\">must</strong> contain at least one of the following video image usage bit(s): <code>VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, or <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</code>"
+          "vuid": "VUID-vkGetPhysicalDeviceVideoFormatPropertiesKHR-pNext-06812",
+          "text": " The <code>pNext</code> chain of <code>pVideoFormatInfo</code> <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure with <code>profileCount</code> greater than <code>0</code>"
         },
         {
           "vuid": "VUID-vkGetPhysicalDeviceVideoFormatPropertiesKHR-physicalDevice-parameter",
@@ -45944,23 +45998,35 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceVideoFormatInfoKHR-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+        },
+        {
+          "vuid": "VUID-VkPhysicalDeviceVideoFormatInfoKHR-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
+          "vuid": "VUID-VkPhysicalDeviceVideoFormatInfoKHR-imageUsage-parameter",
+          "text": " <code>imageUsage</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkImageUsageFlagBits\">VkImageUsageFlagBits</a> values"
+        },
+        {
+          "vuid": "VUID-VkPhysicalDeviceVideoFormatInfoKHR-imageUsage-requiredbitmask",
+          "text": " <code>imageUsage</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ]
     },
     "VkVideoProfilesKHR": {
       "(VK_KHR_video_queue)": [
         {
+          "vuid": "VUID-VkVideoProfilesKHR-pProfiles-06813",
+          "text": " If the <code>pProfiles</code> list contains more than one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> entry, then it <strong class=\"purple\">must</strong> not contain more than one entry whose <code>videoCodecOperation</code> member specifies a decode operation"
+        },
+        {
           "vuid": "VUID-VkVideoProfilesKHR-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR</code>"
         },
         {
           "vuid": "VUID-VkVideoProfilesKHR-pProfiles-parameter",
-          "text": " <code>pProfiles</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>profileCount</code> valid <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> structures"
-        },
-        {
-          "vuid": "VUID-VkVideoProfilesKHR-profileCount-arraylength",
-          "text": " <code>profileCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+          "text": " If <code>profileCount</code> is not <code>0</code>, <code>pProfiles</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>profileCount</code> valid <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> structures"
         }
       ]
     },
@@ -46028,15 +46094,19 @@
         },
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-referencePicturesFormat-04852",
-          "text": " <code>referencePicturesFormat</code> <strong class=\"purple\">must</strong> be one of the supported formats in <a href=\"#VkVideoFormatPropertiesKHR\">VkVideoFormatPropertiesKHR</a> <code>format</code> returned by the <a href=\"#vkGetPhysicalDeviceVideoFormatPropertiesKHR\">vkGetPhysicalDeviceVideoFormatPropertiesKHR</a> when the <a href=\"#VkPhysicalDeviceVideoFormatInfoKHR\">VkPhysicalDeviceVideoFormatInfoKHR</a> <code>imageUsage</code> contains <code>VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR</code> or <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</code> depending on the session codec operation"
+          "text": " If the <code>videoCodecOperation</code> member of <code>pVideoProfile</code> specifies a decode operation then <code>referencePicturesFormat</code> <strong class=\"purple\">must</strong> be one of the supported decode DPB formats as reported by <a href=\"#vkGetPhysicalDeviceVideoFormatPropertiesKHR\">vkGetPhysicalDeviceVideoFormatPropertiesKHR</a> in the <code>format</code> member of <a href=\"#VkVideoFormatPropertiesKHR\">VkVideoFormatPropertiesKHR</a> when called with the <code>imageUsage</code> member of its <code>pVideoFormatInfo</code> parameter containing <code>VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR</code>, and with a <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure chained to its <code>pVideoFormatInfo</code> parameter whose <code>pProfiles</code> member contains an entry matching <code>pVideoProfile</code>"
+        },
+        {
+          "vuid": "VUID-VkVideoSessionCreateInfoKHR-videoCodecOperation-06814",
+          "text": " If the <code>videoCodecOperation</code> member of <code>pVideoProfile</code> specifies an encode operation then <code>referencePicturesFormat</code> <strong class=\"purple\">must</strong> be one of the supported encode DPB formats as reported by <a href=\"#vkGetPhysicalDeviceVideoFormatPropertiesKHR\">vkGetPhysicalDeviceVideoFormatPropertiesKHR</a> in the <code>format</code> member of <a href=\"#VkVideoFormatPropertiesKHR\">VkVideoFormatPropertiesKHR</a> when called with the <code>imageUsage</code> member of its <code>pVideoFormatInfo</code> parameter containing <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</code>, and with a <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure chained to its <code>pVideoFormatInfo</code> parameter whose <code>pProfiles</code> member contains an entry matching <code>pVideoProfile</code>"
         },
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-pictureFormat-04853",
-          "text": " <code>pictureFormat</code> for decode output <strong class=\"purple\">must</strong> be one of the supported formats in <a href=\"#VkVideoFormatPropertiesKHR\">VkVideoFormatPropertiesKHR</a> <code>format</code> returned by the <a href=\"#vkGetPhysicalDeviceVideoFormatPropertiesKHR\">vkGetPhysicalDeviceVideoFormatPropertiesKHR</a> when the <a href=\"#VkPhysicalDeviceVideoFormatInfoKHR\">VkPhysicalDeviceVideoFormatInfoKHR</a> <code>imageUsage</code> contains <code>VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>"
+          "text": " If the <code>videoCodecOperation</code> member of <code>pVideoProfile</code> specifies a decode operation then <code>pictureFormat</code> <strong class=\"purple\">must</strong> be one of the supported decode output formats as reported by <a href=\"#vkGetPhysicalDeviceVideoFormatPropertiesKHR\">vkGetPhysicalDeviceVideoFormatPropertiesKHR</a> in the <code>format</code> member of <a href=\"#VkVideoFormatPropertiesKHR\">VkVideoFormatPropertiesKHR</a> when called with the <code>imageUsage</code> member of its <code>pVideoFormatInfo</code> parameter containing <code>VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>, and with a <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure chained to its <code>pVideoFormatInfo</code> parameter whose <code>pProfiles</code> member contains an entry matching <code>pVideoProfile</code>"
         },
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-pictureFormat-04854",
-          "text": " <code>pictureFormat</code> targeting encode operations <strong class=\"purple\">must</strong> be one of the supported formats in <a href=\"#VkVideoFormatPropertiesKHR\">VkVideoFormatPropertiesKHR</a> <code>format</code> returned by the <a href=\"#vkGetPhysicalDeviceVideoFormatPropertiesKHR\">vkGetPhysicalDeviceVideoFormatPropertiesKHR</a> when the <a href=\"#VkPhysicalDeviceVideoFormatInfoKHR\">VkPhysicalDeviceVideoFormatInfoKHR</a> <code>imageUsage</code> contains <code>VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>"
+          "text": " If the <code>videoCodecOperation</code> member of <code>pVideoProfile</code> specifies an encode operation then <code>pictureFormat</code> <strong class=\"purple\">must</strong> be one of the supported encode input formats as reported by <a href=\"#vkGetPhysicalDeviceVideoFormatPropertiesKHR\">vkGetPhysicalDeviceVideoFormatPropertiesKHR</a> in the <code>format</code> member of <a href=\"#VkVideoFormatPropertiesKHR\">VkVideoFormatPropertiesKHR</a> when called with the <code>imageUsage</code> member of its <code>pVideoFormatInfo</code> parameter containing <code>VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, and with a <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure chained to its <code>pVideoFormatInfo</code> parameter whose <code>pProfiles</code> member contains an entry matching <code>pVideoProfile</code>"
         },
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-sType-sType",
@@ -48912,7 +48982,7 @@
         },
         {
           "vuid": "VUID-VkFormatProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDrmFormatModifierPropertiesList2EXT\">VkDrmFormatModifierPropertiesList2EXT</a>, <a href=\"#VkDrmFormatModifierPropertiesListEXT\">VkDrmFormatModifierPropertiesListEXT</a>, <a href=\"#VkFormatProperties3\">VkFormatProperties3</a>, <a href=\"#VkVideoDecodeH264ProfileEXT\">VkVideoDecodeH264ProfileEXT</a>, <a href=\"#VkVideoDecodeH265ProfileEXT\">VkVideoDecodeH265ProfileEXT</a>, <a href=\"#VkVideoEncodeH264ProfileEXT\">VkVideoEncodeH264ProfileEXT</a>, <a href=\"#VkVideoEncodeH265ProfileEXT\">VkVideoEncodeH265ProfileEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDrmFormatModifierPropertiesList2EXT\">VkDrmFormatModifierPropertiesList2EXT</a>, <a href=\"#VkDrmFormatModifierPropertiesListEXT\">VkDrmFormatModifierPropertiesListEXT</a>, or <a href=\"#VkFormatProperties3\">VkFormatProperties3</a>"
         },
         {
           "vuid": "VUID-VkFormatProperties2-sType-unique",
@@ -49066,7 +49136,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceImageFormatInfo2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkPhysicalDeviceExternalImageFormatInfo\">VkPhysicalDeviceExternalImageFormatInfo</a>, <a href=\"#VkPhysicalDeviceImageDrmFormatModifierInfoEXT\">VkPhysicalDeviceImageDrmFormatModifierInfoEXT</a>, or <a href=\"#VkPhysicalDeviceImageViewImageFormatInfoEXT\">VkPhysicalDeviceImageViewImageFormatInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageCompressionControlEXT\">VkImageCompressionControlEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkPhysicalDeviceExternalImageFormatInfo\">VkPhysicalDeviceExternalImageFormatInfo</a>, <a href=\"#VkPhysicalDeviceImageDrmFormatModifierInfoEXT\">VkPhysicalDeviceImageDrmFormatModifierInfoEXT</a>, <a href=\"#VkPhysicalDeviceImageViewImageFormatInfoEXT\">VkPhysicalDeviceImageViewImageFormatInfoEXT</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceImageFormatInfo2-sType-unique",
@@ -51071,12 +51141,20 @@
         {
           "vuid": "VUID-RuntimeSpirv-LocalSizeId-06433",
           "text": " The execution mode <code>LocalSizeId</code> <strong class=\"purple\">must</strong> not be used"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTypeVector-06816",
+          "text": " Any <code>OpTypeVector</code> output interface variables <strong class=\"purple\">must</strong> not have a higher <code>Component</code> <code>Count</code> than a matching <code>OpTypeVector</code> input interface variable"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_maintenance4)": [
         {
           "vuid": "VUID-RuntimeSpirv-LocalSizeId-06434",
-          "text": " if execution mode <code>LocalSizeId</code> is used, <a href=\"#features-maintenance4\"><code>maintenance4</code></a> <strong class=\"purple\">must</strong> be enabled"
+          "text": " If execution mode <code>LocalSizeId</code> is used, <a href=\"#features-maintenance4\"><code>maintenance4</code></a> <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-maintenance4-06817",
+          "text": " If <a href=\"#features-maintenance4\"><code>maintenance4</code></a> is not enabled, any <code>OpTypeVector</code> output interface variables <strong class=\"purple\">must</strong> not have a higher <code>Component</code> <code>Count</code> than a matching <code>OpTypeVector</code> input interface variable"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_zero_initialize_workgroup_memory)": [
