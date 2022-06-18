@@ -33,12 +33,14 @@ namespace rx
 {
 namespace
 {
-constexpr VkImageUsageFlags kDrawStagingImageFlags = VK_IMAGE_USAGE_TRANSFER_SRC_BIT |
-                                                     VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT |
-                                                     VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-
-constexpr VkImageUsageFlags kTransferStagingImageFlags =
+constexpr VkImageUsageFlags kTransferImageFlags =
     VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT;
+
+constexpr VkImageUsageFlags kColorAttachmentImageFlags =
+    VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
+
+constexpr VkImageUsageFlags kDrawStagingImageFlags =
+    kTransferImageFlags | kColorAttachmentImageFlags;
 
 constexpr VkFormatFeatureFlags kBlitFeatureFlags =
     VK_FORMAT_FEATURE_BLIT_SRC_BIT | VK_FORMAT_FEATURE_BLIT_DST_BIT;
@@ -1053,7 +1055,7 @@ angle::Result TextureVk::copySubImageImplWithTransfer(ContextVk *contextVk,
         ANGLE_TRY(stagingImage->get().init2DStaging(
             contextVk, mState.hasProtectedContent(), renderer->getMemoryProperties(),
             gl::Extents(sourceBox.width, sourceBox.height, 1), dstFormat.getIntendedFormatID(),
-            dstFormat.getActualImageFormatID(getRequiredImageAccess()), kTransferStagingImageFlags,
+            dstFormat.getActualImageFormatID(getRequiredImageAccess()), kTransferImageFlags,
             layerCount));
 
         access.onImageTransferWrite(gl::LevelIndex(0), 1, 0, layerCount, VK_IMAGE_ASPECT_COLOR_BIT,
@@ -1344,9 +1346,8 @@ angle::Result TextureVk::setStorageExternalMemory(const gl::Context *context,
     mImageCreateFlags = createFlags;
 
     constexpr VkImageUsageFlags kRenderableUsageFlags =
-        VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT |
-        VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
-    if ((usageFlags | kRenderableUsageFlags) != 0)
+        kColorAttachmentImageFlags | VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
+    if ((usageFlags & kRenderableUsageFlags) != 0)
     {
         mRequiredImageAccess = vk::ImageAccess::Renderable;
     }
@@ -1509,8 +1510,7 @@ void TextureVk::releaseAndDeleteImageAndViews(ContextVk *contextVk)
 
 void TextureVk::initImageUsageFlags(ContextVk *contextVk, angle::FormatID actualFormatID)
 {
-    mImageUsageFlags = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT |
-                       VK_IMAGE_USAGE_SAMPLED_BIT;
+    mImageUsageFlags = kTransferImageFlags | VK_IMAGE_USAGE_SAMPLED_BIT;
 
     // If the image has depth/stencil support, add those as possible usage.
     RendererVk *renderer = contextVk->getRenderer();
@@ -1527,8 +1527,7 @@ void TextureVk::initImageUsageFlags(ContextVk *contextVk, angle::FormatID actual
     else if (renderer->hasImageFormatFeatureBits(actualFormatID,
                                                  VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT))
     {
-        mImageUsageFlags |=
-            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
+        mImageUsageFlags |= kColorAttachmentImageFlags;
     }
 }
 
@@ -2055,8 +2054,8 @@ angle::Result TextureVk::copyAndStageImageData(ContextVk *contextVk,
     ANGLE_TRY(stagingImage->get().initStaging(
         contextVk, mState.hasProtectedContent(), renderer->getMemoryProperties(),
         srcImage->getType(), srcImage->getExtents(), srcImage->getIntendedFormatID(),
-        srcImage->getActualFormatID(), srcImage->getSamples(), kTransferStagingImageFlags,
-        levelCount, layerCount));
+        srcImage->getActualFormatID(), srcImage->getSamples(), kTransferImageFlags, levelCount,
+        layerCount));
 
     // Copy the src image wholly into the staging image
     const VkImageAspectFlags aspectFlags = srcImage->getAspectFlags();
@@ -3145,11 +3144,20 @@ void TextureVk::releaseImageViews(ContextVk *contextVk)
     {
         for (RenderTargetVector &renderTargetLevels : renderTargets)
         {
+            for (RenderTargetVk &renderTargetVk : renderTargetLevels)
+            {
+                renderTargetVk.release(contextVk);
+            }
             // Clear the layers tracked for each level
             renderTargetLevels.clear();
         }
         // Then clear the levels
         renderTargets.clear();
+    }
+
+    for (auto &renderTargetPair : mMultiLayerRenderTargets)
+    {
+        renderTargetPair.second->release(contextVk);
     }
     mMultiLayerRenderTargets.clear();
 }
@@ -3441,6 +3449,21 @@ angle::Result TextureVk::refreshImageViews(ContextVk *contextVk)
     {
         RendererVk *renderer = contextVk->getRenderer();
         mImage->collectViewGarbage(renderer, &imageView);
+
+        for (auto &renderTargets : mSingleLayerRenderTargets)
+        {
+            for (RenderTargetVector &renderTargetLevels : renderTargets)
+            {
+                for (RenderTargetVk &renderTargetVk : renderTargetLevels)
+                {
+                    renderTargetVk.release(contextVk);
+                }
+            }
+        }
+        for (auto &renderTargetPair : mMultiLayerRenderTargets)
+        {
+            renderTargetPair.second->release(contextVk);
+        }
     }
 
     ANGLE_TRY(initImageViews(contextVk, getImageViewLevelCount()));

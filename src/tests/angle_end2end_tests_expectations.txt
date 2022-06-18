@@ -56,8 +56,6 @@
 7291 VULKAN : BlitFramebufferTest.Blit3D/* = SKIP
 7291 VULKAN : BlitFramebufferTest.Blit3DTo2DArray/* = SKIP
 7291 VULKAN : BlitFramebufferTest.Blit2DArrayTo3D/* = SKIP
-234769934 VULKAN : VulkanPerformanceCounterTest.ResizeFBOAttachedTexture/* = SKIP
-234769934 VULKAN : VulkanPerformanceCounterTest.SetTextureSwizzleWithDifferentValueOnFBOAttachedTexture/* = SKIP
 235523746 VULKAN : VulkanPerformanceCounterTest.CreateDestroyTextureDoesNotIncreaseDescriptporSetCache/* = SKIP
 
 // Windows
@@ -653,9 +651,15 @@
 
 // Flaky hangs on Linux SwANGLE
 7431 LINUX SWIFTSHADER : MultithreadingTestES3.ThreadB*BeforeThreadASyncFinish/ES3_Vulkan_SwiftShader = SKIP
+7431 LINUX SWIFTSHADER : MultithreadingTestES3.ThreadB*BeforeThreadASyncFlush/ES3_Vulkan_SwiftShader = SKIP
+
+// Timeout with SwiftShader and MAC OpenGL due to large workloads
+7389 SWIFTSHADER : Texture2DTest.ManySupersedingTextureUpdates/* = SKIP
+7389 MAC OPENGL : Texture2DTest.ManySupersedingTextureUpdates/* = SKIP
 
 // Slow tests, should appear last in this file
 5076 : GLSLTest.VerifyMaxVertexUniformVectors* = TIMEOUT
+5076 : GLSLTest.VerifyMaxFragmentUniformVectors* = TIMEOUT
 6251 : MultithreadingTest* = TIMEOUT
 // Please do not add expectations below this line,
 // so that TIMEOUT expectations above don't override more precise SKIP expectations
