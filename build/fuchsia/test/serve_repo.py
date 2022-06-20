@@ -5,12 +5,13 @@
 """Implements commands for serving a TUF repository."""
 
 import argparse
+import contextlib
 import json
 import logging
 import os
 import sys
 
-from common import REPO_ALIAS, run_ffx_command
+from common import REPO_ALIAS, register_device_args, run_ffx_command
 
 # Contains information about the active ephemeral repository.
 _REPO_CONFIG_FILE = os.path.join('/', 'tmp', 'fuchsia-repo-config')
@@ -92,16 +93,23 @@ def register_serve_args(arg_parser: argparse.ArgumentParser) -> None:
     serve_args.add_argument('--repo-name',
                             default='test',
                             help='Name of the repository.')
-    serve_args.add_argument('--serve-target',
-                            dest='target',
-                            help='Target the repository registers with.')
 
 
 def run_serve_cmd(cmd: str, args: argparse.Namespace) -> None:
     """Helper for running serve commands."""
     if cmd == 'start':
-        _start_serving(args.repo, args.repo_name, args.target)
+        _start_serving(args.repo, args.repo_name, args.target_id)
     else:
+        _stop_serving()
+
+
+@contextlib.contextmanager
+def serve_repository(args: argparse.Namespace) -> None:
+    """Context manager for serving a repository."""
+    _start_serving(args.repo, args.repo_name, args.target_id)
+    try:
+        yield None
+    finally:
         _stop_serving()
 
 
@@ -111,6 +119,7 @@ def main():
     parser.add_argument('cmd',
                         choices=['start', 'stop'],
                         help='Choose to start|stop repository serving.')
+    register_device_args(parser)
     register_serve_args(parser)
     args = parser.parse_args()
     run_serve_cmd(args.cmd, args)
