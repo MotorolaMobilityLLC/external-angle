@@ -14,7 +14,7 @@ from typing import Iterable, List, Optional
 
 DIR_SRC_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir, os.pardir, os.pardir))
-REPO_ALIAS = 'chromium-test-package-server'
+REPO_ALIAS = 'fuchsia.com'
 SDK_ROOT = os.path.join(DIR_SRC_ROOT, 'third_party', 'fuchsia-sdk', 'sdk')
 
 
@@ -111,8 +111,9 @@ def read_package_paths(out_dir: str, pkg_name: str) -> List[str]:
     Returns:
         A list of the absolute path to all FAR files the package depends on.
     """
-    with open(os.path.join(DIR_SRC_ROOT, out_dir, 'gen',
-                           f'{pkg_name}.meta')) as meta_file:
+    with open(
+            os.path.join(DIR_SRC_ROOT, out_dir, 'gen', 'package_metadata',
+                         f'{pkg_name}.meta')) as meta_file:
         data = json.load(meta_file)
     packages = []
     for package in data['packages']:
