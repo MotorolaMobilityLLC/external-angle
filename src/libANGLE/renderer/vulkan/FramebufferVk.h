@@ -145,8 +145,7 @@ class FramebufferVk : public FramebufferImpl
     void updateRenderPassReadOnlyDepthMode(ContextVk *contextVk,
                                            vk::RenderPassCommandBufferHelper *renderPass);
 
-    void onSwitchProgramFramebufferFetch(ContextVk *contextVk, bool programUsesFramebufferFetch);
-    bool hasFramebufferFetch() const { return mCurrentFramebufferDesc.hasFramebufferFetch(); }
+    void switchToFramebufferFetchMode(ContextVk *contextVk, bool hasFramebufferFetch);
 
     void removeColorResolveAttachment(uint32_t colorIndexGL);
 
@@ -258,6 +257,8 @@ class FramebufferVk : public FramebufferImpl
     // depth stencil read only mode. When we are in feedback loop, we must flush renderpass to exit
     // the loop instead of update the layout.
     bool mReadOnlyDepthFeedbackLoopMode;
+
+    gl::DrawBufferMask mIsAHBColorAttachments;
 };
 }  // namespace rx
 

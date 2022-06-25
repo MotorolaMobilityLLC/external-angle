@@ -1306,6 +1306,55 @@ TEST_P(VulkanPerformanceCounterTest_ES31, ColorMaskedFramebufferFetchDrawThenCle
                                    getPerfCounters().colorClearAttachments);
 }
 
+// Test that masked draw after a framebuffer fetch render pass doesn't load color.
+//
+// - Scenario: framebuffer fetch render pass, mask color, normal draw
+TEST_P(VulkanPerformanceCounterTest_ES31, FramebufferFetchRenderPassThenColorMaskedDraw)
+{
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled(kPerfMonitorExtensionName));
+    ANGLE_SKIP_TEST_IF(!IsGLExtensionEnabled("GL_EXT_shader_framebuffer_fetch_non_coherent"));
+    initANGLEFeatures();
+
+    angle::VulkanPerfCounters expected;
+
+    // Expect rpCount+1, color(Clears+0, Loads+1, LoadNones+0, Stores+0, StoreNones+1)
+    setExpectedCountersForColorOps(getPerfCounters(), 1, 0, 1, 0, 0, 1, &expected);
+
+    GLFramebuffer framebuffer;
+    GLTexture texture;
+    setupForColorOpsTest(&framebuffer, &texture);
+
+    GLBuffer buffer;
+    const GLColor kClearColor(40, 70, 100, 150);
+    maskedFramebufferFetchDraw(kClearColor, buffer);
+
+    EXPECT_EQ(expected.renderPasses, getPerfCounters().renderPasses);
+
+    // Break the render pass and check how many loads and stores were actually done
+    EXPECT_PIXEL_COLOR_NEAR(0, 0, kClearColor, 1);
+
+    maskedFramebufferFetchDrawVerify(kClearColor, buffer);
+    compareColorOpCounters(getPerfCounters(), expected);
+
+    // Start another render pass, and don't use framebuffer fetch.  Color is masked, so it should be
+    // neither loaded nor stored.
+
+    // Expect rpCount+1, color(Clears+0, Loads+0, LoadNones+1, Stores+0, StoreNones+1)
+    setExpectedCountersForColorOps(getPerfCounters(), 1, 0, 0, 1, 0, 1, &expected);
+
+    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+
+    ANGLE_GL_PROGRAM(program, essl1_shaders::vs::Simple(), essl1_shaders::fs::Green());
+    drawQuad(program, essl1_shaders::PositionAttrib(), 0.5f);
+    ASSERT_GL_NO_ERROR();
+
+    EXPECT_EQ(expected.renderPasses, getPerfCounters().renderPasses);
+
+    // Break the render pass and check how many loads and stores were actually done
+    EXPECT_PIXEL_COLOR_NEAR(0, 0, kClearColor, 1);
+    compareColorOpCounters(getPerfCounters(), expected);
+}
+
 // Tests that clear after unused depth/stencil is optimized to use loadOp
 //
 // - Scenario: disable depth/stencil, draw, clear
@@ -5001,7 +5050,7 @@ TEST_P(VulkanPerformanceCounterTest, InceptionScissorClears)
     // Clear small concentric squares using scissor.
     std::vector<GLColor> expectedColors;
     // TODO(syoussefi): verify this
-    ANGLE_MAYBE_UNUSED uint64_t numScissoredClears = 0;
+    [[maybe_unused]] uint64_t numScissoredClears = 0;
     for (GLuint index = 0; index < (kSize - 1) / 2; index++)
     {
         // Do the first clear without the scissor.
@@ -5057,7 +5106,7 @@ TEST_P(VulkanPerformanceCounterTest, Depth16Scissored)
     glEnable(GL_SCISSOR_TEST);
     constexpr int kNumSteps = 13;
     // TODO(syoussefi): verify this
-    ANGLE_MAYBE_UNUSED uint64_t numScissoredClears = 0;
+    [[maybe_unused]] uint64_t numScissoredClears = 0;
     for (int ndx = 1; ndx < kNumSteps; ndx++)
     {
         float perc = static_cast<float>(ndx) / static_cast<float>(kNumSteps);
@@ -5117,7 +5166,7 @@ TEST_P(VulkanPerformanceCounterTest, DrawThenInceptionScissorClears)
 
     // Draw small concentric squares using scissor.
     // TODO(syoussefi): verify this
-    ANGLE_MAYBE_UNUSED uint64_t numScissoredClears = 0;
+    [[maybe_unused]] uint64_t numScissoredClears = 0;
     // All clears are to a scissored render area.
     for (GLuint index = 1; index < (kSize - 1) / 2; index++)
     {

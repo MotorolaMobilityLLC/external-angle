@@ -867,7 +867,7 @@ gl::Version LimitVersionTo(const gl::Version &current, const gl::Version &lower)
     return std::min(current, lower);
 }
 
-ANGLE_MAYBE_UNUSED bool FencePropertiesCompatibleWithAndroid(
+[[maybe_unused]] bool FencePropertiesCompatibleWithAndroid(
     const VkExternalFenceProperties &externalFenceProperties)
 {
     // handleType here is the external fence type -
@@ -898,7 +898,7 @@ ANGLE_MAYBE_UNUSED bool FencePropertiesCompatibleWithAndroid(
     return true;
 }
 
-ANGLE_MAYBE_UNUSED bool SemaphorePropertiesCompatibleWithAndroid(
+[[maybe_unused]] bool SemaphorePropertiesCompatibleWithAndroid(
     const VkExternalSemaphoreProperties &externalSemaphoreProperties)
 {
     // handleType here is the external semaphore type -
@@ -3535,6 +3535,13 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // https://issuetracker.google.com/issues/186643966
     ANGLE_FEATURE_CONDITION(&mFeatures, supportsShaderFramebufferFetchNonCoherent,
                             (IsAndroid() && !(isARM || isQualcomm)) || isSwiftShader);
+
+    // On tile-based renderers, breaking the render pass is costly.  Changing into and out of
+    // framebuffer fetch causes the render pass to break so that the layout of the color attachments
+    // can be adjusted.  On such hardware, the switch to framebuffer fetch mode is made permanent so
+    // such render pass breaks don't happen.
+    ANGLE_FEATURE_CONDITION(&mFeatures, permanentlySwitchToFramebufferFetchMode,
+                            isTileBasedRenderer);
 
     // Support EGL_KHR_lock_surface3 extension.
     ANGLE_FEATURE_CONDITION(&mFeatures, supportsLockSurfaceExtension, IsAndroid());

@@ -210,7 +210,7 @@ class alignas(4) RenderPassDesc final
     {
         mHasFramebufferFetch = hasFramebufferFetch;
     }
-    bool getFramebufferFetchMode() const { return mHasFramebufferFetch; }
+    bool hasFramebufferFetch() const { return mHasFramebufferFetch; }
 
     void updateRenderToTexture(bool isRenderToTexture) { mIsRenderToTexture = isRenderToTexture; }
     bool isRenderToTexture() const { return mIsRenderToTexture; }
@@ -849,7 +849,7 @@ class PipelineLayoutDesc final
   private:
     DescriptorSetArray<DescriptorSetLayoutDesc> mDescriptorSetLayouts;
     PackedPushConstantRange mPushConstantRange;
-    ANGLE_MAYBE_UNUSED uint32_t mPadding;
+    [[maybe_unused]] uint32_t mPadding;
 
     // Verify the arrays are properly packed.
     static_assert(sizeof(decltype(mDescriptorSetLayouts)) ==
@@ -1271,6 +1271,24 @@ class DescriptorSetDesc
     angle::FastMap<DescriptorInfoDesc, kFastDescriptorSetDescLimit> mDescriptorInfos;
 };
 
+// SharedDescriptorSetCacheKey.
+// Because DescriptorSet must associate with a pool, we need to define a structure that wraps both.
+class DescriptorPoolHelper;
+struct DescriptorSetDescAndPool
+{
+    DescriptorSetDesc mDesc;
+    DescriptorPoolHelper *mPool;
+};
+using DescriptorSetAndPoolPointer = std::unique_ptr<DescriptorSetDescAndPool>;
+using SharedDescriptorSetCacheKey = std::shared_ptr<DescriptorSetAndPoolPointer>;
+ANGLE_INLINE const SharedDescriptorSetCacheKey
+CreateSharedDescriptorSetCacheKey(const DescriptorSetDesc &desc, DescriptorPoolHelper *pool)
+{
+    DescriptorSetAndPoolPointer DescriptorAndPoolPointer =
+        std::make_unique<DescriptorSetDescAndPool>(DescriptorSetDescAndPool{desc, pool});
+    return std::make_shared<DescriptorSetAndPoolPointer>(std::move(DescriptorAndPoolPointer));
+}
+
 constexpr VkDescriptorType kStorageBufferDescriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
 
 // Manages a descriptor set desc with a few helper routines and also stores object handles.
@@ -1347,7 +1365,8 @@ class DescriptorSetDescBuilder final
                                            const gl::ActiveTextureArray<TextureVk *> &textures,
                                            const gl::SamplerBindingVector &samplers,
                                            bool emulateSeamfulCubeMapSampling,
-                                           PipelineType pipelineType);
+                                           PipelineType pipelineType,
+                                           const SharedDescriptorSetCacheKey &sharedCacheKey);
 
     void updateDescriptorSet(UpdateDescriptorSetsBuilder *updateBuilder,
                              VkDescriptorSet descriptorSet) const;
@@ -1364,7 +1383,8 @@ class DescriptorSetDescBuilder final
         const gl::ActiveTextureArray<TextureVk *> &textures,
         const gl::SamplerBindingVector &samplers,
         bool emulateSeamfulCubeMapSampling,
-        PipelineType pipelineType);
+        PipelineType pipelineType,
+        const SharedDescriptorSetCacheKey &sharedCacheKey);
 
     void updateWriteDesc(uint32_t bindingIndex,
                          VkDescriptorType descriptorType,
@@ -1406,8 +1426,6 @@ class FramebufferDesc
     FramebufferDesc();
     ~FramebufferDesc();
 
-    void destroyCachedObject(ContextVk *contextVk);
-
     FramebufferDesc(const FramebufferDesc &other);
     FramebufferDesc &operator=(const FramebufferDesc &other);
 
@@ -1442,7 +1460,7 @@ class FramebufferDesc
 
     void updateLayerCount(uint32_t layerCount);
     uint32_t getLayerCount() const { return mLayerCount; }
-    void updateFramebufferFetchMode(bool hasFramebufferFetch);
+    void setFramebufferFetchMode(bool hasFramebufferFetch);
     bool hasFramebufferFetch() const { return mHasFramebufferFetch; }
 
     bool isMultiview() const { return mIsMultiview; }
@@ -1555,15 +1573,16 @@ class SharedCacheKeyManager
     void releaseKeys(ContextVk *contextVk);
     void destroy();
     bool empty() { return mSharedCacheKeys.empty(); }
+    bool containsKey(const SharedCacheKeyT &key) const;
 
   private:
-    bool containsKey(const SharedCacheKeyT &key) const;
     // Tracks an array of cache keys with refcounting. Note this owns one refcount of
     // SharedCacheKeyT object.
     std::vector<SharedCacheKeyT> mSharedCacheKeys;
 };
 
-using FramebufferCacheManager = SharedCacheKeyManager<SharedFramebufferCacheKey>;
+using FramebufferCacheManager   = SharedCacheKeyManager<SharedFramebufferCacheKey>;
+using DescriptorSetCacheManager = SharedCacheKeyManager<SharedDescriptorSetCacheKey>;
 }  // namespace vk
 }  // namespace rx
 
@@ -1719,6 +1738,7 @@ class CacheStats final : angle::NonCopyable
     }
 
     ANGLE_INLINE uint32_t getSize() const { return mSize; }
+    ANGLE_INLINE void setSize(uint32_t size) { mSize = size; }
 
     void reset()
     {
@@ -2053,6 +2073,13 @@ class DescriptorSetCache final : angle::NonCopyable
     {
         mPayload.emplace(desc, descriptorSet);
     }
+
+    ANGLE_INLINE void eraseDescriptorSet(const vk::DescriptorSetDesc &desc)
+    {
+        mPayload.erase(desc);
+    }
+
+    ANGLE_INLINE size_t getTotalCacheSize() const { return mPayload.size(); }
 
     size_t getTotalCacheKeySizeBytes() const
     {
