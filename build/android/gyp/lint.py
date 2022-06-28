@@ -186,40 +186,8 @@ def _WriteXmlFile(root, path):
             root, encoding='utf-8')).toprettyxml(indent='  ').encode('utf-8'))
 
 
-def _SimplifyBaselineFile(baseline):
-  with open(baseline) as f:
-    doc = ElementTree.parse(f)
-
-  root = doc.getroot()
-  assert root.tag == 'issues'
-
-  for issue_node in root.findall('issue'):
-    # Removing the baseline file is the best way to get lint to regenerate it,
-    # yet a LintError is added about the missing baseline file. Remove it here.
-    if (issue_node.get('id') == 'LintError'
-        and 'lint-baseline.xml' in issue_node.get('message', '')):
-      root.remove(issue_node)
-      continue
-    for location_node in issue_node.findall('location'):
-      # Trim file path so that files in src as well as the output directory do
-      # not have prefixes. Thus the baseline files work on bots and locally.
-      # Example: $HOME/path/to/out/Dir/../../file/in/checkout
-      #          => file/in/checkout
-      file_path = location_node.get('file')
-      if file_path:
-        parent_dir_idx = file_path.rfind('../')
-        if parent_dir_idx != -1:
-          location_node.attrib['file'] = file_path[parent_dir_idx + 3:]
-      # Line and column numbers are not used by lint. Removing to reduce churn.
-      location_node.attrib.pop('line', None)
-      location_node.attrib.pop('column', None)
-
-  with build_utils.AtomicOutput(baseline) as f:
-    doc.write(f, encoding='utf-8', xml_declaration=True)
-
-
 def _RunLint(create_cache,
-             lint_binary_path,
+             lint_jar_path,
              backported_methods_path,
              config_path,
              manifest_path,
@@ -247,8 +215,29 @@ def _RunLint(create_cache,
     shutil.rmtree(cache_dir, ignore_errors=True)
     os.makedirs(cache_dir)
 
-  cmd = [
-      lint_binary_path,
+  if baseline and not os.path.exists(baseline):
+    # Generating new baselines is only done locally, and requires more memory to
+    # avoid OOMs.
+    lint_xmx = '4G'
+  else:
+    lint_xmx = '2G'
+
+  # All paths in lint are based off of relative paths from root with root as the
+  # prefix. Path variable substitution is based off of prefix matching so custom
+  # path variables need to match exactly in order to show up in baseline files.
+  # e.g. lint_path=path/to/output/dir/../../file/in/src
+  root_path = os.getcwd()  # This is usually the output directory.
+  pathvar_src = os.path.join(
+      root_path, os.path.relpath(build_utils.DIR_SOURCE_ROOT, start=root_path))
+
+  cmd = build_utils.JavaCmd(xmx=lint_xmx) + [
+      '-cp',
+      lint_jar_path,
+      'com.android.tools.lint.Main',
+      '--sdk-home',
+      android_sdk_root,
+      '--path-variables',
+      f'SRC={pathvar_src}',
       # Uncomment to easily remove fixed lint errors. This is not turned on by
       # default due to: https://crbug.com/1256477#c5
       #'--remove-fixed',
@@ -340,21 +329,8 @@ def _RunLint(create_cache,
 
   logging.info('Preparing environment variables')
   env = os.environ.copy()
-  # It is important that lint uses the checked-in JDK11 as it is almost 50%
-  # faster than JDK8.
-  env['JAVA_HOME'] = build_utils.JAVA_HOME
   # This is necessary so that lint errors print stack traces in stdout.
   env['LINT_PRINT_STACKTRACE'] = 'true'
-  if baseline and not os.path.exists(baseline):
-    # Generating new baselines is only done locally, and requires more memory to
-    # avoid OOMs.
-    env['LINT_OPTS'] = '-Xmx4g'
-    generating_new_baseline = True
-  else:
-    # The default set in the wrapper script is 1g, but it seems not enough :(
-    env['LINT_OPTS'] = '-Xmx2g'
-    generating_new_baseline = False
-
   # This filter is necessary for JDK11.
   stderr_filter = build_utils.FilterReflectiveAccessJavaWarnings
   stdout_filter = lambda x: build_utils.FilterLines(x, 'No issues found')
@@ -371,9 +347,6 @@ def _RunLint(create_cache,
                                 stderr_filter=stderr_filter,
                                 fail_on_output=warnings_as_errors))
   finally:
-    if generating_new_baseline:
-      _SimplifyBaselineFile(baseline)
-
     # When not treating warnings as errors, display the extra footer.
     is_debug = os.environ.get('LINT_DEBUG', '0') != '0'
 
@@ -406,9 +379,9 @@ def _ParseArgs(argv):
   parser.add_argument('--use-build-server',
                       action='store_true',
                       help='Always use the build server.')
-  parser.add_argument('--lint-binary-path',
+  parser.add_argument('--lint-jar-path',
                       required=True,
-                      help='Path to lint executable.')
+                      help='Path to the lint jar.')
   parser.add_argument('--backported-methods',
                       help='Path to backported methods file created by R8.')
   parser.add_argument('--cache-dir',
@@ -507,7 +480,7 @@ def main():
   depfile_deps = [p for p in possible_depfile_deps if p]
 
   _RunLint(args.create_cache,
-           args.lint_binary_path,
+           args.lint_jar_path,
            args.backported_methods,
            args.config_path,
            args.manifest_path,
