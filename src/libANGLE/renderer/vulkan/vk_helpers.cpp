@@ -3164,7 +3164,12 @@ void BufferPool::addStats(std::ostringstream *out) const
 // DescriptorPoolHelper implementation.
 DescriptorPoolHelper::DescriptorPoolHelper() : mFreeDescriptorSets(0) {}
 
-DescriptorPoolHelper::~DescriptorPoolHelper() = default;
+DescriptorPoolHelper::~DescriptorPoolHelper()
+{
+    // Caller must have already freed all caches
+    ASSERT(mDescriptorSetCacheManager.empty());
+    ASSERT(mDescriptorSetCache.empty());
+}
 
 bool DescriptorPoolHelper::hasCapacity(uint32_t descriptorSetCount) const
 {
@@ -3211,14 +3216,14 @@ angle::Result DescriptorPoolHelper::init(Context *context,
 
 void DescriptorPoolHelper::destroy(RendererVk *renderer, VulkanCacheType cacheType)
 {
+    resetCache();
     mDescriptorPool.destroy(renderer->getDevice());
-    mDescriptorSetCache.resetCache();
 }
 
 void DescriptorPoolHelper::release(ContextVk *contextVk, VulkanCacheType cacheType)
 {
+    resetCache();
     contextVk->addGarbage(&mDescriptorPool);
-    mDescriptorSetCache.resetCache();
 }
 
 void DescriptorPoolHelper::resetGarbageList()
@@ -3303,8 +3308,15 @@ void DescriptorPoolHelper::releaseCachedDescriptorSet(ContextVk *contextVk,
     }
 }
 
+void DescriptorPoolHelper::destroyCachedDescriptorSet(const DescriptorSetDesc &desc)
+{
+    // Remove from the cache hash map
+    mDescriptorSetCache.eraseDescriptorSet(desc);
+}
+
 void DescriptorPoolHelper::resetCache()
 {
+    mDescriptorSetCacheManager.destroyKeys();
     mDescriptorSetCache.resetCache();
 }
 
@@ -3460,10 +3472,10 @@ angle::Result DynamicDescriptorPool::getOrAllocateDescriptorSet(
         {
             ANGLE_TRY(allocateNewPool(context));
         }
+        bindingOut->set(mDescriptorPools[mCurrentPoolIndex]);
     }
 
-    bindingOut->set(mDescriptorPools[mCurrentPoolIndex]);
-    ANGLE_TRY(mDescriptorPools[mCurrentPoolIndex]->get().allocateAndCacheDescriptorSet(
+    ANGLE_TRY(bindingOut->get().allocateAndCacheDescriptorSet(
         context, commandBufferHelper, desc, descriptorSetLayout, descriptorSetOut));
     *cacheResultOut = DescriptorCacheResult::NewAllocation;
     ++context->getPerfCounters().descriptorSetAllocations;
@@ -9266,40 +9278,6 @@ VkColorComponentFlags ImageHelper::getEmulatedChannelsMask() const
            (textureFmt.redBits != 0));
 
     return emulatedChannelsMask;
-}
-
-// FramebufferHelper implementation.
-FramebufferHelper::FramebufferHelper() = default;
-
-FramebufferHelper::~FramebufferHelper() = default;
-
-FramebufferHelper::FramebufferHelper(FramebufferHelper &&other) : Resource(std::move(other))
-{
-    mFramebuffer = std::move(other.mFramebuffer);
-}
-
-FramebufferHelper &FramebufferHelper::operator=(FramebufferHelper &&other)
-{
-    std::swap(mUse, other.mUse);
-    std::swap(mFramebuffer, other.mFramebuffer);
-    return *this;
-}
-
-angle::Result FramebufferHelper::init(ContextVk *contextVk,
-                                      const VkFramebufferCreateInfo &createInfo)
-{
-    ANGLE_VK_TRY(contextVk, mFramebuffer.init(contextVk->getDevice(), createInfo));
-    return angle::Result::Continue;
-}
-
-void FramebufferHelper::destroy(RendererVk *rendererVk)
-{
-    mFramebuffer.destroy(rendererVk->getDevice());
-}
-
-void FramebufferHelper::release(ContextVk *contextVk)
-{
-    contextVk->addGarbage(&mFramebuffer);
 }
 
 LayerMode GetLayerMode(const vk::ImageHelper &image, uint32_t layerCount)
