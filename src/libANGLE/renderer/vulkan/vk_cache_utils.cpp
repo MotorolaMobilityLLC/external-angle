@@ -2383,6 +2383,30 @@ void DumpPipelineCacheGraph(
     }
     out << " }\n";
 }
+
+// Used by SharedCacheKeyManager
+void ReleaseCachedObject(ContextVk *contextVk, const FramebufferDesc &desc)
+{
+    contextVk->getShareGroup()->getFramebufferCache().erase(contextVk, desc);
+}
+
+void ReleaseCachedObject(ContextVk *contextVk, const DescriptorSetDescAndPool &descAndPool)
+{
+    ASSERT(descAndPool.mPool != nullptr);
+    descAndPool.mPool->releaseCachedDescriptorSet(contextVk, descAndPool.mDesc);
+}
+
+void DestroyCachedObject(const FramebufferDesc &desc)
+{
+    // Framebuffer cache are implemented in a way that each cache entry tracks GPU progress and we
+    // always guarantee cache entries are released before calling destroy.
+}
+
+void DestroyCachedObject(const DescriptorSetDescAndPool &descAndPool)
+{
+    ASSERT(descAndPool.mPool != nullptr);
+    descAndPool.mPool->destroyCachedDescriptorSet(descAndPool.mDesc);
+}
 }  // anonymous namespace
 
 // RenderPassDesc implementation.
@@ -3951,6 +3975,40 @@ void PipelineHelper::addTransition(GraphicsPipelineTransitionBits bits,
     mTransitions.emplace_back(bits, desc, pipeline);
 }
 
+// FramebufferHelper implementation.
+FramebufferHelper::FramebufferHelper() = default;
+
+FramebufferHelper::~FramebufferHelper() = default;
+
+FramebufferHelper::FramebufferHelper(FramebufferHelper &&other) : Resource(std::move(other))
+{
+    mFramebuffer = std::move(other.mFramebuffer);
+}
+
+FramebufferHelper &FramebufferHelper::operator=(FramebufferHelper &&other)
+{
+    std::swap(mUse, other.mUse);
+    std::swap(mFramebuffer, other.mFramebuffer);
+    return *this;
+}
+
+angle::Result FramebufferHelper::init(ContextVk *contextVk,
+                                      const VkFramebufferCreateInfo &createInfo)
+{
+    ANGLE_VK_TRY(contextVk, mFramebuffer.init(contextVk->getDevice(), createInfo));
+    return angle::Result::Continue;
+}
+
+void FramebufferHelper::destroy(RendererVk *rendererVk)
+{
+    mFramebuffer.destroy(rendererVk->getDevice());
+}
+
+void FramebufferHelper::release(ContextVk *contextVk)
+{
+    contextVk->addGarbage(&mFramebuffer);
+}
+
 // DescriptorSetDesc implementation.
 size_t DescriptorSetDesc::hash() const
 {
@@ -5315,17 +5373,6 @@ void SharedCacheKeyManager<SharedCacheKeyT>::addKey(const SharedCacheKeyT &key)
     mSharedCacheKeys.emplace_back(key);
 }
 
-void DestroyCachedObject(ContextVk *contextVk, const FramebufferDesc &desc)
-{
-    contextVk->getShareGroup()->getFramebufferCache().erase(contextVk, desc);
-}
-
-void DestroyCachedObject(ContextVk *contextVk, const DescriptorSetDescAndPool &descAndPool)
-{
-    ASSERT(descAndPool.mPool != nullptr);
-    descAndPool.mPool->releaseCachedDescriptorSet(contextVk, descAndPool.mDesc);
-}
-
 template <class SharedCacheKeyT>
 void SharedCacheKeyManager<SharedCacheKeyT>::releaseKeys(ContextVk *contextVk)
 {
@@ -5335,7 +5382,7 @@ void SharedCacheKeyManager<SharedCacheKeyT>::releaseKeys(ContextVk *contextVk)
         {
             // Immediate destroy the cached object and the key itself when first releaseRef call is
             // made
-            DestroyCachedObject(contextVk, *(*sharedCacheKey.get()));
+            ReleaseCachedObject(contextVk, *(*sharedCacheKey.get()));
             *sharedCacheKey.get() = nullptr;
         }
     }
@@ -5343,13 +5390,26 @@ void SharedCacheKeyManager<SharedCacheKeyT>::releaseKeys(ContextVk *contextVk)
 }
 
 template <class SharedCacheKeyT>
-void SharedCacheKeyManager<SharedCacheKeyT>::destroy()
+void SharedCacheKeyManager<SharedCacheKeyT>::destroyKeys()
 {
-    // Caller must have already freed all caches
     for (SharedCacheKeyT &sharedCacheKey : mSharedCacheKeys)
     {
-        ASSERT(*sharedCacheKey.get() == nullptr);
+        // destroy the cache key
+        if (*sharedCacheKey.get() != nullptr)
+        {
+            // Immediate destroy the cached object and the key
+            DestroyCachedObject(*(*sharedCacheKey.get()));
+            *sharedCacheKey.get() = nullptr;
+        }
     }
+    mSharedCacheKeys.clear();
+}
+
+template <class SharedCacheKeyT>
+void SharedCacheKeyManager<SharedCacheKeyT>::clear()
+{
+    // Caller must have already freed all caches
+    assertAllEntriesDestroyed();
     mSharedCacheKeys.clear();
 }
 
@@ -5364,6 +5424,16 @@ bool SharedCacheKeyManager<SharedCacheKeyT>::containsKey(const SharedCacheKeyT &
         }
     }
     return false;
+}
+
+template <class SharedCacheKeyT>
+void SharedCacheKeyManager<SharedCacheKeyT>::assertAllEntriesDestroyed()
+{
+    // Caller must have already freed all caches
+    for (SharedCacheKeyT &sharedCacheKey : mSharedCacheKeys)
+    {
+        ASSERT(*sharedCacheKey.get() == nullptr);
+    }
 }
 
 // Explict instantiate for FramebufferCacheManager
