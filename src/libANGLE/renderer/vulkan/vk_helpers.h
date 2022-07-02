@@ -135,28 +135,6 @@ enum class DescriptorCacheResult
     NewAllocation,
 };
 
-// Class DescriptorSetHelper. This is a wrapper of VkDescriptorSet with GPU resource use tracking.
-class DescriptorSetHelper final : public Resource
-{
-  public:
-    DescriptorSetHelper(const VkDescriptorSet &descriptorSet) { mDescriptorSet = descriptorSet; }
-    DescriptorSetHelper(DescriptorSetHelper &&other) : Resource(std::move(other))
-    {
-        mDescriptorSet       = other.mDescriptorSet;
-        other.mDescriptorSet = VK_NULL_HANDLE;
-    }
-
-    void destroy(VkDevice device, DescriptorPool &pool)
-    {
-        pool.freeDescriptorSets(device, 1, &mDescriptorSet);
-        mDescriptorSet = VK_NULL_HANDLE;
-    }
-
-  private:
-    VkDescriptorSet mDescriptorSet;
-};
-using DescriptorSetList = std::deque<DescriptorSetHelper>;
-
 // Uses DescriptorPool to allocate descriptor sets as needed. If a descriptor pool becomes full, we
 // allocate new pools internally as needed. RendererVk takes care of the lifetime of the discarded
 // pools. Note that we used a fixed layout for descriptor pools in ANGLE.
@@ -194,28 +172,17 @@ class DescriptorPoolHelper final : public Resource
 
     bool getCachedDescriptorSet(const DescriptorSetDesc &desc, VkDescriptorSet *descriptorSetOut);
 
-    void releaseCachedDescriptorSet(ContextVk *contextVk, const DescriptorSetDesc &desc);
     void resetCache();
-    // Scan descriptorSet garbage list and destroy all GPU completed garbage
-    void cleanupGarbage(Context *context);
 
-    size_t getTotalCacheSize() const { return mDescriptorSetCache.getTotalCacheSize(); }
     size_t getTotalCacheKeySizeBytes() const
     {
         return mDescriptorSetCache.getTotalCacheKeySizeBytes();
     }
 
   private:
-    // Reset entire descriptorSet garbage list. This should only used when pool gets reset.
-    void resetGarbageList();
-
     uint32_t mFreeDescriptorSets;
     DescriptorPool mDescriptorPool;
     DescriptorSetCache mDescriptorSetCache;
-    // Because freeing descriptorSet require DescriptorPool, we store individually released
-    // descriptor sets here instead of usual garbage list in the renderer to avoid complicated
-    // threading issues and other weirdness associated with pooled object destruction.
-    DescriptorSetList mDescriptorSetGarbageList;
 };
 
 using RefCountedDescriptorPoolHelper  = RefCounted<DescriptorPoolHelper>;
@@ -262,14 +229,7 @@ class DynamicDescriptorPool final : angle::NonCopyable
     template <typename Accumulator>
     void accumulateDescriptorCacheStats(VulkanCacheType cacheType, Accumulator *accum) const
     {
-        size_t cacheSize = 0;
-        for (RefCountedDescriptorPoolHelper *pool : mDescriptorPools)
-        {
-            cacheSize += pool->get().getTotalCacheSize();
-        }
-        CacheStats adjusted = mCacheStats;
-        adjusted.setSize(static_cast<uint32_t>(cacheSize));
-        accum->accumulateCacheStats(cacheType, adjusted);
+        accum->accumulateCacheStats(cacheType, mCacheStats);
     }
 
     void resetDescriptorCacheStats() { mCacheStats.resetHitAndMissCount(); }
@@ -772,8 +732,6 @@ class PipelineBarrier : angle::NonCopyable
     std::vector<VkImageMemoryBarrier> mImageMemoryBarriers;
 };
 using PipelineBarrierArray = angle::PackedEnumMap<PipelineStage, PipelineBarrier>;
-
-class FramebufferHelper;
 
 enum class MemoryCoherency
 {
@@ -2872,38 +2830,6 @@ class BufferViewHelper final : public Resource
     // Serial for the buffer view.  An ImageOrBufferViewSerial is used for texture buffers so that
     // they fit together with the other texture types.
     ImageOrBufferViewSerial mViewSerial;
-};
-
-class FramebufferHelper : public Resource
-{
-  public:
-    FramebufferHelper();
-    ~FramebufferHelper() override;
-
-    FramebufferHelper(FramebufferHelper &&other);
-    FramebufferHelper &operator=(FramebufferHelper &&other);
-
-    angle::Result init(ContextVk *contextVk, const VkFramebufferCreateInfo &createInfo);
-    void destroy(RendererVk *rendererVk);
-    void release(ContextVk *contextVk);
-
-    bool valid() { return mFramebuffer.valid(); }
-
-    const Framebuffer &getFramebuffer() const
-    {
-        ASSERT(mFramebuffer.valid());
-        return mFramebuffer;
-    }
-
-    Framebuffer &getFramebuffer()
-    {
-        ASSERT(mFramebuffer.valid());
-        return mFramebuffer;
-    }
-
-  private:
-    // Vulkan object.
-    Framebuffer mFramebuffer;
 };
 
 class ShaderProgramHelper : angle::NonCopyable

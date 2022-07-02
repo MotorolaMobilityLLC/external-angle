@@ -3008,6 +3008,8 @@ angle::Result BufferPool::allocateBuffer(Context *context,
     VmaVirtualAllocation allocation;
     VkDeviceSize offset;
     VkDeviceSize alignedSize = roundUp(sizeInBytes, alignment);
+    bool extraBufferLoggingAndChecking =
+        context->getRenderer()->getFeatures().extraBufferLoggingAndChecking.enabled;
 
     if (alignedSize >= kMaxBufferSizeForSuballocation)
     {
@@ -3039,6 +3041,14 @@ angle::Result BufferPool::allocateBuffer(Context *context,
         VkDeviceSize sizeOut;
         ANGLE_TRY(AllocateBufferMemory(context, memoryPropertyFlags, &memoryPropertyFlagsOut,
                                        nullptr, &buffer.get(), &deviceMemory.get(), &sizeOut));
+        // Explicitly check the ASSERT on Android-Swiftshader
+        if (extraBufferLoggingAndChecking && !(sizeOut >= alignedSize))
+        {
+            ALOGE(
+                "BufferPool::allocateBuffer(): ASSERT FAILED: \"sizeOut >= alignedSize\""
+                " with sizeOut = %" PRIu64 " and alignSize = %" PRIu64,
+                sizeOut, alignedSize);
+        }
         ASSERT(sizeOut >= alignedSize);
 
         suballocation->initWithEntireBuffer(context, buffer.get(), deviceMemory.get(),
@@ -3064,10 +3074,25 @@ angle::Result BufferPool::allocateBuffer(Context *context,
             continue;
         }
 
+        if (extraBufferLoggingAndChecking)
+        {
+            ALOGI("BufferPool::allocateBuffer(): about to call block->allocate(alignedSize(%" PRIu64
+                  "), alignment(%" PRIu64 "), ...)",
+                  alignedSize, alignment);
+        }
         if (block->allocate(alignedSize, alignment, &allocation, &offset) == VK_SUCCESS)
         {
+            if (extraBufferLoggingAndChecking)
+            {
+                ALOGI("BufferPool::allocateBuffer():\t block->allocate() success: offset=%" PRIu64,
+                      offset);
+            }
             suballocation->init(context->getDevice(), block.get(), allocation, offset, alignedSize);
             return angle::Result::Continue;
+        }
+        if (extraBufferLoggingAndChecking)
+        {
+            ALOGI("BufferPool::allocateBuffer():\t block->allocate() DID NOT return VK_SUCCESS");
         }
         ++iter;
     }
@@ -3177,10 +3202,6 @@ angle::Result DescriptorPoolHelper::init(Context *context,
 {
     RendererVk *renderer = context->getRenderer();
 
-    // If there are descriptorSet garbage, they no longer relevant since the entire pool is going to
-    // be destroyed.
-    resetGarbageList();
-
     if (mDescriptorPool.valid())
     {
         ASSERT(!isCurrentlyInUse(renderer->getLastCompletedQueueSerial()));
@@ -3197,10 +3218,10 @@ angle::Result DescriptorPoolHelper::init(Context *context,
 
     VkDescriptorPoolCreateInfo descriptorPoolInfo = {};
     descriptorPoolInfo.sType                      = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-    descriptorPoolInfo.flags         = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
-    descriptorPoolInfo.maxSets       = maxSets;
-    descriptorPoolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
-    descriptorPoolInfo.pPoolSizes    = poolSizes.data();
+    descriptorPoolInfo.flags                      = 0;
+    descriptorPoolInfo.maxSets                    = maxSets;
+    descriptorPoolInfo.poolSizeCount              = static_cast<uint32_t>(poolSizes.size());
+    descriptorPoolInfo.pPoolSizes                 = poolSizes.data();
 
     mFreeDescriptorSets = maxSets;
 
@@ -3219,29 +3240,6 @@ void DescriptorPoolHelper::release(ContextVk *contextVk, VulkanCacheType cacheTy
 {
     contextVk->addGarbage(&mDescriptorPool);
     mDescriptorSetCache.resetCache();
-}
-
-void DescriptorPoolHelper::resetGarbageList()
-{
-    mFreeDescriptorSets += mDescriptorSetGarbageList.size();
-    mDescriptorSetGarbageList.clear();
-}
-
-void DescriptorPoolHelper::cleanupGarbage(Context *context)
-{
-    RendererVk *rendererVk          = context->getRenderer();
-    Serial lastCompletedQueueSerial = rendererVk->getLastCompletedQueueSerial();
-    while (!mDescriptorSetGarbageList.empty())
-    {
-        DescriptorSetHelper &garbage = mDescriptorSetGarbageList.front();
-        if (garbage.isCurrentlyInUse(lastCompletedQueueSerial))
-        {
-            break;
-        }
-        garbage.destroy(rendererVk->getDevice(), mDescriptorPool);
-        mDescriptorSetGarbageList.pop_front();
-        mFreeDescriptorSets++;
-    }
 }
 
 angle::Result DescriptorPoolHelper::allocateDescriptorSets(
@@ -3286,21 +3284,6 @@ bool DescriptorPoolHelper::getCachedDescriptorSet(const DescriptorSetDesc &desc,
                                                   VkDescriptorSet *descriptorSetOut)
 {
     return mDescriptorSetCache.getDescriptorSet(desc, descriptorSetOut);
-}
-
-void DescriptorPoolHelper::releaseCachedDescriptorSet(ContextVk *contextVk,
-                                                      const DescriptorSetDesc &desc)
-{
-    VkDescriptorSet descriptorSet;
-    if (getCachedDescriptorSet(desc, &descriptorSet))
-    {
-        // Remove from the cache hash map
-        mDescriptorSetCache.eraseDescriptorSet(desc);
-        // Wrap it with helper object so that it can be GPU tracked and add it to resource list.
-        DescriptorSetHelper descriptorSetHelper(descriptorSet);
-        contextVk->retainResource(&descriptorSetHelper);
-        mDescriptorSetGarbageList.push_back(std::move(descriptorSetHelper));
-    }
 }
 
 void DescriptorPoolHelper::resetCache()
@@ -3390,19 +3373,9 @@ angle::Result DynamicDescriptorPool::allocateDescriptorSets(
     ASSERT(!mDescriptorPools.empty());
     ASSERT(descriptorSetLayout.getHandle() == mCachedDescriptorSetLayout);
 
-    bool hasCapacity = false;
-    if (bindingOut->valid())
+    if (!bindingOut->valid() || !bindingOut->get().hasCapacity(descriptorSetCount))
     {
-        // Free descriptorSet garbage before check
-        bindingOut->get().cleanupGarbage(context);
-        hasCapacity = bindingOut->get().hasCapacity(descriptorSetCount);
-    }
-
-    if (!hasCapacity)
-    {
-        mDescriptorPools[mCurrentPoolIndex]->get().cleanupGarbage(context);
-        hasCapacity = mDescriptorPools[mCurrentPoolIndex]->get().hasCapacity(descriptorSetCount);
-        if (!hasCapacity)
+        if (!mDescriptorPools[mCurrentPoolIndex]->get().hasCapacity(descriptorSetCount))
         {
             ANGLE_TRY(allocateNewPool(context));
         }
@@ -3437,26 +3410,16 @@ angle::Result DynamicDescriptorPool::getOrAllocateDescriptorSet(
         }
     }
 
-    mCacheStats.miss();
+    mCacheStats.missAndIncrementSize();
 
     ASSERT(!mDescriptorPools.empty());
     ASSERT(descriptorSetLayout.getHandle() == mCachedDescriptorSetLayout);
 
     constexpr uint32_t kDescriptorSetCount = 1;
 
-    bool hasCapacity = false;
-    if (bindingOut->valid())
+    if (!bindingOut->valid() || !bindingOut->get().hasCapacity(kDescriptorSetCount))
     {
-        // Free descriptorSet garbage before check
-        bindingOut->get().cleanupGarbage(context);
-        hasCapacity = bindingOut->get().hasCapacity(kDescriptorSetCount);
-    }
-
-    if (!hasCapacity)
-    {
-        mDescriptorPools[mCurrentPoolIndex]->get().cleanupGarbage(context);
-        hasCapacity = mDescriptorPools[mCurrentPoolIndex]->get().hasCapacity(kDescriptorSetCount);
-        if (!hasCapacity)
+        if (!mDescriptorPools[mCurrentPoolIndex]->get().hasCapacity(kDescriptorSetCount))
         {
             ANGLE_TRY(allocateNewPool(context));
         }
@@ -9266,40 +9229,6 @@ VkColorComponentFlags ImageHelper::getEmulatedChannelsMask() const
            (textureFmt.redBits != 0));
 
     return emulatedChannelsMask;
-}
-
-// FramebufferHelper implementation.
-FramebufferHelper::FramebufferHelper() = default;
-
-FramebufferHelper::~FramebufferHelper() = default;
-
-FramebufferHelper::FramebufferHelper(FramebufferHelper &&other) : Resource(std::move(other))
-{
-    mFramebuffer = std::move(other.mFramebuffer);
-}
-
-FramebufferHelper &FramebufferHelper::operator=(FramebufferHelper &&other)
-{
-    std::swap(mUse, other.mUse);
-    std::swap(mFramebuffer, other.mFramebuffer);
-    return *this;
-}
-
-angle::Result FramebufferHelper::init(ContextVk *contextVk,
-                                      const VkFramebufferCreateInfo &createInfo)
-{
-    ANGLE_VK_TRY(contextVk, mFramebuffer.init(contextVk->getDevice(), createInfo));
-    return angle::Result::Continue;
-}
-
-void FramebufferHelper::destroy(RendererVk *rendererVk)
-{
-    mFramebuffer.destroy(rendererVk->getDevice());
-}
-
-void FramebufferHelper::release(ContextVk *contextVk)
-{
-    contextVk->addGarbage(&mFramebuffer);
 }
 
 LayerMode GetLayerMode(const vk::ImageHelper &image, uint32_t layerCount)
