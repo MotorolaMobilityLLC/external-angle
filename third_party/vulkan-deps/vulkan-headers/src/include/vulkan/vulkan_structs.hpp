@@ -45053,6 +45053,125 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MultisamplePropertiesEXT;
   };
 
+  struct MultisampledRenderToSingleSampledInfoEXT
+  {
+    using NativeType = VkMultisampledRenderToSingleSampledInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMultisampledRenderToSingleSampledInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      MultisampledRenderToSingleSampledInfoEXT( VULKAN_HPP_NAMESPACE::Bool32              multisampledRenderToSingleSampledEnable_ = {},
+                                                VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples_ = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1,
+                                                const void *                              pNext_                = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , multisampledRenderToSingleSampledEnable( multisampledRenderToSingleSampledEnable_ )
+      , rasterizationSamples( rasterizationSamples_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR MultisampledRenderToSingleSampledInfoEXT( MultisampledRenderToSingleSampledInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    MultisampledRenderToSingleSampledInfoEXT( VkMultisampledRenderToSingleSampledInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : MultisampledRenderToSingleSampledInfoEXT( *reinterpret_cast<MultisampledRenderToSingleSampledInfoEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    MultisampledRenderToSingleSampledInfoEXT & operator=( MultisampledRenderToSingleSampledInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    MultisampledRenderToSingleSampledInfoEXT & operator=( VkMultisampledRenderToSingleSampledInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::MultisampledRenderToSingleSampledInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 MultisampledRenderToSingleSampledInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 MultisampledRenderToSingleSampledInfoEXT &
+      setMultisampledRenderToSingleSampledEnable( VULKAN_HPP_NAMESPACE::Bool32 multisampledRenderToSingleSampledEnable_ ) VULKAN_HPP_NOEXCEPT
+    {
+      multisampledRenderToSingleSampledEnable = multisampledRenderToSingleSampledEnable_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 MultisampledRenderToSingleSampledInfoEXT &
+                            setRasterizationSamples( VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples_ ) VULKAN_HPP_NOEXCEPT
+    {
+      rasterizationSamples = rasterizationSamples_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkMultisampledRenderToSingleSampledInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkMultisampledRenderToSingleSampledInfoEXT *>( this );
+    }
+
+    explicit operator VkMultisampledRenderToSingleSampledInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkMultisampledRenderToSingleSampledInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::SampleCountFlagBits const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, multisampledRenderToSingleSampledEnable, rasterizationSamples );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( MultisampledRenderToSingleSampledInfoEXT const & ) const = default;
+#else
+    bool operator==( MultisampledRenderToSingleSampledInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( multisampledRenderToSingleSampledEnable == rhs.multisampledRenderToSingleSampledEnable ) &&
+             ( rasterizationSamples == rhs.rasterizationSamples );
+#  endif
+    }
+
+    bool operator!=( MultisampledRenderToSingleSampledInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType       sType                                   = StructureType::eMultisampledRenderToSingleSampledInfoEXT;
+    const void *                              pNext                                   = {};
+    VULKAN_HPP_NAMESPACE::Bool32              multisampledRenderToSingleSampledEnable = {};
+    VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples                    = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1;
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::MultisampledRenderToSingleSampledInfoEXT ) == sizeof( VkMultisampledRenderToSingleSampledInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::MultisampledRenderToSingleSampledInfoEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::MultisampledRenderToSingleSampledInfoEXT>::value,
+                            "MultisampledRenderToSingleSampledInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eMultisampledRenderToSingleSampledInfoEXT>
+  {
+    using Type = MultisampledRenderToSingleSampledInfoEXT;
+  };
+
   struct MultiviewPerViewAttributesInfoNVX
   {
     using NativeType = VkMultiviewPerViewAttributesInfoNVX;
@@ -58342,6 +58461,115 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceMultiDrawPropertiesEXT;
   };
 
+  struct PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 multisampledRenderToSingleSampled_ = {},
+                                                                                     void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , multisampledRenderToSingleSampled( multisampledRenderToSingleSampled_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT( PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const & rhs )
+      VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT( VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT(
+          *reinterpret_cast<PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT &
+      operator=( PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT &
+      operator=( VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT &
+                            setMultisampledRenderToSingleSampled( VULKAN_HPP_NAMESPACE::Bool32 multisampledRenderToSingleSampled_ ) VULKAN_HPP_NOEXCEPT
+    {
+      multisampledRenderToSingleSampled = multisampledRenderToSingleSampled_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT *>( this );
+    }
+
+    explicit operator VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, multisampledRenderToSingleSampled );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( multisampledRenderToSingleSampled == rhs.multisampledRenderToSingleSampled );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                             = StructureType::ePhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT;
+    void *                              pNext                             = {};
+    VULKAN_HPP_NAMESPACE::Bool32        multisampledRenderToSingleSampled = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT ) ==
+                              sizeof( VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT>::value,
+                            "PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT>
+  {
+    using Type = PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT;
+  };
+
   struct PhysicalDeviceMultiviewFeatures
   {
     using NativeType = VkPhysicalDeviceMultiviewFeatures;
@@ -65413,6 +65641,205 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::ePhysicalDeviceShaderIntegerFunctions2FeaturesINTEL>
   {
     using Type = PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL;
+  };
+
+  struct PhysicalDeviceShaderModuleIdentifierFeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceShaderModuleIdentifierFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderModuleIdentifierFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 shaderModuleIdentifier_ = {},
+                                                                          void *                       pNext_                  = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , shaderModuleIdentifier( shaderModuleIdentifier_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      PhysicalDeviceShaderModuleIdentifierFeaturesEXT( PhysicalDeviceShaderModuleIdentifierFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderModuleIdentifierFeaturesEXT( VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceShaderModuleIdentifierFeaturesEXT( *reinterpret_cast<PhysicalDeviceShaderModuleIdentifierFeaturesEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceShaderModuleIdentifierFeaturesEXT & operator=( PhysicalDeviceShaderModuleIdentifierFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderModuleIdentifierFeaturesEXT & operator=( VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderModuleIdentifierFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderModuleIdentifierFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderModuleIdentifierFeaturesEXT &
+                            setShaderModuleIdentifier( VULKAN_HPP_NAMESPACE::Bool32 shaderModuleIdentifier_ ) VULKAN_HPP_NOEXCEPT
+    {
+      shaderModuleIdentifier = shaderModuleIdentifier_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT *>( this );
+    }
+
+    explicit operator VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, shaderModuleIdentifier );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceShaderModuleIdentifierFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceShaderModuleIdentifierFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderModuleIdentifier == rhs.shaderModuleIdentifier );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceShaderModuleIdentifierFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                  = StructureType::ePhysicalDeviceShaderModuleIdentifierFeaturesEXT;
+    void *                              pNext                  = {};
+    VULKAN_HPP_NAMESPACE::Bool32        shaderModuleIdentifier = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderModuleIdentifierFeaturesEXT ) ==
+                              sizeof( VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderModuleIdentifierFeaturesEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderModuleIdentifierFeaturesEXT>::value,
+                            "PhysicalDeviceShaderModuleIdentifierFeaturesEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceShaderModuleIdentifierFeaturesEXT>
+  {
+    using Type = PhysicalDeviceShaderModuleIdentifierFeaturesEXT;
+  };
+
+  struct PhysicalDeviceShaderModuleIdentifierPropertiesEXT
+  {
+    using NativeType = VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceShaderModuleIdentifierPropertiesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR_14
+      PhysicalDeviceShaderModuleIdentifierPropertiesEXT( std::array<uint8_t, VK_UUID_SIZE> const & shaderModuleIdentifierAlgorithmUUID_ = {},
+                                                         void *                                    pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , shaderModuleIdentifierAlgorithmUUID( shaderModuleIdentifierAlgorithmUUID_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR_14
+      PhysicalDeviceShaderModuleIdentifierPropertiesEXT( PhysicalDeviceShaderModuleIdentifierPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderModuleIdentifierPropertiesEXT( VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceShaderModuleIdentifierPropertiesEXT( *reinterpret_cast<PhysicalDeviceShaderModuleIdentifierPropertiesEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceShaderModuleIdentifierPropertiesEXT &
+      operator=( PhysicalDeviceShaderModuleIdentifierPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderModuleIdentifierPropertiesEXT & operator=( VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderModuleIdentifierPropertiesEXT const *>( &rhs );
+      return *this;
+    }
+
+    explicit operator VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT *>( this );
+    }
+
+    explicit operator VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint8_t, VK_UUID_SIZE> const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, shaderModuleIdentifierAlgorithmUUID );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceShaderModuleIdentifierPropertiesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceShaderModuleIdentifierPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderModuleIdentifierAlgorithmUUID == rhs.shaderModuleIdentifierAlgorithmUUID );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceShaderModuleIdentifierPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                         sType = StructureType::ePhysicalDeviceShaderModuleIdentifierPropertiesEXT;
+    void *                                                      pNext = {};
+    VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint8_t, VK_UUID_SIZE> shaderModuleIdentifierAlgorithmUUID = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderModuleIdentifierPropertiesEXT ) ==
+                              sizeof( VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderModuleIdentifierPropertiesEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderModuleIdentifierPropertiesEXT>::value,
+                            "PhysicalDeviceShaderModuleIdentifierPropertiesEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceShaderModuleIdentifierPropertiesEXT>
+  {
+    using Type = PhysicalDeviceShaderModuleIdentifierPropertiesEXT;
   };
 
   struct PhysicalDeviceShaderSMBuiltinsFeaturesNV
@@ -75308,6 +75735,138 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::ePipelineSampleLocationsStateCreateInfoEXT>
   {
     using Type = PipelineSampleLocationsStateCreateInfoEXT;
+  };
+
+  struct PipelineShaderStageModuleIdentifierCreateInfoEXT
+  {
+    using NativeType = VkPipelineShaderStageModuleIdentifierCreateInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineShaderStageModuleIdentifierCreateInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PipelineShaderStageModuleIdentifierCreateInfoEXT( uint32_t        identifierSize_ = {},
+                                                                           const uint8_t * pIdentifier_    = {},
+                                                                           const void *    pNext_          = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , identifierSize( identifierSize_ )
+      , pIdentifier( pIdentifier_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      PipelineShaderStageModuleIdentifierCreateInfoEXT( PipelineShaderStageModuleIdentifierCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PipelineShaderStageModuleIdentifierCreateInfoEXT( VkPipelineShaderStageModuleIdentifierCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PipelineShaderStageModuleIdentifierCreateInfoEXT( *reinterpret_cast<PipelineShaderStageModuleIdentifierCreateInfoEXT const *>( &rhs ) )
+    {
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    PipelineShaderStageModuleIdentifierCreateInfoEXT( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const uint8_t> const & identifier_,
+                                                      const void *                                                         pNext_ = nullptr )
+      : pNext( pNext_ ), identifierSize( static_cast<uint32_t>( identifier_.size() ) ), pIdentifier( identifier_.data() )
+    {
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif   /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PipelineShaderStageModuleIdentifierCreateInfoEXT & operator=( PipelineShaderStageModuleIdentifierCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PipelineShaderStageModuleIdentifierCreateInfoEXT & operator=( VkPipelineShaderStageModuleIdentifierCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PipelineShaderStageModuleIdentifierCreateInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PipelineShaderStageModuleIdentifierCreateInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PipelineShaderStageModuleIdentifierCreateInfoEXT & setIdentifierSize( uint32_t identifierSize_ ) VULKAN_HPP_NOEXCEPT
+    {
+      identifierSize = identifierSize_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PipelineShaderStageModuleIdentifierCreateInfoEXT & setPIdentifier( const uint8_t * pIdentifier_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pIdentifier = pIdentifier_;
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    PipelineShaderStageModuleIdentifierCreateInfoEXT &
+      setIdentifier( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const uint8_t> const & identifier_ ) VULKAN_HPP_NOEXCEPT
+    {
+      identifierSize = static_cast<uint32_t>( identifier_.size() );
+      pIdentifier    = identifier_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    explicit operator VkPipelineShaderStageModuleIdentifierCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPipelineShaderStageModuleIdentifierCreateInfoEXT *>( this );
+    }
+
+    explicit operator VkPipelineShaderStageModuleIdentifierCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPipelineShaderStageModuleIdentifierCreateInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, uint32_t const &, const uint8_t * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, identifierSize, pIdentifier );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PipelineShaderStageModuleIdentifierCreateInfoEXT const & ) const = default;
+#else
+    bool operator==( PipelineShaderStageModuleIdentifierCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( identifierSize == rhs.identifierSize ) && ( pIdentifier == rhs.pIdentifier );
+#  endif
+    }
+
+    bool operator!=( PipelineShaderStageModuleIdentifierCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType          = StructureType::ePipelineShaderStageModuleIdentifierCreateInfoEXT;
+    const void *                        pNext          = {};
+    uint32_t                            identifierSize = {};
+    const uint8_t *                     pIdentifier    = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PipelineShaderStageModuleIdentifierCreateInfoEXT ) ==
+                              sizeof( VkPipelineShaderStageModuleIdentifierCreateInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PipelineShaderStageModuleIdentifierCreateInfoEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PipelineShaderStageModuleIdentifierCreateInfoEXT>::value,
+                            "PipelineShaderStageModuleIdentifierCreateInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePipelineShaderStageModuleIdentifierCreateInfoEXT>
+  {
+    using Type = PipelineShaderStageModuleIdentifierCreateInfoEXT;
   };
 
   struct PipelineShaderStageRequiredSubgroupSizeCreateInfo
@@ -86102,6 +86661,100 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ShaderModuleCreateInfo;
   };
 
+  struct ShaderModuleIdentifierEXT
+  {
+    using NativeType = VkShaderModuleIdentifierEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eShaderModuleIdentifierEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR_14 ShaderModuleIdentifierEXT( uint32_t                                                              identifierSize_ = {},
+                                                       std::array<uint8_t, VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT> const & identifier_     = {},
+                                                       void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , identifierSize( identifierSize_ )
+      , identifier( identifier_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderModuleIdentifierEXT( ShaderModuleIdentifierEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ShaderModuleIdentifierEXT( VkShaderModuleIdentifierEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ShaderModuleIdentifierEXT( *reinterpret_cast<ShaderModuleIdentifierEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ShaderModuleIdentifierEXT & operator=( ShaderModuleIdentifierEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ShaderModuleIdentifierEXT & operator=( VkShaderModuleIdentifierEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ShaderModuleIdentifierEXT const *>( &rhs );
+      return *this;
+    }
+
+    explicit operator VkShaderModuleIdentifierEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkShaderModuleIdentifierEXT *>( this );
+    }
+
+    explicit operator VkShaderModuleIdentifierEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkShaderModuleIdentifierEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               uint32_t const &,
+               VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint8_t, VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT> const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, identifierSize, identifier );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ShaderModuleIdentifierEXT const & ) const = default;
+#else
+    bool operator==( ShaderModuleIdentifierEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( identifierSize == rhs.identifierSize ) && ( identifier == rhs.identifier );
+#  endif
+    }
+
+    bool operator!=( ShaderModuleIdentifierEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                                                     sType          = StructureType::eShaderModuleIdentifierEXT;
+    void *                                                                                  pNext          = {};
+    uint32_t                                                                                identifierSize = {};
+    VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint8_t, VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT> identifier     = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ShaderModuleIdentifierEXT ) == sizeof( VkShaderModuleIdentifierEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ShaderModuleIdentifierEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ShaderModuleIdentifierEXT>::value,
+                            "ShaderModuleIdentifierEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eShaderModuleIdentifierEXT>
+  {
+    using Type = ShaderModuleIdentifierEXT;
+  };
+
   struct ShaderModuleValidationCacheCreateInfoEXT
   {
     using NativeType = VkShaderModuleValidationCacheCreateInfoEXT;
@@ -87965,6 +88618,94 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::eSubpassFragmentDensityMapOffsetEndInfoQCOM>
   {
     using Type = SubpassFragmentDensityMapOffsetEndInfoQCOM;
+  };
+
+  struct SubpassResolvePerformanceQueryEXT
+  {
+    using NativeType = VkSubpassResolvePerformanceQueryEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSubpassResolvePerformanceQueryEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SubpassResolvePerformanceQueryEXT( VULKAN_HPP_NAMESPACE::Bool32 optimal_ = {}, void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , optimal( optimal_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR SubpassResolvePerformanceQueryEXT( SubpassResolvePerformanceQueryEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SubpassResolvePerformanceQueryEXT( VkSubpassResolvePerformanceQueryEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SubpassResolvePerformanceQueryEXT( *reinterpret_cast<SubpassResolvePerformanceQueryEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    SubpassResolvePerformanceQueryEXT & operator=( SubpassResolvePerformanceQueryEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SubpassResolvePerformanceQueryEXT & operator=( VkSubpassResolvePerformanceQueryEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SubpassResolvePerformanceQueryEXT const *>( &rhs );
+      return *this;
+    }
+
+    explicit operator VkSubpassResolvePerformanceQueryEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSubpassResolvePerformanceQueryEXT *>( this );
+    }
+
+    explicit operator VkSubpassResolvePerformanceQueryEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSubpassResolvePerformanceQueryEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, optimal );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( SubpassResolvePerformanceQueryEXT const & ) const = default;
+#else
+    bool operator==( SubpassResolvePerformanceQueryEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( optimal == rhs.optimal );
+#  endif
+    }
+
+    bool operator!=( SubpassResolvePerformanceQueryEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType   = StructureType::eSubpassResolvePerformanceQueryEXT;
+    void *                              pNext   = {};
+    VULKAN_HPP_NAMESPACE::Bool32        optimal = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::SubpassResolvePerformanceQueryEXT ) == sizeof( VkSubpassResolvePerformanceQueryEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::SubpassResolvePerformanceQueryEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SubpassResolvePerformanceQueryEXT>::value,
+                            "SubpassResolvePerformanceQueryEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eSubpassResolvePerformanceQueryEXT>
+  {
+    using Type = SubpassResolvePerformanceQueryEXT;
   };
 
   struct SubpassShadingPipelineCreateInfoHUAWEI

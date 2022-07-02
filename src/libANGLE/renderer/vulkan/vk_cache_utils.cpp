@@ -789,8 +789,6 @@ angle::Result CreateRenderPass2(Context *context,
     renderToTextureInfo.sType = VK_STRUCTURE_TYPE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_INFO_EXT;
     renderToTextureInfo.multisampledRenderToSingleSampledEnable = true;
     renderToTextureInfo.rasterizationSamples = gl_vk::GetSamples(renderToTextureSamples);
-    renderToTextureInfo.depthResolveMode     = VK_RESOLVE_MODE_SAMPLE_ZERO_BIT;
-    renderToTextureInfo.stencilResolveMode   = VK_RESOLVE_MODE_SAMPLE_ZERO_BIT;
 
     // Append the depth/stencil resolve attachment to the pNext chain of last subpass, if any.
     if (depthStencilResolve.pDepthStencilResolveAttachment != nullptr)
@@ -3951,6 +3949,40 @@ void PipelineHelper::addTransition(GraphicsPipelineTransitionBits bits,
     mTransitions.emplace_back(bits, desc, pipeline);
 }
 
+// FramebufferHelper implementation.
+FramebufferHelper::FramebufferHelper() = default;
+
+FramebufferHelper::~FramebufferHelper() = default;
+
+FramebufferHelper::FramebufferHelper(FramebufferHelper &&other) : Resource(std::move(other))
+{
+    mFramebuffer = std::move(other.mFramebuffer);
+}
+
+FramebufferHelper &FramebufferHelper::operator=(FramebufferHelper &&other)
+{
+    std::swap(mUse, other.mUse);
+    std::swap(mFramebuffer, other.mFramebuffer);
+    return *this;
+}
+
+angle::Result FramebufferHelper::init(ContextVk *contextVk,
+                                      const VkFramebufferCreateInfo &createInfo)
+{
+    ANGLE_VK_TRY(contextVk, mFramebuffer.init(contextVk->getDevice(), createInfo));
+    return angle::Result::Continue;
+}
+
+void FramebufferHelper::destroy(RendererVk *rendererVk)
+{
+    mFramebuffer.destroy(rendererVk->getDevice());
+}
+
+void FramebufferHelper::release(ContextVk *contextVk)
+{
+    contextVk->addGarbage(&mFramebuffer);
+}
+
 // DescriptorSetDesc implementation.
 size_t DescriptorSetDesc::hash() const
 {
@@ -3973,6 +4005,11 @@ FramebufferDesc::FramebufferDesc()
 FramebufferDesc::~FramebufferDesc()                                       = default;
 FramebufferDesc::FramebufferDesc(const FramebufferDesc &other)            = default;
 FramebufferDesc &FramebufferDesc::operator=(const FramebufferDesc &other) = default;
+
+void FramebufferDesc::destroyCachedObject(ContextVk *contextVk)
+{
+    contextVk->getShareGroup()->getFramebufferCache().erase(contextVk, *this);
+}
 
 void FramebufferDesc::update(uint32_t index, ImageOrBufferViewSubresourceSerial serial)
 {
@@ -4814,15 +4851,14 @@ angle::Result DescriptorSetDescBuilder::updateFullActiveTextures(
     const gl::ActiveTextureArray<TextureVk *> &textures,
     const gl::SamplerBindingVector &samplers,
     bool emulateSeamfulCubeMapSampling,
-    PipelineType pipelineType,
-    const SharedDescriptorSetCacheKey &sharedCacheKey)
+    PipelineType pipelineType)
 {
     reset();
     for (gl::ShaderType shaderType : executable.getLinkedShaderStages())
     {
         ANGLE_TRY(updateExecutableActiveTexturesForShader(
             context, shaderType, variableInfoMap, executable, textures, samplers,
-            emulateSeamfulCubeMapSampling, pipelineType, sharedCacheKey));
+            emulateSeamfulCubeMapSampling, pipelineType));
     }
 
     return angle::Result::Continue;
@@ -4836,8 +4872,7 @@ angle::Result DescriptorSetDescBuilder::updateExecutableActiveTexturesForShader(
     const gl::ActiveTextureArray<TextureVk *> &textures,
     const gl::SamplerBindingVector &samplers,
     bool emulateSeamfulCubeMapSampling,
-    PipelineType pipelineType,
-    const SharedDescriptorSetCacheKey &sharedCacheKey)
+    PipelineType pipelineType)
 {
     const std::vector<gl::SamplerBinding> &samplerBindings = executable.getSamplerBindings();
     const std::vector<gl::LinkedUniform> &uniforms         = executable.getUniforms();
@@ -4885,8 +4920,6 @@ angle::Result DescriptorSetDescBuilder::updateExecutableActiveTexturesForShader(
                     textureVk->getBufferViewSerial();
                 infoDesc.imageViewSerialOrOffset = imageViewSerial.viewSerial.getValue();
 
-                textureVk->onNewTextureDescriptorSet(sharedCacheKey);
-
                 const BufferView *view = nullptr;
                 ANGLE_TRY(textureVk->getBufferViewAndRecordUse(context, nullptr, false, &view));
                 mHandles[infoIndex].bufferView = view->getHandle();
@@ -4903,8 +4936,6 @@ angle::Result DescriptorSetDescBuilder::updateExecutableActiveTexturesForShader(
 
                 ImageOrBufferViewSubresourceSerial imageViewSerial =
                     textureVk->getImageViewSubresourceSerial(samplerState);
-
-                textureVk->onNewTextureDescriptorSet(sharedCacheKey);
 
                 ImageLayout imageLayout = textureVk->getImage().getCurrentImageLayout();
 
@@ -5303,6 +5334,8 @@ void DescriptorSetDescBuilder::updateDescriptorSet(UpdateDescriptorSetsBuilder *
 template <class SharedCacheKeyT>
 void SharedCacheKeyManager<SharedCacheKeyT>::addKey(const SharedCacheKeyT &key)
 {
+    ASSERT(!containsKey(key));
+
     // If there is invalid key in the array, use it instead of keep expanding the array
     for (SharedCacheKeyT &sharedCacheKey : mSharedCacheKeys)
     {
@@ -5315,17 +5348,6 @@ void SharedCacheKeyManager<SharedCacheKeyT>::addKey(const SharedCacheKeyT &key)
     mSharedCacheKeys.emplace_back(key);
 }
 
-void DestroyCachedObject(ContextVk *contextVk, const FramebufferDesc &desc)
-{
-    contextVk->getShareGroup()->getFramebufferCache().erase(contextVk, desc);
-}
-
-void DestroyCachedObject(ContextVk *contextVk, const DescriptorSetDescAndPool &descAndPool)
-{
-    ASSERT(descAndPool.mPool != nullptr);
-    descAndPool.mPool->releaseCachedDescriptorSet(contextVk, descAndPool.mDesc);
-}
-
 template <class SharedCacheKeyT>
 void SharedCacheKeyManager<SharedCacheKeyT>::releaseKeys(ContextVk *contextVk)
 {
@@ -5335,7 +5357,7 @@ void SharedCacheKeyManager<SharedCacheKeyT>::releaseKeys(ContextVk *contextVk)
         {
             // Immediate destroy the cached object and the key itself when first releaseRef call is
             // made
-            DestroyCachedObject(contextVk, *(*sharedCacheKey.get()));
+            (*sharedCacheKey.get())->destroyCachedObject(contextVk);
             *sharedCacheKey.get() = nullptr;
         }
     }
@@ -5368,8 +5390,6 @@ bool SharedCacheKeyManager<SharedCacheKeyT>::containsKey(const SharedCacheKeyT &
 
 // Explict instantiate for FramebufferCacheManager
 template class SharedCacheKeyManager<SharedFramebufferCacheKey>;
-// Explict instantiate for DescriptorSetCacheManager
-template class SharedCacheKeyManager<SharedDescriptorSetCacheKey>;
 }  // namespace vk
 
 // FramebufferCache implementation.
