@@ -187,6 +187,7 @@ def _WriteXmlFile(root, path):
 
 
 def _RunLint(create_cache,
+             custom_lint_jar_path,
              lint_jar_path,
              backported_methods_path,
              config_path,
@@ -232,16 +233,16 @@ def _RunLint(create_cache,
 
   cmd = build_utils.JavaCmd(xmx=lint_xmx) + [
       '-cp',
-      lint_jar_path,
-      'com.android.tools.lint.Main',
+      '{}:{}'.format(lint_jar_path, custom_lint_jar_path),
+      'org.chromium.build.CustomLint',
       '--sdk-home',
       android_sdk_root,
+      '--jdk-home',
+      build_utils.JAVA_HOME,
       '--path-variables',
       f'SRC={pathvar_src}',
-      # Uncomment to easily remove fixed lint errors. This is not turned on by
-      # default due to: https://crbug.com/1256477#c5
-      #'--remove-fixed',
       '--quiet',  # Silences lint's "." progress updates.
+      '--stacktrace',  # Prints full stacktraces for internal lint errors.
       '--disable',
       ','.join(_DISABLED_ALWAYS),
   ]
@@ -327,10 +328,6 @@ def _RunLint(create_cache,
   _WriteXmlFile(project_file_root, project_xml_path)
   cmd += ['--project', project_xml_path]
 
-  logging.info('Preparing environment variables')
-  env = os.environ.copy()
-  # This is necessary so that lint errors print stack traces in stdout.
-  env['LINT_PRINT_STACKTRACE'] = 'true'
   # This filter is necessary for JDK11.
   stderr_filter = build_utils.FilterReflectiveAccessJavaWarnings
   stdout_filter = lambda x: build_utils.FilterLines(x, 'No issues found')
@@ -338,10 +335,10 @@ def _RunLint(create_cache,
   start = time.time()
   logging.debug('Lint command %s', ' '.join(cmd))
   failed = True
+
   try:
     failed = bool(
         build_utils.CheckOutput(cmd,
-                                env=env,
                                 print_stdout=True,
                                 stdout_filter=stdout_filter,
                                 stderr_filter=stderr_filter,
@@ -382,6 +379,9 @@ def _ParseArgs(argv):
   parser.add_argument('--lint-jar-path',
                       required=True,
                       help='Path to the lint jar.')
+  parser.add_argument('--custom-lint-jar-path',
+                      required=True,
+                      help='Path to our custom lint jar.')
   parser.add_argument('--backported-methods',
                       help='Path to backported methods file created by R8.')
   parser.add_argument('--cache-dir',
@@ -480,6 +480,7 @@ def main():
   depfile_deps = [p for p in possible_depfile_deps if p]
 
   _RunLint(args.create_cache,
+           args.custom_lint_jar_path,
            args.lint_jar_path,
            args.backported_methods,
            args.config_path,
