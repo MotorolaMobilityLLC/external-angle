@@ -40,6 +40,8 @@ constexpr size_t kStagingBufferSize = 1024 * 16;
 
 constexpr VkImageCreateFlags kVkImageCreateFlagsNone = 0;
 
+constexpr VkFilter kDefaultYCbCrChromaFilter = VK_FILTER_NEAREST;
+
 using StagingBufferOffsetArray = std::array<VkDeviceSize, 2>;
 
 // A dynamic buffer is conceptually an infinitely long buffer. Each time you write to the buffer,
@@ -146,11 +148,7 @@ class DescriptorSetHelper final : public Resource
         other.mDescriptorSet = VK_NULL_HANDLE;
     }
 
-    void destroy(VkDevice device, DescriptorPool &pool)
-    {
-        pool.freeDescriptorSets(device, 1, &mDescriptorSet);
-        mDescriptorSet = VK_NULL_HANDLE;
-    }
+    VkDescriptorSet getDescriptorSet() const { return mDescriptorSet; }
 
   private:
     VkDescriptorSet mDescriptorSet;
@@ -180,25 +178,22 @@ class DescriptorPoolHelper final : public Resource
     void destroy(RendererVk *renderer, VulkanCacheType cacheType);
     void release(ContextVk *contextVk, VulkanCacheType cacheType);
 
-    angle::Result allocateDescriptorSets(Context *context,
-                                         CommandBufferHelperCommon *commandBufferHelper,
-                                         const DescriptorSetLayout &descriptorSetLayout,
-                                         uint32_t descriptorSetCount,
-                                         VkDescriptorSet *descriptorSetsOut);
+    bool allocateDescriptorSet(Context *context,
+                               CommandBufferHelperCommon *commandBufferHelper,
+                               const DescriptorSetLayout &descriptorSetLayout,
+                               VkDescriptorSet *descriptorSetsOut);
 
-    angle::Result allocateAndCacheDescriptorSet(Context *context,
-                                                CommandBufferHelperCommon *commandBufferHelper,
-                                                const DescriptorSetDesc &desc,
-                                                const DescriptorSetLayout &descriptorSetLayout,
-                                                VkDescriptorSet *descriptorSetOut);
+    bool allocateAndCacheDescriptorSet(Context *context,
+                                       CommandBufferHelperCommon *commandBufferHelper,
+                                       const DescriptorSetDesc &desc,
+                                       const DescriptorSetLayout &descriptorSetLayout,
+                                       VkDescriptorSet *descriptorSetOut);
 
     bool getCachedDescriptorSet(const DescriptorSetDesc &desc, VkDescriptorSet *descriptorSetOut);
 
     void releaseCachedDescriptorSet(ContextVk *contextVk, const DescriptorSetDesc &desc);
     void destroyCachedDescriptorSet(const DescriptorSetDesc &desc);
     void resetCache();
-    // Scan descriptorSet garbage list and destroy all GPU completed garbage
-    void cleanupGarbage(Context *context);
 
     size_t getTotalCacheSize() const { return mDescriptorSetCache.getTotalCacheSize(); }
     size_t getTotalCacheKeySizeBytes() const
@@ -212,9 +207,6 @@ class DescriptorPoolHelper final : public Resource
     }
 
   private:
-    // Reset entire descriptorSet garbage list. This should only used when pool gets reset.
-    void resetGarbageList();
-
     uint32_t mFreeDescriptorSets;
     DescriptorPool mDescriptorPool;
     DescriptorSetCache mDescriptorSetCache;
@@ -252,12 +244,11 @@ class DynamicDescriptorPool final : angle::NonCopyable
 
     // We use the descriptor type to help count the number of free sets.
     // By convention, sets are indexed according to the constants in vk_cache_utils.h.
-    angle::Result allocateDescriptorSets(Context *context,
-                                         CommandBufferHelperCommon *commandBufferHelper,
-                                         const DescriptorSetLayout &descriptorSetLayout,
-                                         uint32_t descriptorSetCount,
-                                         RefCountedDescriptorPoolBinding *bindingOut,
-                                         VkDescriptorSet *descriptorSetsOut);
+    angle::Result allocateDescriptorSet(Context *context,
+                                        CommandBufferHelperCommon *commandBufferHelper,
+                                        const DescriptorSetLayout &descriptorSetLayout,
+                                        RefCountedDescriptorPoolBinding *bindingOut,
+                                        VkDescriptorSet *descriptorSetsOut);
 
     angle::Result getOrAllocateDescriptorSet(Context *context,
                                              CommandBufferHelperCommon *commandBufferHelper,
@@ -2217,6 +2208,10 @@ class ImageHelper final : public Resource, public angle::Subject
                  VkImageAspectFlags aspectFlags);
     bool hasImmutableSampler() const { return mYcbcrConversionDesc.valid(); }
     uint64_t getExternalFormat() const { return mYcbcrConversionDesc.getExternalFormat(); }
+    bool updateChromaFilter(RendererVk *rendererVk, VkFilter filter)
+    {
+        return mYcbcrConversionDesc.updateChromaFilter(rendererVk, filter);
+    }
     const YcbcrConversionDesc &getYcbcrConversionDesc() const { return mYcbcrConversionDesc; }
     void updateYcbcrConversionDesc(RendererVk *rendererVk,
                                    uint64_t externalFormat,
@@ -2232,8 +2227,6 @@ class ImageHelper final : public Resource, public angle::Subject
                                     xChromaOffset, yChromaOffset, chromaFilter, components,
                                     intendedFormatID);
     }
-
-    void updateImmutableSamplerState(const gl::SamplerState &samplerState);
 
     // Used by framebuffer and render pass functions to decide loadOps and invalidate/un-invalidate
     // render target contents.
