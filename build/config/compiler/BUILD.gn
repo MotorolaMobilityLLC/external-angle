@@ -1545,6 +1545,13 @@ config("default_warnings") {
         "-Wno-ignored-pragma-optimize",
       ]
 
+      if (llvm_force_head_revision) {
+        cflags += [
+          # TODO(crbug.com/1343303) Evaluate and possibly enable.
+          "-Wno-array-parameter",
+        ]
+      }
+
       if (!is_nacl) {
         # TODO(https://crbug.com/1300731) Clean up and enable.
         cflags += [ "-Wno-unqualified-std-cast-call" ]
@@ -2343,8 +2350,7 @@ config("symbols") {
       cflags += [ "-g2" ]
     }
 
-    if (!is_nacl && is_clang && !is_tsan && !is_asan &&
-        !(is_ios && enable_ios_bitcode)) {
+    if (!is_nacl && is_clang && !is_tsan && !is_asan) {
       # gcc generates dwarf-aranges by default on -g1 and -g2. On clang it has
       # to be manually enabled.
       #
@@ -2468,8 +2474,7 @@ config("minimal_symbols") {
       cflags += [ "-g1" ]
     }
 
-    if (!is_nacl && is_clang && !is_tsan && !is_asan &&
-        !(is_ios && enable_ios_bitcode)) {
+    if (!is_nacl && is_clang && !is_tsan && !is_asan) {
       # See comment for -gdwarf-aranges in config("symbols").
       cflags += [ "-gdwarf-aranges" ]
     }
