@@ -1893,7 +1893,7 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
 
     mMultisampledRenderToSingleSampledFeatures = {};
     mMultisampledRenderToSingleSampledFeatures.sType =
-        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_EXT;
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_GOOGLEX;
 
     mImage2dViewOf3dFeatures = {};
     mImage2dViewOf3dFeatures.sType =
@@ -2020,7 +2020,7 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     }
 
     // Query multisampled render to single-sampled features
-    if (ExtensionFound(VK_EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION_NAME,
+    if (ExtensionFound(VK_GOOGLEX_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION_NAME,
                        deviceExtensionNames))
     {
         vk::AddToPNextChain(&deviceFeatures, &mMultisampledRenderToSingleSampledFeatures);
@@ -2490,7 +2490,7 @@ angle::Result RendererVk::initializeDevice(DisplayVk *displayVk, uint32_t queueF
     if (getFeatures().supportsMultisampledRenderToSingleSampled.enabled)
     {
         mEnabledDeviceExtensions.push_back(
-            VK_EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION_NAME);
+            VK_GOOGLEX_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION_NAME);
         vk::AddToPNextChain(&mEnabledFeatures, &mMultisampledRenderToSingleSampledFeatures);
     }
 
@@ -3350,9 +3350,9 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     ANGLE_FEATURE_CONDITION(&mFeatures, bindEmptyForUnusedDescriptorSets,
                             IsAndroid() && isQualcommProprietary);
 
-    ANGLE_FEATURE_CONDITION(
-        &mFeatures, perFrameWindowSizeQuery,
-        IsAndroid() || isIntel || (IsWindows() && isAMD) || IsFuchsia() || isSamsung);
+    ANGLE_FEATURE_CONDITION(&mFeatures, perFrameWindowSizeQuery,
+                            IsAndroid() || isIntel || (IsWindows() && isAMD) || IsFuchsia() ||
+                                isSamsung || displayVk->isWayland());
 
     ANGLE_FEATURE_CONDITION(&mFeatures, padBuffersToMaxVertexAttribStride, isAMD || isSamsung);
     mMaxVertexAttribStride = std::min(static_cast<uint32_t>(gl::limits::kMaxVertexAttribStride),
@@ -3592,6 +3592,10 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // Without VK_GOOGLE_surfaceless_query, there is no way to automatically deduce this support.
     ANGLE_FEATURE_CONDITION(&mFeatures, emulateAdvancedBlendEquations,
                             !mFeatures.supportsBlendOperationAdvanced.enabled && !isIntel);
+
+    // Workaround for platforms that do not return 1.0f even when dividend and divisor have the same
+    // value.
+    ANGLE_FEATURE_CONDITION(&mFeatures, precisionSafeDivision, isSamsung || isAMD);
 
     // http://anglebug.com/6933
     // Android expects VkPresentRegionsKHR rectangles with a bottom-left origin, while spec

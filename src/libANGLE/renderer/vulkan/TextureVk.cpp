@@ -2694,11 +2694,17 @@ angle::Result TextureVk::respecifyImageStorageIfNecessary(ContextVk *contextVk, 
 angle::Result TextureVk::onLabelUpdate(const gl::Context *context)
 {
     ContextVk *contextVk = vk::GetImpl(context);
-    RendererVk *renderer = contextVk->getRenderer();
+    return updateTextureLabel(contextVk);
+}
 
-    if (!renderer->enableDebugUtils() && !renderer->angleDebuggerMode() && imageValid())
+angle::Result TextureVk::updateTextureLabel(ContextVk *contextVk)
+{
+    RendererVk *renderer = contextVk->getRenderer();
+    std::string label    = mState.getLabel();
+    if (!label.empty() && renderer->enableDebugUtils() && imageValid())
     {
-        return vk::SetDebugUtilsObjectName(contextVk, (uint64_t)(getImage().getImage().getHandle()),
+        return vk::SetDebugUtilsObjectName(contextVk, VK_OBJECT_TYPE_IMAGE,
+                                           (uint64_t)(getImage().getImage().getHandle()),
                                            mState.getLabel());
     }
     return angle::Result::Continue;
@@ -2743,12 +2749,18 @@ angle::Result TextureVk::syncState(const gl::Context *context,
 
     // For AHBs, the ImageViews are created with VkSamplerYcbcrConversionInfo's chromaFilter
     // matching min/magFilters as part of the eglEGLImageTargetTexture2DOES() call. However, the
-    // min/mag filters can change later, requiring the ImageViews to be created.
+    // min/mag filters can change later, requiring the ImageViews to be refreshed.
     if (mImage->valid() && mImage->hasImmutableSampler() &&
         (dirtyBits.test(gl::Texture::DIRTY_BIT_MIN_FILTER) ||
          dirtyBits.test(gl::Texture::DIRTY_BIT_MAG_FILTER)))
     {
-        ANGLE_TRY(refreshImageViews(contextVk));
+        const gl::SamplerState &samplerState = mState.getSamplerState();
+        ASSERT(samplerState.getMinFilter() == samplerState.getMagFilter());
+        if (mImage->updateChromaFilter(renderer, gl_vk::GetFilter(samplerState.getMinFilter())))
+        {
+            mSampler.reset();
+            ANGLE_TRY(refreshImageViews(contextVk));
+        }
     }
 
     if (localBits.none() && mSampler.valid())
@@ -3038,6 +3050,8 @@ angle::Result TextureVk::initImage(ContextVk *contextVk,
         gl::LevelIndex(firstLevel), levelCount, layerCount,
         contextVk->isRobustResourceInitEnabled(), mState.hasProtectedContent()));
 
+    ANGLE_TRY(updateTextureLabel(contextVk));
+
     mRequiresMutableStorage = (mImageCreateFlags & VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT) != 0;
 
     VkMemoryPropertyFlags flags = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
@@ -3077,11 +3091,6 @@ angle::Result TextureVk::initImageViews(ContextVk *contextVk, uint32_t levelCoun
 
     // Use this as a proxy for the SRGB override & skip decode settings.
     bool createExtraSRGBViews = mRequiresMutableStorage;
-
-    if (mImage->hasImmutableSampler())
-    {
-        mImage->updateImmutableSamplerState(mState.getSamplerState());
-    }
 
     ANGLE_TRY(getImageViews().initReadViews(contextVk, mState.getType(), *mImage, formatSwizzle,
                                             readSwizzle, baseLevelVk, levelCount, baseLayer,
