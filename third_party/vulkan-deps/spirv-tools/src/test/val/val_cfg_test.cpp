@@ -663,7 +663,8 @@ TEST_P(ValidateCFG, HeaderDoesntStrictlyDominateMergeBad) {
     EXPECT_THAT(
         getDiagnosticString(),
         MatchesRegex("The selection construct with the selection header "
-                     ".\\[%head\\] does not strictly dominate the merge block "
+                     ".\\[%head\\] does not strictly structurally dominate the "
+                     "merge block "
                      ".\\[%head\\]\n  %head = OpLabel\n"));
   } else {
     ASSERT_EQ(SPV_SUCCESS, ValidateInstructions()) << str;
@@ -1345,11 +1346,13 @@ TEST_P(ValidateCFG, BackEdgeBlockDoesntPostDominateContinueTargetBad) {
   CompileSuccessfully(str);
   if (GetParam() == SpvCapabilityShader) {
     ASSERT_EQ(SPV_ERROR_INVALID_CFG, ValidateInstructions());
-    EXPECT_THAT(getDiagnosticString(),
-                MatchesRegex("The continue construct with the continue target "
-                             ".\\[%loop1_cont\\] is not post dominated by the "
-                             "back-edge block .\\[%be_block\\]\n"
-                             "  %be_block = OpLabel\n"));
+    EXPECT_THAT(
+        getDiagnosticString(),
+        MatchesRegex(
+            "The continue construct with the continue target "
+            ".\\[%loop1_cont\\] is not structurally post dominated by the "
+            "back-edge block .\\[%be_block\\]\n"
+            "  %be_block = OpLabel\n"));
   } else {
     ASSERT_EQ(SPV_SUCCESS, ValidateInstructions());
   }
@@ -1485,10 +1488,11 @@ TEST_P(ValidateCFG, ContinueTargetMustBePostDominatedByBackEdge) {
   if (is_shader) {
     ASSERT_EQ(SPV_ERROR_INVALID_CFG, ValidateInstructions());
     EXPECT_THAT(getDiagnosticString(),
-                MatchesRegex("The continue construct with the continue target "
-                             ".\\[%cheader\\] is not post dominated by the "
-                             "back-edge block .\\[%be_block\\]\n"
-                             "  %be_block = OpLabel\n"));
+                MatchesRegex(
+                    "The continue construct with the continue target "
+                    ".\\[%cheader\\] is not structurally post dominated by the "
+                    "back-edge block .\\[%be_block\\]\n"
+                    "  %be_block = OpLabel\n"));
   } else {
     ASSERT_EQ(SPV_SUCCESS, ValidateInstructions());
   }
@@ -1517,11 +1521,12 @@ TEST_P(ValidateCFG, BranchOutOfConstructToMergeBad) {
   CompileSuccessfully(str);
   if (is_shader) {
     ASSERT_EQ(SPV_ERROR_INVALID_CFG, ValidateInstructions());
-    EXPECT_THAT(getDiagnosticString(),
-                MatchesRegex("The continue construct with the continue target "
-                             ".\\[%loop\\] is not post dominated by the "
-                             "back-edge block .\\[%cont\\]\n"
-                             "  %cont = OpLabel\n"))
+    EXPECT_THAT(
+        getDiagnosticString(),
+        MatchesRegex("The continue construct with the continue target "
+                     ".\\[%loop\\] is not structurally post dominated by the "
+                     "back-edge block .\\[%cont\\]\n"
+                     "  %cont = OpLabel\n"))
         << str;
   } else {
     ASSERT_EQ(SPV_SUCCESS, ValidateInstructions());
@@ -1553,11 +1558,12 @@ TEST_P(ValidateCFG, BranchOutOfConstructBad) {
   CompileSuccessfully(str);
   if (is_shader) {
     ASSERT_EQ(SPV_ERROR_INVALID_CFG, ValidateInstructions());
-    EXPECT_THAT(getDiagnosticString(),
-                MatchesRegex("The continue construct with the continue target "
-                             ".\\[%loop\\] is not post dominated by the "
-                             "back-edge block .\\[%cont\\]\n"
-                             "  %cont = OpLabel\n"));
+    EXPECT_THAT(
+        getDiagnosticString(),
+        MatchesRegex("The continue construct with the continue target "
+                     ".\\[%loop\\] is not structurally post dominated by the "
+                     "back-edge block .\\[%cont\\]\n"
+                     "  %cont = OpLabel\n"));
   } else {
     ASSERT_EQ(SPV_SUCCESS, ValidateInstructions());
   }
@@ -3200,7 +3206,7 @@ OpFunctionEnd
   EXPECT_THAT(
       getDiagnosticString(),
       HasSubstr("The continue construct with the continue target 9[%9] is not "
-                "post dominated by the back-edge block 13[%13]"));
+                "structurally post dominated by the back-edge block 13[%13]"));
 }
 
 TEST_F(ValidateCFG, BreakFromSwitch) {
@@ -4208,9 +4214,11 @@ TEST_F(ValidateCFG, StructuredSelections_RegisterBothTrueAndFalse) {
 
   CompileSuccessfully(text);
   EXPECT_NE(SPV_SUCCESS, ValidateInstructions());
-  EXPECT_THAT(getDiagnosticString(),
-              HasSubstr("The selection construct with the selection header "
-                        "8[%8] does not dominate the merge block 10[%10]\n"));
+  EXPECT_THAT(
+      getDiagnosticString(),
+      HasSubstr(
+          "The selection construct with the selection header "
+          "8[%8] does not structurally dominate the merge block 10[%10]\n"));
 }
 
 TEST_F(ValidateCFG, UnreachableIsStaticallyReachable) {
@@ -4545,6 +4553,36 @@ OpFunctionEnd
   EXPECT_THAT(getDiagnosticString(),
               HasSubstr("In SPIR-V 1.6 or later, True Label and False Label "
                         "must be different labels"));
+}
+
+TEST_F(ValidateCFG, BadBackEdgeUnreachableContinue) {
+  const std::string text = R"(
+OpCapability Shader
+OpCapability Linkage
+OpMemoryModel Logical GLSL450
+%1 = OpTypeVoid
+%2 = OpTypeFunction %1
+%3 = OpFunction %1 None %2
+%4 = OpLabel
+OpBranch %5
+%5 = OpLabel
+OpLoopMerge %6 %7 None
+OpBranch %8
+%8 = OpLabel
+OpBranch %5
+%7 = OpLabel
+OpUnreachable
+%6 = OpLabel
+OpUnreachable
+OpFunctionEnd
+)";
+
+  CompileSuccessfully(text);
+  EXPECT_EQ(SPV_ERROR_INVALID_CFG, ValidateInstructions());
+  EXPECT_THAT(
+      getDiagnosticString(),
+      HasSubstr("The continue construct with the continue target 7[%7] "
+                "does not structurally dominate the back-edge block 8[%8]"));
 }
 
 }  // namespace
