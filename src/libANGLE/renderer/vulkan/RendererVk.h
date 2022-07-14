@@ -35,13 +35,6 @@
 #include "libANGLE/renderer/vulkan/vk_internal_shaders_autogen.h"
 #include "libANGLE/renderer/vulkan/vk_mem_alloc_wrapper.h"
 
-#if defined(ANGLE_PLATFORM_ANDROID)
-#    include <android/log.h>
-#    include <unistd.h>
-#    define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "ANGLEDbg", __VA_ARGS__)
-#    define ALOGI(...) __android_log_print(ANDROID_LOG_INFO, "ANGLEDbg", __VA_ARGS__)
-#endif
-
 namespace angle
 {
 class Library;
@@ -613,10 +606,9 @@ class RendererVk : angle::NonCopyable
         return mSuballocationGarbageSizeInBytesCachedAtomic.load(std::memory_order_consume);
     }
 
-    ANGLE_INLINE VkFilter getPreferredFilterForYUV()
+    ANGLE_INLINE VkFilter getPreferredFilterForYUV(VkFilter defaultFilter)
     {
-        return getFeatures().preferLinearFilterForYUV.enabled ? VK_FILTER_LINEAR
-                                                              : VK_FILTER_NEAREST;
+        return getFeatures().preferLinearFilterForYUV.enabled ? VK_FILTER_LINEAR : defaultFilter;
     }
 
   private:
@@ -691,7 +683,7 @@ class RendererVk : angle::NonCopyable
     VkPhysicalDeviceExternalMemoryHostPropertiesEXT mExternalMemoryHostProperties;
     VkPhysicalDeviceShaderFloat16Int8FeaturesKHR mShaderFloat16Int8Features;
     VkPhysicalDeviceDepthStencilResolvePropertiesKHR mDepthStencilResolveProperties;
-    VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT
+    VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesGoogleX
         mMultisampledRenderToSingleSampledFeatures;
     VkPhysicalDeviceImage2DViewOf3DFeaturesEXT mImage2dViewOf3dFeatures;
     VkPhysicalDeviceMultiviewFeatures mMultiviewFeatures;
