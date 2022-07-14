@@ -584,6 +584,11 @@ def AddInstrumentationTestOptions(parser):
       type=float,
       help='Factor by which timeouts should be scaled.')
   parser.add_argument(
+      '--is-unit-test',
+      action='store_true',
+      help=('Specify the test suite as composed of unit tests, blocking '
+            'certain operations.'))
+  parser.add_argument(
       '-w', '--wait-for-java-debugger', action='store_true',
       help='Wait for java debugger to attach before running any application '
            'code. Also disables test timeouts and sets retries=0.')
@@ -594,6 +599,12 @@ def AddInstrumentationTestOptions(parser):
                       default=False,
                       help='If true, WPR server runs in record mode.'
                       'otherwise, runs in replay mode.')
+
+  parser.add_argument(
+      '--approve-app-links',
+      help='Force enables Digital Asset Link verification for the provided '
+      'package and domain, example usage: --approve-app-links '
+      'com.android.package:www.example.com')
 
   # These arguments are suppressed from the help text because they should
   # only ever be specified by an intermediate script.
@@ -1158,8 +1169,7 @@ def _LogRerunStatement(failed_tests, wrapper_arg_str):
 
   test_filter_file = os.path.join(os.path.relpath(constants.GetOutDirectory()),
                                   _RERUN_FAILED_TESTS_FILE)
-  arg_list = shlex.split(
-      wrapper_arg_str.strip('\'')) if wrapper_arg_str else sys.argv
+  arg_list = shlex.split(wrapper_arg_str) if wrapper_arg_str else sys.argv
   index = 0
   while index < len(arg_list):
     arg = arg_list[index]
