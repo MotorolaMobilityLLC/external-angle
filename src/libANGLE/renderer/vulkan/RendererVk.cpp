@@ -217,6 +217,8 @@ constexpr const char *kSkippedMessages[] = {
     "VUID-VkGraphicsPipelineCreateInfo-renderPass-06039",
     // http://anglebug.com/7470
     "UNASSIGNED-BestPractices-vkCmdBeginRenderPass-ClearValueWithoutLoadOpClear",
+    // http://anglebug.com/7513
+    "VUID-VkGraphicsPipelineCreateInfo-pStages-06896",
 };
 
 // Some syncval errors are resolved in the presence of the NONE load or store render pass ops.  For
@@ -435,6 +437,13 @@ constexpr vk::SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
     {
         "SYNC-HAZARD-WRITE_AFTER_READ",
         "type: VK_DESCRIPTOR_TYPE_STORAGE_BUFFER",
+    },
+    // From: TracePerfTest.Run/vulkan_car_chase http://anglebug.com/7125#c6
+    {
+        "SYNC-HAZARD-WRITE_AFTER_READ",
+        "Access info (usage: SYNC_COPY_TRANSFER_WRITE, "
+        "prior_usage: SYNC_FRAGMENT_SHADER_UNIFORM_READ, "
+        "read_barriers: VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT, command: vkCmdDrawIndexed",
     },
     // From: TracePerfTest.Run/vulkan_special_forces_group_2 http://anglebug.com/5592
     {
@@ -1679,8 +1688,13 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
     std::vector<VkPhysicalDevice> physicalDevices(physicalDeviceCount);
     ANGLE_VK_TRY(displayVk, vkEnumeratePhysicalDevices(mInstance, &physicalDeviceCount,
                                                        physicalDevices.data()));
+    uint32_t preferredVendorId =
+        static_cast<uint32_t>(attribs.get(EGL_PLATFORM_ANGLE_DEVICE_ID_HIGH_ANGLE, 0));
+    uint32_t preferredDeviceId =
+        static_cast<uint32_t>(attribs.get(EGL_PLATFORM_ANGLE_DEVICE_ID_LOW_ANGLE, 0));
     ChoosePhysicalDevice(vkGetPhysicalDeviceProperties, physicalDevices, mEnabledICD,
-                         &mPhysicalDevice, &mPhysicalDeviceProperties);
+                         preferredVendorId, preferredDeviceId, &mPhysicalDevice,
+                         &mPhysicalDeviceProperties);
 
     mGarbageCollectionFlushThreshold =
         static_cast<uint32_t>(mPhysicalDeviceProperties.limits.maxMemoryAllocationCount *
@@ -3353,9 +3367,6 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
 
     ANGLE_FEATURE_CONDITION(&mFeatures, disableFifoPresentMode, IsLinux() && isIntel);
 
-    ANGLE_FEATURE_CONDITION(&mFeatures, bindEmptyForUnusedDescriptorSets,
-                            IsAndroid() && isQualcommProprietary);
-
     ANGLE_FEATURE_CONDITION(&mFeatures, perFrameWindowSizeQuery,
                             IsAndroid() || isIntel || (IsWindows() && isAMD) || IsFuchsia() ||
                                 isSamsung || displayVk->isWayland());
@@ -3607,6 +3618,11 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // Android expects VkPresentRegionsKHR rectangles with a bottom-left origin, while spec
     // states they should have a top-left origin.
     ANGLE_FEATURE_CONDITION(&mFeatures, bottomLeftOriginPresentRegionRectangles, IsAndroid());
+
+    // http://anglebug.com/7308
+    // Flushing mutable textures causes flakes in perf tests using Windows/Intel GPU. Failures are
+    // due to lost context/device.
+    ANGLE_FEATURE_CONDITION(&mFeatures, mutableMipmapTextureUpload, !(IsWindows() && isIntel));
 
     // Retain debug info in SPIR-V blob.
     ANGLE_FEATURE_CONDITION(&mFeatures, retainSPIRVDebugInfo, getEnableValidationLayers());
