@@ -16,6 +16,7 @@
 #include "common/string_utils.h"
 #include "common/system_utils.h"
 #include "common/utilities.h"
+#include "libANGLE/capture/gl_enum_utils.h"
 #include "test_utils/runner/TestSuite.h"
 #include "third_party/perf/perf_test.h"
 #include "third_party/trace_event/trace_event.h"
@@ -774,6 +775,11 @@ void ANGLERenderTest::addExtensionPrerequisite(const char *extensionName)
     mExtensionPrerequisites.push_back(extensionName);
 }
 
+void ANGLERenderTest::addIntegerPrerequisite(GLenum target, int min)
+{
+    mIntegerPrerequisites.push_back({target, min});
+}
+
 void ANGLERenderTest::SetUp()
 {
     if (mSkipTest)
@@ -858,6 +864,7 @@ void ANGLERenderTest::SetUp()
     }
 
     skipTestIfMissingExtensionPrerequisites();
+    skipTestIfFailsIntegerPrerequisite();
 
     if (mSkipTest)
     {
@@ -1204,6 +1211,23 @@ void ANGLERenderTest::skipTestIfMissingExtensionPrerequisites()
         {
             skipTest(std::string("Test skipped due to missing extension: ") + extension);
             return;
+        }
+    }
+}
+
+void ANGLERenderTest::skipTestIfFailsIntegerPrerequisite()
+{
+    for (const auto [target, minRequired] : mIntegerPrerequisites)
+    {
+        GLint driverValue;
+        glGetIntegerv(target, &driverValue);
+        if (static_cast<int>(driverValue) < minRequired)
+        {
+            std::stringstream ss;
+            ss << "Test skipped due to value (" << std::to_string(static_cast<int>(driverValue))
+               << ") being less than the prerequisite minimum (" << std::to_string(minRequired)
+               << ") for GL constant " << gl::GLenumToString(gl::GLenumGroup::DefaultGroup, target);
+            skipTest(ss.str());
         }
     }
 }

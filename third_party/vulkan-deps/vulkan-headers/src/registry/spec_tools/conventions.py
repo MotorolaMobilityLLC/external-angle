@@ -8,6 +8,8 @@
 # used in generation.
 
 from enum import Enum
+import abc
+import re
 
 # Type categories that respond "False" to isStructAlwaysValid
 # basetype is home to typedefs like ..Bool32
@@ -21,13 +23,16 @@ CATEGORIES_REQUIRING_VALIDATION = set(('handle',
 TYPES_KNOWN_ALWAYS_VALID = set(('char',
                                 'float',
                                 'int8_t', 'uint8_t',
+                                'int16_t', 'uint16_t',
                                 'int32_t', 'uint32_t',
                                 'int64_t', 'uint64_t',
                                 'size_t',
-                                'uintptr_t',
+                                'intptr_t', 'uintptr_t',
                                 'int',
                                 ))
 
+# Split an extension name into vendor ID and name portions
+EXT_NAME_DECOMPOSE_RE = re.compile(r'[A-Z]+_(?P<vendor>[A-Z]+)_(?P<name>[\w_]+)')
 
 class ProseListFormats(Enum):
     """A connective, possibly with a quantifier."""
@@ -42,7 +47,7 @@ class ProseListFormats(Enum):
             return cls.OR
         if s == 'and':
             return cls.AND
-        return None
+        raise RuntimeError("Unrecognized string connective: " + s)
 
     @property
     def connective(self):
@@ -63,7 +68,7 @@ class ProseListFormats(Enum):
         return ''
 
 
-class ConventionsBase:
+class ConventionsBase(abc.ABC):
     """WG-specific conventions."""
 
     def __init__(self):
@@ -72,9 +77,10 @@ class ConventionsBase:
 
     def formatExtension(self, name):
         """Mark up an extension name as a link the spec."""
-        return '`apiext:{}`'.format(name)
+        return '`<<{}>>`'.format(name)
 
     @property
+    @abc.abstractmethod
     def null(self):
         """Preferred spelling of NULL."""
         raise NotImplementedError
@@ -111,6 +117,38 @@ class ConventionsBase:
         May override.
         """
         return 'code:'
+
+    @property
+    @abc.abstractmethod
+    def structtype_member_name(self):
+        """Return name of the structure type member.
+
+        Must implement.
+        """
+        raise NotImplementedError()
+
+    @property
+    @abc.abstractmethod
+    def nextpointer_member_name(self):
+        """Return name of the structure pointer chain member.
+
+        Must implement.
+        """
+        raise NotImplementedError()
+
+    @property
+    @abc.abstractmethod
+    def xml_api_name(self):
+        """Return the name used in the default API XML registry for the default API"""
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def generate_structure_type_from_name(self, structname):
+        """Generate a structure type name, like XR_TYPE_CREATE_INSTANCE_INFO.
+
+        Must implement.
+        """
+        raise NotImplementedError()
 
     def makeStructName(self, name):
         """Prepend the appropriate format macro for a structure to a structure type name.
@@ -166,10 +204,12 @@ class ConventionsBase:
         return ''.join(parts)
 
     @property
+    @abc.abstractmethod
     def file_suffix(self):
         """Return suffix of generated Asciidoctor files"""
         raise NotImplementedError
 
+    @abc.abstractmethod
     def api_name(self, spectype=None):
         """Return API or specification name for citations in ref pages.
 
@@ -206,6 +246,7 @@ class ConventionsBase:
         return self._type_prefix
 
     @property
+    @abc.abstractmethod
     def api_prefix(self):
         """Return API token prefix.
 
@@ -329,24 +370,43 @@ class ConventionsBase:
            documentation includes."""
         return False
 
+    @abc.abstractmethod
+    def extension_file_path(self, name):
+        """Return file path to an extension appendix relative to a directory
+           containing all such appendices.
+           - name - extension name
 
-    def extension_include_string(self, ext):
-        """Return format string for include:: line for an extension appendix
-           file. ext is an object with the following members:
-            - name - extension string string
-            - vendor - vendor portion of name
-            - barename - remainder of name
-
-        Must implement."""
+           Must implement."""
         raise NotImplementedError
+
+    def extension_include_string(self, name):
+        """Return format string for include:: line for an extension appendix
+           file.
+            - name - extension name"""
+
+        return 'include::{{appendices}}/{}[]'.format(
+                self.extension_file_path(name))
 
     @property
-    def refpage_generated_include_path(self):
-        """Return path relative to the generated reference pages, to the
-           generated API include files.
+    def provisional_extension_warning(self):
+        """Return True if a warning should be included in extension
+           appendices for provisional extensions."""
+        return True
 
-        Must implement."""
-        raise NotImplementedError
+    @property
+    def generated_include_path(self):
+        """Return path relative to the generated reference pages, to the
+           generated API include files."""
+
+        return '{generated}'
+
+    @property
+    def include_extension_appendix_in_refpage(self):
+        """Return True if generating extension refpages by embedding
+           extension appendix content (default), False otherwise
+           (OpenXR)."""
+
+        return True
 
     def valid_flag_bit(self, bitpos):
         """Return True if bitpos is an allowed numeric bit position for
@@ -356,3 +416,17 @@ class ConventionsBase:
            or 64 bits), and may depend on assumptions about compiler
            handling of sign bits in enumerated types, as well."""
         return True
+
+    @property
+    def duplicate_aliased_structs(self):
+        """
+        Should aliased structs have the original struct definition listed in the
+        generated docs snippet?
+        """
+        return False
+
+    @property
+    def protectProtoComment(self):
+        """Return True if generated #endif should have a comment matching
+           the protection symbol used in the opening #ifdef/#ifndef."""
+        return False
