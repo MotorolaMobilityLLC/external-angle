@@ -10,6 +10,7 @@
 #define LIBANGLE_RENDERER_VULKAN_VK_HELPERS_H_
 
 #include "common/MemoryBuffer.h"
+#include "libANGLE/renderer/vulkan/Suballocation.h"
 #include "libANGLE/renderer/vulkan/vk_cache_utils.h"
 #include "libANGLE/renderer/vulkan/vk_format_utils.h"
 
@@ -131,12 +132,6 @@ class DynamicBuffer : angle::NonCopyable
     BufferHelperPointerVector mBufferFreeList;
 };
 
-enum class DescriptorCacheResult
-{
-    CacheHit,
-    NewAllocation,
-};
-
 // Class DescriptorSetHelper. This is a wrapper of VkDescriptorSet with GPU resource use tracking.
 class DescriptorSetHelper final : public Resource
 {
@@ -171,54 +166,44 @@ class DescriptorPoolHelper final : public Resource
 
     bool valid() { return mDescriptorPool.valid(); }
 
-    bool hasCapacity(uint32_t descriptorSetCount) const;
     angle::Result init(Context *context,
                        const std::vector<VkDescriptorPoolSize> &poolSizesIn,
                        uint32_t maxSets);
-    void destroy(RendererVk *renderer, VulkanCacheType cacheType);
-    void release(ContextVk *contextVk, VulkanCacheType cacheType);
+    void destroy(RendererVk *renderer);
+    void release(RendererVk *renderer);
 
     bool allocateDescriptorSet(Context *context,
-                               CommandBufferHelperCommon *commandBufferHelper,
                                const DescriptorSetLayout &descriptorSetLayout,
                                VkDescriptorSet *descriptorSetsOut);
 
-    bool allocateAndCacheDescriptorSet(Context *context,
-                                       CommandBufferHelperCommon *commandBufferHelper,
-                                       const DescriptorSetDesc &desc,
-                                       const DescriptorSetLayout &descriptorSetLayout,
-                                       VkDescriptorSet *descriptorSetOut);
-
-    bool getCachedDescriptorSet(const DescriptorSetDesc &desc, VkDescriptorSet *descriptorSetOut);
-
-    void releaseCachedDescriptorSet(ContextVk *contextVk, const DescriptorSetDesc &desc);
-    void destroyCachedDescriptorSet(const DescriptorSetDesc &desc);
-    void resetCache();
-
-    size_t getTotalCacheSize() const { return mDescriptorSetCache.getTotalCacheSize(); }
-    size_t getTotalCacheKeySizeBytes() const
+    void addGarbage(DescriptorSetHelper &&garbage)
     {
-        return mDescriptorSetCache.getTotalCacheKeySizeBytes();
+        mValidDescriptorSets--;
+        mDescriptorSetGarbageList.emplace_back(std::move(garbage));
     }
 
     void onNewDescriptorSetAllocated(const vk::SharedDescriptorSetCacheKey &sharedCacheKey)
     {
         mDescriptorSetCacheManager.addKey(sharedCacheKey);
     }
+    bool hasValidDescriptorSet() const { return mValidDescriptorSets != 0; }
 
   private:
+    // Track the number of descriptorSets allocated out of this pool that are valid. DescriptorSets
+    // that have been allocated but in the mDescriptorSetGarbageList is considered as inactive.
+    uint32_t mValidDescriptorSets;
+    // Track the number of remaining descriptorSets in the pool that can be allocated.
     uint32_t mFreeDescriptorSets;
     DescriptorPool mDescriptorPool;
-    DescriptorSetCache mDescriptorSetCache;
-    // Because freeing descriptorSet require DescriptorPool, we store individually released
-    // descriptor sets here instead of usual garbage list in the renderer to avoid complicated
-    // threading issues and other weirdness associated with pooled object destruction.
+    // Keeps track descriptorSets that has been released. Because freeing descriptorSet require
+    // DescriptorPool, we store individually released descriptor sets here instead of usual garbage
+    // list in the renderer to avoid complicated threading issues and other weirdness associated
+    // with pooled object destruction. This list is mutually exclusive with mDescriptorSetCache.
     DescriptorSetList mDescriptorSetGarbageList;
     // Manages the texture descriptor set cache that allocated from this pool
     vk::DescriptorSetCacheManager mDescriptorSetCacheManager;
 };
 
-using RefCountedDescriptorPoolHelper  = RefCounted<DescriptorPoolHelper>;
 using RefCountedDescriptorPoolBinding = BindingPointer<DescriptorPoolHelper>;
 
 class DynamicDescriptorPool final : angle::NonCopyable
@@ -236,19 +221,17 @@ class DynamicDescriptorPool final : angle::NonCopyable
     angle::Result init(Context *context,
                        const VkDescriptorPoolSize *setSizes,
                        size_t setSizeCount,
-                       VkDescriptorSetLayout descriptorSetLayout);
-    void destroy(RendererVk *renderer, VulkanCacheType cacheType);
-    void release(ContextVk *contextVk, VulkanCacheType cacheType);
+                       const DescriptorSetLayout &descriptorSetLayout);
+    void destroy(RendererVk *renderer);
 
     bool valid() const { return !mDescriptorPools.empty(); }
 
     // We use the descriptor type to help count the number of free sets.
     // By convention, sets are indexed according to the constants in vk_cache_utils.h.
     angle::Result allocateDescriptorSet(Context *context,
-                                        CommandBufferHelperCommon *commandBufferHelper,
                                         const DescriptorSetLayout &descriptorSetLayout,
                                         RefCountedDescriptorPoolBinding *bindingOut,
-                                        VkDescriptorSet *descriptorSetsOut);
+                                        VkDescriptorSet *descriptorSetOut);
 
     angle::Result getOrAllocateDescriptorSet(Context *context,
                                              CommandBufferHelperCommon *commandBufferHelper,
@@ -256,34 +239,24 @@ class DynamicDescriptorPool final : angle::NonCopyable
                                              const DescriptorSetLayout &descriptorSetLayout,
                                              RefCountedDescriptorPoolBinding *bindingOut,
                                              VkDescriptorSet *descriptorSetOut,
-                                             DescriptorCacheResult *cacheResultOut);
+                                             SharedDescriptorSetCacheKey *sharedCacheKeyOut);
+
+    void releaseCachedDescriptorSet(ContextVk *contextVk, const DescriptorSetDesc &desc);
+    void destroyCachedDescriptorSet(RendererVk *renderer, const DescriptorSetDesc &desc);
 
     template <typename Accumulator>
     void accumulateDescriptorCacheStats(VulkanCacheType cacheType, Accumulator *accum) const
     {
-        size_t cacheSize = 0;
-        for (RefCountedDescriptorPoolHelper *pool : mDescriptorPools)
-        {
-            cacheSize += pool->get().getTotalCacheSize();
-        }
-        CacheStats adjusted = mCacheStats;
-        adjusted.setSize(static_cast<uint32_t>(cacheSize));
-        accum->accumulateCacheStats(cacheType, adjusted);
+        accum->accumulateCacheStats(cacheType, mCacheStats);
     }
-
     void resetDescriptorCacheStats() { mCacheStats.resetHitAndMissCount(); }
-
     size_t getTotalCacheKeySizeBytes() const
     {
-        size_t totalSize = 0;
-
-        for (RefCountedDescriptorPoolHelper *pool : mDescriptorPools)
-        {
-            totalSize += pool->get().getTotalCacheKeySizeBytes();
-        }
-
-        return totalSize;
+        return mDescriptorSetCache.getTotalCacheKeySizeBytes();
     }
+
+    // Release the pool if it is no longer been used and contains no valid descriptorSet.
+    void checkAndReleaseUnusedPool(RendererVk *renderer, RefCountedDescriptorPoolHelper *pool);
 
     // For testing only!
     static uint32_t GetMaxSetsPerPoolForTesting();
@@ -298,19 +271,17 @@ class DynamicDescriptorPool final : angle::NonCopyable
     static uint32_t mMaxSetsPerPool;
     static uint32_t mMaxSetsPerPoolMultiplier;
     size_t mCurrentPoolIndex;
-    std::vector<RefCountedDescriptorPoolHelper *> mDescriptorPools;
+    std::vector<std::unique_ptr<RefCountedDescriptorPoolHelper>> mDescriptorPools;
     std::vector<VkDescriptorPoolSize> mPoolSizes;
     // This cached handle is used for verifying the layout being used to allocate descriptor sets
     // from the pool matches the layout that the pool was created for, to ensure that the free
     // descriptor count is accurate and new pools are created appropriately.
     VkDescriptorSetLayout mCachedDescriptorSetLayout;
+    // Tracks cache for descriptorSet. Note that cached DescriptorSet can be reuse even if it is GPU
+    // busy.
+    DescriptorSetCache mDescriptorSetCache;
+    // Statistics for the cache.
     CacheStats mCacheStats;
-};
-
-struct DescriptorSetAndPoolIndex
-{
-    VkDescriptorSet descriptorSet;
-    size_t poolIndex;
 };
 
 using RefCountedDescriptorPool = RefCounted<DynamicDescriptorPool>;
@@ -325,7 +296,7 @@ class MetaDescriptorPool final : angle::NonCopyable
     MetaDescriptorPool();
     ~MetaDescriptorPool();
 
-    void destroy(RendererVk *rendererVk, VulkanCacheType cacheType);
+    void destroy(RendererVk *rendererVk);
 
     angle::Result bindCachedDescriptorPool(Context *context,
                                            const DescriptorSetLayoutDesc &descriptorSetLayoutDesc,
@@ -824,6 +795,7 @@ class BufferHelper : public ReadWriteResource
 
     void destroy(RendererVk *renderer);
     void release(RendererVk *renderer);
+    void releaseBufferAndDescriptorSetCache(ContextVk *contextVk);
 
     BufferSerial getBufferSerial() const { return mSerial; }
     BufferSerial getBlockSerial() const
@@ -831,6 +803,7 @@ class BufferHelper : public ReadWriteResource
         ASSERT(mSuballocation.valid());
         return mSuballocation.getBlockSerial();
     }
+    BufferBlock *getBufferBlock() const { return mSuballocation.getBufferBlock(); }
     bool valid() const { return mSuballocation.valid(); }
     const Buffer &getBuffer() const { return mSuballocation.getBuffer(); }
     VkDeviceSize getOffset() const { return mSuballocation.getOffset(); }
@@ -902,6 +875,11 @@ class BufferHelper : public ReadWriteResource
                                           VkDeviceSize actualDataSize,
                                           VkDeviceSize *offsetOut);
 
+    void onNewDescriptorSet(const SharedDescriptorSetCacheKey &sharedCacheKey)
+    {
+        mDescriptorSetCacheManager.addKey(sharedCacheKey);
+    }
+
   private:
     void initializeBarrierTracker(Context *context);
     angle::Result initializeNonZeroMemory(Context *context,
@@ -931,6 +909,8 @@ class BufferHelper : public ReadWriteResource
     VkPipelineStageFlags mCurrentReadStages;
 
     BufferSerial mSerial;
+    // Manages the descriptorSet cache that created with this BufferHelper object.
+    DescriptorSetCacheManager mDescriptorSetCacheManager;
 };
 
 class BufferPool : angle::NonCopyable
@@ -1637,6 +1617,9 @@ enum class UpdateSource
     Image,
 };
 
+constexpr VkImageAspectFlagBits IMAGE_ASPECT_DEPTH_STENCIL =
+    static_cast<VkImageAspectFlagBits>(VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT);
+
 bool FormatHasNecessaryFeature(RendererVk *renderer,
                                angle::FormatID formatID,
                                VkImageTiling tilingMode,
@@ -1713,7 +1696,8 @@ class ImageHelper final : public Resource, public angle::Subject
                                      uint32_t levelCount,
                                      uint32_t baseArrayLayer,
                                      uint32_t layerCount,
-                                     gl::SrgbWriteControlMode mode) const;
+                                     gl::SrgbWriteControlMode srgbWriteControlMode,
+                                     gl::YuvSamplingMode yuvSamplingMode) const;
     angle::Result initReinterpretedLayerImageView(Context *context,
                                                   gl::TextureType textureType,
                                                   VkImageAspectFlags aspectMask,
@@ -2213,6 +2197,12 @@ class ImageHelper final : public Resource, public angle::Subject
         return mYcbcrConversionDesc.updateChromaFilter(rendererVk, filter);
     }
     const YcbcrConversionDesc &getYcbcrConversionDesc() const { return mYcbcrConversionDesc; }
+    const YcbcrConversionDesc getY2YConversionDesc() const
+    {
+        YcbcrConversionDesc y2yDesc = mYcbcrConversionDesc;
+        y2yDesc.updateConversionModel(VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY);
+        return y2yDesc;
+    }
     void updateYcbcrConversionDesc(RendererVk *rendererVk,
                                    uint64_t externalFormat,
                                    VkSamplerYcbcrModelConversion conversionModel,
@@ -2470,7 +2460,25 @@ class ImageHelper final : public Resource, public angle::Subject
                                          uint32_t baseArrayLayer,
                                          uint32_t layerCount,
                                          VkFormat imageFormat,
-                                         VkImageUsageFlags usageFlags) const;
+                                         VkImageUsageFlags usageFlags,
+                                         gl::YuvSamplingMode yuvSamplingMode) const;
+
+    angle::Result readPixelsImpl(ContextVk *contextVk,
+                                 const gl::Rectangle &area,
+                                 const PackPixelsParams &packPixelsParams,
+                                 VkImageAspectFlagBits copyAspectFlags,
+                                 gl::LevelIndex levelGL,
+                                 uint32_t layer,
+                                 void *pixels);
+
+    angle::Result packReadPixelBuffer(ContextVk *contextVk,
+                                      const gl::Rectangle &area,
+                                      const PackPixelsParams &packPixelsParams,
+                                      const angle::Format &readFormat,
+                                      const angle::Format &aspectFormat,
+                                      const uint8_t *readPixelBuffer,
+                                      gl::LevelIndex levelGL,
+                                      void *pixels);
 
     bool canCopyWithTransformForReadPixels(const PackPixelsParams &packPixelsParams,
                                            const angle::Format *readFormat);
@@ -2627,6 +2635,16 @@ class ImageViewHelper final : angle::NonCopyable
     {
         return mLinearColorspace ? getReadViewImpl(mPerLevelRangeLinearCopyImageViews)
                                  : getReadViewImpl(mPerLevelRangeSRGBCopyImageViews);
+    }
+
+    ImageView &getSamplerExternal2DY2YEXTImageView()
+    {
+        return getReadViewImpl(mPerLevelRangeSamplerExternal2DY2YEXTImageViews);
+    }
+
+    const ImageView &getSamplerExternal2DY2YEXTImageView() const
+    {
+        return getValidReadViewImpl(mPerLevelRangeSamplerExternal2DY2YEXTImageViews);
     }
 
     // Used when initialized RenderTargets.
@@ -2811,6 +2829,7 @@ class ImageViewHelper final : angle::NonCopyable
     ImageViewVector mPerLevelRangeLinearCopyImageViews;
     ImageViewVector mPerLevelRangeSRGBCopyImageViews;
     ImageViewVector mPerLevelRangeStencilReadImageViews;
+    ImageViewVector mPerLevelRangeSamplerExternal2DY2YEXTImageViews;
 
     // Draw views
     LayerLevelImageViewVector mLayerLevelDrawImageViews;

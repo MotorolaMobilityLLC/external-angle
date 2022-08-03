@@ -3671,12 +3671,12 @@ Extensions Context::generateSupportedExtensions() const
         // Disable ES3.1+ extensions
         supportedExtensions.geometryShaderEXT       = false;
         supportedExtensions.geometryShaderOES       = false;
-        supportedExtensions.tessellationShaderEXT   = false;
         supportedExtensions.gpuShader5EXT           = false;
         supportedExtensions.primitiveBoundingBoxEXT = false;
         supportedExtensions.shaderImageAtomicOES    = false;
         supportedExtensions.shaderIoBlocksEXT       = false;
         supportedExtensions.shaderIoBlocksOES       = false;
+        supportedExtensions.tessellationShaderEXT   = false;
         supportedExtensions.textureBufferEXT        = false;
         supportedExtensions.textureBufferOES        = false;
 
@@ -3804,6 +3804,12 @@ Extensions Context::generateSupportedExtensions() const
     // GL_ANDROID_extension_pack_es31a
     supportedExtensions.extensionPackEs31aANDROID =
         CanSupportAEP(getClientVersion(), supportedExtensions);
+
+    // GL_ANGLE_shader_pixel_local_storage is implemented in the front-end.
+    if (getFrontendFeatures().emulatePixelLocalStorage.enabled && getClientVersion() >= ES_3_1)
+    {
+        supportedExtensions.shaderPixelLocalStorageANGLE = true;
+    }
 
     return supportedExtensions;
 }
@@ -4022,6 +4028,21 @@ void Context::initCaps()
     {
         mSupportedExtensions.compressedETC1RGB8SubTextureEXT = false;
         mSupportedExtensions.compressedETC1RGB8TextureOES    = false;
+    }
+
+    if (getLimitations().emulatedAstc)
+    {
+        // Hide emulated ASTC extension from WebGL contexts.
+        if (mWebGLContext)
+        {
+            mSupportedExtensions.textureCompressionAstcLdrKHR = false;
+            mState.mExtensions.textureCompressionAstcLdrKHR   = false;
+        }
+#if !defined(ANGLE_HAS_ASTCENC)
+        // Don't expose emulated ASTC when it's not built.
+        mSupportedExtensions.textureCompressionAstcLdrKHR = false;
+        mState.mExtensions.textureCompressionAstcLdrKHR   = false;
+#endif
     }
 
     // If we're capturing application calls for replay, apply some feature limits to increase
@@ -9784,6 +9805,7 @@ StateCache::StateCache()
       mCachedInstancedVertexElementLimit(0),
       mCachedBasicDrawStatesError(kInvalidPointer),
       mCachedBasicDrawElementsError(kInvalidPointer),
+      mCachedProgramPipelineError(kInvalidPointer),
       mCachedTransformFeedbackActiveUnpaused(false),
       mCachedCanDraw(false)
 {
@@ -9887,6 +9909,11 @@ void StateCache::updateBasicDrawStatesError()
     mCachedBasicDrawStatesError = kInvalidPointer;
 }
 
+void StateCache::updateProgramPipelineError()
+{
+    mCachedProgramPipelineError = kInvalidPointer;
+}
+
 void StateCache::updateBasicDrawElementsError()
 {
     mCachedBasicDrawElementsError = kInvalidPointer;
@@ -9897,6 +9924,13 @@ intptr_t StateCache::getBasicDrawStatesErrorImpl(const Context *context) const
     ASSERT(mCachedBasicDrawStatesError == kInvalidPointer);
     mCachedBasicDrawStatesError = reinterpret_cast<intptr_t>(ValidateDrawStates(context));
     return mCachedBasicDrawStatesError;
+}
+
+intptr_t StateCache::getProgramPipelineErrorImpl(const Context *context) const
+{
+    ASSERT(mCachedProgramPipelineError == kInvalidPointer);
+    mCachedProgramPipelineError = reinterpret_cast<intptr_t>(ValidateProgramPipeline(context));
+    return mCachedProgramPipelineError;
 }
 
 intptr_t StateCache::getBasicDrawElementsErrorImpl(const Context *context) const
@@ -9919,6 +9953,7 @@ void StateCache::onProgramExecutableChange(Context *context)
     updateActiveAttribsMask(context);
     updateVertexElementLimits(context);
     updateBasicDrawStatesError();
+    updateProgramPipelineError();
     updateValidDrawModes(context);
     updateActiveShaderStorageBufferIndices(context);
     updateActiveImageUnitIndices(context);
