@@ -133,6 +133,9 @@ struct Limitations
     // and GL_CONSTANT_COLOR/GL_ONE_MINUS_CONSTANT_COLOR blend functions.
     bool noSimultaneousConstantColorAndAlphaBlendFunc = false;
 
+    // Renderer always clamps constant blend color.
+    bool noUnclampedBlendColor = false;
+
     // D3D9 does not support flexible varying register packing.
     bool noFlexibleVaryingPacking = false;
 
@@ -151,6 +154,9 @@ struct Limitations
 
     // ETC1 texture support is emulated.
     bool emulatedEtc1 = false;
+
+    // ASTC texture support is emulated.
+    bool emulatedAstc = false;
 
     // No compressed TEXTURE_3D support.
     bool noCompressedTexture3D = false;
