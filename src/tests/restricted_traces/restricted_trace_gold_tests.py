@@ -41,10 +41,6 @@ import test_env
 import xvfb
 
 
-def IsWindows():
-    return sys.platform == 'cygwin' or sys.platform.startswith('win')
-
-
 DEFAULT_TEST_SUITE = 'angle_perftests'
 DEFAULT_TEST_PREFIX = 'TracePerfTest.Run/vulkan_'
 SWIFTSHADER_TEST_PREFIX = 'TracePerfTest.Run/vulkan_swiftshader_'
@@ -130,7 +126,7 @@ def run_wrapper(test_suite, cmd_args, args, env, stdoutfile):
     if _use_adb(args.test_suite):
         return android_helper.RunTests(cmd_args, stdoutfile)[0]
 
-    cmd = [get_binary_name(test_suite)] + cmd_args
+    cmd = [angle_test_util.ExecutablePathInCurrentDir(test_suite)] + cmd_args
 
     if args.xvfb:
         return xvfb.run_executable(cmd, env, stdoutfile=stdoutfile)
@@ -164,13 +160,6 @@ def to_non_empty_string_or_none(val):
 
 def to_non_empty_string_or_none_dict(d, key):
     return 'None' if not key in d else to_non_empty_string_or_none(d[key])
-
-
-def get_binary_name(binary):
-    if IsWindows():
-        return '.\\%s.exe' % binary
-    else:
-        return './%s' % binary
 
 
 def get_skia_gold_keys(args, env):
@@ -255,6 +244,13 @@ def upload_test_result_to_skia_gold(args, gold_session_manager, gold_session, go
 
     if not os.path.isfile(png_file_name):
         raise Exception('Screenshot not found: ' + png_file_name)
+
+    # TODO(anglebug.com/7550): temporary logging of skia_gold_session's RunComparison internals
+    auth_rc, auth_stdout = gold_session.Authenticate(use_luci=use_luci)
+    if auth_rc == 0:
+        init_rc, init_stdout = gold_session.Initialize()
+        if init_stdout is not None:
+            logging.info('gold_session.Initialize stdout: %s', init_stdout)
 
     status, error = gold_session.RunComparison(
         name=image_name, png_file=png_file_name, use_luci=use_luci)
@@ -359,6 +355,7 @@ def _run_tests(args, tests, extra_flags, env, screenshot_dir, results, test_resu
                         '--verbose-logging',
                         '--enable-all-trace-tests',
                         '--render-test-output-dir=%s' % screenshot_dir,
+                        '--save-screenshots',
                     ] + extra_flags
                     batch_result = PASS if run_wrapper(args.test_suite, cmd_args, args, env,
                                                        tempfile_path) == 0 else FAIL
@@ -444,16 +441,12 @@ def main():
     add_skia_gold_args(parser)
 
     args, extra_flags = parser.parse_known_args()
-    angle_test_util.setupLogging(args.log.upper())
+    angle_test_util.SetupLogging(args.log.upper())
 
     env = os.environ.copy()
 
-    if 'GTEST_TOTAL_SHARDS' in env and int(env['GTEST_TOTAL_SHARDS']) != 1:
-        if 'GTEST_SHARD_INDEX' not in env:
-            logging.error('Sharding params must be specified together.')
-            sys.exit(1)
-        args.shard_count = int(env.pop('GTEST_TOTAL_SHARDS'))
-        args.shard_index = int(env.pop('GTEST_SHARD_INDEX'))
+    if angle_test_util.HasGtestShardsAndIndex(env):
+        args.shard_count, args.shard_index = angle_test_util.PopGtestShardsAndIndex(env)
 
     results = {
         'tests': {},
@@ -515,18 +508,5 @@ def main():
     return rc
 
 
-# This is not really a "script test" so does not need to manually add
-# any additional compile targets.
-def main_compile_targets(args):
-    json.dump([], args.output)
-
-
 if __name__ == '__main__':
-    # Conform minimally to the protocol defined by ScriptTest.
-    if 'compile_targets' in sys.argv:
-        funcs = {
-            'run': None,
-            'compile_targets': main_compile_targets,
-        }
-        sys.exit(common.run_script(sys.argv[1:], funcs))
     sys.exit(main())
