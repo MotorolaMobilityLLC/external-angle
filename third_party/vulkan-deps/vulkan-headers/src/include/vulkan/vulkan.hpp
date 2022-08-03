@@ -26,22 +26,11 @@
 #  error "vulkan.hpp needs at least c++ standard version 11"
 #endif
 
-#include <algorithm>
-#include <array>
-#include <cstddef>
-#include <cstdint>
-#include <cstring>
-#include <functional>
-#include <initializer_list>
-#include <sstream>
-#include <string>
-#include <system_error>
-#include <tuple>
-#include <type_traits>
-#include <utility>
+#include <array>   // ArrayWrapperND
+#include <string>  // std::string
 #include <vulkan/vulkan.h>
 #if 17 <= VULKAN_HPP_CPP_VERSION
-#  include <string_view>
+#  include <string_view>  // std::string_view
 #endif
 
 #if defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
@@ -49,8 +38,16 @@
 #    define VULKAN_HPP_NO_SMART_HANDLE
 #  endif
 #else
-#  include <memory>
-#  include <vector>
+#  include <tuple>   // std::tie
+#  include <vector>  // std::vector
+#endif
+
+#if !defined( VULKAN_HPP_NO_EXCEPTIONS )
+#  include <system_error>  // std::is_error_code_enum
+#endif
+
+#if !defined( VULKAN_HPP_NO_SMART_HANDLE )
+#  include <algorithm>  // std::transform
 #endif
 
 #if defined( VULKAN_HPP_NO_CONSTRUCTORS )
@@ -120,7 +117,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 219, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 223, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for non-dispatchable handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -241,318 +238,6 @@ static_assert( VK_HEADER_VERSION == 219, "Wrong VK_HEADER_VERSION!" );
 
 namespace VULKAN_HPP_NAMESPACE
 {
-#if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-  template <typename T>
-  class ArrayProxy
-  {
-  public:
-    VULKAN_HPP_CONSTEXPR ArrayProxy() VULKAN_HPP_NOEXCEPT
-      : m_count( 0 )
-      , m_ptr( nullptr )
-    {
-    }
-
-    VULKAN_HPP_CONSTEXPR ArrayProxy( std::nullptr_t ) VULKAN_HPP_NOEXCEPT
-      : m_count( 0 )
-      , m_ptr( nullptr )
-    {
-    }
-
-    ArrayProxy( T & value ) VULKAN_HPP_NOEXCEPT
-      : m_count( 1 )
-      , m_ptr( &value )
-    {
-    }
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( typename std::remove_const<T>::type & value ) VULKAN_HPP_NOEXCEPT
-      : m_count( 1 )
-      , m_ptr( &value )
-    {
-    }
-
-    ArrayProxy( uint32_t count, T * ptr ) VULKAN_HPP_NOEXCEPT
-      : m_count( count )
-      , m_ptr( ptr )
-    {
-    }
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( uint32_t count, typename std::remove_const<T>::type * ptr ) VULKAN_HPP_NOEXCEPT
-      : m_count( count )
-      , m_ptr( ptr )
-    {
-    }
-
-    template <std::size_t C>
-    ArrayProxy( T ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
-      : m_count( C )
-      , m_ptr( ptr )
-    {
-    }
-
-    template <std::size_t C, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( typename std::remove_const<T>::type ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
-      : m_count( C )
-      , m_ptr( ptr )
-    {
-    }
-
-#  if __GNUC__ >= 9
-#    pragma GCC diagnostic push
-#    pragma GCC diagnostic ignored "-Winit-list-lifetime"
-#  endif
-
-    ArrayProxy( std::initializer_list<T> const & list ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( list.size() ) )
-      , m_ptr( list.begin() )
-    {
-    }
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( std::initializer_list<typename std::remove_const<T>::type> const & list ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( list.size() ) )
-      , m_ptr( list.begin() )
-    {
-    }
-
-    ArrayProxy( std::initializer_list<T> & list ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( list.size() ) )
-      , m_ptr( list.begin() )
-    {
-    }
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( std::initializer_list<typename std::remove_const<T>::type> & list ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( list.size() ) )
-      , m_ptr( list.begin() )
-    {
-    }
-
-#  if __GNUC__ >= 9
-#    pragma GCC diagnostic pop
-#  endif
-
-    // Any type with a .data() return type implicitly convertible to T*, and a .size() return type implicitly
-    // convertible to size_t. The const version can capture temporaries, with lifetime ending at end of statement.
-    template <typename V,
-              typename std::enable_if<std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
-                                      std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
-    ArrayProxy( V const & v ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( v.size() ) )
-      , m_ptr( v.data() )
-    {
-    }
-
-    template <typename V,
-              typename std::enable_if<std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
-                                      std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
-    ArrayProxy( V & v ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( v.size() ) )
-      , m_ptr( v.data() )
-    {
-    }
-
-    const T * begin() const VULKAN_HPP_NOEXCEPT
-    {
-      return m_ptr;
-    }
-
-    const T * end() const VULKAN_HPP_NOEXCEPT
-    {
-      return m_ptr + m_count;
-    }
-
-    const T & front() const VULKAN_HPP_NOEXCEPT
-    {
-      VULKAN_HPP_ASSERT( m_count && m_ptr );
-      return *m_ptr;
-    }
-
-    const T & back() const VULKAN_HPP_NOEXCEPT
-    {
-      VULKAN_HPP_ASSERT( m_count && m_ptr );
-      return *( m_ptr + m_count - 1 );
-    }
-
-    bool empty() const VULKAN_HPP_NOEXCEPT
-    {
-      return ( m_count == 0 );
-    }
-
-    uint32_t size() const VULKAN_HPP_NOEXCEPT
-    {
-      return m_count;
-    }
-
-    T * data() const VULKAN_HPP_NOEXCEPT
-    {
-      return m_ptr;
-    }
-
-  private:
-    uint32_t m_count;
-    T *      m_ptr;
-  };
-
-  template <typename T>
-  class ArrayProxyNoTemporaries
-  {
-  public:
-    VULKAN_HPP_CONSTEXPR ArrayProxyNoTemporaries() VULKAN_HPP_NOEXCEPT
-      : m_count( 0 )
-      , m_ptr( nullptr )
-    {
-    }
-
-    VULKAN_HPP_CONSTEXPR ArrayProxyNoTemporaries( std::nullptr_t ) VULKAN_HPP_NOEXCEPT
-      : m_count( 0 )
-      , m_ptr( nullptr )
-    {
-    }
-
-    ArrayProxyNoTemporaries( T & value ) VULKAN_HPP_NOEXCEPT
-      : m_count( 1 )
-      , m_ptr( &value )
-    {
-    }
-
-    template <typename V>
-    ArrayProxyNoTemporaries( V && value ) = delete;
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( typename std::remove_const<T>::type & value ) VULKAN_HPP_NOEXCEPT
-      : m_count( 1 )
-      , m_ptr( &value )
-    {
-    }
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( typename std::remove_const<T>::type && value ) = delete;
-
-    ArrayProxyNoTemporaries( uint32_t count, T * ptr ) VULKAN_HPP_NOEXCEPT
-      : m_count( count )
-      , m_ptr( ptr )
-    {
-    }
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( uint32_t count, typename std::remove_const<T>::type * ptr ) VULKAN_HPP_NOEXCEPT
-      : m_count( count )
-      , m_ptr( ptr )
-    {
-    }
-
-    template <std::size_t C>
-    ArrayProxyNoTemporaries( T ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
-      : m_count( C )
-      , m_ptr( ptr )
-    {
-    }
-
-    template <std::size_t C>
-    ArrayProxyNoTemporaries( T( &&ptr )[C] ) = delete;
-
-    template <std::size_t C, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( typename std::remove_const<T>::type ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
-      : m_count( C )
-      , m_ptr( ptr )
-    {
-    }
-
-    template <std::size_t C, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( typename std::remove_const<T>::type( &&ptr )[C] ) = delete;
-
-    ArrayProxyNoTemporaries( std::initializer_list<T> const & list ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( list.size() ) )
-      , m_ptr( list.begin() )
-    {
-    }
-
-    ArrayProxyNoTemporaries( std::initializer_list<T> const && list ) = delete;
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::initializer_list<typename std::remove_const<T>::type> const & list ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( list.size() ) )
-      , m_ptr( list.begin() )
-    {
-    }
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::initializer_list<typename std::remove_const<T>::type> const && list ) = delete;
-
-    ArrayProxyNoTemporaries( std::initializer_list<T> & list ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( list.size() ) )
-      , m_ptr( list.begin() )
-    {
-    }
-
-    ArrayProxyNoTemporaries( std::initializer_list<T> && list ) = delete;
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::initializer_list<typename std::remove_const<T>::type> & list ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( list.size() ) )
-      , m_ptr( list.begin() )
-    {
-    }
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::initializer_list<typename std::remove_const<T>::type> && list ) = delete;
-
-    // Any type with a .data() return type implicitly convertible to T*, and a // .size() return type implicitly
-    // convertible to size_t.
-    template <typename V,
-              typename std::enable_if<std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
-                                      std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
-    ArrayProxyNoTemporaries( V & v ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( v.size() ) )
-      , m_ptr( v.data() )
-    {
-    }
-
-    const T * begin() const VULKAN_HPP_NOEXCEPT
-    {
-      return m_ptr;
-    }
-
-    const T * end() const VULKAN_HPP_NOEXCEPT
-    {
-      return m_ptr + m_count;
-    }
-
-    const T & front() const VULKAN_HPP_NOEXCEPT
-    {
-      VULKAN_HPP_ASSERT( m_count && m_ptr );
-      return *m_ptr;
-    }
-
-    const T & back() const VULKAN_HPP_NOEXCEPT
-    {
-      VULKAN_HPP_ASSERT( m_count && m_ptr );
-      return *( m_ptr + m_count - 1 );
-    }
-
-    bool empty() const VULKAN_HPP_NOEXCEPT
-    {
-      return ( m_count == 0 );
-    }
-
-    uint32_t size() const VULKAN_HPP_NOEXCEPT
-    {
-      return m_count;
-    }
-
-    T * data() const VULKAN_HPP_NOEXCEPT
-    {
-      return m_ptr;
-    }
-
-  private:
-    uint32_t m_count;
-    T *      m_ptr;
-  };
-#endif
-
   template <typename T, size_t N>
   class ArrayWrapper1D : public std::array<T, N>
   {
@@ -871,6 +556,317 @@ namespace VULKAN_HPP_NAMESPACE
   {
     return flags.operator^( bit );
   }
+#if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+
+  template <typename T>
+  class ArrayProxy
+  {
+  public:
+    VULKAN_HPP_CONSTEXPR ArrayProxy() VULKAN_HPP_NOEXCEPT
+      : m_count( 0 )
+      , m_ptr( nullptr )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ArrayProxy( std::nullptr_t ) VULKAN_HPP_NOEXCEPT
+      : m_count( 0 )
+      , m_ptr( nullptr )
+    {
+    }
+
+    ArrayProxy( T & value ) VULKAN_HPP_NOEXCEPT
+      : m_count( 1 )
+      , m_ptr( &value )
+    {
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxy( typename std::remove_const<T>::type & value ) VULKAN_HPP_NOEXCEPT
+      : m_count( 1 )
+      , m_ptr( &value )
+    {
+    }
+
+    ArrayProxy( uint32_t count, T * ptr ) VULKAN_HPP_NOEXCEPT
+      : m_count( count )
+      , m_ptr( ptr )
+    {
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxy( uint32_t count, typename std::remove_const<T>::type * ptr ) VULKAN_HPP_NOEXCEPT
+      : m_count( count )
+      , m_ptr( ptr )
+    {
+    }
+
+    template <std::size_t C>
+    ArrayProxy( T ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
+      : m_count( C )
+      , m_ptr( ptr )
+    {
+    }
+
+    template <std::size_t C, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxy( typename std::remove_const<T>::type ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
+      : m_count( C )
+      , m_ptr( ptr )
+    {
+    }
+
+#  if __GNUC__ >= 9
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Winit-list-lifetime"
+#  endif
+
+    ArrayProxy( std::initializer_list<T> const & list ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( list.size() ) )
+      , m_ptr( list.begin() )
+    {
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxy( std::initializer_list<typename std::remove_const<T>::type> const & list ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( list.size() ) )
+      , m_ptr( list.begin() )
+    {
+    }
+
+    ArrayProxy( std::initializer_list<T> & list ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( list.size() ) )
+      , m_ptr( list.begin() )
+    {
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxy( std::initializer_list<typename std::remove_const<T>::type> & list ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( list.size() ) )
+      , m_ptr( list.begin() )
+    {
+    }
+
+#  if __GNUC__ >= 9
+#    pragma GCC diagnostic pop
+#  endif
+
+    // Any type with a .data() return type implicitly convertible to T*, and a .size() return type implicitly
+    // convertible to size_t. The const version can capture temporaries, with lifetime ending at end of statement.
+    template <typename V,
+              typename std::enable_if<std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
+                                      std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
+    ArrayProxy( V const & v ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( v.size() ) )
+      , m_ptr( v.data() )
+    {
+    }
+
+    template <typename V,
+              typename std::enable_if<std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
+                                      std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
+    ArrayProxy( V & v ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( v.size() ) )
+      , m_ptr( v.data() )
+    {
+    }
+
+    const T * begin() const VULKAN_HPP_NOEXCEPT
+    {
+      return m_ptr;
+    }
+
+    const T * end() const VULKAN_HPP_NOEXCEPT
+    {
+      return m_ptr + m_count;
+    }
+
+    const T & front() const VULKAN_HPP_NOEXCEPT
+    {
+      VULKAN_HPP_ASSERT( m_count && m_ptr );
+      return *m_ptr;
+    }
+
+    const T & back() const VULKAN_HPP_NOEXCEPT
+    {
+      VULKAN_HPP_ASSERT( m_count && m_ptr );
+      return *( m_ptr + m_count - 1 );
+    }
+
+    bool empty() const VULKAN_HPP_NOEXCEPT
+    {
+      return ( m_count == 0 );
+    }
+
+    uint32_t size() const VULKAN_HPP_NOEXCEPT
+    {
+      return m_count;
+    }
+
+    T * data() const VULKAN_HPP_NOEXCEPT
+    {
+      return m_ptr;
+    }
+
+  private:
+    uint32_t m_count;
+    T *      m_ptr;
+  };
+
+  template <typename T>
+  class ArrayProxyNoTemporaries
+  {
+  public:
+    VULKAN_HPP_CONSTEXPR ArrayProxyNoTemporaries() VULKAN_HPP_NOEXCEPT
+      : m_count( 0 )
+      , m_ptr( nullptr )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ArrayProxyNoTemporaries( std::nullptr_t ) VULKAN_HPP_NOEXCEPT
+      : m_count( 0 )
+      , m_ptr( nullptr )
+    {
+    }
+
+    ArrayProxyNoTemporaries( T & value ) VULKAN_HPP_NOEXCEPT
+      : m_count( 1 )
+      , m_ptr( &value )
+    {
+    }
+
+    template <typename V>
+    ArrayProxyNoTemporaries( V && value ) = delete;
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( typename std::remove_const<T>::type & value ) VULKAN_HPP_NOEXCEPT
+      : m_count( 1 )
+      , m_ptr( &value )
+    {
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( typename std::remove_const<T>::type && value ) = delete;
+
+    ArrayProxyNoTemporaries( uint32_t count, T * ptr ) VULKAN_HPP_NOEXCEPT
+      : m_count( count )
+      , m_ptr( ptr )
+    {
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( uint32_t count, typename std::remove_const<T>::type * ptr ) VULKAN_HPP_NOEXCEPT
+      : m_count( count )
+      , m_ptr( ptr )
+    {
+    }
+
+    template <std::size_t C>
+    ArrayProxyNoTemporaries( T ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
+      : m_count( C )
+      , m_ptr( ptr )
+    {
+    }
+
+    template <std::size_t C>
+    ArrayProxyNoTemporaries( T( &&ptr )[C] ) = delete;
+
+    template <std::size_t C, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( typename std::remove_const<T>::type ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
+      : m_count( C )
+      , m_ptr( ptr )
+    {
+    }
+
+    template <std::size_t C, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( typename std::remove_const<T>::type( &&ptr )[C] ) = delete;
+
+    ArrayProxyNoTemporaries( std::initializer_list<T> const & list ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( list.size() ) )
+      , m_ptr( list.begin() )
+    {
+    }
+
+    ArrayProxyNoTemporaries( std::initializer_list<T> const && list ) = delete;
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( std::initializer_list<typename std::remove_const<T>::type> const & list ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( list.size() ) )
+      , m_ptr( list.begin() )
+    {
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( std::initializer_list<typename std::remove_const<T>::type> const && list ) = delete;
+
+    ArrayProxyNoTemporaries( std::initializer_list<T> & list ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( list.size() ) )
+      , m_ptr( list.begin() )
+    {
+    }
+
+    ArrayProxyNoTemporaries( std::initializer_list<T> && list ) = delete;
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( std::initializer_list<typename std::remove_const<T>::type> & list ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( list.size() ) )
+      , m_ptr( list.begin() )
+    {
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( std::initializer_list<typename std::remove_const<T>::type> && list ) = delete;
+
+    // Any type with a .data() return type implicitly convertible to T*, and a // .size() return type implicitly
+    // convertible to size_t.
+    template <typename V,
+              typename std::enable_if<std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
+                                      std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
+    ArrayProxyNoTemporaries( V & v ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( v.size() ) )
+      , m_ptr( v.data() )
+    {
+    }
+
+    const T * begin() const VULKAN_HPP_NOEXCEPT
+    {
+      return m_ptr;
+    }
+
+    const T * end() const VULKAN_HPP_NOEXCEPT
+    {
+      return m_ptr + m_count;
+    }
+
+    const T & front() const VULKAN_HPP_NOEXCEPT
+    {
+      VULKAN_HPP_ASSERT( m_count && m_ptr );
+      return *m_ptr;
+    }
+
+    const T & back() const VULKAN_HPP_NOEXCEPT
+    {
+      VULKAN_HPP_ASSERT( m_count && m_ptr );
+      return *( m_ptr + m_count - 1 );
+    }
+
+    bool empty() const VULKAN_HPP_NOEXCEPT
+    {
+      return ( m_count == 0 );
+    }
+
+    uint32_t size() const VULKAN_HPP_NOEXCEPT
+    {
+      return m_count;
+    }
+
+    T * data() const VULKAN_HPP_NOEXCEPT
+    {
+      return m_ptr;
+    }
+
+  private:
+    uint32_t m_count;
+    T *      m_ptr;
+  };
 
   template <typename RefType>
   class Optional
@@ -1142,7 +1138,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
   };
 
-#if !defined( VULKAN_HPP_NO_SMART_HANDLE )
+#  if !defined( VULKAN_HPP_NO_SMART_HANDLE )
   template <typename Type, typename Dispatch>
   class UniqueHandleTraits;
 
@@ -1265,7 +1261,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     lhs.swap( rhs );
   }
-#endif
+#  endif
+#endif  // VULKAN_HPP_DISABLE_ENHANCED_MODE
 
   class DispatchLoaderBase
   {
@@ -5320,6 +5317,23 @@ namespace VULKAN_HPP_NAMESPACE
     {
       return ::vkGetShaderModuleCreateInfoIdentifierEXT( device, pCreateInfo, pIdentifier );
     }
+
+    //=== VK_QCOM_tile_properties ===
+
+    VkResult vkGetFramebufferTilePropertiesQCOM( VkDevice               device,
+                                                 VkFramebuffer          framebuffer,
+                                                 uint32_t *             pPropertiesCount,
+                                                 VkTilePropertiesQCOM * pProperties ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetFramebufferTilePropertiesQCOM( device, framebuffer, pPropertiesCount, pProperties );
+    }
+
+    VkResult vkGetDynamicRenderingTilePropertiesQCOM( VkDevice                device,
+                                                      const VkRenderingInfo * pRenderingInfo,
+                                                      VkTilePropertiesQCOM *  pProperties ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetDynamicRenderingTilePropertiesQCOM( device, pRenderingInfo, pProperties );
+    }
   };
 #endif
 
@@ -5392,6 +5406,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  define VULKAN_HPP_DEFAULT_ARGUMENT_NULLPTR_ASSIGNMENT = nullptr
 #  define VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT       = VULKAN_HPP_DEFAULT_DISPATCHER
 #endif
+#if !defined( VULKAN_HPP_NO_SMART_HANDLE )
 
   struct AllocationCallbacks;
 
@@ -5570,6 +5585,8 @@ namespace VULKAN_HPP_NAMESPACE
     Dispatch const * m_dispatch = nullptr;
   };
 
+#endif  // !VULKAN_HPP_NO_SMART_HANDLE
+
   //==================
   //=== BASE TYPEs ===
   //==================
@@ -5583,6 +5600,9 @@ namespace VULKAN_HPP_NAMESPACE
 }  // namespace VULKAN_HPP_NAMESPACE
 
 #include <vulkan/vulkan_enums.hpp>
+#if !defined( VULKAN_HPP_NO_TO_STRING )
+#  include <vulkan/vulkan_to_string.hpp>
+#endif
 
 #ifndef VULKAN_HPP_NO_EXCEPTIONS
 namespace std
@@ -5607,7 +5627,11 @@ namespace VULKAN_HPP_NAMESPACE
     }
     virtual std::string message( int ev ) const override
     {
-      return to_string( static_cast<Result>( ev ) );
+#  if defined( VULKAN_HPP_NO_TO_STRING )
+      return std::to_string( ev );
+#  else
+      return VULKAN_HPP_NAMESPACE::to_string( static_cast<VULKAN_HPP_NAMESPACE::Result>( ev ) );
+#  endif
     }
   };
 
@@ -6172,6 +6196,8 @@ namespace VULKAN_HPP_NAMESPACE
 
 namespace VULKAN_HPP_NAMESPACE
 {
+#if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+
   //=======================
   //=== STRUCTS EXTENDS ===
   //=======================
@@ -7464,7 +7490,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_KHR_video_queue ===
   template <>
   struct StructExtends<QueueFamilyQueryResultStatusProperties2KHR, QueueFamilyProperties2>
@@ -7522,9 +7548,9 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_KHR_video_decode_queue ===
   template <>
   struct StructExtends<VideoDecodeCapabilitiesKHR, VideoCapabilitiesKHR>
@@ -7534,7 +7560,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_NV_dedicated_allocation ===
   template <>
@@ -7596,7 +7622,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_EXT_video_encode_h264 ===
   template <>
   struct StructExtends<VideoEncodeH264CapabilitiesEXT, VideoEncodeCapabilitiesKHR>
@@ -7670,9 +7696,9 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_EXT_video_encode_h265 ===
   template <>
   struct StructExtends<VideoEncodeH265CapabilitiesEXT, VideoEncodeCapabilitiesKHR>
@@ -7746,9 +7772,9 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_EXT_video_decode_h264 ===
   template <>
   struct StructExtends<VideoDecodeH264ProfileEXT, VideoProfileKHR>
@@ -7814,7 +7840,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_AMD_texture_gather_bias_lod ===
   template <>
@@ -7920,7 +7946,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_USE_PLATFORM_WIN32_KHR )
+#  if defined( VK_USE_PLATFORM_WIN32_KHR )
   //=== VK_NV_external_memory_win32 ===
   template <>
   struct StructExtends<ImportMemoryWin32HandleInfoNV, MemoryAllocateInfo>
@@ -7938,9 +7964,9 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#  endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
-#if defined( VK_USE_PLATFORM_WIN32_KHR )
+#  if defined( VK_USE_PLATFORM_WIN32_KHR )
   //=== VK_NV_win32_keyed_mutex ===
   template <>
   struct StructExtends<Win32KeyedMutexAcquireReleaseInfoNV, SubmitInfo>
@@ -7958,7 +7984,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#  endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   //=== VK_EXT_validation_flags ===
   template <>
@@ -7996,7 +8022,65 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_USE_PLATFORM_WIN32_KHR )
+  //=== VK_EXT_pipeline_robustness ===
+  template <>
+  struct StructExtends<PhysicalDevicePipelineRobustnessFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDevicePipelineRobustnessFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDevicePipelineRobustnessPropertiesEXT, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PipelineRobustnessCreateInfoEXT, GraphicsPipelineCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PipelineRobustnessCreateInfoEXT, ComputePipelineCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PipelineRobustnessCreateInfoEXT, PipelineShaderStageCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PipelineRobustnessCreateInfoEXT, RayTracingPipelineCreateInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+#  if defined( VK_USE_PLATFORM_WIN32_KHR )
   //=== VK_KHR_external_memory_win32 ===
   template <>
   struct StructExtends<ImportMemoryWin32HandleInfoKHR, MemoryAllocateInfo>
@@ -8014,7 +8098,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#  endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   //=== VK_KHR_external_memory_fd ===
   template <>
@@ -8026,7 +8110,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_USE_PLATFORM_WIN32_KHR )
+#  if defined( VK_USE_PLATFORM_WIN32_KHR )
   //=== VK_KHR_win32_keyed_mutex ===
   template <>
   struct StructExtends<Win32KeyedMutexAcquireReleaseInfoKHR, SubmitInfo>
@@ -8044,9 +8128,9 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#  endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
-#if defined( VK_USE_PLATFORM_WIN32_KHR )
+#  if defined( VK_USE_PLATFORM_WIN32_KHR )
   //=== VK_KHR_external_semaphore_win32 ===
   template <>
   struct StructExtends<ExportSemaphoreWin32HandleInfoKHR, SemaphoreCreateInfo>
@@ -8064,7 +8148,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#  endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   //=== VK_KHR_push_descriptor ===
   template <>
@@ -8234,7 +8318,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_USE_PLATFORM_WIN32_KHR )
+#  if defined( VK_USE_PLATFORM_WIN32_KHR )
   //=== VK_KHR_external_fence_win32 ===
   template <>
   struct StructExtends<ExportFenceWin32HandleInfoKHR, FenceCreateInfo>
@@ -8244,7 +8328,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#  endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   //=== VK_KHR_performance_query ===
   template <>
@@ -8314,7 +8398,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_USE_PLATFORM_ANDROID_KHR )
+#  if defined( VK_USE_PLATFORM_ANDROID_KHR )
   //=== VK_ANDROID_external_memory_android_hardware_buffer ===
   template <>
   struct StructExtends<AndroidHardwareBufferUsageANDROID, ImageFormatProperties2>
@@ -8364,7 +8448,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+#  endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
   //=== VK_EXT_sample_locations ===
   template <>
@@ -8573,8 +8657,16 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
+  template <>
+  struct StructExtends<ShaderModuleValidationCacheCreateInfoEXT, PipelineShaderStageCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
 
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_KHR_portability_subset ===
   template <>
   struct StructExtends<PhysicalDevicePortabilitySubsetFeaturesKHR, PhysicalDeviceFeatures2>
@@ -8600,7 +8692,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_NV_shading_rate_image ===
   template <>
@@ -8770,7 +8862,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_EXT_video_decode_h265 ===
   template <>
   struct StructExtends<VideoDecodeH265ProfileEXT, VideoProfileKHR>
@@ -8828,7 +8920,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_KHR_global_priority ===
   template <>
@@ -8908,7 +9000,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_USE_PLATFORM_GGP )
+#  if defined( VK_USE_PLATFORM_GGP )
   //=== VK_GGP_frame_token ===
   template <>
   struct StructExtends<PresentFrameTokenGGP, PresentInfoKHR>
@@ -8918,7 +9010,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_GGP*/
+#  endif /*VK_USE_PLATFORM_GGP*/
 
   //=== VK_NV_compute_shader_derivatives ===
   template <>
@@ -9444,7 +9536,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_USE_PLATFORM_WIN32_KHR )
+#  if defined( VK_USE_PLATFORM_WIN32_KHR )
   //=== VK_EXT_full_screen_exclusive ===
   template <>
   struct StructExtends<SurfaceFullScreenExclusiveInfoEXT, PhysicalDeviceSurfaceInfo2KHR>
@@ -9486,7 +9578,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#  endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
   //=== VK_EXT_line_rasterization ===
   template <>
@@ -9830,7 +9922,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_KHR_video_encode_queue ===
   template <>
   struct StructExtends<VideoEncodeCapabilitiesKHR, VideoCapabilitiesKHR>
@@ -9856,7 +9948,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_NV_device_diagnostics_config ===
   template <>
@@ -9884,7 +9976,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_USE_PLATFORM_METAL_EXT )
+#  if defined( VK_USE_PLATFORM_METAL_EXT )
   //=== VK_EXT_metal_objects ===
   template <>
   struct StructExtends<ExportMetalObjectCreateInfoEXT, InstanceCreateInfo>
@@ -10030,7 +10122,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_METAL_EXT*/
+#  endif /*VK_USE_PLATFORM_METAL_EXT*/
 
   //=== VK_KHR_synchronization2 ===
   template <>
@@ -10556,7 +10648,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#if defined( VK_USE_PLATFORM_FUCHSIA )
+#  if defined( VK_USE_PLATFORM_FUCHSIA )
   //=== VK_FUCHSIA_external_memory ===
   template <>
   struct StructExtends<ImportMemoryZirconHandleInfoFUCHSIA, MemoryAllocateInfo>
@@ -10566,9 +10658,9 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_FUCHSIA*/
+#  endif /*VK_USE_PLATFORM_FUCHSIA*/
 
-#if defined( VK_USE_PLATFORM_FUCHSIA )
+#  if defined( VK_USE_PLATFORM_FUCHSIA )
   //=== VK_FUCHSIA_buffer_collection ===
   template <>
   struct StructExtends<ImportMemoryBufferCollectionFUCHSIA, MemoryAllocateInfo>
@@ -10594,7 +10686,7 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#endif /*VK_USE_PLATFORM_FUCHSIA*/
+#  endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   //=== VK_HUAWEI_subpass_shading ===
   template <>
@@ -11026,6 +11118,40 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_QCOM_image_processing ===
+  template <>
+  struct StructExtends<ImageViewSampleWeightCreateInfoQCOM, ImageViewCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceImageProcessingFeaturesQCOM, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceImageProcessingFeaturesQCOM, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceImageProcessingPropertiesQCOM, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_EXT_subpass_merge_feedback ===
   template <>
   struct StructExtends<PhysicalDeviceSubpassMergeFeedbackFeaturesEXT, PhysicalDeviceFeatures2>
@@ -11109,6 +11235,26 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
+
+  //=== VK_QCOM_tile_properties ===
+  template <>
+  struct StructExtends<PhysicalDeviceTilePropertiesFeaturesQCOM, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceTilePropertiesFeaturesQCOM, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+#endif  // VULKAN_HPP_DISABLE_ENHANCED_MODE
 
 #if VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL
   class DynamicLoader
@@ -12162,6 +12308,10 @@ namespace VULKAN_HPP_NAMESPACE
     //=== VK_EXT_shader_module_identifier ===
     PFN_vkGetShaderModuleIdentifierEXT           vkGetShaderModuleIdentifierEXT           = 0;
     PFN_vkGetShaderModuleCreateInfoIdentifierEXT vkGetShaderModuleCreateInfoIdentifierEXT = 0;
+
+    //=== VK_QCOM_tile_properties ===
+    PFN_vkGetFramebufferTilePropertiesQCOM      vkGetFramebufferTilePropertiesQCOM      = 0;
+    PFN_vkGetDynamicRenderingTilePropertiesQCOM vkGetDynamicRenderingTilePropertiesQCOM = 0;
 
   public:
     DispatchLoaderDynamic() VULKAN_HPP_NOEXCEPT                                    = default;
@@ -13354,6 +13504,11 @@ namespace VULKAN_HPP_NAMESPACE
       vkGetShaderModuleIdentifierEXT = PFN_vkGetShaderModuleIdentifierEXT( vkGetInstanceProcAddr( instance, "vkGetShaderModuleIdentifierEXT" ) );
       vkGetShaderModuleCreateInfoIdentifierEXT =
         PFN_vkGetShaderModuleCreateInfoIdentifierEXT( vkGetInstanceProcAddr( instance, "vkGetShaderModuleCreateInfoIdentifierEXT" ) );
+
+      //=== VK_QCOM_tile_properties ===
+      vkGetFramebufferTilePropertiesQCOM = PFN_vkGetFramebufferTilePropertiesQCOM( vkGetInstanceProcAddr( instance, "vkGetFramebufferTilePropertiesQCOM" ) );
+      vkGetDynamicRenderingTilePropertiesQCOM =
+        PFN_vkGetDynamicRenderingTilePropertiesQCOM( vkGetInstanceProcAddr( instance, "vkGetDynamicRenderingTilePropertiesQCOM" ) );
     }
 
     void init( VULKAN_HPP_NAMESPACE::Device deviceCpp ) VULKAN_HPP_NOEXCEPT
@@ -14195,6 +14350,11 @@ namespace VULKAN_HPP_NAMESPACE
       vkGetShaderModuleIdentifierEXT = PFN_vkGetShaderModuleIdentifierEXT( vkGetDeviceProcAddr( device, "vkGetShaderModuleIdentifierEXT" ) );
       vkGetShaderModuleCreateInfoIdentifierEXT =
         PFN_vkGetShaderModuleCreateInfoIdentifierEXT( vkGetDeviceProcAddr( device, "vkGetShaderModuleCreateInfoIdentifierEXT" ) );
+
+      //=== VK_QCOM_tile_properties ===
+      vkGetFramebufferTilePropertiesQCOM = PFN_vkGetFramebufferTilePropertiesQCOM( vkGetDeviceProcAddr( device, "vkGetFramebufferTilePropertiesQCOM" ) );
+      vkGetDynamicRenderingTilePropertiesQCOM =
+        PFN_vkGetDynamicRenderingTilePropertiesQCOM( vkGetDeviceProcAddr( device, "vkGetDynamicRenderingTilePropertiesQCOM" ) );
     }
   };
 }  // namespace VULKAN_HPP_NAMESPACE

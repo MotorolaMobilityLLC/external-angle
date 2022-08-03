@@ -59,6 +59,11 @@ struct FeaturesVk : FeatureSetBase
         "The depth value is not clamped to [0,1] for floating point depth buffers.", &members,
         "http://anglebug.com/3970"};
 
+    FeatureInfo mutableMipmapTextureUpload = {
+        "mutableMipmapTextureUpload", FeatureCategory::VulkanFeatures,
+        "Enable uploading the previously defined mutable mipmap texture.", &members,
+        "https://anglebug.com/7308"};
+
     FeatureInfo supportsRenderpass2 = {
         "supportsRenderpass2",
         FeatureCategory::VulkanFeatures,
@@ -215,11 +220,6 @@ struct FeaturesVk : FeatureSetBase
     FeatureInfo disableFifoPresentMode = {
         "disableFifoPresentMode", FeatureCategory::VulkanWorkarounds,
         "VK_PRESENT_MODE_FIFO_KHR causes random timeouts", &members, "http://anglebug.com/3153"};
-
-    FeatureInfo bindEmptyForUnusedDescriptorSets = {
-        "bindEmptyForUnusedDescriptorSets", FeatureCategory::VulkanWorkarounds,
-        "Gaps in bound descriptor set indices causes the post-gap sets to misbehave", &members,
-        "http://anglebug.com/2727"};
 
     FeatureInfo forceD16TexFilter = {
         "forceD16TexFilter", FeatureCategory::VulkanWorkarounds,
@@ -669,6 +669,13 @@ struct FeaturesVk : FeatureSetBase
         "preferLinearFilterForYUV",
         FeatureCategory::VulkanFeatures,
         "Prefer to use VK_FILTER_LINEAR for VkSamplerYcbcrConversion",
+        &members,
+    };
+
+    FeatureInfo supportsYuvTarget = {
+        "supportsYuvTarget",
+        FeatureCategory::VulkanFeatures,
+        "VkDevice supports VK_ANDROID_render_to_external_format and VK_EXT_ycbcr_attachment",
         &members,
     };
 };
