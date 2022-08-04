@@ -2397,16 +2397,16 @@ void ReleaseCachedObject(ContextVk *contextVk, const DescriptorSetDescAndPool &d
     descAndPool.mPool->releaseCachedDescriptorSet(contextVk, descAndPool.mDesc);
 }
 
-void DestroyCachedObject(const FramebufferDesc &desc)
+void DestroyCachedObject(RendererVk *renderer, const FramebufferDesc &desc)
 {
     // Framebuffer cache are implemented in a way that each cache entry tracks GPU progress and we
     // always guarantee cache entries are released before calling destroy.
 }
 
-void DestroyCachedObject(const DescriptorSetDescAndPool &descAndPool)
+void DestroyCachedObject(RendererVk *renderer, const DescriptorSetDescAndPool &descAndPool)
 {
     ASSERT(descAndPool.mPool != nullptr);
-    descAndPool.mPool->destroyCachedDescriptorSet(descAndPool.mDesc);
+    descAndPool.mPool->destroyCachedDescriptorSet(renderer, descAndPool.mDesc);
 }
 }  // anonymous namespace
 
@@ -4239,6 +4239,11 @@ bool YcbcrConversionDesc::updateChromaFilter(RendererVk *rendererVk, VkFilter fi
     return false;
 }
 
+void YcbcrConversionDesc::updateConversionModel(VkSamplerYcbcrModelConversion conversionModel)
+{
+    SetBitField(mConversionModel, conversionModel);
+}
+
 angle::Result YcbcrConversionDesc::init(Context *context,
                                         SamplerYcbcrConversion *conversionOut) const
 {
@@ -4725,21 +4730,32 @@ void DescriptorSetDesc::streamOut(std::ostream &ostr) const
 // DescriptorSetDescBuilder implementation.
 DescriptorSetDescBuilder::DescriptorSetDescBuilder() = default;
 
-DescriptorSetDescBuilder::~DescriptorSetDescBuilder() = default;
+DescriptorSetDescBuilder::~DescriptorSetDescBuilder()
+{
+    ASSERT(mUsedImages.empty());
+    ASSERT(mUsedBufferBlocks.empty());
+    ASSERT(mUsedBufferHelpers.empty());
+}
 
 DescriptorSetDescBuilder::DescriptorSetDescBuilder(const DescriptorSetDescBuilder &other)
     : mDesc(other.mDesc),
       mHandles(other.mHandles),
       mDynamicOffsets(other.mDynamicOffsets),
-      mCurrentInfoIndex(other.mCurrentInfoIndex)
+      mCurrentInfoIndex(other.mCurrentInfoIndex),
+      mUsedImages(other.mUsedImages),
+      mUsedBufferBlocks(other.mUsedBufferBlocks),
+      mUsedBufferHelpers(other.mUsedBufferHelpers)
 {}
 
 DescriptorSetDescBuilder &DescriptorSetDescBuilder::operator=(const DescriptorSetDescBuilder &other)
 {
-    mDesc             = other.mDesc;
-    mHandles          = other.mHandles;
-    mDynamicOffsets   = other.mDynamicOffsets;
-    mCurrentInfoIndex = other.mCurrentInfoIndex;
+    mDesc              = other.mDesc;
+    mHandles           = other.mHandles;
+    mDynamicOffsets    = other.mDynamicOffsets;
+    mCurrentInfoIndex  = other.mCurrentInfoIndex;
+    mUsedImages        = other.mUsedImages;
+    mUsedBufferBlocks  = other.mUsedBufferBlocks;
+    mUsedBufferHelpers = other.mUsedBufferHelpers;
     return *this;
 }
 
@@ -4749,6 +4765,9 @@ void DescriptorSetDescBuilder::reset()
     mHandles.clear();
     mDynamicOffsets.clear();
     mCurrentInfoIndex = 0;
+    mUsedImages.clear();
+    mUsedBufferBlocks.clear();
+    mUsedBufferHelpers.clear();
 }
 
 void DescriptorSetDescBuilder::updateWriteDesc(uint32_t bindingIndex,
@@ -4796,6 +4815,7 @@ void DescriptorSetDescBuilder::updateUniformBuffer(uint32_t bindingIndex,
     DescriptorInfoDesc infoDesc = {};
     SetBitField(infoDesc.imageLayoutOrRange, bufferRange);
     infoDesc.samplerOrBufferSerial = bufferHelper.getBlockSerial().getValue();
+    mUsedBufferBlocks.emplace_back(bufferHelper.getBufferBlock());
 
     uint32_t infoIndex = mDesc.getInfoDescIndex(bindingIndex);
 
@@ -4832,6 +4852,7 @@ void DescriptorSetDescBuilder::updateTransformFeedbackBuffer(
     SetBitField(infoDesc.imageLayoutOrRange, adjustedRange);
     SetBitField(infoDesc.imageViewSerialOrOffset, alignedOffset);
     infoDesc.samplerOrBufferSerial = bufferHelper.getBlockSerial().getValue();
+    mUsedBufferBlocks.emplace_back(bufferHelper.getBufferBlock());
 
     uint32_t infoIndex = mDesc.getInfoDescIndex(baseBinding) + xfbBufferIndex;
 
@@ -4876,45 +4897,58 @@ void DescriptorSetDescBuilder::updateUniformsAndXfb(Context *context,
     }
 }
 
-void UpdatePreCacheActiveTextures(const gl::ActiveTextureMask &activeTextures,
+void UpdatePreCacheActiveTextures(const std::vector<gl::SamplerBinding> &samplerBindings,
+                                  const gl::ActiveTextureMask &activeTextures,
                                   const gl::ActiveTextureArray<TextureVk *> &textures,
                                   const gl::SamplerBindingVector &samplers,
                                   DescriptorSetDesc *desc)
 {
     desc->reset();
 
-    for (size_t textureIndex : activeTextures)
+    for (uint32_t samplerIndex = 0; samplerIndex < samplerBindings.size(); ++samplerIndex)
     {
-        TextureVk *textureVk = textures[textureIndex];
-
-        DescriptorInfoDesc infoDesc = {};
-
-        if (textureVk->getState().getType() == gl::TextureType::Buffer)
+        const gl::SamplerBinding &samplerBinding = samplerBindings[samplerIndex];
+        uint32_t arraySize        = static_cast<uint32_t>(samplerBinding.boundTextureUnits.size());
+        bool isSamplerExternalY2Y = samplerBinding.samplerType == GL_SAMPLER_EXTERNAL_2D_Y2Y_EXT;
+        for (uint32_t arrayElement = 0; arrayElement < arraySize; ++arrayElement)
         {
-            ImageOrBufferViewSubresourceSerial imageViewSerial = textureVk->getBufferViewSerial();
-            infoDesc.imageViewSerialOrOffset = imageViewSerial.viewSerial.getValue();
+            size_t textureIndex = samplerBinding.boundTextureUnits[arrayElement];
+            if (!activeTextures.test(textureIndex))
+                continue;
+            TextureVk *textureVk = textures[textureIndex];
+
+            DescriptorInfoDesc infoDesc = {};
+
+            if (textureVk->getState().getType() == gl::TextureType::Buffer)
+            {
+                ImageOrBufferViewSubresourceSerial imageViewSerial =
+                    textureVk->getBufferViewSerial();
+                infoDesc.imageViewSerialOrOffset = imageViewSerial.viewSerial.getValue();
+            }
+            else
+            {
+                gl::Sampler *sampler       = samplers[textureIndex].get();
+                const SamplerVk *samplerVk = sampler ? vk::GetImpl(sampler) : nullptr;
+
+                const SamplerHelper &samplerHelper =
+                    samplerVk ? samplerVk->getSampler()
+                              : textureVk->getSampler(isSamplerExternalY2Y);
+                const gl::SamplerState &samplerState =
+                    sampler ? sampler->getSamplerState() : textureVk->getState().getSamplerState();
+
+                ImageOrBufferViewSubresourceSerial imageViewSerial =
+                    textureVk->getImageViewSubresourceSerial(samplerState);
+
+                // Layout is implicit.
+
+                infoDesc.imageViewSerialOrOffset = imageViewSerial.viewSerial.getValue();
+                infoDesc.samplerOrBufferSerial   = samplerHelper.getSamplerSerial().getValue();
+                memcpy(&infoDesc.imageSubresourceRange, &imageViewSerial.subresource,
+                       sizeof(uint32_t));
+            }
+
+            desc->updateInfoDesc(static_cast<uint32_t>(textureIndex), infoDesc);
         }
-        else
-        {
-            gl::Sampler *sampler       = samplers[textureIndex].get();
-            const SamplerVk *samplerVk = sampler ? vk::GetImpl(sampler) : nullptr;
-
-            const SamplerHelper &samplerHelper =
-                samplerVk ? samplerVk->getSampler() : textureVk->getSampler();
-            const gl::SamplerState &samplerState =
-                sampler ? sampler->getSamplerState() : textureVk->getState().getSamplerState();
-
-            ImageOrBufferViewSubresourceSerial imageViewSerial =
-                textureVk->getImageViewSubresourceSerial(samplerState);
-
-            // Layout is implicit.
-
-            infoDesc.imageViewSerialOrOffset = imageViewSerial.viewSerial.getValue();
-            infoDesc.samplerOrBufferSerial   = samplerHelper.getSamplerSerial().getValue();
-            memcpy(&infoDesc.imageSubresourceRange, &imageViewSerial.subresource, sizeof(uint32_t));
-        }
-
-        desc->updateInfoDesc(static_cast<uint32_t>(textureIndex), infoDesc);
     }
 }
 
@@ -4980,6 +5014,8 @@ angle::Result DescriptorSetDescBuilder::updateExecutableActiveTexturesForShader(
 
         updateWriteDesc(info.binding, descriptorType, descriptorCount);
 
+        bool isSamplerExternalY2Y = samplerBinding.samplerType == GL_SAMPLER_EXTERNAL_2D_Y2Y_EXT;
+
         for (uint32_t arrayElement = 0; arrayElement < arraySize; ++arrayElement)
         {
             GLuint textureUnit   = samplerBinding.boundTextureUnits[arrayElement];
@@ -4996,7 +5032,7 @@ angle::Result DescriptorSetDescBuilder::updateExecutableActiveTexturesForShader(
                     textureVk->getBufferViewSerial();
                 infoDesc.imageViewSerialOrOffset = imageViewSerial.viewSerial.getValue();
 
-                textureVk->onNewTextureDescriptorSet(sharedCacheKey);
+                textureVk->onNewDescriptorSet(sharedCacheKey);
 
                 const BufferView *view = nullptr;
                 ANGLE_TRY(textureVk->getBufferViewAndRecordUse(context, nullptr, false, &view));
@@ -5008,14 +5044,15 @@ angle::Result DescriptorSetDescBuilder::updateExecutableActiveTexturesForShader(
                 const SamplerVk *samplerVk = sampler ? vk::GetImpl(sampler) : nullptr;
 
                 const SamplerHelper &samplerHelper =
-                    samplerVk ? samplerVk->getSampler() : textureVk->getSampler();
+                    samplerVk ? samplerVk->getSampler()
+                              : textureVk->getSampler(isSamplerExternalY2Y);
                 const gl::SamplerState &samplerState =
                     sampler ? sampler->getSamplerState() : textureVk->getState().getSamplerState();
 
                 ImageOrBufferViewSubresourceSerial imageViewSerial =
                     textureVk->getImageViewSubresourceSerial(samplerState);
 
-                textureVk->onNewTextureDescriptorSet(sharedCacheKey);
+                textureVk->onNewDescriptorSet(sharedCacheKey);
 
                 ImageLayout imageLayout = textureVk->getImage().getCurrentImageLayout();
 
@@ -5027,7 +5064,10 @@ angle::Result DescriptorSetDescBuilder::updateExecutableActiveTexturesForShader(
 
                 mHandles[infoIndex].sampler = samplerHelper.get().getHandle();
 
-                if (emulateSeamfulCubeMapSampling)
+                // __samplerExternal2DY2YEXT cannot be used with
+                // emulateSeamfulCubeMapSampling because that's only enabled in GLES == 2.
+                // Use the read image view here anyway.
+                if (emulateSeamfulCubeMapSampling && !isSamplerExternalY2Y)
                 {
                     // If emulating seamful cube mapping, use the fetch image view.  This is
                     // basically the same image view as read, except it's a 2DArray view for
@@ -5039,7 +5079,8 @@ angle::Result DescriptorSetDescBuilder::updateExecutableActiveTexturesForShader(
                 else
                 {
                     const ImageView &imageView = textureVk->getReadImageView(
-                        context, samplerState.getSRGBDecode(), samplerUniform.texelFetchStaticUse);
+                        context, samplerState.getSRGBDecode(), samplerUniform.texelFetchStaticUse,
+                        isSamplerExternalY2Y);
                     mHandles[infoIndex].imageView = imageView.getHandle();
                 }
             }
@@ -5151,10 +5192,12 @@ void DescriptorSetDescBuilder::updateShaderBuffers(
             if (IsDynamicDescriptor(descriptorType))
             {
                 SetBitField(mDynamicOffsets[infoDescIndex], offset);
+                mUsedBufferBlocks.emplace_back(bufferHelper.getBufferBlock());
             }
             else
             {
                 SetBitField(infoDesc.imageViewSerialOrOffset, offset);
+                mUsedBufferHelpers.emplace_back(&bufferHelper);
             }
 
             mDesc.updateInfoDesc(infoDescIndex, infoDesc);
@@ -5231,6 +5274,7 @@ void DescriptorSetDescBuilder::updateAtomicCounters(
         SetBitField(infoDesc.imageLayoutOrRange, range);
         SetBitField(infoDesc.imageViewSerialOrOffset, offset);
         infoDesc.samplerOrBufferSerial = bufferHelper.getBlockSerial().getValue();
+        mUsedBufferHelpers.emplace_back(&bufferHelper);
 
         mDesc.updateInfoDesc(infoIndex, infoDesc);
         mHandles[infoIndex].buffer = bufferHelper.getBuffer().getHandle();
@@ -5305,6 +5349,7 @@ angle::Result DescriptorSetDescBuilder::updateImages(
                 DescriptorInfoDesc infoDesc = {};
                 infoDesc.imageViewSerialOrOffset =
                     textureVk->getBufferViewSerial().viewSerial.getValue();
+                mUsedImages.emplace_back(textureVk);
 
                 mDesc.updateInfoDesc(infoIndex, infoDesc);
                 mHandles[infoIndex].bufferView = view->getHandle();
@@ -5335,6 +5380,7 @@ angle::Result DescriptorSetDescBuilder::updateImages(
                 SetBitField(infoDesc.imageLayoutOrRange, image->getCurrentImageLayout());
                 memcpy(&infoDesc.imageSubresourceRange, &serial.subresource, sizeof(uint32_t));
                 infoDesc.imageViewSerialOrOffset = serial.viewSerial.getValue();
+                mUsedImages.emplace_back(textureVk);
 
                 mDesc.updateInfoDesc(infoIndex, infoDesc);
                 mHandles[infoIndex].imageView = imageView->getHandle();
@@ -5410,6 +5456,32 @@ void DescriptorSetDescBuilder::updateDescriptorSet(UpdateDescriptorSetsBuilder *
     mDesc.updateDescriptorSet(updateBuilder, mHandles.data(), descriptorSet);
 }
 
+void DescriptorSetDescBuilder::updateImagesAndBuffersWithSharedCacheKey(
+    const SharedDescriptorSetCacheKey &sharedCacheKey)
+{
+    if (sharedCacheKey)
+    {
+        // A new cache entry has been created. We record this cache key in the images and buffers so
+        // that the descriptorSet cache can be destroyed when buffer/image is destroyed.
+        for (TextureVk *image : mUsedImages)
+        {
+            image->onNewDescriptorSet(sharedCacheKey);
+        }
+        for (BufferBlock *bufferBlock : mUsedBufferBlocks)
+        {
+            bufferBlock->onNewDescriptorSet(sharedCacheKey);
+        }
+        for (BufferHelper *bufferHelper : mUsedBufferHelpers)
+        {
+            bufferHelper->onNewDescriptorSet(sharedCacheKey);
+        }
+    }
+
+    mUsedImages.clear();
+    mUsedBufferBlocks.clear();
+    mUsedBufferHelpers.clear();
+}
+
 // SharedCacheKeyManager implementation.
 template <class SharedCacheKeyT>
 void SharedCacheKeyManager<SharedCacheKeyT>::addKey(const SharedCacheKeyT &key)
@@ -5443,7 +5515,7 @@ void SharedCacheKeyManager<SharedCacheKeyT>::releaseKeys(ContextVk *contextVk)
 }
 
 template <class SharedCacheKeyT>
-void SharedCacheKeyManager<SharedCacheKeyT>::destroyKeys()
+void SharedCacheKeyManager<SharedCacheKeyT>::destroyKeys(RendererVk *renderer)
 {
     for (SharedCacheKeyT &sharedCacheKey : mSharedCacheKeys)
     {
@@ -5451,7 +5523,7 @@ void SharedCacheKeyManager<SharedCacheKeyT>::destroyKeys()
         if (*sharedCacheKey.get() != nullptr)
         {
             // Immediate destroy the cached object and the key
-            DestroyCachedObject(*(*sharedCacheKey.get()));
+            DestroyCachedObject(renderer, *(*sharedCacheKey.get()));
             *sharedCacheKey.get() = nullptr;
         }
     }

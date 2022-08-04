@@ -637,6 +637,8 @@ class GraphicsPipelineDesc final
                               const RenderPassDesc &renderPassDesc);
     void setRenderPassSampleCount(GLint samples);
     void setRenderPassFramebufferFetchMode(bool hasFramebufferFetch);
+    bool getRenderPassFramebufferFetchMode() const { return mRenderPassDesc.hasFramebufferFetch(); }
+
     void setRenderPassColorAttachmentFormat(size_t colorIndexGL, angle::FormatID formatID);
 
     // Blend states
@@ -886,6 +888,7 @@ class YcbcrConversionDesc final
                 angle::FormatID intendedFormatID);
     VkFilter getChromaFilter() const { return static_cast<VkFilter>(mChromaFilter); }
     bool updateChromaFilter(RendererVk *rendererVk, VkFilter filter);
+    void updateConversionModel(VkSamplerYcbcrModelConversion conversionModel);
     uint64_t getExternalFormat() const { return mIsExternalFormat ? mExternalOrVkFormat : 0; }
 
     angle::Result init(Context *context, SamplerYcbcrConversion *conversionOut) const;
@@ -1304,18 +1307,20 @@ class DescriptorSetDesc
     angle::FastMap<DescriptorInfoDesc, kFastDescriptorSetDescLimit> mDescriptorInfos;
 };
 
+class DescriptorPoolHelper;
+using RefCountedDescriptorPoolHelper = RefCounted<DescriptorPoolHelper>;
+
 // SharedDescriptorSetCacheKey.
 // Because DescriptorSet must associate with a pool, we need to define a structure that wraps both.
-class DescriptorPoolHelper;
 struct DescriptorSetDescAndPool
 {
     DescriptorSetDesc mDesc;
-    DescriptorPoolHelper *mPool;
+    DynamicDescriptorPool *mPool;
 };
 using DescriptorSetAndPoolPointer = std::unique_ptr<DescriptorSetDescAndPool>;
 using SharedDescriptorSetCacheKey = std::shared_ptr<DescriptorSetAndPoolPointer>;
 ANGLE_INLINE const SharedDescriptorSetCacheKey
-CreateSharedDescriptorSetCacheKey(const DescriptorSetDesc &desc, DescriptorPoolHelper *pool)
+CreateSharedDescriptorSetCacheKey(const DescriptorSetDesc &desc, DynamicDescriptorPool *pool)
 {
     DescriptorSetAndPoolPointer DescriptorAndPoolPointer =
         std::make_unique<DescriptorSetDescAndPool>(DescriptorSetDescAndPool{desc, pool});
@@ -1404,6 +1409,13 @@ class DescriptorSetDescBuilder final
     void updateDescriptorSet(UpdateDescriptorSetsBuilder *updateBuilder,
                              VkDescriptorSet descriptorSet) const;
 
+    // If sharedCacheKey is not null, it means a new cache entry for descriptoret has been created.
+    // This function will store the new shared cache key in the buffer or textures that the
+    // descriptorSet is created so that the descriptorSet cache can be destroyed when any of these
+    // is release or destroyed.
+    void updateImagesAndBuffersWithSharedCacheKey(
+        const SharedDescriptorSetCacheKey &sharedCacheKey);
+
     const uint32_t *getDynamicOffsets() const { return mDynamicOffsets.data(); }
     size_t getDynamicOffsetsSize() const { return mDynamicOffsets.size(); }
 
@@ -1427,10 +1439,16 @@ class DescriptorSetDescBuilder final
     angle::FastMap<DescriptorDescHandles, kFastDescriptorSetDescLimit> mHandles;
     angle::FastMap<uint32_t, kFastDescriptorSetDescLimit> mDynamicOffsets;
     uint32_t mCurrentInfoIndex = 0;
+
+    // Track textures and buffers that used for this descriptorSet.
+    std::vector<TextureVk *> mUsedImages;
+    std::vector<BufferBlock *> mUsedBufferBlocks;
+    std::vector<BufferHelper *> mUsedBufferHelpers;
 };
 
 // Specialized update for textures.
-void UpdatePreCacheActiveTextures(const gl::ActiveTextureMask &activeTextures,
+void UpdatePreCacheActiveTextures(const std::vector<gl::SamplerBinding> &samplerBindings,
+                                  const gl::ActiveTextureMask &activeTextures,
                                   const gl::ActiveTextureArray<TextureVk *> &textures,
                                   const gl::SamplerBindingVector &samplers,
                                   DescriptorSetDesc *desc);
@@ -1603,7 +1621,7 @@ class SharedCacheKeyManager
     // Iterate over the descriptor array and release the descriptor and cache.
     void releaseKeys(ContextVk *contextVk);
     // Iterate over the descriptor array and destroy the descriptor and cache.
-    void destroyKeys();
+    void destroyKeys(RendererVk *renderer);
     void clear();
 
     // The following APIs are expected to be used for assertion only
@@ -1746,6 +1764,7 @@ class CacheStats final : angle::NonCopyable
     ANGLE_INLINE void hit() { mHitCount++; }
     ANGLE_INLINE void miss() { mMissCount++; }
     ANGLE_INLINE void incrementSize() { mSize++; }
+    ANGLE_INLINE void decrementSize() { mSize--; }
     ANGLE_INLINE void missAndIncrementSize()
     {
         mMissCount++;
@@ -2093,21 +2112,24 @@ class DescriptorSetCache final : angle::NonCopyable
     void resetCache() { mPayload.clear(); }
 
     ANGLE_INLINE bool getDescriptorSet(const vk::DescriptorSetDesc &desc,
-                                       VkDescriptorSet *descriptorSet)
+                                       VkDescriptorSet *descriptorSetOut,
+                                       vk::RefCountedDescriptorPoolHelper **poolOut)
     {
         auto iter = mPayload.find(desc);
         if (iter != mPayload.end())
         {
-            *descriptorSet = iter->second;
+            *descriptorSetOut = iter->second->getDescriptorSet();
+            *poolOut          = iter->second->getPool();
             return true;
         }
         return false;
     }
 
     ANGLE_INLINE void insertDescriptorSet(const vk::DescriptorSetDesc &desc,
-                                          VkDescriptorSet descriptorSet)
+                                          VkDescriptorSet descriptorSet,
+                                          vk::RefCountedDescriptorPoolHelper *pool)
     {
-        mPayload.emplace(desc, descriptorSet);
+        mPayload.emplace(desc, std::make_unique<dsCacheEntry>(descriptorSet, pool));
     }
 
     ANGLE_INLINE void eraseDescriptorSet(const vk::DescriptorSetDesc &desc)
@@ -2131,7 +2153,23 @@ class DescriptorSetCache final : angle::NonCopyable
     bool empty() const { return mPayload.empty(); }
 
   private:
-    angle::HashMap<vk::DescriptorSetDesc, VkDescriptorSet> mPayload;
+    class dsCacheEntry
+    {
+      public:
+        dsCacheEntry(VkDescriptorSet descriptorSet, vk::RefCountedDescriptorPoolHelper *pool)
+            : mDescriptorSet(descriptorSet), mPool(pool)
+        {}
+        VkDescriptorSet getDescriptorSet() const { return mDescriptorSet; }
+        vk::RefCountedDescriptorPoolHelper *getPool() const { return mPool; }
+
+      private:
+        VkDescriptorSet mDescriptorSet;
+        // Weak pointer to the pool this descriptorSet allocated from. The RefCount is tracking if
+        // this pool is bound as the current pool in any ProgramExecutableVk or not, so we should
+        // not add refcount from the cache.
+        vk::RefCountedDescriptorPoolHelper *mPool;
+    };
+    angle::HashMap<vk::DescriptorSetDesc, std::unique_ptr<dsCacheEntry>> mPayload;
 };
 
 // Only 1 driver uniform binding is used.

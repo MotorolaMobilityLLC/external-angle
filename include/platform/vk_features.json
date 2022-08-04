@@ -53,6 +53,14 @@
             "issue": "http://anglebug.com/3970"
         },
         {
+            "name": "mutable_mipmap_texture_upload",
+            "category": "Features",
+            "description": [
+                "Enable uploading the previously defined mutable mipmap texture."
+            ],
+            "issue": "https://anglebug.com/7308"
+        },
+        {
             "name": "supports_renderpass2",
             "category": "Features",
             "description": [
@@ -255,14 +263,6 @@
                 "VK_PRESENT_MODE_FIFO_KHR causes random timeouts"
             ],
             "issue": "http://anglebug.com/3153"
-        },
-        {
-            "name": "bind_empty_for_unused_descriptor_sets",
-            "category": "Workarounds",
-            "description": [
-                "Gaps in bound descriptor set indices causes the post-gap sets to misbehave"
-            ],
-            "issue": "http://anglebug.com/2727"
         },
         {
             "name": "force_D16_tex_filter",
@@ -900,6 +900,13 @@
             "category": "Features",
             "description": [
                 "Prefer to use VK_FILTER_LINEAR for VkSamplerYcbcrConversion"
+            ]
+        },
+        {
+            "name": "supports_yuv_target",
+            "category": "Features",
+            "description": [
+                "VkDevice supports VK_ANDROID_render_to_external_format and VK_EXT_ycbcr_attachment"
             ]
         }
     ]

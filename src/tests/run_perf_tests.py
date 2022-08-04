@@ -58,17 +58,6 @@ EXIT_FAILURE = 1
 EXIT_SUCCESS = 0
 
 
-def is_windows():
-    return sys.platform == 'cygwin' or sys.platform.startswith('win')
-
-
-def get_binary_name(binary):
-    if is_windows():
-        return '.\\%s.exe' % binary
-    else:
-        return './%s' % binary
-
-
 def _popen(*args, **kwargs):
     assert 'creationflags' not in kwargs
     if sys.platform == 'win32':
@@ -230,6 +219,9 @@ class Results:
         }
         self._test_results = {}
 
+    def has_failures(self):
+        return self._results['num_failures_by_type'][FAIL] > 0
+
     def has_result(self, test):
         return test in self._test_results
 
@@ -321,7 +313,7 @@ def main():
 
     args, extra_flags = parser.parse_known_args()
 
-    angle_test_util.setupLogging(args.log.upper())
+    angle_test_util.SetupLogging(args.log.upper())
 
     start_time = time.time()
 
@@ -333,13 +325,8 @@ def main():
 
     env = os.environ.copy()
 
-    # Get sharding args
-    if 'GTEST_TOTAL_SHARDS' in env and int(env['GTEST_TOTAL_SHARDS']) != 1:
-        if 'GTEST_SHARD_INDEX' not in env:
-            logging.error('Sharding params must be specified together.')
-            sys.exit(1)
-        args.shard_count = int(env.pop('GTEST_TOTAL_SHARDS'))
-        args.shard_index = int(env.pop('GTEST_SHARD_INDEX'))
+    if angle_test_util.HasGtestShardsAndIndex(env):
+        args.shard_count, args.shard_index = angle_test_util.PopGtestShardsAndIndex(env)
 
     # Get test list
     if _use_adb(args.test_suite):
@@ -348,7 +335,11 @@ def main():
         if args.test_suite == DEFAULT_TEST_SUITE:
             android_helper.RunSmokeTest()
     else:
-        cmd = [get_binary_name(args.test_suite), '--list-tests', '--verbose']
+        cmd = [
+            angle_test_util.ExecutablePathInCurrentDir(args.test_suite),
+            '--list-tests',
+            '--verbose',
+        ]
         exit_code, lines = _run_and_get_output(args, cmd, env, [])
         if exit_code != EXIT_SUCCESS:
             logging.fatal('Could not find test list from test output:\n%s' % '\n'.join(lines))
@@ -384,7 +375,7 @@ def main():
                 prepared_traces.add(trace)
 
         cmd = [
-            get_binary_name(args.test_suite),
+            angle_test_util.ExecutablePathInCurrentDir(args.test_suite),
             '--gtest_filter=%s' % test,
             '--verbose',
             '--calibration-time',
@@ -517,21 +508,10 @@ def main():
     end_time = time.time()
     logging.info('Elapsed time: %.2lf seconds.' % (end_time - start_time))
 
+    if results.has_failures():
+        return EXIT_FAILURE
     return EXIT_SUCCESS
 
 
-# This is not really a "script test" so does not need to manually add
-# any additional compile targets.
-def main_compile_targets(args):
-    json.dump([], args.output)
-
-
 if __name__ == '__main__':
-    # Conform minimally to the protocol defined by ScriptTest.
-    if 'compile_targets' in sys.argv:
-        funcs = {
-            'run': None,
-            'compile_targets': main_compile_targets,
-        }
-        sys.exit(common.run_script(sys.argv[1:], funcs))
     sys.exit(main())
