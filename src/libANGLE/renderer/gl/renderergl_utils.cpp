@@ -1821,6 +1821,23 @@ void GenerateCaps(const FunctionsGL *functions,
     {
         limitations->squarePvrtc1 = true;
     }
+
+    // Check if the driver clamps constant blend color
+    if (IsQualcomm(GetVendorID(functions)))
+    {
+        // Backup current state
+        float oldColor[4];
+        functions->getFloatv(GL_BLEND_COLOR, oldColor);
+
+        // Probe clamping
+        float color[4];
+        functions->blendColor(2.0, 0.0, 0.0, 0.0);
+        functions->getFloatv(GL_BLEND_COLOR, color);
+        limitations->noUnclampedBlendColor = color[0] == 1.0;
+
+        // Restore previous state
+        functions->blendColor(oldColor[0], oldColor[1], oldColor[2], oldColor[3]);
+    }
 }
 
 bool GetSystemInfoVendorIDAndDeviceID(const FunctionsGL *functions,
@@ -1890,6 +1907,7 @@ void InitializeFeatures(const FunctionsGL *functions, angle::FeaturesGL *feature
         GetSystemInfoVendorIDAndDeviceID(functions, &systemInfo, &vendor, &device);
 
     bool isAMD         = IsAMD(vendor);
+    bool isApple       = IsApple(vendor);
     bool isIntel       = IsIntel(vendor);
     bool isNvidia      = IsNvidia(vendor);
     bool isQualcomm    = IsQualcomm(vendor);
@@ -2107,6 +2125,10 @@ void InitializeFeatures(const FunctionsGL *functions, angle::FeaturesGL *feature
     ANGLE_FEATURE_CONDITION(
         features, emulateCopyTexImage2DFromRenderbuffers,
         IsApple() && functions->standard == STANDARD_GL_ES && !(isAMD && IsWindows()));
+
+    // anglebug.com/5360
+    // Replace copyTexImage2D with texImage2D + copyTexSubImage2D to bypass driver bug.
+    ANGLE_FEATURE_CONDITION(features, emulateCopyTexImage2D, isApple);
 
     // Don't attempt to use the discrete GPU on NVIDIA-based MacBook Pros, since the
     // driver is unstable in this situation.

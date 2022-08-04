@@ -8,6 +8,8 @@
 #ifndef VULKAN_STRUCTS_HPP
 #define VULKAN_STRUCTS_HPP
 
+#include <cstring>  // strcmp
+
 namespace VULKAN_HPP_NAMESPACE
 {
   //===============
@@ -81,12 +83,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAabbPositionsKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAabbPositionsKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAabbPositionsKHR *>( this );
     }
 
-    explicit operator VkAabbPositionsKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAabbPositionsKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAabbPositionsKHR *>( this );
     }
@@ -277,12 +279,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureGeometryTrianglesDataKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureGeometryTrianglesDataKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureGeometryTrianglesDataKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureGeometryTrianglesDataKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureGeometryTrianglesDataKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureGeometryTrianglesDataKHR *>( this );
     }
@@ -386,12 +388,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureGeometryAabbsDataKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureGeometryAabbsDataKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureGeometryAabbsDataKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureGeometryAabbsDataKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureGeometryAabbsDataKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureGeometryAabbsDataKHR *>( this );
     }
@@ -486,12 +488,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureGeometryInstancesDataKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureGeometryInstancesDataKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureGeometryInstancesDataKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureGeometryInstancesDataKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureGeometryInstancesDataKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureGeometryInstancesDataKHR *>( this );
     }
@@ -656,12 +658,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureGeometryKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureGeometryKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureGeometryKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureGeometryKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureGeometryKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureGeometryKHR *>( this );
     }
@@ -918,12 +920,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureBuildGeometryInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureBuildGeometryInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureBuildGeometryInfoKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureBuildGeometryInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureBuildGeometryInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureBuildGeometryInfoKHR *>( this );
     }
@@ -1035,12 +1037,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureBuildRangeInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureBuildRangeInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureBuildRangeInfoKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureBuildRangeInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureBuildRangeInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureBuildRangeInfoKHR *>( this );
     }
@@ -1153,12 +1155,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureBuildSizesInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureBuildSizesInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureBuildSizesInfoKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureBuildSizesInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureBuildSizesInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureBuildSizesInfoKHR *>( this );
     }
@@ -1305,12 +1307,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureCreateInfoKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureCreateInfoKHR *>( this );
     }
@@ -1500,12 +1502,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkGeometryTrianglesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkGeometryTrianglesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkGeometryTrianglesNV *>( this );
     }
 
-    explicit operator VkGeometryTrianglesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkGeometryTrianglesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkGeometryTrianglesNV *>( this );
     }
@@ -1659,12 +1661,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkGeometryAABBNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkGeometryAABBNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkGeometryAABBNV *>( this );
     }
 
-    explicit operator VkGeometryAABBNV &() VULKAN_HPP_NOEXCEPT
+    operator VkGeometryAABBNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkGeometryAABBNV *>( this );
     }
@@ -1763,12 +1765,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkGeometryDataNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkGeometryDataNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkGeometryDataNV *>( this );
     }
 
-    explicit operator VkGeometryDataNV &() VULKAN_HPP_NOEXCEPT
+    operator VkGeometryDataNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkGeometryDataNV *>( this );
     }
@@ -1870,12 +1872,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkGeometryNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkGeometryNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkGeometryNV *>( this );
     }
 
-    explicit operator VkGeometryNV &() VULKAN_HPP_NOEXCEPT
+    operator VkGeometryNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkGeometryNV *>( this );
     }
@@ -2034,12 +2036,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureInfoNV *>( this );
     }
 
-    explicit operator VkAccelerationStructureInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureInfoNV *>( this );
     }
@@ -2155,12 +2157,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureCreateInfoNV *>( this );
     }
 
-    explicit operator VkAccelerationStructureCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureCreateInfoNV *>( this );
     }
@@ -2263,12 +2265,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureDeviceAddressInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureDeviceAddressInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureDeviceAddressInfoKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureDeviceAddressInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureDeviceAddressInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureDeviceAddressInfoKHR *>( this );
     }
@@ -2369,12 +2371,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureGeometryMotionTrianglesDataNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureGeometryMotionTrianglesDataNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureGeometryMotionTrianglesDataNV *>( this );
     }
 
-    explicit operator VkAccelerationStructureGeometryMotionTrianglesDataNV &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureGeometryMotionTrianglesDataNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureGeometryMotionTrianglesDataNV *>( this );
     }
@@ -2438,12 +2440,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkTransformMatrixKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkTransformMatrixKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkTransformMatrixKHR *>( this );
     }
 
-    explicit operator VkTransformMatrixKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkTransformMatrixKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkTransformMatrixKHR *>( this );
     }
@@ -2562,12 +2564,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureInstanceKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureInstanceKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureInstanceKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureInstanceKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureInstanceKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureInstanceKHR *>( this );
     }
@@ -2712,12 +2714,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureMatrixMotionInstanceNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureMatrixMotionInstanceNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureMatrixMotionInstanceNV *>( this );
     }
 
-    explicit operator VkAccelerationStructureMatrixMotionInstanceNV &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureMatrixMotionInstanceNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureMatrixMotionInstanceNV *>( this );
     }
@@ -2834,12 +2836,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureMemoryRequirementsInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureMemoryRequirementsInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureMemoryRequirementsInfoNV *>( this );
     }
 
-    explicit operator VkAccelerationStructureMemoryRequirementsInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureMemoryRequirementsInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureMemoryRequirementsInfoNV *>( this );
     }
@@ -2951,12 +2953,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureMotionInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureMotionInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureMotionInfoNV *>( this );
     }
 
-    explicit operator VkAccelerationStructureMotionInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureMotionInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureMotionInfoNV *>( this );
     }
@@ -3164,12 +3166,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSRTDataNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSRTDataNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSRTDataNV *>( this );
     }
 
-    explicit operator VkSRTDataNV &() VULKAN_HPP_NOEXCEPT
+    operator VkSRTDataNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSRTDataNV *>( this );
     }
@@ -3329,12 +3331,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureSRTMotionInstanceNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureSRTMotionInstanceNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureSRTMotionInstanceNV *>( this );
     }
 
-    explicit operator VkAccelerationStructureSRTMotionInstanceNV &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureSRTMotionInstanceNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureSRTMotionInstanceNV *>( this );
     }
@@ -3512,12 +3514,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureMotionInstanceNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureMotionInstanceNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureMotionInstanceNV *>( this );
     }
 
-    explicit operator VkAccelerationStructureMotionInstanceNV &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureMotionInstanceNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureMotionInstanceNV *>( this );
     }
@@ -3592,12 +3594,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAccelerationStructureVersionInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureVersionInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAccelerationStructureVersionInfoKHR *>( this );
     }
 
-    explicit operator VkAccelerationStructureVersionInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAccelerationStructureVersionInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAccelerationStructureVersionInfoKHR *>( this );
     }
@@ -3727,12 +3729,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAcquireNextImageInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAcquireNextImageInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAcquireNextImageInfoKHR *>( this );
     }
 
-    explicit operator VkAcquireNextImageInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAcquireNextImageInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAcquireNextImageInfoKHR *>( this );
     }
@@ -3848,12 +3850,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAcquireProfilingLockInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAcquireProfilingLockInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAcquireProfilingLockInfoKHR *>( this );
     }
 
-    explicit operator VkAcquireProfilingLockInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAcquireProfilingLockInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAcquireProfilingLockInfoKHR *>( this );
     }
@@ -3979,12 +3981,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAllocationCallbacks const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAllocationCallbacks const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAllocationCallbacks *>( this );
     }
 
-    explicit operator VkAllocationCallbacks &() VULKAN_HPP_NOEXCEPT
+    operator VkAllocationCallbacks &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAllocationCallbacks *>( this );
     }
@@ -4089,12 +4091,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkComponentMapping const &() const VULKAN_HPP_NOEXCEPT
+    operator VkComponentMapping const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkComponentMapping *>( this );
     }
 
-    explicit operator VkComponentMapping &() VULKAN_HPP_NOEXCEPT
+    operator VkComponentMapping &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkComponentMapping *>( this );
     }
@@ -4191,12 +4193,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkAndroidHardwareBufferFormatProperties2ANDROID const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAndroidHardwareBufferFormatProperties2ANDROID const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAndroidHardwareBufferFormatProperties2ANDROID *>( this );
     }
 
-    explicit operator VkAndroidHardwareBufferFormatProperties2ANDROID &() VULKAN_HPP_NOEXCEPT
+    operator VkAndroidHardwareBufferFormatProperties2ANDROID &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAndroidHardwareBufferFormatProperties2ANDROID *>( this );
     }
@@ -4326,12 +4328,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkAndroidHardwareBufferFormatPropertiesANDROID const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAndroidHardwareBufferFormatPropertiesANDROID const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAndroidHardwareBufferFormatPropertiesANDROID *>( this );
     }
 
-    explicit operator VkAndroidHardwareBufferFormatPropertiesANDROID &() VULKAN_HPP_NOEXCEPT
+    operator VkAndroidHardwareBufferFormatPropertiesANDROID &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAndroidHardwareBufferFormatPropertiesANDROID *>( this );
     }
@@ -4448,12 +4450,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkAndroidHardwareBufferPropertiesANDROID const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAndroidHardwareBufferPropertiesANDROID const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAndroidHardwareBufferPropertiesANDROID *>( this );
     }
 
-    explicit operator VkAndroidHardwareBufferPropertiesANDROID &() VULKAN_HPP_NOEXCEPT
+    operator VkAndroidHardwareBufferPropertiesANDROID &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAndroidHardwareBufferPropertiesANDROID *>( this );
     }
@@ -4539,12 +4541,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkAndroidHardwareBufferUsageANDROID const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAndroidHardwareBufferUsageANDROID const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAndroidHardwareBufferUsageANDROID *>( this );
     }
 
-    explicit operator VkAndroidHardwareBufferUsageANDROID &() VULKAN_HPP_NOEXCEPT
+    operator VkAndroidHardwareBufferUsageANDROID &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAndroidHardwareBufferUsageANDROID *>( this );
     }
@@ -4652,12 +4654,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAndroidSurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAndroidSurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAndroidSurfaceCreateInfoKHR *>( this );
     }
 
-    explicit operator VkAndroidSurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkAndroidSurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAndroidSurfaceCreateInfoKHR *>( this );
     }
@@ -4788,12 +4790,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkApplicationInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkApplicationInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkApplicationInfo *>( this );
     }
 
-    explicit operator VkApplicationInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkApplicationInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkApplicationInfo *>( this );
     }
@@ -4972,12 +4974,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAttachmentDescription const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentDescription const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAttachmentDescription *>( this );
     }
 
-    explicit operator VkAttachmentDescription &() VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentDescription &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAttachmentDescription *>( this );
     }
@@ -5148,12 +5150,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAttachmentDescription2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentDescription2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAttachmentDescription2 *>( this );
     }
 
-    explicit operator VkAttachmentDescription2 &() VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentDescription2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAttachmentDescription2 *>( this );
     }
@@ -5282,12 +5284,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAttachmentDescriptionStencilLayout const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentDescriptionStencilLayout const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAttachmentDescriptionStencilLayout *>( this );
     }
 
-    explicit operator VkAttachmentDescriptionStencilLayout &() VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentDescriptionStencilLayout &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAttachmentDescriptionStencilLayout *>( this );
     }
@@ -5385,12 +5387,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAttachmentReference const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentReference const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAttachmentReference *>( this );
     }
 
-    explicit operator VkAttachmentReference &() VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentReference &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAttachmentReference *>( this );
     }
@@ -5495,12 +5497,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAttachmentReference2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentReference2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAttachmentReference2 *>( this );
     }
 
-    explicit operator VkAttachmentReference2 &() VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentReference2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAttachmentReference2 *>( this );
     }
@@ -5605,12 +5607,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAttachmentReferenceStencilLayout const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentReferenceStencilLayout const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAttachmentReferenceStencilLayout *>( this );
     }
 
-    explicit operator VkAttachmentReferenceStencilLayout &() VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentReferenceStencilLayout &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAttachmentReferenceStencilLayout *>( this );
     }
@@ -5751,12 +5753,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAttachmentSampleCountInfoAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentSampleCountInfoAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAttachmentSampleCountInfoAMD *>( this );
     }
 
-    explicit operator VkAttachmentSampleCountInfoAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentSampleCountInfoAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAttachmentSampleCountInfoAMD *>( this );
     }
@@ -5854,12 +5856,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExtent2D const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExtent2D const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExtent2D *>( this );
     }
 
-    explicit operator VkExtent2D &() VULKAN_HPP_NOEXCEPT
+    operator VkExtent2D &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExtent2D *>( this );
     }
@@ -5940,12 +5942,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSampleLocationEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSampleLocationEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSampleLocationEXT *>( this );
     }
 
-    explicit operator VkSampleLocationEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSampleLocationEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSampleLocationEXT *>( this );
     }
@@ -6086,12 +6088,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSampleLocationsInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSampleLocationsInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSampleLocationsInfoEXT *>( this );
     }
 
-    explicit operator VkSampleLocationsInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSampleLocationsInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSampleLocationsInfoEXT *>( this );
     }
@@ -6196,12 +6198,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkAttachmentSampleLocationsEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentSampleLocationsEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkAttachmentSampleLocationsEXT *>( this );
     }
 
-    explicit operator VkAttachmentSampleLocationsEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkAttachmentSampleLocationsEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkAttachmentSampleLocationsEXT *>( this );
     }
@@ -6279,12 +6281,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBaseInStructure const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBaseInStructure const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBaseInStructure *>( this );
     }
 
-    explicit operator VkBaseInStructure &() VULKAN_HPP_NOEXCEPT
+    operator VkBaseInStructure &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBaseInStructure *>( this );
     }
@@ -6361,12 +6363,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBaseOutStructure const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBaseOutStructure const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBaseOutStructure *>( this );
     }
 
-    explicit operator VkBaseOutStructure &() VULKAN_HPP_NOEXCEPT
+    operator VkBaseOutStructure &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBaseOutStructure *>( this );
     }
@@ -6514,12 +6516,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindAccelerationStructureMemoryInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindAccelerationStructureMemoryInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindAccelerationStructureMemoryInfoNV *>( this );
     }
 
-    explicit operator VkBindAccelerationStructureMemoryInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkBindAccelerationStructureMemoryInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindAccelerationStructureMemoryInfoNV *>( this );
     }
@@ -6653,12 +6655,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindBufferMemoryDeviceGroupInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindBufferMemoryDeviceGroupInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindBufferMemoryDeviceGroupInfo *>( this );
     }
 
-    explicit operator VkBindBufferMemoryDeviceGroupInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkBindBufferMemoryDeviceGroupInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindBufferMemoryDeviceGroupInfo *>( this );
     }
@@ -6773,12 +6775,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindBufferMemoryInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindBufferMemoryInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindBufferMemoryInfo *>( this );
     }
 
-    explicit operator VkBindBufferMemoryInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkBindBufferMemoryInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindBufferMemoryInfo *>( this );
     }
@@ -6875,12 +6877,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkOffset2D const &() const VULKAN_HPP_NOEXCEPT
+    operator VkOffset2D const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkOffset2D *>( this );
     }
 
-    explicit operator VkOffset2D &() VULKAN_HPP_NOEXCEPT
+    operator VkOffset2D &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkOffset2D *>( this );
     }
@@ -6961,12 +6963,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRect2D const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRect2D const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRect2D *>( this );
     }
 
-    explicit operator VkRect2D &() VULKAN_HPP_NOEXCEPT
+    operator VkRect2D &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRect2D *>( this );
     }
@@ -7112,12 +7114,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindImageMemoryDeviceGroupInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindImageMemoryDeviceGroupInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindImageMemoryDeviceGroupInfo *>( this );
     }
 
-    explicit operator VkBindImageMemoryDeviceGroupInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkBindImageMemoryDeviceGroupInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindImageMemoryDeviceGroupInfo *>( this );
     }
@@ -7239,12 +7241,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindImageMemoryInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindImageMemoryInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindImageMemoryInfo *>( this );
     }
 
-    explicit operator VkBindImageMemoryInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkBindImageMemoryInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindImageMemoryInfo *>( this );
     }
@@ -7355,12 +7357,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindImageMemorySwapchainInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindImageMemorySwapchainInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindImageMemorySwapchainInfoKHR *>( this );
     }
 
-    explicit operator VkBindImageMemorySwapchainInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkBindImageMemorySwapchainInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindImageMemorySwapchainInfoKHR *>( this );
     }
@@ -7458,12 +7460,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindImagePlaneMemoryInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindImagePlaneMemoryInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindImagePlaneMemoryInfo *>( this );
     }
 
-    explicit operator VkBindImagePlaneMemoryInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkBindImagePlaneMemoryInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindImagePlaneMemoryInfo *>( this );
     }
@@ -7567,12 +7569,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindIndexBufferIndirectCommandNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindIndexBufferIndirectCommandNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindIndexBufferIndirectCommandNV *>( this );
     }
 
-    explicit operator VkBindIndexBufferIndirectCommandNV &() VULKAN_HPP_NOEXCEPT
+    operator VkBindIndexBufferIndirectCommandNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindIndexBufferIndirectCommandNV *>( this );
     }
@@ -7650,12 +7652,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindShaderGroupIndirectCommandNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindShaderGroupIndirectCommandNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindShaderGroupIndirectCommandNV *>( this );
     }
 
-    explicit operator VkBindShaderGroupIndirectCommandNV &() VULKAN_HPP_NOEXCEPT
+    operator VkBindShaderGroupIndirectCommandNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindShaderGroupIndirectCommandNV *>( this );
     }
@@ -7763,12 +7765,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSparseMemoryBind const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSparseMemoryBind const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSparseMemoryBind *>( this );
     }
 
-    explicit operator VkSparseMemoryBind &() VULKAN_HPP_NOEXCEPT
+    operator VkSparseMemoryBind &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSparseMemoryBind *>( this );
     }
@@ -7888,12 +7890,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSparseBufferMemoryBindInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSparseBufferMemoryBindInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSparseBufferMemoryBindInfo *>( this );
     }
 
-    explicit operator VkSparseBufferMemoryBindInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSparseBufferMemoryBindInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSparseBufferMemoryBindInfo *>( this );
     }
@@ -8007,12 +8009,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSparseImageOpaqueMemoryBindInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageOpaqueMemoryBindInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSparseImageOpaqueMemoryBindInfo *>( this );
     }
 
-    explicit operator VkSparseImageOpaqueMemoryBindInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageOpaqueMemoryBindInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSparseImageOpaqueMemoryBindInfo *>( this );
     }
@@ -8104,12 +8106,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageSubresource const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageSubresource const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageSubresource *>( this );
     }
 
-    explicit operator VkImageSubresource &() VULKAN_HPP_NOEXCEPT
+    operator VkImageSubresource &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageSubresource *>( this );
     }
@@ -8201,12 +8203,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkOffset3D const &() const VULKAN_HPP_NOEXCEPT
+    operator VkOffset3D const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkOffset3D *>( this );
     }
 
-    explicit operator VkOffset3D &() VULKAN_HPP_NOEXCEPT
+    operator VkOffset3D &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkOffset3D *>( this );
     }
@@ -8297,12 +8299,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExtent3D const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExtent3D const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExtent3D *>( this );
     }
 
-    explicit operator VkExtent3D &() VULKAN_HPP_NOEXCEPT
+    operator VkExtent3D &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExtent3D *>( this );
     }
@@ -8420,12 +8422,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSparseImageMemoryBind const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageMemoryBind const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSparseImageMemoryBind *>( this );
     }
 
-    explicit operator VkSparseImageMemoryBind &() VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageMemoryBind &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSparseImageMemoryBind *>( this );
     }
@@ -8548,12 +8550,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSparseImageMemoryBindInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageMemoryBindInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSparseImageMemoryBindInfo *>( this );
     }
 
-    explicit operator VkSparseImageMemoryBindInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageMemoryBindInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSparseImageMemoryBindInfo *>( this );
     }
@@ -8786,12 +8788,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindSparseInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindSparseInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindSparseInfo *>( this );
     }
 
-    explicit operator VkBindSparseInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkBindSparseInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindSparseInfo *>( this );
     }
@@ -8927,12 +8929,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBindVertexBufferIndirectCommandNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBindVertexBufferIndirectCommandNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBindVertexBufferIndirectCommandNV *>( this );
     }
 
-    explicit operator VkBindVertexBufferIndirectCommandNV &() VULKAN_HPP_NOEXCEPT
+    operator VkBindVertexBufferIndirectCommandNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBindVertexBufferIndirectCommandNV *>( this );
     }
@@ -9037,12 +9039,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageSubresourceLayers const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageSubresourceLayers const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageSubresourceLayers *>( this );
     }
 
-    explicit operator VkImageSubresourceLayers &() VULKAN_HPP_NOEXCEPT
+    operator VkImageSubresourceLayers &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageSubresourceLayers *>( this );
     }
@@ -9155,12 +9157,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageBlit2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageBlit2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageBlit2 *>( this );
     }
 
-    explicit operator VkImageBlit2 &() VULKAN_HPP_NOEXCEPT
+    operator VkImageBlit2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageBlit2 *>( this );
     }
@@ -9339,12 +9341,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBlitImageInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBlitImageInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBlitImageInfo2 *>( this );
     }
 
-    explicit operator VkBlitImageInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkBlitImageInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBlitImageInfo2 *>( this );
     }
@@ -9467,12 +9469,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferCollectionBufferCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionBufferCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferCollectionBufferCreateInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkBufferCollectionBufferCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionBufferCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferCollectionBufferCreateInfoFUCHSIA *>( this );
     }
@@ -9607,12 +9609,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferCollectionConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferCollectionConstraintsInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkBufferCollectionConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferCollectionConstraintsInfoFUCHSIA *>( this );
     }
@@ -9723,12 +9725,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferCollectionCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferCollectionCreateInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkBufferCollectionCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferCollectionCreateInfoFUCHSIA *>( this );
     }
@@ -9843,12 +9845,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferCollectionImageCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionImageCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferCollectionImageCreateInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkBufferCollectionImageCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionImageCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferCollectionImageCreateInfoFUCHSIA *>( this );
     }
@@ -9948,12 +9950,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSysmemColorSpaceFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSysmemColorSpaceFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSysmemColorSpaceFUCHSIA *>( this );
     }
 
-    explicit operator VkSysmemColorSpaceFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkSysmemColorSpaceFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSysmemColorSpaceFUCHSIA *>( this );
     }
@@ -10140,12 +10142,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferCollectionPropertiesFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionPropertiesFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferCollectionPropertiesFUCHSIA *>( this );
     }
 
-    explicit operator VkBufferCollectionPropertiesFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionPropertiesFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferCollectionPropertiesFUCHSIA *>( this );
     }
@@ -10346,12 +10348,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferCreateInfo *>( this );
     }
 
-    explicit operator VkBufferCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferCreateInfo *>( this );
     }
@@ -10479,12 +10481,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferConstraintsInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkBufferConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferConstraintsInfoFUCHSIA *>( this );
     }
@@ -10591,12 +10593,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferCopy const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferCopy const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferCopy *>( this );
     }
 
-    explicit operator VkBufferCopy &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferCopy &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferCopy *>( this );
     }
@@ -10698,12 +10700,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferCopy2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferCopy2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferCopy2 *>( this );
     }
 
-    explicit operator VkBufferCopy2 &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferCopy2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferCopy2 *>( this );
     }
@@ -10805,12 +10807,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferDeviceAddressCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferDeviceAddressCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferDeviceAddressCreateInfoEXT *>( this );
     }
 
-    explicit operator VkBufferDeviceAddressCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferDeviceAddressCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferDeviceAddressCreateInfoEXT *>( this );
     }
@@ -10907,12 +10909,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferDeviceAddressInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferDeviceAddressInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferDeviceAddressInfo *>( this );
     }
 
-    explicit operator VkBufferDeviceAddressInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferDeviceAddressInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferDeviceAddressInfo *>( this );
     }
@@ -11037,12 +11039,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferImageCopy const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferImageCopy const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferImageCopy *>( this );
     }
 
-    explicit operator VkBufferImageCopy &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferImageCopy &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferImageCopy *>( this );
     }
@@ -11178,12 +11180,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferImageCopy2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferImageCopy2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferImageCopy2 *>( this );
     }
 
-    explicit operator VkBufferImageCopy2 &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferImageCopy2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferImageCopy2 *>( this );
     }
@@ -11341,12 +11343,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferMemoryBarrier const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferMemoryBarrier const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferMemoryBarrier *>( this );
     }
 
-    explicit operator VkBufferMemoryBarrier &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferMemoryBarrier &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferMemoryBarrier *>( this );
     }
@@ -11522,12 +11524,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferMemoryBarrier2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferMemoryBarrier2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferMemoryBarrier2 *>( this );
     }
 
-    explicit operator VkBufferMemoryBarrier2 &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferMemoryBarrier2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferMemoryBarrier2 *>( this );
     }
@@ -11644,12 +11646,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferMemoryRequirementsInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferMemoryRequirementsInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferMemoryRequirementsInfo2 *>( this );
     }
 
-    explicit operator VkBufferMemoryRequirementsInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferMemoryRequirementsInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferMemoryRequirementsInfo2 *>( this );
     }
@@ -11746,12 +11748,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferOpaqueCaptureAddressCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferOpaqueCaptureAddressCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferOpaqueCaptureAddressCreateInfo *>( this );
     }
 
-    explicit operator VkBufferOpaqueCaptureAddressCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferOpaqueCaptureAddressCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferOpaqueCaptureAddressCreateInfo *>( this );
     }
@@ -11882,12 +11884,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkBufferViewCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkBufferViewCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkBufferViewCreateInfo *>( this );
     }
 
-    explicit operator VkBufferViewCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferViewCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkBufferViewCreateInfo *>( this );
     }
@@ -11995,12 +11997,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCalibratedTimestampInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCalibratedTimestampInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCalibratedTimestampInfoEXT *>( this );
     }
 
-    explicit operator VkCalibratedTimestampInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkCalibratedTimestampInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCalibratedTimestampInfoEXT *>( this );
     }
@@ -12081,12 +12083,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkCheckpointData2NV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCheckpointData2NV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCheckpointData2NV *>( this );
     }
 
-    explicit operator VkCheckpointData2NV &() VULKAN_HPP_NOEXCEPT
+    operator VkCheckpointData2NV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCheckpointData2NV *>( this );
     }
@@ -12168,12 +12170,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkCheckpointDataNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCheckpointDataNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCheckpointDataNV *>( this );
     }
 
-    explicit operator VkCheckpointDataNV &() VULKAN_HPP_NOEXCEPT
+    operator VkCheckpointDataNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCheckpointDataNV *>( this );
     }
@@ -12313,12 +12315,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkClearDepthStencilValue const &() const VULKAN_HPP_NOEXCEPT
+    operator VkClearDepthStencilValue const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkClearDepthStencilValue *>( this );
     }
 
-    explicit operator VkClearDepthStencilValue &() VULKAN_HPP_NOEXCEPT
+    operator VkClearDepthStencilValue &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkClearDepthStencilValue *>( this );
     }
@@ -12453,12 +12455,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkClearAttachment const &() const VULKAN_HPP_NOEXCEPT
+    operator VkClearAttachment const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkClearAttachment *>( this );
     }
 
-    explicit operator VkClearAttachment &() VULKAN_HPP_NOEXCEPT
+    operator VkClearAttachment &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkClearAttachment *>( this );
     }
@@ -12530,12 +12532,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkClearRect const &() const VULKAN_HPP_NOEXCEPT
+    operator VkClearRect const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkClearRect *>( this );
     }
 
-    explicit operator VkClearRect &() VULKAN_HPP_NOEXCEPT
+    operator VkClearRect &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkClearRect *>( this );
     }
@@ -12627,12 +12629,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCoarseSampleLocationNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCoarseSampleLocationNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCoarseSampleLocationNV *>( this );
     }
 
-    explicit operator VkCoarseSampleLocationNV &() VULKAN_HPP_NOEXCEPT
+    operator VkCoarseSampleLocationNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCoarseSampleLocationNV *>( this );
     }
@@ -12760,12 +12762,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCoarseSampleOrderCustomNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCoarseSampleOrderCustomNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCoarseSampleOrderCustomNV *>( this );
     }
 
-    explicit operator VkCoarseSampleOrderCustomNV &() VULKAN_HPP_NOEXCEPT
+    operator VkCoarseSampleOrderCustomNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCoarseSampleOrderCustomNV *>( this );
     }
@@ -12877,12 +12879,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCommandBufferAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCommandBufferAllocateInfo *>( this );
     }
 
-    explicit operator VkCommandBufferAllocateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferAllocateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCommandBufferAllocateInfo *>( this );
     }
@@ -13027,12 +13029,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCommandBufferInheritanceInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferInheritanceInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCommandBufferInheritanceInfo *>( this );
     }
 
-    explicit operator VkCommandBufferInheritanceInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferInheritanceInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCommandBufferInheritanceInfo *>( this );
     }
@@ -13152,12 +13154,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCommandBufferBeginInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferBeginInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCommandBufferBeginInfo *>( this );
     }
 
-    explicit operator VkCommandBufferBeginInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferBeginInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCommandBufferBeginInfo *>( this );
     }
@@ -13261,12 +13263,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCommandBufferInheritanceConditionalRenderingInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferInheritanceConditionalRenderingInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCommandBufferInheritanceConditionalRenderingInfoEXT *>( this );
     }
 
-    explicit operator VkCommandBufferInheritanceConditionalRenderingInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferInheritanceConditionalRenderingInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT *>( this );
     }
@@ -13378,12 +13380,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCommandBufferInheritanceRenderPassTransformInfoQCOM const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferInheritanceRenderPassTransformInfoQCOM const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCommandBufferInheritanceRenderPassTransformInfoQCOM *>( this );
     }
 
-    explicit operator VkCommandBufferInheritanceRenderPassTransformInfoQCOM &() VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferInheritanceRenderPassTransformInfoQCOM &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCommandBufferInheritanceRenderPassTransformInfoQCOM *>( this );
     }
@@ -13569,12 +13571,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCommandBufferInheritanceRenderingInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferInheritanceRenderingInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCommandBufferInheritanceRenderingInfo *>( this );
     }
 
-    explicit operator VkCommandBufferInheritanceRenderingInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferInheritanceRenderingInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCommandBufferInheritanceRenderingInfo *>( this );
     }
@@ -13713,12 +13715,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkViewport const &() const VULKAN_HPP_NOEXCEPT
+    operator VkViewport const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkViewport *>( this );
     }
 
-    explicit operator VkViewport &() VULKAN_HPP_NOEXCEPT
+    operator VkViewport &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkViewport *>( this );
     }
@@ -13830,12 +13832,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCommandBufferInheritanceViewportScissorInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferInheritanceViewportScissorInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCommandBufferInheritanceViewportScissorInfoNV *>( this );
     }
 
-    explicit operator VkCommandBufferInheritanceViewportScissorInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferInheritanceViewportScissorInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCommandBufferInheritanceViewportScissorInfoNV *>( this );
     }
@@ -13949,12 +13951,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCommandBufferSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCommandBufferSubmitInfo *>( this );
     }
 
-    explicit operator VkCommandBufferSubmitInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkCommandBufferSubmitInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCommandBufferSubmitInfo *>( this );
     }
@@ -14061,12 +14063,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCommandPoolCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCommandPoolCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCommandPoolCreateInfo *>( this );
     }
 
-    explicit operator VkCommandPoolCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkCommandPoolCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCommandPoolCreateInfo *>( this );
     }
@@ -14167,12 +14169,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSpecializationMapEntry const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSpecializationMapEntry const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSpecializationMapEntry *>( this );
     }
 
-    explicit operator VkSpecializationMapEntry &() VULKAN_HPP_NOEXCEPT
+    operator VkSpecializationMapEntry &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSpecializationMapEntry *>( this );
     }
@@ -14305,12 +14307,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSpecializationInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSpecializationInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSpecializationInfo *>( this );
     }
 
-    explicit operator VkSpecializationInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSpecializationInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSpecializationInfo *>( this );
     }
@@ -14434,12 +14436,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineShaderStageCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineShaderStageCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineShaderStageCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineShaderStageCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineShaderStageCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineShaderStageCreateInfo *>( this );
     }
@@ -14594,12 +14596,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkComputePipelineCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkComputePipelineCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkComputePipelineCreateInfo *>( this );
     }
 
-    explicit operator VkComputePipelineCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkComputePipelineCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkComputePipelineCreateInfo *>( this );
     }
@@ -14723,12 +14725,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkConditionalRenderingBeginInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkConditionalRenderingBeginInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkConditionalRenderingBeginInfoEXT *>( this );
     }
 
-    explicit operator VkConditionalRenderingBeginInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkConditionalRenderingBeginInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkConditionalRenderingBeginInfoEXT *>( this );
     }
@@ -14839,12 +14841,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkConformanceVersion const &() const VULKAN_HPP_NOEXCEPT
+    operator VkConformanceVersion const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkConformanceVersion *>( this );
     }
 
-    explicit operator VkConformanceVersion &() VULKAN_HPP_NOEXCEPT
+    operator VkConformanceVersion &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkConformanceVersion *>( this );
     }
@@ -14992,12 +14994,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCooperativeMatrixPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCooperativeMatrixPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCooperativeMatrixPropertiesNV *>( this );
     }
 
-    explicit operator VkCooperativeMatrixPropertiesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkCooperativeMatrixPropertiesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCooperativeMatrixPropertiesNV *>( this );
     }
@@ -15128,12 +15130,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCopyAccelerationStructureInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCopyAccelerationStructureInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCopyAccelerationStructureInfoKHR *>( this );
     }
 
-    explicit operator VkCopyAccelerationStructureInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkCopyAccelerationStructureInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCopyAccelerationStructureInfoKHR *>( this );
     }
@@ -15255,12 +15257,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCopyAccelerationStructureToMemoryInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCopyAccelerationStructureToMemoryInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCopyAccelerationStructureToMemoryInfoKHR *>( this );
     }
 
-    explicit operator VkCopyAccelerationStructureToMemoryInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkCopyAccelerationStructureToMemoryInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCopyAccelerationStructureToMemoryInfoKHR *>( this );
     }
@@ -15386,12 +15388,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCopyBufferInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCopyBufferInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCopyBufferInfo2 *>( this );
     }
 
-    explicit operator VkCopyBufferInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkCopyBufferInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCopyBufferInfo2 *>( this );
     }
@@ -15555,12 +15557,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCopyBufferToImageInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCopyBufferToImageInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCopyBufferToImageInfo2 *>( this );
     }
 
-    explicit operator VkCopyBufferToImageInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkCopyBufferToImageInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCopyBufferToImageInfo2 *>( this );
     }
@@ -15670,12 +15672,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCopyCommandTransformInfoQCOM const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCopyCommandTransformInfoQCOM const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCopyCommandTransformInfoQCOM *>( this );
     }
 
-    explicit operator VkCopyCommandTransformInfoQCOM &() VULKAN_HPP_NOEXCEPT
+    operator VkCopyCommandTransformInfoQCOM &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCopyCommandTransformInfoQCOM *>( this );
     }
@@ -15817,12 +15819,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCopyDescriptorSet const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCopyDescriptorSet const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCopyDescriptorSet *>( this );
     }
 
-    explicit operator VkCopyDescriptorSet &() VULKAN_HPP_NOEXCEPT
+    operator VkCopyDescriptorSet &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCopyDescriptorSet *>( this );
     }
@@ -15963,12 +15965,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageCopy2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageCopy2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageCopy2 *>( this );
     }
 
-    explicit operator VkImageCopy2 &() VULKAN_HPP_NOEXCEPT
+    operator VkImageCopy2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageCopy2 *>( this );
     }
@@ -16139,12 +16141,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCopyImageInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCopyImageInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCopyImageInfo2 *>( this );
     }
 
-    explicit operator VkCopyImageInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkCopyImageInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCopyImageInfo2 *>( this );
     }
@@ -16312,12 +16314,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCopyImageToBufferInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCopyImageToBufferInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCopyImageToBufferInfo2 *>( this );
     }
 
-    explicit operator VkCopyImageToBufferInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkCopyImageToBufferInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCopyImageToBufferInfo2 *>( this );
     }
@@ -16445,12 +16447,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCopyMemoryToAccelerationStructureInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCopyMemoryToAccelerationStructureInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCopyMemoryToAccelerationStructureInfoKHR *>( this );
     }
 
-    explicit operator VkCopyMemoryToAccelerationStructureInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkCopyMemoryToAccelerationStructureInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCopyMemoryToAccelerationStructureInfoKHR *>( this );
     }
@@ -16543,12 +16545,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCuFunctionCreateInfoNVX const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCuFunctionCreateInfoNVX const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCuFunctionCreateInfoNVX *>( this );
     }
 
-    explicit operator VkCuFunctionCreateInfoNVX &() VULKAN_HPP_NOEXCEPT
+    operator VkCuFunctionCreateInfoNVX &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCuFunctionCreateInfoNVX *>( this );
     }
@@ -16787,12 +16789,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCuLaunchInfoNVX const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCuLaunchInfoNVX const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCuLaunchInfoNVX *>( this );
     }
 
-    explicit operator VkCuLaunchInfoNVX &() VULKAN_HPP_NOEXCEPT
+    operator VkCuLaunchInfoNVX &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCuLaunchInfoNVX *>( this );
     }
@@ -16940,12 +16942,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkCuModuleCreateInfoNVX const &() const VULKAN_HPP_NOEXCEPT
+    operator VkCuModuleCreateInfoNVX const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkCuModuleCreateInfoNVX *>( this );
     }
 
-    explicit operator VkCuModuleCreateInfoNVX &() VULKAN_HPP_NOEXCEPT
+    operator VkCuModuleCreateInfoNVX &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkCuModuleCreateInfoNVX *>( this );
     }
@@ -17101,12 +17103,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkD3D12FenceSubmitInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkD3D12FenceSubmitInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkD3D12FenceSubmitInfoKHR *>( this );
     }
 
-    explicit operator VkD3D12FenceSubmitInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkD3D12FenceSubmitInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkD3D12FenceSubmitInfoKHR *>( this );
     }
@@ -17221,12 +17223,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDebugMarkerMarkerInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDebugMarkerMarkerInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDebugMarkerMarkerInfoEXT *>( this );
     }
 
-    explicit operator VkDebugMarkerMarkerInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDebugMarkerMarkerInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDebugMarkerMarkerInfoEXT *>( this );
     }
@@ -17351,12 +17353,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDebugMarkerObjectNameInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDebugMarkerObjectNameInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDebugMarkerObjectNameInfoEXT *>( this );
     }
 
-    explicit operator VkDebugMarkerObjectNameInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDebugMarkerObjectNameInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDebugMarkerObjectNameInfoEXT *>( this );
     }
@@ -17526,12 +17528,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDebugMarkerObjectTagInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDebugMarkerObjectTagInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDebugMarkerObjectTagInfoEXT *>( this );
     }
 
-    explicit operator VkDebugMarkerObjectTagInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDebugMarkerObjectTagInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDebugMarkerObjectTagInfoEXT *>( this );
     }
@@ -17655,12 +17657,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDebugReportCallbackCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDebugReportCallbackCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDebugReportCallbackCreateInfoEXT *>( this );
     }
 
-    explicit operator VkDebugReportCallbackCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDebugReportCallbackCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDebugReportCallbackCreateInfoEXT *>( this );
     }
@@ -17764,12 +17766,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDebugUtilsLabelEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDebugUtilsLabelEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDebugUtilsLabelEXT *>( this );
     }
 
-    explicit operator VkDebugUtilsLabelEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDebugUtilsLabelEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDebugUtilsLabelEXT *>( this );
     }
@@ -17892,12 +17894,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDebugUtilsObjectNameInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDebugUtilsObjectNameInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDebugUtilsObjectNameInfoEXT *>( this );
     }
 
-    explicit operator VkDebugUtilsObjectNameInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDebugUtilsObjectNameInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDebugUtilsObjectNameInfoEXT *>( this );
     }
@@ -18140,12 +18142,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDebugUtilsMessengerCallbackDataEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDebugUtilsMessengerCallbackDataEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDebugUtilsMessengerCallbackDataEXT *>( this );
     }
 
-    explicit operator VkDebugUtilsMessengerCallbackDataEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDebugUtilsMessengerCallbackDataEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDebugUtilsMessengerCallbackDataEXT *>( this );
     }
@@ -18328,12 +18330,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDebugUtilsMessengerCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDebugUtilsMessengerCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT *>( this );
     }
 
-    explicit operator VkDebugUtilsMessengerCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDebugUtilsMessengerCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT *>( this );
     }
@@ -18497,12 +18499,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDebugUtilsObjectTagInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDebugUtilsObjectTagInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDebugUtilsObjectTagInfoEXT *>( this );
     }
 
-    explicit operator VkDebugUtilsObjectTagInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDebugUtilsObjectTagInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDebugUtilsObjectTagInfoEXT *>( this );
     }
@@ -18611,12 +18613,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDedicatedAllocationBufferCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDedicatedAllocationBufferCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDedicatedAllocationBufferCreateInfoNV *>( this );
     }
 
-    explicit operator VkDedicatedAllocationBufferCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkDedicatedAllocationBufferCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDedicatedAllocationBufferCreateInfoNV *>( this );
     }
@@ -18715,12 +18717,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDedicatedAllocationImageCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDedicatedAllocationImageCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDedicatedAllocationImageCreateInfoNV *>( this );
     }
 
-    explicit operator VkDedicatedAllocationImageCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkDedicatedAllocationImageCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDedicatedAllocationImageCreateInfoNV *>( this );
     }
@@ -18826,12 +18828,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDedicatedAllocationMemoryAllocateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDedicatedAllocationMemoryAllocateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDedicatedAllocationMemoryAllocateInfoNV *>( this );
     }
 
-    explicit operator VkDedicatedAllocationMemoryAllocateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkDedicatedAllocationMemoryAllocateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDedicatedAllocationMemoryAllocateInfoNV *>( this );
     }
@@ -18951,12 +18953,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryBarrier2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryBarrier2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryBarrier2 *>( this );
     }
 
-    explicit operator VkMemoryBarrier2 &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryBarrier2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryBarrier2 *>( this );
     }
@@ -19083,12 +19085,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageSubresourceRange const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageSubresourceRange const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageSubresourceRange *>( this );
     }
 
-    explicit operator VkImageSubresourceRange &() VULKAN_HPP_NOEXCEPT
+    operator VkImageSubresourceRange &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageSubresourceRange *>( this );
     }
@@ -19254,12 +19256,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageMemoryBarrier2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageMemoryBarrier2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageMemoryBarrier2 *>( this );
     }
 
-    explicit operator VkImageMemoryBarrier2 &() VULKAN_HPP_NOEXCEPT
+    operator VkImageMemoryBarrier2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageMemoryBarrier2 *>( this );
     }
@@ -19485,12 +19487,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDependencyInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDependencyInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDependencyInfo *>( this );
     }
 
-    explicit operator VkDependencyInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDependencyInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDependencyInfo *>( this );
     }
@@ -19617,12 +19619,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorBufferInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorBufferInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorBufferInfo *>( this );
     }
 
-    explicit operator VkDescriptorBufferInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorBufferInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorBufferInfo *>( this );
     }
@@ -19718,12 +19720,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorImageInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorImageInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorImageInfo *>( this );
     }
 
-    explicit operator VkDescriptorImageInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorImageInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorImageInfo *>( this );
     }
@@ -19807,12 +19809,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorPoolSize const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorPoolSize const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorPoolSize *>( this );
     }
 
-    explicit operator VkDescriptorPoolSize &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorPoolSize &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorPoolSize *>( this );
     }
@@ -19945,12 +19947,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorPoolCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorPoolCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorPoolCreateInfo *>( this );
     }
 
-    explicit operator VkDescriptorPoolCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorPoolCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorPoolCreateInfo *>( this );
     }
@@ -20057,12 +20059,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorPoolInlineUniformBlockCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorPoolInlineUniformBlockCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorPoolInlineUniformBlockCreateInfo *>( this );
     }
 
-    explicit operator VkDescriptorPoolInlineUniformBlockCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorPoolInlineUniformBlockCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorPoolInlineUniformBlockCreateInfo *>( this );
     }
@@ -20197,12 +20199,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorSetAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorSetAllocateInfo *>( this );
     }
 
-    explicit operator VkDescriptorSetAllocateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetAllocateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorSetAllocateInfo *>( this );
     }
@@ -20315,12 +20317,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorSetBindingReferenceVALVE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetBindingReferenceVALVE const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorSetBindingReferenceVALVE *>( this );
     }
 
-    explicit operator VkDescriptorSetBindingReferenceVALVE &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetBindingReferenceVALVE &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorSetBindingReferenceVALVE *>( this );
     }
@@ -20464,12 +20466,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorSetLayoutBinding const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetLayoutBinding const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorSetLayoutBinding *>( this );
     }
 
-    explicit operator VkDescriptorSetLayoutBinding &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetLayoutBinding &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorSetLayoutBinding *>( this );
     }
@@ -20594,12 +20596,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorSetLayoutBindingFlagsCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetLayoutBindingFlagsCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorSetLayoutBindingFlagsCreateInfo *>( this );
     }
 
-    explicit operator VkDescriptorSetLayoutBindingFlagsCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetLayoutBindingFlagsCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorSetLayoutBindingFlagsCreateInfo *>( this );
     }
@@ -20736,12 +20738,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorSetLayoutCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetLayoutCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorSetLayoutCreateInfo *>( this );
     }
 
-    explicit operator VkDescriptorSetLayoutCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetLayoutCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorSetLayoutCreateInfo *>( this );
     }
@@ -20852,12 +20854,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorSetLayoutHostMappingInfoVALVE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetLayoutHostMappingInfoVALVE const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorSetLayoutHostMappingInfoVALVE *>( this );
     }
 
-    explicit operator VkDescriptorSetLayoutHostMappingInfoVALVE &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetLayoutHostMappingInfoVALVE &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorSetLayoutHostMappingInfoVALVE *>( this );
     }
@@ -20941,12 +20943,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDescriptorSetLayoutSupport const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetLayoutSupport const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorSetLayoutSupport *>( this );
     }
 
-    explicit operator VkDescriptorSetLayoutSupport &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetLayoutSupport &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorSetLayoutSupport *>( this );
     }
@@ -21071,12 +21073,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorSetVariableDescriptorCountAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetVariableDescriptorCountAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorSetVariableDescriptorCountAllocateInfo *>( this );
     }
 
-    explicit operator VkDescriptorSetVariableDescriptorCountAllocateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetVariableDescriptorCountAllocateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountAllocateInfo *>( this );
     }
@@ -21166,12 +21168,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDescriptorSetVariableDescriptorCountLayoutSupport const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetVariableDescriptorCountLayoutSupport const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorSetVariableDescriptorCountLayoutSupport *>( this );
     }
 
-    explicit operator VkDescriptorSetVariableDescriptorCountLayoutSupport &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorSetVariableDescriptorCountLayoutSupport &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountLayoutSupport *>( this );
     }
@@ -21300,12 +21302,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorUpdateTemplateEntry const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorUpdateTemplateEntry const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorUpdateTemplateEntry *>( this );
     }
 
-    explicit operator VkDescriptorUpdateTemplateEntry &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorUpdateTemplateEntry &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorUpdateTemplateEntry *>( this );
     }
@@ -21497,12 +21499,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDescriptorUpdateTemplateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorUpdateTemplateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDescriptorUpdateTemplateCreateInfo *>( this );
     }
 
-    explicit operator VkDescriptorUpdateTemplateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDescriptorUpdateTemplateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDescriptorUpdateTemplateCreateInfo *>( this );
     }
@@ -21621,12 +21623,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceBufferMemoryRequirements const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceBufferMemoryRequirements const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceBufferMemoryRequirements *>( this );
     }
 
-    explicit operator VkDeviceBufferMemoryRequirements &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceBufferMemoryRequirements &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceBufferMemoryRequirements *>( this );
     }
@@ -21771,12 +21773,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceQueueCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceQueueCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceQueueCreateInfo *>( this );
     }
 
-    explicit operator VkDeviceQueueCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceQueueCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceQueueCreateInfo *>( this );
     }
@@ -22314,12 +22316,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFeatures *>( this );
     }
@@ -22701,12 +22703,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceCreateInfo *>( this );
     }
 
-    explicit operator VkDeviceCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceCreateInfo *>( this );
     }
@@ -22892,12 +22894,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceDeviceMemoryReportCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceDeviceMemoryReportCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceDeviceMemoryReportCreateInfoEXT *>( this );
     }
 
-    explicit operator VkDeviceDeviceMemoryReportCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceDeviceMemoryReportCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceDeviceMemoryReportCreateInfoEXT *>( this );
     }
@@ -22998,12 +23000,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceDiagnosticsConfigCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceDiagnosticsConfigCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceDiagnosticsConfigCreateInfoNV *>( this );
     }
 
-    explicit operator VkDeviceDiagnosticsConfigCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceDiagnosticsConfigCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceDiagnosticsConfigCreateInfoNV *>( this );
     }
@@ -23098,12 +23100,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceEventInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceEventInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceEventInfoEXT *>( this );
     }
 
-    explicit operator VkDeviceEventInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceEventInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceEventInfoEXT *>( this );
     }
@@ -23206,12 +23208,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceGroupBindSparseInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupBindSparseInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceGroupBindSparseInfo *>( this );
     }
 
-    explicit operator VkDeviceGroupBindSparseInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupBindSparseInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceGroupBindSparseInfo *>( this );
     }
@@ -23310,12 +23312,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceGroupCommandBufferBeginInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupCommandBufferBeginInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceGroupCommandBufferBeginInfo *>( this );
     }
 
-    explicit operator VkDeviceGroupCommandBufferBeginInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupCommandBufferBeginInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceGroupCommandBufferBeginInfo *>( this );
     }
@@ -23441,12 +23443,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceGroupDeviceCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupDeviceCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceGroupDeviceCreateInfo *>( this );
     }
 
-    explicit operator VkDeviceGroupDeviceCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupDeviceCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceGroupDeviceCreateInfo *>( this );
     }
@@ -23534,12 +23536,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDeviceGroupPresentCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupPresentCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceGroupPresentCapabilitiesKHR *>( this );
     }
 
-    explicit operator VkDeviceGroupPresentCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupPresentCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceGroupPresentCapabilitiesKHR *>( this );
     }
@@ -23676,12 +23678,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceGroupPresentInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupPresentInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceGroupPresentInfoKHR *>( this );
     }
 
-    explicit operator VkDeviceGroupPresentInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupPresentInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceGroupPresentInfoKHR *>( this );
     }
@@ -23824,12 +23826,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceGroupRenderPassBeginInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupRenderPassBeginInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceGroupRenderPassBeginInfo *>( this );
     }
 
-    explicit operator VkDeviceGroupRenderPassBeginInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupRenderPassBeginInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceGroupRenderPassBeginInfo *>( this );
     }
@@ -24017,12 +24019,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceGroupSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceGroupSubmitInfo *>( this );
     }
 
-    explicit operator VkDeviceGroupSubmitInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupSubmitInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceGroupSubmitInfo *>( this );
     }
@@ -24142,12 +24144,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceGroupSwapchainCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupSwapchainCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceGroupSwapchainCreateInfoKHR *>( this );
     }
 
-    explicit operator VkDeviceGroupSwapchainCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceGroupSwapchainCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceGroupSwapchainCreateInfoKHR *>( this );
     }
@@ -24379,12 +24381,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageCreateInfo *>( this );
     }
 
-    explicit operator VkImageCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkImageCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageCreateInfo *>( this );
     }
@@ -24533,12 +24535,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceImageMemoryRequirements const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceImageMemoryRequirements const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceImageMemoryRequirements *>( this );
     }
 
-    explicit operator VkDeviceImageMemoryRequirements &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceImageMemoryRequirements &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceImageMemoryRequirements *>( this );
     }
@@ -24640,12 +24642,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceMemoryOpaqueCaptureAddressInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceMemoryOpaqueCaptureAddressInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceMemoryOpaqueCaptureAddressInfo *>( this );
     }
 
-    explicit operator VkDeviceMemoryOpaqueCaptureAddressInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceMemoryOpaqueCaptureAddressInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceMemoryOpaqueCaptureAddressInfo *>( this );
     }
@@ -24746,12 +24748,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceMemoryOverallocationCreateInfoAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceMemoryOverallocationCreateInfoAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceMemoryOverallocationCreateInfoAMD *>( this );
     }
 
-    explicit operator VkDeviceMemoryOverallocationCreateInfoAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceMemoryOverallocationCreateInfoAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceMemoryOverallocationCreateInfoAMD *>( this );
     }
@@ -24848,12 +24850,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDeviceMemoryReportCallbackDataEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceMemoryReportCallbackDataEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceMemoryReportCallbackDataEXT *>( this );
     }
 
-    explicit operator VkDeviceMemoryReportCallbackDataEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceMemoryReportCallbackDataEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceMemoryReportCallbackDataEXT *>( this );
     }
@@ -24965,12 +24967,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDevicePrivateDataCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDevicePrivateDataCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDevicePrivateDataCreateInfo *>( this );
     }
 
-    explicit operator VkDevicePrivateDataCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkDevicePrivateDataCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDevicePrivateDataCreateInfo *>( this );
     }
@@ -25070,12 +25072,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceQueueGlobalPriorityCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceQueueGlobalPriorityCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceQueueGlobalPriorityCreateInfoKHR *>( this );
     }
 
-    explicit operator VkDeviceQueueGlobalPriorityCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceQueueGlobalPriorityCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceQueueGlobalPriorityCreateInfoKHR *>( this );
     }
@@ -25187,12 +25189,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDeviceQueueInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDeviceQueueInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDeviceQueueInfo2 *>( this );
     }
 
-    explicit operator VkDeviceQueueInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkDeviceQueueInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDeviceQueueInfo2 *>( this );
     }
@@ -25312,12 +25314,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDirectFBSurfaceCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDirectFBSurfaceCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDirectFBSurfaceCreateInfoEXT *>( this );
     }
 
-    explicit operator VkDirectFBSurfaceCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDirectFBSurfaceCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDirectFBSurfaceCreateInfoEXT *>( this );
     }
@@ -25424,12 +25426,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDispatchIndirectCommand const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDispatchIndirectCommand const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDispatchIndirectCommand *>( this );
     }
 
-    explicit operator VkDispatchIndirectCommand &() VULKAN_HPP_NOEXCEPT
+    operator VkDispatchIndirectCommand &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDispatchIndirectCommand *>( this );
     }
@@ -25520,12 +25522,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDisplayEventInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayEventInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayEventInfoEXT *>( this );
     }
 
-    explicit operator VkDisplayEventInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayEventInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayEventInfoEXT *>( this );
     }
@@ -25617,12 +25619,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDisplayModeParametersKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayModeParametersKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayModeParametersKHR *>( this );
     }
 
-    explicit operator VkDisplayModeParametersKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayModeParametersKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayModeParametersKHR *>( this );
     }
@@ -25720,12 +25722,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDisplayModeCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayModeCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayModeCreateInfoKHR *>( this );
     }
 
-    explicit operator VkDisplayModeCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayModeCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayModeCreateInfoKHR *>( this );
     }
@@ -25809,12 +25811,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDisplayModePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayModePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayModePropertiesKHR *>( this );
     }
 
-    explicit operator VkDisplayModePropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayModePropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayModePropertiesKHR *>( this );
     }
@@ -25890,12 +25892,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDisplayModeProperties2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayModeProperties2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayModeProperties2KHR *>( this );
     }
 
-    explicit operator VkDisplayModeProperties2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayModeProperties2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayModeProperties2KHR *>( this );
     }
@@ -25978,12 +25980,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDisplayNativeHdrSurfaceCapabilitiesAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayNativeHdrSurfaceCapabilitiesAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayNativeHdrSurfaceCapabilitiesAMD *>( this );
     }
 
-    explicit operator VkDisplayNativeHdrSurfaceCapabilitiesAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayNativeHdrSurfaceCapabilitiesAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayNativeHdrSurfaceCapabilitiesAMD *>( this );
     }
@@ -26078,12 +26080,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDisplayPlaneCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPlaneCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayPlaneCapabilitiesKHR *>( this );
     }
 
-    explicit operator VkDisplayPlaneCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPlaneCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayPlaneCapabilitiesKHR *>( this );
     }
@@ -26176,12 +26178,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDisplayPlaneCapabilities2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPlaneCapabilities2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayPlaneCapabilities2KHR *>( this );
     }
 
-    explicit operator VkDisplayPlaneCapabilities2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPlaneCapabilities2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayPlaneCapabilities2KHR *>( this );
     }
@@ -26285,12 +26287,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDisplayPlaneInfo2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPlaneInfo2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayPlaneInfo2KHR *>( this );
     }
 
-    explicit operator VkDisplayPlaneInfo2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPlaneInfo2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayPlaneInfo2KHR *>( this );
     }
@@ -26371,12 +26373,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDisplayPlanePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPlanePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayPlanePropertiesKHR *>( this );
     }
 
-    explicit operator VkDisplayPlanePropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPlanePropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayPlanePropertiesKHR *>( this );
     }
@@ -26452,12 +26454,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDisplayPlaneProperties2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPlaneProperties2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayPlaneProperties2KHR *>( this );
     }
 
-    explicit operator VkDisplayPlaneProperties2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPlaneProperties2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayPlaneProperties2KHR *>( this );
     }
@@ -26553,12 +26555,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDisplayPowerInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPowerInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayPowerInfoEXT *>( this );
     }
 
-    explicit operator VkDisplayPowerInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPowerInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayPowerInfoEXT *>( this );
     }
@@ -26670,12 +26672,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDisplayPresentInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPresentInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayPresentInfoKHR *>( this );
     }
 
-    explicit operator VkDisplayPresentInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPresentInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayPresentInfoKHR *>( this );
     }
@@ -26771,12 +26773,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDisplayPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayPropertiesKHR *>( this );
     }
 
-    explicit operator VkDisplayPropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayPropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayPropertiesKHR *>( this );
     }
@@ -26881,12 +26883,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDisplayProperties2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplayProperties2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplayProperties2KHR *>( this );
     }
 
-    explicit operator VkDisplayProperties2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplayProperties2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplayProperties2KHR *>( this );
     }
@@ -27040,12 +27042,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDisplaySurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDisplaySurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDisplaySurfaceCreateInfoKHR *>( this );
     }
 
-    explicit operator VkDisplaySurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkDisplaySurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDisplaySurfaceCreateInfoKHR *>( this );
     }
@@ -27181,12 +27183,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDrawIndexedIndirectCommand const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDrawIndexedIndirectCommand const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDrawIndexedIndirectCommand *>( this );
     }
 
-    explicit operator VkDrawIndexedIndirectCommand &() VULKAN_HPP_NOEXCEPT
+    operator VkDrawIndexedIndirectCommand &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDrawIndexedIndirectCommand *>( this );
     }
@@ -27292,12 +27294,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDrawIndirectCommand const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDrawIndirectCommand const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDrawIndirectCommand *>( this );
     }
 
-    explicit operator VkDrawIndirectCommand &() VULKAN_HPP_NOEXCEPT
+    operator VkDrawIndirectCommand &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDrawIndirectCommand *>( this );
     }
@@ -27385,12 +27387,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkDrawMeshTasksIndirectCommandNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDrawMeshTasksIndirectCommandNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDrawMeshTasksIndirectCommandNV *>( this );
     }
 
-    explicit operator VkDrawMeshTasksIndirectCommandNV &() VULKAN_HPP_NOEXCEPT
+    operator VkDrawMeshTasksIndirectCommandNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDrawMeshTasksIndirectCommandNV *>( this );
     }
@@ -27465,12 +27467,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDrmFormatModifierProperties2EXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDrmFormatModifierProperties2EXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDrmFormatModifierProperties2EXT *>( this );
     }
 
-    explicit operator VkDrmFormatModifierProperties2EXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDrmFormatModifierProperties2EXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDrmFormatModifierProperties2EXT *>( this );
     }
@@ -27547,12 +27549,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDrmFormatModifierPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDrmFormatModifierPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDrmFormatModifierPropertiesEXT *>( this );
     }
 
-    explicit operator VkDrmFormatModifierPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDrmFormatModifierPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDrmFormatModifierPropertiesEXT *>( this );
     }
@@ -27643,12 +27645,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDrmFormatModifierPropertiesList2EXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDrmFormatModifierPropertiesList2EXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDrmFormatModifierPropertiesList2EXT *>( this );
     }
 
-    explicit operator VkDrmFormatModifierPropertiesList2EXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDrmFormatModifierPropertiesList2EXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDrmFormatModifierPropertiesList2EXT *>( this );
     }
@@ -27747,12 +27749,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkDrmFormatModifierPropertiesListEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkDrmFormatModifierPropertiesListEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkDrmFormatModifierPropertiesListEXT *>( this );
     }
 
-    explicit operator VkDrmFormatModifierPropertiesListEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkDrmFormatModifierPropertiesListEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkDrmFormatModifierPropertiesListEXT *>( this );
     }
@@ -27848,12 +27850,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkEventCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkEventCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkEventCreateInfo *>( this );
     }
 
-    explicit operator VkEventCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkEventCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkEventCreateInfo *>( this );
     }
@@ -27949,12 +27951,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportFenceCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportFenceCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportFenceCreateInfo *>( this );
     }
 
-    explicit operator VkExportFenceCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkExportFenceCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportFenceCreateInfo *>( this );
     }
@@ -28069,12 +28071,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportFenceWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportFenceWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportFenceWin32HandleInfoKHR *>( this );
     }
 
-    explicit operator VkExportFenceWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkExportFenceWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportFenceWin32HandleInfoKHR *>( this );
     }
@@ -28174,12 +28176,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMemoryAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMemoryAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMemoryAllocateInfo *>( this );
     }
 
-    explicit operator VkExportMemoryAllocateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMemoryAllocateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMemoryAllocateInfo *>( this );
     }
@@ -28278,12 +28280,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMemoryAllocateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMemoryAllocateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMemoryAllocateInfoNV *>( this );
     }
 
-    explicit operator VkExportMemoryAllocateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMemoryAllocateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMemoryAllocateInfoNV *>( this );
     }
@@ -28397,12 +28399,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMemoryWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMemoryWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMemoryWin32HandleInfoKHR *>( this );
     }
 
-    explicit operator VkExportMemoryWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMemoryWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMemoryWin32HandleInfoKHR *>( this );
     }
@@ -28510,12 +28512,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMemoryWin32HandleInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMemoryWin32HandleInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMemoryWin32HandleInfoNV *>( this );
     }
 
-    explicit operator VkExportMemoryWin32HandleInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMemoryWin32HandleInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMemoryWin32HandleInfoNV *>( this );
     }
@@ -28623,12 +28625,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMetalBufferInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalBufferInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMetalBufferInfoEXT *>( this );
     }
 
-    explicit operator VkExportMetalBufferInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalBufferInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMetalBufferInfoEXT *>( this );
     }
@@ -28736,12 +28738,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMetalCommandQueueInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalCommandQueueInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMetalCommandQueueInfoEXT *>( this );
     }
 
-    explicit operator VkExportMetalCommandQueueInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalCommandQueueInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMetalCommandQueueInfoEXT *>( this );
     }
@@ -28840,12 +28842,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMetalDeviceInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalDeviceInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMetalDeviceInfoEXT *>( this );
     }
 
-    explicit operator VkExportMetalDeviceInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalDeviceInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMetalDeviceInfoEXT *>( this );
     }
@@ -28951,12 +28953,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMetalIOSurfaceInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalIOSurfaceInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMetalIOSurfaceInfoEXT *>( this );
     }
 
-    explicit operator VkExportMetalIOSurfaceInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalIOSurfaceInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMetalIOSurfaceInfoEXT *>( this );
     }
@@ -29058,12 +29060,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMetalObjectCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalObjectCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMetalObjectCreateInfoEXT *>( this );
     }
 
-    explicit operator VkExportMetalObjectCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalObjectCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMetalObjectCreateInfoEXT *>( this );
     }
@@ -29151,12 +29153,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMetalObjectsInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalObjectsInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMetalObjectsInfoEXT *>( this );
     }
 
-    explicit operator VkExportMetalObjectsInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalObjectsInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMetalObjectsInfoEXT *>( this );
     }
@@ -29270,12 +29272,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMetalSharedEventInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalSharedEventInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMetalSharedEventInfoEXT *>( this );
     }
 
-    explicit operator VkExportMetalSharedEventInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalSharedEventInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMetalSharedEventInfoEXT *>( this );
     }
@@ -29413,12 +29415,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportMetalTextureInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalTextureInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportMetalTextureInfoEXT *>( this );
     }
 
-    explicit operator VkExportMetalTextureInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkExportMetalTextureInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportMetalTextureInfoEXT *>( this );
     }
@@ -29528,12 +29530,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportSemaphoreCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportSemaphoreCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportSemaphoreCreateInfo *>( this );
     }
 
-    explicit operator VkExportSemaphoreCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkExportSemaphoreCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportSemaphoreCreateInfo *>( this );
     }
@@ -29648,12 +29650,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExportSemaphoreWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExportSemaphoreWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExportSemaphoreWin32HandleInfoKHR *>( this );
     }
 
-    explicit operator VkExportSemaphoreWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkExportSemaphoreWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExportSemaphoreWin32HandleInfoKHR *>( this );
     }
@@ -29736,12 +29738,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkExtensionProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExtensionProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExtensionProperties *>( this );
     }
 
-    explicit operator VkExtensionProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkExtensionProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExtensionProperties *>( this );
     }
@@ -29815,12 +29817,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkExternalMemoryProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExternalMemoryProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExternalMemoryProperties *>( this );
     }
 
-    explicit operator VkExternalMemoryProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkExternalMemoryProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExternalMemoryProperties *>( this );
     }
@@ -29901,12 +29903,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkExternalBufferProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExternalBufferProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExternalBufferProperties *>( this );
     }
 
-    explicit operator VkExternalBufferProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkExternalBufferProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExternalBufferProperties *>( this );
     }
@@ -29994,12 +29996,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkExternalFenceProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExternalFenceProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExternalFenceProperties *>( this );
     }
 
-    explicit operator VkExternalFenceProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkExternalFenceProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExternalFenceProperties *>( this );
     }
@@ -30104,12 +30106,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExternalFormatANDROID const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExternalFormatANDROID const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExternalFormatANDROID *>( this );
     }
 
-    explicit operator VkExternalFormatANDROID &() VULKAN_HPP_NOEXCEPT
+    operator VkExternalFormatANDROID &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExternalFormatANDROID *>( this );
     }
@@ -30193,12 +30195,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkExternalImageFormatProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExternalImageFormatProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExternalImageFormatProperties *>( this );
     }
 
-    explicit operator VkExternalImageFormatProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkExternalImageFormatProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExternalImageFormatProperties *>( this );
     }
@@ -30285,12 +30287,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkImageFormatProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageFormatProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageFormatProperties *>( this );
     }
 
-    explicit operator VkImageFormatProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkImageFormatProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageFormatProperties *>( this );
     }
@@ -30376,12 +30378,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkExternalImageFormatPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExternalImageFormatPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExternalImageFormatPropertiesNV *>( this );
     }
 
-    explicit operator VkExternalImageFormatPropertiesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkExternalImageFormatPropertiesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExternalImageFormatPropertiesNV *>( this );
     }
@@ -30478,12 +30480,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExternalMemoryBufferCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExternalMemoryBufferCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExternalMemoryBufferCreateInfo *>( this );
     }
 
-    explicit operator VkExternalMemoryBufferCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkExternalMemoryBufferCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExternalMemoryBufferCreateInfo *>( this );
     }
@@ -30582,12 +30584,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExternalMemoryImageCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExternalMemoryImageCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExternalMemoryImageCreateInfo *>( this );
     }
 
-    explicit operator VkExternalMemoryImageCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkExternalMemoryImageCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExternalMemoryImageCreateInfo *>( this );
     }
@@ -30686,12 +30688,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkExternalMemoryImageCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExternalMemoryImageCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExternalMemoryImageCreateInfoNV *>( this );
     }
 
-    explicit operator VkExternalMemoryImageCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkExternalMemoryImageCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExternalMemoryImageCreateInfoNV *>( this );
     }
@@ -30778,12 +30780,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkExternalSemaphoreProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkExternalSemaphoreProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkExternalSemaphoreProperties *>( this );
     }
 
-    explicit operator VkExternalSemaphoreProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkExternalSemaphoreProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkExternalSemaphoreProperties *>( this );
     }
@@ -30884,12 +30886,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkFenceCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFenceCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFenceCreateInfo *>( this );
     }
 
-    explicit operator VkFenceCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkFenceCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFenceCreateInfo *>( this );
     }
@@ -30991,12 +30993,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkFenceGetFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFenceGetFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFenceGetFdInfoKHR *>( this );
     }
 
-    explicit operator VkFenceGetFdInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkFenceGetFdInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFenceGetFdInfoKHR *>( this );
     }
@@ -31106,12 +31108,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkFenceGetWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFenceGetWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFenceGetWin32HandleInfoKHR *>( this );
     }
 
-    explicit operator VkFenceGetWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkFenceGetWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFenceGetWin32HandleInfoKHR *>( this );
     }
@@ -31201,12 +31203,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkFilterCubicImageViewImageFormatPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFilterCubicImageViewImageFormatPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFilterCubicImageViewImageFormatPropertiesEXT *>( this );
     }
 
-    explicit operator VkFilterCubicImageViewImageFormatPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkFilterCubicImageViewImageFormatPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFilterCubicImageViewImageFormatPropertiesEXT *>( this );
     }
@@ -31288,12 +31290,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkFormatProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFormatProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFormatProperties *>( this );
     }
 
-    explicit operator VkFormatProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkFormatProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFormatProperties *>( this );
     }
@@ -31368,12 +31370,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkFormatProperties2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFormatProperties2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFormatProperties2 *>( this );
     }
 
-    explicit operator VkFormatProperties2 &() VULKAN_HPP_NOEXCEPT
+    operator VkFormatProperties2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFormatProperties2 *>( this );
     }
@@ -31457,12 +31459,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkFormatProperties3 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFormatProperties3 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFormatProperties3 *>( this );
     }
 
-    explicit operator VkFormatProperties3 &() VULKAN_HPP_NOEXCEPT
+    operator VkFormatProperties3 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFormatProperties3 *>( this );
     }
@@ -31576,12 +31578,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkFragmentShadingRateAttachmentInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFragmentShadingRateAttachmentInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFragmentShadingRateAttachmentInfoKHR *>( this );
     }
 
-    explicit operator VkFragmentShadingRateAttachmentInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkFragmentShadingRateAttachmentInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFragmentShadingRateAttachmentInfoKHR *>( this );
     }
@@ -31762,12 +31764,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkFramebufferAttachmentImageInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFramebufferAttachmentImageInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFramebufferAttachmentImageInfo *>( this );
     }
 
-    explicit operator VkFramebufferAttachmentImageInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkFramebufferAttachmentImageInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFramebufferAttachmentImageInfo *>( this );
     }
@@ -31911,12 +31913,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkFramebufferAttachmentsCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFramebufferAttachmentsCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFramebufferAttachmentsCreateInfo *>( this );
     }
 
-    explicit operator VkFramebufferAttachmentsCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkFramebufferAttachmentsCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFramebufferAttachmentsCreateInfo *>( this );
     }
@@ -32098,12 +32100,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkFramebufferCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFramebufferCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFramebufferCreateInfo *>( this );
     }
 
-    explicit operator VkFramebufferCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkFramebufferCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFramebufferCreateInfo *>( this );
     }
@@ -32209,12 +32211,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkFramebufferMixedSamplesCombinationNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkFramebufferMixedSamplesCombinationNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkFramebufferMixedSamplesCombinationNV *>( this );
     }
 
-    explicit operator VkFramebufferMixedSamplesCombinationNV &() VULKAN_HPP_NOEXCEPT
+    operator VkFramebufferMixedSamplesCombinationNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkFramebufferMixedSamplesCombinationNV *>( this );
     }
@@ -32318,12 +32320,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkIndirectCommandsStreamNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkIndirectCommandsStreamNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkIndirectCommandsStreamNV *>( this );
     }
 
-    explicit operator VkIndirectCommandsStreamNV &() VULKAN_HPP_NOEXCEPT
+    operator VkIndirectCommandsStreamNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkIndirectCommandsStreamNV *>( this );
     }
@@ -32553,12 +32555,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkGeneratedCommandsInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkGeneratedCommandsInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkGeneratedCommandsInfoNV *>( this );
     }
 
-    explicit operator VkGeneratedCommandsInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkGeneratedCommandsInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkGeneratedCommandsInfoNV *>( this );
     }
@@ -32727,12 +32729,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkGeneratedCommandsMemoryRequirementsInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkGeneratedCommandsMemoryRequirementsInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkGeneratedCommandsMemoryRequirementsInfoNV *>( this );
     }
 
-    explicit operator VkGeneratedCommandsMemoryRequirementsInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkGeneratedCommandsMemoryRequirementsInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkGeneratedCommandsMemoryRequirementsInfoNV *>( this );
     }
@@ -32845,12 +32847,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVertexInputBindingDescription const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVertexInputBindingDescription const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVertexInputBindingDescription *>( this );
     }
 
-    explicit operator VkVertexInputBindingDescription &() VULKAN_HPP_NOEXCEPT
+    operator VkVertexInputBindingDescription &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVertexInputBindingDescription *>( this );
     }
@@ -32954,12 +32956,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVertexInputAttributeDescription const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVertexInputAttributeDescription const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVertexInputAttributeDescription *>( this );
     }
 
-    explicit operator VkVertexInputAttributeDescription &() VULKAN_HPP_NOEXCEPT
+    operator VkVertexInputAttributeDescription &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVertexInputAttributeDescription *>( this );
     }
@@ -33125,12 +33127,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineVertexInputStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineVertexInputStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineVertexInputStateCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineVertexInputStateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineVertexInputStateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineVertexInputStateCreateInfo *>( this );
     }
@@ -33260,12 +33262,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineInputAssemblyStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineInputAssemblyStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineInputAssemblyStateCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineInputAssemblyStateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineInputAssemblyStateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineInputAssemblyStateCreateInfo *>( this );
     }
@@ -33379,12 +33381,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineTessellationStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineTessellationStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineTessellationStateCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineTessellationStateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineTessellationStateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineTessellationStateCreateInfo *>( this );
     }
@@ -33553,12 +33555,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineViewportStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineViewportStateCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineViewportStateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportStateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineViewportStateCreateInfo *>( this );
     }
@@ -33748,12 +33750,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineRasterizationStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineRasterizationStateCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineRasterizationStateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationStateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineRasterizationStateCreateInfo *>( this );
     }
@@ -33940,12 +33942,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineMultisampleStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineMultisampleStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineMultisampleStateCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineMultisampleStateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineMultisampleStateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineMultisampleStateCreateInfo *>( this );
     }
@@ -34093,12 +34095,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkStencilOpState const &() const VULKAN_HPP_NOEXCEPT
+    operator VkStencilOpState const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkStencilOpState *>( this );
     }
 
-    explicit operator VkStencilOpState &() VULKAN_HPP_NOEXCEPT
+    operator VkStencilOpState &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkStencilOpState *>( this );
     }
@@ -34273,12 +34275,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineDepthStencilStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineDepthStencilStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineDepthStencilStateCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineDepthStencilStateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineDepthStencilStateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineDepthStencilStateCreateInfo *>( this );
     }
@@ -34460,12 +34462,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineColorBlendAttachmentState const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineColorBlendAttachmentState const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineColorBlendAttachmentState *>( this );
     }
 
-    explicit operator VkPipelineColorBlendAttachmentState &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineColorBlendAttachmentState &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineColorBlendAttachmentState *>( this );
     }
@@ -34642,12 +34644,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineColorBlendStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineColorBlendStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineColorBlendStateCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineColorBlendStateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineColorBlendStateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineColorBlendStateCreateInfo *>( this );
     }
@@ -34794,12 +34796,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineDynamicStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineDynamicStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineDynamicStateCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineDynamicStateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineDynamicStateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineDynamicStateCreateInfo *>( this );
     }
@@ -35090,12 +35092,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkGraphicsPipelineCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkGraphicsPipelineCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkGraphicsPipelineCreateInfo *>( this );
     }
 
-    explicit operator VkGraphicsPipelineCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkGraphicsPipelineCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkGraphicsPipelineCreateInfo *>( this );
     }
@@ -35250,12 +35252,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkGraphicsPipelineLibraryCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkGraphicsPipelineLibraryCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkGraphicsPipelineLibraryCreateInfoEXT *>( this );
     }
 
-    explicit operator VkGraphicsPipelineLibraryCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkGraphicsPipelineLibraryCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkGraphicsPipelineLibraryCreateInfoEXT *>( this );
     }
@@ -35404,12 +35406,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkGraphicsShaderGroupCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkGraphicsShaderGroupCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkGraphicsShaderGroupCreateInfoNV *>( this );
     }
 
-    explicit operator VkGraphicsShaderGroupCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkGraphicsShaderGroupCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkGraphicsShaderGroupCreateInfoNV *>( this );
     }
@@ -35574,12 +35576,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkGraphicsPipelineShaderGroupsCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkGraphicsPipelineShaderGroupsCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkGraphicsPipelineShaderGroupsCreateInfoNV *>( this );
     }
 
-    explicit operator VkGraphicsPipelineShaderGroupsCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkGraphicsPipelineShaderGroupsCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkGraphicsPipelineShaderGroupsCreateInfoNV *>( this );
     }
@@ -35679,12 +35681,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkXYColorEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkXYColorEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkXYColorEXT *>( this );
     }
 
-    explicit operator VkXYColorEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkXYColorEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkXYColorEXT *>( this );
     }
@@ -35825,12 +35827,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkHdrMetadataEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkHdrMetadataEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkHdrMetadataEXT *>( this );
     }
 
-    explicit operator VkHdrMetadataEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkHdrMetadataEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkHdrMetadataEXT *>( this );
     }
@@ -35954,12 +35956,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkHeadlessSurfaceCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkHeadlessSurfaceCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkHeadlessSurfaceCreateInfoEXT *>( this );
     }
 
-    explicit operator VkHeadlessSurfaceCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkHeadlessSurfaceCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkHeadlessSurfaceCreateInfoEXT *>( this );
     }
@@ -36065,12 +36067,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkIOSSurfaceCreateInfoMVK const &() const VULKAN_HPP_NOEXCEPT
+    operator VkIOSSurfaceCreateInfoMVK const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkIOSSurfaceCreateInfoMVK *>( this );
     }
 
-    explicit operator VkIOSSurfaceCreateInfoMVK &() VULKAN_HPP_NOEXCEPT
+    operator VkIOSSurfaceCreateInfoMVK &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkIOSSurfaceCreateInfoMVK *>( this );
     }
@@ -36179,12 +36181,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageBlit const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageBlit const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageBlit *>( this );
     }
 
-    explicit operator VkImageBlit &() VULKAN_HPP_NOEXCEPT
+    operator VkImageBlit &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageBlit *>( this );
     }
@@ -36317,12 +36319,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageCompressionControlEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageCompressionControlEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageCompressionControlEXT *>( this );
     }
 
-    explicit operator VkImageCompressionControlEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImageCompressionControlEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageCompressionControlEXT *>( this );
     }
@@ -36414,12 +36416,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkImageCompressionPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageCompressionPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageCompressionPropertiesEXT *>( this );
     }
 
-    explicit operator VkImageCompressionPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImageCompressionPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageCompressionPropertiesEXT *>( this );
     }
@@ -36593,12 +36595,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageFormatConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageFormatConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageFormatConstraintsInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkImageFormatConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkImageFormatConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageFormatConstraintsInfoFUCHSIA *>( this );
     }
@@ -36764,12 +36766,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageConstraintsInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkImageConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkImageConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageConstraintsInfoFUCHSIA *>( this );
     }
@@ -36894,12 +36896,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageCopy const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageCopy const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageCopy *>( this );
     }
 
-    explicit operator VkImageCopy &() VULKAN_HPP_NOEXCEPT
+    operator VkImageCopy &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageCopy *>( this );
     }
@@ -36981,12 +36983,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSubresourceLayout const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubresourceLayout const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubresourceLayout *>( this );
     }
 
-    explicit operator VkSubresourceLayout &() VULKAN_HPP_NOEXCEPT
+    operator VkSubresourceLayout &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubresourceLayout *>( this );
     }
@@ -37124,12 +37126,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageDrmFormatModifierExplicitCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageDrmFormatModifierExplicitCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageDrmFormatModifierExplicitCreateInfoEXT *>( this );
     }
 
-    explicit operator VkImageDrmFormatModifierExplicitCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImageDrmFormatModifierExplicitCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageDrmFormatModifierExplicitCreateInfoEXT *>( this );
     }
@@ -37261,12 +37263,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageDrmFormatModifierListCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageDrmFormatModifierListCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageDrmFormatModifierListCreateInfoEXT *>( this );
     }
 
-    explicit operator VkImageDrmFormatModifierListCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImageDrmFormatModifierListCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageDrmFormatModifierListCreateInfoEXT *>( this );
     }
@@ -37351,12 +37353,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkImageDrmFormatModifierPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageDrmFormatModifierPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageDrmFormatModifierPropertiesEXT *>( this );
     }
 
-    explicit operator VkImageDrmFormatModifierPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImageDrmFormatModifierPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageDrmFormatModifierPropertiesEXT *>( this );
     }
@@ -37480,12 +37482,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageFormatListCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageFormatListCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageFormatListCreateInfo *>( this );
     }
 
-    explicit operator VkImageFormatListCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkImageFormatListCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageFormatListCreateInfo *>( this );
     }
@@ -37570,12 +37572,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkImageFormatProperties2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageFormatProperties2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageFormatProperties2 *>( this );
     }
 
-    explicit operator VkImageFormatProperties2 &() VULKAN_HPP_NOEXCEPT
+    operator VkImageFormatProperties2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageFormatProperties2 *>( this );
     }
@@ -37727,12 +37729,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageMemoryBarrier const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageMemoryBarrier const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageMemoryBarrier *>( this );
     }
 
-    explicit operator VkImageMemoryBarrier &() VULKAN_HPP_NOEXCEPT
+    operator VkImageMemoryBarrier &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageMemoryBarrier *>( this );
     }
@@ -37845,12 +37847,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageMemoryRequirementsInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageMemoryRequirementsInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageMemoryRequirementsInfo2 *>( this );
     }
 
-    explicit operator VkImageMemoryRequirementsInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkImageMemoryRequirementsInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageMemoryRequirementsInfo2 *>( this );
     }
@@ -37957,12 +37959,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImagePipeSurfaceCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImagePipeSurfaceCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImagePipeSurfaceCreateInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkImagePipeSurfaceCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkImagePipeSurfaceCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImagePipeSurfaceCreateInfoFUCHSIA *>( this );
     }
@@ -38075,12 +38077,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImagePlaneMemoryRequirementsInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImagePlaneMemoryRequirementsInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImagePlaneMemoryRequirementsInfo *>( this );
     }
 
-    explicit operator VkImagePlaneMemoryRequirementsInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkImagePlaneMemoryRequirementsInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImagePlaneMemoryRequirementsInfo *>( this );
     }
@@ -38197,12 +38199,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageResolve const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageResolve const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageResolve *>( this );
     }
 
-    explicit operator VkImageResolve &() VULKAN_HPP_NOEXCEPT
+    operator VkImageResolve &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageResolve *>( this );
     }
@@ -38327,12 +38329,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageResolve2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageResolve2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageResolve2 *>( this );
     }
 
-    explicit operator VkImageResolve2 &() VULKAN_HPP_NOEXCEPT
+    operator VkImageResolve2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageResolve2 *>( this );
     }
@@ -38439,12 +38441,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageSparseMemoryRequirementsInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageSparseMemoryRequirementsInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2 *>( this );
     }
 
-    explicit operator VkImageSparseMemoryRequirementsInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkImageSparseMemoryRequirementsInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageSparseMemoryRequirementsInfo2 *>( this );
     }
@@ -38543,12 +38545,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageStencilUsageCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageStencilUsageCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageStencilUsageCreateInfo *>( this );
     }
 
-    explicit operator VkImageStencilUsageCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkImageStencilUsageCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageStencilUsageCreateInfo *>( this );
     }
@@ -38645,12 +38647,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageSubresource2EXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageSubresource2EXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageSubresource2EXT *>( this );
     }
 
-    explicit operator VkImageSubresource2EXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImageSubresource2EXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageSubresource2EXT *>( this );
     }
@@ -38746,12 +38748,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageSwapchainCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageSwapchainCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageSwapchainCreateInfoKHR *>( this );
     }
 
-    explicit operator VkImageSwapchainCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkImageSwapchainCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageSwapchainCreateInfoKHR *>( this );
     }
@@ -38848,12 +38850,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageViewASTCDecodeModeEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageViewASTCDecodeModeEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageViewASTCDecodeModeEXT *>( this );
     }
 
-    explicit operator VkImageViewASTCDecodeModeEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImageViewASTCDecodeModeEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageViewASTCDecodeModeEXT *>( this );
     }
@@ -38938,12 +38940,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkImageViewAddressPropertiesNVX const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageViewAddressPropertiesNVX const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageViewAddressPropertiesNVX *>( this );
     }
 
-    explicit operator VkImageViewAddressPropertiesNVX &() VULKAN_HPP_NOEXCEPT
+    operator VkImageViewAddressPropertiesNVX &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageViewAddressPropertiesNVX *>( this );
     }
@@ -39082,12 +39084,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageViewCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageViewCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageViewCreateInfo *>( this );
     }
 
-    explicit operator VkImageViewCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkImageViewCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageViewCreateInfo *>( this );
     }
@@ -39212,12 +39214,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageViewHandleInfoNVX const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageViewHandleInfoNVX const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageViewHandleInfoNVX *>( this );
     }
 
-    explicit operator VkImageViewHandleInfoNVX &() VULKAN_HPP_NOEXCEPT
+    operator VkImageViewHandleInfoNVX &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageViewHandleInfoNVX *>( this );
     }
@@ -39320,12 +39322,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageViewMinLodCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageViewMinLodCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageViewMinLodCreateInfoEXT *>( this );
     }
 
-    explicit operator VkImageViewMinLodCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImageViewMinLodCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageViewMinLodCreateInfoEXT *>( this );
     }
@@ -39377,6 +39379,132 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageViewMinLodCreateInfoEXT;
   };
 
+  struct ImageViewSampleWeightCreateInfoQCOM
+  {
+    using NativeType = VkImageViewSampleWeightCreateInfoQCOM;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageViewSampleWeightCreateInfoQCOM;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImageViewSampleWeightCreateInfoQCOM( VULKAN_HPP_NAMESPACE::Offset2D filterCenter_ = {},
+                                                              VULKAN_HPP_NAMESPACE::Extent2D filterSize_   = {},
+                                                              uint32_t                       numPhases_    = {},
+                                                              const void *                   pNext_        = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , filterCenter( filterCenter_ )
+      , filterSize( filterSize_ )
+      , numPhases( numPhases_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ImageViewSampleWeightCreateInfoQCOM( ImageViewSampleWeightCreateInfoQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageViewSampleWeightCreateInfoQCOM( VkImageViewSampleWeightCreateInfoQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImageViewSampleWeightCreateInfoQCOM( *reinterpret_cast<ImageViewSampleWeightCreateInfoQCOM const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImageViewSampleWeightCreateInfoQCOM & operator=( ImageViewSampleWeightCreateInfoQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageViewSampleWeightCreateInfoQCOM & operator=( VkImageViewSampleWeightCreateInfoQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImageViewSampleWeightCreateInfoQCOM const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ImageViewSampleWeightCreateInfoQCOM & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImageViewSampleWeightCreateInfoQCOM & setFilterCenter( VULKAN_HPP_NAMESPACE::Offset2D const & filterCenter_ ) VULKAN_HPP_NOEXCEPT
+    {
+      filterCenter = filterCenter_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImageViewSampleWeightCreateInfoQCOM & setFilterSize( VULKAN_HPP_NAMESPACE::Extent2D const & filterSize_ ) VULKAN_HPP_NOEXCEPT
+    {
+      filterSize = filterSize_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImageViewSampleWeightCreateInfoQCOM & setNumPhases( uint32_t numPhases_ ) VULKAN_HPP_NOEXCEPT
+    {
+      numPhases = numPhases_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkImageViewSampleWeightCreateInfoQCOM const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImageViewSampleWeightCreateInfoQCOM *>( this );
+    }
+
+    operator VkImageViewSampleWeightCreateInfoQCOM &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImageViewSampleWeightCreateInfoQCOM *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::Offset2D const &,
+               VULKAN_HPP_NAMESPACE::Extent2D const &,
+               uint32_t const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, filterCenter, filterSize, numPhases );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImageViewSampleWeightCreateInfoQCOM const & ) const = default;
+#else
+    bool operator==( ImageViewSampleWeightCreateInfoQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( filterCenter == rhs.filterCenter ) && ( filterSize == rhs.filterSize ) &&
+             ( numPhases == rhs.numPhases );
+#  endif
+    }
+
+    bool operator!=( ImageViewSampleWeightCreateInfoQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType        = StructureType::eImageViewSampleWeightCreateInfoQCOM;
+    const void *                        pNext        = {};
+    VULKAN_HPP_NAMESPACE::Offset2D      filterCenter = {};
+    VULKAN_HPP_NAMESPACE::Extent2D      filterSize   = {};
+    uint32_t                            numPhases    = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ImageViewSampleWeightCreateInfoQCOM ) == sizeof( VkImageViewSampleWeightCreateInfoQCOM ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ImageViewSampleWeightCreateInfoQCOM>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageViewSampleWeightCreateInfoQCOM>::value,
+                            "ImageViewSampleWeightCreateInfoQCOM is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eImageViewSampleWeightCreateInfoQCOM>
+  {
+    using Type = ImageViewSampleWeightCreateInfoQCOM;
+  };
+
   struct ImageViewUsageCreateInfo
   {
     using NativeType = VkImageViewUsageCreateInfo;
@@ -39421,12 +39549,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImageViewUsageCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImageViewUsageCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImageViewUsageCreateInfo *>( this );
     }
 
-    explicit operator VkImageViewUsageCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkImageViewUsageCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImageViewUsageCreateInfo *>( this );
     }
@@ -39524,12 +39652,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportAndroidHardwareBufferInfoANDROID const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportAndroidHardwareBufferInfoANDROID const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportAndroidHardwareBufferInfoANDROID *>( this );
     }
 
-    explicit operator VkImportAndroidHardwareBufferInfoANDROID &() VULKAN_HPP_NOEXCEPT
+    operator VkImportAndroidHardwareBufferInfoANDROID &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportAndroidHardwareBufferInfoANDROID *>( this );
     }
@@ -39653,12 +39781,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportFenceFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportFenceFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportFenceFdInfoKHR *>( this );
     }
 
-    explicit operator VkImportFenceFdInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkImportFenceFdInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportFenceFdInfoKHR *>( this );
     }
@@ -39799,12 +39927,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportFenceWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportFenceWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportFenceWin32HandleInfoKHR *>( this );
     }
 
-    explicit operator VkImportFenceWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkImportFenceWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportFenceWin32HandleInfoKHR *>( this );
     }
@@ -39922,12 +40050,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportMemoryBufferCollectionFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryBufferCollectionFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportMemoryBufferCollectionFUCHSIA *>( this );
     }
 
-    explicit operator VkImportMemoryBufferCollectionFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryBufferCollectionFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportMemoryBufferCollectionFUCHSIA *>( this );
     }
@@ -40036,12 +40164,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportMemoryFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportMemoryFdInfoKHR *>( this );
     }
 
-    explicit operator VkImportMemoryFdInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryFdInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportMemoryFdInfoKHR *>( this );
     }
@@ -40149,12 +40277,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportMemoryHostPointerInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryHostPointerInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportMemoryHostPointerInfoEXT *>( this );
     }
 
-    explicit operator VkImportMemoryHostPointerInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryHostPointerInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportMemoryHostPointerInfoEXT *>( this );
     }
@@ -40272,12 +40400,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportMemoryWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportMemoryWin32HandleInfoKHR *>( this );
     }
 
-    explicit operator VkImportMemoryWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportMemoryWin32HandleInfoKHR *>( this );
     }
@@ -40391,12 +40519,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportMemoryWin32HandleInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryWin32HandleInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportMemoryWin32HandleInfoNV *>( this );
     }
 
-    explicit operator VkImportMemoryWin32HandleInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryWin32HandleInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportMemoryWin32HandleInfoNV *>( this );
     }
@@ -40506,12 +40634,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportMemoryZirconHandleInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryZirconHandleInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportMemoryZirconHandleInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkImportMemoryZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkImportMemoryZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportMemoryZirconHandleInfoFUCHSIA *>( this );
     }
@@ -40623,12 +40751,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportMetalBufferInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportMetalBufferInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportMetalBufferInfoEXT *>( this );
     }
 
-    explicit operator VkImportMetalBufferInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImportMetalBufferInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportMetalBufferInfoEXT *>( this );
     }
@@ -40726,12 +40854,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportMetalIOSurfaceInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportMetalIOSurfaceInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportMetalIOSurfaceInfoEXT *>( this );
     }
 
-    explicit operator VkImportMetalIOSurfaceInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImportMetalIOSurfaceInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportMetalIOSurfaceInfoEXT *>( this );
     }
@@ -40829,12 +40957,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportMetalSharedEventInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportMetalSharedEventInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportMetalSharedEventInfoEXT *>( this );
     }
 
-    explicit operator VkImportMetalSharedEventInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImportMetalSharedEventInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportMetalSharedEventInfoEXT *>( this );
     }
@@ -40941,12 +41069,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportMetalTextureInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportMetalTextureInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportMetalTextureInfoEXT *>( this );
     }
 
-    explicit operator VkImportMetalTextureInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkImportMetalTextureInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportMetalTextureInfoEXT *>( this );
     }
@@ -41071,12 +41199,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportSemaphoreFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportSemaphoreFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportSemaphoreFdInfoKHR *>( this );
     }
 
-    explicit operator VkImportSemaphoreFdInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkImportSemaphoreFdInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportSemaphoreFdInfoKHR *>( this );
     }
@@ -41217,12 +41345,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportSemaphoreWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportSemaphoreWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportSemaphoreWin32HandleInfoKHR *>( this );
     }
 
-    explicit operator VkImportSemaphoreWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkImportSemaphoreWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportSemaphoreWin32HandleInfoKHR *>( this );
     }
@@ -41359,12 +41487,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkImportSemaphoreZirconHandleInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkImportSemaphoreZirconHandleInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkImportSemaphoreZirconHandleInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkImportSemaphoreZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkImportSemaphoreZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkImportSemaphoreZirconHandleInfoFUCHSIA *>( this );
     }
@@ -41645,12 +41773,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkIndirectCommandsLayoutTokenNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkIndirectCommandsLayoutTokenNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkIndirectCommandsLayoutTokenNV *>( this );
     }
 
-    explicit operator VkIndirectCommandsLayoutTokenNV &() VULKAN_HPP_NOEXCEPT
+    operator VkIndirectCommandsLayoutTokenNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkIndirectCommandsLayoutTokenNV *>( this );
     }
@@ -41873,12 +42001,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkIndirectCommandsLayoutCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkIndirectCommandsLayoutCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkIndirectCommandsLayoutCreateInfoNV *>( this );
     }
 
-    explicit operator VkIndirectCommandsLayoutCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkIndirectCommandsLayoutCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkIndirectCommandsLayoutCreateInfoNV *>( this );
     }
@@ -41988,12 +42116,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkInitializePerformanceApiInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
+    operator VkInitializePerformanceApiInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkInitializePerformanceApiInfoINTEL *>( this );
     }
 
-    explicit operator VkInitializePerformanceApiInfoINTEL &() VULKAN_HPP_NOEXCEPT
+    operator VkInitializePerformanceApiInfoINTEL &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkInitializePerformanceApiInfoINTEL *>( this );
     }
@@ -42096,12 +42224,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkInputAttachmentAspectReference const &() const VULKAN_HPP_NOEXCEPT
+    operator VkInputAttachmentAspectReference const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkInputAttachmentAspectReference *>( this );
     }
 
-    explicit operator VkInputAttachmentAspectReference &() VULKAN_HPP_NOEXCEPT
+    operator VkInputAttachmentAspectReference &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkInputAttachmentAspectReference *>( this );
     }
@@ -42267,12 +42395,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkInstanceCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkInstanceCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkInstanceCreateInfo *>( this );
     }
 
-    explicit operator VkInstanceCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkInstanceCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkInstanceCreateInfo *>( this );
     }
@@ -42408,12 +42536,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkLayerProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkLayerProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkLayerProperties *>( this );
     }
 
-    explicit operator VkLayerProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkLayerProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkLayerProperties *>( this );
     }
@@ -42517,12 +42645,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMacOSSurfaceCreateInfoMVK const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMacOSSurfaceCreateInfoMVK const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMacOSSurfaceCreateInfoMVK *>( this );
     }
 
-    explicit operator VkMacOSSurfaceCreateInfoMVK &() VULKAN_HPP_NOEXCEPT
+    operator VkMacOSSurfaceCreateInfoMVK &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMacOSSurfaceCreateInfoMVK *>( this );
     }
@@ -42635,12 +42763,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMappedMemoryRange const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMappedMemoryRange const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMappedMemoryRange *>( this );
     }
 
-    explicit operator VkMappedMemoryRange &() VULKAN_HPP_NOEXCEPT
+    operator VkMappedMemoryRange &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMappedMemoryRange *>( this );
     }
@@ -42750,12 +42878,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryAllocateFlagsInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryAllocateFlagsInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryAllocateFlagsInfo *>( this );
     }
 
-    explicit operator VkMemoryAllocateFlagsInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryAllocateFlagsInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryAllocateFlagsInfo *>( this );
     }
@@ -42859,12 +42987,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryAllocateInfo *>( this );
     }
 
-    explicit operator VkMemoryAllocateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryAllocateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryAllocateInfo *>( this );
     }
@@ -42966,12 +43094,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryBarrier const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryBarrier const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryBarrier *>( this );
     }
 
-    explicit operator VkMemoryBarrier &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryBarrier &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryBarrier *>( this );
     }
@@ -43079,12 +43207,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryDedicatedAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryDedicatedAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryDedicatedAllocateInfo *>( this );
     }
 
-    explicit operator VkMemoryDedicatedAllocateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryDedicatedAllocateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryDedicatedAllocateInfo *>( this );
     }
@@ -43171,12 +43299,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkMemoryDedicatedRequirements const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryDedicatedRequirements const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryDedicatedRequirements *>( this );
     }
 
-    explicit operator VkMemoryDedicatedRequirements &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryDedicatedRequirements &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryDedicatedRequirements *>( this );
     }
@@ -43261,12 +43389,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkMemoryFdPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryFdPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryFdPropertiesKHR *>( this );
     }
 
-    explicit operator VkMemoryFdPropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryFdPropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryFdPropertiesKHR *>( this );
     }
@@ -43364,12 +43492,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryGetAndroidHardwareBufferInfoANDROID const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryGetAndroidHardwareBufferInfoANDROID const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryGetAndroidHardwareBufferInfoANDROID *>( this );
     }
 
-    explicit operator VkMemoryGetAndroidHardwareBufferInfoANDROID &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryGetAndroidHardwareBufferInfoANDROID &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryGetAndroidHardwareBufferInfoANDROID *>( this );
     }
@@ -43474,12 +43602,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryGetFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryGetFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryGetFdInfoKHR *>( this );
     }
 
-    explicit operator VkMemoryGetFdInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryGetFdInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryGetFdInfoKHR *>( this );
     }
@@ -43589,12 +43717,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryGetRemoteAddressInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryGetRemoteAddressInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryGetRemoteAddressInfoNV *>( this );
     }
 
-    explicit operator VkMemoryGetRemoteAddressInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryGetRemoteAddressInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryGetRemoteAddressInfoNV *>( this );
     }
@@ -43706,12 +43834,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryGetWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryGetWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryGetWin32HandleInfoKHR *>( this );
     }
 
-    explicit operator VkMemoryGetWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryGetWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryGetWin32HandleInfoKHR *>( this );
     }
@@ -43824,12 +43952,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryGetZirconHandleInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryGetZirconHandleInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryGetZirconHandleInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkMemoryGetZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryGetZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryGetZirconHandleInfoFUCHSIA *>( this );
     }
@@ -43911,12 +44039,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkMemoryHeap const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryHeap const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryHeap *>( this );
     }
 
-    explicit operator VkMemoryHeap &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryHeap &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryHeap *>( this );
     }
@@ -43989,12 +44117,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkMemoryHostPointerPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryHostPointerPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryHostPointerPropertiesEXT *>( this );
     }
 
-    explicit operator VkMemoryHostPointerPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryHostPointerPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryHostPointerPropertiesEXT *>( this );
     }
@@ -44090,12 +44218,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryOpaqueCaptureAddressAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryOpaqueCaptureAddressAllocateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryOpaqueCaptureAddressAllocateInfo *>( this );
     }
 
-    explicit operator VkMemoryOpaqueCaptureAddressAllocateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryOpaqueCaptureAddressAllocateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryOpaqueCaptureAddressAllocateInfo *>( this );
     }
@@ -44193,12 +44321,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMemoryPriorityAllocateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryPriorityAllocateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryPriorityAllocateInfoEXT *>( this );
     }
 
-    explicit operator VkMemoryPriorityAllocateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryPriorityAllocateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryPriorityAllocateInfoEXT *>( this );
     }
@@ -44277,12 +44405,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkMemoryRequirements const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryRequirements const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryRequirements *>( this );
     }
 
-    explicit operator VkMemoryRequirements &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryRequirements &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryRequirements *>( this );
     }
@@ -44356,12 +44484,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkMemoryRequirements2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryRequirements2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryRequirements2 *>( this );
     }
 
-    explicit operator VkMemoryRequirements2 &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryRequirements2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryRequirements2 *>( this );
     }
@@ -44437,12 +44565,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkMemoryType const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryType const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryType *>( this );
     }
 
-    explicit operator VkMemoryType &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryType &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryType *>( this );
     }
@@ -44516,12 +44644,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkMemoryWin32HandlePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryWin32HandlePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryWin32HandlePropertiesKHR *>( this );
     }
 
-    explicit operator VkMemoryWin32HandlePropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryWin32HandlePropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryWin32HandlePropertiesKHR *>( this );
     }
@@ -44605,12 +44733,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkMemoryZirconHandlePropertiesFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMemoryZirconHandlePropertiesFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMemoryZirconHandlePropertiesFUCHSIA *>( this );
     }
 
-    explicit operator VkMemoryZirconHandlePropertiesFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkMemoryZirconHandlePropertiesFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMemoryZirconHandlePropertiesFUCHSIA *>( this );
     }
@@ -44718,12 +44846,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMetalSurfaceCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMetalSurfaceCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMetalSurfaceCreateInfoEXT *>( this );
     }
 
-    explicit operator VkMetalSurfaceCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkMetalSurfaceCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMetalSurfaceCreateInfoEXT *>( this );
     }
@@ -44828,12 +44956,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMultiDrawIndexedInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMultiDrawIndexedInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMultiDrawIndexedInfoEXT *>( this );
     }
 
-    explicit operator VkMultiDrawIndexedInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkMultiDrawIndexedInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMultiDrawIndexedInfoEXT *>( this );
     }
@@ -44917,12 +45045,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMultiDrawInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMultiDrawInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMultiDrawInfoEXT *>( this );
     }
 
-    explicit operator VkMultiDrawInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkMultiDrawInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMultiDrawInfoEXT *>( this );
     }
@@ -44996,12 +45124,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkMultisamplePropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMultisamplePropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMultisamplePropertiesEXT *>( this );
     }
 
-    explicit operator VkMultisamplePropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkMultisamplePropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMultisamplePropertiesEXT *>( this );
     }
@@ -45109,12 +45237,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMultisampledRenderToSingleSampledInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMultisampledRenderToSingleSampledInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMultisampledRenderToSingleSampledInfoEXT *>( this );
     }
 
-    explicit operator VkMultisampledRenderToSingleSampledInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkMultisampledRenderToSingleSampledInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMultisampledRenderToSingleSampledInfoEXT *>( this );
     }
@@ -45226,12 +45354,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMultiviewPerViewAttributesInfoNVX const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMultiviewPerViewAttributesInfoNVX const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMultiviewPerViewAttributesInfoNVX *>( this );
     }
 
-    explicit operator VkMultiviewPerViewAttributesInfoNVX &() VULKAN_HPP_NOEXCEPT
+    operator VkMultiviewPerViewAttributesInfoNVX &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMultiviewPerViewAttributesInfoNVX *>( this );
     }
@@ -45346,12 +45474,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMutableDescriptorTypeListVALVE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMutableDescriptorTypeListVALVE const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMutableDescriptorTypeListVALVE *>( this );
     }
 
-    explicit operator VkMutableDescriptorTypeListVALVE &() VULKAN_HPP_NOEXCEPT
+    operator VkMutableDescriptorTypeListVALVE &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMutableDescriptorTypeListVALVE *>( this );
     }
@@ -45473,12 +45601,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkMutableDescriptorTypeCreateInfoVALVE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMutableDescriptorTypeCreateInfoVALVE const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkMutableDescriptorTypeCreateInfoVALVE *>( this );
     }
 
-    explicit operator VkMutableDescriptorTypeCreateInfoVALVE &() VULKAN_HPP_NOEXCEPT
+    operator VkMutableDescriptorTypeCreateInfoVALVE &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkMutableDescriptorTypeCreateInfoVALVE *>( this );
     }
@@ -45570,12 +45698,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPastPresentationTimingGOOGLE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPastPresentationTimingGOOGLE const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPastPresentationTimingGOOGLE *>( this );
     }
 
-    explicit operator VkPastPresentationTimingGOOGLE &() VULKAN_HPP_NOEXCEPT
+    operator VkPastPresentationTimingGOOGLE &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPastPresentationTimingGOOGLE *>( this );
     }
@@ -45672,12 +45800,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPerformanceConfigurationAcquireInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceConfigurationAcquireInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPerformanceConfigurationAcquireInfoINTEL *>( this );
     }
 
-    explicit operator VkPerformanceConfigurationAcquireInfoINTEL &() VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceConfigurationAcquireInfoINTEL &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPerformanceConfigurationAcquireInfoINTEL *>( this );
     }
@@ -45768,12 +45896,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPerformanceCounterDescriptionKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceCounterDescriptionKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPerformanceCounterDescriptionKHR *>( this );
     }
 
-    explicit operator VkPerformanceCounterDescriptionKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceCounterDescriptionKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPerformanceCounterDescriptionKHR *>( this );
     }
@@ -45873,12 +46001,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPerformanceCounterKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceCounterKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPerformanceCounterKHR *>( this );
     }
 
-    explicit operator VkPerformanceCounterKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceCounterKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPerformanceCounterKHR *>( this );
     }
@@ -46057,12 +46185,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPerformanceMarkerInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceMarkerInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPerformanceMarkerInfoINTEL *>( this );
     }
 
-    explicit operator VkPerformanceMarkerInfoINTEL &() VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceMarkerInfoINTEL &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPerformanceMarkerInfoINTEL *>( this );
     }
@@ -46176,12 +46304,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPerformanceOverrideInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceOverrideInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPerformanceOverrideInfoINTEL *>( this );
     }
 
-    explicit operator VkPerformanceOverrideInfoINTEL &() VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceOverrideInfoINTEL &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPerformanceOverrideInfoINTEL *>( this );
     }
@@ -46283,12 +46411,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPerformanceQuerySubmitInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceQuerySubmitInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPerformanceQuerySubmitInfoKHR *>( this );
     }
 
-    explicit operator VkPerformanceQuerySubmitInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceQuerySubmitInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPerformanceQuerySubmitInfoKHR *>( this );
     }
@@ -46384,12 +46512,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPerformanceStreamMarkerInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceStreamMarkerInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPerformanceStreamMarkerInfoINTEL *>( this );
     }
 
-    explicit operator VkPerformanceStreamMarkerInfoINTEL &() VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceStreamMarkerInfoINTEL &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPerformanceStreamMarkerInfoINTEL *>( this );
     }
@@ -46556,12 +46684,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPerformanceValueINTEL const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceValueINTEL const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPerformanceValueINTEL *>( this );
     }
 
-    explicit operator VkPerformanceValueINTEL &() VULKAN_HPP_NOEXCEPT
+    operator VkPerformanceValueINTEL &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPerformanceValueINTEL *>( this );
     }
@@ -46661,12 +46789,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevice16BitStorageFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevice16BitStorageFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevice16BitStorageFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDevice16BitStorageFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevice16BitStorageFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevice16BitStorageFeatures *>( this );
     }
@@ -46783,12 +46911,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevice4444FormatsFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevice4444FormatsFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevice4444FormatsFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDevice4444FormatsFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevice4444FormatsFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevice4444FormatsFeaturesEXT *>( this );
     }
@@ -46906,12 +47034,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevice8BitStorageFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevice8BitStorageFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevice8BitStorageFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDevice8BitStorageFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevice8BitStorageFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevice8BitStorageFeatures *>( this );
     }
@@ -47018,12 +47146,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceASTCDecodeFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceASTCDecodeFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceASTCDecodeFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceASTCDecodeFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceASTCDecodeFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceASTCDecodeFeaturesEXT *>( this );
     }
@@ -47160,12 +47288,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceAccelerationStructureFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceAccelerationStructureFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceAccelerationStructureFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceAccelerationStructureFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceAccelerationStructureFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceAccelerationStructureFeaturesKHR *>( this );
     }
@@ -47285,12 +47413,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceAccelerationStructurePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceAccelerationStructurePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceAccelerationStructurePropertiesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceAccelerationStructurePropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceAccelerationStructurePropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceAccelerationStructurePropertiesKHR *>( this );
     }
@@ -47422,12 +47550,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT *>( this );
     }
@@ -47524,12 +47652,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT *>( this );
     }
@@ -47661,12 +47789,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceBorderColorSwizzleFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceBorderColorSwizzleFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceBorderColorSwizzleFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceBorderColorSwizzleFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceBorderColorSwizzleFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceBorderColorSwizzleFeaturesEXT *>( this );
     }
@@ -47786,12 +47914,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceBufferDeviceAddressFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceBufferDeviceAddressFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceBufferDeviceAddressFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceBufferDeviceAddressFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceBufferDeviceAddressFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceBufferDeviceAddressFeatures *>( this );
     }
@@ -47917,12 +48045,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceBufferDeviceAddressFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceBufferDeviceAddressFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceBufferDeviceAddressFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceBufferDeviceAddressFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceBufferDeviceAddressFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceBufferDeviceAddressFeaturesEXT *>( this );
     }
@@ -48031,12 +48159,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceCoherentMemoryFeaturesAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCoherentMemoryFeaturesAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceCoherentMemoryFeaturesAMD *>( this );
     }
 
-    explicit operator VkPhysicalDeviceCoherentMemoryFeaturesAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCoherentMemoryFeaturesAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceCoherentMemoryFeaturesAMD *>( this );
     }
@@ -48135,12 +48263,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceColorWriteEnableFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceColorWriteEnableFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceColorWriteEnableFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceColorWriteEnableFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceColorWriteEnableFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceColorWriteEnableFeaturesEXT *>( this );
     }
@@ -48249,12 +48377,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceComputeShaderDerivativesFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceComputeShaderDerivativesFeaturesNV *>( this );
     }
@@ -48366,12 +48494,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceConditionalRenderingFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceConditionalRenderingFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceConditionalRenderingFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceConditionalRenderingFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceConditionalRenderingFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceConditionalRenderingFeaturesEXT *>( this );
     }
@@ -48476,12 +48604,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceConservativeRasterizationPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT *>( this );
     }
@@ -48625,12 +48753,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceCooperativeMatrixFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCooperativeMatrixFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceCooperativeMatrixFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceCooperativeMatrixFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCooperativeMatrixFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceCooperativeMatrixFeaturesNV *>( this );
     }
@@ -48716,12 +48844,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceCooperativeMatrixPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCooperativeMatrixPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceCooperativeMatrixPropertiesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceCooperativeMatrixPropertiesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCooperativeMatrixPropertiesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceCooperativeMatrixPropertiesNV *>( this );
     }
@@ -48821,12 +48949,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceCornerSampledImageFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCornerSampledImageFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceCornerSampledImageFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceCornerSampledImageFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCornerSampledImageFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceCornerSampledImageFeaturesNV *>( this );
     }
@@ -48927,12 +49055,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceCoverageReductionModeFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCoverageReductionModeFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceCoverageReductionModeFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceCoverageReductionModeFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCoverageReductionModeFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceCoverageReductionModeFeaturesNV *>( this );
     }
@@ -49041,12 +49169,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceCustomBorderColorFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCustomBorderColorFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceCustomBorderColorFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceCustomBorderColorFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCustomBorderColorFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceCustomBorderColorFeaturesEXT *>( this );
     }
@@ -49133,12 +49261,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceCustomBorderColorPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCustomBorderColorPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceCustomBorderColorPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceCustomBorderColorPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceCustomBorderColorPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceCustomBorderColorPropertiesEXT *>( this );
     }
@@ -49241,12 +49369,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV *>( this );
     }
@@ -49346,12 +49474,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceDepthClipControlFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDepthClipControlFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDepthClipControlFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDepthClipControlFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDepthClipControlFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDepthClipControlFeaturesEXT *>( this );
     }
@@ -49449,12 +49577,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceDepthClipEnableFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDepthClipEnableFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDepthClipEnableFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDepthClipEnableFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDepthClipEnableFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDepthClipEnableFeaturesEXT *>( this );
     }
@@ -49544,12 +49672,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceDepthStencilResolveProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDepthStencilResolveProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDepthStencilResolveProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDepthStencilResolveProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDepthStencilResolveProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDepthStencilResolveProperties *>( this );
     }
@@ -49831,12 +49959,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceDescriptorIndexingFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDescriptorIndexingFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDescriptorIndexingFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDescriptorIndexingFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingFeatures *>( this );
     }
@@ -50046,12 +50174,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceDescriptorIndexingProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDescriptorIndexingProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDescriptorIndexingProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDescriptorIndexingProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingProperties *>( this );
     }
@@ -50245,12 +50373,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE *>( this );
     }
@@ -50351,12 +50479,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV *>( this );
     }
@@ -50459,12 +50587,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV *>( this );
     }
@@ -50599,12 +50727,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceDeviceMemoryReportFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDeviceMemoryReportFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDeviceMemoryReportFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDeviceMemoryReportFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDeviceMemoryReportFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDeviceMemoryReportFeaturesEXT *>( this );
     }
@@ -50704,12 +50832,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceDiagnosticsConfigFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDiagnosticsConfigFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDiagnosticsConfigFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDiagnosticsConfigFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDiagnosticsConfigFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDiagnosticsConfigFeaturesNV *>( this );
     }
@@ -50792,12 +50920,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceDiscardRectanglePropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDiscardRectanglePropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDiscardRectanglePropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDiscardRectanglePropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDiscardRectanglePropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT *>( this );
     }
@@ -50888,12 +51016,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceDriverProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDriverProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDriverProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDriverProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDriverProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDriverProperties *>( this );
     }
@@ -50996,12 +51124,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceDrmPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDrmPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDrmPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDrmPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDrmPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDrmPropertiesEXT *>( this );
     }
@@ -51112,12 +51240,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceDynamicRenderingFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDynamicRenderingFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceDynamicRenderingFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceDynamicRenderingFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceDynamicRenderingFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceDynamicRenderingFeatures *>( this );
     }
@@ -51216,12 +51344,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceExclusiveScissorFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExclusiveScissorFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceExclusiveScissorFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceExclusiveScissorFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExclusiveScissorFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceExclusiveScissorFeaturesNV *>( this );
     }
@@ -51339,12 +51467,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceExtendedDynamicState2FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExtendedDynamicState2FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceExtendedDynamicState2FeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceExtendedDynamicState2FeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExtendedDynamicState2FeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceExtendedDynamicState2FeaturesEXT *>( this );
     }
@@ -51453,12 +51581,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceExtendedDynamicStateFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExtendedDynamicStateFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceExtendedDynamicStateFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceExtendedDynamicStateFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExtendedDynamicStateFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceExtendedDynamicStateFeaturesEXT *>( this );
     }
@@ -51575,12 +51703,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceExternalBufferInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalBufferInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceExternalBufferInfo *>( this );
     }
 
-    explicit operator VkPhysicalDeviceExternalBufferInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalBufferInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceExternalBufferInfo *>( this );
     }
@@ -51687,12 +51815,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceExternalFenceInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalFenceInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceExternalFenceInfo *>( this );
     }
 
-    explicit operator VkPhysicalDeviceExternalFenceInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalFenceInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceExternalFenceInfo *>( this );
     }
@@ -51792,12 +51920,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceExternalImageFormatInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalImageFormatInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceExternalImageFormatInfo *>( this );
     }
 
-    explicit operator VkPhysicalDeviceExternalImageFormatInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalImageFormatInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceExternalImageFormatInfo *>( this );
     }
@@ -51883,12 +52011,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceExternalMemoryHostPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT *>( this );
     }
@@ -51988,12 +52116,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceExternalMemoryRDMAFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalMemoryRDMAFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceExternalMemoryRDMAFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceExternalMemoryRDMAFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalMemoryRDMAFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceExternalMemoryRDMAFeaturesNV *>( this );
     }
@@ -52094,12 +52222,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceExternalSemaphoreInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalSemaphoreInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceExternalSemaphoreInfo *>( this );
     }
 
-    explicit operator VkPhysicalDeviceExternalSemaphoreInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceExternalSemaphoreInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceExternalSemaphoreInfo *>( this );
     }
@@ -52197,12 +52325,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFeatures2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFeatures2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFeatures2 *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFeatures2 &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFeatures2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFeatures2 *>( this );
     }
@@ -52319,12 +52447,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceFloatControlsProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFloatControlsProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFloatControlsProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFloatControlsProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFloatControlsProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFloatControlsProperties *>( this );
     }
@@ -52487,12 +52615,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFragmentDensityMap2FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMap2FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentDensityMap2FeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentDensityMap2FeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMap2FeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMap2FeaturesEXT *>( this );
     }
@@ -52584,12 +52712,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceFragmentDensityMap2PropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMap2PropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentDensityMap2PropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentDensityMap2PropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMap2PropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMap2PropertiesEXT *>( this );
     }
@@ -52717,12 +52845,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFragmentDensityMapFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMapFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentDensityMapFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentDensityMapFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMapFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMapFeaturesEXT *>( this );
     }
@@ -52832,12 +52960,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM *>( this );
     }
@@ -52924,12 +53052,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM *>( this );
     }
@@ -53019,12 +53147,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceFragmentDensityMapPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMapPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentDensityMapPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentDensityMapPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentDensityMapPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentDensityMapPropertiesEXT *>( this );
     }
@@ -53133,12 +53261,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR *>( this );
     }
@@ -53227,12 +53355,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR *>( this );
     }
@@ -53352,12 +53480,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT *>( this );
     }
@@ -53484,12 +53612,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV *>( this );
     }
@@ -53600,12 +53728,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV *>( this );
     }
@@ -53723,12 +53851,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceFragmentShadingRateFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShadingRateFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentShadingRateFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentShadingRateFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShadingRateFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentShadingRateFeaturesKHR *>( this );
     }
@@ -53822,12 +53950,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceFragmentShadingRateKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShadingRateKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentShadingRateKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentShadingRateKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShadingRateKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentShadingRateKHR *>( this );
     }
@@ -53947,12 +54075,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceFragmentShadingRatePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShadingRatePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceFragmentShadingRatePropertiesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceFragmentShadingRatePropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceFragmentShadingRatePropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceFragmentShadingRatePropertiesKHR *>( this );
     }
@@ -54120,12 +54248,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR *>( this );
     }
@@ -54227,12 +54355,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT *>( this );
     }
@@ -54344,12 +54472,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT *>( this );
     }
@@ -54441,12 +54569,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceGroupProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceGroupProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceGroupProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceGroupProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceGroupProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceGroupProperties *>( this );
     }
@@ -54550,12 +54678,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceHostQueryResetFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceHostQueryResetFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceHostQueryResetFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceHostQueryResetFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceHostQueryResetFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceHostQueryResetFeatures *>( this );
     }
@@ -54648,12 +54776,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceIDProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceIDProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceIDProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceIDProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceIDProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceIDProperties *>( this );
     }
@@ -54771,12 +54899,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceImage2DViewOf3DFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImage2DViewOf3DFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceImage2DViewOf3DFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceImage2DViewOf3DFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImage2DViewOf3DFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceImage2DViewOf3DFeaturesEXT *>( this );
     }
@@ -54877,12 +55005,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceImageCompressionControlFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageCompressionControlFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceImageCompressionControlFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceImageCompressionControlFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageCompressionControlFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceImageCompressionControlFeaturesEXT *>( this );
     }
@@ -54986,12 +55114,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT *>( this );
     }
@@ -55139,12 +55267,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceImageDrmFormatModifierInfoEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceImageDrmFormatModifierInfoEXT *>( this );
     }
@@ -55284,12 +55412,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceImageFormatInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageFormatInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceImageFormatInfo2 *>( this );
     }
 
-    explicit operator VkPhysicalDeviceImageFormatInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageFormatInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceImageFormatInfo2 *>( this );
     }
@@ -55353,6 +55481,241 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceImageFormatInfo2KHR = PhysicalDeviceImageFormatInfo2;
 
+  struct PhysicalDeviceImageProcessingFeaturesQCOM
+  {
+    using NativeType = VkPhysicalDeviceImageProcessingFeaturesQCOM;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceImageProcessingFeaturesQCOM;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceImageProcessingFeaturesQCOM( VULKAN_HPP_NAMESPACE::Bool32 textureSampleWeighted_ = {},
+                                                                    VULKAN_HPP_NAMESPACE::Bool32 textureBoxFilter_      = {},
+                                                                    VULKAN_HPP_NAMESPACE::Bool32 textureBlockMatch_     = {},
+                                                                    void *                       pNext_                 = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , textureSampleWeighted( textureSampleWeighted_ )
+      , textureBoxFilter( textureBoxFilter_ )
+      , textureBlockMatch( textureBlockMatch_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceImageProcessingFeaturesQCOM( PhysicalDeviceImageProcessingFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceImageProcessingFeaturesQCOM( VkPhysicalDeviceImageProcessingFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceImageProcessingFeaturesQCOM( *reinterpret_cast<PhysicalDeviceImageProcessingFeaturesQCOM const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceImageProcessingFeaturesQCOM & operator=( PhysicalDeviceImageProcessingFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceImageProcessingFeaturesQCOM & operator=( VkPhysicalDeviceImageProcessingFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageProcessingFeaturesQCOM const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceImageProcessingFeaturesQCOM & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceImageProcessingFeaturesQCOM &
+                            setTextureSampleWeighted( VULKAN_HPP_NAMESPACE::Bool32 textureSampleWeighted_ ) VULKAN_HPP_NOEXCEPT
+    {
+      textureSampleWeighted = textureSampleWeighted_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceImageProcessingFeaturesQCOM &
+                            setTextureBoxFilter( VULKAN_HPP_NAMESPACE::Bool32 textureBoxFilter_ ) VULKAN_HPP_NOEXCEPT
+    {
+      textureBoxFilter = textureBoxFilter_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceImageProcessingFeaturesQCOM &
+                            setTextureBlockMatch( VULKAN_HPP_NAMESPACE::Bool32 textureBlockMatch_ ) VULKAN_HPP_NOEXCEPT
+    {
+      textureBlockMatch = textureBlockMatch_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceImageProcessingFeaturesQCOM const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceImageProcessingFeaturesQCOM *>( this );
+    }
+
+    operator VkPhysicalDeviceImageProcessingFeaturesQCOM &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceImageProcessingFeaturesQCOM *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, textureSampleWeighted, textureBoxFilter, textureBlockMatch );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceImageProcessingFeaturesQCOM const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceImageProcessingFeaturesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( textureSampleWeighted == rhs.textureSampleWeighted ) &&
+             ( textureBoxFilter == rhs.textureBoxFilter ) && ( textureBlockMatch == rhs.textureBlockMatch );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceImageProcessingFeaturesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                 = StructureType::ePhysicalDeviceImageProcessingFeaturesQCOM;
+    void *                              pNext                 = {};
+    VULKAN_HPP_NAMESPACE::Bool32        textureSampleWeighted = {};
+    VULKAN_HPP_NAMESPACE::Bool32        textureBoxFilter      = {};
+    VULKAN_HPP_NAMESPACE::Bool32        textureBlockMatch     = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceImageProcessingFeaturesQCOM ) == sizeof( VkPhysicalDeviceImageProcessingFeaturesQCOM ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageProcessingFeaturesQCOM>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageProcessingFeaturesQCOM>::value,
+                            "PhysicalDeviceImageProcessingFeaturesQCOM is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceImageProcessingFeaturesQCOM>
+  {
+    using Type = PhysicalDeviceImageProcessingFeaturesQCOM;
+  };
+
+  struct PhysicalDeviceImageProcessingPropertiesQCOM
+  {
+    using NativeType = VkPhysicalDeviceImageProcessingPropertiesQCOM;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceImageProcessingPropertiesQCOM;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceImageProcessingPropertiesQCOM( uint32_t                       maxWeightFilterPhases_    = {},
+                                                                      VULKAN_HPP_NAMESPACE::Extent2D maxWeightFilterDimension_ = {},
+                                                                      VULKAN_HPP_NAMESPACE::Extent2D maxBlockMatchRegion_      = {},
+                                                                      VULKAN_HPP_NAMESPACE::Extent2D maxBoxFilterBlockSize_    = {},
+                                                                      void *                         pNext_                    = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , maxWeightFilterPhases( maxWeightFilterPhases_ )
+      , maxWeightFilterDimension( maxWeightFilterDimension_ )
+      , maxBlockMatchRegion( maxBlockMatchRegion_ )
+      , maxBoxFilterBlockSize( maxBoxFilterBlockSize_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceImageProcessingPropertiesQCOM( PhysicalDeviceImageProcessingPropertiesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceImageProcessingPropertiesQCOM( VkPhysicalDeviceImageProcessingPropertiesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceImageProcessingPropertiesQCOM( *reinterpret_cast<PhysicalDeviceImageProcessingPropertiesQCOM const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceImageProcessingPropertiesQCOM & operator=( PhysicalDeviceImageProcessingPropertiesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceImageProcessingPropertiesQCOM & operator=( VkPhysicalDeviceImageProcessingPropertiesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageProcessingPropertiesQCOM const *>( &rhs );
+      return *this;
+    }
+
+    operator VkPhysicalDeviceImageProcessingPropertiesQCOM const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceImageProcessingPropertiesQCOM *>( this );
+    }
+
+    operator VkPhysicalDeviceImageProcessingPropertiesQCOM &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceImageProcessingPropertiesQCOM *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               uint32_t const &,
+               VULKAN_HPP_NAMESPACE::Extent2D const &,
+               VULKAN_HPP_NAMESPACE::Extent2D const &,
+               VULKAN_HPP_NAMESPACE::Extent2D const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, maxWeightFilterPhases, maxWeightFilterDimension, maxBlockMatchRegion, maxBoxFilterBlockSize );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceImageProcessingPropertiesQCOM const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceImageProcessingPropertiesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxWeightFilterPhases == rhs.maxWeightFilterPhases ) &&
+             ( maxWeightFilterDimension == rhs.maxWeightFilterDimension ) && ( maxBlockMatchRegion == rhs.maxBlockMatchRegion ) &&
+             ( maxBoxFilterBlockSize == rhs.maxBoxFilterBlockSize );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceImageProcessingPropertiesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                    = StructureType::ePhysicalDeviceImageProcessingPropertiesQCOM;
+    void *                              pNext                    = {};
+    uint32_t                            maxWeightFilterPhases    = {};
+    VULKAN_HPP_NAMESPACE::Extent2D      maxWeightFilterDimension = {};
+    VULKAN_HPP_NAMESPACE::Extent2D      maxBlockMatchRegion      = {};
+    VULKAN_HPP_NAMESPACE::Extent2D      maxBoxFilterBlockSize    = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceImageProcessingPropertiesQCOM ) ==
+                              sizeof( VkPhysicalDeviceImageProcessingPropertiesQCOM ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageProcessingPropertiesQCOM>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageProcessingPropertiesQCOM>::value,
+                            "PhysicalDeviceImageProcessingPropertiesQCOM is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceImageProcessingPropertiesQCOM>
+  {
+    using Type = PhysicalDeviceImageProcessingPropertiesQCOM;
+  };
+
   struct PhysicalDeviceImageRobustnessFeatures
   {
     using NativeType = VkPhysicalDeviceImageRobustnessFeatures;
@@ -55398,12 +55761,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceImageRobustnessFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageRobustnessFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceImageRobustnessFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceImageRobustnessFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageRobustnessFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceImageRobustnessFeatures *>( this );
     }
@@ -55504,12 +55867,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceImageViewImageFormatInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageViewImageFormatInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceImageViewImageFormatInfoEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceImageViewImageFormatInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageViewImageFormatInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceImageViewImageFormatInfoEXT *>( this );
     }
@@ -55606,12 +55969,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceImageViewMinLodFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageViewMinLodFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceImageViewMinLodFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceImageViewMinLodFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImageViewMinLodFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceImageViewMinLodFeaturesEXT *>( this );
     }
@@ -55710,12 +56073,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceImagelessFramebufferFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImagelessFramebufferFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceImagelessFramebufferFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceImagelessFramebufferFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceImagelessFramebufferFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceImagelessFramebufferFeatures *>( this );
     }
@@ -55815,12 +56178,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceIndexTypeUint8FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceIndexTypeUint8FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceIndexTypeUint8FeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceIndexTypeUint8FeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceIndexTypeUint8FeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceIndexTypeUint8FeaturesEXT *>( this );
     }
@@ -55920,12 +56283,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceInheritedViewportScissorFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceInheritedViewportScissorFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceInheritedViewportScissorFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceInheritedViewportScissorFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceInheritedViewportScissorFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceInheritedViewportScissorFeaturesNV *>( this );
     }
@@ -56034,12 +56397,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceInlineUniformBlockFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceInlineUniformBlockFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceInlineUniformBlockFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceInlineUniformBlockFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockFeatures *>( this );
     }
@@ -56134,12 +56497,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceInlineUniformBlockProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceInlineUniformBlockProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceInlineUniformBlockProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceInlineUniformBlockProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockProperties *>( this );
     }
@@ -56259,12 +56622,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceInvocationMaskFeaturesHUAWEI const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceInvocationMaskFeaturesHUAWEI const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceInvocationMaskFeaturesHUAWEI *>( this );
     }
 
-    explicit operator VkPhysicalDeviceInvocationMaskFeaturesHUAWEI &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceInvocationMaskFeaturesHUAWEI &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceInvocationMaskFeaturesHUAWEI *>( this );
     }
@@ -56554,12 +56917,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceLimits const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceLimits const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceLimits *>( this );
     }
 
-    explicit operator VkPhysicalDeviceLimits &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceLimits &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceLimits *>( this );
     }
@@ -57068,12 +57431,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceLineRasterizationFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceLineRasterizationFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceLineRasterizationFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceLineRasterizationFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceLineRasterizationFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceLineRasterizationFeaturesEXT *>( this );
     }
@@ -57171,12 +57534,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceLineRasterizationPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceLineRasterizationPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceLineRasterizationPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceLineRasterizationPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceLineRasterizationPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceLineRasterizationPropertiesEXT *>( this );
     }
@@ -57277,12 +57640,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceLinearColorAttachmentFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceLinearColorAttachmentFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceLinearColorAttachmentFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceLinearColorAttachmentFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceLinearColorAttachmentFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceLinearColorAttachmentFeaturesNV *>( this );
     }
@@ -57369,12 +57732,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceMaintenance3Properties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMaintenance3Properties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMaintenance3Properties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMaintenance3Properties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMaintenance3Properties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMaintenance3Properties *>( this );
     }
@@ -57474,12 +57837,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceMaintenance4Features const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMaintenance4Features const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMaintenance4Features *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMaintenance4Features &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMaintenance4Features &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMaintenance4Features *>( this );
     }
@@ -57564,12 +57927,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceMaintenance4Properties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMaintenance4Properties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMaintenance4Properties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMaintenance4Properties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMaintenance4Properties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMaintenance4Properties *>( this );
     }
@@ -57656,12 +58019,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceMemoryBudgetPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMemoryBudgetPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMemoryBudgetPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMemoryBudgetPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMemoryBudgetPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMemoryBudgetPropertiesEXT *>( this );
     }
@@ -57763,12 +58126,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceMemoryPriorityFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMemoryPriorityFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMemoryPriorityFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMemoryPriorityFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMemoryPriorityFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMemoryPriorityFeaturesEXT *>( this );
     }
@@ -57854,12 +58217,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceMemoryProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMemoryProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMemoryProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMemoryProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMemoryProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMemoryProperties *>( this );
     }
@@ -57941,12 +58304,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceMemoryProperties2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMemoryProperties2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMemoryProperties2 *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMemoryProperties2 &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMemoryProperties2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMemoryProperties2 *>( this );
     }
@@ -58052,12 +58415,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceMeshShaderFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMeshShaderFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMeshShaderFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMeshShaderFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMeshShaderFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMeshShaderFeaturesNV *>( this );
     }
@@ -58166,12 +58529,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceMeshShaderPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMeshShaderPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMeshShaderPropertiesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMeshShaderPropertiesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMeshShaderPropertiesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesNV *>( this );
     }
@@ -58315,12 +58678,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceMultiDrawFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultiDrawFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMultiDrawFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMultiDrawFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultiDrawFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMultiDrawFeaturesEXT *>( this );
     }
@@ -58403,12 +58766,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceMultiDrawPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultiDrawPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMultiDrawPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMultiDrawPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultiDrawPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMultiDrawPropertiesEXT *>( this );
     }
@@ -58511,12 +58874,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT *>( this );
     }
@@ -58633,12 +58996,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceMultiviewFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultiviewFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMultiviewFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMultiviewFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultiviewFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMultiviewFeatures *>( this );
     }
@@ -58731,12 +59094,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX *>( this );
     }
@@ -58823,12 +59186,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceMultiviewProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultiviewProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMultiviewProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMultiviewProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMultiviewProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMultiviewProperties *>( this );
     }
@@ -58931,12 +59294,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE *>( this );
     }
 
-    explicit operator VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE *>( this );
     }
@@ -59036,12 +59399,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT *>( this );
     }
@@ -59129,12 +59492,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDevicePCIBusInfoPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePCIBusInfoPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePCIBusInfoPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDevicePCIBusInfoPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePCIBusInfoPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePCIBusInfoPropertiesEXT *>( this );
     }
@@ -59239,12 +59602,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT *>( this );
     }
@@ -59353,12 +59716,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePerformanceQueryFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePerformanceQueryFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePerformanceQueryFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDevicePerformanceQueryFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePerformanceQueryFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePerformanceQueryFeaturesKHR *>( this );
     }
@@ -59444,12 +59807,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDevicePerformanceQueryPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePerformanceQueryPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePerformanceQueryPropertiesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDevicePerformanceQueryPropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePerformanceQueryPropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePerformanceQueryPropertiesKHR *>( this );
     }
@@ -59551,12 +59914,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePipelineCreationCacheControlFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePipelineCreationCacheControlFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePipelineCreationCacheControlFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDevicePipelineCreationCacheControlFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePipelineCreationCacheControlFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePipelineCreationCacheControlFeatures *>( this );
     }
@@ -59659,12 +60022,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR *>( this );
     }
@@ -59764,12 +60127,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePipelinePropertiesFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePipelinePropertiesFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePipelinePropertiesFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDevicePipelinePropertiesFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePipelinePropertiesFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePipelinePropertiesFeaturesEXT *>( this );
     }
@@ -59823,6 +60186,226 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePipelinePropertiesFeaturesEXT;
   };
 
+  struct PhysicalDevicePipelineRobustnessFeaturesEXT
+  {
+    using NativeType = VkPhysicalDevicePipelineRobustnessFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDevicePipelineRobustnessFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDevicePipelineRobustnessFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 pipelineRobustness_ = {},
+                                                                      void *                       pNext_              = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , pipelineRobustness( pipelineRobustness_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDevicePipelineRobustnessFeaturesEXT( PhysicalDevicePipelineRobustnessFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDevicePipelineRobustnessFeaturesEXT( VkPhysicalDevicePipelineRobustnessFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDevicePipelineRobustnessFeaturesEXT( *reinterpret_cast<PhysicalDevicePipelineRobustnessFeaturesEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDevicePipelineRobustnessFeaturesEXT & operator=( PhysicalDevicePipelineRobustnessFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDevicePipelineRobustnessFeaturesEXT & operator=( VkPhysicalDevicePipelineRobustnessFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineRobustnessFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDevicePipelineRobustnessFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDevicePipelineRobustnessFeaturesEXT &
+                            setPipelineRobustness( VULKAN_HPP_NAMESPACE::Bool32 pipelineRobustness_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pipelineRobustness = pipelineRobustness_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDevicePipelineRobustnessFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDevicePipelineRobustnessFeaturesEXT *>( this );
+    }
+
+    operator VkPhysicalDevicePipelineRobustnessFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDevicePipelineRobustnessFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, pipelineRobustness );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDevicePipelineRobustnessFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDevicePipelineRobustnessFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pipelineRobustness == rhs.pipelineRobustness );
+#  endif
+    }
+
+    bool operator!=( PhysicalDevicePipelineRobustnessFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType              = StructureType::ePhysicalDevicePipelineRobustnessFeaturesEXT;
+    void *                              pNext              = {};
+    VULKAN_HPP_NAMESPACE::Bool32        pipelineRobustness = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineRobustnessFeaturesEXT ) ==
+                              sizeof( VkPhysicalDevicePipelineRobustnessFeaturesEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineRobustnessFeaturesEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineRobustnessFeaturesEXT>::value,
+                            "PhysicalDevicePipelineRobustnessFeaturesEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDevicePipelineRobustnessFeaturesEXT>
+  {
+    using Type = PhysicalDevicePipelineRobustnessFeaturesEXT;
+  };
+
+  struct PhysicalDevicePipelineRobustnessPropertiesEXT
+  {
+    using NativeType = VkPhysicalDevicePipelineRobustnessPropertiesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDevicePipelineRobustnessPropertiesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      PhysicalDevicePipelineRobustnessPropertiesEXT( VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT defaultRobustnessStorageBuffers_ =
+                                                       VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault,
+                                                     VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT defaultRobustnessUniformBuffers_ =
+                                                       VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault,
+                                                     VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT defaultRobustnessVertexInputs_ =
+                                                       VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault,
+                                                     VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT defaultRobustnessImages_ =
+                                                       VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT::eDeviceDefault,
+                                                     void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , defaultRobustnessStorageBuffers( defaultRobustnessStorageBuffers_ )
+      , defaultRobustnessUniformBuffers( defaultRobustnessUniformBuffers_ )
+      , defaultRobustnessVertexInputs( defaultRobustnessVertexInputs_ )
+      , defaultRobustnessImages( defaultRobustnessImages_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      PhysicalDevicePipelineRobustnessPropertiesEXT( PhysicalDevicePipelineRobustnessPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDevicePipelineRobustnessPropertiesEXT( VkPhysicalDevicePipelineRobustnessPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDevicePipelineRobustnessPropertiesEXT( *reinterpret_cast<PhysicalDevicePipelineRobustnessPropertiesEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDevicePipelineRobustnessPropertiesEXT & operator=( PhysicalDevicePipelineRobustnessPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDevicePipelineRobustnessPropertiesEXT & operator=( VkPhysicalDevicePipelineRobustnessPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineRobustnessPropertiesEXT const *>( &rhs );
+      return *this;
+    }
+
+    operator VkPhysicalDevicePipelineRobustnessPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDevicePipelineRobustnessPropertiesEXT *>( this );
+    }
+
+    operator VkPhysicalDevicePipelineRobustnessPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDevicePipelineRobustnessPropertiesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT const &,
+               VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT const &,
+               VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT const &,
+               VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, defaultRobustnessStorageBuffers, defaultRobustnessUniformBuffers, defaultRobustnessVertexInputs, defaultRobustnessImages );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDevicePipelineRobustnessPropertiesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDevicePipelineRobustnessPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( defaultRobustnessStorageBuffers == rhs.defaultRobustnessStorageBuffers ) &&
+             ( defaultRobustnessUniformBuffers == rhs.defaultRobustnessUniformBuffers ) &&
+             ( defaultRobustnessVertexInputs == rhs.defaultRobustnessVertexInputs ) && ( defaultRobustnessImages == rhs.defaultRobustnessImages );
+#  endif
+    }
+
+    bool operator!=( PhysicalDevicePipelineRobustnessPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                       sType = StructureType::ePhysicalDevicePipelineRobustnessPropertiesEXT;
+    void *                                                    pNext = {};
+    VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT defaultRobustnessStorageBuffers =
+      VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault;
+    VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT defaultRobustnessUniformBuffers =
+      VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault;
+    VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT defaultRobustnessVertexInputs =
+      VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault;
+    VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT defaultRobustnessImages = VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT::eDeviceDefault;
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineRobustnessPropertiesEXT ) ==
+                              sizeof( VkPhysicalDevicePipelineRobustnessPropertiesEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineRobustnessPropertiesEXT>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineRobustnessPropertiesEXT>::value,
+                            "PhysicalDevicePipelineRobustnessPropertiesEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDevicePipelineRobustnessPropertiesEXT>
+  {
+    using Type = PhysicalDevicePipelineRobustnessPropertiesEXT;
+  };
+
   struct PhysicalDevicePointClippingProperties
   {
     using NativeType = VkPhysicalDevicePointClippingProperties;
@@ -59855,12 +60438,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDevicePointClippingProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePointClippingProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePointClippingProperties *>( this );
     }
 
-    explicit operator VkPhysicalDevicePointClippingProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePointClippingProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePointClippingProperties *>( this );
     }
@@ -60084,12 +60667,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePortabilitySubsetFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePortabilitySubsetFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePortabilitySubsetFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDevicePortabilitySubsetFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePortabilitySubsetFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePortabilitySubsetFeaturesKHR *>( this );
     }
@@ -60245,12 +60828,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePortabilitySubsetPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePortabilitySubsetPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePortabilitySubsetPropertiesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDevicePortabilitySubsetPropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePortabilitySubsetPropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePortabilitySubsetPropertiesKHR *>( this );
     }
@@ -60349,12 +60932,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePresentIdFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePresentIdFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePresentIdFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDevicePresentIdFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePresentIdFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePresentIdFeaturesKHR *>( this );
     }
@@ -60451,12 +61034,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePresentWaitFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePresentWaitFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePresentWaitFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDevicePresentWaitFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePresentWaitFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePresentWaitFeaturesKHR *>( this );
     }
@@ -60566,12 +61149,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT *>( this );
     }
@@ -60693,12 +61276,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT *>( this );
     }
@@ -60804,12 +61387,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDevicePrivateDataFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePrivateDataFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePrivateDataFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDevicePrivateDataFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePrivateDataFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePrivateDataFeatures *>( this );
     }
@@ -60897,12 +61480,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceSparseProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSparseProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSparseProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSparseProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSparseProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSparseProperties *>( this );
     }
@@ -61003,12 +61586,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceProperties *>( this );
     }
@@ -61101,12 +61684,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceProperties2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProperties2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceProperties2 *>( this );
     }
 
-    explicit operator VkPhysicalDeviceProperties2 &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProperties2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceProperties2 *>( this );
     }
@@ -61204,12 +61787,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceProtectedMemoryFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProtectedMemoryFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceProtectedMemoryFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceProtectedMemoryFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProtectedMemoryFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryFeatures *>( this );
     }
@@ -61293,12 +61876,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceProtectedMemoryProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProtectedMemoryProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceProtectedMemoryProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceProtectedMemoryProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProtectedMemoryProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryProperties *>( this );
     }
@@ -61406,12 +61989,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceProvokingVertexFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProvokingVertexFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceProvokingVertexFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceProvokingVertexFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProvokingVertexFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceProvokingVertexFeaturesEXT *>( this );
     }
@@ -61499,12 +62082,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceProvokingVertexPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProvokingVertexPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceProvokingVertexPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceProvokingVertexPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceProvokingVertexPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceProvokingVertexPropertiesEXT *>( this );
     }
@@ -61590,12 +62173,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDevicePushDescriptorPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePushDescriptorPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDevicePushDescriptorPropertiesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDevicePushDescriptorPropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDevicePushDescriptorPropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDevicePushDescriptorPropertiesKHR *>( this );
     }
@@ -61694,12 +62277,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT *>( this );
     }
@@ -61821,12 +62404,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM *>( this );
     }
@@ -61933,12 +62516,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceRayQueryFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayQueryFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRayQueryFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRayQueryFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayQueryFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRayQueryFeaturesKHR *>( this );
     }
@@ -62047,12 +62630,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR *>( this );
     }
@@ -62163,12 +62746,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceRayTracingMotionBlurFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayTracingMotionBlurFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRayTracingMotionBlurFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRayTracingMotionBlurFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayTracingMotionBlurFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRayTracingMotionBlurFeaturesNV *>( this );
     }
@@ -62306,12 +62889,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceRayTracingPipelineFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayTracingPipelineFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRayTracingPipelineFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRayTracingPipelineFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayTracingPipelineFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRayTracingPipelineFeaturesKHR *>( this );
     }
@@ -62431,12 +63014,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceRayTracingPipelinePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayTracingPipelinePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRayTracingPipelinePropertiesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRayTracingPipelinePropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayTracingPipelinePropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRayTracingPipelinePropertiesKHR *>( this );
     }
@@ -62564,12 +63147,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceRayTracingPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayTracingPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRayTracingPropertiesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRayTracingPropertiesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRayTracingPropertiesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRayTracingPropertiesNV *>( this );
     }
@@ -62699,12 +63282,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV *>( this );
     }
@@ -62820,12 +63403,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceRobustness2FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRobustness2FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRobustness2FeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRobustness2FeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRobustness2FeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRobustness2FeaturesEXT *>( this );
     }
@@ -62918,12 +63501,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceRobustness2PropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRobustness2PropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceRobustness2PropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceRobustness2PropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceRobustness2PropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceRobustness2PropertiesEXT *>( this );
     }
@@ -63017,12 +63600,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceSampleLocationsPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSampleLocationsPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSampleLocationsPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSampleLocationsPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSampleLocationsPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT *>( this );
     }
@@ -63127,12 +63710,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceSamplerFilterMinmaxProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSamplerFilterMinmaxProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSamplerFilterMinmaxProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSamplerFilterMinmaxProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSamplerFilterMinmaxProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSamplerFilterMinmaxProperties *>( this );
     }
@@ -63235,12 +63818,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceSamplerYcbcrConversionFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSamplerYcbcrConversionFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSamplerYcbcrConversionFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSamplerYcbcrConversionFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSamplerYcbcrConversionFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSamplerYcbcrConversionFeatures *>( this );
     }
@@ -63341,12 +63924,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceScalarBlockLayoutFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceScalarBlockLayoutFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceScalarBlockLayoutFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceScalarBlockLayoutFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceScalarBlockLayoutFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceScalarBlockLayoutFeatures *>( this );
     }
@@ -63448,12 +64031,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures *>( this );
     }
@@ -63653,12 +64236,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT *>( this );
     }
@@ -63904,12 +64487,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderAtomicFloatFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderAtomicFloatFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderAtomicFloatFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderAtomicFloatFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderAtomicFloatFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderAtomicFloatFeaturesEXT *>( this );
     }
@@ -64061,12 +64644,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderAtomicInt64Features const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderAtomicInt64Features const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderAtomicInt64Features *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderAtomicInt64Features &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderAtomicInt64Features &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderAtomicInt64Features *>( this );
     }
@@ -64176,12 +64759,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderClockFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderClockFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderClockFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderClockFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderClockFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderClockFeaturesKHR *>( this );
     }
@@ -64269,12 +64852,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceShaderCoreProperties2AMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderCoreProperties2AMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderCoreProperties2AMD *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderCoreProperties2AMD &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderCoreProperties2AMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderCoreProperties2AMD *>( this );
     }
@@ -64386,12 +64969,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceShaderCorePropertiesAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderCorePropertiesAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderCorePropertiesAMD *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderCorePropertiesAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderCorePropertiesAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesAMD *>( this );
     }
@@ -64541,12 +65124,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures *>( this );
     }
@@ -64647,12 +65230,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderDrawParametersFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderDrawParametersFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderDrawParametersFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderDrawParametersFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderDrawParametersFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderDrawParametersFeatures *>( this );
     }
@@ -64756,12 +65339,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD *>( this );
     }
@@ -64868,12 +65451,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderFloat16Int8Features const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderFloat16Int8Features const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderFloat16Int8Features *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderFloat16Int8Features &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderFloat16Int8Features &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderFloat16Int8Features *>( this );
     }
@@ -64985,12 +65568,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT *>( this );
     }
@@ -65091,12 +65674,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderImageFootprintFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderImageFootprintFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderImageFootprintFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderImageFootprintFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderImageFootprintFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderImageFootprintFeaturesNV *>( this );
     }
@@ -65197,12 +65780,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderIntegerDotProductFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderIntegerDotProductFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderIntegerDotProductFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderIntegerDotProductFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderIntegerDotProductFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderIntegerDotProductFeatures *>( this );
     }
@@ -65349,12 +65932,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceShaderIntegerDotProductProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderIntegerDotProductProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderIntegerDotProductProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderIntegerDotProductProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderIntegerDotProductProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderIntegerDotProductProperties *>( this );
     }
@@ -65584,12 +66167,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL *>( this );
     }
@@ -65690,12 +66273,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT *>( this );
     }
@@ -65783,12 +66366,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT *>( this );
     }
@@ -65887,12 +66470,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderSMBuiltinsFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderSMBuiltinsFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderSMBuiltinsFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderSMBuiltinsFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderSMBuiltinsFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderSMBuiltinsFeaturesNV *>( this );
     }
@@ -65977,12 +66560,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceShaderSMBuiltinsPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderSMBuiltinsPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderSMBuiltinsPropertiesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderSMBuiltinsPropertiesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderSMBuiltinsPropertiesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderSMBuiltinsPropertiesNV *>( this );
     }
@@ -66085,12 +66668,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures *>( this );
     }
@@ -66195,12 +66778,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR *>( this );
     }
@@ -66301,12 +66884,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShaderTerminateInvocationFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderTerminateInvocationFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShaderTerminateInvocationFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShaderTerminateInvocationFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShaderTerminateInvocationFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShaderTerminateInvocationFeatures *>( this );
     }
@@ -66415,12 +66998,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceShadingRateImageFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShadingRateImageFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShadingRateImageFeaturesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShadingRateImageFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShadingRateImageFeaturesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShadingRateImageFeaturesNV *>( this );
     }
@@ -66510,12 +67093,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceShadingRateImagePropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShadingRateImagePropertiesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceShadingRateImagePropertiesNV *>( this );
     }
 
-    explicit operator VkPhysicalDeviceShadingRateImagePropertiesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceShadingRateImagePropertiesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceShadingRateImagePropertiesNV *>( this );
     }
@@ -66650,12 +67233,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceSparseImageFormatInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSparseImageFormatInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2 *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSparseImageFormatInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSparseImageFormatInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSparseImageFormatInfo2 *>( this );
     }
@@ -66757,12 +67340,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceSubgroupProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubgroupProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSubgroupProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSubgroupProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubgroupProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSubgroupProperties *>( this );
     }
@@ -66879,12 +67462,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceSubgroupSizeControlFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubgroupSizeControlFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSubgroupSizeControlFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSubgroupSizeControlFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubgroupSizeControlFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSubgroupSizeControlFeatures *>( this );
     }
@@ -66977,12 +67560,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceSubgroupSizeControlProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubgroupSizeControlProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSubgroupSizeControlProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSubgroupSizeControlProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubgroupSizeControlProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSubgroupSizeControlProperties *>( this );
     }
@@ -67093,12 +67676,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT *>( this );
     }
@@ -67197,12 +67780,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceSubpassShadingFeaturesHUAWEI const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubpassShadingFeaturesHUAWEI const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSubpassShadingFeaturesHUAWEI *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSubpassShadingFeaturesHUAWEI &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubpassShadingFeaturesHUAWEI &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSubpassShadingFeaturesHUAWEI *>( this );
     }
@@ -67287,12 +67870,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceSubpassShadingPropertiesHUAWEI const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubpassShadingPropertiesHUAWEI const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSubpassShadingPropertiesHUAWEI *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSubpassShadingPropertiesHUAWEI &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSubpassShadingPropertiesHUAWEI &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSubpassShadingPropertiesHUAWEI *>( this );
     }
@@ -67390,12 +67973,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceSurfaceInfo2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSurfaceInfo2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSurfaceInfo2KHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSurfaceInfo2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSurfaceInfo2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSurfaceInfo2KHR *>( this );
     }
@@ -67492,12 +68075,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceSynchronization2Features const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSynchronization2Features const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceSynchronization2Features *>( this );
     }
 
-    explicit operator VkPhysicalDeviceSynchronization2Features &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceSynchronization2Features &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceSynchronization2Features *>( this );
     }
@@ -67598,12 +68181,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT *>( this );
     }
@@ -67694,12 +68277,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceTexelBufferAlignmentProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTexelBufferAlignmentProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceTexelBufferAlignmentProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceTexelBufferAlignmentProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTexelBufferAlignmentProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceTexelBufferAlignmentProperties *>( this );
     }
@@ -67817,12 +68400,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceTextureCompressionASTCHDRFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTextureCompressionASTCHDRFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceTextureCompressionASTCHDRFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceTextureCompressionASTCHDRFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTextureCompressionASTCHDRFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceTextureCompressionASTCHDRFeatures *>( this );
     }
@@ -67877,6 +68460,109 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT = PhysicalDeviceTextureCompressionASTCHDRFeatures;
 
+  struct PhysicalDeviceTilePropertiesFeaturesQCOM
+  {
+    using NativeType = VkPhysicalDeviceTilePropertiesFeaturesQCOM;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceTilePropertiesFeaturesQCOM;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceTilePropertiesFeaturesQCOM( VULKAN_HPP_NAMESPACE::Bool32 tileProperties_ = {},
+                                                                   void *                       pNext_          = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , tileProperties( tileProperties_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceTilePropertiesFeaturesQCOM( PhysicalDeviceTilePropertiesFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceTilePropertiesFeaturesQCOM( VkPhysicalDeviceTilePropertiesFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceTilePropertiesFeaturesQCOM( *reinterpret_cast<PhysicalDeviceTilePropertiesFeaturesQCOM const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceTilePropertiesFeaturesQCOM & operator=( PhysicalDeviceTilePropertiesFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceTilePropertiesFeaturesQCOM & operator=( VkPhysicalDeviceTilePropertiesFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceTilePropertiesFeaturesQCOM const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceTilePropertiesFeaturesQCOM & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceTilePropertiesFeaturesQCOM & setTileProperties( VULKAN_HPP_NAMESPACE::Bool32 tileProperties_ ) VULKAN_HPP_NOEXCEPT
+    {
+      tileProperties = tileProperties_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceTilePropertiesFeaturesQCOM const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceTilePropertiesFeaturesQCOM *>( this );
+    }
+
+    operator VkPhysicalDeviceTilePropertiesFeaturesQCOM &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceTilePropertiesFeaturesQCOM *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, tileProperties );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceTilePropertiesFeaturesQCOM const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceTilePropertiesFeaturesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( tileProperties == rhs.tileProperties );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceTilePropertiesFeaturesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType          = StructureType::ePhysicalDeviceTilePropertiesFeaturesQCOM;
+    void *                              pNext          = {};
+    VULKAN_HPP_NAMESPACE::Bool32        tileProperties = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDeviceTilePropertiesFeaturesQCOM ) == sizeof( VkPhysicalDeviceTilePropertiesFeaturesQCOM ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDeviceTilePropertiesFeaturesQCOM>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDeviceTilePropertiesFeaturesQCOM>::value,
+                            "PhysicalDeviceTilePropertiesFeaturesQCOM is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceTilePropertiesFeaturesQCOM>
+  {
+    using Type = PhysicalDeviceTilePropertiesFeaturesQCOM;
+  };
+
   struct PhysicalDeviceTimelineSemaphoreFeatures
   {
     using NativeType = VkPhysicalDeviceTimelineSemaphoreFeatures;
@@ -67923,12 +68609,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceTimelineSemaphoreFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTimelineSemaphoreFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceTimelineSemaphoreFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceTimelineSemaphoreFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTimelineSemaphoreFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceTimelineSemaphoreFeatures *>( this );
     }
@@ -68013,12 +68699,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceTimelineSemaphoreProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTimelineSemaphoreProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceTimelineSemaphoreProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceTimelineSemaphoreProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTimelineSemaphoreProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceTimelineSemaphoreProperties *>( this );
     }
@@ -68111,12 +68797,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceToolProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceToolProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceToolProperties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceToolProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceToolProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceToolProperties *>( this );
     }
@@ -68234,12 +68920,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceTransformFeedbackFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTransformFeedbackFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceTransformFeedbackFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceTransformFeedbackFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTransformFeedbackFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceTransformFeedbackFeaturesEXT *>( this );
     }
@@ -68343,12 +69029,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceTransformFeedbackPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTransformFeedbackPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceTransformFeedbackPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceTransformFeedbackPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceTransformFeedbackPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceTransformFeedbackPropertiesEXT *>( this );
     }
@@ -68489,12 +69175,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceUniformBufferStandardLayoutFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceUniformBufferStandardLayoutFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceUniformBufferStandardLayoutFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceUniformBufferStandardLayoutFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceUniformBufferStandardLayoutFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceUniformBufferStandardLayoutFeatures *>( this );
     }
@@ -68603,12 +69289,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceVariablePointersFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVariablePointersFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVariablePointersFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVariablePointersFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVariablePointersFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVariablePointersFeatures *>( this );
     }
@@ -68722,12 +69408,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT *>( this );
     }
@@ -68815,12 +69501,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT *>( this );
     }
@@ -68921,12 +69607,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT *>( this );
     }
@@ -69025,12 +69711,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceVideoFormatInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVideoFormatInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVideoFormatInfoKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVideoFormatInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVideoFormatInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVideoFormatInfoKHR *>( this );
     }
@@ -69223,12 +69909,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceVulkan11Features const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan11Features const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVulkan11Features *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVulkan11Features &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan11Features &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVulkan11Features *>( this );
     }
@@ -69383,12 +70069,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceVulkan11Properties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan11Properties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVulkan11Properties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVulkan11Properties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan11Properties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVulkan11Properties *>( this );
     }
@@ -69941,12 +70627,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceVulkan12Features const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan12Features const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVulkan12Features *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVulkan12Features &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan12Features &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVulkan12Features *>( this );
     }
@@ -70308,12 +70994,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceVulkan12Properties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan12Properties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVulkan12Properties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVulkan12Properties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan12Properties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVulkan12Properties *>( this );
     }
@@ -70727,12 +71413,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceVulkan13Features const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan13Features const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVulkan13Features *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVulkan13Features &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan13Features &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVulkan13Features *>( this );
     }
@@ -70959,12 +71645,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPhysicalDeviceVulkan13Properties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan13Properties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVulkan13Properties *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVulkan13Properties &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkan13Properties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVulkan13Properties *>( this );
     }
@@ -71265,12 +71951,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceVulkanMemoryModelFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkanMemoryModelFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceVulkanMemoryModelFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceVulkanMemoryModelFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceVulkanMemoryModelFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceVulkanMemoryModelFeatures *>( this );
     }
@@ -71409,12 +72095,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR *>( this );
     }
 
-    explicit operator VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR *>( this );
     }
@@ -71531,12 +72217,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT *>( this );
     }
@@ -71636,12 +72322,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceYcbcrImageArraysFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceYcbcrImageArraysFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceYcbcrImageArraysFeaturesEXT *>( this );
     }
 
-    explicit operator VkPhysicalDeviceYcbcrImageArraysFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceYcbcrImageArraysFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceYcbcrImageArraysFeaturesEXT *>( this );
     }
@@ -71742,12 +72428,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures *>( this );
     }
 
-    explicit operator VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures *>( this );
     }
@@ -71883,12 +72569,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineCacheCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCacheCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineCacheCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineCacheCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCacheCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineCacheCreateInfo *>( this );
     }
@@ -72015,12 +72701,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineCacheHeaderVersionOne const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCacheHeaderVersionOne const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineCacheHeaderVersionOne *>( this );
     }
 
-    explicit operator VkPipelineCacheHeaderVersionOne &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCacheHeaderVersionOne &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineCacheHeaderVersionOne *>( this );
     }
@@ -72138,12 +72824,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineColorBlendAdvancedStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineColorBlendAdvancedStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineColorBlendAdvancedStateCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineColorBlendAdvancedStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineColorBlendAdvancedStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT *>( this );
     }
@@ -72276,12 +72962,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineColorWriteCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineColorWriteCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineColorWriteCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineColorWriteCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineColorWriteCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineColorWriteCreateInfoEXT *>( this );
     }
@@ -72380,12 +73066,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineCompilerControlCreateInfoAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCompilerControlCreateInfoAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineCompilerControlCreateInfoAMD *>( this );
     }
 
-    explicit operator VkPipelineCompilerControlCreateInfoAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCompilerControlCreateInfoAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineCompilerControlCreateInfoAMD *>( this );
     }
@@ -72547,12 +73233,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineCoverageModulationStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCoverageModulationStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineCoverageModulationStateCreateInfoNV *>( this );
     }
 
-    explicit operator VkPipelineCoverageModulationStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCoverageModulationStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineCoverageModulationStateCreateInfoNV *>( this );
     }
@@ -72674,12 +73360,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineCoverageReductionStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCoverageReductionStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineCoverageReductionStateCreateInfoNV *>( this );
     }
 
-    explicit operator VkPipelineCoverageReductionStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCoverageReductionStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineCoverageReductionStateCreateInfoNV *>( this );
     }
@@ -72800,12 +73486,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineCoverageToColorStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCoverageToColorStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineCoverageToColorStateCreateInfoNV *>( this );
     }
 
-    explicit operator VkPipelineCoverageToColorStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCoverageToColorStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineCoverageToColorStateCreateInfoNV *>( this );
     }
@@ -72893,12 +73579,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPipelineCreationFeedback const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCreationFeedback const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineCreationFeedback *>( this );
     }
 
-    explicit operator VkPipelineCreationFeedback &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCreationFeedback &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineCreationFeedback *>( this );
     }
@@ -73032,12 +73718,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineCreationFeedbackCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCreationFeedbackCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineCreationFeedbackCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineCreationFeedbackCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineCreationFeedbackCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineCreationFeedbackCreateInfo *>( this );
     }
@@ -73196,12 +73882,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineDiscardRectangleStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineDiscardRectangleStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineDiscardRectangleStateCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineDiscardRectangleStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineDiscardRectangleStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineDiscardRectangleStateCreateInfoEXT *>( this );
     }
@@ -73317,12 +74003,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineExecutableInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineExecutableInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineExecutableInfoKHR *>( this );
     }
 
-    explicit operator VkPipelineExecutableInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineExecutableInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineExecutableInfoKHR *>( this );
     }
@@ -73427,12 +74113,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPipelineExecutableInternalRepresentationKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineExecutableInternalRepresentationKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineExecutableInternalRepresentationKHR *>( this );
     }
 
-    explicit operator VkPipelineExecutableInternalRepresentationKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineExecutableInternalRepresentationKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineExecutableInternalRepresentationKHR *>( this );
     }
@@ -73534,12 +74220,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPipelineExecutablePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineExecutablePropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineExecutablePropertiesKHR *>( this );
     }
 
-    explicit operator VkPipelineExecutablePropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineExecutablePropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineExecutablePropertiesKHR *>( this );
     }
@@ -73701,12 +74387,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPipelineExecutableStatisticKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineExecutableStatisticKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineExecutableStatisticKHR *>( this );
     }
 
-    explicit operator VkPipelineExecutableStatisticKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineExecutableStatisticKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineExecutableStatisticKHR *>( this );
     }
@@ -73815,12 +74501,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineFragmentShadingRateEnumStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineFragmentShadingRateEnumStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineFragmentShadingRateEnumStateCreateInfoNV *>( this );
     }
 
-    explicit operator VkPipelineFragmentShadingRateEnumStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineFragmentShadingRateEnumStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineFragmentShadingRateEnumStateCreateInfoNV *>( this );
     }
@@ -73939,12 +74625,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineFragmentShadingRateStateCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineFragmentShadingRateStateCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineFragmentShadingRateStateCreateInfoKHR *>( this );
     }
 
-    explicit operator VkPipelineFragmentShadingRateStateCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineFragmentShadingRateStateCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineFragmentShadingRateStateCreateInfoKHR *>( this );
     }
@@ -74043,12 +74729,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineInfoKHR *>( this );
     }
 
-    explicit operator VkPipelineInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineInfoKHR *>( this );
     }
@@ -74146,12 +74832,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPushConstantRange const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPushConstantRange const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPushConstantRange *>( this );
     }
 
-    explicit operator VkPushConstantRange &() VULKAN_HPP_NOEXCEPT
+    operator VkPushConstantRange &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPushConstantRange *>( this );
     }
@@ -74309,12 +74995,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineLayoutCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineLayoutCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineLayoutCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineLayoutCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineLayoutCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineLayoutCreateInfo *>( this );
     }
@@ -74449,12 +75135,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineLibraryCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineLibraryCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineLibraryCreateInfoKHR *>( this );
     }
 
-    explicit operator VkPipelineLibraryCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineLibraryCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineLibraryCreateInfoKHR *>( this );
     }
@@ -74552,12 +75238,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelinePropertiesIdentifierEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelinePropertiesIdentifierEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelinePropertiesIdentifierEXT *>( this );
     }
 
-    explicit operator VkPipelinePropertiesIdentifierEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelinePropertiesIdentifierEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelinePropertiesIdentifierEXT *>( this );
     }
@@ -74676,12 +75362,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineRasterizationConservativeStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationConservativeStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineRasterizationConservativeStateCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineRasterizationConservativeStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationConservativeStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT *>( this );
     }
@@ -74799,12 +75485,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineRasterizationDepthClipStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationDepthClipStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineRasterizationDepthClipStateCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineRasterizationDepthClipStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationDepthClipStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineRasterizationDepthClipStateCreateInfoEXT *>( this );
     }
@@ -74934,12 +75620,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineRasterizationLineStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationLineStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineRasterizationLineStateCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineRasterizationLineStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationLineStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineRasterizationLineStateCreateInfoEXT *>( this );
     }
@@ -75053,12 +75739,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineRasterizationProvokingVertexStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationProvokingVertexStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineRasterizationProvokingVertexStateCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineRasterizationProvokingVertexStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationProvokingVertexStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineRasterizationProvokingVertexStateCreateInfoEXT *>( this );
     }
@@ -75160,12 +75846,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineRasterizationStateRasterizationOrderAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationStateRasterizationOrderAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineRasterizationStateRasterizationOrderAMD *>( this );
     }
 
-    explicit operator VkPipelineRasterizationStateRasterizationOrderAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationStateRasterizationOrderAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineRasterizationStateRasterizationOrderAMD *>( this );
     }
@@ -75274,12 +75960,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineRasterizationStateStreamCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationStateStreamCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineRasterizationStateStreamCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineRasterizationStateStreamCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRasterizationStateStreamCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineRasterizationStateStreamCreateInfoEXT *>( this );
     }
@@ -75442,12 +76128,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineRenderingCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRenderingCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineRenderingCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineRenderingCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRenderingCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineRenderingCreateInfo *>( this );
     }
@@ -75560,12 +76246,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineRepresentativeFragmentTestStateCreateInfoNV *>( this );
     }
 
-    explicit operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineRepresentativeFragmentTestStateCreateInfoNV *>( this );
     }
@@ -75617,6 +76303,145 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::ePipelineRepresentativeFragmentTestStateCreateInfoNV>
   {
     using Type = PipelineRepresentativeFragmentTestStateCreateInfoNV;
+  };
+
+  struct PipelineRobustnessCreateInfoEXT
+  {
+    using NativeType = VkPipelineRobustnessCreateInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineRobustnessCreateInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PipelineRobustnessCreateInfoEXT(
+      VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT storageBuffers_ = VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault,
+      VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT uniformBuffers_ = VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault,
+      VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT vertexInputs_   = VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault,
+      VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT  images_         = VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT::eDeviceDefault,
+      const void *                                              pNext_          = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , storageBuffers( storageBuffers_ )
+      , uniformBuffers( uniformBuffers_ )
+      , vertexInputs( vertexInputs_ )
+      , images( images_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PipelineRobustnessCreateInfoEXT( PipelineRobustnessCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PipelineRobustnessCreateInfoEXT( VkPipelineRobustnessCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PipelineRobustnessCreateInfoEXT( *reinterpret_cast<PipelineRobustnessCreateInfoEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PipelineRobustnessCreateInfoEXT & operator=( PipelineRobustnessCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PipelineRobustnessCreateInfoEXT & operator=( VkPipelineRobustnessCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PipelineRobustnessCreateInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PipelineRobustnessCreateInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PipelineRobustnessCreateInfoEXT &
+                            setStorageBuffers( VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT storageBuffers_ ) VULKAN_HPP_NOEXCEPT
+    {
+      storageBuffers = storageBuffers_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PipelineRobustnessCreateInfoEXT &
+                            setUniformBuffers( VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT uniformBuffers_ ) VULKAN_HPP_NOEXCEPT
+    {
+      uniformBuffers = uniformBuffers_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PipelineRobustnessCreateInfoEXT &
+                            setVertexInputs( VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT vertexInputs_ ) VULKAN_HPP_NOEXCEPT
+    {
+      vertexInputs = vertexInputs_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PipelineRobustnessCreateInfoEXT & setImages( VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT images_ ) VULKAN_HPP_NOEXCEPT
+    {
+      images = images_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPipelineRobustnessCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPipelineRobustnessCreateInfoEXT *>( this );
+    }
+
+    operator VkPipelineRobustnessCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPipelineRobustnessCreateInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT const &,
+               VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT const &,
+               VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT const &,
+               VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, storageBuffers, uniformBuffers, vertexInputs, images );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PipelineRobustnessCreateInfoEXT const & ) const = default;
+#else
+    bool operator==( PipelineRobustnessCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( storageBuffers == rhs.storageBuffers ) && ( uniformBuffers == rhs.uniformBuffers ) &&
+             ( vertexInputs == rhs.vertexInputs ) && ( images == rhs.images );
+#  endif
+    }
+
+    bool operator!=( PipelineRobustnessCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                       sType          = StructureType::ePipelineRobustnessCreateInfoEXT;
+    const void *                                              pNext          = {};
+    VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT storageBuffers = VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault;
+    VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT uniformBuffers = VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault;
+    VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT vertexInputs   = VULKAN_HPP_NAMESPACE::PipelineRobustnessBufferBehaviorEXT::eDeviceDefault;
+    VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT  images         = VULKAN_HPP_NAMESPACE::PipelineRobustnessImageBehaviorEXT::eDeviceDefault;
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PipelineRobustnessCreateInfoEXT ) == sizeof( VkPipelineRobustnessCreateInfoEXT ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PipelineRobustnessCreateInfoEXT>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PipelineRobustnessCreateInfoEXT>::value,
+                            "PipelineRobustnessCreateInfoEXT is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePipelineRobustnessCreateInfoEXT>
+  {
+    using Type = PipelineRobustnessCreateInfoEXT;
   };
 
   struct PipelineSampleLocationsStateCreateInfoEXT
@@ -75674,12 +76499,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineSampleLocationsStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineSampleLocationsStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineSampleLocationsStateCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineSampleLocationsStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineSampleLocationsStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineSampleLocationsStateCreateInfoEXT *>( this );
     }
@@ -75809,12 +76634,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineShaderStageModuleIdentifierCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineShaderStageModuleIdentifierCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineShaderStageModuleIdentifierCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineShaderStageModuleIdentifierCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineShaderStageModuleIdentifierCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineShaderStageModuleIdentifierCreateInfoEXT *>( this );
     }
@@ -75901,12 +76726,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkPipelineShaderStageRequiredSubgroupSizeCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineShaderStageRequiredSubgroupSizeCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineShaderStageRequiredSubgroupSizeCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineShaderStageRequiredSubgroupSizeCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineShaderStageRequiredSubgroupSizeCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineShaderStageRequiredSubgroupSizeCreateInfo *>( this );
     }
@@ -76009,12 +76834,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineTessellationDomainOriginStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineTessellationDomainOriginStateCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineTessellationDomainOriginStateCreateInfo *>( this );
     }
 
-    explicit operator VkPipelineTessellationDomainOriginStateCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineTessellationDomainOriginStateCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineTessellationDomainOriginStateCreateInfo *>( this );
     }
@@ -76110,12 +76935,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVertexInputBindingDivisorDescriptionEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVertexInputBindingDivisorDescriptionEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVertexInputBindingDivisorDescriptionEXT *>( this );
     }
 
-    explicit operator VkVertexInputBindingDivisorDescriptionEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVertexInputBindingDivisorDescriptionEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVertexInputBindingDivisorDescriptionEXT *>( this );
     }
@@ -76239,12 +77064,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineVertexInputDivisorStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineVertexInputDivisorStateCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineVertexInputDivisorStateCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineVertexInputDivisorStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineVertexInputDivisorStateCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT *>( this );
     }
@@ -76393,12 +77218,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineViewportCoarseSampleOrderStateCreateInfoNV *>( this );
     }
 
-    explicit operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV *>( this );
     }
@@ -76506,12 +77331,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineViewportDepthClipControlCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportDepthClipControlCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineViewportDepthClipControlCreateInfoEXT *>( this );
     }
 
-    explicit operator VkPipelineViewportDepthClipControlCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportDepthClipControlCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineViewportDepthClipControlCreateInfoEXT *>( this );
     }
@@ -76639,12 +77464,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineViewportExclusiveScissorStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportExclusiveScissorStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineViewportExclusiveScissorStateCreateInfoNV *>( this );
     }
 
-    explicit operator VkPipelineViewportExclusiveScissorStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportExclusiveScissorStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineViewportExclusiveScissorStateCreateInfoNV *>( this );
     }
@@ -76763,12 +77588,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkShadingRatePaletteNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkShadingRatePaletteNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkShadingRatePaletteNV *>( this );
     }
 
-    explicit operator VkShadingRatePaletteNV &() VULKAN_HPP_NOEXCEPT
+    operator VkShadingRatePaletteNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkShadingRatePaletteNV *>( this );
     }
@@ -76901,12 +77726,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineViewportShadingRateImageStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportShadingRateImageStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineViewportShadingRateImageStateCreateInfoNV *>( this );
     }
 
-    explicit operator VkPipelineViewportShadingRateImageStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportShadingRateImageStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineViewportShadingRateImageStateCreateInfoNV *>( this );
     }
@@ -77023,12 +77848,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkViewportSwizzleNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkViewportSwizzleNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkViewportSwizzleNV *>( this );
     }
 
-    explicit operator VkViewportSwizzleNV &() VULKAN_HPP_NOEXCEPT
+    operator VkViewportSwizzleNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkViewportSwizzleNV *>( this );
     }
@@ -77160,12 +77985,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineViewportSwizzleStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportSwizzleStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineViewportSwizzleStateCreateInfoNV *>( this );
     }
 
-    explicit operator VkPipelineViewportSwizzleStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportSwizzleStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineViewportSwizzleStateCreateInfoNV *>( this );
     }
@@ -77263,12 +78088,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkViewportWScalingNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkViewportWScalingNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkViewportWScalingNV *>( this );
     }
 
-    explicit operator VkViewportWScalingNV &() VULKAN_HPP_NOEXCEPT
+    operator VkViewportWScalingNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkViewportWScalingNV *>( this );
     }
@@ -77398,12 +78223,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPipelineViewportWScalingStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportWScalingStateCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPipelineViewportWScalingStateCreateInfoNV *>( this );
     }
 
-    explicit operator VkPipelineViewportWScalingStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkPipelineViewportWScalingStateCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPipelineViewportWScalingStateCreateInfoNV *>( this );
     }
@@ -77508,12 +78333,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPresentFrameTokenGGP const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPresentFrameTokenGGP const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPresentFrameTokenGGP *>( this );
     }
 
-    explicit operator VkPresentFrameTokenGGP &() VULKAN_HPP_NOEXCEPT
+    operator VkPresentFrameTokenGGP &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPresentFrameTokenGGP *>( this );
     }
@@ -77636,12 +78461,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPresentIdKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPresentIdKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPresentIdKHR *>( this );
     }
 
-    explicit operator VkPresentIdKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPresentIdKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPresentIdKHR *>( this );
     }
@@ -77847,12 +78672,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPresentInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPresentInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPresentInfoKHR *>( this );
     }
 
-    explicit operator VkPresentInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPresentInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPresentInfoKHR *>( this );
     }
@@ -77965,12 +78790,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRectLayerKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRectLayerKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRectLayerKHR *>( this );
     }
 
-    explicit operator VkRectLayerKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkRectLayerKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRectLayerKHR *>( this );
     }
@@ -78069,12 +78894,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPresentRegionKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPresentRegionKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPresentRegionKHR *>( this );
     }
 
-    explicit operator VkPresentRegionKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPresentRegionKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPresentRegionKHR *>( this );
     }
@@ -78186,12 +79011,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPresentRegionsKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPresentRegionsKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPresentRegionsKHR *>( this );
     }
 
-    explicit operator VkPresentRegionsKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkPresentRegionsKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPresentRegionsKHR *>( this );
     }
@@ -78281,12 +79106,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPresentTimeGOOGLE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPresentTimeGOOGLE const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPresentTimeGOOGLE *>( this );
     }
 
-    explicit operator VkPresentTimeGOOGLE &() VULKAN_HPP_NOEXCEPT
+    operator VkPresentTimeGOOGLE &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPresentTimeGOOGLE *>( this );
     }
@@ -78401,12 +79226,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPresentTimesInfoGOOGLE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPresentTimesInfoGOOGLE const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPresentTimesInfoGOOGLE *>( this );
     }
 
-    explicit operator VkPresentTimesInfoGOOGLE &() VULKAN_HPP_NOEXCEPT
+    operator VkPresentTimesInfoGOOGLE &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPresentTimesInfoGOOGLE *>( this );
     }
@@ -78504,12 +79329,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkPrivateDataSlotCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPrivateDataSlotCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkPrivateDataSlotCreateInfo *>( this );
     }
 
-    explicit operator VkPrivateDataSlotCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkPrivateDataSlotCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkPrivateDataSlotCreateInfo *>( this );
     }
@@ -78605,12 +79430,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkProtectedSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkProtectedSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkProtectedSubmitInfo *>( this );
     }
 
-    explicit operator VkProtectedSubmitInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkProtectedSubmitInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkProtectedSubmitInfo *>( this );
     }
@@ -78730,12 +79555,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkQueryPoolCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkQueryPoolCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkQueryPoolCreateInfo *>( this );
     }
 
-    explicit operator VkQueryPoolCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkQueryPoolCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkQueryPoolCreateInfo *>( this );
     }
@@ -78878,12 +79703,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkQueryPoolPerformanceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkQueryPoolPerformanceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkQueryPoolPerformanceCreateInfoKHR *>( this );
     }
 
-    explicit operator VkQueryPoolPerformanceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkQueryPoolPerformanceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkQueryPoolPerformanceCreateInfoKHR *>( this );
     }
@@ -78986,12 +79811,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkQueryPoolPerformanceQueryCreateInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
+    operator VkQueryPoolPerformanceQueryCreateInfoINTEL const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkQueryPoolPerformanceQueryCreateInfoINTEL *>( this );
     }
 
-    explicit operator VkQueryPoolPerformanceQueryCreateInfoINTEL &() VULKAN_HPP_NOEXCEPT
+    operator VkQueryPoolPerformanceQueryCreateInfoINTEL &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkQueryPoolPerformanceQueryCreateInfoINTEL *>( this );
     }
@@ -79076,12 +79901,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkQueueFamilyCheckpointProperties2NV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyCheckpointProperties2NV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkQueueFamilyCheckpointProperties2NV *>( this );
     }
 
-    explicit operator VkQueueFamilyCheckpointProperties2NV &() VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyCheckpointProperties2NV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkQueueFamilyCheckpointProperties2NV *>( this );
     }
@@ -79165,12 +79990,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkQueueFamilyCheckpointPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyCheckpointPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkQueueFamilyCheckpointPropertiesNV *>( this );
     }
 
-    explicit operator VkQueueFamilyCheckpointPropertiesNV &() VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyCheckpointPropertiesNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkQueueFamilyCheckpointPropertiesNV *>( this );
     }
@@ -79294,12 +80119,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkQueueFamilyGlobalPriorityPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyGlobalPriorityPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkQueueFamilyGlobalPriorityPropertiesKHR *>( this );
     }
 
-    explicit operator VkQueueFamilyGlobalPriorityPropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyGlobalPriorityPropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkQueueFamilyGlobalPriorityPropertiesKHR *>( this );
     }
@@ -79389,12 +80214,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkQueueFamilyProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkQueueFamilyProperties *>( this );
     }
 
-    explicit operator VkQueueFamilyProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkQueueFamilyProperties *>( this );
     }
@@ -79473,12 +80298,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkQueueFamilyProperties2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyProperties2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkQueueFamilyProperties2 *>( this );
     }
 
-    explicit operator VkQueueFamilyProperties2 &() VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyProperties2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkQueueFamilyProperties2 *>( this );
     }
@@ -79578,12 +80403,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkQueueFamilyQueryResultStatusProperties2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyQueryResultStatusProperties2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkQueueFamilyQueryResultStatusProperties2KHR *>( this );
     }
 
-    explicit operator VkQueueFamilyQueryResultStatusProperties2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkQueueFamilyQueryResultStatusProperties2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkQueueFamilyQueryResultStatusProperties2KHR *>( this );
     }
@@ -79725,12 +80550,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRayTracingShaderGroupCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRayTracingShaderGroupCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRayTracingShaderGroupCreateInfoKHR *>( this );
     }
 
-    explicit operator VkRayTracingShaderGroupCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkRayTracingShaderGroupCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRayTracingShaderGroupCreateInfoKHR *>( this );
     }
@@ -79851,12 +80676,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRayTracingPipelineInterfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRayTracingPipelineInterfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRayTracingPipelineInterfaceCreateInfoKHR *>( this );
     }
 
-    explicit operator VkRayTracingPipelineInterfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkRayTracingPipelineInterfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRayTracingPipelineInterfaceCreateInfoKHR *>( this );
     }
@@ -80099,12 +80924,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRayTracingPipelineCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRayTracingPipelineCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRayTracingPipelineCreateInfoKHR *>( this );
     }
 
-    explicit operator VkRayTracingPipelineCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkRayTracingPipelineCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRayTracingPipelineCreateInfoKHR *>( this );
     }
@@ -80274,12 +81099,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRayTracingShaderGroupCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRayTracingShaderGroupCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRayTracingShaderGroupCreateInfoNV *>( this );
     }
 
-    explicit operator VkRayTracingShaderGroupCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkRayTracingShaderGroupCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRayTracingShaderGroupCreateInfoNV *>( this );
     }
@@ -80498,12 +81323,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRayTracingPipelineCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRayTracingPipelineCreateInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRayTracingPipelineCreateInfoNV *>( this );
     }
 
-    explicit operator VkRayTracingPipelineCreateInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkRayTracingPipelineCreateInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRayTracingPipelineCreateInfoNV *>( this );
     }
@@ -80598,12 +81423,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkRefreshCycleDurationGOOGLE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRefreshCycleDurationGOOGLE const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRefreshCycleDurationGOOGLE *>( this );
     }
 
-    explicit operator VkRefreshCycleDurationGOOGLE &() VULKAN_HPP_NOEXCEPT
+    operator VkRefreshCycleDurationGOOGLE &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRefreshCycleDurationGOOGLE *>( this );
     }
@@ -80718,12 +81543,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassAttachmentBeginInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassAttachmentBeginInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassAttachmentBeginInfo *>( this );
     }
 
-    explicit operator VkRenderPassAttachmentBeginInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassAttachmentBeginInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassAttachmentBeginInfo *>( this );
     }
@@ -80879,12 +81704,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassBeginInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassBeginInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassBeginInfo *>( this );
     }
 
-    explicit operator VkRenderPassBeginInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassBeginInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassBeginInfo *>( this );
     }
@@ -81125,12 +81950,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubpassDescription const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassDescription const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassDescription *>( this );
     }
 
-    explicit operator VkSubpassDescription &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassDescription &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassDescription *>( this );
     }
@@ -81283,12 +82108,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubpassDependency const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassDependency const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassDependency *>( this );
     }
 
-    explicit operator VkSubpassDependency &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassDependency &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassDependency *>( this );
     }
@@ -81486,12 +82311,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassCreateInfo *>( this );
     }
 
-    explicit operator VkRenderPassCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassCreateInfo *>( this );
     }
@@ -81763,12 +82588,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubpassDescription2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassDescription2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassDescription2 *>( this );
     }
 
-    explicit operator VkSubpassDescription2 &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassDescription2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassDescription2 *>( this );
     }
@@ -81956,12 +82781,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubpassDependency2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassDependency2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassDependency2 *>( this );
     }
 
-    explicit operator VkSubpassDependency2 &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassDependency2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassDependency2 *>( this );
     }
@@ -82201,12 +83026,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassCreateInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassCreateInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassCreateInfo2 *>( this );
     }
 
-    explicit operator VkRenderPassCreateInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassCreateInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassCreateInfo2 *>( this );
     }
@@ -82334,12 +83159,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassCreationControlEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassCreationControlEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassCreationControlEXT *>( this );
     }
 
-    explicit operator VkRenderPassCreationControlEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassCreationControlEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassCreationControlEXT *>( this );
     }
@@ -82417,12 +83242,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkRenderPassCreationFeedbackInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassCreationFeedbackInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassCreationFeedbackInfoEXT *>( this );
     }
 
-    explicit operator VkRenderPassCreationFeedbackInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassCreationFeedbackInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassCreationFeedbackInfoEXT *>( this );
     }
@@ -82513,12 +83338,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassCreationFeedbackCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassCreationFeedbackCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassCreationFeedbackCreateInfoEXT *>( this );
     }
 
-    explicit operator VkRenderPassCreationFeedbackCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassCreationFeedbackCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassCreationFeedbackCreateInfoEXT *>( this );
     }
@@ -82617,12 +83442,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassFragmentDensityMapCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassFragmentDensityMapCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassFragmentDensityMapCreateInfoEXT *>( this );
     }
 
-    explicit operator VkRenderPassFragmentDensityMapCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassFragmentDensityMapCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassFragmentDensityMapCreateInfoEXT *>( this );
     }
@@ -82748,12 +83573,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassInputAttachmentAspectCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassInputAttachmentAspectCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassInputAttachmentAspectCreateInfo *>( this );
     }
 
-    explicit operator VkRenderPassInputAttachmentAspectCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassInputAttachmentAspectCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassInputAttachmentAspectCreateInfo *>( this );
     }
@@ -82941,12 +83766,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassMultiviewCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassMultiviewCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassMultiviewCreateInfo *>( this );
     }
 
-    explicit operator VkRenderPassMultiviewCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassMultiviewCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassMultiviewCreateInfo *>( this );
     }
@@ -83056,12 +83881,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubpassSampleLocationsEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassSampleLocationsEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassSampleLocationsEXT *>( this );
     }
 
-    explicit operator VkSubpassSampleLocationsEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassSampleLocationsEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassSampleLocationsEXT *>( this );
     }
@@ -83216,12 +84041,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassSampleLocationsBeginInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassSampleLocationsBeginInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassSampleLocationsBeginInfoEXT *>( this );
     }
 
-    explicit operator VkRenderPassSampleLocationsBeginInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassSampleLocationsBeginInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassSampleLocationsBeginInfoEXT *>( this );
     }
@@ -83316,12 +84141,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkRenderPassSubpassFeedbackInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassSubpassFeedbackInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassSubpassFeedbackInfoEXT *>( this );
     }
 
-    explicit operator VkRenderPassSubpassFeedbackInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassSubpassFeedbackInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassSubpassFeedbackInfoEXT *>( this );
     }
@@ -83415,12 +84240,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassSubpassFeedbackCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassSubpassFeedbackCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassSubpassFeedbackCreateInfoEXT *>( this );
     }
 
-    explicit operator VkRenderPassSubpassFeedbackCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassSubpassFeedbackCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassSubpassFeedbackCreateInfoEXT *>( this );
     }
@@ -83519,12 +84344,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderPassTransformBeginInfoQCOM const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassTransformBeginInfoQCOM const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderPassTransformBeginInfoQCOM *>( this );
     }
 
-    explicit operator VkRenderPassTransformBeginInfoQCOM &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderPassTransformBeginInfoQCOM &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderPassTransformBeginInfoQCOM *>( this );
     }
@@ -83678,12 +84503,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderingAttachmentInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderingAttachmentInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderingAttachmentInfo *>( this );
     }
 
-    explicit operator VkRenderingAttachmentInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderingAttachmentInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderingAttachmentInfo *>( this );
     }
@@ -83788,12 +84613,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderingFragmentDensityMapAttachmentInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderingFragmentDensityMapAttachmentInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderingFragmentDensityMapAttachmentInfoEXT *>( this );
     }
 
-    explicit operator VkRenderingFragmentDensityMapAttachmentInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderingFragmentDensityMapAttachmentInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderingFragmentDensityMapAttachmentInfoEXT *>( this );
     }
@@ -83915,12 +84740,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderingFragmentShadingRateAttachmentInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderingFragmentShadingRateAttachmentInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderingFragmentShadingRateAttachmentInfoKHR *>( this );
     }
 
-    explicit operator VkRenderingFragmentShadingRateAttachmentInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderingFragmentShadingRateAttachmentInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderingFragmentShadingRateAttachmentInfoKHR *>( this );
     }
@@ -84112,12 +84937,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkRenderingInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkRenderingInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkRenderingInfo *>( this );
     }
 
-    explicit operator VkRenderingInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkRenderingInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkRenderingInfo *>( this );
     }
@@ -84297,12 +85122,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkResolveImageInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkResolveImageInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkResolveImageInfo2 *>( this );
     }
 
-    explicit operator VkResolveImageInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkResolveImageInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkResolveImageInfo2 *>( this );
     }
@@ -84422,12 +85247,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSamplerBorderColorComponentMappingCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSamplerBorderColorComponentMappingCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSamplerBorderColorComponentMappingCreateInfoEXT *>( this );
     }
 
-    explicit operator VkSamplerBorderColorComponentMappingCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSamplerBorderColorComponentMappingCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSamplerBorderColorComponentMappingCreateInfoEXT *>( this );
     }
@@ -84647,12 +85472,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSamplerCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSamplerCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSamplerCreateInfo *>( this );
     }
 
-    explicit operator VkSamplerCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSamplerCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSamplerCreateInfo *>( this );
     }
@@ -84810,12 +85635,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSamplerCustomBorderColorCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSamplerCustomBorderColorCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSamplerCustomBorderColorCreateInfoEXT *>( this );
     }
 
-    explicit operator VkSamplerCustomBorderColorCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSamplerCustomBorderColorCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSamplerCustomBorderColorCreateInfoEXT *>( this );
     }
@@ -84900,12 +85725,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSamplerReductionModeCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSamplerReductionModeCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSamplerReductionModeCreateInfo *>( this );
     }
 
-    explicit operator VkSamplerReductionModeCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSamplerReductionModeCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSamplerReductionModeCreateInfo *>( this );
     }
@@ -85062,12 +85887,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSamplerYcbcrConversionCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSamplerYcbcrConversionCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSamplerYcbcrConversionCreateInfo *>( this );
     }
 
-    explicit operator VkSamplerYcbcrConversionCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSamplerYcbcrConversionCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSamplerYcbcrConversionCreateInfo *>( this );
     }
@@ -85171,12 +85996,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSamplerYcbcrConversionImageFormatProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSamplerYcbcrConversionImageFormatProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSamplerYcbcrConversionImageFormatProperties *>( this );
     }
 
-    explicit operator VkSamplerYcbcrConversionImageFormatProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkSamplerYcbcrConversionImageFormatProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSamplerYcbcrConversionImageFormatProperties *>( this );
     }
@@ -85276,12 +86101,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSamplerYcbcrConversionInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSamplerYcbcrConversionInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSamplerYcbcrConversionInfo *>( this );
     }
 
-    explicit operator VkSamplerYcbcrConversionInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSamplerYcbcrConversionInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSamplerYcbcrConversionInfo *>( this );
     }
@@ -85396,12 +86221,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkScreenSurfaceCreateInfoQNX const &() const VULKAN_HPP_NOEXCEPT
+    operator VkScreenSurfaceCreateInfoQNX const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkScreenSurfaceCreateInfoQNX *>( this );
     }
 
-    explicit operator VkScreenSurfaceCreateInfoQNX &() VULKAN_HPP_NOEXCEPT
+    operator VkScreenSurfaceCreateInfoQNX &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkScreenSurfaceCreateInfoQNX *>( this );
     }
@@ -85503,12 +86328,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSemaphoreCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSemaphoreCreateInfo *>( this );
     }
 
-    explicit operator VkSemaphoreCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSemaphoreCreateInfo *>( this );
     }
@@ -85613,12 +86438,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSemaphoreGetFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreGetFdInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSemaphoreGetFdInfoKHR *>( this );
     }
 
-    explicit operator VkSemaphoreGetFdInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreGetFdInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSemaphoreGetFdInfoKHR *>( this );
     }
@@ -85730,12 +86555,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSemaphoreGetWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreGetWin32HandleInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSemaphoreGetWin32HandleInfoKHR *>( this );
     }
 
-    explicit operator VkSemaphoreGetWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreGetWin32HandleInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSemaphoreGetWin32HandleInfoKHR *>( this );
     }
@@ -85848,12 +86673,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSemaphoreGetZirconHandleInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreGetZirconHandleInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSemaphoreGetZirconHandleInfoFUCHSIA *>( this );
     }
 
-    explicit operator VkSemaphoreGetZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreGetZirconHandleInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSemaphoreGetZirconHandleInfoFUCHSIA *>( this );
     }
@@ -85962,12 +86787,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSemaphoreSignalInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreSignalInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSemaphoreSignalInfo *>( this );
     }
 
-    explicit operator VkSemaphoreSignalInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreSignalInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSemaphoreSignalInfo *>( this );
     }
@@ -86088,12 +86913,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSemaphoreSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSemaphoreSubmitInfo *>( this );
     }
 
-    explicit operator VkSemaphoreSubmitInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreSubmitInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSemaphoreSubmitInfo *>( this );
     }
@@ -86207,12 +87032,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSemaphoreTypeCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreTypeCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSemaphoreTypeCreateInfo *>( this );
     }
 
-    explicit operator VkSemaphoreTypeCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreTypeCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSemaphoreTypeCreateInfo *>( this );
     }
@@ -86373,12 +87198,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSemaphoreWaitInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreWaitInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSemaphoreWaitInfo *>( this );
     }
 
-    explicit operator VkSemaphoreWaitInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSemaphoreWaitInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSemaphoreWaitInfo *>( this );
     }
@@ -86470,12 +87295,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSetStateFlagsIndirectCommandNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSetStateFlagsIndirectCommandNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSetStateFlagsIndirectCommandNV *>( this );
     }
 
-    explicit operator VkSetStateFlagsIndirectCommandNV &() VULKAN_HPP_NOEXCEPT
+    operator VkSetStateFlagsIndirectCommandNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSetStateFlagsIndirectCommandNV *>( this );
     }
@@ -86598,12 +87423,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkShaderModuleCreateInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkShaderModuleCreateInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkShaderModuleCreateInfo *>( this );
     }
 
-    explicit operator VkShaderModuleCreateInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkShaderModuleCreateInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkShaderModuleCreateInfo *>( this );
     }
@@ -86694,12 +87519,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkShaderModuleIdentifierEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkShaderModuleIdentifierEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkShaderModuleIdentifierEXT *>( this );
     }
 
-    explicit operator VkShaderModuleIdentifierEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkShaderModuleIdentifierEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkShaderModuleIdentifierEXT *>( this );
     }
@@ -86801,12 +87626,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkShaderModuleValidationCacheCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkShaderModuleValidationCacheCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkShaderModuleValidationCacheCreateInfoEXT *>( this );
     }
 
-    explicit operator VkShaderModuleValidationCacheCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkShaderModuleValidationCacheCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkShaderModuleValidationCacheCreateInfoEXT *>( this );
     }
@@ -86893,12 +87718,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkShaderResourceUsageAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkShaderResourceUsageAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkShaderResourceUsageAMD *>( this );
     }
 
-    explicit operator VkShaderResourceUsageAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkShaderResourceUsageAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkShaderResourceUsageAMD *>( this );
     }
@@ -86985,12 +87810,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkShaderStatisticsInfoAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkShaderStatisticsInfoAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkShaderStatisticsInfoAMD *>( this );
     }
 
-    explicit operator VkShaderStatisticsInfoAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkShaderStatisticsInfoAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkShaderStatisticsInfoAMD *>( this );
     }
@@ -87079,12 +87904,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSharedPresentSurfaceCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSharedPresentSurfaceCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSharedPresentSurfaceCapabilitiesKHR *>( this );
     }
 
-    explicit operator VkSharedPresentSurfaceCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkSharedPresentSurfaceCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSharedPresentSurfaceCapabilitiesKHR *>( this );
     }
@@ -87167,12 +87992,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSparseImageFormatProperties const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageFormatProperties const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSparseImageFormatProperties *>( this );
     }
 
-    explicit operator VkSparseImageFormatProperties &() VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageFormatProperties &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSparseImageFormatProperties *>( this );
     }
@@ -87249,12 +88074,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSparseImageFormatProperties2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageFormatProperties2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSparseImageFormatProperties2 *>( this );
     }
 
-    explicit operator VkSparseImageFormatProperties2 &() VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageFormatProperties2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSparseImageFormatProperties2 *>( this );
     }
@@ -87341,12 +88166,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSparseImageMemoryRequirements const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageMemoryRequirements const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSparseImageMemoryRequirements *>( this );
     }
 
-    explicit operator VkSparseImageMemoryRequirements &() VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageMemoryRequirements &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSparseImageMemoryRequirements *>( this );
     }
@@ -87431,12 +88256,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSparseImageMemoryRequirements2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageMemoryRequirements2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSparseImageMemoryRequirements2 *>( this );
     }
 
-    explicit operator VkSparseImageMemoryRequirements2 &() VULKAN_HPP_NOEXCEPT
+    operator VkSparseImageMemoryRequirements2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSparseImageMemoryRequirements2 *>( this );
     }
@@ -87544,12 +88369,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkStreamDescriptorSurfaceCreateInfoGGP const &() const VULKAN_HPP_NOEXCEPT
+    operator VkStreamDescriptorSurfaceCreateInfoGGP const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkStreamDescriptorSurfaceCreateInfoGGP *>( this );
     }
 
-    explicit operator VkStreamDescriptorSurfaceCreateInfoGGP &() VULKAN_HPP_NOEXCEPT
+    operator VkStreamDescriptorSurfaceCreateInfoGGP &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkStreamDescriptorSurfaceCreateInfoGGP *>( this );
     }
@@ -87666,12 +88491,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkStridedDeviceAddressRegionKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkStridedDeviceAddressRegionKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkStridedDeviceAddressRegionKHR *>( this );
     }
 
-    explicit operator VkStridedDeviceAddressRegionKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkStridedDeviceAddressRegionKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkStridedDeviceAddressRegionKHR *>( this );
     }
@@ -87873,12 +88698,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubmitInfo *>( this );
     }
 
-    explicit operator VkSubmitInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSubmitInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubmitInfo *>( this );
     }
@@ -88086,12 +88911,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubmitInfo2 const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubmitInfo2 const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubmitInfo2 *>( this );
     }
 
-    explicit operator VkSubmitInfo2 &() VULKAN_HPP_NOEXCEPT
+    operator VkSubmitInfo2 &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubmitInfo2 *>( this );
     }
@@ -88209,12 +89034,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubpassBeginInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassBeginInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassBeginInfo *>( this );
     }
 
-    explicit operator VkSubpassBeginInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassBeginInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassBeginInfo *>( this );
     }
@@ -88331,12 +89156,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubpassDescriptionDepthStencilResolve const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassDescriptionDepthStencilResolve const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassDescriptionDepthStencilResolve *>( this );
     }
 
-    explicit operator VkSubpassDescriptionDepthStencilResolve &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassDescriptionDepthStencilResolve &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassDescriptionDepthStencilResolve *>( this );
     }
@@ -88428,12 +89253,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubpassEndInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassEndInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassEndInfo *>( this );
     }
 
-    explicit operator VkSubpassEndInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassEndInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassEndInfo *>( this );
     }
@@ -88559,12 +89384,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSubpassFragmentDensityMapOffsetEndInfoQCOM const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassFragmentDensityMapOffsetEndInfoQCOM const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassFragmentDensityMapOffsetEndInfoQCOM *>( this );
     }
 
-    explicit operator VkSubpassFragmentDensityMapOffsetEndInfoQCOM &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassFragmentDensityMapOffsetEndInfoQCOM &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassFragmentDensityMapOffsetEndInfoQCOM *>( this );
     }
@@ -88650,12 +89475,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSubpassResolvePerformanceQueryEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassResolvePerformanceQueryEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassResolvePerformanceQueryEXT *>( this );
     }
 
-    explicit operator VkSubpassResolvePerformanceQueryEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassResolvePerformanceQueryEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassResolvePerformanceQueryEXT *>( this );
     }
@@ -88741,12 +89566,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSubpassShadingPipelineCreateInfoHUAWEI const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubpassShadingPipelineCreateInfoHUAWEI const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubpassShadingPipelineCreateInfoHUAWEI *>( this );
     }
 
-    explicit operator VkSubpassShadingPipelineCreateInfoHUAWEI &() VULKAN_HPP_NOEXCEPT
+    operator VkSubpassShadingPipelineCreateInfoHUAWEI &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubpassShadingPipelineCreateInfoHUAWEI *>( this );
     }
@@ -88830,12 +89655,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSubresourceLayout2EXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSubresourceLayout2EXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubresourceLayout2EXT *>( this );
     }
 
-    explicit operator VkSubresourceLayout2EXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSubresourceLayout2EXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSubresourceLayout2EXT *>( this );
     }
@@ -88939,12 +89764,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSurfaceCapabilities2EXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceCapabilities2EXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSurfaceCapabilities2EXT *>( this );
     }
 
-    explicit operator VkSurfaceCapabilities2EXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceCapabilities2EXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSurfaceCapabilities2EXT *>( this );
     }
@@ -89079,12 +89904,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSurfaceCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSurfaceCapabilitiesKHR *>( this );
     }
 
-    explicit operator VkSurfaceCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSurfaceCapabilitiesKHR *>( this );
     }
@@ -89189,12 +90014,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSurfaceCapabilities2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceCapabilities2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSurfaceCapabilities2KHR *>( this );
     }
 
-    explicit operator VkSurfaceCapabilities2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceCapabilities2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSurfaceCapabilities2KHR *>( this );
     }
@@ -89293,12 +90118,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSurfaceCapabilitiesFullScreenExclusiveEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceCapabilitiesFullScreenExclusiveEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSurfaceCapabilitiesFullScreenExclusiveEXT *>( this );
     }
 
-    explicit operator VkSurfaceCapabilitiesFullScreenExclusiveEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceCapabilitiesFullScreenExclusiveEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSurfaceCapabilitiesFullScreenExclusiveEXT *>( this );
     }
@@ -89378,12 +90203,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSurfaceFormatKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceFormatKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSurfaceFormatKHR *>( this );
     }
 
-    explicit operator VkSurfaceFormatKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceFormatKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSurfaceFormatKHR *>( this );
     }
@@ -89454,12 +90279,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkSurfaceFormat2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceFormat2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSurfaceFormat2KHR *>( this );
     }
 
-    explicit operator VkSurfaceFormat2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceFormat2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSurfaceFormat2KHR *>( this );
     }
@@ -89558,12 +90383,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSurfaceFullScreenExclusiveInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceFullScreenExclusiveInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSurfaceFullScreenExclusiveInfoEXT *>( this );
     }
 
-    explicit operator VkSurfaceFullScreenExclusiveInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceFullScreenExclusiveInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSurfaceFullScreenExclusiveInfoEXT *>( this );
     }
@@ -89662,12 +90487,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSurfaceFullScreenExclusiveWin32InfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceFullScreenExclusiveWin32InfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSurfaceFullScreenExclusiveWin32InfoEXT *>( this );
     }
 
-    explicit operator VkSurfaceFullScreenExclusiveWin32InfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceFullScreenExclusiveWin32InfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSurfaceFullScreenExclusiveWin32InfoEXT *>( this );
     }
@@ -89766,12 +90591,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSurfaceProtectedCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceProtectedCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSurfaceProtectedCapabilitiesKHR *>( this );
     }
 
-    explicit operator VkSurfaceProtectedCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkSurfaceProtectedCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSurfaceProtectedCapabilitiesKHR *>( this );
     }
@@ -89869,12 +90694,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSwapchainCounterCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSwapchainCounterCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSwapchainCounterCreateInfoEXT *>( this );
     }
 
-    explicit operator VkSwapchainCounterCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkSwapchainCounterCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSwapchainCounterCreateInfoEXT *>( this );
     }
@@ -90140,12 +90965,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSwapchainCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSwapchainCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSwapchainCreateInfoKHR *>( this );
     }
 
-    explicit operator VkSwapchainCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkSwapchainCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSwapchainCreateInfoKHR *>( this );
     }
@@ -90297,12 +91122,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkSwapchainDisplayNativeHdrCreateInfoAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkSwapchainDisplayNativeHdrCreateInfoAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSwapchainDisplayNativeHdrCreateInfoAMD *>( this );
     }
 
-    explicit operator VkSwapchainDisplayNativeHdrCreateInfoAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkSwapchainDisplayNativeHdrCreateInfoAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkSwapchainDisplayNativeHdrCreateInfoAMD *>( this );
     }
@@ -90386,12 +91211,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkTextureLODGatherFormatPropertiesAMD const &() const VULKAN_HPP_NOEXCEPT
+    operator VkTextureLODGatherFormatPropertiesAMD const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkTextureLODGatherFormatPropertiesAMD *>( this );
     }
 
-    explicit operator VkTextureLODGatherFormatPropertiesAMD &() VULKAN_HPP_NOEXCEPT
+    operator VkTextureLODGatherFormatPropertiesAMD &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkTextureLODGatherFormatPropertiesAMD *>( this );
     }
@@ -90442,6 +91267,126 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::eTextureLodGatherFormatPropertiesAMD>
   {
     using Type = TextureLODGatherFormatPropertiesAMD;
+  };
+
+  struct TilePropertiesQCOM
+  {
+    using NativeType = VkTilePropertiesQCOM;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eTilePropertiesQCOM;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR TilePropertiesQCOM( VULKAN_HPP_NAMESPACE::Extent3D tileSize_  = {},
+                                             VULKAN_HPP_NAMESPACE::Extent2D apronSize_ = {},
+                                             VULKAN_HPP_NAMESPACE::Offset2D origin_    = {},
+                                             void *                         pNext_     = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , tileSize( tileSize_ )
+      , apronSize( apronSize_ )
+      , origin( origin_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR TilePropertiesQCOM( TilePropertiesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    TilePropertiesQCOM( VkTilePropertiesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT : TilePropertiesQCOM( *reinterpret_cast<TilePropertiesQCOM const *>( &rhs ) ) {}
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    TilePropertiesQCOM & operator=( TilePropertiesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    TilePropertiesQCOM & operator=( VkTilePropertiesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::TilePropertiesQCOM const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 TilePropertiesQCOM & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 TilePropertiesQCOM & setTileSize( VULKAN_HPP_NAMESPACE::Extent3D const & tileSize_ ) VULKAN_HPP_NOEXCEPT
+    {
+      tileSize = tileSize_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 TilePropertiesQCOM & setApronSize( VULKAN_HPP_NAMESPACE::Extent2D const & apronSize_ ) VULKAN_HPP_NOEXCEPT
+    {
+      apronSize = apronSize_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 TilePropertiesQCOM & setOrigin( VULKAN_HPP_NAMESPACE::Offset2D const & origin_ ) VULKAN_HPP_NOEXCEPT
+    {
+      origin = origin_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkTilePropertiesQCOM const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkTilePropertiesQCOM *>( this );
+    }
+
+    operator VkTilePropertiesQCOM &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkTilePropertiesQCOM *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::Extent3D const &,
+               VULKAN_HPP_NAMESPACE::Extent2D const &,
+               VULKAN_HPP_NAMESPACE::Offset2D const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, tileSize, apronSize, origin );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( TilePropertiesQCOM const & ) const = default;
+#else
+    bool operator==( TilePropertiesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( tileSize == rhs.tileSize ) && ( apronSize == rhs.apronSize ) && ( origin == rhs.origin );
+#  endif
+    }
+
+    bool operator!=( TilePropertiesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType     = StructureType::eTilePropertiesQCOM;
+    void *                              pNext     = {};
+    VULKAN_HPP_NAMESPACE::Extent3D      tileSize  = {};
+    VULKAN_HPP_NAMESPACE::Extent2D      apronSize = {};
+    VULKAN_HPP_NAMESPACE::Offset2D      origin    = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::TilePropertiesQCOM ) == sizeof( VkTilePropertiesQCOM ), "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::TilePropertiesQCOM>::value, "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::TilePropertiesQCOM>::value,
+                            "TilePropertiesQCOM is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eTilePropertiesQCOM>
+  {
+    using Type = TilePropertiesQCOM;
   };
 
   struct TimelineSemaphoreSubmitInfo
@@ -90546,12 +91491,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkTimelineSemaphoreSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
+    operator VkTimelineSemaphoreSubmitInfo const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkTimelineSemaphoreSubmitInfo *>( this );
     }
 
-    explicit operator VkTimelineSemaphoreSubmitInfo &() VULKAN_HPP_NOEXCEPT
+    operator VkTimelineSemaphoreSubmitInfo &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkTimelineSemaphoreSubmitInfo *>( this );
     }
@@ -90763,12 +91708,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkTraceRaysIndirectCommand2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkTraceRaysIndirectCommand2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkTraceRaysIndirectCommand2KHR *>( this );
     }
 
-    explicit operator VkTraceRaysIndirectCommand2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkTraceRaysIndirectCommand2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkTraceRaysIndirectCommand2KHR *>( this );
     }
@@ -90911,12 +91856,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkTraceRaysIndirectCommandKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkTraceRaysIndirectCommandKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkTraceRaysIndirectCommandKHR *>( this );
     }
 
-    explicit operator VkTraceRaysIndirectCommandKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkTraceRaysIndirectCommandKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkTraceRaysIndirectCommandKHR *>( this );
     }
@@ -91043,12 +91988,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkValidationCacheCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkValidationCacheCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkValidationCacheCreateInfoEXT *>( this );
     }
 
-    explicit operator VkValidationCacheCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkValidationCacheCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkValidationCacheCreateInfoEXT *>( this );
     }
@@ -91214,12 +92159,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkValidationFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkValidationFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkValidationFeaturesEXT *>( this );
     }
 
-    explicit operator VkValidationFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkValidationFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkValidationFeaturesEXT *>( this );
     }
@@ -91352,12 +92297,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkValidationFlagsEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkValidationFlagsEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkValidationFlagsEXT *>( this );
     }
 
-    explicit operator VkValidationFlagsEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkValidationFlagsEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkValidationFlagsEXT *>( this );
     }
@@ -91479,12 +92424,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVertexInputAttributeDescription2EXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVertexInputAttributeDescription2EXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVertexInputAttributeDescription2EXT *>( this );
     }
 
-    explicit operator VkVertexInputAttributeDescription2EXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVertexInputAttributeDescription2EXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVertexInputAttributeDescription2EXT *>( this );
     }
@@ -91615,12 +92560,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVertexInputBindingDescription2EXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVertexInputBindingDescription2EXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVertexInputBindingDescription2EXT *>( this );
     }
 
-    explicit operator VkVertexInputBindingDescription2EXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVertexInputBindingDescription2EXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVertexInputBindingDescription2EXT *>( this );
     }
@@ -91735,12 +92680,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkViSurfaceCreateInfoNN const &() const VULKAN_HPP_NOEXCEPT
+    operator VkViSurfaceCreateInfoNN const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkViSurfaceCreateInfoNN *>( this );
     }
 
-    explicit operator VkViSurfaceCreateInfoNN &() VULKAN_HPP_NOEXCEPT
+    operator VkViSurfaceCreateInfoNN &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkViSurfaceCreateInfoNN *>( this );
     }
@@ -91864,12 +92809,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoPictureResourceKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoPictureResourceKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoPictureResourceKHR *>( this );
     }
 
-    explicit operator VkVideoPictureResourceKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoPictureResourceKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoPictureResourceKHR *>( this );
     }
@@ -91986,12 +92931,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoReferenceSlotKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoReferenceSlotKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoReferenceSlotKHR *>( this );
     }
 
-    explicit operator VkVideoReferenceSlotKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoReferenceSlotKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoReferenceSlotKHR *>( this );
     }
@@ -92162,12 +93107,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoBeginCodingInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoBeginCodingInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoBeginCodingInfoKHR *>( this );
     }
 
-    explicit operator VkVideoBeginCodingInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoBeginCodingInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoBeginCodingInfoKHR *>( this );
     }
@@ -92301,12 +93246,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoBindMemoryKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoBindMemoryKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoBindMemoryKHR *>( this );
     }
 
-    explicit operator VkVideoBindMemoryKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoBindMemoryKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoBindMemoryKHR *>( this );
     }
@@ -92415,12 +93360,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkVideoCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoCapabilitiesKHR *>( this );
     }
 
-    explicit operator VkVideoCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoCapabilitiesKHR *>( this );
     }
@@ -92552,12 +93497,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoCodingControlInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoCodingControlInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoCodingControlInfoKHR *>( this );
     }
 
-    explicit operator VkVideoCodingControlInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoCodingControlInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoCodingControlInfoKHR *>( this );
     }
@@ -92642,12 +93587,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkVideoDecodeCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeCapabilitiesKHR *>( this );
     }
 
-    explicit operator VkVideoDecodeCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeCapabilitiesKHR *>( this );
     }
@@ -92734,12 +93679,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkVideoDecodeH264CapabilitiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264CapabilitiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH264CapabilitiesEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH264CapabilitiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264CapabilitiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH264CapabilitiesEXT *>( this );
     }
@@ -92849,12 +93794,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH264DpbSlotInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264DpbSlotInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH264DpbSlotInfoEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH264DpbSlotInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264DpbSlotInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH264DpbSlotInfoEXT *>( this );
     }
@@ -92952,12 +93897,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH264MvcEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264MvcEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH264MvcEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH264MvcEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264MvcEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH264MvcEXT *>( this );
     }
@@ -93094,12 +94039,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH264PictureInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264PictureInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH264PictureInfoEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH264PictureInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264PictureInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH264PictureInfoEXT *>( this );
     }
@@ -93214,12 +94159,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH264ProfileEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264ProfileEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH264ProfileEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH264ProfileEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264ProfileEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH264ProfileEXT *>( this );
     }
@@ -93388,12 +94333,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH264SessionParametersAddInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264SessionParametersAddInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH264SessionParametersAddInfoEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH264SessionParametersAddInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264SessionParametersAddInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH264SessionParametersAddInfoEXT *>( this );
     }
@@ -93522,12 +94467,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH264SessionParametersCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264SessionParametersCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH264SessionParametersCreateInfoEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH264SessionParametersCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH264SessionParametersCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH264SessionParametersCreateInfoEXT *>( this );
     }
@@ -93620,12 +94565,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkVideoDecodeH265CapabilitiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265CapabilitiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH265CapabilitiesEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH265CapabilitiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265CapabilitiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH265CapabilitiesEXT *>( this );
     }
@@ -93731,12 +94676,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH265DpbSlotInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265DpbSlotInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH265DpbSlotInfoEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH265DpbSlotInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265DpbSlotInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH265DpbSlotInfoEXT *>( this );
     }
@@ -93873,12 +94818,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH265PictureInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265PictureInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH265PictureInfoEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH265PictureInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265PictureInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH265PictureInfoEXT *>( this );
     }
@@ -93983,12 +94928,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH265ProfileEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265ProfileEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH265ProfileEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH265ProfileEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265ProfileEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH265ProfileEXT *>( this );
     }
@@ -94179,12 +95124,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH265SessionParametersAddInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265SessionParametersAddInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH265SessionParametersAddInfoEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH265SessionParametersAddInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265SessionParametersAddInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH265SessionParametersAddInfoEXT *>( this );
     }
@@ -94325,12 +95270,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeH265SessionParametersCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265SessionParametersCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeH265SessionParametersCreateInfoEXT *>( this );
     }
 
-    explicit operator VkVideoDecodeH265SessionParametersCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeH265SessionParametersCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeH265SessionParametersCreateInfoEXT *>( this );
     }
@@ -94527,12 +95472,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoDecodeInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoDecodeInfoKHR *>( this );
     }
 
-    explicit operator VkVideoDecodeInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoDecodeInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoDecodeInfoKHR *>( this );
     }
@@ -94644,12 +95589,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkVideoEncodeCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeCapabilitiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeCapabilitiesKHR *>( this );
     }
 
-    explicit operator VkVideoEncodeCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeCapabilitiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeCapabilitiesKHR *>( this );
     }
@@ -94766,12 +95711,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkVideoEncodeH264CapabilitiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264CapabilitiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264CapabilitiesEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264CapabilitiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264CapabilitiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264CapabilitiesEXT *>( this );
     }
@@ -94918,12 +95863,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264DpbSlotInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264DpbSlotInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264DpbSlotInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264DpbSlotInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264DpbSlotInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264DpbSlotInfoEXT *>( this );
     }
@@ -95071,12 +96016,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264EmitPictureParametersEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264EmitPictureParametersEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264EmitPictureParametersEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264EmitPictureParametersEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264EmitPictureParametersEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264EmitPictureParametersEXT *>( this );
     }
@@ -95188,12 +96133,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264FrameSizeEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264FrameSizeEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264FrameSizeEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264FrameSizeEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264FrameSizeEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264FrameSizeEXT *>( this );
     }
@@ -95359,12 +96304,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264ReferenceListsEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264ReferenceListsEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264ReferenceListsEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264ReferenceListsEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264ReferenceListsEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264ReferenceListsEXT *>( this );
     }
@@ -95494,12 +96439,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264NaluSliceEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264NaluSliceEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264NaluSliceEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264NaluSliceEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264NaluSliceEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264NaluSliceEXT *>( this );
     }
@@ -95604,12 +96549,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264ProfileEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264ProfileEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264ProfileEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264ProfileEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264ProfileEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264ProfileEXT *>( this );
     }
@@ -95717,12 +96662,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264QpEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264QpEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264QpEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264QpEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264QpEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264QpEXT *>( this );
     }
@@ -95849,12 +96794,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264RateControlInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264RateControlInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264RateControlInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264RateControlInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264RateControlInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264RateControlInfoEXT *>( this );
     }
@@ -96033,12 +96978,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264RateControlLayerInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264RateControlLayerInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264RateControlLayerInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264RateControlLayerInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264RateControlLayerInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264RateControlLayerInfoEXT *>( this );
     }
@@ -96215,12 +97160,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264SessionParametersAddInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264SessionParametersAddInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264SessionParametersAddInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264SessionParametersAddInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264SessionParametersAddInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264SessionParametersAddInfoEXT *>( this );
     }
@@ -96349,12 +97294,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264SessionParametersCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264SessionParametersCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264SessionParametersCreateInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264SessionParametersCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264SessionParametersCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264SessionParametersCreateInfoEXT *>( this );
     }
@@ -96514,12 +97459,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH264VclFrameInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264VclFrameInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH264VclFrameInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH264VclFrameInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH264VclFrameInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH264VclFrameInfoEXT *>( this );
     }
@@ -96652,12 +97597,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkVideoEncodeH265CapabilitiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265CapabilitiesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265CapabilitiesEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265CapabilitiesEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265CapabilitiesEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265CapabilitiesEXT *>( this );
     }
@@ -96838,12 +97783,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265DpbSlotInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265DpbSlotInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265DpbSlotInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265DpbSlotInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265DpbSlotInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265DpbSlotInfoEXT *>( this );
     }
@@ -97011,12 +97956,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265EmitPictureParametersEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265EmitPictureParametersEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265EmitPictureParametersEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265EmitPictureParametersEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265EmitPictureParametersEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265EmitPictureParametersEXT *>( this );
     }
@@ -97132,12 +98077,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265FrameSizeEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265FrameSizeEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265FrameSizeEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265FrameSizeEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265FrameSizeEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265FrameSizeEXT *>( this );
     }
@@ -97303,12 +98248,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265ReferenceListsEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265ReferenceListsEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265ReferenceListsEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265ReferenceListsEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265ReferenceListsEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265ReferenceListsEXT *>( this );
     }
@@ -97439,12 +98384,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265NaluSliceSegmentEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265NaluSliceSegmentEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265NaluSliceSegmentEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265NaluSliceSegmentEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265NaluSliceSegmentEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265NaluSliceSegmentEXT *>( this );
     }
@@ -97550,12 +98495,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265ProfileEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265ProfileEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265ProfileEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265ProfileEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265ProfileEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265ProfileEXT *>( this );
     }
@@ -97663,12 +98608,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265QpEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265QpEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265QpEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265QpEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265QpEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265QpEXT *>( this );
     }
@@ -97795,12 +98740,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265RateControlInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265RateControlInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265RateControlInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265RateControlInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265RateControlInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265RateControlInfoEXT *>( this );
     }
@@ -97979,12 +98924,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265RateControlLayerInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265RateControlLayerInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265RateControlLayerInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265RateControlLayerInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265RateControlLayerInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265RateControlLayerInfoEXT *>( this );
     }
@@ -98190,12 +99135,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265SessionParametersAddInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265SessionParametersAddInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265SessionParametersAddInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265SessionParametersAddInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265SessionParametersAddInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265SessionParametersAddInfoEXT *>( this );
     }
@@ -98336,12 +99281,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265SessionParametersCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265SessionParametersCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265SessionParametersCreateInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265SessionParametersCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265SessionParametersCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265SessionParametersCreateInfoEXT *>( this );
     }
@@ -98504,12 +99449,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeH265VclFrameInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265VclFrameInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeH265VclFrameInfoEXT *>( this );
     }
 
-    explicit operator VkVideoEncodeH265VclFrameInfoEXT &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeH265VclFrameInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeH265VclFrameInfoEXT *>( this );
     }
@@ -98726,12 +99671,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeInfoKHR *>( this );
     }
 
-    explicit operator VkVideoEncodeInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeInfoKHR *>( this );
     }
@@ -98904,12 +99849,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeRateControlLayerInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeRateControlLayerInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeRateControlLayerInfoKHR *>( this );
     }
 
-    explicit operator VkVideoEncodeRateControlLayerInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeRateControlLayerInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeRateControlLayerInfoKHR *>( this );
     }
@@ -99076,12 +100021,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEncodeRateControlInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeRateControlInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEncodeRateControlInfoKHR *>( this );
     }
 
-    explicit operator VkVideoEncodeRateControlInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEncodeRateControlInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEncodeRateControlInfoKHR *>( this );
     }
@@ -99188,12 +100133,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoEndCodingInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoEndCodingInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoEndCodingInfoKHR *>( this );
     }
 
-    explicit operator VkVideoEndCodingInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoEndCodingInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoEndCodingInfoKHR *>( this );
     }
@@ -99288,12 +100233,12 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    explicit operator VkVideoFormatPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoFormatPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoFormatPropertiesKHR *>( this );
     }
 
-    explicit operator VkVideoFormatPropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoFormatPropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoFormatPropertiesKHR *>( this );
     }
@@ -99415,12 +100360,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoGetMemoryPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoGetMemoryPropertiesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoGetMemoryPropertiesKHR *>( this );
     }
 
-    explicit operator VkVideoGetMemoryPropertiesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoGetMemoryPropertiesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoGetMemoryPropertiesKHR *>( this );
     }
@@ -99545,12 +100490,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoProfileKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoProfileKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoProfileKHR *>( this );
     }
 
-    explicit operator VkVideoProfileKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoProfileKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoProfileKHR *>( this );
     }
@@ -99680,12 +100625,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoProfilesKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoProfilesKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoProfilesKHR *>( this );
     }
 
-    explicit operator VkVideoProfilesKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoProfilesKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoProfilesKHR *>( this );
     }
@@ -99785,12 +100730,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoQueueFamilyProperties2KHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoQueueFamilyProperties2KHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoQueueFamilyProperties2KHR *>( this );
     }
 
-    explicit operator VkVideoQueueFamilyProperties2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoQueueFamilyProperties2KHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoQueueFamilyProperties2KHR *>( this );
     }
@@ -99954,12 +100899,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoSessionCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoSessionCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoSessionCreateInfoKHR *>( this );
     }
 
-    explicit operator VkVideoSessionCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoSessionCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoSessionCreateInfoKHR *>( this );
     }
@@ -100098,12 +101043,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoSessionParametersCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoSessionParametersCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoSessionParametersCreateInfoKHR *>( this );
     }
 
-    explicit operator VkVideoSessionParametersCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoSessionParametersCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoSessionParametersCreateInfoKHR *>( this );
     }
@@ -100207,12 +101152,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkVideoSessionParametersUpdateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkVideoSessionParametersUpdateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkVideoSessionParametersUpdateInfoKHR *>( this );
     }
 
-    explicit operator VkVideoSessionParametersUpdateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkVideoSessionParametersUpdateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkVideoSessionParametersUpdateInfoKHR *>( this );
     }
@@ -100328,12 +101273,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkWaylandSurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkWaylandSurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkWaylandSurfaceCreateInfoKHR *>( this );
     }
 
-    explicit operator VkWaylandSurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkWaylandSurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkWaylandSurfaceCreateInfoKHR *>( this );
     }
@@ -100588,12 +101533,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkWin32KeyedMutexAcquireReleaseInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkWin32KeyedMutexAcquireReleaseInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoKHR *>( this );
     }
 
-    explicit operator VkWin32KeyedMutexAcquireReleaseInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkWin32KeyedMutexAcquireReleaseInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR *>( this );
     }
@@ -100862,12 +101807,12 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #  endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkWin32KeyedMutexAcquireReleaseInfoNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkWin32KeyedMutexAcquireReleaseInfoNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoNV *>( this );
     }
 
-    explicit operator VkWin32KeyedMutexAcquireReleaseInfoNV &() VULKAN_HPP_NOEXCEPT
+    operator VkWin32KeyedMutexAcquireReleaseInfoNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoNV *>( this );
     }
@@ -100999,12 +101944,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkWin32SurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkWin32SurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkWin32SurfaceCreateInfoKHR *>( this );
     }
 
-    explicit operator VkWin32SurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkWin32SurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkWin32SurfaceCreateInfoKHR *>( this );
     }
@@ -101224,12 +102169,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkWriteDescriptorSet const &() const VULKAN_HPP_NOEXCEPT
+    operator VkWriteDescriptorSet const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkWriteDescriptorSet *>( this );
     }
 
-    explicit operator VkWriteDescriptorSet &() VULKAN_HPP_NOEXCEPT
+    operator VkWriteDescriptorSet &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkWriteDescriptorSet *>( this );
     }
@@ -101374,12 +102319,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkWriteDescriptorSetAccelerationStructureKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkWriteDescriptorSetAccelerationStructureKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkWriteDescriptorSetAccelerationStructureKHR *>( this );
     }
 
-    explicit operator VkWriteDescriptorSetAccelerationStructureKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkWriteDescriptorSetAccelerationStructureKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkWriteDescriptorSetAccelerationStructureKHR *>( this );
     }
@@ -101512,12 +102457,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkWriteDescriptorSetAccelerationStructureNV const &() const VULKAN_HPP_NOEXCEPT
+    operator VkWriteDescriptorSetAccelerationStructureNV const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkWriteDescriptorSetAccelerationStructureNV *>( this );
     }
 
-    explicit operator VkWriteDescriptorSetAccelerationStructureNV &() VULKAN_HPP_NOEXCEPT
+    operator VkWriteDescriptorSetAccelerationStructureNV &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkWriteDescriptorSetAccelerationStructureNV *>( this );
     }
@@ -101643,12 +102588,12 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkWriteDescriptorSetInlineUniformBlock const &() const VULKAN_HPP_NOEXCEPT
+    operator VkWriteDescriptorSetInlineUniformBlock const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkWriteDescriptorSetInlineUniformBlock *>( this );
     }
 
-    explicit operator VkWriteDescriptorSetInlineUniformBlock &() VULKAN_HPP_NOEXCEPT
+    operator VkWriteDescriptorSetInlineUniformBlock &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkWriteDescriptorSetInlineUniformBlock *>( this );
     }
@@ -101765,12 +102710,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkXcbSurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkXcbSurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkXcbSurfaceCreateInfoKHR *>( this );
     }
 
-    explicit operator VkXcbSurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkXcbSurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkXcbSurfaceCreateInfoKHR *>( this );
     }
@@ -101902,12 +102847,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    explicit operator VkXlibSurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    operator VkXlibSurfaceCreateInfoKHR const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkXlibSurfaceCreateInfoKHR *>( this );
     }
 
-    explicit operator VkXlibSurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
+    operator VkXlibSurfaceCreateInfoKHR &() VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<VkXlibSurfaceCreateInfoKHR *>( this );
     }
