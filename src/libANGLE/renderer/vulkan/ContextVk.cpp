@@ -90,17 +90,10 @@ struct GraphicsDriverUniforms
 static_assert(sizeof(GraphicsDriverUniforms) % (sizeof(uint32_t) * 4) == 0,
               "GraphicsDriverUniforms should be 16bytes aligned");
 
-// Only used under the following conditions:
-//
-// - Bresenham line rasterization is not supported, or
-// - Transform feedback is emulated
-//
+// Only used when transform feedback is emulated.
 struct GraphicsDriverUniformsExtended
 {
     GraphicsDriverUniforms common;
-
-    // Only used with bresenham line rasterization emulation
-    std::array<float, 4> viewport;
 
     // Only used with transform feedback emulation
     std::array<int32_t, 4> xfbBufferOffsets;
@@ -646,8 +639,7 @@ bool BlendModeSupportsDither(const gl::State &state, size_t colorIndex)
 
 bool shouldUseGraphicsDriverUniformsExtended(const ContextVk *contextVk)
 {
-    return contextVk->getFeatures().basicGLLineRasterization.enabled ||
-           contextVk->getFeatures().emulateTransformFeedback.enabled;
+    return contextVk->getFeatures().emulateTransformFeedback.enabled;
 }
 
 }  // anonymous namespace
@@ -928,8 +920,11 @@ ContextVk::ContextVk(const gl::State &state, gl::ErrorSet *errorSet, RendererVk 
     mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_LINE_WIDTH);
     mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_POLYGON_OFFSET);
     mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_BLEND_COLOR);
-    mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_STENCIL_WRITEMASK_FRONT);
-    mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_STENCIL_WRITEMASK_BACK);
+    if (!getFeatures().useNonZeroStencilWriteMaskStaticState.enabled)
+    {
+        mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_STENCIL_WRITEMASK_FRONT);
+        mPipelineDirtyBitsMask.reset(gl::State::DIRTY_BIT_STENCIL_WRITEMASK_BACK);
+    }
 
     // Dynamic state in VK_EXT_extended_dynamic_state:
     if (getFeatures().supportsExtendedDynamicState.enabled)
@@ -1074,10 +1069,16 @@ angle::Result ContextVk::initialize()
             vk::kDefaultTransformFeedbackQueryPoolSize));
     }
 
-    // The primitives generated query is provided through the Vulkan pipeline statistics query if
-    // supported.  TODO: If VK_EXT_primitives_generated_query is supported, use that instead.
-    // http://anglebug.com/5430
-    if (getFeatures().supportsPipelineStatisticsQuery.enabled)
+    // If VK_EXT_primitives_generated_query is supported, use that to implement the OpenGL query.
+    // Otherwise, the primitives generated query is provided through the Vulkan pipeline statistics
+    // query if supported.
+    if (getFeatures().supportsPrimitivesGeneratedQuery.enabled)
+    {
+        ANGLE_TRY(mQueryPools[gl::QueryType::PrimitivesGenerated].init(
+            this, VK_QUERY_TYPE_PRIMITIVES_GENERATED_EXT,
+            vk::kDefaultPrimitivesGeneratedQueryPoolSize));
+    }
+    else if (getFeatures().supportsPipelineStatisticsQuery.enabled)
     {
         ANGLE_TRY(mQueryPools[gl::QueryType::PrimitivesGenerated].init(
             this, VK_QUERY_TYPE_PIPELINE_STATISTICS, vk::kDefaultPrimitivesGeneratedQueryPoolSize));
@@ -4341,10 +4342,6 @@ void ContextVk::updateViewport(FramebufferVk *framebufferVk,
     // Ensure viewport is within Vulkan requirements
     vk::ClampViewport(&mViewport);
 
-    if (getFeatures().basicGLLineRasterization.enabled)
-    {
-        invalidateGraphicsDriverUniforms();
-    }
     mGraphicsDirtyBits.set(DIRTY_BIT_DYNAMIC_VIEWPORT);
 }
 
@@ -4638,6 +4635,24 @@ void ContextVk::updateDither()
     }
 }
 
+void ContextVk::updateStencilWriteWorkaround()
+{
+    if (!getFeatures().useNonZeroStencilWriteMaskStaticState.enabled)
+    {
+        return;
+    }
+
+    // On certain drivers, having a stencil write mask of 0 in static state enables optimizations
+    // that make the interaction of the stencil write mask dynamic state with discard and alpha to
+    // coverage broken.  When the program has discard, or when alpha to coverage is enabled, these
+    // optimizations are disabled by specifying a non-zero static state for stencil write mask.
+    const bool programHasDiscard        = mState.getProgramExecutable()->hasDiscard();
+    const bool isAlphaToCoverageEnabled = mState.isSampleAlphaToCoverageEnabled();
+
+    mGraphicsPipelineDesc->updateNonZeroStencilWriteMaskWorkaround(
+        &mGraphicsPipelineTransition, programHasDiscard || isAlphaToCoverageEnabled);
+}
+
 angle::Result ContextVk::invalidateProgramExecutableHelper(const gl::Context *context)
 {
     const gl::State &glState                = context->getState();
@@ -4673,6 +4688,8 @@ angle::Result ContextVk::invalidateProgramExecutableHelper(const gl::Context *co
             // masked, so update their access.
             onColorAccessChange();
         }
+
+        updateStencilWriteWorkaround();
     }
 
     return angle::Result::Continue;
@@ -4741,6 +4758,8 @@ angle::Result ContextVk::syncState(const gl::Context *context,
             case gl::State::DIRTY_BIT_SAMPLE_ALPHA_TO_COVERAGE_ENABLED:
                 mGraphicsPipelineDesc->updateAlphaToCoverageEnable(
                     &mGraphicsPipelineTransition, glState.isSampleAlphaToCoverageEnabled());
+                updateStencilWriteWorkaround();
+
                 static_assert(gl::State::DIRTY_BIT_PROGRAM_EXECUTABLE >
                                   gl::State::DIRTY_BIT_SAMPLE_ALPHA_TO_COVERAGE_ENABLED,
                               "Dirty bit order");
@@ -5953,13 +5972,13 @@ vk::DynamicQueryPool *ContextVk::getQueryPool(gl::QueryType queryType)
     // For PrimitivesGenerated queries:
     //
     // - If VK_EXT_primitives_generated_query is supported, use that.
-    //   TODO: http://anglebug.com/5430
     // - Otherwise, if pipelineStatisticsQuery is supported, use that,
     // - Otherwise, use the same pool as TransformFeedbackPrimitivesWritten and share the query as
     //   the Vulkan transform feedback query produces both results.  This option is non-conformant
     //   as the primitives generated query will not be functional without transform feedback.
     //
     if (queryType == gl::QueryType::PrimitivesGenerated &&
+        !getFeatures().supportsPrimitivesGeneratedQuery.enabled &&
         !getFeatures().supportsPipelineStatisticsQuery.enabled)
     {
         queryType = gl::QueryType::TransformFeedbackPrimitivesWritten;
@@ -6088,17 +6107,6 @@ angle::Result ContextVk::handleDirtyGraphicsDriverUniforms(DirtyBits::Iterator *
     GraphicsDriverUniformsExtended driverUniformsExt = {};
     if (shouldUseGraphicsDriverUniformsExtended(this))
     {
-        gl::Rectangle glViewport = mState.getViewport();
-        if (isRotatedAspectRatioForDrawFBO())
-        {
-            // The surface is rotated 90/270 degrees.  This changes the aspect ratio of the surface.
-            std::swap(glViewport.x, glViewport.y);
-            std::swap(glViewport.width, glViewport.height);
-        }
-        driverUniformsExt.viewport = {
-            static_cast<float>(glViewport.x), static_cast<float>(glViewport.y),
-            static_cast<float>(glViewport.width), static_cast<float>(glViewport.height)};
-
         if (mState.isTransformFeedbackActiveUnpaused())
         {
             TransformFeedbackVk *transformFeedbackVk =
@@ -7198,8 +7206,13 @@ angle::Result ContextVk::resumeXfbRenderPassQueriesIfActive()
 
 bool ContextVk::doesPrimitivesGeneratedQuerySupportRasterizerDiscard() const
 {
-    // TODO: If primitives generated is implemented with VK_EXT_primitives_generated_query, check
-    // the corresponding feature bit.  http://anglebug.com/5430.
+    // If primitives generated is implemented with VK_EXT_primitives_generated_query, check the
+    // corresponding feature bit.
+    if (getFeatures().supportsPrimitivesGeneratedQuery.enabled)
+    {
+        return mRenderer->getPhysicalDevicePrimitivesGeneratedQueryFeatures()
+                   .primitivesGeneratedQueryWithRasterizerDiscard == VK_TRUE;
+    }
 
     // If primitives generated is emulated with pipeline statistics query, it's unknown on which
     // hardware rasterizer discard is supported.  Assume it's supported on none.
