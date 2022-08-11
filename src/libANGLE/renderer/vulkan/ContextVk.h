@@ -1277,6 +1277,16 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     void updateDither();
 
+    // When the useNonZeroStencilWriteMaskStaticState workaround is enabled, the static state for
+    // stencil should be non-zero despite the state being dynamic.  This is done when:
+    //
+    // - The shader includes discard, or
+    // - Alpha-to-coverage is enabled.
+    //
+    // An alternative could have been to set the static state unconditionally to non-zero.  This is
+    // avoided however, as on the affected driver that would disable certain optimizations.
+    void updateStencilWriteWorkaround();
+
     SpecConstUsageBits getCurrentProgramSpecConstUsageBits() const;
     void updateGraphicsPipelineDescWithSpecConstUsageBits(SpecConstUsageBits usageBits);
 
@@ -1567,7 +1577,7 @@ ANGLE_INLINE void ContextVk::retainResource(vk::Resource *resource)
 
 ANGLE_INLINE bool UseLineRaster(const ContextVk *contextVk, gl::PrimitiveMode mode)
 {
-    return contextVk->getFeatures().basicGLLineRasterization.enabled && gl::IsLineMode(mode);
+    return gl::IsLineMode(mode);
 }
 }  // namespace rx
 
