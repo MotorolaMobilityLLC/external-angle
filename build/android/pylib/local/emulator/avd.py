@@ -16,6 +16,7 @@ import threading
 
 from google.protobuf import text_format  # pylint: disable=import-error
 
+from devil.android import apk_helper
 from devil.android import device_utils
 from devil.android import settings
 from devil.android.sdk import adb_wrapper
@@ -120,9 +121,13 @@ def _FindMinSdkFile(apk_dir, min_sdk):
         curr_min_sdk_version = entry['min_sdk']
 
     if not min_sdk_found:
-      logging.error('No suitable apk file found that suits the minimum sdk.')
+      logging.error('No suitable apk file found that suits the minimum sdk %d.',
+                    min_sdk)
       return None
 
+    logging.info('Found apk file for mininum sdk %d: %r with version %r',
+                 min_sdk, min_sdk_found['file_name'],
+                 min_sdk_found['version_name'])
     return os.path.join(apk_dir, min_sdk_found['file_name'])
 
 
@@ -376,40 +381,16 @@ class AvdConfig:
           ])
           config_ini_contents['hw.sdCard.path'] = sdcard_path
 
-      # Start & stop the AVD.
-      self._Initialize()
-      instance = _AvdInstance(self._emulator_path, self._emulator_home,
-                              self._config)
-      # Enable debug for snapshot when it is set to True
-      debug_tags = 'init,snapshot' if snapshot else None
-      instance.Start(
-          ensure_system_settings=False,
-          read_only=False,
-          # Installing privileged apks requires modifying the system
-          # image.
-          writable_system=True,
-          gpu_mode=_DEFAULT_GPU_MODE,
-          debug_tags=debug_tags)
-
-      assert instance.device is not None, '`instance.device` not initialized.'
-      # Android devices with full-disk encryption are encrypted on first boot,
-      # and then get decrypted to continue the boot process (See details in
-      # https://bit.ly/3agmjcM).
-      # Wait for this step to complete since it can take a while for old OSs
-      # like M, otherwise the avd may have "Encryption Unsuccessful" error.
-      instance.device.WaitUntilFullyBooted(decrypt=True, timeout=180, retries=0)
-
       if not additional_apks:
         additional_apks = []
-      for apk_package in self._config.additional_apk:
-        apk_dir = os.path.join(COMMON_CIPD_ROOT, apk_package.dest_path)
-        for f in os.listdir(apk_dir):
-          if os.path.isfile(f) and f.endswith('.apk'):
-            additional_apks.append(os.path.join(apk_dir, f))
-
-      if additional_apks:
-        for apk in additional_apks:
-          instance.device.Install(apk, allow_downgrade=True, reinstall=True)
+      for pkg in self._config.additional_apk:
+        apk_dir = os.path.join(COMMON_CIPD_ROOT, pkg.dest_path)
+        apk_file = _FindMinSdkFile(apk_dir, self._config.min_sdk)
+        # Some of these files come from chrome internal, so may not be
+        # available to non-internal permissioned users.
+        if os.path.exists(apk_file):
+          logging.info('Adding additional apk for install: %s', apk_file)
+          additional_apks.append(apk_file)
 
       if not privileged_apk_tuples:
         privileged_apk_tuples = []
@@ -423,8 +404,44 @@ class AvdConfig:
           privileged_apk_tuples.append(
               (apk_file, self._config.install_privileged_apk_partition))
 
+      # Start & stop the AVD.
+      self._Initialize()
+      instance = _AvdInstance(self._emulator_path, self._emulator_home,
+                              self._config)
+      # Enable debug for snapshot when it is set to True
+      debug_tags = 'init,snapshot' if snapshot else None
+      # Installing privileged apks requires modifying the system
+      # image.
+      writable_system = bool(privileged_apk_tuples)
+      instance.Start(ensure_system_settings=False,
+                     read_only=False,
+                     writable_system=writable_system,
+                     gpu_mode=_DEFAULT_GPU_MODE,
+                     debug_tags=debug_tags)
+
+      assert instance.device is not None, '`instance.device` not initialized.'
+      # Android devices with full-disk encryption are encrypted on first boot,
+      # and then get decrypted to continue the boot process (See details in
+      # https://bit.ly/3agmjcM).
+      # Wait for this step to complete since it can take a while for old OSs
+      # like M, otherwise the avd may have "Encryption Unsuccessful" error.
+      instance.device.WaitUntilFullyBooted(decrypt=True, timeout=180, retries=0)
+
+      if additional_apks:
+        for apk in additional_apks:
+          instance.device.Install(apk, allow_downgrade=True, reinstall=True)
+          package_name = apk_helper.GetPackageName(apk)
+          package_version = instance.device.GetApplicationVersion(package_name)
+          logging.info('The version for package %r on the device is %r',
+                       package_name, package_version)
+
       if privileged_apk_tuples:
         system_app.InstallPrivilegedApps(instance.device, privileged_apk_tuples)
+        for apk, _ in privileged_apk_tuples:
+          package_name = apk_helper.GetPackageName(apk)
+          package_version = instance.device.GetApplicationVersion(package_name)
+          logging.info('The version for package %r on the device is %r',
+                       package_name, package_version)
 
       # Always disable the network to prevent built-in system apps from
       # updating themselves, which could take over package manager and
