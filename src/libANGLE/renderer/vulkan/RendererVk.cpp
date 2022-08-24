@@ -3760,6 +3760,10 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     ANGLE_FEATURE_CONDITION(&mFeatures, supportsExtendedDynamicState2,
                             mExtendedDynamicState2Features.extendedDynamicState2 == VK_TRUE);
 
+    // Avoid dynamic state for vertex input binding stride on buggy drivers.
+    ANGLE_FEATURE_CONDITION(&mFeatures, forceStaticVertexStrideState,
+                            mFeatures.supportsExtendedDynamicState.enabled && isARM);
+
     // Support GL_QCOM_shading_rate extension
     ANGLE_FEATURE_CONDITION(&mFeatures, supportsFragmentShadingRate,
                             canSupportFragmentShadingRate(deviceExtensionNames));
@@ -3925,7 +3929,8 @@ void RendererVk::initializeFrontendFeatures(angle::FrontendFeatures *features) c
     // https://issuetracker.google.com/issues/220069903
     ANGLE_FEATURE_CONDITION(features, forceGlErrorChecking, (IsAndroid() && isSwiftShader));
 
-    ANGLE_FEATURE_CONDITION(features, cacheCompiledShader, true);
+    // TODO(eddiehatfield): re-enable this when the BlobCache test flakes are resolved.
+    ANGLE_FEATURE_CONDITION(features, cacheCompiledShader, false);
 }
 
 angle::Result RendererVk::getPipelineCacheSize(DisplayVk *displayVk, size_t *pipelineCacheSizeOut)
