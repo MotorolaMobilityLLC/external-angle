@@ -9,7 +9,13 @@
             "UseANGLE": false,
             "Applications": [
                 {
+                    "AppName": "com.google.android.apps.photos"
+                },
+                {
                     "AppName": "com.google.android.GoogleCamera"
+                },
+                {
+                    "AppName": "com.google.android.GoogleCameraEng"
                 },
                 {
                     "AppName": "com.google.android.videos"
