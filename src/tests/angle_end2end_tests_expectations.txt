@@ -543,7 +543,6 @@
 7583 PIXEL6 VULKAN : GLSLTest_ES31.ShaderCacheGeometryWithSSBO/* = SKIP
 7583 PIXEL6 VULKAN : GLSLTest_ES31.ShaderCacheTessellationControlWithSSBO/* = SKIP
 7583 PIXEL6 VULKAN : GLSLTest_ES31.ShaderCacheTessellationEvalWithSSBO/* = SKIP
-7583 PIXEL6 VULKAN : GLSLTest_ES31.ShaderCacheVertexWithSSBO/* = SKIP
 7583 PIXEL6 VULKAN : VulkanPerformanceCounterTest.DepthStencilInvalidate/* = SKIP
 7583 PIXEL6 VULKAN : VulkanPerformanceCounterTest.DepthStencilInvalidateAndClear/* = SKIP
 7583 PIXEL6 VULKAN : VulkanPerformanceCounterTest.DepthStencilInvalidateDetachModifyTexAttachDrawWithBlend/* = SKIP
@@ -683,10 +682,8 @@
 3032 D3D11 : GLSLTest_ES31.AliasedLoadStore/* = SKIP
 7398 OpenGL : GLSLTest_ES31.AliasedLoadStore/* = SKIP
 
-// image2D handles do not work as function arguments.
-7484 D3D11 : GLSLTest_ES31.*Image2DAsFunctionArg/* = SKIP
-7484 OpenGL : GLSLTest_ES31.*Image2DAsFunctionArg/* = SKIP
-7484 GLES : GLSLTest_ES31.*Image2DAsFunctionArg/* = SKIP
+// On D3D: readonly image2D handles don't return the texture's existing contents.
+7611 D3D11 : GLSLTest_ES31.ReadOnlyImage2DAsFunctionArg/* = SKIP
 
 // Flaky hangs on Linux SwANGLE
 7419 SWIFTSHADER : MultithreadingTestES3.CreateFramebufferFetchBeforeRenderPass/* = SKIP
