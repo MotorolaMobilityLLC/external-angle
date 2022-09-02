@@ -3247,6 +3247,10 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
                              mPhysicalDeviceProperties.deviceName);
     const bool isQualcommProprietary = isQualcomm && !isQualcommOpenSource;
 
+    // Parse the ARM driver version to be readable/comparable
+    const ARMDriverVersion armDriverVersion =
+        ParseARMDriverVersion(mPhysicalDeviceProperties.driverVersion);
+
     // Classify devices based on general architecture:
     //
     // - IMR (Immediate-Mode Rendering) devices generally progress through draw calls once and use
@@ -3438,7 +3442,8 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
         &mFeatures, supportsRenderPassLoadStoreOpNone,
         ExtensionFound(VK_EXT_LOAD_STORE_OP_NONE_EXTENSION_NAME, deviceExtensionNames));
 
-    ANGLE_FEATURE_CONDITION(&mFeatures, disallowMixedDepthStencilLoadOpNoneAndLoad, isARM);
+    ANGLE_FEATURE_CONDITION(&mFeatures, disallowMixedDepthStencilLoadOpNoneAndLoad,
+                            isARM && armDriverVersion < ARMDriverVersion(38, 1, 0));
 
     ANGLE_FEATURE_CONDITION(
         &mFeatures, supportsRenderPassStoreOpNone,
@@ -3810,7 +3815,8 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // On ARM, dynamic state for stencil write mask doesn't work correctly in the presence of
     // discard or alpha to coverage, if the static state provided when creating the pipeline has a
     // value of 0.
-    ANGLE_FEATURE_CONDITION(&mFeatures, useNonZeroStencilWriteMaskStaticState, isARM);
+    ANGLE_FEATURE_CONDITION(&mFeatures, useNonZeroStencilWriteMaskStaticState,
+                            isARM && armDriverVersion < ARMDriverVersion(40, 0, 0));
 
     // On ARM, per-sample shading is not enabled despite the presence of a Sample decoration.  As a
     // workaround, per-sample shading is inferred by ANGLE and explicitly enabled by the API.
@@ -3950,8 +3956,7 @@ void RendererVk::initializeFrontendFeatures(angle::FrontendFeatures *features) c
     // https://issuetracker.google.com/issues/220069903
     ANGLE_FEATURE_CONDITION(features, forceGlErrorChecking, (IsAndroid() && isSwiftShader));
 
-    // TODO(eddiehatfield): re-enable this when the BlobCache test flakes are resolved.
-    ANGLE_FEATURE_CONDITION(features, cacheCompiledShader, false);
+    ANGLE_FEATURE_CONDITION(features, cacheCompiledShader, true);
 }
 
 angle::Result RendererVk::getPipelineCacheSize(DisplayVk *displayVk, size_t *pipelineCacheSizeOut)
