@@ -26544,6 +26544,101 @@ namespace VULKAN_HPP_NAMESPACE
     uint32_t firstInstance = {};
   };
 
+  struct DrawMeshTasksIndirectCommandEXT
+  {
+    using NativeType = VkDrawMeshTasksIndirectCommandEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      DrawMeshTasksIndirectCommandEXT( uint32_t groupCountX_ = {}, uint32_t groupCountY_ = {}, uint32_t groupCountZ_ = {} ) VULKAN_HPP_NOEXCEPT
+      : groupCountX( groupCountX_ )
+      , groupCountY( groupCountY_ )
+      , groupCountZ( groupCountZ_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR DrawMeshTasksIndirectCommandEXT( DrawMeshTasksIndirectCommandEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    DrawMeshTasksIndirectCommandEXT( VkDrawMeshTasksIndirectCommandEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : DrawMeshTasksIndirectCommandEXT( *reinterpret_cast<DrawMeshTasksIndirectCommandEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    DrawMeshTasksIndirectCommandEXT & operator=( DrawMeshTasksIndirectCommandEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    DrawMeshTasksIndirectCommandEXT & operator=( VkDrawMeshTasksIndirectCommandEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::DrawMeshTasksIndirectCommandEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 DrawMeshTasksIndirectCommandEXT & setGroupCountX( uint32_t groupCountX_ ) VULKAN_HPP_NOEXCEPT
+    {
+      groupCountX = groupCountX_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DrawMeshTasksIndirectCommandEXT & setGroupCountY( uint32_t groupCountY_ ) VULKAN_HPP_NOEXCEPT
+    {
+      groupCountY = groupCountY_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DrawMeshTasksIndirectCommandEXT & setGroupCountZ( uint32_t groupCountZ_ ) VULKAN_HPP_NOEXCEPT
+    {
+      groupCountZ = groupCountZ_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkDrawMeshTasksIndirectCommandEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkDrawMeshTasksIndirectCommandEXT *>( this );
+    }
+
+    operator VkDrawMeshTasksIndirectCommandEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkDrawMeshTasksIndirectCommandEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<uint32_t const &, uint32_t const &, uint32_t const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( groupCountX, groupCountY, groupCountZ );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( DrawMeshTasksIndirectCommandEXT const & ) const = default;
+#else
+    bool operator==( DrawMeshTasksIndirectCommandEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( groupCountX == rhs.groupCountX ) && ( groupCountY == rhs.groupCountY ) && ( groupCountZ == rhs.groupCountZ );
+#  endif
+    }
+
+    bool operator!=( DrawMeshTasksIndirectCommandEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    uint32_t groupCountX = {};
+    uint32_t groupCountY = {};
+    uint32_t groupCountZ = {};
+  };
+
   struct DrawMeshTasksIndirectCommandNV
   {
     using NativeType = VkDrawMeshTasksIndirectCommandNV;
@@ -47859,6 +47954,104 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV;
   };
 
+  struct PhysicalDeviceDepthClampZeroOneFeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceDepthClampZeroOneFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceDepthClampZeroOneFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceDepthClampZeroOneFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 depthClampZeroOne_ = {},
+                                                                     void *                       pNext_             = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , depthClampZeroOne( depthClampZeroOne_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceDepthClampZeroOneFeaturesEXT( PhysicalDeviceDepthClampZeroOneFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceDepthClampZeroOneFeaturesEXT( VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceDepthClampZeroOneFeaturesEXT( *reinterpret_cast<PhysicalDeviceDepthClampZeroOneFeaturesEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceDepthClampZeroOneFeaturesEXT & operator=( PhysicalDeviceDepthClampZeroOneFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceDepthClampZeroOneFeaturesEXT & operator=( VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceDepthClampZeroOneFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDepthClampZeroOneFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDepthClampZeroOneFeaturesEXT &
+                            setDepthClampZeroOne( VULKAN_HPP_NAMESPACE::Bool32 depthClampZeroOne_ ) VULKAN_HPP_NOEXCEPT
+    {
+      depthClampZeroOne = depthClampZeroOne_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceDepthClampZeroOneFeaturesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceDepthClampZeroOneFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceDepthClampZeroOneFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, depthClampZeroOne );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceDepthClampZeroOneFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceDepthClampZeroOneFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( depthClampZeroOne == rhs.depthClampZeroOne );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceDepthClampZeroOneFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType             = StructureType::ePhysicalDeviceDepthClampZeroOneFeaturesEXT;
+    void *                              pNext             = {};
+    VULKAN_HPP_NAMESPACE::Bool32        depthClampZeroOne = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceDepthClampZeroOneFeaturesEXT>
+  {
+    using Type = PhysicalDeviceDepthClampZeroOneFeaturesEXT;
+  };
+
   struct PhysicalDeviceDepthClipControlFeaturesEXT
   {
     using NativeType = VkPhysicalDeviceDepthClipControlFeaturesEXT;
@@ -56333,6 +56526,149 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceMemoryProperties2KHR = PhysicalDeviceMemoryProperties2;
 
+  struct PhysicalDeviceMeshShaderFeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceMeshShaderFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceMeshShaderFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceMeshShaderFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 taskShader_                             = {},
+                                                              VULKAN_HPP_NAMESPACE::Bool32 meshShader_                             = {},
+                                                              VULKAN_HPP_NAMESPACE::Bool32 multiviewMeshShader_                    = {},
+                                                              VULKAN_HPP_NAMESPACE::Bool32 primitiveFragmentShadingRateMeshShader_ = {},
+                                                              VULKAN_HPP_NAMESPACE::Bool32 meshShaderQueries_                      = {},
+                                                              void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , taskShader( taskShader_ )
+      , meshShader( meshShader_ )
+      , multiviewMeshShader( multiviewMeshShader_ )
+      , primitiveFragmentShadingRateMeshShader( primitiveFragmentShadingRateMeshShader_ )
+      , meshShaderQueries( meshShaderQueries_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceMeshShaderFeaturesEXT( PhysicalDeviceMeshShaderFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceMeshShaderFeaturesEXT( VkPhysicalDeviceMeshShaderFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceMeshShaderFeaturesEXT( *reinterpret_cast<PhysicalDeviceMeshShaderFeaturesEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceMeshShaderFeaturesEXT & operator=( PhysicalDeviceMeshShaderFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceMeshShaderFeaturesEXT & operator=( VkPhysicalDeviceMeshShaderFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceMeshShaderFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMeshShaderFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMeshShaderFeaturesEXT & setTaskShader( VULKAN_HPP_NAMESPACE::Bool32 taskShader_ ) VULKAN_HPP_NOEXCEPT
+    {
+      taskShader = taskShader_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMeshShaderFeaturesEXT & setMeshShader( VULKAN_HPP_NAMESPACE::Bool32 meshShader_ ) VULKAN_HPP_NOEXCEPT
+    {
+      meshShader = meshShader_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMeshShaderFeaturesEXT &
+                            setMultiviewMeshShader( VULKAN_HPP_NAMESPACE::Bool32 multiviewMeshShader_ ) VULKAN_HPP_NOEXCEPT
+    {
+      multiviewMeshShader = multiviewMeshShader_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMeshShaderFeaturesEXT &
+      setPrimitiveFragmentShadingRateMeshShader( VULKAN_HPP_NAMESPACE::Bool32 primitiveFragmentShadingRateMeshShader_ ) VULKAN_HPP_NOEXCEPT
+    {
+      primitiveFragmentShadingRateMeshShader = primitiveFragmentShadingRateMeshShader_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMeshShaderFeaturesEXT & setMeshShaderQueries( VULKAN_HPP_NAMESPACE::Bool32 meshShaderQueries_ ) VULKAN_HPP_NOEXCEPT
+    {
+      meshShaderQueries = meshShaderQueries_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceMeshShaderFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceMeshShaderFeaturesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceMeshShaderFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceMeshShaderFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, taskShader, meshShader, multiviewMeshShader, primitiveFragmentShadingRateMeshShader, meshShaderQueries );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceMeshShaderFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceMeshShaderFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( taskShader == rhs.taskShader ) && ( meshShader == rhs.meshShader ) &&
+             ( multiviewMeshShader == rhs.multiviewMeshShader ) && ( primitiveFragmentShadingRateMeshShader == rhs.primitiveFragmentShadingRateMeshShader ) &&
+             ( meshShaderQueries == rhs.meshShaderQueries );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceMeshShaderFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                                  = StructureType::ePhysicalDeviceMeshShaderFeaturesEXT;
+    void *                              pNext                                  = {};
+    VULKAN_HPP_NAMESPACE::Bool32        taskShader                             = {};
+    VULKAN_HPP_NAMESPACE::Bool32        meshShader                             = {};
+    VULKAN_HPP_NAMESPACE::Bool32        multiviewMeshShader                    = {};
+    VULKAN_HPP_NAMESPACE::Bool32        primitiveFragmentShadingRateMeshShader = {};
+    VULKAN_HPP_NAMESPACE::Bool32        meshShaderQueries                      = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceMeshShaderFeaturesEXT>
+  {
+    using Type = PhysicalDeviceMeshShaderFeaturesEXT;
+  };
+
   struct PhysicalDeviceMeshShaderFeaturesNV
   {
     using NativeType = VkPhysicalDeviceMeshShaderFeaturesNV;
@@ -56437,6 +56773,244 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::ePhysicalDeviceMeshShaderFeaturesNV>
   {
     using Type = PhysicalDeviceMeshShaderFeaturesNV;
+  };
+
+  struct PhysicalDeviceMeshShaderPropertiesEXT
+  {
+    using NativeType = VkPhysicalDeviceMeshShaderPropertiesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceMeshShaderPropertiesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMeshShaderPropertiesEXT( uint32_t                        maxTaskWorkGroupTotalCount_            = {},
+                                                                   std::array<uint32_t, 3> const & maxTaskWorkGroupCount_                 = {},
+                                                                   uint32_t                        maxTaskWorkGroupInvocations_           = {},
+                                                                   std::array<uint32_t, 3> const & maxTaskWorkGroupSize_                  = {},
+                                                                   uint32_t                        maxTaskPayloadSize_                    = {},
+                                                                   uint32_t                        maxTaskSharedMemorySize_               = {},
+                                                                   uint32_t                        maxTaskPayloadAndSharedMemorySize_     = {},
+                                                                   uint32_t                        maxMeshWorkGroupTotalCount_            = {},
+                                                                   std::array<uint32_t, 3> const & maxMeshWorkGroupCount_                 = {},
+                                                                   uint32_t                        maxMeshWorkGroupInvocations_           = {},
+                                                                   std::array<uint32_t, 3> const & maxMeshWorkGroupSize_                  = {},
+                                                                   uint32_t                        maxMeshSharedMemorySize_               = {},
+                                                                   uint32_t                        maxMeshPayloadAndSharedMemorySize_     = {},
+                                                                   uint32_t                        maxMeshOutputMemorySize_               = {},
+                                                                   uint32_t                        maxMeshPayloadAndOutputMemorySize_     = {},
+                                                                   uint32_t                        maxMeshOutputComponents_               = {},
+                                                                   uint32_t                        maxMeshOutputVertices_                 = {},
+                                                                   uint32_t                        maxMeshOutputPrimitives_               = {},
+                                                                   uint32_t                        maxMeshOutputLayers_                   = {},
+                                                                   uint32_t                        maxMeshMultiviewViewCount_             = {},
+                                                                   uint32_t                        meshOutputPerVertexGranularity_        = {},
+                                                                   uint32_t                        meshOutputPerPrimitiveGranularity_     = {},
+                                                                   uint32_t                        maxPreferredTaskWorkGroupInvocations_  = {},
+                                                                   uint32_t                        maxPreferredMeshWorkGroupInvocations_  = {},
+                                                                   VULKAN_HPP_NAMESPACE::Bool32    prefersLocalInvocationVertexOutput_    = {},
+                                                                   VULKAN_HPP_NAMESPACE::Bool32    prefersLocalInvocationPrimitiveOutput_ = {},
+                                                                   VULKAN_HPP_NAMESPACE::Bool32    prefersCompactVertexOutput_            = {},
+                                                                   VULKAN_HPP_NAMESPACE::Bool32    prefersCompactPrimitiveOutput_         = {},
+                                                                   void *                          pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , maxTaskWorkGroupTotalCount( maxTaskWorkGroupTotalCount_ )
+      , maxTaskWorkGroupCount( maxTaskWorkGroupCount_ )
+      , maxTaskWorkGroupInvocations( maxTaskWorkGroupInvocations_ )
+      , maxTaskWorkGroupSize( maxTaskWorkGroupSize_ )
+      , maxTaskPayloadSize( maxTaskPayloadSize_ )
+      , maxTaskSharedMemorySize( maxTaskSharedMemorySize_ )
+      , maxTaskPayloadAndSharedMemorySize( maxTaskPayloadAndSharedMemorySize_ )
+      , maxMeshWorkGroupTotalCount( maxMeshWorkGroupTotalCount_ )
+      , maxMeshWorkGroupCount( maxMeshWorkGroupCount_ )
+      , maxMeshWorkGroupInvocations( maxMeshWorkGroupInvocations_ )
+      , maxMeshWorkGroupSize( maxMeshWorkGroupSize_ )
+      , maxMeshSharedMemorySize( maxMeshSharedMemorySize_ )
+      , maxMeshPayloadAndSharedMemorySize( maxMeshPayloadAndSharedMemorySize_ )
+      , maxMeshOutputMemorySize( maxMeshOutputMemorySize_ )
+      , maxMeshPayloadAndOutputMemorySize( maxMeshPayloadAndOutputMemorySize_ )
+      , maxMeshOutputComponents( maxMeshOutputComponents_ )
+      , maxMeshOutputVertices( maxMeshOutputVertices_ )
+      , maxMeshOutputPrimitives( maxMeshOutputPrimitives_ )
+      , maxMeshOutputLayers( maxMeshOutputLayers_ )
+      , maxMeshMultiviewViewCount( maxMeshMultiviewViewCount_ )
+      , meshOutputPerVertexGranularity( meshOutputPerVertexGranularity_ )
+      , meshOutputPerPrimitiveGranularity( meshOutputPerPrimitiveGranularity_ )
+      , maxPreferredTaskWorkGroupInvocations( maxPreferredTaskWorkGroupInvocations_ )
+      , maxPreferredMeshWorkGroupInvocations( maxPreferredMeshWorkGroupInvocations_ )
+      , prefersLocalInvocationVertexOutput( prefersLocalInvocationVertexOutput_ )
+      , prefersLocalInvocationPrimitiveOutput( prefersLocalInvocationPrimitiveOutput_ )
+      , prefersCompactVertexOutput( prefersCompactVertexOutput_ )
+      , prefersCompactPrimitiveOutput( prefersCompactPrimitiveOutput_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMeshShaderPropertiesEXT( PhysicalDeviceMeshShaderPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceMeshShaderPropertiesEXT( VkPhysicalDeviceMeshShaderPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceMeshShaderPropertiesEXT( *reinterpret_cast<PhysicalDeviceMeshShaderPropertiesEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceMeshShaderPropertiesEXT & operator=( PhysicalDeviceMeshShaderPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceMeshShaderPropertiesEXT & operator=( VkPhysicalDeviceMeshShaderPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceMeshShaderPropertiesEXT const *>( &rhs );
+      return *this;
+    }
+
+    operator VkPhysicalDeviceMeshShaderPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceMeshShaderPropertiesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceMeshShaderPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               uint32_t const &,
+               VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint32_t, 3> const &,
+               uint32_t const &,
+               VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint32_t, 3> const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint32_t, 3> const &,
+               uint32_t const &,
+               VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint32_t, 3> const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType,
+                       pNext,
+                       maxTaskWorkGroupTotalCount,
+                       maxTaskWorkGroupCount,
+                       maxTaskWorkGroupInvocations,
+                       maxTaskWorkGroupSize,
+                       maxTaskPayloadSize,
+                       maxTaskSharedMemorySize,
+                       maxTaskPayloadAndSharedMemorySize,
+                       maxMeshWorkGroupTotalCount,
+                       maxMeshWorkGroupCount,
+                       maxMeshWorkGroupInvocations,
+                       maxMeshWorkGroupSize,
+                       maxMeshSharedMemorySize,
+                       maxMeshPayloadAndSharedMemorySize,
+                       maxMeshOutputMemorySize,
+                       maxMeshPayloadAndOutputMemorySize,
+                       maxMeshOutputComponents,
+                       maxMeshOutputVertices,
+                       maxMeshOutputPrimitives,
+                       maxMeshOutputLayers,
+                       maxMeshMultiviewViewCount,
+                       meshOutputPerVertexGranularity,
+                       meshOutputPerPrimitiveGranularity,
+                       maxPreferredTaskWorkGroupInvocations,
+                       maxPreferredMeshWorkGroupInvocations,
+                       prefersLocalInvocationVertexOutput,
+                       prefersLocalInvocationPrimitiveOutput,
+                       prefersCompactVertexOutput,
+                       prefersCompactPrimitiveOutput );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceMeshShaderPropertiesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceMeshShaderPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxTaskWorkGroupTotalCount == rhs.maxTaskWorkGroupTotalCount ) &&
+             ( maxTaskWorkGroupCount == rhs.maxTaskWorkGroupCount ) && ( maxTaskWorkGroupInvocations == rhs.maxTaskWorkGroupInvocations ) &&
+             ( maxTaskWorkGroupSize == rhs.maxTaskWorkGroupSize ) && ( maxTaskPayloadSize == rhs.maxTaskPayloadSize ) &&
+             ( maxTaskSharedMemorySize == rhs.maxTaskSharedMemorySize ) && ( maxTaskPayloadAndSharedMemorySize == rhs.maxTaskPayloadAndSharedMemorySize ) &&
+             ( maxMeshWorkGroupTotalCount == rhs.maxMeshWorkGroupTotalCount ) && ( maxMeshWorkGroupCount == rhs.maxMeshWorkGroupCount ) &&
+             ( maxMeshWorkGroupInvocations == rhs.maxMeshWorkGroupInvocations ) && ( maxMeshWorkGroupSize == rhs.maxMeshWorkGroupSize ) &&
+             ( maxMeshSharedMemorySize == rhs.maxMeshSharedMemorySize ) && ( maxMeshPayloadAndSharedMemorySize == rhs.maxMeshPayloadAndSharedMemorySize ) &&
+             ( maxMeshOutputMemorySize == rhs.maxMeshOutputMemorySize ) && ( maxMeshPayloadAndOutputMemorySize == rhs.maxMeshPayloadAndOutputMemorySize ) &&
+             ( maxMeshOutputComponents == rhs.maxMeshOutputComponents ) && ( maxMeshOutputVertices == rhs.maxMeshOutputVertices ) &&
+             ( maxMeshOutputPrimitives == rhs.maxMeshOutputPrimitives ) && ( maxMeshOutputLayers == rhs.maxMeshOutputLayers ) &&
+             ( maxMeshMultiviewViewCount == rhs.maxMeshMultiviewViewCount ) && ( meshOutputPerVertexGranularity == rhs.meshOutputPerVertexGranularity ) &&
+             ( meshOutputPerPrimitiveGranularity == rhs.meshOutputPerPrimitiveGranularity ) &&
+             ( maxPreferredTaskWorkGroupInvocations == rhs.maxPreferredTaskWorkGroupInvocations ) &&
+             ( maxPreferredMeshWorkGroupInvocations == rhs.maxPreferredMeshWorkGroupInvocations ) &&
+             ( prefersLocalInvocationVertexOutput == rhs.prefersLocalInvocationVertexOutput ) &&
+             ( prefersLocalInvocationPrimitiveOutput == rhs.prefersLocalInvocationPrimitiveOutput ) &&
+             ( prefersCompactVertexOutput == rhs.prefersCompactVertexOutput ) && ( prefersCompactPrimitiveOutput == rhs.prefersCompactPrimitiveOutput );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceMeshShaderPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType               sType                                 = StructureType::ePhysicalDeviceMeshShaderPropertiesEXT;
+    void *                                            pNext                                 = {};
+    uint32_t                                          maxTaskWorkGroupTotalCount            = {};
+    VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint32_t, 3> maxTaskWorkGroupCount                 = {};
+    uint32_t                                          maxTaskWorkGroupInvocations           = {};
+    VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint32_t, 3> maxTaskWorkGroupSize                  = {};
+    uint32_t                                          maxTaskPayloadSize                    = {};
+    uint32_t                                          maxTaskSharedMemorySize               = {};
+    uint32_t                                          maxTaskPayloadAndSharedMemorySize     = {};
+    uint32_t                                          maxMeshWorkGroupTotalCount            = {};
+    VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint32_t, 3> maxMeshWorkGroupCount                 = {};
+    uint32_t                                          maxMeshWorkGroupInvocations           = {};
+    VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint32_t, 3> maxMeshWorkGroupSize                  = {};
+    uint32_t                                          maxMeshSharedMemorySize               = {};
+    uint32_t                                          maxMeshPayloadAndSharedMemorySize     = {};
+    uint32_t                                          maxMeshOutputMemorySize               = {};
+    uint32_t                                          maxMeshPayloadAndOutputMemorySize     = {};
+    uint32_t                                          maxMeshOutputComponents               = {};
+    uint32_t                                          maxMeshOutputVertices                 = {};
+    uint32_t                                          maxMeshOutputPrimitives               = {};
+    uint32_t                                          maxMeshOutputLayers                   = {};
+    uint32_t                                          maxMeshMultiviewViewCount             = {};
+    uint32_t                                          meshOutputPerVertexGranularity        = {};
+    uint32_t                                          meshOutputPerPrimitiveGranularity     = {};
+    uint32_t                                          maxPreferredTaskWorkGroupInvocations  = {};
+    uint32_t                                          maxPreferredMeshWorkGroupInvocations  = {};
+    VULKAN_HPP_NAMESPACE::Bool32                      prefersLocalInvocationVertexOutput    = {};
+    VULKAN_HPP_NAMESPACE::Bool32                      prefersLocalInvocationPrimitiveOutput = {};
+    VULKAN_HPP_NAMESPACE::Bool32                      prefersCompactVertexOutput            = {};
+    VULKAN_HPP_NAMESPACE::Bool32                      prefersCompactPrimitiveOutput         = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceMeshShaderPropertiesEXT>
+  {
+    using Type = PhysicalDeviceMeshShaderPropertiesEXT;
   };
 
   struct PhysicalDeviceMeshShaderPropertiesNV
@@ -91825,6 +92399,105 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
+  struct VideoDecodeUsageInfoKHR
+  {
+    using NativeType = VkVideoDecodeUsageInfoKHR;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeUsageInfoKHR;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR VideoDecodeUsageInfoKHR( VULKAN_HPP_NAMESPACE::VideoDecodeUsageFlagsKHR videoUsageHints_ = {},
+                                                  const void *                                   pNext_           = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , videoUsageHints( videoUsageHints_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR VideoDecodeUsageInfoKHR( VideoDecodeUsageInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    VideoDecodeUsageInfoKHR( VkVideoDecodeUsageInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      : VideoDecodeUsageInfoKHR( *reinterpret_cast<VideoDecodeUsageInfoKHR const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    VideoDecodeUsageInfoKHR & operator=( VideoDecodeUsageInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    VideoDecodeUsageInfoKHR & operator=( VkVideoDecodeUsageInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::VideoDecodeUsageInfoKHR const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 VideoDecodeUsageInfoKHR & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoDecodeUsageInfoKHR & setVideoUsageHints( VULKAN_HPP_NAMESPACE::VideoDecodeUsageFlagsKHR videoUsageHints_ ) VULKAN_HPP_NOEXCEPT
+    {
+      videoUsageHints = videoUsageHints_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkVideoDecodeUsageInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkVideoDecodeUsageInfoKHR *>( this );
+    }
+
+    operator VkVideoDecodeUsageInfoKHR &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkVideoDecodeUsageInfoKHR *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::VideoDecodeUsageFlagsKHR const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, videoUsageHints );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( VideoDecodeUsageInfoKHR const & ) const = default;
+#  else
+    bool operator==( VideoDecodeUsageInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( videoUsageHints == rhs.videoUsageHints );
+#    endif
+    }
+
+    bool operator!=( VideoDecodeUsageInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType            sType           = StructureType::eVideoDecodeUsageInfoKHR;
+    const void *                                   pNext           = {};
+    VULKAN_HPP_NAMESPACE::VideoDecodeUsageFlagsKHR videoUsageHints = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eVideoDecodeUsageInfoKHR>
+  {
+    using Type = VideoDecodeUsageInfoKHR;
+  };
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
   struct VideoEncodeCapabilitiesKHR
   {
     using NativeType = VkVideoEncodeCapabilitiesKHR;
@@ -96192,6 +96865,130 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::eVideoEncodeRateControlInfoKHR>
   {
     using Type = VideoEncodeRateControlInfoKHR;
+  };
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+  struct VideoEncodeUsageInfoKHR
+  {
+    using NativeType = VkVideoEncodeUsageInfoKHR;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeUsageInfoKHR;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      VideoEncodeUsageInfoKHR( VULKAN_HPP_NAMESPACE::VideoEncodeUsageFlagsKHR   videoUsageHints_   = {},
+                               VULKAN_HPP_NAMESPACE::VideoEncodeContentFlagsKHR videoContentHints_ = {},
+                               VULKAN_HPP_NAMESPACE::VideoEncodeTuningModeKHR   tuningMode_        = VULKAN_HPP_NAMESPACE::VideoEncodeTuningModeKHR::eDefault,
+                               const void *                                     pNext_             = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , videoUsageHints( videoUsageHints_ )
+      , videoContentHints( videoContentHints_ )
+      , tuningMode( tuningMode_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR VideoEncodeUsageInfoKHR( VideoEncodeUsageInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    VideoEncodeUsageInfoKHR( VkVideoEncodeUsageInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      : VideoEncodeUsageInfoKHR( *reinterpret_cast<VideoEncodeUsageInfoKHR const *>( &rhs ) )
+    {
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    VideoEncodeUsageInfoKHR & operator=( VideoEncodeUsageInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    VideoEncodeUsageInfoKHR & operator=( VkVideoEncodeUsageInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::VideoEncodeUsageInfoKHR const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeUsageInfoKHR & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeUsageInfoKHR & setVideoUsageHints( VULKAN_HPP_NAMESPACE::VideoEncodeUsageFlagsKHR videoUsageHints_ ) VULKAN_HPP_NOEXCEPT
+    {
+      videoUsageHints = videoUsageHints_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeUsageInfoKHR &
+                            setVideoContentHints( VULKAN_HPP_NAMESPACE::VideoEncodeContentFlagsKHR videoContentHints_ ) VULKAN_HPP_NOEXCEPT
+    {
+      videoContentHints = videoContentHints_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 VideoEncodeUsageInfoKHR & setTuningMode( VULKAN_HPP_NAMESPACE::VideoEncodeTuningModeKHR tuningMode_ ) VULKAN_HPP_NOEXCEPT
+    {
+      tuningMode = tuningMode_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkVideoEncodeUsageInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkVideoEncodeUsageInfoKHR *>( this );
+    }
+
+    operator VkVideoEncodeUsageInfoKHR &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkVideoEncodeUsageInfoKHR *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::VideoEncodeUsageFlagsKHR const &,
+               VULKAN_HPP_NAMESPACE::VideoEncodeContentFlagsKHR const &,
+               VULKAN_HPP_NAMESPACE::VideoEncodeTuningModeKHR const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, videoUsageHints, videoContentHints, tuningMode );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( VideoEncodeUsageInfoKHR const & ) const = default;
+#  else
+    bool operator==( VideoEncodeUsageInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( videoUsageHints == rhs.videoUsageHints ) && ( videoContentHints == rhs.videoContentHints ) &&
+             ( tuningMode == rhs.tuningMode );
+#    endif
+    }
+
+    bool operator!=( VideoEncodeUsageInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType              sType             = StructureType::eVideoEncodeUsageInfoKHR;
+    const void *                                     pNext             = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeUsageFlagsKHR   videoUsageHints   = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeContentFlagsKHR videoContentHints = {};
+    VULKAN_HPP_NAMESPACE::VideoEncodeTuningModeKHR   tuningMode        = VULKAN_HPP_NAMESPACE::VideoEncodeTuningModeKHR::eDefault;
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eVideoEncodeUsageInfoKHR>
+  {
+    using Type = VideoEncodeUsageInfoKHR;
   };
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
