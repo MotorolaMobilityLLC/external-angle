@@ -598,7 +598,7 @@
 
 // ASAN flakes with Vulkan / SwiftShader / AsyncCommandQueue
 6875 ASAN VULKAN SWIFTSHADER : ComputeShaderTest.*/ES3_1_Vulkan_SwiftShader_AsyncCommandQueue = SKIP
-6875 SWIFTSHADER : TransformFeedbackTest.SpanMultipleRenderPasses/* = SKIP
+6875 SWIFTSHADER : TransformFeedbackTest.SpanMultipleRenderPasses/*AsyncCommandQueue* = SKIP
 
 7112 SWIFTSHADER : TransformFeedbackTest.BaseInstance/* = SKIP
 7112 PIXEL4ORXL VULKAN : TransformFeedbackTest.BaseInstance/* = SKIP
@@ -706,3 +706,5 @@
 6261 : MultithreadingTest* = TIMEOUT
 // Please do not add expectations below this line,
 // so that TIMEOUT expectations above don't override more precise SKIP expectations
+
+7629 VULKAN : EGLRobustnessTestES3.Context*ResetOnInvalidLocalShaderVariableAccess_ShareGroupAfterProgramCreation/* = SKIP

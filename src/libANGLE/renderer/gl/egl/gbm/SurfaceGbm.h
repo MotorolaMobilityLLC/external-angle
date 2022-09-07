@@ -22,9 +22,6 @@ class SurfaceGbm : public SurfaceGL
     SurfaceGbm(const egl::SurfaceState &state, DisplayGbm::Buffer *buffer);
     ~SurfaceGbm() override;
 
-    FramebufferImpl *createDefaultFramebuffer(const gl::Context *context,
-                                              const gl::FramebufferState &state) override;
-
     egl::Error initialize(const egl::Display *display) override;
     egl::Error makeCurrent(const gl::Context *context) override;
 

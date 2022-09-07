@@ -134,13 +134,13 @@ EGLint PbufferSurfaceEAGL::getSwapBehavior() const
 egl::Error PbufferSurfaceEAGL::attachToFramebuffer(const gl::Context *context,
                                                    gl::Framebuffer *framebuffer)
 {
-    FramebufferGL *framebufferGL = GetImplAs<framebufferGL>(framebuffer);
+    FramebufferGL *framebufferGL = GetImplAs<FramebufferGL>(framebuffer);
     ASSERT(framebufferGL->getFramebufferID() == 0);
     if (mFramebufferID == 0)
     {
         GLuint framebufferID = 0;
         mFunctions->genFramebuffers(1, &framebufferID);
-        stateManager->bindFramebuffer(GL_FRAMEBUFFER, framebufferID);
+        mStateManager->bindFramebuffer(GL_FRAMEBUFFER, framebufferID);
         mFunctions->framebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER,
                                             mColorRenderbuffer);
         mFunctions->framebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
@@ -151,9 +151,9 @@ egl::Error PbufferSurfaceEAGL::attachToFramebuffer(const gl::Context *context,
 }
 
 egl::Error PbufferSurfaceEAGL::detachFromFramebuffer(const gl::Context *context,
-                                                     FramebufferImpl *framebuffer)
+                                                     gl::Framebuffer *framebuffer)
 {
-    FramebufferGL *framebufferGL = static_cast<framebufferGL>(framebuffer);
+    FramebufferGL *framebufferGL = GetImplAs<FramebufferGL>(framebuffer);
     ASSERT(framebufferGL->getFramebufferID() == mFramebufferID);
     framebufferGL->setFramebufferID(0);
     return egl::NoError();
