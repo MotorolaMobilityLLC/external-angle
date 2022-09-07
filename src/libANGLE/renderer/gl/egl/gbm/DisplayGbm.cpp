@@ -330,7 +330,7 @@ egl::Error DisplayGbm::Buffer::detachFromFramebuffer(const gl::Context *context,
 {
     ASSERT(framebuffer->getFramebufferID() == mFramebufferID);
     framebuffer->setFramebufferID(0);
-    return eg::NoError();
+    return egl::NoError();
 }
 
 void DisplayGbm::Buffer::present(const gl::Context *context)
