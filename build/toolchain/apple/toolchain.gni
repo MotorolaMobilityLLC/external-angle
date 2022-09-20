@@ -1,4 +1,4 @@
-# Copyright (c) 2013 The Chromium Authors. All rights reserved.
+# Copyright 2013 The Chromium Authors
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
@@ -37,7 +37,7 @@ if (swift_toolchain_path == -1) {
     # the compiler is rolled to ensure that all outputs are regenerated. It must
     # be kept in sync with the `version` of `third_party/swift-toolchain` in
     # //DEPS.
-    swiftc_version = "swift-5.7-20220818"
+    swiftc_version = "swift-5.7-release"
 
     # Use the hermetic swift toolchain.
     swift_toolchain_path =
@@ -631,6 +631,19 @@ template("apple_toolchain") {
         # version changes.
         if (defined(swiftc_version)) {
           _extra_flags += " -swiftc-version $swiftc_version"
+        }
+
+        # Include the version of Xcode on the command-line (if specified via
+        # toolchain_args). This causes `ninja` to consider all the compilation
+        # outputs to be dirty when the version change.
+        #
+        # This is required because sometimes module dependency changes between
+        # different version of Xcode (e.g. when moving from Xcode 14 beta 6 to
+        # Xcode 14 RC). If the swiftmodule are not rebuilt when the version
+        # changes, they may encode dependency on now non-existing frameworks
+        # causing linker failures ultimately.
+        if (defined(toolchain_args.xcode_build)) {
+          _extra_flags += " -xcode-version ${toolchain_args.xcode_build}"
         }
 
         if (swift_toolchain_path != "") {
