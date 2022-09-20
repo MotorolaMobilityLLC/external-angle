@@ -54911,6 +54911,103 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceInvocationMaskFeaturesHUAWEI;
   };
 
+  struct PhysicalDeviceLegacyDitheringFeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceLegacyDitheringFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceLegacyDitheringFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceLegacyDitheringFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 legacyDithering_ = {},
+                                                                   void *                       pNext_           = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , legacyDithering( legacyDithering_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceLegacyDitheringFeaturesEXT( PhysicalDeviceLegacyDitheringFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceLegacyDitheringFeaturesEXT( VkPhysicalDeviceLegacyDitheringFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceLegacyDitheringFeaturesEXT( *reinterpret_cast<PhysicalDeviceLegacyDitheringFeaturesEXT const *>( &rhs ) )
+    {
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceLegacyDitheringFeaturesEXT & operator=( PhysicalDeviceLegacyDitheringFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceLegacyDitheringFeaturesEXT & operator=( VkPhysicalDeviceLegacyDitheringFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceLegacyDitheringFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceLegacyDitheringFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceLegacyDitheringFeaturesEXT & setLegacyDithering( VULKAN_HPP_NAMESPACE::Bool32 legacyDithering_ ) VULKAN_HPP_NOEXCEPT
+    {
+      legacyDithering = legacyDithering_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceLegacyDitheringFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceLegacyDitheringFeaturesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceLegacyDitheringFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceLegacyDitheringFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, legacyDithering );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceLegacyDitheringFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceLegacyDitheringFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( legacyDithering == rhs.legacyDithering );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceLegacyDitheringFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType           = StructureType::ePhysicalDeviceLegacyDitheringFeaturesEXT;
+    void *                              pNext           = {};
+    VULKAN_HPP_NAMESPACE::Bool32        legacyDithering = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceLegacyDitheringFeaturesEXT>
+  {
+    using Type = PhysicalDeviceLegacyDitheringFeaturesEXT;
+  };
+
   struct PhysicalDeviceLimits
   {
     using NativeType = VkPhysicalDeviceLimits;

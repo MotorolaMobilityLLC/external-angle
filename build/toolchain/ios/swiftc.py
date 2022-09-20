@@ -1,4 +1,4 @@
-# Copyright 2020 The Chromium Authors. All rights reserved.
+# Copyright 2020 The Chromium Authors
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
@@ -310,6 +310,10 @@ def main(args):
                       default='',
                       action='store',
                       help='version of swiftc compiler')
+  parser.add_argument('-xcode-version',
+                      default='',
+                      action='store',
+                      help='version of xcode')
 
   parsed, extras = parser.parse_known_args(args)
   with tempfile.TemporaryDirectory() as tmpdir:
