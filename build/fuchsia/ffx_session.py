@@ -1,5 +1,5 @@
 #!/usr/bin/env vpython3
-# Copyright 2022 The Chromium Authors. All rights reserved.
+# Copyright 2022 The Chromium Authors
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 """A helper tool for running Fuchsia's `ffx`.
@@ -426,11 +426,6 @@ class FfxSession():
     self._debug_data_directory = None
 
   def __enter__(self):
-    # Remove any stale experimental_structure_output value that may have been
-    # left behind by the previous implementation.
-    self._ffx.run_ffx(
-        ['config', 'remove', 'test.experimental_structured_output'],
-        check=False)
     if self._log_manager.IsLoggingEnabled():
       # Use a subdir of the configured log directory to hold test outputs.
       self._output_dir = os.path.join(self._log_manager.GetLogDirectory(),
@@ -472,8 +467,8 @@ class FfxSession():
       A subprocess.Popen object.
     """
     command = [
-        'test', 'run', '--output-directory', self._output_dir, component_uri,
-        '--'
+        '--config', 'test.experimental_structured_output=false', 'test', 'run',
+        '--output-directory', self._output_dir, component_uri, '--'
     ]
     command.extend(package_args)
     return ffx_target.open_ffx(command)
