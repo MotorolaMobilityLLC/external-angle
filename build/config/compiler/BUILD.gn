@@ -1,4 +1,4 @@
-# Copyright (c) 2013 The Chromium Authors. All rights reserved.
+# Copyright 2013 The Chromium Authors
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
@@ -549,6 +549,14 @@ config("compiler") {
       cflags += [ "/clang:-ffp-contract=off" ]
     } else {
       cflags += [ "-ffp-contract=off" ]
+    }
+
+    if (default_toolchain != "//build/toolchain/cros:target") {
+      # TODO(crbug.com/1361629): Fix the compiler so this is not needed.
+      cflags += [
+        "-mllvm",
+        "-simplifycfg-hoist-common-skip-limit=0",
+      ]
     }
   }
 
@@ -1673,7 +1681,7 @@ config("chromium_code") {
     }
 
     # TODO(https://crbug.com/1355871): Enable on more platforms.
-    if (is_win || is_mac || is_linux) {
+    if (!is_ios && !is_chromecast) {
       cflags += [ "-Wextra-semi" ]
     }
   }
@@ -2220,8 +2228,9 @@ if (is_clang && is_a_target_toolchain) {
       _clang_sample_profile = "//chrome/android/profiles/afdo.prof"
     } else {
       assert(chromeos_afdo_platform == "atom" ||
-                 chromeos_afdo_platform == "bigcore",
-             "Only atom and bigcore are valid Chrome OS profiles.")
+                 chromeos_afdo_platform == "bigcore" ||
+                 chromeos_afdo_platform == "arm",
+             "Only atom, bigcore and arm are valid Chrome OS profiles.")
       _clang_sample_profile =
           "//chromeos/profiles/${chromeos_afdo_platform}.afdo.prof"
     }
