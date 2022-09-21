@@ -1,4 +1,4 @@
-# Copyright 2022 The Chromium Authors. All rights reserved.
+# Copyright 2022 The Chromium Authors
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 """Provide helpers for running Fuchsia's `ffx`."""
@@ -232,11 +232,6 @@ class FfxTestRunner(AbstractContextManager):
         self._debug_data_directory = None
 
     def __enter__(self):
-        # Remove any stale experimental_structure_output value that may have
-        # been left behind by the previous implementation.
-        run_ffx_command(
-            ('config', 'remove', 'test.experimental_structured_output'),
-            check=False)
         if self._results_dir:
             os.makedirs(self._results_dir, exist_ok=True)
         else:
@@ -265,8 +260,8 @@ class FfxTestRunner(AbstractContextManager):
             A subprocess.Popen object.
         """
         command = [
-            'test', 'run', '--output-directory', self._results_dir,
-            component_uri
+            '--config', 'test.experimental_structured_output=false', 'test',
+            'run', '--output-directory', self._results_dir, component_uri
         ]
         if test_args:
             command.append('--')
