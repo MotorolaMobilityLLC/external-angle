@@ -12,7 +12,7 @@ import subprocess
 from argparse import ArgumentParser
 from typing import Iterable, List, Optional
 
-from compatible_utils import parse_host_port
+from compatible_utils import get_ssh_prefix
 
 DIR_SRC_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir, os.pardir, os.pardir))
@@ -33,6 +33,17 @@ def get_host_arch() -> str:
 
 SDK_TOOLS_DIR = os.path.join(SDK_ROOT, 'tools', get_host_arch())
 _FFX_TOOL = os.path.join(SDK_TOOLS_DIR, 'ffx')
+
+# This global variable is used to set the environment variable
+# |FFX_ISOLATE_DIR| when running ffx commands in E2E testing scripts.
+_FFX_ISOLATE_DIR = None
+
+
+def set_ffx_isolate_dir(isolate_dir: str) -> None:
+    """Overwrites |_FFX_ISOLATE_DIR|."""
+
+    global _FFX_ISOLATE_DIR  # pylint: disable=global-statement
+    _FFX_ISOLATE_DIR = isolate_dir
 
 
 def _run_repair_command(output):
@@ -86,8 +97,15 @@ def run_ffx_command(cmd: Iterable[str],
     if target_id:
         ffx_cmd.extend(('--target', target_id))
     ffx_cmd.extend(cmd)
+    env = os.environ
+    if _FFX_ISOLATE_DIR:
+        env['FFX_ISOLATE_DIR'] = _FFX_ISOLATE_DIR
     try:
-        return subprocess.run(ffx_cmd, check=check, encoding='utf-8', **kwargs)
+        return subprocess.run(ffx_cmd,
+                              check=check,
+                              encoding='utf-8',
+                              env=env,
+                              **kwargs)
     except subprocess.CalledProcessError as cpe:
         if suppress_repair or not _run_repair_command(cpe.output):
             raise
@@ -185,13 +203,9 @@ def resolve_v1_packages(packages: List[str], target_id: Optional[str]) -> None:
     ssh_address = run_ffx_command(('target', 'get-ssh-address'),
                                   target_id,
                                   capture_output=True).stdout.strip()
-    address, port = parse_host_port(ssh_address)
-
     for package in packages:
-        subprocess.run([
-            'ssh', '-F',
-            os.path.expanduser('~/.fuchsia/sshconfig'), address, '-p',
-            str(port), '--', 'pkgctl', 'resolve',
+        resolve_cmd = [
+            '--', 'pkgctl', 'resolve',
             'fuchsia-pkg://%s/%s' % (REPO_ALIAS, package)
-        ],
-                       check=True)
+        ]
+        subprocess.run(get_ssh_prefix(ssh_address) + resolve_cmd, check=True)
