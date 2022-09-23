@@ -228,6 +228,11 @@ bool ValidateVertexAttribDivisorANGLE(const Context *context,
                                       GLuint index,
                                       GLuint divisor);
 
+// GL_ANGLE_logic_op
+bool ValidateLogicOpANGLE(const Context *context,
+                          angle::EntryPoint entryPoint,
+                          LogicalOperation opcodePacked);
+
 // GL_ANGLE_memory_object_flags
 bool ValidateTexStorageMemFlags2DANGLE(const Context *context,
                                        angle::EntryPoint entryPoint,
@@ -844,6 +849,25 @@ bool ValidateImportSemaphoreZirconHandleANGLE(const Context *context,
                                               SemaphoreID semaphorePacked,
                                               HandleType handleTypePacked,
                                               GLuint handle);
+
+// GL_ANGLE_shader_pixel_local_storage
+bool ValidateFramebufferMemorylessPixelLocalStorageANGLE(const Context *context,
+                                                         angle::EntryPoint entryPoint,
+                                                         GLint plane,
+                                                         GLenum internalformat);
+bool ValidateFramebufferTexturePixelLocalStorageANGLE(const Context *context,
+                                                      angle::EntryPoint entryPoint,
+                                                      GLint plane,
+                                                      TextureID backingtexturePacked,
+                                                      GLint level,
+                                                      GLint layer);
+bool ValidateBeginPixelLocalStorageANGLE(const Context *context,
+                                         angle::EntryPoint entryPoint,
+                                         GLsizei planes,
+                                         const GLenum *loadops,
+                                         const void *cleardata);
+bool ValidateEndPixelLocalStorageANGLE(const Context *context, angle::EntryPoint entryPoint);
+bool ValidatePixelLocalStorageBarrierANGLE(const Context *context, angle::EntryPoint entryPoint);
 
 // GL_ANGLE_texture_compression_dxt3
 

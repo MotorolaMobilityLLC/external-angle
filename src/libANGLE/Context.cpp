@@ -9073,6 +9073,34 @@ void Context::importSemaphoreZirconHandle(SemaphoreID semaphore,
     ANGLE_CONTEXT_TRY(semaphoreObject->importZirconHandle(this, handleType, handle));
 }
 
+void Context::framebufferMemorylessPixelLocalStorage(GLint plane, GLenum internalformat)
+{
+    UNIMPLEMENTED();
+}
+
+void Context::framebufferTexturePixelLocalStorage(GLint plane,
+                                                  TextureID backingtexture,
+                                                  GLint level,
+                                                  GLint layer)
+{
+    UNIMPLEMENTED();
+}
+
+void Context::beginPixelLocalStorage(GLsizei planes, const GLenum loadops[], const void *cleardata)
+{
+    UNIMPLEMENTED();
+}
+
+void Context::endPixelLocalStorage()
+{
+    UNIMPLEMENTED();
+}
+
+void Context::pixelLocalStorageBarrier()
+{
+    UNIMPLEMENTED();
+}
+
 void Context::eGLImageTargetTexStorage(GLenum target, GLeglImageOES image, const GLint *attrib_list)
 {
     Texture *texture        = getTextureByType(FromGLenum<TextureType>(target));
@@ -9539,6 +9567,11 @@ void Context::getRenderbufferImage(GLenum target, GLenum format, GLenum type, vo
     Buffer *packBuffer         = mState.getTargetBuffer(BufferBinding::PixelPack);
     ANGLE_CONTEXT_TRY(renderbuffer->getRenderbufferImage(this, mState.getPackState(), packBuffer,
                                                          format, type, pixels));
+}
+
+void Context::logicOpANGLE(LogicalOperation opcodePacked)
+{
+    mState.setLogicOp(opcodePacked);
 }
 
 egl::Error Context::releaseHighPowerGPU()
