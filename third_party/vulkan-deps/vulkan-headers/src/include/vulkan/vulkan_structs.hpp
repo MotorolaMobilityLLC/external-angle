@@ -43955,49 +43955,49 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MultiviewPerViewAttributesInfoNVX;
   };
 
-  struct MutableDescriptorTypeListVALVE
+  struct MutableDescriptorTypeListEXT
   {
-    using NativeType = VkMutableDescriptorTypeListVALVE;
+    using NativeType = VkMutableDescriptorTypeListEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR MutableDescriptorTypeListVALVE( uint32_t                                     descriptorTypeCount_ = {},
-                                                         const VULKAN_HPP_NAMESPACE::DescriptorType * pDescriptorTypes_    = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR MutableDescriptorTypeListEXT( uint32_t                                     descriptorTypeCount_ = {},
+                                                       const VULKAN_HPP_NAMESPACE::DescriptorType * pDescriptorTypes_    = {} ) VULKAN_HPP_NOEXCEPT
       : descriptorTypeCount( descriptorTypeCount_ )
       , pDescriptorTypes( pDescriptorTypes_ )
     {
     }
 
-    VULKAN_HPP_CONSTEXPR MutableDescriptorTypeListVALVE( MutableDescriptorTypeListVALVE const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+    VULKAN_HPP_CONSTEXPR MutableDescriptorTypeListEXT( MutableDescriptorTypeListEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
-    MutableDescriptorTypeListVALVE( VkMutableDescriptorTypeListVALVE const & rhs ) VULKAN_HPP_NOEXCEPT
-      : MutableDescriptorTypeListVALVE( *reinterpret_cast<MutableDescriptorTypeListVALVE const *>( &rhs ) )
+    MutableDescriptorTypeListEXT( VkMutableDescriptorTypeListEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : MutableDescriptorTypeListEXT( *reinterpret_cast<MutableDescriptorTypeListEXT const *>( &rhs ) )
     {
     }
 
 #  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    MutableDescriptorTypeListVALVE( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::DescriptorType> const & descriptorTypes_ )
+    MutableDescriptorTypeListEXT( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::DescriptorType> const & descriptorTypes_ )
       : descriptorTypeCount( static_cast<uint32_t>( descriptorTypes_.size() ) ), pDescriptorTypes( descriptorTypes_.data() )
     {
     }
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
 
-    MutableDescriptorTypeListVALVE & operator=( MutableDescriptorTypeListVALVE const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+    MutableDescriptorTypeListEXT & operator=( MutableDescriptorTypeListEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
-    MutableDescriptorTypeListVALVE & operator=( VkMutableDescriptorTypeListVALVE const & rhs ) VULKAN_HPP_NOEXCEPT
+    MutableDescriptorTypeListEXT & operator=( VkMutableDescriptorTypeListEXT const & rhs ) VULKAN_HPP_NOEXCEPT
     {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE const *>( &rhs );
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListEXT const *>( &rhs );
       return *this;
     }
 
 #if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 MutableDescriptorTypeListVALVE & setDescriptorTypeCount( uint32_t descriptorTypeCount_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 MutableDescriptorTypeListEXT & setDescriptorTypeCount( uint32_t descriptorTypeCount_ ) VULKAN_HPP_NOEXCEPT
     {
       descriptorTypeCount = descriptorTypeCount_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 MutableDescriptorTypeListVALVE &
+    VULKAN_HPP_CONSTEXPR_14 MutableDescriptorTypeListEXT &
                             setPDescriptorTypes( const VULKAN_HPP_NAMESPACE::DescriptorType * pDescriptorTypes_ ) VULKAN_HPP_NOEXCEPT
     {
       pDescriptorTypes = pDescriptorTypes_;
@@ -44005,7 +44005,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
 #  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    MutableDescriptorTypeListVALVE & setDescriptorTypes(
+    MutableDescriptorTypeListEXT & setDescriptorTypes(
       VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::DescriptorType> const & descriptorTypes_ ) VULKAN_HPP_NOEXCEPT
     {
       descriptorTypeCount = static_cast<uint32_t>( descriptorTypes_.size() );
@@ -44015,14 +44015,14 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    operator VkMutableDescriptorTypeListVALVE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMutableDescriptorTypeListEXT const &() const VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<const VkMutableDescriptorTypeListVALVE *>( this );
+      return *reinterpret_cast<const VkMutableDescriptorTypeListEXT *>( this );
     }
 
-    operator VkMutableDescriptorTypeListVALVE &() VULKAN_HPP_NOEXCEPT
+    operator VkMutableDescriptorTypeListEXT &() VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<VkMutableDescriptorTypeListVALVE *>( this );
+      return *reinterpret_cast<VkMutableDescriptorTypeListEXT *>( this );
     }
 
 #if defined( VULKAN_HPP_USE_REFLECT )
@@ -44038,9 +44038,9 @@ namespace VULKAN_HPP_NAMESPACE
 #endif
 
 #if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
-    auto operator<=>( MutableDescriptorTypeListVALVE const & ) const = default;
+    auto operator<=>( MutableDescriptorTypeListEXT const & ) const = default;
 #else
-    bool operator==( MutableDescriptorTypeListVALVE const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator==( MutableDescriptorTypeListEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
 #  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
@@ -44049,7 +44049,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif
     }
 
-    bool operator!=( MutableDescriptorTypeListVALVE const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator!=( MutableDescriptorTypeListEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
       return !operator==( rhs );
     }
@@ -44059,35 +44059,36 @@ namespace VULKAN_HPP_NAMESPACE
     uint32_t                                     descriptorTypeCount = {};
     const VULKAN_HPP_NAMESPACE::DescriptorType * pDescriptorTypes    = {};
   };
+  using MutableDescriptorTypeListVALVE = MutableDescriptorTypeListEXT;
 
-  struct MutableDescriptorTypeCreateInfoVALVE
+  struct MutableDescriptorTypeCreateInfoEXT
   {
-    using NativeType = VkMutableDescriptorTypeCreateInfoVALVE;
+    using NativeType = VkMutableDescriptorTypeCreateInfoEXT;
 
     static const bool                                  allowDuplicate = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMutableDescriptorTypeCreateInfoVALVE;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMutableDescriptorTypeCreateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR MutableDescriptorTypeCreateInfoVALVE( uint32_t mutableDescriptorTypeListCount_                                                  = {},
-                                                               const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE * pMutableDescriptorTypeLists_ = {},
-                                                               const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR MutableDescriptorTypeCreateInfoEXT( uint32_t                                                   mutableDescriptorTypeListCount_ = {},
+                                                             const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListEXT * pMutableDescriptorTypeLists_    = {},
+                                                             const void *                                               pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
       : pNext( pNext_ )
       , mutableDescriptorTypeListCount( mutableDescriptorTypeListCount_ )
       , pMutableDescriptorTypeLists( pMutableDescriptorTypeLists_ )
     {
     }
 
-    VULKAN_HPP_CONSTEXPR MutableDescriptorTypeCreateInfoVALVE( MutableDescriptorTypeCreateInfoVALVE const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+    VULKAN_HPP_CONSTEXPR MutableDescriptorTypeCreateInfoEXT( MutableDescriptorTypeCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
-    MutableDescriptorTypeCreateInfoVALVE( VkMutableDescriptorTypeCreateInfoVALVE const & rhs ) VULKAN_HPP_NOEXCEPT
-      : MutableDescriptorTypeCreateInfoVALVE( *reinterpret_cast<MutableDescriptorTypeCreateInfoVALVE const *>( &rhs ) )
+    MutableDescriptorTypeCreateInfoEXT( VkMutableDescriptorTypeCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : MutableDescriptorTypeCreateInfoEXT( *reinterpret_cast<MutableDescriptorTypeCreateInfoEXT const *>( &rhs ) )
     {
     }
 
 #  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    MutableDescriptorTypeCreateInfoVALVE(
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE> const & mutableDescriptorTypeLists_,
-      const void *                                                                                                      pNext_ = nullptr )
+    MutableDescriptorTypeCreateInfoEXT(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListEXT> const & mutableDescriptorTypeLists_,
+      const void *                                                                                                    pNext_ = nullptr )
       : pNext( pNext_ )
       , mutableDescriptorTypeListCount( static_cast<uint32_t>( mutableDescriptorTypeLists_.size() ) )
       , pMutableDescriptorTypeLists( mutableDescriptorTypeLists_.data() )
@@ -44096,38 +44097,38 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
 
-    MutableDescriptorTypeCreateInfoVALVE & operator=( MutableDescriptorTypeCreateInfoVALVE const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+    MutableDescriptorTypeCreateInfoEXT & operator=( MutableDescriptorTypeCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
-    MutableDescriptorTypeCreateInfoVALVE & operator=( VkMutableDescriptorTypeCreateInfoVALVE const & rhs ) VULKAN_HPP_NOEXCEPT
+    MutableDescriptorTypeCreateInfoEXT & operator=( VkMutableDescriptorTypeCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
     {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::MutableDescriptorTypeCreateInfoVALVE const *>( &rhs );
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::MutableDescriptorTypeCreateInfoEXT const *>( &rhs );
       return *this;
     }
 
 #if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 MutableDescriptorTypeCreateInfoVALVE & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 MutableDescriptorTypeCreateInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
     {
       pNext = pNext_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 MutableDescriptorTypeCreateInfoVALVE &
+    VULKAN_HPP_CONSTEXPR_14 MutableDescriptorTypeCreateInfoEXT &
                             setMutableDescriptorTypeListCount( uint32_t mutableDescriptorTypeListCount_ ) VULKAN_HPP_NOEXCEPT
     {
       mutableDescriptorTypeListCount = mutableDescriptorTypeListCount_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 MutableDescriptorTypeCreateInfoVALVE &
-      setPMutableDescriptorTypeLists( const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE * pMutableDescriptorTypeLists_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 MutableDescriptorTypeCreateInfoEXT &
+      setPMutableDescriptorTypeLists( const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListEXT * pMutableDescriptorTypeLists_ ) VULKAN_HPP_NOEXCEPT
     {
       pMutableDescriptorTypeLists = pMutableDescriptorTypeLists_;
       return *this;
     }
 
 #  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    MutableDescriptorTypeCreateInfoVALVE & setMutableDescriptorTypeLists(
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE> const & mutableDescriptorTypeLists_ )
+    MutableDescriptorTypeCreateInfoEXT & setMutableDescriptorTypeLists(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListEXT> const & mutableDescriptorTypeLists_ )
       VULKAN_HPP_NOEXCEPT
     {
       mutableDescriptorTypeListCount = static_cast<uint32_t>( mutableDescriptorTypeLists_.size() );
@@ -44137,14 +44138,14 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    operator VkMutableDescriptorTypeCreateInfoVALVE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkMutableDescriptorTypeCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<const VkMutableDescriptorTypeCreateInfoVALVE *>( this );
+      return *reinterpret_cast<const VkMutableDescriptorTypeCreateInfoEXT *>( this );
     }
 
-    operator VkMutableDescriptorTypeCreateInfoVALVE &() VULKAN_HPP_NOEXCEPT
+    operator VkMutableDescriptorTypeCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<VkMutableDescriptorTypeCreateInfoVALVE *>( this );
+      return *reinterpret_cast<VkMutableDescriptorTypeCreateInfoEXT *>( this );
     }
 
 #if defined( VULKAN_HPP_USE_REFLECT )
@@ -44154,7 +44155,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
                const void * const &,
                uint32_t const &,
-               const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE * const &>
+               const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListEXT * const &>
 #  endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
@@ -44163,9 +44164,9 @@ namespace VULKAN_HPP_NAMESPACE
 #endif
 
 #if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
-    auto operator<=>( MutableDescriptorTypeCreateInfoVALVE const & ) const = default;
+    auto operator<=>( MutableDescriptorTypeCreateInfoEXT const & ) const = default;
 #else
-    bool operator==( MutableDescriptorTypeCreateInfoVALVE const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator==( MutableDescriptorTypeCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
 #  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
@@ -44175,24 +44176,25 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif
     }
 
-    bool operator!=( MutableDescriptorTypeCreateInfoVALVE const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator!=( MutableDescriptorTypeCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
       return !operator==( rhs );
     }
 #endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType                          sType                          = StructureType::eMutableDescriptorTypeCreateInfoVALVE;
-    const void *                                                 pNext                          = {};
-    uint32_t                                                     mutableDescriptorTypeListCount = {};
-    const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListVALVE * pMutableDescriptorTypeLists    = {};
+    VULKAN_HPP_NAMESPACE::StructureType                        sType                          = StructureType::eMutableDescriptorTypeCreateInfoEXT;
+    const void *                                               pNext                          = {};
+    uint32_t                                                   mutableDescriptorTypeListCount = {};
+    const VULKAN_HPP_NAMESPACE::MutableDescriptorTypeListEXT * pMutableDescriptorTypeLists    = {};
   };
 
   template <>
-  struct CppType<StructureType, StructureType::eMutableDescriptorTypeCreateInfoVALVE>
+  struct CppType<StructureType, StructureType::eMutableDescriptorTypeCreateInfoEXT>
   {
-    using Type = MutableDescriptorTypeCreateInfoVALVE;
+    using Type = MutableDescriptorTypeCreateInfoEXT;
   };
+  using MutableDescriptorTypeCreateInfoVALVE = MutableDescriptorTypeCreateInfoEXT;
 
   struct PastPresentationTimingGOOGLE
   {
@@ -57840,46 +57842,46 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceMultiviewPropertiesKHR = PhysicalDeviceMultiviewProperties;
 
-  struct PhysicalDeviceMutableDescriptorTypeFeaturesVALVE
+  struct PhysicalDeviceMutableDescriptorTypeFeaturesEXT
   {
-    using NativeType = VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
+    using NativeType = VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT;
 
     static const bool                                  allowDuplicate = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR PhysicalDeviceMutableDescriptorTypeFeaturesVALVE( VULKAN_HPP_NAMESPACE::Bool32 mutableDescriptorType_ = {},
-                                                                           void *                       pNext_                 = nullptr ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceMutableDescriptorTypeFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 mutableDescriptorType_ = {},
+                                                                         void *                       pNext_                 = nullptr ) VULKAN_HPP_NOEXCEPT
       : pNext( pNext_ )
       , mutableDescriptorType( mutableDescriptorType_ )
     {
     }
 
     VULKAN_HPP_CONSTEXPR
-      PhysicalDeviceMutableDescriptorTypeFeaturesVALVE( PhysicalDeviceMutableDescriptorTypeFeaturesVALVE const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+      PhysicalDeviceMutableDescriptorTypeFeaturesEXT( PhysicalDeviceMutableDescriptorTypeFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
-    PhysicalDeviceMutableDescriptorTypeFeaturesVALVE( VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const & rhs ) VULKAN_HPP_NOEXCEPT
-      : PhysicalDeviceMutableDescriptorTypeFeaturesVALVE( *reinterpret_cast<PhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *>( &rhs ) )
+    PhysicalDeviceMutableDescriptorTypeFeaturesEXT( VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceMutableDescriptorTypeFeaturesEXT( *reinterpret_cast<PhysicalDeviceMutableDescriptorTypeFeaturesEXT const *>( &rhs ) )
     {
     }
 #endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
 
-    PhysicalDeviceMutableDescriptorTypeFeaturesVALVE & operator=( PhysicalDeviceMutableDescriptorTypeFeaturesVALVE const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+    PhysicalDeviceMutableDescriptorTypeFeaturesEXT & operator=( PhysicalDeviceMutableDescriptorTypeFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
-    PhysicalDeviceMutableDescriptorTypeFeaturesVALVE & operator=( VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const & rhs ) VULKAN_HPP_NOEXCEPT
+    PhysicalDeviceMutableDescriptorTypeFeaturesEXT & operator=( VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
     {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *>( &rhs );
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceMutableDescriptorTypeFeaturesEXT const *>( &rhs );
       return *this;
     }
 
 #if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMutableDescriptorTypeFeaturesVALVE & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMutableDescriptorTypeFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
     {
       pNext = pNext_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMutableDescriptorTypeFeaturesVALVE &
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMutableDescriptorTypeFeaturesEXT &
                             setMutableDescriptorType( VULKAN_HPP_NAMESPACE::Bool32 mutableDescriptorType_ ) VULKAN_HPP_NOEXCEPT
     {
       mutableDescriptorType = mutableDescriptorType_;
@@ -57887,14 +57889,14 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    operator VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const &() const VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<const VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE *>( this );
+      return *reinterpret_cast<const VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT *>( this );
     }
 
-    operator VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE &() VULKAN_HPP_NOEXCEPT
+    operator VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT &() VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE *>( this );
+      return *reinterpret_cast<VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT *>( this );
     }
 
 #if defined( VULKAN_HPP_USE_REFLECT )
@@ -57910,9 +57912,9 @@ namespace VULKAN_HPP_NAMESPACE
 #endif
 
 #if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
-    auto operator<=>( PhysicalDeviceMutableDescriptorTypeFeaturesVALVE const & ) const = default;
+    auto operator<=>( PhysicalDeviceMutableDescriptorTypeFeaturesEXT const & ) const = default;
 #else
-    bool operator==( PhysicalDeviceMutableDescriptorTypeFeaturesVALVE const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator==( PhysicalDeviceMutableDescriptorTypeFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
 #  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
@@ -57921,23 +57923,24 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif
     }
 
-    bool operator!=( PhysicalDeviceMutableDescriptorTypeFeaturesVALVE const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator!=( PhysicalDeviceMutableDescriptorTypeFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
       return !operator==( rhs );
     }
 #endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType sType                 = StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
+    VULKAN_HPP_NAMESPACE::StructureType sType                 = StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesEXT;
     void *                              pNext                 = {};
     VULKAN_HPP_NAMESPACE::Bool32        mutableDescriptorType = {};
   };
 
   template <>
-  struct CppType<StructureType, StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesEXT>
   {
-    using Type = PhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
+    using Type = PhysicalDeviceMutableDescriptorTypeFeaturesEXT;
   };
+  using PhysicalDeviceMutableDescriptorTypeFeaturesVALVE = PhysicalDeviceMutableDescriptorTypeFeaturesEXT;
 
   struct PhysicalDeviceNonSeamlessCubeMapFeaturesEXT
   {
