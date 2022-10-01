@@ -596,7 +596,7 @@ deps = {
   },
 
   'third_party/zlib': {
-    'url': '{chromium_git}/chromium/src/third_party/zlib@cbb6b98dc2ff90596044efe2572c3c1f7abf1010',
+    'url': '{chromium_git}/chromium/src/third_party/zlib@aaa0defe835ba2cc942f4ea134769e1d40aab9a6',
     'condition': 'not build_with_chromium',
   },
 
@@ -2121,6 +2121,16 @@ deps = {
         {
             'package': 'angle/traces/standoff_2',
             'version': 'version:5',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/star_wars_galaxy_of_heroes': {
+      'packages': [
+        {
+            'package': 'angle/traces/star_wars_galaxy_of_heroes',
+            'version': 'version:1',
         },
       ],
       'dep_type': 'cipd',
