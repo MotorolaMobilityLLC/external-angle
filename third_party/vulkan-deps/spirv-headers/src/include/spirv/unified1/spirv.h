@@ -617,6 +617,11 @@ typedef enum SpvBuiltIn_ {
     SpvBuiltInSubgroupLocalInvocationId = 41,
     SpvBuiltInVertexIndex = 42,
     SpvBuiltInInstanceIndex = 43,
+    SpvBuiltInCoreIDARM = 4160,
+    SpvBuiltInCoreCountARM = 4161,
+    SpvBuiltInCoreMaxIDARM = 4162,
+    SpvBuiltInWarpIDARM = 4163,
+    SpvBuiltInWarpMaxIDARM = 4164,
     SpvBuiltInSubgroupEqMask = 4416,
     SpvBuiltInSubgroupEqMaskKHR = 4416,
     SpvBuiltInSubgroupGeMask = 4417,
@@ -960,6 +965,7 @@ typedef enum SpvCapability_ {
     SpvCapabilityShaderLayer = 69,
     SpvCapabilityShaderViewportIndex = 70,
     SpvCapabilityUniformDecoration = 71,
+    SpvCapabilityCoreBuiltinsARM = 4165,
     SpvCapabilityFragmentShadingRateKHR = 4422,
     SpvCapabilitySubgroupBallotKHR = 4423,
     SpvCapabilityDrawParameters = 4427,
@@ -1056,6 +1062,7 @@ typedef enum SpvCapability_ {
     SpvCapabilityFragmentShaderPixelInterlockEXT = 5378,
     SpvCapabilityDemoteToHelperInvocation = 5379,
     SpvCapabilityDemoteToHelperInvocationEXT = 5379,
+    SpvCapabilityRayTracingOpacityMicromapEXT = 5381,
     SpvCapabilityBindlessTextureNV = 5390,
     SpvCapabilitySubgroupShuffleINTEL = 5568,
     SpvCapabilitySubgroupBufferBlockIOINTEL = 5569,
@@ -1129,6 +1136,7 @@ typedef enum SpvRayFlagsShift_ {
     SpvRayFlagsCullNoOpaqueKHRShift = 7,
     SpvRayFlagsSkipTrianglesKHRShift = 8,
     SpvRayFlagsSkipAABBsKHRShift = 9,
+    SpvRayFlagsForceOpacityMicromap2StateEXTShift = 10,
     SpvRayFlagsMax = 0x7fffffff,
 } SpvRayFlagsShift;
 
@@ -1144,6 +1152,7 @@ typedef enum SpvRayFlagsMask_ {
     SpvRayFlagsCullNoOpaqueKHRMask = 0x00000080,
     SpvRayFlagsSkipTrianglesKHRMask = 0x00000100,
     SpvRayFlagsSkipAABBsKHRMask = 0x00000200,
+    SpvRayFlagsForceOpacityMicromap2StateEXTMask = 0x00000400,
 } SpvRayFlagsMask;
 
 typedef enum SpvRayQueryIntersection_ {

@@ -5850,6 +5850,7 @@ void TBuiltIns::initialize(int version, EProfile profile, const SpvVersion& spvV
             "const uint gl_RayFlagsCullNoOpaqueEXT = 128U;"
             "const uint gl_RayFlagsSkipTrianglesEXT = 256U;"
             "const uint gl_RayFlagsSkipAABBEXT = 512U;"
+            "const uint gl_RayFlagsForceOpacityMicromap2StateEXT = 1024U;"
             "const uint gl_HitKindFrontFacingTriangleEXT = 254U;"
             "const uint gl_HitKindBackFacingTriangleEXT = 255U;"
             "\n";
@@ -7654,6 +7655,23 @@ static void SpecialQualifier(const char* name, TStorageQualifier qualifier, TBui
 }
 
 //
+// Modify the symbol's flat decoration.
+//
+// Safe to call even if name is not present.
+//
+// Originally written to transform gl_SubGroupSizeARB from uniform to fragment input in Vulkan.
+//
+static void ModifyFlatDecoration(const char* name, bool flat, TSymbolTable& symbolTable)
+{
+    TSymbol* symbol = symbolTable.find(name);
+    if (symbol == nullptr)
+        return;
+
+    TQualifier& symQualifier = symbol->getWritableType().getQualifier();
+    symQualifier.flat = flat;
+}
+
+//
 // To tag built-in variables with their TBuiltInVariable enum.  Use this when the
 // normal declaration text already gets the qualifier right, and all that's needed
 // is setting the builtIn field.  This should be the normal way for all new
@@ -8036,9 +8054,12 @@ void TBuiltIns::identifyBuiltIns(int version, EProfile profile, const SpvVersion
             BuiltInVariable("gl_SubGroupLeMaskARB",     EbvSubGroupLeMask,     symbolTable);
             BuiltInVariable("gl_SubGroupLtMaskARB",     EbvSubGroupLtMask,     symbolTable);
 
-            if (spvVersion.vulkan > 0)
+            if (spvVersion.vulkan > 0) {
                 // Treat "gl_SubGroupSizeARB" as shader input instead of uniform for Vulkan
                 SpecialQualifier("gl_SubGroupSizeARB", EvqVaryingIn, EbvSubGroupSize, symbolTable);
+                if (language == EShLangFragment)
+                    ModifyFlatDecoration("gl_SubGroupSizeARB", true, symbolTable);
+            }
             else
                 BuiltInVariable("gl_SubGroupSizeARB", EbvSubGroupSize, symbolTable);
         }
@@ -8147,6 +8168,7 @@ void TBuiltIns::identifyBuiltIns(int version, EProfile profile, const SpvVersion
             symbolTable.setFunctionExtensions("rayQueryGetWorldRayDirectionEXT",                                  1, &E_GL_EXT_ray_query);
             symbolTable.setVariableExtensions("gl_RayFlagsSkipAABBEXT",                         1, &E_GL_EXT_ray_flags_primitive_culling);
             symbolTable.setVariableExtensions("gl_RayFlagsSkipTrianglesEXT",                    1, &E_GL_EXT_ray_flags_primitive_culling);
+            symbolTable.setVariableExtensions("gl_RayFlagsForceOpacityMicromap2StateEXT",                  1, &E_GL_EXT_opacity_micromap);
         }
 
         if ((profile != EEsProfile && version >= 130) ||
@@ -8470,9 +8492,12 @@ void TBuiltIns::identifyBuiltIns(int version, EProfile profile, const SpvVersion
             BuiltInVariable("gl_SubGroupLeMaskARB",     EbvSubGroupLeMask,     symbolTable);
             BuiltInVariable("gl_SubGroupLtMaskARB",     EbvSubGroupLtMask,     symbolTable);
 
-            if (spvVersion.vulkan > 0)
+            if (spvVersion.vulkan > 0) {
                 // Treat "gl_SubGroupSizeARB" as shader input instead of uniform for Vulkan
                 SpecialQualifier("gl_SubGroupSizeARB", EvqVaryingIn, EbvSubGroupSize, symbolTable);
+                if (language == EShLangFragment)
+                    ModifyFlatDecoration("gl_SubGroupSizeARB", true, symbolTable);
+            }
             else
                 BuiltInVariable("gl_SubGroupSizeARB", EbvSubGroupSize, symbolTable);
         }
@@ -8687,9 +8712,12 @@ void TBuiltIns::identifyBuiltIns(int version, EProfile profile, const SpvVersion
             BuiltInVariable("gl_SubGroupLeMaskARB",     EbvSubGroupLeMask,     symbolTable);
             BuiltInVariable("gl_SubGroupLtMaskARB",     EbvSubGroupLtMask,     symbolTable);
 
-            if (spvVersion.vulkan > 0)
+            if (spvVersion.vulkan > 0) {
                 // Treat "gl_SubGroupSizeARB" as shader input instead of uniform for Vulkan
                 SpecialQualifier("gl_SubGroupSizeARB", EvqVaryingIn, EbvSubGroupSize, symbolTable);
+                if (language == EShLangFragment)
+                    ModifyFlatDecoration("gl_SubGroupSizeARB", true, symbolTable);
+            }
             else
                 BuiltInVariable("gl_SubGroupSizeARB", EbvSubGroupSize, symbolTable);
         }
@@ -8877,9 +8905,12 @@ void TBuiltIns::identifyBuiltIns(int version, EProfile profile, const SpvVersion
             BuiltInVariable("gl_SubGroupLeMaskARB",     EbvSubGroupLeMask,     symbolTable);
             BuiltInVariable("gl_SubGroupLtMaskARB",     EbvSubGroupLtMask,     symbolTable);
 
-            if (spvVersion.vulkan > 0)
+            if (spvVersion.vulkan > 0) {
                 // Treat "gl_SubGroupSizeARB" as shader input instead of uniform for Vulkan
                 SpecialQualifier("gl_SubGroupSizeARB", EvqVaryingIn, EbvSubGroupSize, symbolTable);
+                if (language == EShLangFragment)
+                    ModifyFlatDecoration("gl_SubGroupSizeARB", true, symbolTable);
+            }
             else
                 BuiltInVariable("gl_SubGroupSizeARB", EbvSubGroupSize, symbolTable);
 
@@ -9075,9 +9106,12 @@ void TBuiltIns::identifyBuiltIns(int version, EProfile profile, const SpvVersion
             BuiltInVariable("gl_SubGroupLeMaskARB",     EbvSubGroupLeMask,     symbolTable);
             BuiltInVariable("gl_SubGroupLtMaskARB",     EbvSubGroupLtMask,     symbolTable);
 
-            if (spvVersion.vulkan > 0)
+            if (spvVersion.vulkan > 0) {
                 // Treat "gl_SubGroupSizeARB" as shader input instead of uniform for Vulkan
                 SpecialQualifier("gl_SubGroupSizeARB", EvqVaryingIn, EbvSubGroupSize, symbolTable);
+                if (language == EShLangFragment)
+                    ModifyFlatDecoration("gl_SubGroupSizeARB", true, symbolTable);
+            }
             else
                 BuiltInVariable("gl_SubGroupSizeARB", EbvSubGroupSize, symbolTable);
         }
@@ -9202,9 +9236,12 @@ void TBuiltIns::identifyBuiltIns(int version, EProfile profile, const SpvVersion
             BuiltInVariable("gl_SubGroupLeMaskARB",     EbvSubGroupLeMask,     symbolTable);
             BuiltInVariable("gl_SubGroupLtMaskARB",     EbvSubGroupLtMask,     symbolTable);
 
-            if (spvVersion.vulkan > 0)
+            if (spvVersion.vulkan > 0) {
                 // Treat "gl_SubGroupSizeARB" as shader input instead of uniform for Vulkan
                 SpecialQualifier("gl_SubGroupSizeARB", EvqVaryingIn, EbvSubGroupSize, symbolTable);
+                if (language == EShLangFragment)
+                    ModifyFlatDecoration("gl_SubGroupSizeARB", true, symbolTable);
+            }
             else
                 BuiltInVariable("gl_SubGroupSizeARB", EbvSubGroupSize, symbolTable);
         }
