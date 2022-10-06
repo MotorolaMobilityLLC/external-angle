@@ -239,23 +239,23 @@ spv_result_t ValidateReturnValue(ValidationState_t& _,
   const auto value = _.FindDef(value_id);
   if (!value || !value->type_id()) {
     return _.diag(SPV_ERROR_INVALID_ID, inst)
-           << "OpReturnValue Value <id> '" << _.getIdName(value_id)
-           << "' does not represent a value.";
+           << "OpReturnValue Value <id> " << _.getIdName(value_id)
+           << " does not represent a value.";
   }
   auto value_type = _.FindDef(value->type_id());
   if (!value_type || SpvOpTypeVoid == value_type->opcode()) {
     return _.diag(SPV_ERROR_INVALID_ID, inst)
-           << "OpReturnValue value's type <id> '"
-           << _.getIdName(value->type_id()) << "' is missing or void.";
+           << "OpReturnValue value's type <id> "
+           << _.getIdName(value->type_id()) << " is missing or void.";
   }
 
   if (_.addressing_model() == SpvAddressingModelLogical &&
       SpvOpTypePointer == value_type->opcode() &&
       !_.features().variable_pointers && !_.options()->relax_logical_pointer) {
     return _.diag(SPV_ERROR_INVALID_ID, inst)
-           << "OpReturnValue value's type <id> '"
+           << "OpReturnValue value's type <id> "
            << _.getIdName(value->type_id())
-           << "' is a pointer, which is invalid in the Logical addressing "
+           << " is a pointer, which is invalid in the Logical addressing "
               "model.";
   }
 
@@ -263,8 +263,8 @@ spv_result_t ValidateReturnValue(ValidationState_t& _,
   const auto return_type = _.FindDef(function->GetResultTypeId());
   if (!return_type || return_type->id() != value_type->id()) {
     return _.diag(SPV_ERROR_INVALID_ID, inst)
-           << "OpReturnValue Value <id> '" << _.getIdName(value_id)
-           << "'s type does not match OpFunction's return type.";
+           << "OpReturnValue Value <id> " << _.getIdName(value_id)
+           << "s type does not match OpFunction's return type.";
   }
 
   return SPV_SUCCESS;
@@ -1068,6 +1068,7 @@ spv_result_t CfgPass(ValidationState_t& _, const Instruction* inst) {
     case SpvOpTerminateRayKHR:
     case SpvOpEmitMeshTasksEXT:
       _.current_function().RegisterBlockEnd(std::vector<uint32_t>());
+      // Ops with dedicated passes check for the Execution Model there
       if (opcode == SpvOpKill) {
         _.current_function().RegisterExecutionModelLimitation(
             SpvExecutionModelFragment,
@@ -1087,11 +1088,6 @@ spv_result_t CfgPass(ValidationState_t& _, const Instruction* inst) {
         _.current_function().RegisterExecutionModelLimitation(
             SpvExecutionModelAnyHitKHR,
             "OpTerminateRayKHR requires AnyHitKHR execution model");
-      }
-      if (opcode == SpvOpEmitMeshTasksEXT) {
-        _.current_function().RegisterExecutionModelLimitation(
-            SpvExecutionModelTaskEXT,
-            "OpEmitMeshTasksEXT requires TaskEXT execution model");
       }
 
       break;

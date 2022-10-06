@@ -9409,6 +9409,12 @@
           "value" : "0x0200",
           "capabilities" : [ "RayTraversalPrimitiveCullingKHR" ],
           "version" : "None"
+        },
+        {
+          "enumerant" : "ForceOpacityMicromap2StateEXT",
+          "value" : "0x0400",
+          "capabilities" : [ "RayTracingOpacityMicromapEXT" ],
+          "version" : "None"
         }
       ]
     },
@@ -12193,6 +12199,31 @@
           "capabilities" : [ "Shader" ]
         },
         {
+          "enumerant" : "CoreIDARM",
+          "value" : 4160,
+          "capabilities" : [ "CoreBuiltinsARM" ]
+        },
+        {
+          "enumerant" : "CoreCountARM",
+          "value" : 4161,
+          "capabilities" : [ "CoreBuiltinsARM" ]
+        },
+        {
+          "enumerant" : "CoreMaxIDARM",
+          "value" : 4162,
+          "capabilities" : [ "CoreBuiltinsARM" ]
+        },
+        {
+          "enumerant" : "WarpIDARM",
+          "value" : 4163,
+          "capabilities" : [ "CoreBuiltinsARM" ]
+        },
+        {
+          "enumerant" : "WarpMaxIDARM",
+          "value" : 4164,
+          "capabilities" : [ "CoreBuiltinsARM" ]
+        },
+        {
           "enumerant" : "SubgroupEqMask",
           "value" : 4416,
           "capabilities" : [ "SubgroupBallotKHR", "GroupNonUniformBallot" ],
@@ -13244,6 +13275,11 @@
           "version" : "1.6"
         },
         {
+          "enumerant" : "CoreBuiltinsARM",
+          "value" : 4165,
+          "extensions" : [ "SPV_ARM_core_builtins" ]
+        },
+        {
           "enumerant" : "FragmentShadingRateKHR",
           "value" : 4422,
           "capabilities" : [ "Shader" ],
@@ -13879,6 +13915,13 @@
           "capabilities" : [ "Shader" ],
           "extensions" : [ "SPV_EXT_demote_to_helper_invocation" ],
           "version" : "1.6"
+        },
+        {
+          "enumerant" : "RayTracingOpacityMicromapEXT",
+          "value" : 5381,
+          "capabilities" : [ "RayQueryKHR","RayTracingKHR" ],
+          "extensions" : [ "SPV_EXT_opacity_micromap" ],
+          "version" : "None"
         },
         {
           "enumerant" : "BindlessTextureNV",
