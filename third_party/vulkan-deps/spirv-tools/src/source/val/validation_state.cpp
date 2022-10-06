@@ -208,9 +208,12 @@ ValidationState_t::ValidationState_t(const spv_const_context ctx,
   }
   UpdateFeaturesBasedOnSpirvVersion(&features_, version_);
 
-  friendly_mapper_ = spvtools::MakeUnique<spvtools::FriendlyNameMapper>(
-      context_, words_, num_words_);
-  name_mapper_ = friendly_mapper_->GetNameMapper();
+  name_mapper_ = spvtools::GetTrivialNameMapper();
+  if (options_->use_friendly_names) {
+    friendly_mapper_ = spvtools::MakeUnique<spvtools::FriendlyNameMapper>(
+        context_, words_, num_words_);
+    name_mapper_ = friendly_mapper_->GetNameMapper();
+  }
 }
 
 void ValidationState_t::preallocateStorage() {
@@ -245,7 +248,7 @@ std::string ValidationState_t::getIdName(uint32_t id) const {
   const std::string id_name = name_mapper_(id);
 
   std::stringstream out;
-  out << id << "[%" << id_name << "]";
+  out << "'" << id << "[%" << id_name << "]'";
   return out.str();
 }
 
@@ -760,6 +763,21 @@ void ValidationState_t::RegisterStorageClassConsumer(
                       "ShaderRecordBufferKHR Storage Class is limited to "
                       "RayGenerationKHR, IntersectionKHR, AnyHitKHR, "
                       "ClosestHitKHR, CallableKHR, and MissKHR execution model";
+                }
+                return false;
+              }
+              return true;
+            });
+  } else if (storage_class == SpvStorageClassTaskPayloadWorkgroupEXT) {
+    function(consumer->function()->id())
+        ->RegisterExecutionModelLimitation(
+            [](SpvExecutionModel model, std::string* message) {
+              if (model != SpvExecutionModelTaskEXT &&
+                  model != SpvExecutionModelMeshEXT) {
+                if (message) {
+                  *message =
+                      "TaskPayloadWorkgroupEXT Storage Class is limited to "
+                      "TaskEXT and MeshKHR execution model";
                 }
                 return false;
               }
@@ -2110,6 +2128,8 @@ std::string ValidationState_t::VkErrorID(uint32_t id,
       return VUID_WRAP(VUID-StandaloneSpirv-Uniform-06925);
     case 6997:
       return VUID_WRAP(VUID-StandaloneSpirv-SubgroupVoteKHR-06997);
+    case 7102:
+      return VUID_WRAP(VUID-StandaloneSpirv-MeshEXT-07102);
     case 7320:
       return VUID_WRAP(VUID-StandaloneSpirv-ExecutionModel-07320);
     case 7290:

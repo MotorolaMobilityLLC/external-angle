@@ -85,9 +85,6 @@ declare_args() {
   # the needed gcov profiling data.
   auto_profile_path = ""
 
-  # Allow projects that wish to stay on C++11 to override Chromium's default.
-  use_cxx11 = false
-
   # Path to an AFDO profile to use while building with clang, if any. Empty
   # implies none.
   clang_sample_profile_path = ""
@@ -591,6 +588,15 @@ config("compiler") {
       cflags_cc += [ "-std=${standard_prefix}++14" ]
       if (is_clang) {
         cflags_cc += [ "-fno-trigraphs" ]
+      }
+    } else if (is_linux) {
+      # TODO(crbug.com/1284275): Switch to C++20 on all platforms.
+      if (is_clang) {
+        cflags_cc += [ "-std=${standard_prefix}++20" ]
+      } else {
+        # The gcc bots are currently using GCC 9, which is not new enough to
+        # support "c++20"/"gnu++20".
+        cflags_cc += [ "-std=${standard_prefix}++2a" ]
       }
     } else {
       cflags_cc += [ "-std=${standard_prefix}++17" ]
