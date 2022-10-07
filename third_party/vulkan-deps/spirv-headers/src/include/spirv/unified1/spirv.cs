@@ -611,6 +611,11 @@ namespace Spv
             SubgroupLocalInvocationId = 41,
             VertexIndex = 42,
             InstanceIndex = 43,
+            CoreIDARM = 4160,
+            CoreCountARM = 4161,
+            CoreMaxIDARM = 4162,
+            WarpIDARM = 4163,
+            WarpMaxIDARM = 4164,
             SubgroupEqMask = 4416,
             SubgroupEqMaskKHR = 4416,
             SubgroupGeMask = 4417,
@@ -960,6 +965,7 @@ namespace Spv
             ShaderLayer = 69,
             ShaderViewportIndex = 70,
             UniformDecoration = 71,
+            CoreBuiltinsARM = 4165,
             FragmentShadingRateKHR = 4422,
             SubgroupBallotKHR = 4423,
             DrawParameters = 4427,
@@ -1056,6 +1062,7 @@ namespace Spv
             FragmentShaderPixelInterlockEXT = 5378,
             DemoteToHelperInvocation = 5379,
             DemoteToHelperInvocationEXT = 5379,
+            RayTracingOpacityMicromapEXT = 5381,
             BindlessTextureNV = 5390,
             SubgroupShuffleINTEL = 5568,
             SubgroupBufferBlockIOINTEL = 5569,
@@ -1129,6 +1136,7 @@ namespace Spv
             CullNoOpaqueKHR = 7,
             SkipTrianglesKHR = 8,
             SkipAABBsKHR = 9,
+            ForceOpacityMicromap2StateEXT = 10,
         }
 
         public enum RayFlagsMask
@@ -1144,6 +1152,7 @@ namespace Spv
             CullNoOpaqueKHR = 0x00000080,
             SkipTrianglesKHR = 0x00000100,
             SkipAABBsKHR = 0x00000200,
+            ForceOpacityMicromap2StateEXT = 0x00000400,
         }
 
         public enum RayQueryIntersection
