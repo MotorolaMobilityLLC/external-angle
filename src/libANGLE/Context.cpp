@@ -3709,23 +3709,25 @@ Extensions Context::generateSupportedExtensions() const
 
         // GL_EXT_clip_cull_distance requires ESSL3
         supportedExtensions.clipCullDistanceEXT = false;
+
+        // ANGLE_shader_pixel_local_storage requires ES3
+        supportedExtensions.shaderPixelLocalStorageANGLE         = false;
+        supportedExtensions.shaderPixelLocalStorageCoherentANGLE = false;
     }
 
     if (getClientVersion() < ES_3_1)
     {
         // Disable ES3.1+ extensions
-        supportedExtensions.geometryShaderEXT                    = false;
-        supportedExtensions.geometryShaderOES                    = false;
-        supportedExtensions.gpuShader5EXT                        = false;
-        supportedExtensions.primitiveBoundingBoxEXT              = false;
-        supportedExtensions.shaderImageAtomicOES                 = false;
-        supportedExtensions.shaderIoBlocksEXT                    = false;
-        supportedExtensions.shaderIoBlocksOES                    = false;
-        supportedExtensions.shaderPixelLocalStorageANGLE         = false;
-        supportedExtensions.shaderPixelLocalStorageCoherentANGLE = false;
-        supportedExtensions.tessellationShaderEXT                = false;
-        supportedExtensions.textureBufferEXT                     = false;
-        supportedExtensions.textureBufferOES                     = false;
+        supportedExtensions.geometryShaderEXT       = false;
+        supportedExtensions.geometryShaderOES       = false;
+        supportedExtensions.gpuShader5EXT           = false;
+        supportedExtensions.primitiveBoundingBoxEXT = false;
+        supportedExtensions.shaderImageAtomicOES    = false;
+        supportedExtensions.shaderIoBlocksEXT       = false;
+        supportedExtensions.shaderIoBlocksOES       = false;
+        supportedExtensions.tessellationShaderEXT   = false;
+        supportedExtensions.textureBufferEXT        = false;
+        supportedExtensions.textureBufferOES        = false;
 
         // TODO(http://anglebug.com/2775): Multisample arrays could be supported on ES 3.0 as well
         // once 2D multisample texture extension is exposed there.
@@ -3756,6 +3758,12 @@ Extensions Context::generateSupportedExtensions() const
         // non-conformant in ES 3.0 and superseded by EXT_color_buffer_float.
         supportedExtensions.colorBufferFloatRgbCHROMIUM  = false;
         supportedExtensions.colorBufferFloatRgbaCHROMIUM = false;
+    }
+
+    if (getFrontendFeatures().disableDrawBuffersIndexed.enabled)
+    {
+        supportedExtensions.drawBuffersIndexedEXT = false;
+        supportedExtensions.drawBuffersIndexedOES = false;
     }
 
     if (getFrontendFeatures().disableAnisotropicFiltering.enabled)
@@ -4163,6 +4171,10 @@ void Context::initCaps()
                   "supported on some native drivers";
         mState.mExtensions.shaderNoperspectiveInterpolationNV = false;
 
+        INFO() << "Disabling GL_NV_framebuffer_blit during capture, which is not "
+                  "supported on some native drivers";
+        mState.mExtensions.framebufferBlitNV = false;
+
         // NVIDIA's Vulkan driver only supports 4 draw buffers
         constexpr GLint maxDrawBuffers = 4;
         INFO() << "Limiting draw buffer count to " << maxDrawBuffers;
@@ -4224,18 +4236,44 @@ void Context::initCaps()
 
     if (mSupportedExtensions.shaderPixelLocalStorageANGLE)
     {
-        // TODO(anglebug.com/7279): These limits are specific to shader images. They will need to be
-        // updated once we have other implementations.
-        mState.mCaps.maxPixelLocalStoragePlanes =
-            mState.mCaps.maxShaderImageUniforms[ShaderType::Fragment];
-        ANGLE_LIMIT_CAP(mState.mCaps.maxPixelLocalStoragePlanes,
-                        IMPLEMENTATION_MAX_PIXEL_LOCAL_STORAGE_PLANES);
-        mState.mCaps.maxColorAttachmentsWithActivePixelLocalStorage =
-            mState.mCaps.maxColorAttachments;
-        mState.mCaps.maxCombinedDrawBuffersAndPixelLocalStoragePlanes = std::min<GLint>(
-            mState.mCaps.maxPixelLocalStoragePlanes +
-                std::min(mState.mCaps.maxDrawBuffers, mState.mCaps.maxColorAttachments),
-            mState.mCaps.maxCombinedShaderOutputResources);
+        int maxDrawableAttachments =
+            std::min(mState.mCaps.maxDrawBuffers, mState.mCaps.maxColorAttachments);
+        ShPixelLocalStorageType plsType = mImplementation->getNativePixelLocalStorageType();
+        if (ShPixelLocalStorageTypeUsesImages(plsType))
+        {
+            mState.mCaps.maxPixelLocalStoragePlanes =
+                mState.mCaps.maxShaderImageUniforms[ShaderType::Fragment];
+            ANGLE_LIMIT_CAP(mState.mCaps.maxPixelLocalStoragePlanes,
+                            IMPLEMENTATION_MAX_PIXEL_LOCAL_STORAGE_PLANES);
+            mState.mCaps.maxColorAttachmentsWithActivePixelLocalStorage =
+                mState.mCaps.maxColorAttachments;
+            mState.mCaps.maxCombinedDrawBuffersAndPixelLocalStoragePlanes = std::min<GLint>(
+                mState.mCaps.maxPixelLocalStoragePlanes +
+                    std::min(mState.mCaps.maxDrawBuffers, mState.mCaps.maxColorAttachments),
+                mState.mCaps.maxCombinedShaderOutputResources);
+        }
+        else
+        {
+            ASSERT(plsType == ShPixelLocalStorageType::FramebufferFetch);
+            mState.mCaps.maxPixelLocalStoragePlanes = maxDrawableAttachments;
+            ANGLE_LIMIT_CAP(mState.mCaps.maxPixelLocalStoragePlanes,
+                            IMPLEMENTATION_MAX_PIXEL_LOCAL_STORAGE_PLANES);
+            if (!mSupportedExtensions.drawBuffersIndexedAny())
+            {
+                // When pixel local storage is implemented as framebuffer attachments, we need to
+                // disable color masks and blending to its attachments. If the backend context
+                // doesn't have indexed blend and color mask support, then we will have have to
+                // disable them globally. This also means the application can't have its own draw
+                // buffers while PLS is active.
+                mState.mCaps.maxColorAttachmentsWithActivePixelLocalStorage = 0;
+            }
+            else
+            {
+                mState.mCaps.maxColorAttachmentsWithActivePixelLocalStorage =
+                    maxDrawableAttachments - 1;
+            }
+            mState.mCaps.maxCombinedDrawBuffersAndPixelLocalStoragePlanes = maxDrawableAttachments;
+        }
     }
 
 #undef ANGLE_LIMIT_CAP
@@ -4328,7 +4366,7 @@ void Context::updateCaps()
             }
         }
 
-        if (formatCaps.texturable && formatInfo.compressed)
+        if (formatCaps.texturable && (formatInfo.compressed || formatInfo.paletted))
         {
             mState.mCaps.compressedTextureFormats.push_back(sizedInternalFormat);
         }
@@ -4540,8 +4578,7 @@ void Context::blitFramebuffer(GLint srcX0,
         return;
     }
 
-    ANGLE_CONTEXT_TRY(syncStateForBlit());
-
+    ANGLE_CONTEXT_TRY(syncStateForBlit(mask));
     ANGLE_CONTEXT_TRY(drawFramebuffer->blit(this, srcArea, dstArea, mask, filter));
 }
 
@@ -5677,9 +5714,25 @@ angle::Result Context::syncStateForTexImage()
     return syncState(mTexImageDirtyBits, mTexImageDirtyObjects, Command::TexImage);
 }
 
-angle::Result Context::syncStateForBlit()
+angle::Result Context::syncStateForBlit(GLbitfield mask)
 {
-    return syncState(mBlitDirtyBits, mBlitDirtyObjects, Command::Blit);
+    uint32_t commandMask = 0;
+    if ((mask & GL_COLOR_BUFFER_BIT) != 0)
+    {
+        commandMask |= CommandBlitBufferColor;
+    }
+    if ((mask & GL_DEPTH_BUFFER_BIT) != 0)
+    {
+        commandMask |= CommandBlitBufferDepth;
+    }
+    if ((mask & GL_STENCIL_BUFFER_BIT) != 0)
+    {
+        commandMask |= CommandBlitBufferStencil;
+    }
+
+    Command command = static_cast<Command>(static_cast<uint32_t>(Command::Blit) + commandMask);
+
+    return syncState(mBlitDirtyBits, mBlitDirtyObjects, command);
 }
 
 angle::Result Context::syncStateForClear()
