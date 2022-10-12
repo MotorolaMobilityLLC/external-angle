@@ -96,7 +96,7 @@ public class FragmentActivityReplacer extends ByteCodeRewriter {
         private final ClassLoader mClassLoader;
 
         private InvocationReplacer(ClassVisitor baseVisitor, boolean singleAndroidX) {
-            super(Opcodes.ASM7, baseVisitor);
+            super(Opcodes.ASM9, baseVisitor);
             mSingleAndroidX = singleAndroidX;
             mClassLoader = new ResourceStubbingClassLoader();
         }
@@ -105,7 +105,7 @@ public class FragmentActivityReplacer extends ByteCodeRewriter {
         public MethodVisitor visitMethod(
                 int access, String name, String descriptor, String signature, String[] exceptions) {
             MethodVisitor base = super.visitMethod(access, name, descriptor, signature, exceptions);
-            return new MethodVisitor(Opcodes.ASM7, base) {
+            return new MethodVisitor(Opcodes.ASM9, base) {
                 @Override
                 public void visitMethodInsn(int opcode, String owner, String name,
                         String descriptor, boolean isInterface) {
@@ -218,7 +218,7 @@ public class FragmentActivityReplacer extends ByteCodeRewriter {
      */
     private static class FragmentClassVisitor extends ClassVisitor {
         private FragmentClassVisitor(ClassVisitor baseVisitor) {
-            super(Opcodes.ASM7, baseVisitor);
+            super(Opcodes.ASM9, baseVisitor);
         }
 
         @Override
@@ -276,7 +276,7 @@ public class FragmentActivityReplacer extends ByteCodeRewriter {
      */
     private static class SupportLifecycleFragmentImplClassVisitor extends ClassVisitor {
         private SupportLifecycleFragmentImplClassVisitor(ClassVisitor baseVisitor) {
-            super(Opcodes.ASM7, baseVisitor);
+            super(Opcodes.ASM9, baseVisitor);
         }
 
         @Override
