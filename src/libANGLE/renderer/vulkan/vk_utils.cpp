@@ -1618,7 +1618,6 @@ angle::Result BufferBlock::init(Context *context,
     ASSERT(!mBuffer.valid());
     ASSERT(!mDeviceMemory.valid());
 
-    mVirtualBlockMutex.init(renderer->isAsyncCommandQueueEnabled());
     ANGLE_VK_TRY(context, mVirtualBlock.init(renderer->getDevice(), flags, size));
 
     mBuffer              = std::move(buffer);
@@ -1664,7 +1663,7 @@ void BufferBlock::unmap(const VkDevice device)
 
 void BufferBlock::free(VkDeviceSize offset)
 {
-    std::lock_guard<ConditionalMutex> lock(mVirtualBlockMutex);
+    std::unique_lock<std::mutex> lock(mVirtualBlockMutex);
     mVirtualBlock.free(offset);
 }
 

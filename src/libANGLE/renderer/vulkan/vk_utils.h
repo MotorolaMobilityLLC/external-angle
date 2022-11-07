@@ -945,9 +945,7 @@ class BufferBlock final : angle::NonCopyable
     int32_t getAndIncrementEmptyCounter();
 
   private:
-    // Protect multi-thread access to mVirtualBlock, which could be possible when asyncCommandQueue
-    // is enabled.
-    ConditionalMutex mVirtualBlockMutex;
+    mutable std::mutex mVirtualBlockMutex;
     VirtualBlock mVirtualBlock;
 
     Buffer mBuffer;
@@ -1025,7 +1023,7 @@ ANGLE_INLINE VkDeviceSize BufferBlock::getMemorySize() const
 
 ANGLE_INLINE VkBool32 BufferBlock::isEmpty()
 {
-    std::lock_guard<ConditionalMutex> lock(mVirtualBlockMutex);
+    std::unique_lock<std::mutex> lock(mVirtualBlockMutex);
     return vma::IsVirtualBlockEmpty(mVirtualBlock.getHandle());
 }
 
@@ -1054,7 +1052,7 @@ ANGLE_INLINE VkResult BufferBlock::allocate(VkDeviceSize size,
                                             VkDeviceSize alignment,
                                             VkDeviceSize *offsetOut)
 {
-    std::lock_guard<ConditionalMutex> lock(mVirtualBlockMutex);
+    std::unique_lock<std::mutex> lock(mVirtualBlockMutex);
     mCountRemainsEmpty = 0;
     return mVirtualBlock.allocate(size, alignment, offsetOut);
 }
