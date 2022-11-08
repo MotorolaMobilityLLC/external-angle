@@ -120,28 +120,12 @@ class FfxEmulator(AbstractContextManager):
     @staticmethod
     def _check_ssh_config_file() -> None:
         """Checks for ssh keys and generates them if they are missing."""
+
         script_path = os.path.join(SDK_ROOT, 'bin', 'fuchsia-common.sh')
         check_cmd = [
             'bash', '-c', f'. {script_path}; check-fuchsia-ssh-config'
         ]
         subprocess.run(check_cmd, check=True)
-
-    def _download_product_bundle_if_necessary(self) -> None:
-        """Download the image for a given product bundle."""
-
-        # Check if the product bundle has already been downloaded.
-        # TODO: remove when `ffx product-bundle get` doesn't automatically
-        # redownload.
-        list_cmd = run_ffx_command(('product-bundle', 'list'),
-                                   capture_output=True)
-        sdk_version = run_ffx_command(('sdk', 'version'),
-                                      capture_output=True).stdout.strip()
-        for line in list_cmd.stdout.splitlines():
-            if (self._product_bundle in line and sdk_version in line
-                    and '*' in line):
-                return
-
-        run_ffx_command(('product-bundle', 'get', self._product_bundle))
 
     def __enter__(self) -> str:
         """Start the emulator.
@@ -154,7 +138,6 @@ class FfxEmulator(AbstractContextManager):
         if self._scoped_pb_metadata:
             self._scoped_pb_metadata.__enter__()
         self._check_ssh_config_file()
-        self._download_product_bundle_if_necessary()
         emu_command = [
             'emu', 'start', self._product_bundle, '--name', self._node_name
         ]
