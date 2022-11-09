@@ -1444,6 +1444,17 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM;
   struct SubpassFragmentDensityMapOffsetEndInfoQCOM;
 
+  //=== VK_NV_copy_memory_indirect ===
+  struct CopyMemoryIndirectCommandNV;
+  struct CopyMemoryToImageIndirectCommandNV;
+  struct PhysicalDeviceCopyMemoryIndirectFeaturesNV;
+  struct PhysicalDeviceCopyMemoryIndirectPropertiesNV;
+
+  //=== VK_NV_memory_decompression ===
+  struct DecompressMemoryRegionNV;
+  struct PhysicalDeviceMemoryDecompressionFeaturesNV;
+  struct PhysicalDeviceMemoryDecompressionPropertiesNV;
+
   //=== VK_NV_linear_color_attachment ===
   struct PhysicalDeviceLinearColorAttachmentFeaturesNV;
 
@@ -1502,6 +1513,10 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceAmigoProfilingFeaturesSEC;
   struct AmigoProfilingSubmitInfoSEC;
 
+  //=== VK_NV_ray_tracing_invocation_reorder ===
+  struct PhysicalDeviceRayTracingInvocationReorderPropertiesNV;
+  struct PhysicalDeviceRayTracingInvocationReorderFeaturesNV;
+
   //=== VK_EXT_mutable_descriptor_type ===
   struct PhysicalDeviceMutableDescriptorTypeFeaturesEXT;
   using PhysicalDeviceMutableDescriptorTypeFeaturesVALVE = PhysicalDeviceMutableDescriptorTypeFeaturesEXT;
@@ -1510,9 +1525,19 @@ namespace VULKAN_HPP_NAMESPACE
   struct MutableDescriptorTypeCreateInfoEXT;
   using MutableDescriptorTypeCreateInfoVALVE = MutableDescriptorTypeCreateInfoEXT;
 
+  //=== VK_ARM_shader_core_builtins ===
+  struct PhysicalDeviceShaderCoreBuiltinsFeaturesARM;
+  struct PhysicalDeviceShaderCoreBuiltinsPropertiesARM;
+
   //===============
   //=== HANDLEs ===
   //===============
+
+  template <typename Type>
+  struct isVulkanHandleType
+  {
+    static VULKAN_HPP_CONST_OR_CONSTEXPR bool value = false;
+  };
 
   class SurfaceKHR
   {
@@ -5167,6 +5192,50 @@ namespace VULKAN_HPP_NAMESPACE
                                       uint32_t                                                                          firstQuery,
                                       Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    //=== VK_NV_copy_memory_indirect ===
+
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void copyMemoryIndirectNV( VULKAN_HPP_NAMESPACE::DeviceAddress copyBufferAddress,
+                               uint32_t                            copyCount,
+                               uint32_t                            stride,
+                               Dispatch const & d                  VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void copyMemoryToImageIndirectNV( VULKAN_HPP_NAMESPACE::DeviceAddress                  copyBufferAddress,
+                                      uint32_t                                             copyCount,
+                                      uint32_t                                             stride,
+                                      VULKAN_HPP_NAMESPACE::Image                          dstImage,
+                                      VULKAN_HPP_NAMESPACE::ImageLayout                    dstImageLayout,
+                                      const VULKAN_HPP_NAMESPACE::ImageSubresourceLayers * pImageSubresources,
+                                      Dispatch const & d                                   VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void copyMemoryToImageIndirectNV( VULKAN_HPP_NAMESPACE::DeviceAddress                                                          copyBufferAddress,
+                                      uint32_t                                                                                     stride,
+                                      VULKAN_HPP_NAMESPACE::Image                                                                  dstImage,
+                                      VULKAN_HPP_NAMESPACE::ImageLayout                                                            dstImageLayout,
+                                      VULKAN_HPP_NAMESPACE::ArrayProxy<const VULKAN_HPP_NAMESPACE::ImageSubresourceLayers> const & imageSubresources,
+                                      Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    //=== VK_NV_memory_decompression ===
+
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void decompressMemoryNV( uint32_t                                               decompressRegionCount,
+                             const VULKAN_HPP_NAMESPACE::DecompressMemoryRegionNV * pDecompressMemoryRegions,
+                             Dispatch const & d                                     VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void decompressMemoryNV( VULKAN_HPP_NAMESPACE::ArrayProxy<const VULKAN_HPP_NAMESPACE::DecompressMemoryRegionNV> const & decompressMemoryRegions,
+                             Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void decompressMemoryIndirectCountNV( VULKAN_HPP_NAMESPACE::DeviceAddress indirectCommandsAddress,
+                                          VULKAN_HPP_NAMESPACE::DeviceAddress indirectCommandsCountAddress,
+                                          uint32_t                            stride,
+                                          Dispatch const & d                  VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 
     //=== VK_EXT_extended_dynamic_state3 ===
 

@@ -46,11 +46,17 @@ group("deployment_resources") {
     "//third_party/fuchsia-sdk/sdk/tools/${test_host_cpu}/zbi",
     "//third_party/fuchsia-sdk/sdk/tools/${test_host_cpu}/zbi-meta.json",
   ]
+
+  if (fuchsia_additional_boot_images == []) {
+    data += [ "${boot_image_root}" ]
+  }
+
+  foreach(fuchsia_additional_boot_image, fuchsia_additional_boot_images) {
+    data += [ "${fuchsia_additional_boot_image}/" ]
+  }
+
   if (test_isolate_uses_emulator) {
     data += [
-      "${boot_image_root}/qemu/qemu-kernel.kernel",
-      "${boot_image_root}/qemu/storage-full.blk",
-      "${boot_image_root}/qemu/zircon-a.zbi",
       "//third_party/fuchsia-sdk/sdk/bin/device_launcher.version",
       "//third_party/fuchsia-sdk/sdk/tools/${test_host_cpu}/fvdl",
     ]
@@ -70,9 +76,6 @@ group("deployment_resources") {
         "//third_party/fuchsia-sdk/sdk/tools/x64/qemu_internal-meta.json",
       ]
     }
-  }
-  foreach(fuchsia_additional_boot_image, fuchsia_additional_boot_images) {
-    data += [ "${fuchsia_additional_boot_image}/" ]
   }
 }
 

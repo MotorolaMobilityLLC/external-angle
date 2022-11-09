@@ -5,7 +5,6 @@
 # Do not add any imports to non-//build directories here.
 # Some projects (e.g. V8) do not have non-build directories DEPS'ed in.
 import("//build/config/android/config.gni")
-import("//build/config/android/copy_ex.gni")
 import("//build/config/compiler/compiler.gni")
 import("//build/config/compute_inputs_for_analyze.gni")
 import("//build/config/coverage/coverage.gni")
@@ -23,6 +22,10 @@ assert(is_android)
 default_android_sdk_dep = "//third_party/android_sdk:android_sdk_java"
 _jacoco_dep = "//third_party/jacoco:jacocoagent_java"
 _jacoco_host_jar = "$root_build_dir/lib.java/third_party/jacoco/jacocoagent.jar"
+_robolectric_libs_dir =
+    rebase_path(
+        get_label_info("//:foo($robolectric_toolchain)", "root_out_dir"),
+        root_build_dir)
 
 # The following _java_*_types variables capture all the existing target types.
 # If a new type is introduced, please add it to one of these categories,
@@ -898,6 +901,8 @@ template("test_runner_script") {
       executable_args += [
         "--test-suite",
         invoker.test_suite,
+        "--native-libs-dir",
+        "@WrappedPath($_robolectric_libs_dir)",
       ]
 
       # Test runner uses this generated wrapper script.
@@ -1713,13 +1718,18 @@ if (enable_java_templates) {
           }
         }
         if (_desugar_needs_classpath) {
-          if (defined(invoker.unprocessed_jar_path)) {
-            # Cannot use header jar for the active jar, because it does not
-            # contain anonymous classes. https://crbug.com/1342018#c5
-            # Cannot use processed .jar here because it might have classes
-            # filtered out via jar_excluded_patterns.
-            # Must come first in classpath in order to take precedence over
-            # deps that defined the same classes (via jar_excluded_patterns).
+          # Cannot use header jar for the active jar, because it does not
+          # contain anonymous classes. https://crbug.com/1342018#c5
+          # Cannot use processed .jar here because it might have classes
+          # filtered out via jar_excluded_patterns.
+          # Must come first in classpath in order to take precedence over
+          # deps that defined the same classes (via jar_excluded_patterns).
+          if (defined(invoker.unprocessed_jar_path_filearg)) {
+            args += [
+              "--classpath",
+              invoker.unprocessed_jar_path_filearg,
+            ]
+          } else if (defined(invoker.unprocessed_jar_path)) {
             args += [
               "--classpath",
               rebase_path(invoker.unprocessed_jar_path, root_build_dir),
@@ -4039,19 +4049,13 @@ if (enable_java_templates) {
           "//third_party/jdk:java_data",
         ]
         if (_is_robolectric) {
-          # An uninstrumented robolectric platform .jar is needed by the test
-          # runner to provide a copy of org.json - we could pull from maven
-          # instead if we wanted. TODO(crbug.com/1351430)
-          # Additionally, we provide an sdk jar, since whenever we start using a
-          # new Android SDK, robolectric doesn't support it, and they often take
-          # a few months to support it. This causes issues when mocking classes
-          # that reference new SDK classes, so providing our normal SDK will
-          # allow these classes to resolve. For an example, see
-          # crbug.com/1350963.
-          extra_classpath_jars = [
-            _robolectric_jar_path,
-            android_sdk_jar,
-          ]
+          # For robolectric tests, we also add the normal sdk jar to the
+          # classpath since whenever we start using a new Android SDK,
+          # robolectric doesn't support it, and they often take a few months to
+          # support it. This causes issues when mocking classes that reference
+          # new SDK classes, so providing our normal SDK will allow these
+          # classes to resolve. For an example, see crbug.com/1350963.
+          extra_classpath_jars = [ android_sdk_jar ]
         }
       }
     }
