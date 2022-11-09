@@ -46,6 +46,31 @@ ABSL_NAMESPACE_BEGIN
 namespace log_internal {
 namespace {
 
+// This templated function avoids compiler warnings about tautological
+// comparisons when log_internal::Tid is unsigned. It can be replaced with a
+// constexpr if once the minimum C++ version Abseil suppports is C++17.
+template <typename T>
+inline std::enable_if_t<!std::is_signed<T>::value>
+PutLeadingWhitespace(T tid, char*& p) {
+  if (tid < 10) *p++ = ' ';
+  if (tid < 100) *p++ = ' ';
+  if (tid < 1000) *p++ = ' ';
+  if (tid < 10000) *p++ = ' ';
+  if (tid < 100000) *p++ = ' ';
+  if (tid < 1000000) *p++ = ' ';
+}
+
+template <typename T>
+inline std::enable_if_t<std::is_signed<T>::value>
+PutLeadingWhitespace(T tid, char*& p) {
+  if (tid >= 0 && tid < 10) *p++ = ' ';
+  if (tid > -10 && tid < 100) *p++ = ' ';
+  if (tid > -100 && tid < 1000) *p++ = ' ';
+  if (tid > -1000 && tid < 10000) *p++ = ' ';
+  if (tid > -10000 && tid < 100000) *p++ = ' ';
+  if (tid > -100000 && tid < 1000000) *p++ = ' ';
+}
+
 // The fields before the filename are all fixed-width except for the thread ID,
 // which is of bounded width.
 size_t FormatBoundedFields(absl::LogSeverity severity, absl::Time timestamp,
@@ -78,7 +103,7 @@ size_t FormatBoundedFields(absl::LogSeverity severity, absl::Time timestamp,
         absl::LogSeverityName(severity)[0], static_cast<int>(tv.tv_sec),
         static_cast<int>(tv.tv_usec), static_cast<int>(tid));
     if (snprintf_result >= 0) {
-      buf.remove_prefix(snprintf_result);
+      buf.remove_prefix(static_cast<size_t>(snprintf_result));
       return static_cast<size_t>(snprintf_result);
     }
     return 0;
@@ -87,38 +112,33 @@ size_t FormatBoundedFields(absl::LogSeverity severity, absl::Time timestamp,
   char* p = buf.data();
   *p++ = absl::LogSeverityName(severity)[0];
   const absl::TimeZone::CivilInfo ci = tz->At(timestamp);
-  absl::numbers_internal::PutTwoDigits(ci.cs.month(), p);
+  absl::numbers_internal::PutTwoDigits(static_cast<size_t>(ci.cs.month()), p);
   p += 2;
-  absl::numbers_internal::PutTwoDigits(ci.cs.day(), p);
+  absl::numbers_internal::PutTwoDigits(static_cast<size_t>(ci.cs.day()), p);
   p += 2;
   *p++ = ' ';
-  absl::numbers_internal::PutTwoDigits(ci.cs.hour(), p);
+  absl::numbers_internal::PutTwoDigits(static_cast<size_t>(ci.cs.hour()), p);
   p += 2;
   *p++ = ':';
-  absl::numbers_internal::PutTwoDigits(ci.cs.minute(), p);
+  absl::numbers_internal::PutTwoDigits(static_cast<size_t>(ci.cs.minute()), p);
   p += 2;
   *p++ = ':';
-  absl::numbers_internal::PutTwoDigits(ci.cs.second(), p);
+  absl::numbers_internal::PutTwoDigits(static_cast<size_t>(ci.cs.second()), p);
   p += 2;
   *p++ = '.';
   const int64_t usecs = absl::ToInt64Microseconds(ci.subsecond);
-  absl::numbers_internal::PutTwoDigits(usecs / 10000, p);
+  absl::numbers_internal::PutTwoDigits(static_cast<size_t>(usecs / 10000), p);
   p += 2;
-  absl::numbers_internal::PutTwoDigits(usecs / 100 % 100, p);
+  absl::numbers_internal::PutTwoDigits(static_cast<size_t>(usecs / 100 % 100),
+                                       p);
   p += 2;
-  absl::numbers_internal::PutTwoDigits(usecs % 100, p);
+  absl::numbers_internal::PutTwoDigits(static_cast<size_t>(usecs % 100), p);
   p += 2;
   *p++ = ' ';
-  constexpr bool unsigned_tid_t = !std::is_signed<log_internal::Tid>::value;
-  if ((unsigned_tid_t || tid >= 0) && tid < 10) *p++ = ' ';
-  if ((unsigned_tid_t || tid > -10) && tid < 100) *p++ = ' ';
-  if ((unsigned_tid_t || tid > -100) && tid < 1000) *p++ = ' ';
-  if ((unsigned_tid_t || tid > -1000) && tid < 10000) *p++ = ' ';
-  if ((unsigned_tid_t || tid > -10000) && tid < 100000) *p++ = ' ';
-  if ((unsigned_tid_t || tid > -100000) && tid < 1000000) *p++ = ' ';
+  PutLeadingWhitespace(tid, p);
   p = absl::numbers_internal::FastIntToBuffer(tid, p);
   *p++ = ' ';
-  const size_t bytes_formatted = p - buf.data();
+  const size_t bytes_formatted = static_cast<size_t>(p - buf.data());
   buf.remove_prefix(bytes_formatted);
   return bytes_formatted;
 }
@@ -146,7 +166,7 @@ size_t FormatLineNumber(int line, absl::Span<char>& buf) {
   p = absl::numbers_internal::FastIntToBuffer(line, p);
   *p++ = ']';
   *p++ = ' ';
-  const size_t bytes_formatted = p - buf.data();
+  const size_t bytes_formatted = static_cast<size_t>(p - buf.data());
   buf.remove_prefix(bytes_formatted);
   return bytes_formatted;
 }

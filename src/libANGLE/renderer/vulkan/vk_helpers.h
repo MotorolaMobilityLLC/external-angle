@@ -1237,6 +1237,47 @@ class OutsideRenderPassCommandBufferHelper final : public CommandBufferHelperCom
     OutsideRenderPassCommandBuffer mCommandBuffer;
 };
 
+enum class ImagelessStatus
+{
+    NotImageless,
+    Imageless,
+};
+
+class MaybeImagelessFramebuffer : angle::NonCopyable
+{
+  public:
+    MaybeImagelessFramebuffer() : mImageViews({}), mImageless(ImagelessStatus::NotImageless) {}
+    ~MaybeImagelessFramebuffer() { mFramebuffer.release(); }
+
+    MaybeImagelessFramebuffer &operator=(MaybeImagelessFramebuffer &&rhs)
+    {
+        updateFramebuffer(rhs.mFramebuffer.getHandle(), &rhs.mImageViews, rhs.mImageless);
+        return *this;
+    }
+
+    void updateFramebuffer(VkFramebuffer newFramebufferHandle,
+                           FramebufferAttachmentsVector<VkImageView> *newImageViews,
+                           ImagelessStatus imagelessStatus)
+    {
+        mFramebuffer.setHandle(newFramebufferHandle);
+        std::swap(mImageViews, *newImageViews);
+        mImageless = imagelessStatus;
+    }
+
+    Framebuffer &getFramebuffer() { return mFramebuffer; }
+    [[nodiscard]] VkFramebuffer getHandle() const { return mFramebuffer.getHandle(); }
+    void setHandle(VkFramebuffer handle) { mFramebuffer.setHandle(handle); }
+
+    FramebufferAttachmentsVector<VkImageView> &getImageViews() { return mImageViews; }
+
+    bool isImageless() { return mImageless == ImagelessStatus::Imageless; }
+
+  private:
+    Framebuffer mFramebuffer;
+    FramebufferAttachmentsVector<VkImageView> mImageViews;
+    ImagelessStatus mImageless;
+};
+
 using RenderPassSerial = Serial;
 
 class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
@@ -1295,7 +1336,7 @@ class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
     void finalizeImageLayout(Context *context, const ImageHelper *image);
 
     angle::Result beginRenderPass(ContextVk *contextVk,
-                                  const Framebuffer &framebuffer,
+                                  MaybeImagelessFramebuffer &framebuffer,
                                   const gl::Rectangle &renderArea,
                                   const RenderPassDesc &renderPassDesc,
                                   const AttachmentOpsArray &renderPassAttachmentOps,
@@ -1343,6 +1384,8 @@ class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
     bool isTransformFeedbackStarted() const { return mValidTransformFeedbackBufferCount > 0; }
     bool isTransformFeedbackActiveUnpaused() const { return mIsTransformFeedbackActiveUnpaused; }
 
+    bool usesImagelessFramebuffer() { return mFramebuffer.isImageless(); }
+
     uint32_t getAndResetCounter()
     {
         uint32_t count = mCounter;
@@ -1365,7 +1408,7 @@ class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
     bool hasAnyStencilAccess() { return mStencilAttachment.hasAnyAccess(); }
 
     void updateRenderPassForResolve(ContextVk *contextVk,
-                                    Framebuffer *newFramebuffer,
+                                    MaybeImagelessFramebuffer &newFramebuffer,
                                     const RenderPassDesc &renderPassDesc);
 
     bool hasDepthStencilWriteOrClear() const
@@ -1434,7 +1477,7 @@ class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
     uint32_t mCounter;
     RenderPassDesc mRenderPassDesc;
     AttachmentOpsArray mAttachmentOps;
-    Framebuffer mFramebuffer;
+    MaybeImagelessFramebuffer mFramebuffer;
     gl::Rectangle mRenderArea;
     PackedClearValuesArray mClearValues;
     bool mRenderPassStarted;
@@ -1468,6 +1511,8 @@ class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
 
     RenderPassAttachment mStencilAttachment;
     RenderPassAttachment mStencilResolveAttachment;
+
+    FramebufferAttachmentArray<VkImageView> mImageViews;
 
     // This is last renderpass before present and this is the image will be presented. We can use
     // final layout of the renderpass to transition it to the presentable layout
@@ -1780,6 +1825,15 @@ class ImageHelper final : public Resource, public angle::Subject
         VkImageFormatListCreateInfoKHR *imageFormatListInfoStorage,
         ImageListFormats *imageListFormatsStorage,
         VkImageCreateFlags *createFlagsOut);
+
+    // Image formats used for the creation of imageless framebuffers.
+    using ImageFormats = angle::FixedVector<VkFormat, kImageListFormatCount>;
+    ImageFormats &getViewFormats() { return mViewFormats; }
+
+    // Helper for initExternal and users to extract the view formats of the image from the pNext
+    // chain in VkImageCreateInfo.
+    void deriveImageViewFormatFromCreateInfoPNext(VkImageCreateInfo &imageInfo,
+                                                  ImageFormats &formatOut);
 
     // Release the underlining VkImage object for garbage collection.
     void releaseImage(RendererVk *renderer);
@@ -2554,6 +2608,9 @@ class ImageHelper final : public Resource, public angle::Subject
     uint32_t mLayerCount;
     uint32_t mLevelCount;
 
+    // Image formats used for imageless framebuffers.
+    ImageFormats mViewFormats;
+
     std::vector<std::vector<SubresourceUpdate>> mSubresourceUpdates;
     VkDeviceSize mTotalStagedBufferUpdateSize;
 
@@ -2922,6 +2979,21 @@ class BufferViewHelper final : public Resource
     ImageOrBufferViewSerial mViewSerial;
 };
 
+// Context state that can affect a compute pipeline
+enum class ComputePipelineFlag : uint8_t
+{
+    // Whether VK_EXT_pipeline_robustness should be used to make the pipeline robust.  Note that
+    // programs are allowed to be shared between robust and non-robust contexts, so different
+    // pipelines can be created for the same compute program.
+    Robust,
+
+    InvalidEnum,
+    EnumCount = InvalidEnum,
+};
+
+using ComputePipelineFlags = angle::PackedEnumBitSet<ComputePipelineFlag, uint8_t>;
+using ComputePipelineCache = std::array<PipelineHelper, 1u << ComputePipelineFlags::size()>;
+
 class ShaderProgramHelper : angle::NonCopyable
 {
   public:
@@ -2932,50 +3004,38 @@ class ShaderProgramHelper : angle::NonCopyable
     void destroy(RendererVk *rendererVk);
     void release(ContextVk *contextVk);
 
-    ShaderAndSerial &getShader(gl::ShaderType shaderType) { return mShaders[shaderType].get(); }
+    void setShader(gl::ShaderType shaderType, RefCounted<ShaderModule> *shader);
 
-    void setShader(gl::ShaderType shaderType, RefCounted<ShaderAndSerial> *shader);
-    void setSpecializationConstant(sh::vk::SpecializationConstantId id, uint32_t value);
-
-    // For getting a Pipeline and from the pipeline cache.
-    ANGLE_INLINE angle::Result getGraphicsPipeline(
+    // Create a graphics pipeline and place it in the cache.  Must not be called if the pipeline
+    // exists in cache.
+    template <typename PipelineHash>
+    ANGLE_INLINE angle::Result createGraphicsPipeline(
         ContextVk *contextVk,
-        RenderPassCache *renderPassCache,
+        GraphicsPipelineCache<PipelineHash> *graphicsPipelines,
         PipelineCacheAccess *pipelineCache,
+        const vk::RenderPass &compatibleRenderPass,
         const PipelineLayout &pipelineLayout,
         PipelineSource source,
         const GraphicsPipelineDesc &pipelineDesc,
-        const gl::AttributesMask &activeAttribLocationsMask,
-        const gl::ComponentTypeMask &programAttribsTypeMask,
-        const gl::DrawBufferMask &missingOutputsMask,
+        const vk::SpecializationConstants &specConsts,
         const GraphicsPipelineDesc **descPtrOut,
-        PipelineHelper **pipelineOut)
+        PipelineHelper **pipelineOut) const
     {
-        // Pull in a compatible RenderPass.
-        RenderPass *compatibleRenderPass = nullptr;
-        ANGLE_TRY(renderPassCache->getCompatibleRenderPass(
-            contextVk, pipelineDesc.getRenderPassDesc(), &compatibleRenderPass));
-
-        return mGraphicsPipelines.getPipeline(
-            contextVk, pipelineCache, *compatibleRenderPass, pipelineLayout,
-            activeAttribLocationsMask, programAttribsTypeMask, missingOutputsMask, mShaders,
-            mSpecializationConstants, source, pipelineDesc, descPtrOut, pipelineOut);
+        return graphicsPipelines->createPipeline(contextVk, pipelineCache, compatibleRenderPass,
+                                                 pipelineLayout, mShaders, specConsts, source,
+                                                 pipelineDesc, descPtrOut, pipelineOut);
     }
 
-    angle::Result getComputePipeline(ContextVk *contextVk,
-                                     PipelineCacheAccess *pipelineCache,
-                                     const PipelineLayout &pipelineLayout,
-                                     PipelineSource source,
-                                     PipelineHelper **pipelineOut);
+    angle::Result getOrCreateComputePipeline(ContextVk *contextVk,
+                                             ComputePipelineCache *computePipelines,
+                                             PipelineCacheAccess *pipelineCache,
+                                             const PipelineLayout &pipelineLayout,
+                                             ComputePipelineFlags pipelineFlags,
+                                             PipelineSource source,
+                                             PipelineHelper **pipelineOut) const;
 
   private:
-    ShaderAndSerialMap mShaders;
-    GraphicsPipelineCache mGraphicsPipelines;
-
-    PipelineHelper mComputePipeline;
-
-    // Specialization constants, currently only used by the graphics queue.
-    SpecializationConstants mSpecializationConstants;
+    ShaderModuleMap mShaders;
 };
 
 // Tracks current handle allocation counts in the back-end. Useful for debugging and profiling.
