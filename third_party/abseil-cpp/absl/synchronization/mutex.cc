@@ -135,25 +135,42 @@ enum DelayMode { AGGRESSIVE, GENTLE };
 struct ABSL_CACHELINE_ALIGNED MutexGlobals {
   absl::once_flag once;
   int spinloop_iterations = 0;
-  int32_t mutex_sleep_limit[2] = {};
+  int32_t mutex_sleep_spins[2] = {};
+  absl::Duration mutex_sleep_time;
 };
+
+absl::Duration MeasureTimeToYield() {
+  absl::Time before = absl::Now();
+  ABSL_INTERNAL_C_SYMBOL(AbslInternalMutexYield)();
+  return absl::Now() - before;
+}
 
 const MutexGlobals &GetMutexGlobals() {
   ABSL_CONST_INIT static MutexGlobals data;
   absl::base_internal::LowLevelCallOnce(&data.once, [&]() {
     const int num_cpus = absl::base_internal::NumCPUs();
     data.spinloop_iterations = num_cpus > 1 ? 1500 : 0;
-    // If this a uniprocessor, only yield/sleep.  Otherwise, if the mode is
+    // If this a uniprocessor, only yield/sleep.
+    // Real-time threads are often unable to yield, so the sleep time needs
+    // to be long enough to keep the calling thread asleep until scheduling
+    // happens.
+    // If this is multiprocessor, allow spinning. If the mode is
     // aggressive then spin many times before yielding.  If the mode is
     // gentle then spin only a few times before yielding.  Aggressive spinning
     // is used to ensure that an Unlock() call, which must get the spin lock
     // for any thread to make progress gets it without undue delay.
     if (num_cpus > 1) {
-      data.mutex_sleep_limit[AGGRESSIVE] = 5000;
-      data.mutex_sleep_limit[GENTLE] = 250;
+      data.mutex_sleep_spins[AGGRESSIVE] = 5000;
+      data.mutex_sleep_spins[GENTLE] = 250;
+      data.mutex_sleep_time = absl::Microseconds(10);
     } else {
-      data.mutex_sleep_limit[AGGRESSIVE] = 0;
-      data.mutex_sleep_limit[GENTLE] = 0;
+      data.mutex_sleep_spins[AGGRESSIVE] = 0;
+      data.mutex_sleep_spins[GENTLE] = 0;
+      data.mutex_sleep_time = MeasureTimeToYield() * 5;
+      data.mutex_sleep_time =
+          std::min(data.mutex_sleep_time, absl::Milliseconds(1));
+      data.mutex_sleep_time =
+          std::max(data.mutex_sleep_time, absl::Microseconds(10));
     }
   });
   return data;
@@ -164,7 +181,8 @@ namespace synchronization_internal {
 // Returns the Mutex delay on iteration `c` depending on the given `mode`.
 // The returned value should be used as `c` for the next call to `MutexDelay`.
 int MutexDelay(int32_t c, int mode) {
-  const int32_t limit = GetMutexGlobals().mutex_sleep_limit[mode];
+  const int32_t limit = GetMutexGlobals().mutex_sleep_spins[mode];
+  const absl::Duration sleep_time = GetMutexGlobals().mutex_sleep_time;
   if (c < limit) {
     // Spin.
     c++;
@@ -177,7 +195,7 @@ int MutexDelay(int32_t c, int mode) {
       c++;
     } else {
       // Then wait.
-      absl::SleepFor(absl::Microseconds(10));
+      absl::SleepFor(sleep_time);
       c = 0;
     }
     ABSL_TSAN_MUTEX_POST_DIVERT(nullptr, 0);
@@ -2342,22 +2360,26 @@ ABSL_ATTRIBUTE_NOINLINE void Mutex::UnlockSlow(SynchWaitParams *waitp) {
   }                            // end of for(;;)-loop
 
   if (wake_list != kPerThreadSynchNull) {
-    int64_t wait_cycles = 0;
+    int64_t total_wait_cycles = 0;
+    int64_t max_wait_cycles = 0;
     int64_t now = base_internal::CycleClock::Now();
     do {
-      // Sample lock contention events only if the waiter was trying to acquire
+      // Profile lock contention events only if the waiter was trying to acquire
       // the lock, not waiting on a condition variable or Condition.
       if (!wake_list->cond_waiter) {
-        wait_cycles += (now - wake_list->waitp->contention_start_cycles);
+        int64_t cycles_waited =
+            (now - wake_list->waitp->contention_start_cycles);
+        total_wait_cycles += cycles_waited;
+        if (max_wait_cycles == 0) max_wait_cycles = cycles_waited;
         wake_list->waitp->contention_start_cycles = now;
         wake_list->waitp->should_submit_contention_data = true;
       }
       wake_list = Wakeup(wake_list);              // wake waiters
     } while (wake_list != kPerThreadSynchNull);
-    if (wait_cycles > 0) {
-      mutex_tracer("slow release", this, wait_cycles);
+    if (total_wait_cycles > 0) {
+      mutex_tracer("slow release", this, total_wait_cycles);
       ABSL_TSAN_MUTEX_PRE_DIVERT(this, 0);
-      submit_profile_data(wait_cycles);
+      submit_profile_data(total_wait_cycles);
       ABSL_TSAN_MUTEX_POST_DIVERT(this, 0);
     }
   }

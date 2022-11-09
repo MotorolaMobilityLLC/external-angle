@@ -8,7 +8,7 @@ import static org.objectweb.asm.Opcodes.ACC_FINAL;
 import static org.objectweb.asm.Opcodes.ACC_PRIVATE;
 import static org.objectweb.asm.Opcodes.ACC_PROTECTED;
 import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
-import static org.objectweb.asm.Opcodes.ASM9;
+import static org.objectweb.asm.Opcodes.ASM7;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -30,7 +30,7 @@ class ParentMethodCheckerClassAdapter extends ClassVisitor {
 
     public ParentMethodCheckerClassAdapter(
             ArrayList<MethodDescription> methodsToCheck, ClassLoader jarClassLoader) {
-        super(ASM9);
+        super(ASM7);
         mMethodsToCheck = methodsToCheck;
         mJarClassLoader = jarClassLoader;
     }

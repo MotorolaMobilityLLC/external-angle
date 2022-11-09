@@ -298,7 +298,9 @@ struct CalculatedFloat {
 // minus the number of leading zero bits.)
 int BitWidth(uint128 value) {
   if (Uint128High64(value) == 0) {
-    return bit_width(Uint128Low64(value));
+    // This static_cast is only needed when using a std::bit_width()
+    // implementation that does not have the fix for LWG 3656 applied.
+    return static_cast<int>(bit_width(Uint128Low64(value)));
   }
   return 128 - countl_zero(Uint128High64(value));
 }
@@ -339,14 +341,19 @@ template <typename FloatType>
 bool HandleEdgeCase(const strings_internal::ParsedFloat& input, bool negative,
                     FloatType* value) {
   if (input.type == strings_internal::FloatType::kNan) {
-    // A bug in both clang and gcc would cause the compiler to optimize away the
-    // buffer we are building below.  Declaring the buffer volatile avoids the
-    // issue, and has no measurable performance impact in microbenchmarks.
+    // A bug in both clang < 7 and gcc would cause the compiler to optimize
+    // away the buffer we are building below.  Declaring the buffer volatile
+    // avoids the issue, and has no measurable performance impact in
+    // microbenchmarks.
     //
     // https://bugs.llvm.org/show_bug.cgi?id=37778
     // https://gcc.gnu.org/bugzilla/show_bug.cgi?id=86113
     constexpr ptrdiff_t kNanBufferSize = 128;
+#if defined(__GNUC__) || (defined(__clang__) && __clang_major__ < 7)
     volatile char n_char_sequence[kNanBufferSize];
+#else
+    char n_char_sequence[kNanBufferSize];
+#endif
     if (input.subrange_begin == nullptr) {
       n_char_sequence[0] = '\0';
     } else {
@@ -575,7 +582,9 @@ CalculatedFloat CalculateFromParsedHexadecimal(
     const strings_internal::ParsedFloat& parsed_hex) {
   uint64_t mantissa = parsed_hex.mantissa;
   int exponent = parsed_hex.exponent;
-  int mantissa_width = bit_width(mantissa);
+  // This static_cast is only needed when using a std::bit_width()
+  // implementation that does not have the fix for LWG 3656 applied.
+  int mantissa_width = static_cast<int>(bit_width(mantissa));
   const int shift = NormalizedShiftSize<FloatType>(mantissa_width, exponent);
   bool result_exact;
   exponent += shift;
