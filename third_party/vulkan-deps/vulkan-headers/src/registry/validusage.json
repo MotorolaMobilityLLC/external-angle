@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.233",
-    "comment": "from git branch: github-main commit: 42d3f5a641810c52bbe53c0f049be1130af07f2f",
-    "date": "2022-11-03 08:44:18Z"
+    "api version": "1.3.234",
+    "comment": "from git branch: github-main commit: 3abd2bbc91a7e74186a8acc82268d726cee6a731",
+    "date": "2022-11-10 11:56:58Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -11704,7 +11704,7 @@
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06046",
-          "text": " If <code>renderPass</code> is a valid renderPass, <code>subpass</code> <strong class=\"purple\">must</strong> be a valid subpass within <code>renderPass</code>"
+          "text": " If <code>renderPass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>subpass</code> <strong class=\"purple\">must</strong> be a valid subpass within <code>renderPass</code>"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-layout-01688",
@@ -12060,25 +12060,29 @@
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06047",
-          "text": " If <code>renderPass</code> is a valid renderPass, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and the <code>renderPass</code> has multiview enabled and <code>subpass</code> has more than one bit set in the view mask and <code>multiviewTessellationShader</code> is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include tessellation shaders"
+          "text": " If <code>renderPass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, <code>subpass</code> viewMask is not <code>0</code>, and <code>multiviewTessellationShader</code> is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include tessellation shaders"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06048",
-          "text": " If <code>renderPass</code> is a valid renderPass, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and the <code>renderPass</code> has multiview enabled and <code>subpass</code> has more than one bit set in the view mask and <code>multiviewGeometryShader</code> is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include a geometry shader"
+          "text": " If <code>renderPass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, <code>subpass</code> viewMask is not <code>0</code>, and <code>multiviewGeometryShader</code> is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include a geometry shader"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06049",
-          "text": " If <code>renderPass</code> is a valid renderPass, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and the <code>renderPass</code> has multiview enabled and <code>subpass</code> has more than one bit set in the view mask, shaders in the pipeline <strong class=\"purple\">must</strong> not write to the <code>Layer</code> built-in output"
+          "text": " If <code>renderPass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and <code>subpass</code> viewMask is not <code>0</code>, all of the shaders in the pipeline <strong class=\"purple\">must</strong> not write to the <code>Layer</code> built-in output"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06050",
-          "text": " If <code>renderPass</code> is a valid renderPass and the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and the <code>renderPass</code> has multiview enabled, then all shaders <strong class=\"purple\">must</strong> not include variables decorated with the <code>Layer</code> built-in decoration in their interfaces"
+          "text": " If <code>renderPass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> and the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and <code>subpass</code> viewMask is not <code>0</code>, then all of the shaders in the pipeline <strong class=\"purple\">must</strong> not include variables decorated with the <code>Layer</code> built-in decoration in their interfaces"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-07717",
+          "text": " If <code>renderPass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> and the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and <code>subpass</code> viewMask is not <code>0</code>, then all of the shaders in the pipeline <strong class=\"purple\">must</strong> not include variables decorated with the <code>ViewMask</code> built-in decoration in their interfaces"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)+(VK_EXT_mesh_shader)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-07064",
-          "text": " If <code>renderPass</code> is a valid renderPass, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and the <code>renderPass</code> has multiview enabled and <code>subpass</code> has more than one bit set in the view mask and <code>multiviewMeshShader</code> is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include a mesh shader"
+          "text": " If <code>renderPass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, <code>subpass</code> viewMask is not <code>0</code>, and <code>multiviewMeshShader</code> is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include a mesh shader"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_device_group)": [
@@ -12534,15 +12538,23 @@
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_multiview,VK_VERSION_1_1)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06057",
-          "text": " If <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, the <code>viewMask</code> member of a <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a> structure included in the <code>pNext</code> chain is not <code>0</code>, and the <a href=\"#features-multiview-tess\"><code>multiviewTessellationShader</code></a> feature is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include tessellation shaders"
+          "text": " If <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a>::<code>viewMask</code> is not <code>0</code>, and the <a href=\"#features-multiview-tess\"><code>multiviewTessellationShader</code></a> feature is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include tessellation shaders"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06058",
-          "text": " If <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, the <code>viewMask</code> member of a <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a> structure included in the <code>pNext</code> chain is not <code>0</code>, and the <a href=\"#features-multiview-gs\"><code>multiviewGeometryShader</code></a> feature is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include a geometry shader"
+          "text": " If <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a>::<code>viewMask</code> is not <code>0</code>, and the <a href=\"#features-multiview-gs\"><code>multiviewGeometryShader</code></a> feature is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include a geometry shader"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-07718",
+          "text": " If <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a>::<code>viewMask</code> is not <code>0</code>, all of the shaders in the pipeline <strong class=\"purple\">must</strong> not write to the <code>Layer</code> built-in output"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06059",
-          "text": " If <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and the <code>viewMask</code> member of a <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a> structure included in the <code>pNext</code> chain is not <code>0</code>, shaders in <code>pStages</code> <strong class=\"purple\">must</strong> not include variables decorated with the <code>Layer</code> built-in decoration in their interfaces"
+          "text": " If <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a>::<code>viewMask</code> is not <code>0</code>, all of the shaders in the pipeline <strong class=\"purple\">must</strong> not include variables decorated with the <code>Layer</code> built-in decoration in their interfaces"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-07719",
+          "text": " If <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a>::<code>viewMask</code> is not <code>0</code>, all of the shaders in the pipeline <strong class=\"purple\">must</strong> not include variables decorated with the <code>ViewIndex</code> built-in decoration in their interfaces"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06061",
@@ -12551,6 +12563,12 @@
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-06062",
           "text": " If the pipeline is being created with <a href=\"#pipelines-graphics-subsets-fragment-output\">fragment output interface state</a> and <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, for each color attachment format defined by the <code>pColorAttachmentFormats</code> member of <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a>, if its <a href=\"#potential-format-features\">potential format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+        }
+      ],
+      "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_multiview,VK_VERSION_1_1)+(VK_EXT_mesh_shader)": [
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-07720",
+          "text": " If <code>renderPass</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and <a href=\"#VkPipelineRenderingCreateInfo\">VkPipelineRenderingCreateInfo</a>::<code>viewMask</code> is not <code>0</code>, and <code>multiviewMeshShader</code> is not enabled, then <code>pStages</code> <strong class=\"purple\">must</strong> not include a mesh shader"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_AMD_mixed_attachment_samples,VK_NV_framebuffer_mixed_samples)": [
@@ -15726,15 +15744,15 @@
         },
         {
           "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06795",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and its <code>image</code> member is not <code>VK_NULL_HANDLE</code>, the <a href=\"#VkImage\">VkImage</a> in its <code>image</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure in the <a href=\"#vkCreateImage\">vkCreateImage</a> command."
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and its <code>image</code> member is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the <a href=\"#VkImage\">VkImage</a> in its <code>image</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure in the <a href=\"#vkCreateImage\">vkCreateImage</a> command."
         },
         {
           "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06796",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and its <code>imageView</code> member is not <code>VK_NULL_HANDLE</code>, the <a href=\"#VkImageView\">VkImageView</a> in its <code>imageView</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkImageViewCreateInfo\">VkImageViewCreateInfo</a> structure in the <a href=\"#vkCreateImageView\">vkCreateImageView</a> command."
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and its <code>imageView</code> member is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the <a href=\"#VkImageView\">VkImageView</a> in its <code>imageView</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkImageViewCreateInfo\">VkImageViewCreateInfo</a> structure in the <a href=\"#vkCreateImageView\">vkCreateImageView</a> command."
         },
         {
           "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06797",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and its <code>bufferView</code> member is not <code>VK_NULL_HANDLE</code>, the <a href=\"#VkBufferView\">VkBufferView</a> in its <code>bufferView</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkBufferViewCreateInfo\">VkBufferViewCreateInfo</a> structure in the <a href=\"#vkCreateBufferView\">vkCreateBufferView</a> command."
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalTextureInfoEXT\">VkExportMetalTextureInfoEXT</a> structure, and its <code>bufferView</code> member is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the <a href=\"#VkBufferView\">VkBufferView</a> in its <code>bufferView</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkBufferViewCreateInfo\">VkBufferViewCreateInfo</a> structure in the <a href=\"#vkCreateBufferView\">vkCreateBufferView</a> command."
         },
         {
           "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06798",
@@ -15766,11 +15784,11 @@
         },
         {
           "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06805",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalSharedEventInfoEXT\">VkExportMetalSharedEventInfoEXT</a> structure, and its <code>semaphore</code> member is not <code>VK_NULL_HANDLE</code>, the <a href=\"#VkSemaphore\">VkSemaphore</a> in its <code>semaphore</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkSemaphoreCreateInfo\">VkSemaphoreCreateInfo</a> structure in the <a href=\"#vkCreateSemaphore\">vkCreateSemaphore</a> command."
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalSharedEventInfoEXT\">VkExportMetalSharedEventInfoEXT</a> structure, and its <code>semaphore</code> member is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the <a href=\"#VkSemaphore\">VkSemaphore</a> in its <code>semaphore</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkSemaphoreCreateInfo\">VkSemaphoreCreateInfo</a> structure in the <a href=\"#vkCreateSemaphore\">vkCreateSemaphore</a> command."
         },
         {
           "vuid": "VUID-VkExportMetalObjectsInfoEXT-pNext-06806",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalSharedEventInfoEXT\">VkExportMetalSharedEventInfoEXT</a> structure, and its <code>event</code> member is not <code>VK_NULL_HANDLE</code>, the <a href=\"#VkEvent\">VkEvent</a> in its <code>event</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkEventCreateInfo\">VkEventCreateInfo</a> structure in the <a href=\"#vkCreateEvent\">vkCreateEvent</a> command."
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMetalSharedEventInfoEXT\">VkExportMetalSharedEventInfoEXT</a> structure, and its <code>event</code> member is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the <a href=\"#VkEvent\">VkEvent</a> in its <code>event</code> member <strong class=\"purple\">must</strong> have been created with <code>VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT</code> in the <code>exportObjectType</code> member of a <a href=\"#VkExportMetalObjectCreateInfoEXT\">VkExportMetalObjectCreateInfoEXT</a> structure in the <code>pNext</code> chain of the <a href=\"#VkEventCreateInfo\">VkEventCreateInfo</a> structure in the <a href=\"#vkCreateEvent\">vkCreateEvent</a> command."
         },
         {
           "vuid": "VUID-VkExportMetalObjectsInfoEXT-sType-sType",
@@ -26386,7 +26404,7 @@
         },
         {
           "vuid": "VUID-vkCmdClearColorImage-pRanges-01692",
-          "text": " For each <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a> element of <code>pRanges</code>, if the <code>levelCount</code> member is not <code>VK_REMAINING_MIP_LEVELS</code>, then <span class=\"eq\"><code>baseMipLevel</code> &#43; <code>levelCount</code></span> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
+          "text": " For each <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a> element of <code>pRanges</code>, if the <code>levelCount</code> member is not <code>VK_REMAINING_MIP_LEVELS</code>, then <span class=\"eq\"><code>baseMipLevel</code> &#43; <code>levelCount</code></span> <strong class=\"purple\">must</strong> be less than or equal to the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
         },
         {
           "vuid": "VUID-vkCmdClearColorImage-baseArrayLayer-01472",
@@ -26394,7 +26412,7 @@
         },
         {
           "vuid": "VUID-vkCmdClearColorImage-pRanges-01693",
-          "text": " For each <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a> element of <code>pRanges</code>, if the <code>layerCount</code> member is not <code>VK_REMAINING_ARRAY_LAYERS</code>, then <span class=\"eq\"><code>baseArrayLayer</code> &#43; <code>layerCount</code></span> <strong class=\"purple\">must</strong> be less than the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
+          "text": " For each <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a> element of <code>pRanges</code>, if the <code>layerCount</code> member is not <code>VK_REMAINING_ARRAY_LAYERS</code>, then <span class=\"eq\"><code>baseArrayLayer</code> &#43; <code>layerCount</code></span> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
         },
         {
           "vuid": "VUID-vkCmdClearColorImage-image-00007",
@@ -26532,7 +26550,7 @@
         },
         {
           "vuid": "VUID-vkCmdClearDepthStencilImage-pRanges-01694",
-          "text": " For each <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a> element of <code>pRanges</code>, if the <code>levelCount</code> member is not <code>VK_REMAINING_MIP_LEVELS</code>, then <span class=\"eq\"><code>baseMipLevel</code> &#43; <code>levelCount</code></span> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
+          "text": " For each <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a> element of <code>pRanges</code>, if the <code>levelCount</code> member is not <code>VK_REMAINING_MIP_LEVELS</code>, then <span class=\"eq\"><code>baseMipLevel</code> &#43; <code>levelCount</code></span> <strong class=\"purple\">must</strong> be less than or equal to the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
         },
         {
           "vuid": "VUID-vkCmdClearDepthStencilImage-baseArrayLayer-01476",
@@ -26540,7 +26558,7 @@
         },
         {
           "vuid": "VUID-vkCmdClearDepthStencilImage-pRanges-01695",
-          "text": " For each <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a> element of <code>pRanges</code>, if the <code>layerCount</code> member is not <code>VK_REMAINING_ARRAY_LAYERS</code>, then <span class=\"eq\"><code>baseArrayLayer</code> &#43; <code>layerCount</code></span> <strong class=\"purple\">must</strong> be less than the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
+          "text": " For each <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a> element of <code>pRanges</code>, if the <code>layerCount</code> member is not <code>VK_REMAINING_ARRAY_LAYERS</code>, then <span class=\"eq\"><code>baseArrayLayer</code> &#43; <code>layerCount</code></span> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
         },
         {
           "vuid": "VUID-vkCmdClearDepthStencilImage-image-00014",
@@ -58862,7 +58880,7 @@
       "(VK_NV_memory_decompression)": [
         {
           "vuid": "VUID-vkCmdDecompressMemoryNV-None-07684",
-          "text": " <a href=\"#features-memoryDecompression\">memoryDecompression</a> <strong class=\"purple\">must</strong> be enabled"
+          "text": " The <a href=\"#features-memoryDecompression\">memoryDecompression</a> feature <strong class=\"purple\">must</strong> be enabled"
         },
         {
           "vuid": "VUID-vkCmdDecompressMemoryNV-commandBuffer-parameter",
@@ -58938,7 +58956,7 @@
       "(VK_NV_memory_decompression)": [
         {
           "vuid": "VUID-vkCmdDecompressMemoryIndirectCountNV-None-07692",
-          "text": " <a href=\"#features-memoryDecompression\">memoryDecompression</a> <strong class=\"purple\">must</strong> be enabled"
+          "text": " The <a href=\"#features-memoryDecompression\">memoryDecompression</a> feature <strong class=\"purple\">must</strong> be enabled"
         },
         {
           "vuid": "VUID-vkCmdDecompressMemoryIndirectCountNV-indirectCommandsAddress-07693",
@@ -62785,6 +62803,10 @@
     "vkGetPhysicalDeviceExternalImageFormatPropertiesNV": {
       "(VK_NV_external_memory_capabilities)": [
         {
+          "vuid": "VUID-vkGetPhysicalDeviceExternalImageFormatPropertiesNV-externalHandleType-07721",
+          "text": " <code>externalHandleType</code> <strong class=\"purple\">must</strong> not have more than one bit set"
+        },
+        {
           "vuid": "VUID-vkGetPhysicalDeviceExternalImageFormatPropertiesNV-physicalDevice-parameter",
           "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> handle"
         },
@@ -64218,7 +64240,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-Location-06672",
-          "text": " The <code>Location</code> or <code>Component</code> decorations <strong class=\"purple\">must</strong> only be used with the <code>Input</code>, <code>Output</code>, <code>RayPayloadKHR</code>, <code>IncomingRayPayloadKHR</code>, <code>HitAttributeKHR</code>, <code>CallableDataKHR</code>, <code>IncomingCallableDataKHR</code>, or <code>ShaderRecordBufferKHR</code> storage classes"
+          "text": " The <code>Location</code> or <code>Component</code> decorations <strong class=\"purple\">must</strong> only be used with the <code>Input</code>, <code>Output</code>, <code>RayPayloadKHR</code>, <code>IncomingRayPayloadKHR</code>, <code>HitAttributeKHR</code>, <code>HitObjectAttributeNV</code>, <code>CallableDataKHR</code>, <code>IncomingCallableDataKHR</code>, or <code>ShaderRecordBufferKHR</code> storage classes"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Location-04915",
