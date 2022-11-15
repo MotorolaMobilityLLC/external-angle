@@ -5886,6 +5886,7 @@ cc_library_static {
         "src/common/aligned_memory.cpp",
         "src/common/android_util.cpp",
         "src/common/angleutils.cpp",
+        "src/common/backtrace_utils_noop.cpp",
         "src/common/debug.cpp",
         "src/common/entry_points_enum_autogen.cpp",
         "src/common/event_tracer.cpp",
