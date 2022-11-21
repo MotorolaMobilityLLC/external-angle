@@ -189,12 +189,17 @@ class FfxEmulator(AbstractContextManager):
                 json.dump(ast.literal_eval(qemu_arm64_meta), f)
             emu_command.extend(['--engine', 'qemu'])
 
-        for retry_num in range(_EMU_COMMAND_RETRIES):
-            if retry_num == _EMU_COMMAND_RETRIES - 1:
-                run_ffx_command(emu_command)
-            else:
-                if run_ffx_command(emu_command, check=False).returncode == 0:
+        with ScopedFfxConfig('emu.start.timeout', '180'):
+            for _ in range(_EMU_COMMAND_RETRIES):
+
+                # If the ffx daemon fails to establish a connection with
+                # the emulator after 170 seconds, that means the emulator
+                # failed to be brought up and a retry is needed.
+                try:
+                    run_ffx_command(emu_command, timeout=170)
                     break
+                except subprocess.TimeoutExpired:
+                    run_ffx_command(('emu', 'stop'))
         return self._node_name
 
     def __exit__(self, exc_type, exc_value, traceback) -> bool:
