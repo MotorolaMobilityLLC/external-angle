@@ -1172,6 +1172,120 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = AccelerationStructureBuildSizesInfoKHR;
   };
 
+  struct AccelerationStructureCaptureDescriptorDataInfoEXT
+  {
+    using NativeType = VkAccelerationStructureCaptureDescriptorDataInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eAccelerationStructureCaptureDescriptorDataInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR AccelerationStructureCaptureDescriptorDataInfoEXT( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure_   = {},
+                                                                            VULKAN_HPP_NAMESPACE::AccelerationStructureNV  accelerationStructureNV_ = {},
+                                                                            const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , accelerationStructure( accelerationStructure_ )
+      , accelerationStructureNV( accelerationStructureNV_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      AccelerationStructureCaptureDescriptorDataInfoEXT( AccelerationStructureCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    AccelerationStructureCaptureDescriptorDataInfoEXT( VkAccelerationStructureCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : AccelerationStructureCaptureDescriptorDataInfoEXT( *reinterpret_cast<AccelerationStructureCaptureDescriptorDataInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    AccelerationStructureCaptureDescriptorDataInfoEXT &
+      operator=( AccelerationStructureCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    AccelerationStructureCaptureDescriptorDataInfoEXT & operator=( VkAccelerationStructureCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::AccelerationStructureCaptureDescriptorDataInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureCaptureDescriptorDataInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureCaptureDescriptorDataInfoEXT &
+                            setAccelerationStructure( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure_ ) VULKAN_HPP_NOEXCEPT
+    {
+      accelerationStructure = accelerationStructure_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureCaptureDescriptorDataInfoEXT &
+                            setAccelerationStructureNV( VULKAN_HPP_NAMESPACE::AccelerationStructureNV accelerationStructureNV_ ) VULKAN_HPP_NOEXCEPT
+    {
+      accelerationStructureNV = accelerationStructureNV_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkAccelerationStructureCaptureDescriptorDataInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkAccelerationStructureCaptureDescriptorDataInfoEXT *>( this );
+    }
+
+    operator VkAccelerationStructureCaptureDescriptorDataInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkAccelerationStructureCaptureDescriptorDataInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::AccelerationStructureKHR const &,
+               VULKAN_HPP_NAMESPACE::AccelerationStructureNV const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, accelerationStructure, accelerationStructureNV );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( AccelerationStructureCaptureDescriptorDataInfoEXT const & ) const = default;
+#else
+    bool operator==( AccelerationStructureCaptureDescriptorDataInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( accelerationStructure == rhs.accelerationStructure ) &&
+             ( accelerationStructureNV == rhs.accelerationStructureNV );
+#  endif
+    }
+
+    bool operator!=( AccelerationStructureCaptureDescriptorDataInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType            sType                   = StructureType::eAccelerationStructureCaptureDescriptorDataInfoEXT;
+    const void *                                   pNext                   = {};
+    VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure   = {};
+    VULKAN_HPP_NAMESPACE::AccelerationStructureNV  accelerationStructureNV = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eAccelerationStructureCaptureDescriptorDataInfoEXT>
+  {
+    using Type = AccelerationStructureCaptureDescriptorDataInfoEXT;
+  };
+
   struct AccelerationStructureCreateInfoKHR
   {
     using NativeType = VkAccelerationStructureCreateInfoKHR;
@@ -9585,6 +9699,102 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BlitImageInfo2;
   };
   using BlitImageInfo2KHR = BlitImageInfo2;
+
+  struct BufferCaptureDescriptorDataInfoEXT
+  {
+    using NativeType = VkBufferCaptureDescriptorDataInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBufferCaptureDescriptorDataInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR BufferCaptureDescriptorDataInfoEXT( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , buffer( buffer_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR BufferCaptureDescriptorDataInfoEXT( BufferCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCaptureDescriptorDataInfoEXT( VkBufferCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : BufferCaptureDescriptorDataInfoEXT( *reinterpret_cast<BufferCaptureDescriptorDataInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    BufferCaptureDescriptorDataInfoEXT & operator=( BufferCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    BufferCaptureDescriptorDataInfoEXT & operator=( VkBufferCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferCaptureDescriptorDataInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 BufferCaptureDescriptorDataInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 BufferCaptureDescriptorDataInfoEXT & setBuffer( VULKAN_HPP_NAMESPACE::Buffer buffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      buffer = buffer_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkBufferCaptureDescriptorDataInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkBufferCaptureDescriptorDataInfoEXT *>( this );
+    }
+
+    operator VkBufferCaptureDescriptorDataInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkBufferCaptureDescriptorDataInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::Buffer const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, buffer );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( BufferCaptureDescriptorDataInfoEXT const & ) const = default;
+#else
+    bool operator==( BufferCaptureDescriptorDataInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( buffer == rhs.buffer );
+#  endif
+    }
+
+    bool operator!=( BufferCaptureDescriptorDataInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType  = StructureType::eBufferCaptureDescriptorDataInfoEXT;
+    const void *                        pNext  = {};
+    VULKAN_HPP_NAMESPACE::Buffer        buffer = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eBufferCaptureDescriptorDataInfoEXT>
+  {
+    using Type = BufferCaptureDescriptorDataInfoEXT;
+  };
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   struct BufferCollectionBufferCreateInfoFUCHSIA
@@ -20288,6 +20498,333 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using DependencyInfoKHR = DependencyInfo;
 
+  struct DescriptorAddressInfoEXT
+  {
+    using NativeType = VkDescriptorAddressInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDescriptorAddressInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR DescriptorAddressInfoEXT( VULKAN_HPP_NAMESPACE::DeviceAddress address_ = {},
+                                                   VULKAN_HPP_NAMESPACE::DeviceSize    range_   = {},
+                                                   VULKAN_HPP_NAMESPACE::Format        format_  = VULKAN_HPP_NAMESPACE::Format::eUndefined,
+                                                   void *                              pNext_   = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , address( address_ )
+      , range( range_ )
+      , format( format_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR DescriptorAddressInfoEXT( DescriptorAddressInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    DescriptorAddressInfoEXT( VkDescriptorAddressInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : DescriptorAddressInfoEXT( *reinterpret_cast<DescriptorAddressInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    DescriptorAddressInfoEXT & operator=( DescriptorAddressInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    DescriptorAddressInfoEXT & operator=( VkDescriptorAddressInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::DescriptorAddressInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 DescriptorAddressInfoEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorAddressInfoEXT & setAddress( VULKAN_HPP_NAMESPACE::DeviceAddress address_ ) VULKAN_HPP_NOEXCEPT
+    {
+      address = address_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorAddressInfoEXT & setRange( VULKAN_HPP_NAMESPACE::DeviceSize range_ ) VULKAN_HPP_NOEXCEPT
+    {
+      range = range_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorAddressInfoEXT & setFormat( VULKAN_HPP_NAMESPACE::Format format_ ) VULKAN_HPP_NOEXCEPT
+    {
+      format = format_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkDescriptorAddressInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkDescriptorAddressInfoEXT *>( this );
+    }
+
+    operator VkDescriptorAddressInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkDescriptorAddressInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::DeviceAddress const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               VULKAN_HPP_NAMESPACE::Format const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, address, range, format );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( DescriptorAddressInfoEXT const & ) const = default;
+#else
+    bool operator==( DescriptorAddressInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( address == rhs.address ) && ( range == rhs.range ) && ( format == rhs.format );
+#  endif
+    }
+
+    bool operator!=( DescriptorAddressInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType   = StructureType::eDescriptorAddressInfoEXT;
+    void *                              pNext   = {};
+    VULKAN_HPP_NAMESPACE::DeviceAddress address = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize    range   = {};
+    VULKAN_HPP_NAMESPACE::Format        format  = VULKAN_HPP_NAMESPACE::Format::eUndefined;
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eDescriptorAddressInfoEXT>
+  {
+    using Type = DescriptorAddressInfoEXT;
+  };
+
+  struct DescriptorBufferBindingInfoEXT
+  {
+    using NativeType = VkDescriptorBufferBindingInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDescriptorBufferBindingInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR DescriptorBufferBindingInfoEXT( VULKAN_HPP_NAMESPACE::DeviceAddress    address_ = {},
+                                                         VULKAN_HPP_NAMESPACE::BufferUsageFlags usage_   = {},
+                                                         void *                                 pNext_   = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , address( address_ )
+      , usage( usage_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR DescriptorBufferBindingInfoEXT( DescriptorBufferBindingInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    DescriptorBufferBindingInfoEXT( VkDescriptorBufferBindingInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : DescriptorBufferBindingInfoEXT( *reinterpret_cast<DescriptorBufferBindingInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    DescriptorBufferBindingInfoEXT & operator=( DescriptorBufferBindingInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    DescriptorBufferBindingInfoEXT & operator=( VkDescriptorBufferBindingInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::DescriptorBufferBindingInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 DescriptorBufferBindingInfoEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorBufferBindingInfoEXT & setAddress( VULKAN_HPP_NAMESPACE::DeviceAddress address_ ) VULKAN_HPP_NOEXCEPT
+    {
+      address = address_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorBufferBindingInfoEXT & setUsage( VULKAN_HPP_NAMESPACE::BufferUsageFlags usage_ ) VULKAN_HPP_NOEXCEPT
+    {
+      usage = usage_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkDescriptorBufferBindingInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkDescriptorBufferBindingInfoEXT *>( this );
+    }
+
+    operator VkDescriptorBufferBindingInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkDescriptorBufferBindingInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::DeviceAddress const &,
+               VULKAN_HPP_NAMESPACE::BufferUsageFlags const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, address, usage );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( DescriptorBufferBindingInfoEXT const & ) const = default;
+#else
+    bool operator==( DescriptorBufferBindingInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( address == rhs.address ) && ( usage == rhs.usage );
+#  endif
+    }
+
+    bool operator!=( DescriptorBufferBindingInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType    sType   = StructureType::eDescriptorBufferBindingInfoEXT;
+    void *                                 pNext   = {};
+    VULKAN_HPP_NAMESPACE::DeviceAddress    address = {};
+    VULKAN_HPP_NAMESPACE::BufferUsageFlags usage   = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eDescriptorBufferBindingInfoEXT>
+  {
+    using Type = DescriptorBufferBindingInfoEXT;
+  };
+
+  struct DescriptorBufferBindingPushDescriptorBufferHandleEXT
+  {
+    using NativeType = VkDescriptorBufferBindingPushDescriptorBufferHandleEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDescriptorBufferBindingPushDescriptorBufferHandleEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR DescriptorBufferBindingPushDescriptorBufferHandleEXT( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
+                                                                               void *                       pNext_  = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , buffer( buffer_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      DescriptorBufferBindingPushDescriptorBufferHandleEXT( DescriptorBufferBindingPushDescriptorBufferHandleEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    DescriptorBufferBindingPushDescriptorBufferHandleEXT( VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : DescriptorBufferBindingPushDescriptorBufferHandleEXT( *reinterpret_cast<DescriptorBufferBindingPushDescriptorBufferHandleEXT const *>( &rhs ) )
+    {
+    }
+
+    DescriptorBufferBindingPushDescriptorBufferHandleEXT &
+      operator=( DescriptorBufferBindingPushDescriptorBufferHandleEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    DescriptorBufferBindingPushDescriptorBufferHandleEXT & operator=( VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::DescriptorBufferBindingPushDescriptorBufferHandleEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 DescriptorBufferBindingPushDescriptorBufferHandleEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorBufferBindingPushDescriptorBufferHandleEXT & setBuffer( VULKAN_HPP_NAMESPACE::Buffer buffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      buffer = buffer_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkDescriptorBufferBindingPushDescriptorBufferHandleEXT *>( this );
+    }
+
+    operator VkDescriptorBufferBindingPushDescriptorBufferHandleEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkDescriptorBufferBindingPushDescriptorBufferHandleEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Buffer const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, buffer );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( DescriptorBufferBindingPushDescriptorBufferHandleEXT const & ) const = default;
+#else
+    bool operator==( DescriptorBufferBindingPushDescriptorBufferHandleEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( buffer == rhs.buffer );
+#  endif
+    }
+
+    bool operator!=( DescriptorBufferBindingPushDescriptorBufferHandleEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType  = StructureType::eDescriptorBufferBindingPushDescriptorBufferHandleEXT;
+    void *                              pNext  = {};
+    VULKAN_HPP_NAMESPACE::Buffer        buffer = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eDescriptorBufferBindingPushDescriptorBufferHandleEXT>
+  {
+    using Type = DescriptorBufferBindingPushDescriptorBufferHandleEXT;
+  };
+
   struct DescriptorBufferInfo
   {
     using NativeType = VkDescriptorBufferInfo;
@@ -20480,6 +21017,218 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::ImageLayout imageLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
   };
 
+  union DescriptorDataEXT
+  {
+    using NativeType = VkDescriptorDataEXT;
+#if !defined( VULKAN_HPP_NO_UNION_CONSTRUCTORS )
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT( const VULKAN_HPP_NAMESPACE::Sampler * pSampler_ = {} ) : pSampler( pSampler_ ) {}
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT( const VULKAN_HPP_NAMESPACE::DescriptorImageInfo * pDescriptorImageInfo_ )
+      : pCombinedImageSampler( pDescriptorImageInfo_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT( const VULKAN_HPP_NAMESPACE::DescriptorAddressInfoEXT * pDescriptorAddressInfoEXT_ )
+      : pUniformTexelBuffer( pDescriptorAddressInfoEXT_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT( VULKAN_HPP_NAMESPACE::DeviceAddress accelerationStructure_ ) : accelerationStructure( accelerationStructure_ ) {}
+#endif /*VULKAN_HPP_NO_UNION_CONSTRUCTORS*/
+
+#if !defined( VULKAN_HPP_NO_UNION_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT & setPSampler( const VULKAN_HPP_NAMESPACE::Sampler * pSampler_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pSampler = pSampler_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT &
+                            setPCombinedImageSampler( const VULKAN_HPP_NAMESPACE::DescriptorImageInfo * pCombinedImageSampler_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pCombinedImageSampler = pCombinedImageSampler_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT &
+                            setPInputAttachmentImage( const VULKAN_HPP_NAMESPACE::DescriptorImageInfo * pInputAttachmentImage_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pInputAttachmentImage = pInputAttachmentImage_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT & setPSampledImage( const VULKAN_HPP_NAMESPACE::DescriptorImageInfo * pSampledImage_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pSampledImage = pSampledImage_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT & setPStorageImage( const VULKAN_HPP_NAMESPACE::DescriptorImageInfo * pStorageImage_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pStorageImage = pStorageImage_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT &
+                            setPUniformTexelBuffer( const VULKAN_HPP_NAMESPACE::DescriptorAddressInfoEXT * pUniformTexelBuffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pUniformTexelBuffer = pUniformTexelBuffer_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT &
+                            setPStorageTexelBuffer( const VULKAN_HPP_NAMESPACE::DescriptorAddressInfoEXT * pStorageTexelBuffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pStorageTexelBuffer = pStorageTexelBuffer_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT & setPUniformBuffer( const VULKAN_HPP_NAMESPACE::DescriptorAddressInfoEXT * pUniformBuffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pUniformBuffer = pUniformBuffer_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT & setPStorageBuffer( const VULKAN_HPP_NAMESPACE::DescriptorAddressInfoEXT * pStorageBuffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pStorageBuffer = pStorageBuffer_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorDataEXT & setAccelerationStructure( VULKAN_HPP_NAMESPACE::DeviceAddress accelerationStructure_ ) VULKAN_HPP_NOEXCEPT
+    {
+      accelerationStructure = accelerationStructure_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_UNION_SETTERS*/
+
+    operator VkDescriptorDataEXT const &() const
+    {
+      return *reinterpret_cast<const VkDescriptorDataEXT *>( this );
+    }
+
+    operator VkDescriptorDataEXT &()
+    {
+      return *reinterpret_cast<VkDescriptorDataEXT *>( this );
+    }
+
+#ifdef VULKAN_HPP_HAS_UNRESTRICTED_UNIONS
+    const VULKAN_HPP_NAMESPACE::Sampler *                  pSampler;
+    const VULKAN_HPP_NAMESPACE::DescriptorImageInfo *      pCombinedImageSampler;
+    const VULKAN_HPP_NAMESPACE::DescriptorImageInfo *      pInputAttachmentImage;
+    const VULKAN_HPP_NAMESPACE::DescriptorImageInfo *      pSampledImage;
+    const VULKAN_HPP_NAMESPACE::DescriptorImageInfo *      pStorageImage;
+    const VULKAN_HPP_NAMESPACE::DescriptorAddressInfoEXT * pUniformTexelBuffer;
+    const VULKAN_HPP_NAMESPACE::DescriptorAddressInfoEXT * pStorageTexelBuffer;
+    const VULKAN_HPP_NAMESPACE::DescriptorAddressInfoEXT * pUniformBuffer;
+    const VULKAN_HPP_NAMESPACE::DescriptorAddressInfoEXT * pStorageBuffer;
+    VULKAN_HPP_NAMESPACE::DeviceAddress                    accelerationStructure;
+#else
+    const VkSampler *                  pSampler;
+    const VkDescriptorImageInfo *      pCombinedImageSampler;
+    const VkDescriptorImageInfo *      pInputAttachmentImage;
+    const VkDescriptorImageInfo *      pSampledImage;
+    const VkDescriptorImageInfo *      pStorageImage;
+    const VkDescriptorAddressInfoEXT * pUniformTexelBuffer;
+    const VkDescriptorAddressInfoEXT * pStorageTexelBuffer;
+    const VkDescriptorAddressInfoEXT * pUniformBuffer;
+    const VkDescriptorAddressInfoEXT * pStorageBuffer;
+    VkDeviceAddress                    accelerationStructure;
+#endif /*VULKAN_HPP_HAS_UNRESTRICTED_UNIONS*/
+  };
+
+  struct DescriptorGetInfoEXT
+  {
+    using NativeType = VkDescriptorGetInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDescriptorGetInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR_14 DescriptorGetInfoEXT( VULKAN_HPP_NAMESPACE::DescriptorType    type_  = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler,
+                                                  VULKAN_HPP_NAMESPACE::DescriptorDataEXT data_  = {},
+                                                  const void *                            pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , type( type_ )
+      , data( data_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorGetInfoEXT( DescriptorGetInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    DescriptorGetInfoEXT( VkDescriptorGetInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : DescriptorGetInfoEXT( *reinterpret_cast<DescriptorGetInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    DescriptorGetInfoEXT & operator=( DescriptorGetInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    DescriptorGetInfoEXT & operator=( VkDescriptorGetInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::DescriptorGetInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 DescriptorGetInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorGetInfoEXT & setType( VULKAN_HPP_NAMESPACE::DescriptorType type_ ) VULKAN_HPP_NOEXCEPT
+    {
+      type = type_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DescriptorGetInfoEXT & setData( VULKAN_HPP_NAMESPACE::DescriptorDataEXT const & data_ ) VULKAN_HPP_NOEXCEPT
+    {
+      data = data_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkDescriptorGetInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkDescriptorGetInfoEXT *>( this );
+    }
+
+    operator VkDescriptorGetInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkDescriptorGetInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::DescriptorType const &,
+               VULKAN_HPP_NAMESPACE::DescriptorDataEXT const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, type, data );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType     sType = StructureType::eDescriptorGetInfoEXT;
+    const void *                            pNext = {};
+    VULKAN_HPP_NAMESPACE::DescriptorType    type  = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler;
+    VULKAN_HPP_NAMESPACE::DescriptorDataEXT data  = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eDescriptorGetInfoEXT>
+  {
+    using Type = DescriptorGetInfoEXT;
+  };
+
   struct DescriptorPoolSize
   {
     using NativeType = VkDescriptorPoolSize;
@@ -20544,7 +21293,7 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
     auto operator<=>( DescriptorPoolSize const & ) const = default;
 #else
-    bool operator==( DescriptorPoolSize const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool                               operator==( DescriptorPoolSize const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
 #  if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
@@ -37115,6 +37864,102 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::ArrayWrapper1D<VULKAN_HPP_NAMESPACE::Offset3D, 2> dstOffsets     = {};
   };
 
+  struct ImageCaptureDescriptorDataInfoEXT
+  {
+    using NativeType = VkImageCaptureDescriptorDataInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageCaptureDescriptorDataInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImageCaptureDescriptorDataInfoEXT( VULKAN_HPP_NAMESPACE::Image image_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , image( image_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ImageCaptureDescriptorDataInfoEXT( ImageCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageCaptureDescriptorDataInfoEXT( VkImageCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImageCaptureDescriptorDataInfoEXT( *reinterpret_cast<ImageCaptureDescriptorDataInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    ImageCaptureDescriptorDataInfoEXT & operator=( ImageCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImageCaptureDescriptorDataInfoEXT & operator=( VkImageCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImageCaptureDescriptorDataInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ImageCaptureDescriptorDataInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImageCaptureDescriptorDataInfoEXT & setImage( VULKAN_HPP_NAMESPACE::Image image_ ) VULKAN_HPP_NOEXCEPT
+    {
+      image = image_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkImageCaptureDescriptorDataInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImageCaptureDescriptorDataInfoEXT *>( this );
+    }
+
+    operator VkImageCaptureDescriptorDataInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImageCaptureDescriptorDataInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::Image const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, image );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImageCaptureDescriptorDataInfoEXT const & ) const = default;
+#else
+    bool operator==( ImageCaptureDescriptorDataInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( image == rhs.image );
+#  endif
+    }
+
+    bool operator!=( ImageCaptureDescriptorDataInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eImageCaptureDescriptorDataInfoEXT;
+    const void *                        pNext = {};
+    VULKAN_HPP_NAMESPACE::Image         image = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eImageCaptureDescriptorDataInfoEXT>
+  {
+    using Type = ImageCaptureDescriptorDataInfoEXT;
+  };
+
   struct ImageCompressionControlEXT
   {
     using NativeType = VkImageCompressionControlEXT;
@@ -39761,6 +40606,103 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::eImageViewAddressPropertiesNVX>
   {
     using Type = ImageViewAddressPropertiesNVX;
+  };
+
+  struct ImageViewCaptureDescriptorDataInfoEXT
+  {
+    using NativeType = VkImageViewCaptureDescriptorDataInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageViewCaptureDescriptorDataInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImageViewCaptureDescriptorDataInfoEXT( VULKAN_HPP_NAMESPACE::ImageView imageView_ = {},
+                                                                const void *                    pNext_     = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , imageView( imageView_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ImageViewCaptureDescriptorDataInfoEXT( ImageViewCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageViewCaptureDescriptorDataInfoEXT( VkImageViewCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImageViewCaptureDescriptorDataInfoEXT( *reinterpret_cast<ImageViewCaptureDescriptorDataInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    ImageViewCaptureDescriptorDataInfoEXT & operator=( ImageViewCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImageViewCaptureDescriptorDataInfoEXT & operator=( VkImageViewCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImageViewCaptureDescriptorDataInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ImageViewCaptureDescriptorDataInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImageViewCaptureDescriptorDataInfoEXT & setImageView( VULKAN_HPP_NAMESPACE::ImageView imageView_ ) VULKAN_HPP_NOEXCEPT
+    {
+      imageView = imageView_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkImageViewCaptureDescriptorDataInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImageViewCaptureDescriptorDataInfoEXT *>( this );
+    }
+
+    operator VkImageViewCaptureDescriptorDataInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImageViewCaptureDescriptorDataInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::ImageView const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, imageView );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImageViewCaptureDescriptorDataInfoEXT const & ) const = default;
+#else
+    bool operator==( ImageViewCaptureDescriptorDataInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageView == rhs.imageView );
+#  endif
+    }
+
+    bool operator!=( ImageViewCaptureDescriptorDataInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType     = StructureType::eImageViewCaptureDescriptorDataInfoEXT;
+    const void *                        pNext     = {};
+    VULKAN_HPP_NAMESPACE::ImageView     imageView = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eImageViewCaptureDescriptorDataInfoEXT>
+  {
+    using Type = ImageViewCaptureDescriptorDataInfoEXT;
   };
 
   struct ImageViewCreateInfo
@@ -46842,6 +47784,104 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using MutableDescriptorTypeCreateInfoVALVE = MutableDescriptorTypeCreateInfoEXT;
 
+  struct OpaqueCaptureDescriptorDataCreateInfoEXT
+  {
+    using NativeType = VkOpaqueCaptureDescriptorDataCreateInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eOpaqueCaptureDescriptorDataCreateInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR OpaqueCaptureDescriptorDataCreateInfoEXT( const void * opaqueCaptureDescriptorData_ = {},
+                                                                   const void * pNext_                       = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , opaqueCaptureDescriptorData( opaqueCaptureDescriptorData_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR OpaqueCaptureDescriptorDataCreateInfoEXT( OpaqueCaptureDescriptorDataCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    OpaqueCaptureDescriptorDataCreateInfoEXT( VkOpaqueCaptureDescriptorDataCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : OpaqueCaptureDescriptorDataCreateInfoEXT( *reinterpret_cast<OpaqueCaptureDescriptorDataCreateInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    OpaqueCaptureDescriptorDataCreateInfoEXT & operator=( OpaqueCaptureDescriptorDataCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    OpaqueCaptureDescriptorDataCreateInfoEXT & operator=( VkOpaqueCaptureDescriptorDataCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::OpaqueCaptureDescriptorDataCreateInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 OpaqueCaptureDescriptorDataCreateInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 OpaqueCaptureDescriptorDataCreateInfoEXT &
+                            setOpaqueCaptureDescriptorData( const void * opaqueCaptureDescriptorData_ ) VULKAN_HPP_NOEXCEPT
+    {
+      opaqueCaptureDescriptorData = opaqueCaptureDescriptorData_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkOpaqueCaptureDescriptorDataCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkOpaqueCaptureDescriptorDataCreateInfoEXT *>( this );
+    }
+
+    operator VkOpaqueCaptureDescriptorDataCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkOpaqueCaptureDescriptorDataCreateInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, const void * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, opaqueCaptureDescriptorData );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( OpaqueCaptureDescriptorDataCreateInfoEXT const & ) const = default;
+#else
+    bool operator==( OpaqueCaptureDescriptorDataCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( opaqueCaptureDescriptorData == rhs.opaqueCaptureDescriptorData );
+#  endif
+    }
+
+    bool operator!=( OpaqueCaptureDescriptorDataCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                       = StructureType::eOpaqueCaptureDescriptorDataCreateInfoEXT;
+    const void *                        pNext                       = {};
+    const void *                        opaqueCaptureDescriptorData = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eOpaqueCaptureDescriptorDataCreateInfoEXT>
+  {
+    using Type = OpaqueCaptureDescriptorDataCreateInfoEXT;
+  };
+
   struct OpticalFlowExecuteInfoNV
   {
     using NativeType = VkOpticalFlowExecuteInfoNV;
@@ -51891,6 +52931,505 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceDepthStencilResolveProperties;
   };
   using PhysicalDeviceDepthStencilResolvePropertiesKHR = PhysicalDeviceDepthStencilResolveProperties;
+
+  struct PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT
+  {
+    using NativeType = VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceDescriptorBufferDensityMapPropertiesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT( size_t combinedImageSamplerDensityMapDescriptorSize_ = {},
+                                                                                void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , combinedImageSamplerDensityMapDescriptorSize( combinedImageSamplerDensityMapDescriptorSize_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT( PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT( VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT( *reinterpret_cast<PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT &
+      operator=( PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT & operator=( VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *>( &rhs );
+      return *this;
+    }
+
+    operator VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, size_t const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, combinedImageSamplerDensityMapDescriptorSize );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
+             ( combinedImageSamplerDensityMapDescriptorSize == rhs.combinedImageSamplerDensityMapDescriptorSize );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                                        = StructureType::ePhysicalDeviceDescriptorBufferDensityMapPropertiesEXT;
+    void *                              pNext                                        = {};
+    size_t                              combinedImageSamplerDensityMapDescriptorSize = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceDescriptorBufferDensityMapPropertiesEXT>
+  {
+    using Type = PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT;
+  };
+
+  struct PhysicalDeviceDescriptorBufferFeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceDescriptorBufferFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceDescriptorBufferFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceDescriptorBufferFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 descriptorBuffer_                   = {},
+                                                                    VULKAN_HPP_NAMESPACE::Bool32 descriptorBufferCaptureReplay_      = {},
+                                                                    VULKAN_HPP_NAMESPACE::Bool32 descriptorBufferImageLayoutIgnored_ = {},
+                                                                    VULKAN_HPP_NAMESPACE::Bool32 descriptorBufferPushDescriptors_    = {},
+                                                                    void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , descriptorBuffer( descriptorBuffer_ )
+      , descriptorBufferCaptureReplay( descriptorBufferCaptureReplay_ )
+      , descriptorBufferImageLayoutIgnored( descriptorBufferImageLayoutIgnored_ )
+      , descriptorBufferPushDescriptors( descriptorBufferPushDescriptors_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceDescriptorBufferFeaturesEXT( PhysicalDeviceDescriptorBufferFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceDescriptorBufferFeaturesEXT( VkPhysicalDeviceDescriptorBufferFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceDescriptorBufferFeaturesEXT( *reinterpret_cast<PhysicalDeviceDescriptorBufferFeaturesEXT const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceDescriptorBufferFeaturesEXT & operator=( PhysicalDeviceDescriptorBufferFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceDescriptorBufferFeaturesEXT & operator=( VkPhysicalDeviceDescriptorBufferFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceDescriptorBufferFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDescriptorBufferFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDescriptorBufferFeaturesEXT &
+                            setDescriptorBuffer( VULKAN_HPP_NAMESPACE::Bool32 descriptorBuffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      descriptorBuffer = descriptorBuffer_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDescriptorBufferFeaturesEXT &
+                            setDescriptorBufferCaptureReplay( VULKAN_HPP_NAMESPACE::Bool32 descriptorBufferCaptureReplay_ ) VULKAN_HPP_NOEXCEPT
+    {
+      descriptorBufferCaptureReplay = descriptorBufferCaptureReplay_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDescriptorBufferFeaturesEXT &
+                            setDescriptorBufferImageLayoutIgnored( VULKAN_HPP_NAMESPACE::Bool32 descriptorBufferImageLayoutIgnored_ ) VULKAN_HPP_NOEXCEPT
+    {
+      descriptorBufferImageLayoutIgnored = descriptorBufferImageLayoutIgnored_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDescriptorBufferFeaturesEXT &
+                            setDescriptorBufferPushDescriptors( VULKAN_HPP_NAMESPACE::Bool32 descriptorBufferPushDescriptors_ ) VULKAN_HPP_NOEXCEPT
+    {
+      descriptorBufferPushDescriptors = descriptorBufferPushDescriptors_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceDescriptorBufferFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceDescriptorBufferFeaturesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceDescriptorBufferFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceDescriptorBufferFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, descriptorBuffer, descriptorBufferCaptureReplay, descriptorBufferImageLayoutIgnored, descriptorBufferPushDescriptors );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceDescriptorBufferFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceDescriptorBufferFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( descriptorBuffer == rhs.descriptorBuffer ) &&
+             ( descriptorBufferCaptureReplay == rhs.descriptorBufferCaptureReplay ) &&
+             ( descriptorBufferImageLayoutIgnored == rhs.descriptorBufferImageLayoutIgnored ) &&
+             ( descriptorBufferPushDescriptors == rhs.descriptorBufferPushDescriptors );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceDescriptorBufferFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                              = StructureType::ePhysicalDeviceDescriptorBufferFeaturesEXT;
+    void *                              pNext                              = {};
+    VULKAN_HPP_NAMESPACE::Bool32        descriptorBuffer                   = {};
+    VULKAN_HPP_NAMESPACE::Bool32        descriptorBufferCaptureReplay      = {};
+    VULKAN_HPP_NAMESPACE::Bool32        descriptorBufferImageLayoutIgnored = {};
+    VULKAN_HPP_NAMESPACE::Bool32        descriptorBufferPushDescriptors    = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceDescriptorBufferFeaturesEXT>
+  {
+    using Type = PhysicalDeviceDescriptorBufferFeaturesEXT;
+  };
+
+  struct PhysicalDeviceDescriptorBufferPropertiesEXT
+  {
+    using NativeType = VkPhysicalDeviceDescriptorBufferPropertiesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceDescriptorBufferPropertiesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceDescriptorBufferPropertiesEXT( VULKAN_HPP_NAMESPACE::Bool32     combinedImageSamplerDescriptorSingleArray_ = {},
+                                                                      VULKAN_HPP_NAMESPACE::Bool32     bufferlessPushDescriptors_                 = {},
+                                                                      VULKAN_HPP_NAMESPACE::Bool32     allowSamplerImageViewPostSubmitCreation_   = {},
+                                                                      VULKAN_HPP_NAMESPACE::DeviceSize descriptorBufferOffsetAlignment_           = {},
+                                                                      uint32_t                         maxDescriptorBufferBindings_               = {},
+                                                                      uint32_t                         maxResourceDescriptorBufferBindings_       = {},
+                                                                      uint32_t                         maxSamplerDescriptorBufferBindings_        = {},
+                                                                      uint32_t                         maxEmbeddedImmutableSamplerBindings_       = {},
+                                                                      uint32_t                         maxEmbeddedImmutableSamplers_              = {},
+                                                                      size_t                           bufferCaptureReplayDescriptorDataSize_     = {},
+                                                                      size_t                           imageCaptureReplayDescriptorDataSize_      = {},
+                                                                      size_t                           imageViewCaptureReplayDescriptorDataSize_  = {},
+                                                                      size_t                           samplerCaptureReplayDescriptorDataSize_    = {},
+                                                                      size_t accelerationStructureCaptureReplayDescriptorDataSize_                = {},
+                                                                      size_t samplerDescriptorSize_                                               = {},
+                                                                      size_t combinedImageSamplerDescriptorSize_                                  = {},
+                                                                      size_t sampledImageDescriptorSize_                                          = {},
+                                                                      size_t storageImageDescriptorSize_                                          = {},
+                                                                      size_t uniformTexelBufferDescriptorSize_                                    = {},
+                                                                      size_t robustUniformTexelBufferDescriptorSize_                              = {},
+                                                                      size_t storageTexelBufferDescriptorSize_                                    = {},
+                                                                      size_t robustStorageTexelBufferDescriptorSize_                              = {},
+                                                                      size_t uniformBufferDescriptorSize_                                         = {},
+                                                                      size_t robustUniformBufferDescriptorSize_                                   = {},
+                                                                      size_t storageBufferDescriptorSize_                                         = {},
+                                                                      size_t robustStorageBufferDescriptorSize_                                   = {},
+                                                                      size_t inputAttachmentDescriptorSize_                                       = {},
+                                                                      size_t accelerationStructureDescriptorSize_                                 = {},
+                                                                      VULKAN_HPP_NAMESPACE::DeviceSize maxSamplerDescriptorBufferRange_           = {},
+                                                                      VULKAN_HPP_NAMESPACE::DeviceSize maxResourceDescriptorBufferRange_          = {},
+                                                                      VULKAN_HPP_NAMESPACE::DeviceSize samplerDescriptorBufferAddressSpaceSize_   = {},
+                                                                      VULKAN_HPP_NAMESPACE::DeviceSize resourceDescriptorBufferAddressSpaceSize_  = {},
+                                                                      VULKAN_HPP_NAMESPACE::DeviceSize descriptorBufferAddressSpaceSize_          = {},
+                                                                      void *                           pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , combinedImageSamplerDescriptorSingleArray( combinedImageSamplerDescriptorSingleArray_ )
+      , bufferlessPushDescriptors( bufferlessPushDescriptors_ )
+      , allowSamplerImageViewPostSubmitCreation( allowSamplerImageViewPostSubmitCreation_ )
+      , descriptorBufferOffsetAlignment( descriptorBufferOffsetAlignment_ )
+      , maxDescriptorBufferBindings( maxDescriptorBufferBindings_ )
+      , maxResourceDescriptorBufferBindings( maxResourceDescriptorBufferBindings_ )
+      , maxSamplerDescriptorBufferBindings( maxSamplerDescriptorBufferBindings_ )
+      , maxEmbeddedImmutableSamplerBindings( maxEmbeddedImmutableSamplerBindings_ )
+      , maxEmbeddedImmutableSamplers( maxEmbeddedImmutableSamplers_ )
+      , bufferCaptureReplayDescriptorDataSize( bufferCaptureReplayDescriptorDataSize_ )
+      , imageCaptureReplayDescriptorDataSize( imageCaptureReplayDescriptorDataSize_ )
+      , imageViewCaptureReplayDescriptorDataSize( imageViewCaptureReplayDescriptorDataSize_ )
+      , samplerCaptureReplayDescriptorDataSize( samplerCaptureReplayDescriptorDataSize_ )
+      , accelerationStructureCaptureReplayDescriptorDataSize( accelerationStructureCaptureReplayDescriptorDataSize_ )
+      , samplerDescriptorSize( samplerDescriptorSize_ )
+      , combinedImageSamplerDescriptorSize( combinedImageSamplerDescriptorSize_ )
+      , sampledImageDescriptorSize( sampledImageDescriptorSize_ )
+      , storageImageDescriptorSize( storageImageDescriptorSize_ )
+      , uniformTexelBufferDescriptorSize( uniformTexelBufferDescriptorSize_ )
+      , robustUniformTexelBufferDescriptorSize( robustUniformTexelBufferDescriptorSize_ )
+      , storageTexelBufferDescriptorSize( storageTexelBufferDescriptorSize_ )
+      , robustStorageTexelBufferDescriptorSize( robustStorageTexelBufferDescriptorSize_ )
+      , uniformBufferDescriptorSize( uniformBufferDescriptorSize_ )
+      , robustUniformBufferDescriptorSize( robustUniformBufferDescriptorSize_ )
+      , storageBufferDescriptorSize( storageBufferDescriptorSize_ )
+      , robustStorageBufferDescriptorSize( robustStorageBufferDescriptorSize_ )
+      , inputAttachmentDescriptorSize( inputAttachmentDescriptorSize_ )
+      , accelerationStructureDescriptorSize( accelerationStructureDescriptorSize_ )
+      , maxSamplerDescriptorBufferRange( maxSamplerDescriptorBufferRange_ )
+      , maxResourceDescriptorBufferRange( maxResourceDescriptorBufferRange_ )
+      , samplerDescriptorBufferAddressSpaceSize( samplerDescriptorBufferAddressSpaceSize_ )
+      , resourceDescriptorBufferAddressSpaceSize( resourceDescriptorBufferAddressSpaceSize_ )
+      , descriptorBufferAddressSpaceSize( descriptorBufferAddressSpaceSize_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceDescriptorBufferPropertiesEXT( PhysicalDeviceDescriptorBufferPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceDescriptorBufferPropertiesEXT( VkPhysicalDeviceDescriptorBufferPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceDescriptorBufferPropertiesEXT( *reinterpret_cast<PhysicalDeviceDescriptorBufferPropertiesEXT const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceDescriptorBufferPropertiesEXT & operator=( PhysicalDeviceDescriptorBufferPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceDescriptorBufferPropertiesEXT & operator=( VkPhysicalDeviceDescriptorBufferPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceDescriptorBufferPropertiesEXT const *>( &rhs );
+      return *this;
+    }
+
+    operator VkPhysicalDeviceDescriptorBufferPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceDescriptorBufferPropertiesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceDescriptorBufferPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceDescriptorBufferPropertiesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               size_t const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType,
+                       pNext,
+                       combinedImageSamplerDescriptorSingleArray,
+                       bufferlessPushDescriptors,
+                       allowSamplerImageViewPostSubmitCreation,
+                       descriptorBufferOffsetAlignment,
+                       maxDescriptorBufferBindings,
+                       maxResourceDescriptorBufferBindings,
+                       maxSamplerDescriptorBufferBindings,
+                       maxEmbeddedImmutableSamplerBindings,
+                       maxEmbeddedImmutableSamplers,
+                       bufferCaptureReplayDescriptorDataSize,
+                       imageCaptureReplayDescriptorDataSize,
+                       imageViewCaptureReplayDescriptorDataSize,
+                       samplerCaptureReplayDescriptorDataSize,
+                       accelerationStructureCaptureReplayDescriptorDataSize,
+                       samplerDescriptorSize,
+                       combinedImageSamplerDescriptorSize,
+                       sampledImageDescriptorSize,
+                       storageImageDescriptorSize,
+                       uniformTexelBufferDescriptorSize,
+                       robustUniformTexelBufferDescriptorSize,
+                       storageTexelBufferDescriptorSize,
+                       robustStorageTexelBufferDescriptorSize,
+                       uniformBufferDescriptorSize,
+                       robustUniformBufferDescriptorSize,
+                       storageBufferDescriptorSize,
+                       robustStorageBufferDescriptorSize,
+                       inputAttachmentDescriptorSize,
+                       accelerationStructureDescriptorSize,
+                       maxSamplerDescriptorBufferRange,
+                       maxResourceDescriptorBufferRange,
+                       samplerDescriptorBufferAddressSpaceSize,
+                       resourceDescriptorBufferAddressSpaceSize,
+                       descriptorBufferAddressSpaceSize );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceDescriptorBufferPropertiesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceDescriptorBufferPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
+             ( combinedImageSamplerDescriptorSingleArray == rhs.combinedImageSamplerDescriptorSingleArray ) &&
+             ( bufferlessPushDescriptors == rhs.bufferlessPushDescriptors ) &&
+             ( allowSamplerImageViewPostSubmitCreation == rhs.allowSamplerImageViewPostSubmitCreation ) &&
+             ( descriptorBufferOffsetAlignment == rhs.descriptorBufferOffsetAlignment ) && ( maxDescriptorBufferBindings == rhs.maxDescriptorBufferBindings ) &&
+             ( maxResourceDescriptorBufferBindings == rhs.maxResourceDescriptorBufferBindings ) &&
+             ( maxSamplerDescriptorBufferBindings == rhs.maxSamplerDescriptorBufferBindings ) &&
+             ( maxEmbeddedImmutableSamplerBindings == rhs.maxEmbeddedImmutableSamplerBindings ) &&
+             ( maxEmbeddedImmutableSamplers == rhs.maxEmbeddedImmutableSamplers ) &&
+             ( bufferCaptureReplayDescriptorDataSize == rhs.bufferCaptureReplayDescriptorDataSize ) &&
+             ( imageCaptureReplayDescriptorDataSize == rhs.imageCaptureReplayDescriptorDataSize ) &&
+             ( imageViewCaptureReplayDescriptorDataSize == rhs.imageViewCaptureReplayDescriptorDataSize ) &&
+             ( samplerCaptureReplayDescriptorDataSize == rhs.samplerCaptureReplayDescriptorDataSize ) &&
+             ( accelerationStructureCaptureReplayDescriptorDataSize == rhs.accelerationStructureCaptureReplayDescriptorDataSize ) &&
+             ( samplerDescriptorSize == rhs.samplerDescriptorSize ) && ( combinedImageSamplerDescriptorSize == rhs.combinedImageSamplerDescriptorSize ) &&
+             ( sampledImageDescriptorSize == rhs.sampledImageDescriptorSize ) && ( storageImageDescriptorSize == rhs.storageImageDescriptorSize ) &&
+             ( uniformTexelBufferDescriptorSize == rhs.uniformTexelBufferDescriptorSize ) &&
+             ( robustUniformTexelBufferDescriptorSize == rhs.robustUniformTexelBufferDescriptorSize ) &&
+             ( storageTexelBufferDescriptorSize == rhs.storageTexelBufferDescriptorSize ) &&
+             ( robustStorageTexelBufferDescriptorSize == rhs.robustStorageTexelBufferDescriptorSize ) &&
+             ( uniformBufferDescriptorSize == rhs.uniformBufferDescriptorSize ) &&
+             ( robustUniformBufferDescriptorSize == rhs.robustUniformBufferDescriptorSize ) &&
+             ( storageBufferDescriptorSize == rhs.storageBufferDescriptorSize ) &&
+             ( robustStorageBufferDescriptorSize == rhs.robustStorageBufferDescriptorSize ) &&
+             ( inputAttachmentDescriptorSize == rhs.inputAttachmentDescriptorSize ) &&
+             ( accelerationStructureDescriptorSize == rhs.accelerationStructureDescriptorSize ) &&
+             ( maxSamplerDescriptorBufferRange == rhs.maxSamplerDescriptorBufferRange ) &&
+             ( maxResourceDescriptorBufferRange == rhs.maxResourceDescriptorBufferRange ) &&
+             ( samplerDescriptorBufferAddressSpaceSize == rhs.samplerDescriptorBufferAddressSpaceSize ) &&
+             ( resourceDescriptorBufferAddressSpaceSize == rhs.resourceDescriptorBufferAddressSpaceSize ) &&
+             ( descriptorBufferAddressSpaceSize == rhs.descriptorBufferAddressSpaceSize );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceDescriptorBufferPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                                                = StructureType::ePhysicalDeviceDescriptorBufferPropertiesEXT;
+    void *                              pNext                                                = {};
+    VULKAN_HPP_NAMESPACE::Bool32        combinedImageSamplerDescriptorSingleArray            = {};
+    VULKAN_HPP_NAMESPACE::Bool32        bufferlessPushDescriptors                            = {};
+    VULKAN_HPP_NAMESPACE::Bool32        allowSamplerImageViewPostSubmitCreation              = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize    descriptorBufferOffsetAlignment                      = {};
+    uint32_t                            maxDescriptorBufferBindings                          = {};
+    uint32_t                            maxResourceDescriptorBufferBindings                  = {};
+    uint32_t                            maxSamplerDescriptorBufferBindings                   = {};
+    uint32_t                            maxEmbeddedImmutableSamplerBindings                  = {};
+    uint32_t                            maxEmbeddedImmutableSamplers                         = {};
+    size_t                              bufferCaptureReplayDescriptorDataSize                = {};
+    size_t                              imageCaptureReplayDescriptorDataSize                 = {};
+    size_t                              imageViewCaptureReplayDescriptorDataSize             = {};
+    size_t                              samplerCaptureReplayDescriptorDataSize               = {};
+    size_t                              accelerationStructureCaptureReplayDescriptorDataSize = {};
+    size_t                              samplerDescriptorSize                                = {};
+    size_t                              combinedImageSamplerDescriptorSize                   = {};
+    size_t                              sampledImageDescriptorSize                           = {};
+    size_t                              storageImageDescriptorSize                           = {};
+    size_t                              uniformTexelBufferDescriptorSize                     = {};
+    size_t                              robustUniformTexelBufferDescriptorSize               = {};
+    size_t                              storageTexelBufferDescriptorSize                     = {};
+    size_t                              robustStorageTexelBufferDescriptorSize               = {};
+    size_t                              uniformBufferDescriptorSize                          = {};
+    size_t                              robustUniformBufferDescriptorSize                    = {};
+    size_t                              storageBufferDescriptorSize                          = {};
+    size_t                              robustStorageBufferDescriptorSize                    = {};
+    size_t                              inputAttachmentDescriptorSize                        = {};
+    size_t                              accelerationStructureDescriptorSize                  = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize    maxSamplerDescriptorBufferRange                      = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize    maxResourceDescriptorBufferRange                     = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize    samplerDescriptorBufferAddressSpaceSize              = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize    resourceDescriptorBufferAddressSpaceSize             = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize    descriptorBufferAddressSpaceSize                     = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceDescriptorBufferPropertiesEXT>
+  {
+    using Type = PhysicalDeviceDescriptorBufferPropertiesEXT;
+  };
 
   struct PhysicalDeviceDescriptorIndexingFeatures
   {
@@ -88231,6 +89770,102 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::eSamplerBorderColorComponentMappingCreateInfoEXT>
   {
     using Type = SamplerBorderColorComponentMappingCreateInfoEXT;
+  };
+
+  struct SamplerCaptureDescriptorDataInfoEXT
+  {
+    using NativeType = VkSamplerCaptureDescriptorDataInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSamplerCaptureDescriptorDataInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SamplerCaptureDescriptorDataInfoEXT( VULKAN_HPP_NAMESPACE::Sampler sampler_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , sampler( sampler_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR SamplerCaptureDescriptorDataInfoEXT( SamplerCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SamplerCaptureDescriptorDataInfoEXT( VkSamplerCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SamplerCaptureDescriptorDataInfoEXT( *reinterpret_cast<SamplerCaptureDescriptorDataInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    SamplerCaptureDescriptorDataInfoEXT & operator=( SamplerCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    SamplerCaptureDescriptorDataInfoEXT & operator=( VkSamplerCaptureDescriptorDataInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SamplerCaptureDescriptorDataInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 SamplerCaptureDescriptorDataInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SamplerCaptureDescriptorDataInfoEXT & setSampler( VULKAN_HPP_NAMESPACE::Sampler sampler_ ) VULKAN_HPP_NOEXCEPT
+    {
+      sampler = sampler_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkSamplerCaptureDescriptorDataInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSamplerCaptureDescriptorDataInfoEXT *>( this );
+    }
+
+    operator VkSamplerCaptureDescriptorDataInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSamplerCaptureDescriptorDataInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, VULKAN_HPP_NAMESPACE::Sampler const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, sampler );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( SamplerCaptureDescriptorDataInfoEXT const & ) const = default;
+#else
+    bool operator==( SamplerCaptureDescriptorDataInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( sampler == rhs.sampler );
+#  endif
+    }
+
+    bool operator!=( SamplerCaptureDescriptorDataInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType   = StructureType::eSamplerCaptureDescriptorDataInfoEXT;
+    const void *                        pNext   = {};
+    VULKAN_HPP_NAMESPACE::Sampler       sampler = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eSamplerCaptureDescriptorDataInfoEXT>
+  {
+    using Type = SamplerCaptureDescriptorDataInfoEXT;
   };
 
   struct SamplerCreateInfo
