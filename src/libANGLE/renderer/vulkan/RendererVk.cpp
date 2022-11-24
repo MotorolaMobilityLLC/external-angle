@@ -202,6 +202,8 @@ constexpr const char *kSkippedMessages[] = {
     "VUID-vkCmdDrawIndexedIndirect-None-02686",
     "VUID-vkCmdDrawIndexedIndirectCount-None-02686",
     "VUID-vkDestroySemaphore-semaphore-01137",
+    // http://anglebug.com/7843
+    "VUID-VkGraphicsPipelineCreateInfo-Vertex-07722",
 };
 
 // Validation messages that should be ignored only when VK_EXT_primitive_topology_list_restart is
@@ -1267,6 +1269,12 @@ RendererVk::RendererVk()
     // a number of places in the Vulkan backend that make this assumption.  This assertion is made
     // early to fail immediately on big-endian platforms.
     ASSERT(IsLittleEndian());
+
+    // Allocation counters are initialized here to keep track of the size of the memory allocations.
+    for (uint32_t i = 0; i < mActiveMemoryAllocationsSize.size(); i++)
+    {
+        mActiveMemoryAllocationsSize[i] = 0;
+    }
 }
 
 RendererVk::~RendererVk()
@@ -2009,6 +2017,10 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     mGraphicsPipelineLibraryFeatures.sType =
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT;
 
+    mGraphicsPipelineLibraryProperties = {};
+    mGraphicsPipelineLibraryProperties.sType =
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT;
+
     mFragmentShadingRateFeatures = {};
     mFragmentShadingRateFeatures.sType =
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR;
@@ -2202,6 +2214,7 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     if (ExtensionFound(VK_EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION_NAME, deviceExtensionNames))
     {
         vk::AddToPNextChain(&deviceFeatures, &mGraphicsPipelineLibraryFeatures);
+        vk::AddToPNextChain(&deviceProperties, &mGraphicsPipelineLibraryProperties);
     }
 
     if (ExtensionFound(VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME, deviceExtensionNames))
@@ -2276,6 +2289,7 @@ void RendererVk::queryDeviceExtensionFeatures(const vk::ExtensionNameList &devic
     mExtendedDynamicStateFeatures.pNext                     = nullptr;
     mExtendedDynamicState2Features.pNext                    = nullptr;
     mGraphicsPipelineLibraryFeatures.pNext                  = nullptr;
+    mGraphicsPipelineLibraryProperties.pNext                = nullptr;
     mFragmentShadingRateFeatures.pNext                      = nullptr;
     mFragmentShaderInterlockFeatures.pNext                  = nullptr;
     mImagelessFramebufferFeatures.pNext                     = nullptr;
@@ -3966,9 +3980,6 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
         mExtendedDynamicState2Features.extendedDynamicState2LogicOp == VK_TRUE &&
             (!(IsLinux() && isIntel) || isAtLeastMesa22_2));
 
-    ANGLE_FEATURE_CONDITION(&mFeatures, supportsGraphicsPipelineLibrary,
-                            mGraphicsPipelineLibraryFeatures.graphicsPipelineLibrary == VK_TRUE);
-
     // Avoid dynamic state for vertex input binding stride on buggy drivers.
     ANGLE_FEATURE_CONDITION(&mFeatures, forceStaticVertexStrideState,
                             mFeatures.supportsExtendedDynamicState.enabled && isARM);
@@ -3991,6 +4002,14 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
                             mPipelineRobustnessFeatures.pipelineRobustness == VK_TRUE &&
                                 mPhysicalDeviceFeatures.robustBufferAccess);
 
+    // TODO(anglebug.com/7369): Remove depenency to graphicsPipelineLibraryFastLinking when async
+    // pipeline creation is added and the preferMonolithicPipelinesOverLibraries feature is
+    // appropriately set.
+    ANGLE_FEATURE_CONDITION(
+        &mFeatures, supportsGraphicsPipelineLibrary,
+        mGraphicsPipelineLibraryFeatures.graphicsPipelineLibrary == VK_TRUE &&
+            mGraphicsPipelineLibraryProperties.graphicsPipelineLibraryFastLinking);
+
     // The following drivers are known to key the pipeline cache blobs with vertex input and
     // fragment output state, causing draw-time pipeline creation to miss the cache regardless of
     // warmup:
@@ -4009,11 +4028,36 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // Additionally, numerous tests that previously never created a Vulkan pipeline fail or crash on
     // proprietary Qualcomm drivers when they do during cache warm up.  On Intel/Linux, one trace
     // shows flakiness with this.
+    const bool libraryBlobsAreReusedByMonolithicPipelines = !isARM && !isPowerVR;
     ANGLE_FEATURE_CONDITION(&mFeatures, warmUpPipelineCacheAtLink,
-                            !isARM && !isPowerVR && !isQualcommProprietary &&
+                            libraryBlobsAreReusedByMonolithicPipelines && !isQualcommProprietary &&
                                 !(IsLinux() && isIntel) && !(IsChromeOS() && isSwiftShader));
 
+    // On SwiftShader, no data is retrieved from the pipeline cache, so there is no reason to
+    // serialize it or put it in the blob cache.
+    ANGLE_FEATURE_CONDITION(&mFeatures, hasEffectivePipelineCacheSerialization, !isSwiftShader);
+
+    // Whether the pipeline caches should merge into the global pipeline cache.  This should only be
+    // enabled on platforms if:
+    //
+    // - VK_EXT_graphics_pipeline_library is not supported.  In that case, only the program's cache
+    //   used during warm up is merged into the global cache for later monolithic pipeline creation.
+    ANGLE_FEATURE_CONDITION(&mFeatures, mergeProgramPipelineCachesToGlobalCache,
+                            !mFeatures.supportsGraphicsPipelineLibrary.enabled);
+
     ANGLE_FEATURE_CONDITION(&mFeatures, enableAsyncPipelineCacheCompression, true);
+
+    // Sync monolithic pipelines to the blob cache occasionally on platforms that would benefit from
+    // it:
+    //
+    // - VK_EXT_graphics_pipeline_library is not supported, and the program cache is not warmed up:
+    //   If the pipeline cache is being warmed up at link time, the blobs corresponding to each
+    //   program is individually retrieved and stored in the blob cache already.
+    //
+    ANGLE_FEATURE_CONDITION(&mFeatures, syncMonolithicPipelinesToBlobCache,
+                            mFeatures.hasEffectivePipelineCacheSerialization.enabled &&
+                                !mFeatures.supportsGraphicsPipelineLibrary.enabled &&
+                                !mFeatures.warmUpPipelineCacheAtLink.enabled);
 
     // On ARM, dynamic state for stencil write mask doesn't work correctly in the presence of
     // discard or alpha to coverage, if the static state provided when creating the pipeline has a
@@ -4127,7 +4171,7 @@ angle::Result RendererVk::initPipelineCache(DisplayVk *display,
     return angle::Result::Continue;
 }
 
-angle::Result RendererVk::getPipelineCache(PipelineCacheAccess *pipelineCacheOut)
+angle::Result RendererVk::getPipelineCache(vk::PipelineCacheAccess *pipelineCacheOut)
 {
     DisplayVk *displayVk = vk::GetImpl(mDisplay);
 
@@ -4158,7 +4202,7 @@ angle::Result RendererVk::getPipelineCache(PipelineCacheAccess *pipelineCacheOut
 
 angle::Result RendererVk::mergeIntoPipelineCache(const vk::PipelineCache &pipelineCache)
 {
-    PipelineCacheAccess globalCache;
+    vk::PipelineCacheAccess globalCache;
     ANGLE_TRY(getPipelineCache(&globalCache));
 
     globalCache.merge(this, pipelineCache);
@@ -4232,12 +4276,7 @@ angle::Result RendererVk::syncPipelineCacheVk(DisplayVk *displayVk, const gl::Co
 {
     ASSERT(mPipelineCache.valid());
 
-    // If the pipeline cache is being warmed up at link time, the blobs corresponding to each
-    // program is individually retrieved and stored in the blob cache.  This should be enabled only
-    // on platforms where draw time pipeline creation hits the cache due to said warm up.  As a
-    // result, there's no need to store the aggregate cache (the one owned by RendererVk) in the
-    // blob cache too.
-    if (mFeatures.warmUpPipelineCacheAtLink.enabled)
+    if (!mFeatures.syncMonolithicPipelinesToBlobCache.enabled)
     {
         return angle::Result::Continue;
     }
@@ -4392,13 +4431,13 @@ angle::Result RendererVk::queueSubmitOneOff(vk::Context *context,
                                             VkPipelineStageFlags waitSemaphoreStageMasks,
                                             const vk::Fence *fence,
                                             vk::SubmitPolicy submitPolicy,
-                                            Serial *serialOut)
+                                            QueueSerial *queueSerialOut)
 {
     ANGLE_TRACE_EVENT0("gpu.angle", "RendererVk::queueSubmitOneOff");
 
     std::unique_lock<std::mutex> lock(mCommandQueueMutex);
 
-    Serial submitQueueSerial;
+    QueueSerial submitQueueSerial;
     if (isAsyncCommandQueueEnabled())
     {
         submitQueueSerial = mCommandProcessor.reserveSubmitSerial();
@@ -4414,7 +4453,7 @@ angle::Result RendererVk::queueSubmitOneOff(vk::Context *context,
             waitSemaphoreStageMasks, fence, submitPolicy, submitQueueSerial));
     }
 
-    *serialOut = submitQueueSerial;
+    *queueSerialOut = submitQueueSerial;
 
     if (primary.valid())
     {
@@ -4737,7 +4776,7 @@ angle::Result RendererVk::submitCommands(
     const vk::Semaphore *signalSemaphore,
     vk::GarbageList &&currentGarbage,
     vk::SecondaryCommandPools *commandPools,
-    Serial *submitSerialOut)
+    QueueSerial *submitSerialOut)
 {
     std::unique_lock<std::mutex> lock(mCommandQueueMutex);
 
@@ -4784,38 +4823,57 @@ void RendererVk::handleDeviceLost()
     }
 }
 
-angle::Result RendererVk::finishToSerial(vk::Context *context, Serial serial)
+angle::Result RendererVk::finishResourceUse(vk::Context *context, const vk::ResourceUse &use)
 {
     std::unique_lock<std::mutex> lock(mCommandQueueMutex);
 
     if (isAsyncCommandQueueEnabled())
     {
-        ANGLE_TRY(mCommandProcessor.finishToSerial(context, serial, getMaxFenceWaitTimeNs()));
+        ANGLE_TRY(mCommandProcessor.finishResourceUse(context, use, getMaxFenceWaitTimeNs()));
     }
     else
     {
-        ANGLE_TRY(mCommandQueue.finishToSerial(context, serial, getMaxFenceWaitTimeNs()));
+        ANGLE_TRY(mCommandQueue.finishResourceUse(context, use, getMaxFenceWaitTimeNs()));
     }
 
     return angle::Result::Continue;
 }
 
-angle::Result RendererVk::waitForSerialWithUserTimeout(vk::Context *context,
-                                                       Serial serial,
-                                                       uint64_t timeout,
-                                                       VkResult *result)
+angle::Result RendererVk::finishQueueSerial(vk::Context *context, const QueueSerial &queueSerial)
 {
-    ANGLE_TRACE_EVENT0("gpu.angle", "RendererVk::waitForSerialWithUserTimeout");
+    ASSERT(queueSerial.valid());
+    std::unique_lock<std::mutex> lock(mCommandQueueMutex);
+    if (isAsyncCommandQueueEnabled())
+    {
+        vk::ResourceUse use(queueSerial);
+        ANGLE_TRY(mCommandProcessor.finishResourceUse(context, use, getMaxFenceWaitTimeNs()));
+    }
+    else
+    {
+        ANGLE_TRY(mCommandQueue.finishQueueSerial(context, queueSerial, getMaxFenceWaitTimeNs()));
+    }
+
+    return angle::Result::Continue;
+}
+
+angle::Result RendererVk::waitForResourceUseToFinishWithUserTimeout(vk::Context *context,
+                                                                    const vk::ResourceUse &use,
+                                                                    uint64_t timeout,
+                                                                    VkResult *result)
+{
+    ANGLE_TRACE_EVENT0("gpu.angle", "RendererVk::waitForResourceUseToFinishWithUserTimeout");
 
     std::unique_lock<std::mutex> lock(mCommandQueueMutex);
 
     if (isAsyncCommandQueueEnabled())
     {
-        ANGLE_TRY(mCommandProcessor.waitForSerialWithUserTimeout(context, serial, timeout, result));
+        ANGLE_TRY(mCommandProcessor.waitForResourceUseToFinishWithUserTimeout(context, use, timeout,
+                                                                              result));
     }
     else
     {
-        ANGLE_TRY(mCommandQueue.waitForSerialWithUserTimeout(context, serial, timeout, result));
+        ANGLE_TRY(
+            mCommandQueue.waitForResourceUseToFinishWithUserTimeout(context, use, timeout, result));
     }
 
     return angle::Result::Continue;
