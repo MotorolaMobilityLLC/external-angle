@@ -487,7 +487,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     angle::Result flushImpl(const vk::Semaphore *semaphore,
                             RenderPassClosureReason renderPassClosureReason);
     angle::Result flushAndGetSerial(const vk::Semaphore *semaphore,
-                                    Serial *submitSerialOut,
+                                    QueueSerial *submitSerialOut,
                                     RenderPassClosureReason renderPassClosureReason);
     angle::Result finishImpl(RenderPassClosureReason renderPassClosureReason);
 
@@ -504,9 +504,6 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     // It would be nice if we didn't have to expose this for QueryVk::getResult.
     angle::Result checkCompletedCommands();
-
-    // Wait for completion of batches until (at least) batch with given serial is finished.
-    angle::Result finishToSerial(Serial serial);
 
     angle::Result getCompatibleRenderPass(const vk::RenderPassDesc &desc,
                                           const vk::RenderPass **renderPassOut);
@@ -718,7 +715,11 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     // TODO(http://anglebug.com/5624): rework updateActiveTextures(), createPipelineLayout(),
     // handleDirtyGraphicsPipeline(), and ProgramPipelineVk::link().
-    void resetCurrentGraphicsPipeline() { mCurrentGraphicsPipeline = nullptr; }
+    void resetCurrentGraphicsPipeline()
+    {
+        mCurrentGraphicsPipeline        = nullptr;
+        mCurrentGraphicsPipelineShaders = nullptr;
+    }
 
     void onProgramExecutableReset(ProgramExecutableVk *executableVk);
 
@@ -1209,11 +1210,11 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     angle::Result submitFrame(const vk::Semaphore *signalSemaphore,
                               Submit submission,
-                              Serial *submitSerialOut);
-    angle::Result submitFrameOutsideCommandBufferOnly(Serial *submitSerialOut);
+                              QueueSerial *submitSerialOut);
+    angle::Result submitFrameOutsideCommandBufferOnly(QueueSerial *submitSerialOut);
     angle::Result submitCommands(const vk::Semaphore *signalSemaphore,
                                  Submit submission,
-                                 Serial *submitSerialOut);
+                                 QueueSerial *submitSerialOut);
 
     angle::Result synchronizeCpuGpuTime();
     angle::Result traceGpuEventImpl(vk::OutsideRenderPassCommandBuffer *commandBuffer,
@@ -1315,12 +1316,17 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     angle::Result updateShaderResourcesDescriptorDesc(PipelineType pipelineType);
 
+    angle::Result createGraphicsPipeline();
+
     std::array<GraphicsDirtyBitHandler, DIRTY_BIT_MAX> mGraphicsDirtyBitHandlers;
     std::array<ComputeDirtyBitHandler, DIRTY_BIT_MAX> mComputeDirtyBitHandlers;
 
     vk::RenderPassCommandBuffer *mRenderPassCommandBuffer;
 
     vk::PipelineHelper *mCurrentGraphicsPipeline;
+    vk::PipelineHelper *mCurrentGraphicsPipelineShaders;
+    vk::PipelineHelper *mCurrentGraphicsPipelineVertexInput;
+    vk::PipelineHelper *mCurrentGraphicsPipelineFragmentOutput;
     vk::PipelineHelper *mCurrentComputePipeline;
     gl::PrimitiveMode mCurrentDrawMode;
 
@@ -1333,7 +1339,22 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     // Keep a cached pipeline description structure that can be used to query the pipeline cache.
     // Kept in a pointer so allocations can be aligned, and structs can be portably packed.
     std::unique_ptr<vk::GraphicsPipelineDesc> mGraphicsPipelineDesc;
+    // Transition bits indicating which state has changed since last pipeline recreation.  It is
+    // used to look up pipelines in the cache without iterating over the entire key as a performance
+    // optimization.
+    //
+    // |mGraphicsPipelineTransition| tracks transition bits since the last complete pipeline
+    // creation/retrieval.  |mGraphicsPipelineLibraryTransition| tracks the same but for the case
+    // where the pipeline is created through libraries.  The latter accumulates
+    // |mGraphicsPipelineTransition| while the caches are hit, so that the bits are not lost if a
+    // partial library needs to be created in the future.
     vk::GraphicsPipelineTransitionBits mGraphicsPipelineTransition;
+    vk::GraphicsPipelineTransitionBits mGraphicsPipelineLibraryTransition;
+
+    // Used when VK_EXT_graphics_pipeline_library is available, the vertex input and fragment output
+    // partial pipelines are created in the following caches.
+    VertexInputGraphicsPipelineCache mVertexInputGraphicsPipelineCache;
+    FragmentOutputGraphicsPipelineCache mFragmentOutputGraphicsPipelineCache;
 
     // These pools are externally synchronized, so cannot be accessed from different
     // threads simultaneously. Hence, we keep them in the ContextVk instead of the RendererVk.
