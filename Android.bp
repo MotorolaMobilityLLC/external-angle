@@ -6480,9 +6480,6 @@ java_defaults {
     srcs: [
         ":ANGLE_srcs",
     ],
-    plugins: [
-        "java_api_finder",
-    ],
     privileged: true,
     product_specific: true,
     owner: "google",
