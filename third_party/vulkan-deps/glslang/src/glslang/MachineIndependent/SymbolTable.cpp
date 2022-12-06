@@ -416,7 +416,7 @@ TAnonMember* TAnonMember::clone() const
     // copy of the original container.
     assert(0);
 
-    return nullptr;
+    return 0;
 }
 
 TSymbolTableLevel* TSymbolTableLevel::clone() const

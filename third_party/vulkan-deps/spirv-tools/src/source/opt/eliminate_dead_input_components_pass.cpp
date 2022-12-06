@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "source/opt/eliminate_dead_io_components_pass.h"
+#include "source/opt/eliminate_dead_input_components_pass.h"
 
 #include <set>
 #include <vector>
@@ -32,22 +32,10 @@ constexpr uint32_t kAccessChainIndex1InIdx = 2;
 constexpr uint32_t kConstantValueInIdx = 0;
 }  // namespace
 
-Pass::Status EliminateDeadIOComponentsPass::Process() {
-  // Only process input and output variables
-  if (elim_sclass_ != spv::StorageClass::Input &&
-      elim_sclass_ != spv::StorageClass::Output) {
-    if (consumer()) {
-      std::string message =
-          "EliminateDeadIOComponentsPass only valid for input and output "
-          "variables.";
-      consumer()(SPV_MSG_ERROR, 0, {0, 0, 0}, message.c_str());
-    }
-    return Status::Failure;
-  }
-  // If safe mode, only process Input variables in vertex shader
+Pass::Status EliminateDeadInputComponentsPass::Process() {
+  // Process non-vertex only if explicitly allowed.
   const auto stage = context()->GetStage();
-  if (safe_mode_ && !(stage == spv::ExecutionModel::Vertex &&
-                      elim_sclass_ == spv::StorageClass::Input))
+  if (stage != spv::ExecutionModel::Vertex && vertex_shader_only_)
     return Status::SuccessWithoutChange;
   // Current functionality assumes shader capability.
   if (!context()->get_feature_mgr()->HasCapability(spv::Capability::Shader))
@@ -74,8 +62,14 @@ Pass::Status EliminateDeadIOComponentsPass::Process() {
       continue;
     }
     const auto sclass = ptr_type->storage_class();
-    if (sclass != elim_sclass_) {
-      continue;
+    if (output_instead_) {
+      if (sclass != spv::StorageClass::Output) {
+        continue;
+      }
+    } else {
+      if (sclass != spv::StorageClass::Input) {
+        continue;
+      }
     }
     // For tesc, or input variables in tese or geom shaders,
     // there is a outer per-vertex-array that must be ignored
@@ -143,7 +137,7 @@ Pass::Status EliminateDeadIOComponentsPass::Process() {
   return modified ? Status::SuccessWithChange : Status::SuccessWithoutChange;
 }
 
-unsigned EliminateDeadIOComponentsPass::FindMaxIndex(
+unsigned EliminateDeadInputComponentsPass::FindMaxIndex(
     const Instruction& var, const unsigned original_max,
     const bool skip_first_index) {
   unsigned max = 0;
@@ -188,8 +182,8 @@ unsigned EliminateDeadIOComponentsPass::FindMaxIndex(
   return seen_non_const_ac ? original_max : max;
 }
 
-void EliminateDeadIOComponentsPass::ChangeArrayLength(Instruction& arr_var,
-                                                      unsigned length) {
+void EliminateDeadInputComponentsPass::ChangeArrayLength(Instruction& arr_var,
+                                                         unsigned length) {
   analysis::TypeManager* type_mgr = context()->get_type_mgr();
   analysis::ConstantManager* const_mgr = context()->get_constant_mgr();
   analysis::DefUseManager* def_use_mgr = context()->get_def_use_mgr();
@@ -208,8 +202,8 @@ void EliminateDeadIOComponentsPass::ChangeArrayLength(Instruction& arr_var,
   def_use_mgr->AnalyzeInstUse(&arr_var);
 }
 
-void EliminateDeadIOComponentsPass::ChangeIOVarStructLength(Instruction& io_var,
-                                                            unsigned length) {
+void EliminateDeadInputComponentsPass::ChangeIOVarStructLength(
+    Instruction& io_var, unsigned length) {
   analysis::TypeManager* type_mgr = context()->get_type_mgr();
   analysis::Pointer* ptr_type =
       type_mgr->GetType(io_var.type_id())->AsPointer();
@@ -241,7 +235,9 @@ void EliminateDeadIOComponentsPass::ChangeIOVarStructLength(Instruction& io_var,
     analysis::Array new_arr_ty(reg_new_var_ty, arr_type->length_info());
     reg_new_var_ty = type_mgr->GetRegisteredType(&new_arr_ty);
   }
-  analysis::Pointer new_ptr_ty(reg_new_var_ty, elim_sclass_);
+  auto sclass =
+      output_instead_ ? spv::StorageClass::Output : spv::StorageClass::Input;
+  analysis::Pointer new_ptr_ty(reg_new_var_ty, sclass);
   analysis::Type* reg_new_ptr_ty = type_mgr->GetRegisteredType(&new_ptr_ty);
   uint32_t new_ptr_ty_id = type_mgr->GetTypeInstruction(reg_new_ptr_ty);
   io_var.SetResultType(new_ptr_ty_id);

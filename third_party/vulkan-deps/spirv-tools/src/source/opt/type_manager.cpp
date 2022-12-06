@@ -234,7 +234,6 @@ uint32_t TypeManager::GetTypeInstruction(const Type* type) {
     DefineParameterlessCase(NamedBarrier);
     DefineParameterlessCase(AccelerationStructureNV);
     DefineParameterlessCase(RayQueryKHR);
-    DefineParameterlessCase(HitObjectNV);
 #undef DefineParameterlessCase
     case Type::kInteger:
       typeInst = MakeUnique<Instruction>(
@@ -528,7 +527,6 @@ Type* TypeManager::RebuildType(const Type& type) {
     DefineNoSubtypeCase(NamedBarrier);
     DefineNoSubtypeCase(AccelerationStructureNV);
     DefineNoSubtypeCase(RayQueryKHR);
-    DefineNoSubtypeCase(HitObjectNV);
 #undef DefineNoSubtypeCase
     case Type::kVector: {
       const Vector* vec_ty = type.AsVector();
@@ -865,9 +863,6 @@ Type* TypeManager::RecordIfTypeDefinition(const Instruction& inst) {
       break;
     case spv::Op::OpTypeRayQueryKHR:
       type = new RayQueryKHR();
-      break;
-    case spv::Op::OpTypeHitObjectNV:
-      type = new HitObjectNV();
       break;
     default:
       SPIRV_UNIMPLEMENTED(consumer_, "unhandled type");

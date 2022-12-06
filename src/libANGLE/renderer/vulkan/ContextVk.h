@@ -610,7 +610,8 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
                                      const vk::PackedAttachmentCount colorAttachmentCount,
                                      const vk::PackedAttachmentIndex depthStencilAttachmentIndex,
                                      const vk::PackedClearValuesArray &clearValues,
-                                     vk::RenderPassCommandBuffer **commandBufferOut);
+                                     vk::RenderPassCommandBuffer **commandBufferOut,
+                                     vk::RenderPassSerial *renderPassSerialOut);
 
     // Only returns true if we have a started RP and we've run setupDraw.
     bool hasStartedRenderPass() const
@@ -619,9 +620,10 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
         return mRenderPassCommandBuffer && mRenderPassCommands->started();
     }
 
-    bool hasStartedRenderPassWithQueueSerial(const QueueSerial &queueSerial) const
+    bool hasStartedRenderPassWithSerial(const vk::RenderPassSerial renderPassSerial) const
     {
-        return hasStartedRenderPass() && mRenderPassCommands->getQueueSerial() == queueSerial;
+        return hasStartedRenderPass() &&
+               mRenderPassCommands->getRenderPassSerial() == renderPassSerial;
     }
 
     bool hasStartedRenderPassWithCommands() const
@@ -636,7 +638,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     }
 
     // TODO(https://anglebug.com/4968): Support multiple open render passes.
-    void restoreFinishedRenderPass(const QueueSerial &queueSerial);
+    void restoreFinishedRenderPass(const vk::RenderPassSerial renderPassSerial);
 
     uint32_t getCurrentSubpassIndex() const;
     uint32_t getCurrentViewCount() const;
@@ -1557,6 +1559,10 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     // A graph built from pipeline descs and their transitions.
     std::ostringstream mPipelineCacheGraph;
+
+    // The latest serial used for a started render pass.
+    vk::RenderPassSerial mCurrentRenderPassSerial;
+    RenderPassSerialFactory mRenderPassSerialFactory;
 
     RangedSerialFactory mOutsideRenderPassSerialFactory;
 };

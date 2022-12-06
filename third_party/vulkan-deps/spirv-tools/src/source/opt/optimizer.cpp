@@ -785,10 +785,14 @@ Optimizer::PassToken CreateLocalMultiStoreElimPass() {
       MakeUnique<opt::SSARewritePass>());
 }
 
-Optimizer::PassToken CreateAggressiveDCEPass(bool preserve_interface,
-                                             bool remove_outputs) {
+Optimizer::PassToken CreateAggressiveDCEPass() {
   return MakeUnique<Optimizer::PassToken::Impl>(
-      MakeUnique<opt::AggressiveDCEPass>(preserve_interface, remove_outputs));
+      MakeUnique<opt::AggressiveDCEPass>(false));
+}
+
+Optimizer::PassToken CreateAggressiveDCEPass(bool preserve_interface) {
+  return MakeUnique<Optimizer::PassToken::Impl>(
+      MakeUnique<opt::AggressiveDCEPass>(preserve_interface));
 }
 
 Optimizer::PassToken CreateRemoveUnusedInterfaceVariablesPass() {
@@ -1013,20 +1017,19 @@ Optimizer::PassToken CreateInterpolateFixupPass() {
 
 Optimizer::PassToken CreateEliminateDeadInputComponentsPass() {
   return MakeUnique<Optimizer::PassToken::Impl>(
-      MakeUnique<opt::EliminateDeadIOComponentsPass>(spv::StorageClass::Input,
-                                                     /* safe_mode */ false));
+      MakeUnique<opt::EliminateDeadInputComponentsPass>(
+          /* output_instead */ false, /* vertex_shader_only */ false));
 }
 
 Optimizer::PassToken CreateEliminateDeadOutputComponentsPass() {
   return MakeUnique<Optimizer::PassToken::Impl>(
-      MakeUnique<opt::EliminateDeadIOComponentsPass>(spv::StorageClass::Output,
-                                                     /* safe_mode */ false));
+      MakeUnique<opt::EliminateDeadInputComponentsPass>(
+          /* output_instead */ true, /* vertex_shader_only */ false));
 }
 
 Optimizer::PassToken CreateEliminateDeadInputComponentsSafePass() {
   return MakeUnique<Optimizer::PassToken::Impl>(
-      MakeUnique<opt::EliminateDeadIOComponentsPass>(spv::StorageClass::Input,
-                                                     /* safe_mode */ true));
+      MakeUnique<opt::EliminateDeadInputComponentsPass>());
 }
 
 Optimizer::PassToken CreateAnalyzeLiveInputPass(
