@@ -12509,23 +12509,9 @@ namespace VULKAN_HPP_NAMESPACE
 
     VULKAN_HPP_CONSTEXPR_14 ClearColorValue( const std::array<float, 4> & float32_ = {} ) : float32( float32_ ) {}
 
-    VULKAN_HPP_CONSTEXPR ClearColorValue( float float32_0, float float32_1, float float32_2, float float32_3 )
-      : float32( { float32_0, float32_1, float32_2, float32_3 } )
-    {
-    }
-
     VULKAN_HPP_CONSTEXPR_14 ClearColorValue( const std::array<int32_t, 4> & int32_ ) : int32( int32_ ) {}
 
-    VULKAN_HPP_CONSTEXPR ClearColorValue( int32_t int32_0, int32_t int32_1, int32_t int32_2, int32_t int32_3 ) : int32( { int32_0, int32_1, int32_2, int32_3 } )
-    {
-    }
-
     VULKAN_HPP_CONSTEXPR_14 ClearColorValue( const std::array<uint32_t, 4> & uint32_ ) : uint32( uint32_ ) {}
-
-    VULKAN_HPP_CONSTEXPR ClearColorValue( uint32_t uint32_0, uint32_t uint32_1, uint32_t uint32_2, uint32_t uint32_3 )
-      : uint32( { uint32_0, uint32_1, uint32_2, uint32_3 } )
-    {
-    }
 #endif /*VULKAN_HPP_NO_UNION_CONSTRUCTORS*/
 
 #if !defined( VULKAN_HPP_NO_UNION_SETTERS )
@@ -24294,16 +24280,25 @@ namespace VULKAN_HPP_NAMESPACE
     {
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( queueCreateInfoCount == rhs.queueCreateInfoCount ) &&
              ( pQueueCreateInfos == rhs.pQueueCreateInfos ) && ( enabledLayerCount == rhs.enabledLayerCount ) &&
-             std::equal( ppEnabledLayerNames,
-                         ppEnabledLayerNames + enabledLayerCount,
-                         rhs.ppEnabledLayerNames,
-                         []( char const * left, char const * right ) { return ( left == right ) || ( strcmp( left, right ) == 0 ); } ) &&
-             ( enabledExtensionCount == rhs.enabledExtensionCount ) &&
-             std::equal( ppEnabledExtensionNames,
-                         ppEnabledExtensionNames + enabledExtensionCount,
-                         rhs.ppEnabledExtensionNames,
-                         []( char const * left, char const * right ) { return ( left == right ) || ( strcmp( left, right ) == 0 ); } ) &&
-             ( pEnabledFeatures == rhs.pEnabledFeatures );
+             [this, rhs]
+      {
+        bool equal = true;
+        for ( size_t i = 0; equal && ( i < enabledLayerCount ); ++i )
+        {
+          equal = ( ( ppEnabledLayerNames[i] == rhs.ppEnabledLayerNames[i] ) || ( strcmp( ppEnabledLayerNames[i], rhs.ppEnabledLayerNames[i] ) == 0 ) );
+        }
+        return equal;
+      }() && ( enabledExtensionCount == rhs.enabledExtensionCount ) &&
+             [this, rhs]
+      {
+        bool equal = true;
+        for ( size_t i = 0; equal && ( i < enabledExtensionCount ); ++i )
+        {
+          equal = ( ( ppEnabledExtensionNames[i] == rhs.ppEnabledExtensionNames[i] ) ||
+                    ( strcmp( ppEnabledExtensionNames[i], rhs.ppEnabledExtensionNames[i] ) == 0 ) );
+        }
+        return equal;
+      }() && ( pEnabledFeatures == rhs.pEnabledFeatures );
     }
 
     bool operator!=( DeviceCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
@@ -27248,247 +27243,6 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::eDeviceQueueInfo2>
   {
     using Type = DeviceQueueInfo2;
-  };
-
-  struct DirectDriverLoadingInfoLUNARG
-  {
-    using NativeType = VkDirectDriverLoadingInfoLUNARG;
-
-    static const bool                                  allowDuplicate = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDirectDriverLoadingInfoLUNARG;
-
-#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR DirectDriverLoadingInfoLUNARG( VULKAN_HPP_NAMESPACE::DirectDriverLoadingFlagsLUNARG flags_                  = {},
-                                                        PFN_vkGetInstanceProcAddr                            pfnGetInstanceProcAddr_ = {},
-                                                        void *                                               pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
-      : pNext( pNext_ )
-      , flags( flags_ )
-      , pfnGetInstanceProcAddr( pfnGetInstanceProcAddr_ )
-    {
-    }
-
-    VULKAN_HPP_CONSTEXPR DirectDriverLoadingInfoLUNARG( DirectDriverLoadingInfoLUNARG const & rhs ) VULKAN_HPP_NOEXCEPT = default;
-
-    DirectDriverLoadingInfoLUNARG( VkDirectDriverLoadingInfoLUNARG const & rhs ) VULKAN_HPP_NOEXCEPT
-      : DirectDriverLoadingInfoLUNARG( *reinterpret_cast<DirectDriverLoadingInfoLUNARG const *>( &rhs ) )
-    {
-    }
-
-    DirectDriverLoadingInfoLUNARG & operator=( DirectDriverLoadingInfoLUNARG const & rhs ) VULKAN_HPP_NOEXCEPT = default;
-#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
-
-    DirectDriverLoadingInfoLUNARG & operator=( VkDirectDriverLoadingInfoLUNARG const & rhs ) VULKAN_HPP_NOEXCEPT
-    {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::DirectDriverLoadingInfoLUNARG const *>( &rhs );
-      return *this;
-    }
-
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 DirectDriverLoadingInfoLUNARG & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pNext = pNext_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 DirectDriverLoadingInfoLUNARG & setFlags( VULKAN_HPP_NAMESPACE::DirectDriverLoadingFlagsLUNARG flags_ ) VULKAN_HPP_NOEXCEPT
-    {
-      flags = flags_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 DirectDriverLoadingInfoLUNARG & setPfnGetInstanceProcAddr( PFN_vkGetInstanceProcAddr pfnGetInstanceProcAddr_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pfnGetInstanceProcAddr = pfnGetInstanceProcAddr_;
-      return *this;
-    }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
-
-    operator VkDirectDriverLoadingInfoLUNARG const &() const VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<const VkDirectDriverLoadingInfoLUNARG *>( this );
-    }
-
-    operator VkDirectDriverLoadingInfoLUNARG &() VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<VkDirectDriverLoadingInfoLUNARG *>( this );
-    }
-
-#if defined( VULKAN_HPP_USE_REFLECT )
-#  if 14 <= VULKAN_HPP_CPP_VERSION
-    auto
-#  else
-    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
-               void * const &,
-               VULKAN_HPP_NAMESPACE::DirectDriverLoadingFlagsLUNARG const &,
-               PFN_vkGetInstanceProcAddr const &>
-#  endif
-      reflect() const VULKAN_HPP_NOEXCEPT
-    {
-      return std::tie( sType, pNext, flags, pfnGetInstanceProcAddr );
-    }
-#endif
-
-    bool operator==( DirectDriverLoadingInfoLUNARG const & rhs ) const VULKAN_HPP_NOEXCEPT
-    {
-#if defined( VULKAN_HPP_USE_REFLECT )
-      return this->reflect() == rhs.reflect();
-#else
-      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( pfnGetInstanceProcAddr == rhs.pfnGetInstanceProcAddr );
-#endif
-    }
-
-    bool operator!=( DirectDriverLoadingInfoLUNARG const & rhs ) const VULKAN_HPP_NOEXCEPT
-    {
-      return !operator==( rhs );
-    }
-
-  public:
-    VULKAN_HPP_NAMESPACE::StructureType                  sType                  = StructureType::eDirectDriverLoadingInfoLUNARG;
-    void *                                               pNext                  = {};
-    VULKAN_HPP_NAMESPACE::DirectDriverLoadingFlagsLUNARG flags                  = {};
-    PFN_vkGetInstanceProcAddr                            pfnGetInstanceProcAddr = {};
-  };
-
-  template <>
-  struct CppType<StructureType, StructureType::eDirectDriverLoadingInfoLUNARG>
-  {
-    using Type = DirectDriverLoadingInfoLUNARG;
-  };
-
-  struct DirectDriverLoadingListLUNARG
-  {
-    using NativeType = VkDirectDriverLoadingListLUNARG;
-
-    static const bool                                  allowDuplicate = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDirectDriverLoadingListLUNARG;
-
-#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR DirectDriverLoadingListLUNARG(
-      VULKAN_HPP_NAMESPACE::DirectDriverLoadingModeLUNARG         mode_        = VULKAN_HPP_NAMESPACE::DirectDriverLoadingModeLUNARG::eExclusive,
-      uint32_t                                                    driverCount_ = {},
-      const VULKAN_HPP_NAMESPACE::DirectDriverLoadingInfoLUNARG * pDrivers_    = {},
-      void *                                                      pNext_       = nullptr ) VULKAN_HPP_NOEXCEPT
-      : pNext( pNext_ )
-      , mode( mode_ )
-      , driverCount( driverCount_ )
-      , pDrivers( pDrivers_ )
-    {
-    }
-
-    VULKAN_HPP_CONSTEXPR DirectDriverLoadingListLUNARG( DirectDriverLoadingListLUNARG const & rhs ) VULKAN_HPP_NOEXCEPT = default;
-
-    DirectDriverLoadingListLUNARG( VkDirectDriverLoadingListLUNARG const & rhs ) VULKAN_HPP_NOEXCEPT
-      : DirectDriverLoadingListLUNARG( *reinterpret_cast<DirectDriverLoadingListLUNARG const *>( &rhs ) )
-    {
-    }
-
-#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    DirectDriverLoadingListLUNARG( VULKAN_HPP_NAMESPACE::DirectDriverLoadingModeLUNARG                                                              mode_,
-                                   VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::DirectDriverLoadingInfoLUNARG> const & drivers_,
-                                   void * pNext_ = nullptr )
-      : pNext( pNext_ ), mode( mode_ ), driverCount( static_cast<uint32_t>( drivers_.size() ) ), pDrivers( drivers_.data() )
-    {
-    }
-#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
-
-    DirectDriverLoadingListLUNARG & operator=( DirectDriverLoadingListLUNARG const & rhs ) VULKAN_HPP_NOEXCEPT = default;
-#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
-
-    DirectDriverLoadingListLUNARG & operator=( VkDirectDriverLoadingListLUNARG const & rhs ) VULKAN_HPP_NOEXCEPT
-    {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::DirectDriverLoadingListLUNARG const *>( &rhs );
-      return *this;
-    }
-
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 DirectDriverLoadingListLUNARG & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pNext = pNext_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 DirectDriverLoadingListLUNARG & setMode( VULKAN_HPP_NAMESPACE::DirectDriverLoadingModeLUNARG mode_ ) VULKAN_HPP_NOEXCEPT
-    {
-      mode = mode_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 DirectDriverLoadingListLUNARG & setDriverCount( uint32_t driverCount_ ) VULKAN_HPP_NOEXCEPT
-    {
-      driverCount = driverCount_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 DirectDriverLoadingListLUNARG &
-                            setPDrivers( const VULKAN_HPP_NAMESPACE::DirectDriverLoadingInfoLUNARG * pDrivers_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pDrivers = pDrivers_;
-      return *this;
-    }
-
-#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    DirectDriverLoadingListLUNARG & setDrivers(
-      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::DirectDriverLoadingInfoLUNARG> const & drivers_ ) VULKAN_HPP_NOEXCEPT
-    {
-      driverCount = static_cast<uint32_t>( drivers_.size() );
-      pDrivers    = drivers_.data();
-      return *this;
-    }
-#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
-#endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
-
-    operator VkDirectDriverLoadingListLUNARG const &() const VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<const VkDirectDriverLoadingListLUNARG *>( this );
-    }
-
-    operator VkDirectDriverLoadingListLUNARG &() VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<VkDirectDriverLoadingListLUNARG *>( this );
-    }
-
-#if defined( VULKAN_HPP_USE_REFLECT )
-#  if 14 <= VULKAN_HPP_CPP_VERSION
-    auto
-#  else
-    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
-               void * const &,
-               VULKAN_HPP_NAMESPACE::DirectDriverLoadingModeLUNARG const &,
-               uint32_t const &,
-               const VULKAN_HPP_NAMESPACE::DirectDriverLoadingInfoLUNARG * const &>
-#  endif
-      reflect() const VULKAN_HPP_NOEXCEPT
-    {
-      return std::tie( sType, pNext, mode, driverCount, pDrivers );
-    }
-#endif
-
-    bool operator==( DirectDriverLoadingListLUNARG const & rhs ) const VULKAN_HPP_NOEXCEPT
-    {
-#if defined( VULKAN_HPP_USE_REFLECT )
-      return this->reflect() == rhs.reflect();
-#else
-      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( mode == rhs.mode ) && ( driverCount == rhs.driverCount ) && ( pDrivers == rhs.pDrivers );
-#endif
-    }
-
-    bool operator!=( DirectDriverLoadingListLUNARG const & rhs ) const VULKAN_HPP_NOEXCEPT
-    {
-      return !operator==( rhs );
-    }
-
-  public:
-    VULKAN_HPP_NAMESPACE::StructureType                         sType       = StructureType::eDirectDriverLoadingListLUNARG;
-    void *                                                      pNext       = {};
-    VULKAN_HPP_NAMESPACE::DirectDriverLoadingModeLUNARG         mode        = VULKAN_HPP_NAMESPACE::DirectDriverLoadingModeLUNARG::eExclusive;
-    uint32_t                                                    driverCount = {};
-    const VULKAN_HPP_NAMESPACE::DirectDriverLoadingInfoLUNARG * pDrivers    = {};
-  };
-
-  template <>
-  struct CppType<StructureType, StructureType::eDirectDriverLoadingListLUNARG>
-  {
-    using Type = DirectDriverLoadingListLUNARG;
   };
 
 #if defined( VK_USE_PLATFORM_DIRECTFB_EXT )
@@ -38930,38 +38684,6 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 SubresourceLayout & setOffset( VULKAN_HPP_NAMESPACE::DeviceSize offset_ ) VULKAN_HPP_NOEXCEPT
-    {
-      offset = offset_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 SubresourceLayout & setSize( VULKAN_HPP_NAMESPACE::DeviceSize size_ ) VULKAN_HPP_NOEXCEPT
-    {
-      size = size_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 SubresourceLayout & setRowPitch( VULKAN_HPP_NAMESPACE::DeviceSize rowPitch_ ) VULKAN_HPP_NOEXCEPT
-    {
-      rowPitch = rowPitch_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 SubresourceLayout & setArrayPitch( VULKAN_HPP_NAMESPACE::DeviceSize arrayPitch_ ) VULKAN_HPP_NOEXCEPT
-    {
-      arrayPitch = arrayPitch_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 SubresourceLayout & setDepthPitch( VULKAN_HPP_NAMESPACE::DeviceSize depthPitch_ ) VULKAN_HPP_NOEXCEPT
-    {
-      depthPitch = depthPitch_;
-      return *this;
-    }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
-
     operator VkSubresourceLayout const &() const VULKAN_HPP_NOEXCEPT
     {
       return *reinterpret_cast<const VkSubresourceLayout *>( this );
@@ -44312,15 +44034,25 @@ namespace VULKAN_HPP_NAMESPACE
     {
       return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( pApplicationInfo == rhs.pApplicationInfo ) &&
              ( enabledLayerCount == rhs.enabledLayerCount ) &&
-             std::equal( ppEnabledLayerNames,
-                         ppEnabledLayerNames + enabledLayerCount,
-                         rhs.ppEnabledLayerNames,
-                         []( char const * left, char const * right ) { return ( left == right ) || ( strcmp( left, right ) == 0 ); } ) &&
-             ( enabledExtensionCount == rhs.enabledExtensionCount ) &&
-             std::equal( ppEnabledExtensionNames,
-                         ppEnabledExtensionNames + enabledExtensionCount,
-                         rhs.ppEnabledExtensionNames,
-                         []( char const * left, char const * right ) { return ( left == right ) || ( strcmp( left, right ) == 0 ); } );
+             [this, rhs]
+      {
+        bool equal = true;
+        for ( size_t i = 0; equal && ( i < enabledLayerCount ); ++i )
+        {
+          equal = ( ( ppEnabledLayerNames[i] == rhs.ppEnabledLayerNames[i] ) || ( strcmp( ppEnabledLayerNames[i], rhs.ppEnabledLayerNames[i] ) == 0 ) );
+        }
+        return equal;
+      }() && ( enabledExtensionCount == rhs.enabledExtensionCount ) &&
+             [this, rhs]
+      {
+        bool equal = true;
+        for ( size_t i = 0; equal && ( i < enabledExtensionCount ); ++i )
+        {
+          equal = ( ( ppEnabledExtensionNames[i] == rhs.ppEnabledExtensionNames[i] ) ||
+                    ( strcmp( ppEnabledExtensionNames[i], rhs.ppEnabledExtensionNames[i] ) == 0 ) );
+        }
+        return equal;
+      }();
     }
 
     bool operator!=( InstanceCreateInfo const & rhs ) const VULKAN_HPP_NOEXCEPT
@@ -63990,106 +63722,6 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::ePhysicalDeviceMultiviewPerViewAttributesPropertiesNVX>
   {
     using Type = PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX;
-  };
-
-  struct PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM
-  {
-    using NativeType = VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM;
-
-    static const bool                                  allowDuplicate = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM;
-
-#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM( VULKAN_HPP_NAMESPACE::Bool32 multiviewPerViewViewports_ = {},
-                                                                              void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
-      : pNext( pNext_ )
-      , multiviewPerViewViewports( multiviewPerViewViewports_ )
-    {
-    }
-
-    VULKAN_HPP_CONSTEXPR
-      PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM( PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
-
-    PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM( VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
-      : PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM( *reinterpret_cast<PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *>( &rhs ) )
-    {
-    }
-
-    PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM &
-      operator=( PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
-#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
-
-    PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM & operator=( VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
-    {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *>( &rhs );
-      return *this;
-    }
-
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
-    {
-      pNext = pNext_;
-      return *this;
-    }
-
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM &
-                            setMultiviewPerViewViewports( VULKAN_HPP_NAMESPACE::Bool32 multiviewPerViewViewports_ ) VULKAN_HPP_NOEXCEPT
-    {
-      multiviewPerViewViewports = multiviewPerViewViewports_;
-      return *this;
-    }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
-
-    operator VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const &() const VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<const VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM *>( this );
-    }
-
-    operator VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM &() VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM *>( this );
-    }
-
-#if defined( VULKAN_HPP_USE_REFLECT )
-#  if 14 <= VULKAN_HPP_CPP_VERSION
-    auto
-#  else
-    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
-#  endif
-      reflect() const VULKAN_HPP_NOEXCEPT
-    {
-      return std::tie( sType, pNext, multiviewPerViewViewports );
-    }
-#endif
-
-#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
-    auto operator<=>( PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const & ) const = default;
-#else
-    bool operator==( PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
-    {
-#  if defined( VULKAN_HPP_USE_REFLECT )
-      return this->reflect() == rhs.reflect();
-#  else
-      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( multiviewPerViewViewports == rhs.multiviewPerViewViewports );
-#  endif
-    }
-
-    bool operator!=( PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
-    {
-      return !operator==( rhs );
-    }
-#endif
-
-  public:
-    VULKAN_HPP_NAMESPACE::StructureType sType                     = StructureType::ePhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM;
-    void *                              pNext                     = {};
-    VULKAN_HPP_NAMESPACE::Bool32        multiviewPerViewViewports = {};
-  };
-
-  template <>
-  struct CppType<StructureType, StructureType::ePhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM>
-  {
-    using Type = PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM;
   };
 
   struct PhysicalDeviceMultiviewProperties
@@ -99236,14 +98868,14 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeH265PictureInfoEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR VideoDecodeH265PictureInfoEXT( StdVideoDecodeH265PictureInfo * pStdPictureInfo_      = {},
-                                                        uint32_t                        sliceSegmentCount_    = {},
-                                                        const uint32_t *                pSliceSegmentOffsets_ = {},
-                                                        const void *                    pNext_                = nullptr ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR VideoDecodeH265PictureInfoEXT( StdVideoDecodeH265PictureInfo * pStdPictureInfo_ = {},
+                                                        uint32_t                        sliceCount_      = {},
+                                                        const uint32_t *                pSliceOffsets_   = {},
+                                                        const void *                    pNext_           = nullptr ) VULKAN_HPP_NOEXCEPT
       : pNext( pNext_ )
       , pStdPictureInfo( pStdPictureInfo_ )
-      , sliceSegmentCount( sliceSegmentCount_ )
-      , pSliceSegmentOffsets( pSliceSegmentOffsets_ )
+      , sliceCount( sliceCount_ )
+      , pSliceOffsets( pSliceOffsets_ )
     {
     }
 
@@ -99256,12 +98888,9 @@ namespace VULKAN_HPP_NAMESPACE
 
 #    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
     VideoDecodeH265PictureInfoEXT( StdVideoDecodeH265PictureInfo *                                       pStdPictureInfo_,
-                                   VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const uint32_t> const & sliceSegmentOffsets_,
+                                   VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const uint32_t> const & sliceOffsets_,
                                    const void *                                                          pNext_ = nullptr )
-      : pNext( pNext_ )
-      , pStdPictureInfo( pStdPictureInfo_ )
-      , sliceSegmentCount( static_cast<uint32_t>( sliceSegmentOffsets_.size() ) )
-      , pSliceSegmentOffsets( sliceSegmentOffsets_.data() )
+      : pNext( pNext_ ), pStdPictureInfo( pStdPictureInfo_ ), sliceCount( static_cast<uint32_t>( sliceOffsets_.size() ) ), pSliceOffsets( sliceOffsets_.data() )
     {
     }
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -99288,24 +98917,23 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 VideoDecodeH265PictureInfoEXT & setSliceSegmentCount( uint32_t sliceSegmentCount_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 VideoDecodeH265PictureInfoEXT & setSliceCount( uint32_t sliceCount_ ) VULKAN_HPP_NOEXCEPT
     {
-      sliceSegmentCount = sliceSegmentCount_;
+      sliceCount = sliceCount_;
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 VideoDecodeH265PictureInfoEXT & setPSliceSegmentOffsets( const uint32_t * pSliceSegmentOffsets_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 VideoDecodeH265PictureInfoEXT & setPSliceOffsets( const uint32_t * pSliceOffsets_ ) VULKAN_HPP_NOEXCEPT
     {
-      pSliceSegmentOffsets = pSliceSegmentOffsets_;
+      pSliceOffsets = pSliceOffsets_;
       return *this;
     }
 
 #    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
-    VideoDecodeH265PictureInfoEXT &
-      setSliceSegmentOffsets( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const uint32_t> const & sliceSegmentOffsets_ ) VULKAN_HPP_NOEXCEPT
+    VideoDecodeH265PictureInfoEXT & setSliceOffsets( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const uint32_t> const & sliceOffsets_ ) VULKAN_HPP_NOEXCEPT
     {
-      sliceSegmentCount    = static_cast<uint32_t>( sliceSegmentOffsets_.size() );
-      pSliceSegmentOffsets = sliceSegmentOffsets_.data();
+      sliceCount    = static_cast<uint32_t>( sliceOffsets_.size() );
+      pSliceOffsets = sliceOffsets_.data();
       return *this;
     }
 #    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -99333,7 +98961,7 @@ namespace VULKAN_HPP_NAMESPACE
 #    endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
-      return std::tie( sType, pNext, pStdPictureInfo, sliceSegmentCount, pSliceSegmentOffsets );
+      return std::tie( sType, pNext, pStdPictureInfo, sliceCount, pSliceOffsets );
     }
 #  endif
 
@@ -99345,8 +98973,8 @@ namespace VULKAN_HPP_NAMESPACE
 #    if defined( VULKAN_HPP_USE_REFLECT )
       return this->reflect() == rhs.reflect();
 #    else
-      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pStdPictureInfo == rhs.pStdPictureInfo ) && ( sliceSegmentCount == rhs.sliceSegmentCount ) &&
-             ( pSliceSegmentOffsets == rhs.pSliceSegmentOffsets );
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pStdPictureInfo == rhs.pStdPictureInfo ) && ( sliceCount == rhs.sliceCount ) &&
+             ( pSliceOffsets == rhs.pSliceOffsets );
 #    endif
     }
 
@@ -99357,11 +98985,11 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType sType                = StructureType::eVideoDecodeH265PictureInfoEXT;
-    const void *                        pNext                = {};
-    StdVideoDecodeH265PictureInfo *     pStdPictureInfo      = {};
-    uint32_t                            sliceSegmentCount    = {};
-    const uint32_t *                    pSliceSegmentOffsets = {};
+    VULKAN_HPP_NAMESPACE::StructureType sType           = StructureType::eVideoDecodeH265PictureInfoEXT;
+    const void *                        pNext           = {};
+    StdVideoDecodeH265PictureInfo *     pStdPictureInfo = {};
+    uint32_t                            sliceCount      = {};
+    const uint32_t *                    pSliceOffsets   = {};
   };
 
   template <>
