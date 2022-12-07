@@ -1552,7 +1552,7 @@ void TIntermediate::output(TInfoSink& infoSink, bool tree)
         break;
     }
 
-    if (treeRoot == nullptr || ! tree)
+    if (treeRoot == 0 || ! tree)
         return;
 
     TOutputTraverser it(infoSink);

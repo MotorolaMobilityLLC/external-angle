@@ -2086,6 +2086,7 @@ angle::Result RenderPassCommandBufferHelper::beginRenderPass(
     const PackedAttachmentCount colorAttachmentCount,
     const PackedAttachmentIndex depthStencilAttachmentIndex,
     const PackedClearValuesArray &clearValues,
+    const RenderPassSerial renderPassSerial,
     const QueueSerial &queueSerial,
     RenderPassCommandBuffer **commandBufferOut)
 {
@@ -2098,6 +2099,7 @@ angle::Result RenderPassCommandBufferHelper::beginRenderPass(
     mFramebuffer                 = std::move(framebuffer);
     mRenderArea                  = renderArea;
     mClearValues                 = clearValues;
+    mRenderPassSerial            = renderPassSerial;
     mQueueSerial                 = queueSerial;
     *commandBufferOut            = &getCommandBuffer();
 

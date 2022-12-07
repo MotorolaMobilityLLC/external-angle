@@ -620,9 +620,9 @@ class RendererVk : angle::NonCopyable
     }
 
     angle::Result allocateQueueSerialIndex(SerialIndex *indexOut, Serial *serialOut);
-    size_t getLargestQueueSerialIndexEverAllocated() const
+    size_t getLargestAllocatedQueueSerialIndex() const
     {
-        return mQueueSerialIndexAllocator.getLargestIndexEverAllocated();
+        return mQueueSerialIndexAllocator.getLarrgestAllocatedIndex();
     }
     void releaseQueueSerialIndex(SerialIndex index);
     Serial generateQueueSerial(SerialIndex index);
