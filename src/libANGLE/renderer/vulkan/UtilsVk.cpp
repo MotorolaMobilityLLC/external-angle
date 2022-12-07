@@ -2173,9 +2173,11 @@ angle::Result UtilsVk::startRenderPass(ContextVk *contextVk,
                                               vk::ImageLayout::ColorAttachment,
                                               vk::ImageLayout::ColorAttachment);
 
-    ANGLE_TRY(contextVk->beginNewRenderPass(
-        framebuffer, renderArea, renderPassDesc, renderPassAttachmentOps,
-        vk::PackedAttachmentCount(1), vk::kAttachmentIndexInvalid, clearValues, commandBufferOut));
+    vk::RenderPassSerial renderPassSerial;
+    ANGLE_TRY(contextVk->beginNewRenderPass(framebuffer, renderArea, renderPassDesc,
+                                            renderPassAttachmentOps, vk::PackedAttachmentCount(1),
+                                            vk::kAttachmentIndexInvalid, clearValues,
+                                            commandBufferOut, &renderPassSerial));
 
     contextVk->addGarbage(&framebuffer.getFramebuffer());
 
@@ -2195,7 +2197,7 @@ angle::Result UtilsVk::clearFramebuffer(ContextVk *contextVk,
     // Start a new render pass if not already started
     ANGLE_TRY(framebuffer->getFramebuffer(contextVk, &currentFramebuffer, nullptr, nullptr,
                                           SwapchainResolveMode::Disabled));
-    if (contextVk->hasStartedRenderPassWithQueueSerial(framebuffer->getLastRenderPassQueueSerial()))
+    if (contextVk->hasStartedRenderPassWithSerial(framebuffer->getLastRenderPassSerial()))
     {
         vk::RenderPassCommandBufferHelper *renderPassCommands =
             &contextVk->getStartedRenderPassCommands();

@@ -192,7 +192,7 @@ struct Error
 class QueueSerialIndexAllocator final
 {
   public:
-    QueueSerialIndexAllocator() : mLargestIndexEverAllocated(kInvalidQueueSerialIndex)
+    QueueSerialIndexAllocator() : mLargestAllocatedIndex(kInvalidQueueSerialIndex)
     {
         // Start with every index is free
         mFreeIndexBitSetArray.set();
@@ -210,30 +210,28 @@ class QueueSerialIndexAllocator final
         SerialIndex index = static_cast<SerialIndex>(mFreeIndexBitSetArray.first());
         ASSERT(index < kMaxQueueSerialIndexCount);
         mFreeIndexBitSetArray.reset(index);
-        mLargestIndexEverAllocated = (~mFreeIndexBitSetArray).last();
+        mLargestAllocatedIndex = (~mFreeIndexBitSetArray).last();
         return index;
     }
 
     void release(SerialIndex index)
     {
         std::lock_guard<std::mutex> lock(mMutex);
-        ASSERT(index <= mLargestIndexEverAllocated);
+        ASSERT(index <= mLargestAllocatedIndex);
         ASSERT(!mFreeIndexBitSetArray.test(index));
         mFreeIndexBitSetArray.set(index);
-        // mLargestIndexEverAllocated is for optimization. Even if we released queueIndex, we may
-        // still have resources still have serial the index. Thus do not decrement
-        // mLargestIndexEverAllocated here. The only downside is that we may get into slightly less
-        // optimal code path in GetBatchCountUpToSerials.
+        if (index == mLargestAllocatedIndex)
+        {
+            mLargestAllocatedIndex = mFreeIndexBitSetArray.all() ? kInvalidQueueSerialIndex
+                                                                 : (~mFreeIndexBitSetArray).last();
+        }
     }
 
-    size_t getLargestIndexEverAllocated() const
-    {
-        return mLargestIndexEverAllocated.load(std::memory_order_consume);
-    }
+    size_t getLarrgestAllocatedIndex() const { return mLargestAllocatedIndex; }
 
   private:
     angle::BitSetArray<kMaxQueueSerialIndexCount> mFreeIndexBitSetArray;
-    std::atomic<size_t> mLargestIndexEverAllocated;
+    size_t mLargestAllocatedIndex;
     std::mutex mMutex;
 };
 
