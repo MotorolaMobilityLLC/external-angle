@@ -190,7 +190,7 @@ protected:
 // Parameterize an enumerant
 class EnumParameters {
 public:
-    EnumParameters() : desc(nullptr) { }
+    EnumParameters() : desc(0) { }
     const char* desc;
 };
 
@@ -198,7 +198,7 @@ public:
 class EnumDefinition : public EnumParameters {
 public:
     EnumDefinition() : 
-        ceiling(0), bitmask(false), getName(nullptr), enumParams(nullptr), operandParams(nullptr) { }
+        ceiling(0), bitmask(false), getName(0), enumParams(0), operandParams(0) { }
     void set(int ceil, const char* (*name)(int), EnumParameters* ep, bool mask = false)
     {
         ceiling = ceil;

@@ -26,11 +26,12 @@ namespace spvtools {
 namespace opt {
 
 // See optimizer.hpp for documentation.
-class EliminateDeadIOComponentsPass : public Pass {
+class EliminateDeadInputComponentsPass : public Pass {
  public:
-  explicit EliminateDeadIOComponentsPass(spv::StorageClass elim_sclass,
-                                         bool safe_mode = true)
-      : elim_sclass_(elim_sclass), safe_mode_(safe_mode) {}
+  explicit EliminateDeadInputComponentsPass(bool output_instead = false,
+                                            bool vertex_shader_only = true)
+      : output_instead_(output_instead),
+        vertex_shader_only_(vertex_shader_only) {}
 
   const char* name() const override {
     return "eliminate-dead-input-components";
@@ -61,12 +62,11 @@ class EliminateDeadIOComponentsPass : public Pass {
   // is either the struct or a per-vertex-array of the struct.
   void ChangeIOVarStructLength(Instruction& io_var, unsigned length);
 
-  // Storage class to be optimized. Must be Input or Output.
-  spv::StorageClass elim_sclass_;
+  // Process output variables instead
+  bool output_instead_;
 
-  // Only make changes that will not cause interface incompatibility if done
-  // standalone. Currently this is only Input variables in vertex shaders.
-  bool safe_mode_;
+  // Only process vertex shaders
+  bool vertex_shader_only_;
 };
 
 }  // namespace opt

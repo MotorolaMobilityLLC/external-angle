@@ -9615,7 +9615,7 @@ void GlslangToSpv(const TIntermediate& intermediate, std::vector<unsigned int>& 
 {
     TIntermNode* root = intermediate.getTreeRoot();
 
-    if (root == nullptr)
+    if (root == 0)
         return;
 
     SpvOptions defaultOptions;
