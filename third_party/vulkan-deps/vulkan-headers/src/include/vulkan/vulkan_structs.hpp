@@ -27259,7 +27259,7 @@ namespace VULKAN_HPP_NAMESPACE
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DirectDriverLoadingInfoLUNARG( VULKAN_HPP_NAMESPACE::DirectDriverLoadingFlagsLUNARG flags_                  = {},
-                                                        PFN_vkGetInstanceProcAddr                            pfnGetInstanceProcAddr_ = {},
+                                                        PFN_vkGetInstanceProcAddrLUNARG                      pfnGetInstanceProcAddr_ = {},
                                                         void *                                               pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
       : pNext( pNext_ )
       , flags( flags_ )
@@ -27296,7 +27296,8 @@ namespace VULKAN_HPP_NAMESPACE
       return *this;
     }
 
-    VULKAN_HPP_CONSTEXPR_14 DirectDriverLoadingInfoLUNARG & setPfnGetInstanceProcAddr( PFN_vkGetInstanceProcAddr pfnGetInstanceProcAddr_ ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR_14 DirectDriverLoadingInfoLUNARG &
+                            setPfnGetInstanceProcAddr( PFN_vkGetInstanceProcAddrLUNARG pfnGetInstanceProcAddr_ ) VULKAN_HPP_NOEXCEPT
     {
       pfnGetInstanceProcAddr = pfnGetInstanceProcAddr_;
       return *this;
@@ -27320,7 +27321,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
                void * const &,
                VULKAN_HPP_NAMESPACE::DirectDriverLoadingFlagsLUNARG const &,
-               PFN_vkGetInstanceProcAddr const &>
+               PFN_vkGetInstanceProcAddrLUNARG const &>
 #  endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
@@ -27346,7 +27347,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::StructureType                  sType                  = StructureType::eDirectDriverLoadingInfoLUNARG;
     void *                                               pNext                  = {};
     VULKAN_HPP_NAMESPACE::DirectDriverLoadingFlagsLUNARG flags                  = {};
-    PFN_vkGetInstanceProcAddr                            pfnGetInstanceProcAddr = {};
+    PFN_vkGetInstanceProcAddrLUNARG                      pfnGetInstanceProcAddr = {};
   };
 
   template <>
@@ -73493,6 +73494,105 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceSurfaceInfo2KHR;
   };
 
+  struct PhysicalDeviceSwapchainMaintenance1FeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceSwapchainMaintenance1FeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceSwapchainMaintenance1FeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 swapchainMaintenance1_ = {},
+                                                                         void *                       pNext_                 = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , swapchainMaintenance1( swapchainMaintenance1_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      PhysicalDeviceSwapchainMaintenance1FeaturesEXT( PhysicalDeviceSwapchainMaintenance1FeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceSwapchainMaintenance1FeaturesEXT( VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceSwapchainMaintenance1FeaturesEXT( *reinterpret_cast<PhysicalDeviceSwapchainMaintenance1FeaturesEXT const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceSwapchainMaintenance1FeaturesEXT & operator=( PhysicalDeviceSwapchainMaintenance1FeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceSwapchainMaintenance1FeaturesEXT & operator=( VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceSwapchainMaintenance1FeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceSwapchainMaintenance1FeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceSwapchainMaintenance1FeaturesEXT &
+                            setSwapchainMaintenance1( VULKAN_HPP_NAMESPACE::Bool32 swapchainMaintenance1_ ) VULKAN_HPP_NOEXCEPT
+    {
+      swapchainMaintenance1 = swapchainMaintenance1_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, swapchainMaintenance1 );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceSwapchainMaintenance1FeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceSwapchainMaintenance1FeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchainMaintenance1 == rhs.swapchainMaintenance1 );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceSwapchainMaintenance1FeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                 = StructureType::ePhysicalDeviceSwapchainMaintenance1FeaturesEXT;
+    void *                              pNext                 = {};
+    VULKAN_HPP_NAMESPACE::Bool32        swapchainMaintenance1 = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceSwapchainMaintenance1FeaturesEXT>
+  {
+    using Type = PhysicalDeviceSwapchainMaintenance1FeaturesEXT;
+  };
+
   struct PhysicalDeviceSynchronization2Features
   {
     using NativeType = VkPhysicalDeviceSynchronization2Features;
@@ -86434,6 +86534,144 @@ namespace VULKAN_HPP_NAMESPACE
     uint64_t refreshDuration = {};
   };
 
+  struct ReleaseSwapchainImagesInfoEXT
+  {
+    using NativeType = VkReleaseSwapchainImagesInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eReleaseSwapchainImagesInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ReleaseSwapchainImagesInfoEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain_       = {},
+                                                        uint32_t                           imageIndexCount_ = {},
+                                                        const uint32_t *                   pImageIndices_   = {},
+                                                        const void *                       pNext_           = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , swapchain( swapchain_ )
+      , imageIndexCount( imageIndexCount_ )
+      , pImageIndices( pImageIndices_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ReleaseSwapchainImagesInfoEXT( ReleaseSwapchainImagesInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ReleaseSwapchainImagesInfoEXT( VkReleaseSwapchainImagesInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ReleaseSwapchainImagesInfoEXT( *reinterpret_cast<ReleaseSwapchainImagesInfoEXT const *>( &rhs ) )
+    {
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    ReleaseSwapchainImagesInfoEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR                                    swapchain_,
+                                   VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const uint32_t> const & imageIndices_,
+                                   const void *                                                          pNext_ = nullptr )
+      : pNext( pNext_ ), swapchain( swapchain_ ), imageIndexCount( static_cast<uint32_t>( imageIndices_.size() ) ), pImageIndices( imageIndices_.data() )
+    {
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    ReleaseSwapchainImagesInfoEXT & operator=( ReleaseSwapchainImagesInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ReleaseSwapchainImagesInfoEXT & operator=( VkReleaseSwapchainImagesInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ReleaseSwapchainImagesInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ReleaseSwapchainImagesInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ReleaseSwapchainImagesInfoEXT & setSwapchain( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain_ ) VULKAN_HPP_NOEXCEPT
+    {
+      swapchain = swapchain_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ReleaseSwapchainImagesInfoEXT & setImageIndexCount( uint32_t imageIndexCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      imageIndexCount = imageIndexCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ReleaseSwapchainImagesInfoEXT & setPImageIndices( const uint32_t * pImageIndices_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pImageIndices = pImageIndices_;
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    ReleaseSwapchainImagesInfoEXT & setImageIndices( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const uint32_t> const & imageIndices_ ) VULKAN_HPP_NOEXCEPT
+    {
+      imageIndexCount = static_cast<uint32_t>( imageIndices_.size() );
+      pImageIndices   = imageIndices_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkReleaseSwapchainImagesInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkReleaseSwapchainImagesInfoEXT *>( this );
+    }
+
+    operator VkReleaseSwapchainImagesInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkReleaseSwapchainImagesInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::SwapchainKHR const &,
+               uint32_t const &,
+               const uint32_t * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, swapchain, imageIndexCount, pImageIndices );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ReleaseSwapchainImagesInfoEXT const & ) const = default;
+#else
+    bool operator==( ReleaseSwapchainImagesInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchain == rhs.swapchain ) && ( imageIndexCount == rhs.imageIndexCount ) &&
+             ( pImageIndices == rhs.pImageIndices );
+#  endif
+    }
+
+    bool operator!=( ReleaseSwapchainImagesInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType           = StructureType::eReleaseSwapchainImagesInfoEXT;
+    const void *                        pNext           = {};
+    VULKAN_HPP_NAMESPACE::SwapchainKHR  swapchain       = {};
+    uint32_t                            imageIndexCount = {};
+    const uint32_t *                    pImageIndices   = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eReleaseSwapchainImagesInfoEXT>
+  {
+    using Type = ReleaseSwapchainImagesInfoEXT;
+  };
+
   struct RenderPassAttachmentBeginInfo
   {
     using NativeType = VkRenderPassAttachmentBeginInfo;
@@ -95342,6 +95580,373 @@ namespace VULKAN_HPP_NAMESPACE
   };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+  struct SurfacePresentModeCompatibilityEXT
+  {
+    using NativeType = VkSurfacePresentModeCompatibilityEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSurfacePresentModeCompatibilityEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SurfacePresentModeCompatibilityEXT( uint32_t                               presentModeCount_ = {},
+                                                             VULKAN_HPP_NAMESPACE::PresentModeKHR * pPresentModes_    = {},
+                                                             void *                                 pNext_            = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , presentModeCount( presentModeCount_ )
+      , pPresentModes( pPresentModes_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR SurfacePresentModeCompatibilityEXT( SurfacePresentModeCompatibilityEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SurfacePresentModeCompatibilityEXT( VkSurfacePresentModeCompatibilityEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SurfacePresentModeCompatibilityEXT( *reinterpret_cast<SurfacePresentModeCompatibilityEXT const *>( &rhs ) )
+    {
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    SurfacePresentModeCompatibilityEXT( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<VULKAN_HPP_NAMESPACE::PresentModeKHR> const & presentModes_,
+                                        void *                                                                                      pNext_ = nullptr )
+      : pNext( pNext_ ), presentModeCount( static_cast<uint32_t>( presentModes_.size() ) ), pPresentModes( presentModes_.data() )
+    {
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    SurfacePresentModeCompatibilityEXT & operator=( SurfacePresentModeCompatibilityEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    SurfacePresentModeCompatibilityEXT & operator=( VkSurfacePresentModeCompatibilityEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SurfacePresentModeCompatibilityEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentModeCompatibilityEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentModeCompatibilityEXT & setPresentModeCount( uint32_t presentModeCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      presentModeCount = presentModeCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentModeCompatibilityEXT & setPPresentModes( VULKAN_HPP_NAMESPACE::PresentModeKHR * pPresentModes_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pPresentModes = pPresentModes_;
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    SurfacePresentModeCompatibilityEXT &
+      setPresentModes( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<VULKAN_HPP_NAMESPACE::PresentModeKHR> const & presentModes_ ) VULKAN_HPP_NOEXCEPT
+    {
+      presentModeCount = static_cast<uint32_t>( presentModes_.size() );
+      pPresentModes    = presentModes_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkSurfacePresentModeCompatibilityEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSurfacePresentModeCompatibilityEXT *>( this );
+    }
+
+    operator VkSurfacePresentModeCompatibilityEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSurfacePresentModeCompatibilityEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, uint32_t const &, VULKAN_HPP_NAMESPACE::PresentModeKHR * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, presentModeCount, pPresentModes );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( SurfacePresentModeCompatibilityEXT const & ) const = default;
+#else
+    bool operator==( SurfacePresentModeCompatibilityEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( presentModeCount == rhs.presentModeCount ) && ( pPresentModes == rhs.pPresentModes );
+#  endif
+    }
+
+    bool operator!=( SurfacePresentModeCompatibilityEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType    sType            = StructureType::eSurfacePresentModeCompatibilityEXT;
+    void *                                 pNext            = {};
+    uint32_t                               presentModeCount = {};
+    VULKAN_HPP_NAMESPACE::PresentModeKHR * pPresentModes    = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eSurfacePresentModeCompatibilityEXT>
+  {
+    using Type = SurfacePresentModeCompatibilityEXT;
+  };
+
+  struct SurfacePresentModeEXT
+  {
+    using NativeType = VkSurfacePresentModeEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSurfacePresentModeEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SurfacePresentModeEXT( VULKAN_HPP_NAMESPACE::PresentModeKHR presentMode_ = VULKAN_HPP_NAMESPACE::PresentModeKHR::eImmediate,
+                                                void *                               pNext_       = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , presentMode( presentMode_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR SurfacePresentModeEXT( SurfacePresentModeEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SurfacePresentModeEXT( VkSurfacePresentModeEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SurfacePresentModeEXT( *reinterpret_cast<SurfacePresentModeEXT const *>( &rhs ) )
+    {
+    }
+
+    SurfacePresentModeEXT & operator=( SurfacePresentModeEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    SurfacePresentModeEXT & operator=( VkSurfacePresentModeEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SurfacePresentModeEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentModeEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentModeEXT & setPresentMode( VULKAN_HPP_NAMESPACE::PresentModeKHR presentMode_ ) VULKAN_HPP_NOEXCEPT
+    {
+      presentMode = presentMode_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkSurfacePresentModeEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSurfacePresentModeEXT *>( this );
+    }
+
+    operator VkSurfacePresentModeEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSurfacePresentModeEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::PresentModeKHR const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, presentMode );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( SurfacePresentModeEXT const & ) const = default;
+#else
+    bool operator==( SurfacePresentModeEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( presentMode == rhs.presentMode );
+#  endif
+    }
+
+    bool operator!=( SurfacePresentModeEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType  sType       = StructureType::eSurfacePresentModeEXT;
+    void *                               pNext       = {};
+    VULKAN_HPP_NAMESPACE::PresentModeKHR presentMode = VULKAN_HPP_NAMESPACE::PresentModeKHR::eImmediate;
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eSurfacePresentModeEXT>
+  {
+    using Type = SurfacePresentModeEXT;
+  };
+
+  struct SurfacePresentScalingCapabilitiesEXT
+  {
+    using NativeType = VkSurfacePresentScalingCapabilitiesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSurfacePresentScalingCapabilitiesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SurfacePresentScalingCapabilitiesEXT( VULKAN_HPP_NAMESPACE::PresentScalingFlagsEXT supportedPresentScaling_  = {},
+                                                               VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT supportedPresentGravityX_ = {},
+                                                               VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT supportedPresentGravityY_ = {},
+                                                               VULKAN_HPP_NAMESPACE::Extent2D               minScaledImageExtent_     = {},
+                                                               VULKAN_HPP_NAMESPACE::Extent2D               maxScaledImageExtent_     = {},
+                                                               void *                                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , supportedPresentScaling( supportedPresentScaling_ )
+      , supportedPresentGravityX( supportedPresentGravityX_ )
+      , supportedPresentGravityY( supportedPresentGravityY_ )
+      , minScaledImageExtent( minScaledImageExtent_ )
+      , maxScaledImageExtent( maxScaledImageExtent_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR SurfacePresentScalingCapabilitiesEXT( SurfacePresentScalingCapabilitiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SurfacePresentScalingCapabilitiesEXT( VkSurfacePresentScalingCapabilitiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SurfacePresentScalingCapabilitiesEXT( *reinterpret_cast<SurfacePresentScalingCapabilitiesEXT const *>( &rhs ) )
+    {
+    }
+
+    SurfacePresentScalingCapabilitiesEXT & operator=( SurfacePresentScalingCapabilitiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    SurfacePresentScalingCapabilitiesEXT & operator=( VkSurfacePresentScalingCapabilitiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SurfacePresentScalingCapabilitiesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentScalingCapabilitiesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentScalingCapabilitiesEXT &
+                            setSupportedPresentScaling( VULKAN_HPP_NAMESPACE::PresentScalingFlagsEXT supportedPresentScaling_ ) VULKAN_HPP_NOEXCEPT
+    {
+      supportedPresentScaling = supportedPresentScaling_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentScalingCapabilitiesEXT &
+                            setSupportedPresentGravityX( VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT supportedPresentGravityX_ ) VULKAN_HPP_NOEXCEPT
+    {
+      supportedPresentGravityX = supportedPresentGravityX_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentScalingCapabilitiesEXT &
+                            setSupportedPresentGravityY( VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT supportedPresentGravityY_ ) VULKAN_HPP_NOEXCEPT
+    {
+      supportedPresentGravityY = supportedPresentGravityY_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentScalingCapabilitiesEXT &
+                            setMinScaledImageExtent( VULKAN_HPP_NAMESPACE::Extent2D const & minScaledImageExtent_ ) VULKAN_HPP_NOEXCEPT
+    {
+      minScaledImageExtent = minScaledImageExtent_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SurfacePresentScalingCapabilitiesEXT &
+                            setMaxScaledImageExtent( VULKAN_HPP_NAMESPACE::Extent2D const & maxScaledImageExtent_ ) VULKAN_HPP_NOEXCEPT
+    {
+      maxScaledImageExtent = maxScaledImageExtent_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkSurfacePresentScalingCapabilitiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSurfacePresentScalingCapabilitiesEXT *>( this );
+    }
+
+    operator VkSurfacePresentScalingCapabilitiesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSurfacePresentScalingCapabilitiesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::PresentScalingFlagsEXT const &,
+               VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT const &,
+               VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT const &,
+               VULKAN_HPP_NAMESPACE::Extent2D const &,
+               VULKAN_HPP_NAMESPACE::Extent2D const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, supportedPresentScaling, supportedPresentGravityX, supportedPresentGravityY, minScaledImageExtent, maxScaledImageExtent );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( SurfacePresentScalingCapabilitiesEXT const & ) const = default;
+#else
+    bool operator==( SurfacePresentScalingCapabilitiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( supportedPresentScaling == rhs.supportedPresentScaling ) &&
+             ( supportedPresentGravityX == rhs.supportedPresentGravityX ) && ( supportedPresentGravityY == rhs.supportedPresentGravityY ) &&
+             ( minScaledImageExtent == rhs.minScaledImageExtent ) && ( maxScaledImageExtent == rhs.maxScaledImageExtent );
+#  endif
+    }
+
+    bool operator!=( SurfacePresentScalingCapabilitiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType          sType                    = StructureType::eSurfacePresentScalingCapabilitiesEXT;
+    void *                                       pNext                    = {};
+    VULKAN_HPP_NAMESPACE::PresentScalingFlagsEXT supportedPresentScaling  = {};
+    VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT supportedPresentGravityX = {};
+    VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT supportedPresentGravityY = {};
+    VULKAN_HPP_NAMESPACE::Extent2D               minScaledImageExtent     = {};
+    VULKAN_HPP_NAMESPACE::Extent2D               maxScaledImageExtent     = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eSurfacePresentScalingCapabilitiesEXT>
+  {
+    using Type = SurfacePresentScalingCapabilitiesEXT;
+  };
+
   struct SurfaceProtectedCapabilitiesKHR
   {
     using NativeType = VkSurfaceProtectedCapabilitiesKHR;
@@ -96051,6 +96656,501 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::eSwapchainPresentBarrierCreateInfoNV>
   {
     using Type = SwapchainPresentBarrierCreateInfoNV;
+  };
+
+  struct SwapchainPresentFenceInfoEXT
+  {
+    using NativeType = VkSwapchainPresentFenceInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSwapchainPresentFenceInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SwapchainPresentFenceInfoEXT( uint32_t                            swapchainCount_ = {},
+                                                       const VULKAN_HPP_NAMESPACE::Fence * pFences_        = {},
+                                                       void *                              pNext_          = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , swapchainCount( swapchainCount_ )
+      , pFences( pFences_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR SwapchainPresentFenceInfoEXT( SwapchainPresentFenceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SwapchainPresentFenceInfoEXT( VkSwapchainPresentFenceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SwapchainPresentFenceInfoEXT( *reinterpret_cast<SwapchainPresentFenceInfoEXT const *>( &rhs ) )
+    {
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    SwapchainPresentFenceInfoEXT( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::Fence> const & fences_, void * pNext_ = nullptr )
+      : pNext( pNext_ ), swapchainCount( static_cast<uint32_t>( fences_.size() ) ), pFences( fences_.data() )
+    {
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    SwapchainPresentFenceInfoEXT & operator=( SwapchainPresentFenceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    SwapchainPresentFenceInfoEXT & operator=( VkSwapchainPresentFenceInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SwapchainPresentFenceInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentFenceInfoEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentFenceInfoEXT & setSwapchainCount( uint32_t swapchainCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      swapchainCount = swapchainCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentFenceInfoEXT & setPFences( const VULKAN_HPP_NAMESPACE::Fence * pFences_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pFences = pFences_;
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    SwapchainPresentFenceInfoEXT &
+      setFences( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::Fence> const & fences_ ) VULKAN_HPP_NOEXCEPT
+    {
+      swapchainCount = static_cast<uint32_t>( fences_.size() );
+      pFences        = fences_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkSwapchainPresentFenceInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSwapchainPresentFenceInfoEXT *>( this );
+    }
+
+    operator VkSwapchainPresentFenceInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSwapchainPresentFenceInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, uint32_t const &, const VULKAN_HPP_NAMESPACE::Fence * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, swapchainCount, pFences );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( SwapchainPresentFenceInfoEXT const & ) const = default;
+#else
+    bool operator==( SwapchainPresentFenceInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchainCount == rhs.swapchainCount ) && ( pFences == rhs.pFences );
+#  endif
+    }
+
+    bool operator!=( SwapchainPresentFenceInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType          = StructureType::eSwapchainPresentFenceInfoEXT;
+    void *                              pNext          = {};
+    uint32_t                            swapchainCount = {};
+    const VULKAN_HPP_NAMESPACE::Fence * pFences        = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eSwapchainPresentFenceInfoEXT>
+  {
+    using Type = SwapchainPresentFenceInfoEXT;
+  };
+
+  struct SwapchainPresentModeInfoEXT
+  {
+    using NativeType = VkSwapchainPresentModeInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSwapchainPresentModeInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SwapchainPresentModeInfoEXT( uint32_t                                     swapchainCount_ = {},
+                                                      const VULKAN_HPP_NAMESPACE::PresentModeKHR * pPresentModes_  = {},
+                                                      void *                                       pNext_          = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , swapchainCount( swapchainCount_ )
+      , pPresentModes( pPresentModes_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR SwapchainPresentModeInfoEXT( SwapchainPresentModeInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SwapchainPresentModeInfoEXT( VkSwapchainPresentModeInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SwapchainPresentModeInfoEXT( *reinterpret_cast<SwapchainPresentModeInfoEXT const *>( &rhs ) )
+    {
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    SwapchainPresentModeInfoEXT( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::PresentModeKHR> const & presentModes_,
+                                 void *                                                                                            pNext_ = nullptr )
+      : pNext( pNext_ ), swapchainCount( static_cast<uint32_t>( presentModes_.size() ) ), pPresentModes( presentModes_.data() )
+    {
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    SwapchainPresentModeInfoEXT & operator=( SwapchainPresentModeInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    SwapchainPresentModeInfoEXT & operator=( VkSwapchainPresentModeInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SwapchainPresentModeInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentModeInfoEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentModeInfoEXT & setSwapchainCount( uint32_t swapchainCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      swapchainCount = swapchainCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentModeInfoEXT & setPPresentModes( const VULKAN_HPP_NAMESPACE::PresentModeKHR * pPresentModes_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pPresentModes = pPresentModes_;
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    SwapchainPresentModeInfoEXT &
+      setPresentModes( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::PresentModeKHR> const & presentModes_ ) VULKAN_HPP_NOEXCEPT
+    {
+      swapchainCount = static_cast<uint32_t>( presentModes_.size() );
+      pPresentModes  = presentModes_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkSwapchainPresentModeInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSwapchainPresentModeInfoEXT *>( this );
+    }
+
+    operator VkSwapchainPresentModeInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSwapchainPresentModeInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, uint32_t const &, const VULKAN_HPP_NAMESPACE::PresentModeKHR * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, swapchainCount, pPresentModes );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( SwapchainPresentModeInfoEXT const & ) const = default;
+#else
+    bool operator==( SwapchainPresentModeInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( swapchainCount == rhs.swapchainCount ) && ( pPresentModes == rhs.pPresentModes );
+#  endif
+    }
+
+    bool operator!=( SwapchainPresentModeInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType          sType          = StructureType::eSwapchainPresentModeInfoEXT;
+    void *                                       pNext          = {};
+    uint32_t                                     swapchainCount = {};
+    const VULKAN_HPP_NAMESPACE::PresentModeKHR * pPresentModes  = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eSwapchainPresentModeInfoEXT>
+  {
+    using Type = SwapchainPresentModeInfoEXT;
+  };
+
+  struct SwapchainPresentModesCreateInfoEXT
+  {
+    using NativeType = VkSwapchainPresentModesCreateInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSwapchainPresentModesCreateInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SwapchainPresentModesCreateInfoEXT( uint32_t                                     presentModeCount_ = {},
+                                                             const VULKAN_HPP_NAMESPACE::PresentModeKHR * pPresentModes_    = {},
+                                                             void *                                       pNext_            = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , presentModeCount( presentModeCount_ )
+      , pPresentModes( pPresentModes_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR SwapchainPresentModesCreateInfoEXT( SwapchainPresentModesCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SwapchainPresentModesCreateInfoEXT( VkSwapchainPresentModesCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SwapchainPresentModesCreateInfoEXT( *reinterpret_cast<SwapchainPresentModesCreateInfoEXT const *>( &rhs ) )
+    {
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    SwapchainPresentModesCreateInfoEXT( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::PresentModeKHR> const & presentModes_,
+                                        void *                                                                                            pNext_ = nullptr )
+      : pNext( pNext_ ), presentModeCount( static_cast<uint32_t>( presentModes_.size() ) ), pPresentModes( presentModes_.data() )
+    {
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    SwapchainPresentModesCreateInfoEXT & operator=( SwapchainPresentModesCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    SwapchainPresentModesCreateInfoEXT & operator=( VkSwapchainPresentModesCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SwapchainPresentModesCreateInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentModesCreateInfoEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentModesCreateInfoEXT & setPresentModeCount( uint32_t presentModeCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      presentModeCount = presentModeCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentModesCreateInfoEXT &
+                            setPPresentModes( const VULKAN_HPP_NAMESPACE::PresentModeKHR * pPresentModes_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pPresentModes = pPresentModes_;
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    SwapchainPresentModesCreateInfoEXT &
+      setPresentModes( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::PresentModeKHR> const & presentModes_ ) VULKAN_HPP_NOEXCEPT
+    {
+      presentModeCount = static_cast<uint32_t>( presentModes_.size() );
+      pPresentModes    = presentModes_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkSwapchainPresentModesCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSwapchainPresentModesCreateInfoEXT *>( this );
+    }
+
+    operator VkSwapchainPresentModesCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSwapchainPresentModesCreateInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, uint32_t const &, const VULKAN_HPP_NAMESPACE::PresentModeKHR * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, presentModeCount, pPresentModes );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( SwapchainPresentModesCreateInfoEXT const & ) const = default;
+#else
+    bool operator==( SwapchainPresentModesCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( presentModeCount == rhs.presentModeCount ) && ( pPresentModes == rhs.pPresentModes );
+#  endif
+    }
+
+    bool operator!=( SwapchainPresentModesCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType          sType            = StructureType::eSwapchainPresentModesCreateInfoEXT;
+    void *                                       pNext            = {};
+    uint32_t                                     presentModeCount = {};
+    const VULKAN_HPP_NAMESPACE::PresentModeKHR * pPresentModes    = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eSwapchainPresentModesCreateInfoEXT>
+  {
+    using Type = SwapchainPresentModesCreateInfoEXT;
+  };
+
+  struct SwapchainPresentScalingCreateInfoEXT
+  {
+    using NativeType = VkSwapchainPresentScalingCreateInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSwapchainPresentScalingCreateInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SwapchainPresentScalingCreateInfoEXT( VULKAN_HPP_NAMESPACE::PresentScalingFlagsEXT scalingBehavior_ = {},
+                                                               VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT presentGravityX_ = {},
+                                                               VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT presentGravityY_ = {},
+                                                               const void *                                 pNext_           = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , scalingBehavior( scalingBehavior_ )
+      , presentGravityX( presentGravityX_ )
+      , presentGravityY( presentGravityY_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR SwapchainPresentScalingCreateInfoEXT( SwapchainPresentScalingCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SwapchainPresentScalingCreateInfoEXT( VkSwapchainPresentScalingCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SwapchainPresentScalingCreateInfoEXT( *reinterpret_cast<SwapchainPresentScalingCreateInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    SwapchainPresentScalingCreateInfoEXT & operator=( SwapchainPresentScalingCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    SwapchainPresentScalingCreateInfoEXT & operator=( VkSwapchainPresentScalingCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SwapchainPresentScalingCreateInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentScalingCreateInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentScalingCreateInfoEXT &
+                            setScalingBehavior( VULKAN_HPP_NAMESPACE::PresentScalingFlagsEXT scalingBehavior_ ) VULKAN_HPP_NOEXCEPT
+    {
+      scalingBehavior = scalingBehavior_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentScalingCreateInfoEXT &
+                            setPresentGravityX( VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT presentGravityX_ ) VULKAN_HPP_NOEXCEPT
+    {
+      presentGravityX = presentGravityX_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 SwapchainPresentScalingCreateInfoEXT &
+                            setPresentGravityY( VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT presentGravityY_ ) VULKAN_HPP_NOEXCEPT
+    {
+      presentGravityY = presentGravityY_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkSwapchainPresentScalingCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSwapchainPresentScalingCreateInfoEXT *>( this );
+    }
+
+    operator VkSwapchainPresentScalingCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSwapchainPresentScalingCreateInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::PresentScalingFlagsEXT const &,
+               VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT const &,
+               VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, scalingBehavior, presentGravityX, presentGravityY );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( SwapchainPresentScalingCreateInfoEXT const & ) const = default;
+#else
+    bool operator==( SwapchainPresentScalingCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( scalingBehavior == rhs.scalingBehavior ) && ( presentGravityX == rhs.presentGravityX ) &&
+             ( presentGravityY == rhs.presentGravityY );
+#  endif
+    }
+
+    bool operator!=( SwapchainPresentScalingCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType          sType           = StructureType::eSwapchainPresentScalingCreateInfoEXT;
+    const void *                                 pNext           = {};
+    VULKAN_HPP_NAMESPACE::PresentScalingFlagsEXT scalingBehavior = {};
+    VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT presentGravityX = {};
+    VULKAN_HPP_NAMESPACE::PresentGravityFlagsEXT presentGravityY = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eSwapchainPresentScalingCreateInfoEXT>
+  {
+    using Type = SwapchainPresentScalingCreateInfoEXT;
   };
 
   struct TextureLODGatherFormatPropertiesAMD
