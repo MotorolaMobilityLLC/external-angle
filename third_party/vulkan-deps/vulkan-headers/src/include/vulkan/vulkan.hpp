@@ -114,7 +114,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 235, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 237, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for non-dispatchable handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -4777,6 +4777,13 @@ namespace VULKAN_HPP_NAMESPACE
                                                          VkPipelineExecutableInternalRepresentationKHR * pInternalRepresentations ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkGetPipelineExecutableInternalRepresentationsKHR( device, pExecutableInfo, pInternalRepresentationCount, pInternalRepresentations );
+    }
+
+    //=== VK_EXT_swapchain_maintenance1 ===
+
+    VkResult vkReleaseSwapchainImagesEXT( VkDevice device, const VkReleaseSwapchainImagesInfoEXT * pReleaseInfo ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkReleaseSwapchainImagesEXT( device, pReleaseInfo );
     }
 
     //=== VK_NV_device_generated_commands ===
@@ -10206,6 +10213,82 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_EXT_surface_maintenance1 ===
+  template <>
+  struct StructExtends<SurfacePresentModeEXT, PhysicalDeviceSurfaceInfo2KHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<SurfacePresentScalingCapabilitiesEXT, SurfaceCapabilities2KHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<SurfacePresentModeCompatibilityEXT, SurfaceCapabilities2KHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_EXT_swapchain_maintenance1 ===
+  template <>
+  struct StructExtends<PhysicalDeviceSwapchainMaintenance1FeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceSwapchainMaintenance1FeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<SwapchainPresentFenceInfoEXT, PresentInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<SwapchainPresentModesCreateInfoEXT, SwapchainCreateInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<SwapchainPresentModeInfoEXT, PresentInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<SwapchainPresentScalingCreateInfoEXT, SwapchainCreateInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_NV_device_generated_commands ===
   template <>
   struct StructExtends<PhysicalDeviceDeviceGeneratedCommandsPropertiesNV, PhysicalDeviceProperties2>
@@ -12010,6 +12093,16 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_LUNARG_direct_driver_loading ===
+  template <>
+  struct StructExtends<DirectDriverLoadingListLUNARG, InstanceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_EXT_shader_module_identifier ===
   template <>
   struct StructExtends<PhysicalDeviceShaderModuleIdentifierFeaturesEXT, PhysicalDeviceFeatures2>
@@ -12185,6 +12278,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   template <>
   struct StructExtends<AmigoProfilingSubmitInfoSEC, SubmitInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_QCOM_multiview_per_view_viewports ===
+  template <>
+  struct StructExtends<PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM, DeviceCreateInfo>
   {
     enum
     {
@@ -13158,6 +13269,9 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetPipelineExecutablePropertiesKHR              vkGetPipelineExecutablePropertiesKHR              = 0;
     PFN_vkGetPipelineExecutableStatisticsKHR              vkGetPipelineExecutableStatisticsKHR              = 0;
     PFN_vkGetPipelineExecutableInternalRepresentationsKHR vkGetPipelineExecutableInternalRepresentationsKHR = 0;
+
+    //=== VK_EXT_swapchain_maintenance1 ===
+    PFN_vkReleaseSwapchainImagesEXT vkReleaseSwapchainImagesEXT = 0;
 
     //=== VK_NV_device_generated_commands ===
     PFN_vkGetGeneratedCommandsMemoryRequirementsNV vkGetGeneratedCommandsMemoryRequirementsNV = 0;
@@ -14380,6 +14494,9 @@ namespace VULKAN_HPP_NAMESPACE
       vkGetPipelineExecutableInternalRepresentationsKHR =
         PFN_vkGetPipelineExecutableInternalRepresentationsKHR( vkGetInstanceProcAddr( instance, "vkGetPipelineExecutableInternalRepresentationsKHR" ) );
 
+      //=== VK_EXT_swapchain_maintenance1 ===
+      vkReleaseSwapchainImagesEXT = PFN_vkReleaseSwapchainImagesEXT( vkGetInstanceProcAddr( instance, "vkReleaseSwapchainImagesEXT" ) );
+
       //=== VK_NV_device_generated_commands ===
       vkGetGeneratedCommandsMemoryRequirementsNV =
         PFN_vkGetGeneratedCommandsMemoryRequirementsNV( vkGetInstanceProcAddr( instance, "vkGetGeneratedCommandsMemoryRequirementsNV" ) );
@@ -15350,6 +15467,9 @@ namespace VULKAN_HPP_NAMESPACE
       vkGetPipelineExecutableStatisticsKHR = PFN_vkGetPipelineExecutableStatisticsKHR( vkGetDeviceProcAddr( device, "vkGetPipelineExecutableStatisticsKHR" ) );
       vkGetPipelineExecutableInternalRepresentationsKHR =
         PFN_vkGetPipelineExecutableInternalRepresentationsKHR( vkGetDeviceProcAddr( device, "vkGetPipelineExecutableInternalRepresentationsKHR" ) );
+
+      //=== VK_EXT_swapchain_maintenance1 ===
+      vkReleaseSwapchainImagesEXT = PFN_vkReleaseSwapchainImagesEXT( vkGetDeviceProcAddr( device, "vkReleaseSwapchainImagesEXT" ) );
 
       //=== VK_NV_device_generated_commands ===
       vkGetGeneratedCommandsMemoryRequirementsNV =
