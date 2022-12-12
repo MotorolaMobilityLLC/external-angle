@@ -983,8 +983,6 @@ void Display::setupDisplayPlatform(rx::DisplayImpl *impl)
 
 Error Display::initialize()
 {
-    ERR() << "Debug b/249457381 Display::initialize():" << __LINE__ << " this:" << this;
-
     mTerminatedByApi = false;
 
     ASSERT(mImplementation != nullptr);
@@ -1006,7 +1004,6 @@ Error Display::initialize()
 
     if (isInitialized())
     {
-        ERR() << "Debug b/249457381 Display::initialize():" << __LINE__ << " this:" << this << " already initialized.";
         return NoError();
     }
 
@@ -1023,7 +1020,6 @@ Error Display::initialize()
     mConfigSet = mImplementation->generateConfigs();
     if (mConfigSet.size() == 0)
     {
-        ERR() << "Debug b/249457381 Display::initialize():" << __LINE__ << " this:" << this << "failed to initialize.";
         mImplementation->terminate();
         return EglNotInitialized() << "No configs were generated.";
     }
@@ -1088,7 +1084,6 @@ Error Display::initialize()
     mMultiThreadPool  = angle::WorkerThreadPool::Create(0, ANGLEPlatformCurrent());
 
     mInitialized = true;
-    ERR() << "Debug b/249457381 Display::initialize():" << __LINE__ << " this:" << this << " succesfully initialized.";
 
     return NoError();
 }
@@ -1128,8 +1123,6 @@ Error Display::destroyInvalidEglObjects()
 
 Error Display::terminate(Thread *thread, TerminateReason terminateReason)
 {
-    ERR() << "Debug b/249457381 Display::terminate():" << __LINE__ << " this:" << this << " reason:" << static_cast<int>(terminateReason);
-
     if (terminateReason == TerminateReason::Api)
     {
         mTerminatedByApi = true;
@@ -1139,7 +1132,6 @@ Error Display::terminate(Thread *thread, TerminateReason terminateReason)
     // If it is not terminated or if it isn't even initialized, early return.
     if (!mTerminatedByApi || !mInitialized)
     {
-        ERR() << "Debug b/249457381 Display::terminate():" << __LINE__ << " this:" << this << " early return.";
         return NoError();
     }
 
@@ -1210,7 +1202,6 @@ Error Display::terminate(Thread *thread, TerminateReason terminateReason)
     if (!mState.contextSet.empty())
     {
         // There was atleast 1 context that was current on some thread, early return.
-        ERR() << "Debug b/249457381 Display::terminate():" << __LINE__ << " this:" << this << " has active contexts.";
         return NoError();
     }
 
@@ -1243,7 +1234,6 @@ Error Display::terminate(Thread *thread, TerminateReason terminateReason)
     mDeviceLost = false;
 
     mInitialized = false;
-    ERR() << "Debug b/249457381 Display::terminate():" << __LINE__ << " this:" << this << "succesfully terminated.";
 
     gl::UninitializeDebugAnnotations();
 

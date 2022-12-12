@@ -1344,7 +1344,6 @@ bool RendererVk::hasSharedGarbage()
 
 void RendererVk::onDestroy(vk::Context *context)
 {
-    ERR() << "Debug b/249457381 RendererVk::onDestroy():" << __LINE__ << " this:" << this;
     if (isDeviceLost())
     {
         handleDeviceLost();
@@ -1456,7 +1455,6 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
                                      const char *wsiExtension,
                                      const char *wsiLayer)
 {
-    ERR() << "Debug b/249457381 RendererVk::initialize():" << __LINE__ << " this:" << this;
     bool canLoadDebugUtils = true;
 #if defined(ANGLE_SHARED_LIBVULKAN)
     {
