@@ -364,7 +364,7 @@ class DynamicallyGrowingPool : angle::NonCopyable
     angle::Result allocateNewEntryPool(ContextVk *contextVk, Pool &&pool);
 
     // Called by the implementation whenever an entry is freed.
-    void onEntryFreed(ContextVk *contextVk, size_t poolIndex);
+    void onEntryFreed(ContextVk *contextVk, size_t poolIndex, const ResourceUse &use);
 
     const Pool &getPool(size_t index) const
     {
@@ -561,36 +561,6 @@ class QueryHelper final : public Resource
         Ended
     };
     QueryStatus mStatus;
-};
-
-// DynamicSemaphorePool allocates semaphores as needed.  It uses a std::vector
-// as a pool to allocate many semaphores at once.  The pools live permanently,
-// but are recycled as semaphores get freed.
-
-// These are arbitrary default sizes for semaphore pools.
-constexpr uint32_t kDefaultSemaphorePoolSize = 64;
-
-class SemaphoreHelper;
-
-class DynamicSemaphorePool final : public DynamicallyGrowingPool<std::vector<Semaphore>>
-{
-  public:
-    DynamicSemaphorePool();
-    ~DynamicSemaphorePool() override;
-
-    angle::Result init(ContextVk *contextVk, uint32_t poolSize);
-    void destroy(VkDevice device);
-
-    // autoFree can be used to allocate a semaphore that's expected to be freed at the end of the
-    // frame.  This renders freeSemaphore unnecessary and saves an eventual search.
-    angle::Result allocateSemaphore(ContextVk *contextVk, SemaphoreHelper *semaphoreOut);
-    void freeSemaphore(ContextVk *contextVk, SemaphoreHelper *semaphore);
-
-  private:
-    angle::Result allocatePoolImpl(ContextVk *contextVk,
-                                   std::vector<Semaphore> &poolToAllocate,
-                                   uint32_t entriesToAllocate) override;
-    void destroyPoolImpl(VkDevice device, std::vector<Semaphore> &poolToDestroy) override;
 };
 
 // Semaphores that are allocated from the semaphore pool are encapsulated in a helper object,
@@ -967,12 +937,6 @@ class BufferPool : angle::NonCopyable
 };
 using BufferPoolPointerArray = std::array<std::unique_ptr<BufferPool>, VK_MAX_MEMORY_TYPES>;
 
-enum class BufferAccess
-{
-    Read,
-    Write,
-};
-
 // Stores clear value In packed attachment index
 class PackedClearValuesArray final
 {
@@ -1126,6 +1090,8 @@ class CommandBufferHelperCommon : angle::NonCopyable
 
     const QueueSerial &getQueueSerial() const { return mQueueSerial; }
 
+    SecondaryCommandBlockAllocator *getAllocator() { return &mCommandAllocator; }
+
     // Dumping the command stream is disabled by default.
     static constexpr bool kEnableCommandStreamDiagnostics = false;
 
@@ -1133,7 +1099,7 @@ class CommandBufferHelperCommon : angle::NonCopyable
     CommandBufferHelperCommon();
     ~CommandBufferHelperCommon();
 
-    void initializeImpl(Context *context, CommandPool *commandPool);
+    void initializeImpl(CommandPool *commandPool);
 
     void resetImpl();
 
@@ -1157,9 +1123,8 @@ class CommandBufferHelperCommon : angle::NonCopyable
 
     void addCommandDiagnosticsCommon(std::ostringstream *out);
 
-    // Allocator used by this class. Using a pool allocator per CBH to avoid threading issues
-    //  that occur w/ shared allocator between multiple CBHs.
-    angle::PoolAllocator mAllocator;
+    // Allocator used by this class.
+    SecondaryCommandBlockAllocator mCommandAllocator;
 
     // Barriers to be executed before the command buffer.
     PipelineBarrierArray mPipelineBarriers;
@@ -1196,6 +1161,9 @@ class OutsideRenderPassCommandBufferHelper final : public CommandBufferHelperCom
     OutsideRenderPassCommandBuffer &getCommandBuffer() { return mCommandBuffer; }
 
     bool empty() const { return mCommandBuffer.empty(); }
+
+    void attachAllocator(SecondaryCommandMemoryAllocator *allocator);
+    SecondaryCommandMemoryAllocator *detachAllocator();
 
 #if defined(ANGLE_ENABLE_ASSERTS)
     void markOpen() { mCommandBuffer.open(); }
@@ -1291,6 +1259,9 @@ class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
     RenderPassCommandBuffer &getCommandBuffer() { return mCommandBuffers[mCurrentSubpass]; }
 
     bool empty() const { return !started(); }
+
+    void attachAllocator(SecondaryCommandMemoryAllocator *allocator);
+    SecondaryCommandMemoryAllocator *detachAllocator();
 
 #if defined(ANGLE_ENABLE_ASSERTS)
     void markOpen() { getCommandBuffer().open(); }
@@ -1528,6 +1499,7 @@ class CommandBufferRecycler
 
     angle::Result getCommandBufferHelper(Context *context,
                                          CommandPool *commandPool,
+                                         SecondaryCommandMemoryAllocator *commandsAllocator,
                                          CommandBufferHelperT **commandBufferHelperOut);
 
     void recycleCommandBufferHelper(VkDevice device, CommandBufferHelperT **commandBuffer);
@@ -1829,7 +1801,6 @@ class ImageHelper final : public Resource, public angle::Subject
     // Similar to releaseImage, but also notify all contexts in the same share group to stop
     // accessing to it.
     void releaseImageFromShareContexts(RendererVk *renderer, ContextVk *contextVk);
-    void collectViewGarbage(RendererVk *renderer, vk::ImageViewHelper *imageView);
     void releaseStagedUpdates(RendererVk *renderer);
 
     bool valid() const { return mImage.valid(); }
@@ -1849,7 +1820,6 @@ class ImageHelper final : public Resource, public angle::Subject
                              GLint samples,
                              bool isRobustResourceInitEnabled);
     void resetImageWeakReference();
-    void releaseImageAndViewGarbage(RendererVk *renderer);
 
     const Image &getImage() const { return mImage; }
     const DeviceMemory &getDeviceMemory() const { return mDeviceMemory; }
@@ -2613,8 +2583,6 @@ class ImageHelper final : public Resource, public angle::Subject
     gl::TexLevelArray<LevelContentDefinedMask> mContentDefined;
     gl::TexLevelArray<LevelContentDefinedMask> mStencilContentDefined;
 
-    std::vector<vk::GarbageObject> mImageAndViewGarbage;
-
     // Used for memory allocation tracking.
     // Memory size allocated for the image in the memory during the initialization.
     VkDeviceSize mAllocationSize;
@@ -2828,7 +2796,7 @@ class ImageViewHelper final : angle::NonCopyable
 
     bool isImageViewGarbageEmpty() const;
 
-    void release(RendererVk *renderer, std::vector<vk::GarbageObject> &garbage);
+    void release(RendererVk *renderer, const ResourceUse &use);
 
   private:
     ImageView &getReadImageView()
@@ -2981,6 +2949,9 @@ enum class ComputePipelineFlag : uint8_t
     // programs are allowed to be shared between robust and non-robust contexts, so different
     // pipelines can be created for the same compute program.
     Robust,
+    // Whether VK_EXT_pipeline_protected_access should be used to make the pipeline protected-only.
+    // Similar to robustness, EGL allows protected and unprotected to be in the same share group.
+    Protected,
 
     InvalidEnum,
     EnumCount = InvalidEnum,
@@ -3020,6 +2991,13 @@ class ShaderProgramHelper : angle::NonCopyable
                                                  pipelineLayout, mShaders, specConsts, source,
                                                  pipelineDesc, descPtrOut, pipelineOut);
     }
+
+    void createMonolithicPipelineCreationTask(ContextVk *contextVk,
+                                              PipelineCacheAccess *pipelineCache,
+                                              const GraphicsPipelineDesc &desc,
+                                              const PipelineLayout &pipelineLayout,
+                                              const SpecializationConstants &specConsts,
+                                              PipelineHelper *pipeline) const;
 
     angle::Result getOrCreateComputePipeline(ContextVk *contextVk,
                                              ComputePipelineCache *computePipelines,
