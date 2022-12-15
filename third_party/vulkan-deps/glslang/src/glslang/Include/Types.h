@@ -869,6 +869,9 @@ public:
     bool isAnyCallable() const {
         return storage == EvqCallableData || storage == EvqCallableDataIn;
     }
+    bool isHitObjectAttrNV() const {
+        return storage == EvqHitObjectAttrNV;
+    }
 
     // True if this type of IO is supposed to be arrayed with extra level for per-vertex data
     bool isArrayedIo(EShLanguage language) const
@@ -904,6 +907,7 @@ public:
         // -2048 as the default value indicating layoutSecondaryViewportRelative is not set
         layoutSecondaryViewportRelativeOffset = -2048;
         layoutShaderRecord = false;
+        layoutHitObjectShaderRecordNV = false;
         layoutBindlessSampler = false;
         layoutBindlessImage = false;
         layoutBufferReferenceAlign = layoutBufferReferenceAlignEnd;
@@ -1005,6 +1009,7 @@ public:
     bool layoutViewportRelative;
     int layoutSecondaryViewportRelativeOffset;
     bool layoutShaderRecord;
+    bool layoutHitObjectShaderRecordNV;
 
     // GL_EXT_spirv_intrinsics
     int spirvStorageClass;
@@ -1134,6 +1139,7 @@ public:
     TLayoutFormat getFormat() const { return layoutFormat; }
     bool isPushConstant() const { return layoutPushConstant; }
     bool isShaderRecord() const { return layoutShaderRecord; }
+    bool hasHitObjectShaderRecordNV() const { return layoutHitObjectShaderRecordNV; }
     bool hasBufferReference() const { return layoutBufferReference; }
     bool hasBufferReferenceAlign() const
     {
@@ -1888,9 +1894,11 @@ public:
     virtual bool isArray()  const { return arraySizes != nullptr; }
     virtual bool isSizedArray() const { return isArray() && arraySizes->isSized(); }
     virtual bool isUnsizedArray() const { return isArray() && !arraySizes->isSized(); }
+    virtual bool isImplicitlySizedArray() const { return isArray() && arraySizes->isImplicitlySized(); }
     virtual bool isArrayVariablyIndexed() const { assert(isArray()); return arraySizes->isVariablyIndexed(); }
     virtual void setArrayVariablyIndexed() { assert(isArray()); arraySizes->setVariablyIndexed(); }
     virtual void updateImplicitArraySize(int size) { assert(isArray()); arraySizes->updateImplicitSize(size); }
+    virtual void setImplicitlySized(bool isImplicitSized) { arraySizes->setImplicitlySized(isImplicitSized); }
     virtual bool isStruct() const { return basicType == EbtStruct || basicType == EbtBlock; }
     virtual bool isFloatingDomain() const { return basicType == EbtFloat || basicType == EbtDouble || basicType == EbtFloat16; }
     virtual bool isIntegerDomain() const
@@ -1913,7 +1921,8 @@ public:
     }
     virtual bool isOpaque() const { return basicType == EbtSampler
 #ifndef GLSLANG_WEB
-            || basicType == EbtAtomicUint || basicType == EbtAccStruct || basicType == EbtRayQuery
+            || basicType == EbtAtomicUint || basicType == EbtAccStruct || basicType == EbtRayQuery 
+            || basicType == EbtHitObjectNV
 #endif
         ; }
     virtual bool isBuiltIn() const { return getQualifier().builtIn != EbvNone; }
@@ -2118,8 +2127,12 @@ public:
     // an explicit array.
     void adoptImplicitArraySizes(bool skipNonvariablyIndexed)
     {
-        if (isUnsizedArray() && !(skipNonvariablyIndexed || isArrayVariablyIndexed()))
+        if (isUnsizedArray() &&
+            (qualifier.builtIn == EbvSampleMask ||
+                !(skipNonvariablyIndexed || isArrayVariablyIndexed()))) {
             changeOuterArraySize(getImplicitArraySize());
+            setImplicitlySized(true);
+        }
         // For multi-dim per-view arrays, set unsized inner dimension size to 1
         if (qualifier.isPerView() && arraySizes && arraySizes->isInnerUnsized())
             arraySizes->clearInnerUnsized();
@@ -2314,12 +2327,17 @@ public:
                 appendStr(" layoutSecondaryViewportRelativeOffset=");
                 appendInt(qualifier.layoutSecondaryViewportRelativeOffset);
               }
+              
               if (qualifier.layoutShaderRecord)
                 appendStr(" shaderRecordNV");
+              if (qualifier.layoutHitObjectShaderRecordNV)
+                appendStr(" hitobjectshaderrecordnv");
+
               if (qualifier.layoutBindlessSampler)
                   appendStr(" layoutBindlessSampler");
               if (qualifier.layoutBindlessImage)
                   appendStr(" layoutBindlessImage");
+
               appendStr(")");
             }
           }
@@ -2746,7 +2764,10 @@ public:
     bool sameArrayness(const TType& right) const
     {
         return ((arraySizes == nullptr && right.arraySizes == nullptr) ||
-                (arraySizes != nullptr && right.arraySizes != nullptr && *arraySizes == *right.arraySizes));
+                (arraySizes != nullptr && right.arraySizes != nullptr &&
+                 (*arraySizes == *right.arraySizes ||
+                  (arraySizes->isImplicitlySized() && right.arraySizes->isDefaultImplicitlySized()) ||
+                  (right.arraySizes->isImplicitlySized() && arraySizes->isDefaultImplicitlySized()))));
     }
 
     // See if two type's arrayness match in everything except their outer dimension
