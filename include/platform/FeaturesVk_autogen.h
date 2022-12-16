@@ -272,11 +272,6 @@ struct FeaturesVk : FeatureSetBase
         &members,
     };
 
-    FeatureInfo shadowBuffers = {
-        "shadowBuffers", FeatureCategory::VulkanFeatures,
-        "Allocate a shadow buffer for GL buffer objects to reduce glMap* latency.", &members,
-        "http://anglebug.com/4339"};
-
     FeatureInfo preferCPUForBufferSubData = {
         "preferCPUForBufferSubData", FeatureCategory::VulkanFeatures,
         "Prefer use CPU to do bufferSubData instead of staged update.", &members,
@@ -767,6 +762,11 @@ struct FeaturesVk : FeatureSetBase
     FeatureInfo preferMonolithicPipelinesOverLibraries = {
         "preferMonolithicPipelinesOverLibraries", FeatureCategory::VulkanWorkarounds,
         "Whether monolithic pipelines perform significantly better than libraries", &members,
+        "https://anglebug.com/7369"};
+
+    FeatureInfo slowDownMonolithicPipelineCreationForTesting = {
+        "slowDownMonolithicPipelineCreationForTesting", FeatureCategory::VulkanWorkarounds,
+        "Artificially slow down async monolithic pipeline creation for threading testing", &members,
         "https://anglebug.com/7369"};
 
     FeatureInfo syncMonolithicPipelinesToBlobCache = {
