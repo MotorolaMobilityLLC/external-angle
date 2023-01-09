@@ -732,6 +732,13 @@ CallCapture ParseCallCapture(const Token &nameToken,
             ParseParameters<std::remove_pointer<PFNEGLWAITSYNCKHRPROC>::type>(paramTokens, shaders);
         return CallCapture(EntryPoint::EGLWaitSyncKHR, std::move(params));
     }
+    if (strcmp(nameToken, "eglWaitUntilWorkScheduledANGLE") == 0)
+    {
+        ParamBuffer params =
+            ParseParameters<std::remove_pointer<PFNEGLWAITUNTILWORKSCHEDULEDANGLEPROC>::type>(
+                paramTokens, shaders);
+        return CallCapture(EntryPoint::EGLWaitUntilWorkScheduledANGLE, std::move(params));
+    }
     if (strcmp(nameToken, "glAcquireTexturesANGLE") == 0)
     {
         ParamBuffer params =
@@ -2177,6 +2184,28 @@ CallCapture ParseCallCapture(const Token &nameToken,
                 paramTokens, shaders);
         return CallCapture(EntryPoint::GLFramebufferParameteriMESA, std::move(params));
     }
+    if (strcmp(nameToken, "glFramebufferPixelLocalClearValuefvANGLE") == 0)
+    {
+        ParamBuffer params = ParseParameters<
+            std::remove_pointer<PFNGLFRAMEBUFFERPIXELLOCALCLEARVALUEFVANGLEPROC>::type>(paramTokens,
+                                                                                        shaders);
+        return CallCapture(EntryPoint::GLFramebufferPixelLocalClearValuefvANGLE, std::move(params));
+    }
+    if (strcmp(nameToken, "glFramebufferPixelLocalClearValueivANGLE") == 0)
+    {
+        ParamBuffer params = ParseParameters<
+            std::remove_pointer<PFNGLFRAMEBUFFERPIXELLOCALCLEARVALUEIVANGLEPROC>::type>(paramTokens,
+                                                                                        shaders);
+        return CallCapture(EntryPoint::GLFramebufferPixelLocalClearValueivANGLE, std::move(params));
+    }
+    if (strcmp(nameToken, "glFramebufferPixelLocalClearValueuivANGLE") == 0)
+    {
+        ParamBuffer params = ParseParameters<
+            std::remove_pointer<PFNGLFRAMEBUFFERPIXELLOCALCLEARVALUEUIVANGLEPROC>::type>(
+            paramTokens, shaders);
+        return CallCapture(EntryPoint::GLFramebufferPixelLocalClearValueuivANGLE,
+                           std::move(params));
+    }
     if (strcmp(nameToken, "glFramebufferRenderbuffer") == 0)
     {
         ParamBuffer params =
@@ -2648,6 +2677,22 @@ CallCapture ParseCallCapture(const Token &nameToken,
             std::remove_pointer<PFNGLGETFRAMEBUFFERPARAMETERIVROBUSTANGLEPROC>::type>(paramTokens,
                                                                                       shaders);
         return CallCapture(EntryPoint::GLGetFramebufferParameterivRobustANGLE, std::move(params));
+    }
+    if (strcmp(nameToken, "glGetFramebufferPixelLocalStorageParameterfvANGLE") == 0)
+    {
+        ParamBuffer params = ParseParameters<
+            std::remove_pointer<PFNGLGETFRAMEBUFFERPIXELLOCALSTORAGEPARAMETERFVANGLEPROC>::type>(
+            paramTokens, shaders);
+        return CallCapture(EntryPoint::GLGetFramebufferPixelLocalStorageParameterfvANGLE,
+                           std::move(params));
+    }
+    if (strcmp(nameToken, "glGetFramebufferPixelLocalStorageParameterivANGLE") == 0)
+    {
+        ParamBuffer params = ParseParameters<
+            std::remove_pointer<PFNGLGETFRAMEBUFFERPIXELLOCALSTORAGEPARAMETERIVANGLEPROC>::type>(
+            paramTokens, shaders);
+        return CallCapture(EntryPoint::GLGetFramebufferPixelLocalStorageParameterivANGLE,
+                           std::move(params));
     }
     if (strcmp(nameToken, "glGetGraphicsResetStatus") == 0)
     {
@@ -6232,7 +6277,289 @@ CallCapture ParseCallCapture(const Token &nameToken,
         return CallCapture("ValidateSerializedState", std::move(params));
     }
 
-    ASSERT(numParamTokens == 0);
+    if (numParamTokens > 0)
+    {
+        printf("Expected zero parameter tokens for %s\n", nameToken);
+        UNREACHABLE();
+    }
     return CallCapture(nameToken, ParamBuffer());
+}
+
+template <typename Fn, EnableIfNArgs<Fn, 1> = 0>
+void DispatchCallCapture(Fn *fn, const Captures &cap)
+{
+    (*fn)(Arg<Fn, 0>(cap));
+}
+
+template <typename Fn, EnableIfNArgs<Fn, 2> = 0>
+void DispatchCallCapture(Fn *fn, const Captures &cap)
+{
+    (*fn)(Arg<Fn, 0>(cap), Arg<Fn, 1>(cap));
+}
+
+template <typename Fn, EnableIfNArgs<Fn, 3> = 0>
+void DispatchCallCapture(Fn *fn, const Captures &cap)
+{
+    (*fn)(Arg<Fn, 0>(cap), Arg<Fn, 1>(cap), Arg<Fn, 2>(cap));
+}
+
+template <typename Fn, EnableIfNArgs<Fn, 4> = 0>
+void DispatchCallCapture(Fn *fn, const Captures &cap)
+{
+    (*fn)(Arg<Fn, 0>(cap), Arg<Fn, 1>(cap), Arg<Fn, 2>(cap), Arg<Fn, 3>(cap));
+}
+
+template <typename Fn, EnableIfNArgs<Fn, 5> = 0>
+void DispatchCallCapture(Fn *fn, const Captures &cap)
+{
+    (*fn)(Arg<Fn, 0>(cap), Arg<Fn, 1>(cap), Arg<Fn, 2>(cap), Arg<Fn, 3>(cap), Arg<Fn, 4>(cap));
+}
+
+template <typename Fn, EnableIfNArgs<Fn, 6> = 0>
+void DispatchCallCapture(Fn *fn, const Captures &cap)
+{
+    (*fn)(Arg<Fn, 0>(cap), Arg<Fn, 1>(cap), Arg<Fn, 2>(cap), Arg<Fn, 3>(cap), Arg<Fn, 4>(cap),
+          Arg<Fn, 5>(cap));
+}
+
+template <typename Fn, EnableIfNArgs<Fn, 16> = 0>
+void DispatchCallCapture(Fn *fn, const Captures &cap)
+{
+    (*fn)(Arg<Fn, 0>(cap), Arg<Fn, 1>(cap), Arg<Fn, 2>(cap), Arg<Fn, 3>(cap), Arg<Fn, 4>(cap),
+          Arg<Fn, 5>(cap), Arg<Fn, 6>(cap), Arg<Fn, 7>(cap), Arg<Fn, 8>(cap), Arg<Fn, 9>(cap),
+          Arg<Fn, 10>(cap), Arg<Fn, 11>(cap), Arg<Fn, 12>(cap), Arg<Fn, 13>(cap), Arg<Fn, 14>(cap),
+          Arg<Fn, 15>(cap));
+}
+
+template <typename Fn, EnableIfNArgs<Fn, 20> = 0>
+void DispatchCallCapture(Fn *fn, const Captures &cap)
+{
+    (*fn)(Arg<Fn, 0>(cap), Arg<Fn, 1>(cap), Arg<Fn, 2>(cap), Arg<Fn, 3>(cap), Arg<Fn, 4>(cap),
+          Arg<Fn, 5>(cap), Arg<Fn, 6>(cap), Arg<Fn, 7>(cap), Arg<Fn, 8>(cap), Arg<Fn, 9>(cap),
+          Arg<Fn, 10>(cap), Arg<Fn, 11>(cap), Arg<Fn, 12>(cap), Arg<Fn, 13>(cap), Arg<Fn, 14>(cap),
+          Arg<Fn, 15>(cap), Arg<Fn, 16>(cap), Arg<Fn, 17>(cap), Arg<Fn, 18>(cap), Arg<Fn, 19>(cap));
+}
+
+void ReplayCustomFunctionCall(const CallCapture &call, const TraceFunctionMap &customFunctions)
+{
+    ASSERT(call.entryPoint == EntryPoint::Invalid);
+    const Captures &captures = call.params.getParamCaptures();
+
+    if (call.customFunctionName == "CreateContext")
+    {
+        DispatchCallCapture(CreateContext, captures);
+        return;
+    }
+    if (call.customFunctionName == "CreateEGLImage")
+    {
+        DispatchCallCapture(CreateEGLImage, captures);
+        return;
+    }
+    if (call.customFunctionName == "CreateEGLImageKHR")
+    {
+        DispatchCallCapture(CreateEGLImageKHR, captures);
+        return;
+    }
+    if (call.customFunctionName == "CreateNativeClientBufferANDROID")
+    {
+        DispatchCallCapture(CreateNativeClientBufferANDROID, captures);
+        return;
+    }
+    if (call.customFunctionName == "CreatePbufferSurface")
+    {
+        DispatchCallCapture(CreatePbufferSurface, captures);
+        return;
+    }
+    if (call.customFunctionName == "CreateProgram")
+    {
+        DispatchCallCapture(CreateProgram, captures);
+        return;
+    }
+    if (call.customFunctionName == "CreateShader")
+    {
+        DispatchCallCapture(CreateShader, captures);
+        return;
+    }
+    if (call.customFunctionName == "CreateShaderProgramv")
+    {
+        DispatchCallCapture(CreateShaderProgramv, captures);
+        return;
+    }
+    if (call.customFunctionName == "DeleteUniformLocations")
+    {
+        DispatchCallCapture(DeleteUniformLocations, captures);
+        return;
+    }
+    if (call.customFunctionName == "FenceSync")
+    {
+        DispatchCallCapture(FenceSync, captures);
+        return;
+    }
+    if (call.customFunctionName == "InitializeReplay")
+    {
+        DispatchCallCapture(InitializeReplay, captures);
+        return;
+    }
+    if (call.customFunctionName == "InitializeReplay2")
+    {
+        DispatchCallCapture(InitializeReplay2, captures);
+        return;
+    }
+    if (call.customFunctionName == "MapBufferOES")
+    {
+        DispatchCallCapture(MapBufferOES, captures);
+        return;
+    }
+    if (call.customFunctionName == "MapBufferRange")
+    {
+        DispatchCallCapture(MapBufferRange, captures);
+        return;
+    }
+    if (call.customFunctionName == "MapBufferRangeEXT")
+    {
+        DispatchCallCapture(MapBufferRangeEXT, captures);
+        return;
+    }
+    if (call.customFunctionName == "SetBufferID")
+    {
+        DispatchCallCapture(SetBufferID, captures);
+        return;
+    }
+    if (call.customFunctionName == "SetFramebufferID")
+    {
+        DispatchCallCapture(SetFramebufferID, captures);
+        return;
+    }
+    if (call.customFunctionName == "SetRenderbufferID")
+    {
+        DispatchCallCapture(SetRenderbufferID, captures);
+        return;
+    }
+    if (call.customFunctionName == "SetTextureID")
+    {
+        DispatchCallCapture(SetTextureID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UniformBlockBinding")
+    {
+        DispatchCallCapture(UniformBlockBinding, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateBufferID")
+    {
+        DispatchCallCapture(UpdateBufferID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateClientArrayPointer")
+    {
+        DispatchCallCapture(UpdateClientArrayPointer, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateClientBufferData")
+    {
+        DispatchCallCapture(UpdateClientBufferData, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateClientBufferDataWithOffset")
+    {
+        DispatchCallCapture(UpdateClientBufferDataWithOffset, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateCurrentProgram")
+    {
+        DispatchCallCapture(UpdateCurrentProgram, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateFenceNVID")
+    {
+        DispatchCallCapture(UpdateFenceNVID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateFramebufferID")
+    {
+        DispatchCallCapture(UpdateFramebufferID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateMemoryObjectID")
+    {
+        DispatchCallCapture(UpdateMemoryObjectID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateProgramPipelineID")
+    {
+        DispatchCallCapture(UpdateProgramPipelineID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateQueryID")
+    {
+        DispatchCallCapture(UpdateQueryID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateRenderbufferID")
+    {
+        DispatchCallCapture(UpdateRenderbufferID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateSamplerID")
+    {
+        DispatchCallCapture(UpdateSamplerID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateSemaphoreID")
+    {
+        DispatchCallCapture(UpdateSemaphoreID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateShaderProgramID")
+    {
+        DispatchCallCapture(UpdateShaderProgramID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateTextureID")
+    {
+        DispatchCallCapture(UpdateTextureID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateTransformFeedbackID")
+    {
+        DispatchCallCapture(UpdateTransformFeedbackID, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateUniformBlockIndex")
+    {
+        DispatchCallCapture(UpdateUniformBlockIndex, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateUniformLocation")
+    {
+        DispatchCallCapture(UpdateUniformLocation, captures);
+        return;
+    }
+    if (call.customFunctionName == "UpdateVertexArrayID")
+    {
+        DispatchCallCapture(UpdateVertexArrayID, captures);
+        return;
+    }
+    if (call.customFunctionName == "ValidateSerializedState")
+    {
+        DispatchCallCapture(ValidateSerializedState, captures);
+        return;
+    }
+
+    auto iter = customFunctions.find(call.customFunctionName);
+    if (iter == customFunctions.end())
+    {
+        printf("Unknown custom function: %s\n", call.customFunctionName.c_str());
+        UNREACHABLE();
+    }
+    else
+    {
+        ASSERT(call.params.empty());
+        const TraceFunction &customFunc = iter->second;
+        for (const CallCapture &customCall : customFunc)
+        {
+            ReplayTraceFunctionCall(customCall, customFunctions);
+        }
+    }
 }
 }  // namespace angle

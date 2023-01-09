@@ -16,6 +16,7 @@
 
 #include <atomic>
 #include <cstddef>
+#include <cstring>
 
 #include "absl/base/config.h"
 
@@ -25,11 +26,14 @@ namespace container_internal {
 
 // A single block of empty control bytes for tables without any slots allocated.
 // This enables removing a branch in the hot path of find().
-alignas(16) ABSL_CONST_INIT ABSL_DLL const ctrl_t kEmptyGroup[16] = {
+// We have 17 bytes because there may be a generation counter. Any constant is
+// fine for the generation counter.
+alignas(16) ABSL_CONST_INIT ABSL_DLL const ctrl_t kEmptyGroup[17] = {
     ctrl_t::kSentinel, ctrl_t::kEmpty, ctrl_t::kEmpty, ctrl_t::kEmpty,
     ctrl_t::kEmpty,    ctrl_t::kEmpty, ctrl_t::kEmpty, ctrl_t::kEmpty,
     ctrl_t::kEmpty,    ctrl_t::kEmpty, ctrl_t::kEmpty, ctrl_t::kEmpty,
-    ctrl_t::kEmpty,    ctrl_t::kEmpty, ctrl_t::kEmpty, ctrl_t::kEmpty};
+    ctrl_t::kEmpty,    ctrl_t::kEmpty, ctrl_t::kEmpty, ctrl_t::kEmpty,
+    static_cast<ctrl_t>(0)};
 
 #ifdef ABSL_INTERNAL_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr size_t Group::kWidth;
@@ -90,7 +94,7 @@ static inline void* PrevSlot(void* slot, size_t slot_size) {
   return reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(slot) - slot_size);
 }
 
-void DropDeletesWithoutResize(CommonFields& common, size_t& growth_left,
+void DropDeletesWithoutResize(CommonFields& common,
                               const PolicyFunctions& policy, void* tmp_space) {
   void* set = &common;
   void* slot_array = common.slots_;
@@ -167,12 +171,11 @@ void DropDeletesWithoutResize(CommonFields& common, size_t& growth_left,
       slot_ptr = PrevSlot(slot_ptr, slot_size);
     }
   }
-  ResetGrowthLeft(common, growth_left);
+  ResetGrowthLeft(common);
   common.infoz().RecordRehash(total_probe_length);
 }
 
-void EraseMetaOnly(CommonFields& c, size_t& growth_left, ctrl_t* it,
-                   size_t slot_size) {
+void EraseMetaOnly(CommonFields& c, ctrl_t* it, size_t slot_size) {
   assert(IsFull(*it) && "erasing a dangling iterator");
   --c.size_;
   const auto index = static_cast<size_t>(it - c.control_);
@@ -183,31 +186,31 @@ void EraseMetaOnly(CommonFields& c, size_t& growth_left, ctrl_t* it,
   // We count how many consecutive non empties we have to the right and to the
   // left of `it`. If the sum is >= kWidth then there is at least one probe
   // window that might have seen a full group.
-  bool was_never_full =
-      empty_before && empty_after &&
-      static_cast<size_t>(empty_after.TrailingZeros() +
-                          empty_before.LeadingZeros()) < Group::kWidth;
+  bool was_never_full = empty_before && empty_after &&
+                        static_cast<size_t>(empty_after.TrailingZeros()) +
+                                empty_before.LeadingZeros() <
+                            Group::kWidth;
 
   SetCtrl(c, index, was_never_full ? ctrl_t::kEmpty : ctrl_t::kDeleted,
           slot_size);
-  growth_left += (was_never_full ? 1 : 0);
+  c.growth_left() += (was_never_full ? 1 : 0);
   c.infoz().RecordErase();
 }
 
-void ClearBackingArray(CommonFields& c, size_t& growth_left,
-                       const PolicyFunctions& policy, bool reuse) {
+void ClearBackingArray(CommonFields& c, const PolicyFunctions& policy,
+                       bool reuse) {
+  c.size_ = 0;
   if (reuse) {
-    c.size_ = 0;
-    ResetCtrl(c, growth_left, policy.slot_size);
+    ResetCtrl(c, policy.slot_size);
     c.infoz().RecordStorageChanged(0, c.capacity_);
   } else {
     void* set = &c;
     (*policy.dealloc)(set, policy, c.control_, c.slots_, c.capacity_);
     c.control_ = EmptyGroup();
+    c.set_generation_ptr(EmptyGeneration());
     c.slots_ = nullptr;
-    c.size_ = 0;
     c.capacity_ = 0;
-    growth_left = 0;
+    c.growth_left() = 0;
     c.infoz().RecordClearedReservation();
     assert(c.size_ == 0);
     c.infoz().RecordStorageChanged(0, 0);
