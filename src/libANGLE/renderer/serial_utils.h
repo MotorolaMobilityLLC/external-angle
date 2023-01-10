@@ -19,13 +19,33 @@
 
 namespace rx
 {
+class ResourceSerial
+{
+  public:
+    constexpr ResourceSerial() : mValue(kDirty) {}
+    explicit constexpr ResourceSerial(uintptr_t value) : mValue(value) {}
+    constexpr bool operator==(ResourceSerial other) const { return mValue == other.mValue; }
+    constexpr bool operator!=(ResourceSerial other) const { return mValue != other.mValue; }
+
+    void dirty() { mValue = kDirty; }
+    void clear() { mValue = kEmpty; }
+
+    constexpr bool valid() const { return mValue != kEmpty && mValue != kDirty; }
+    constexpr bool empty() const { return mValue == kEmpty; }
+
+  private:
+    constexpr static uintptr_t kDirty = std::numeric_limits<uintptr_t>::max();
+    constexpr static uintptr_t kEmpty = 0;
+
+    uintptr_t mValue;
+};
+
 // Class UniqueSerial defines unique serial number for object identification. It has only
 // equal/unequal comparison but no greater/smaller comparison. The default constructor creates an
 // invalid value.
 class UniqueSerial final
 {
   public:
-    constexpr explicit UniqueSerial(uint64_t value) : mValue(value) {}
     constexpr UniqueSerial() : mValue(kInvalid) {}
     constexpr UniqueSerial(const UniqueSerial &other)  = default;
     UniqueSerial &operator=(const UniqueSerial &other) = default;
@@ -44,6 +64,8 @@ class UniqueSerial final
     constexpr bool valid() const { return mValue != kInvalid; }
 
   private:
+    friend class UniqueSerialFactory;
+    constexpr explicit UniqueSerial(uint64_t value) : mValue(value) {}
     uint64_t mValue;
     static constexpr uint64_t kInvalid = 0;
 };
@@ -69,20 +91,14 @@ class UniqueSerialFactory final : angle::NonCopyable
 class Serial final
 {
   public:
-    constexpr Serial() : mValue(kInvalid) {}
+    constexpr Serial() : mValue(0) {}
     constexpr Serial(const Serial &other)  = default;
     Serial &operator=(const Serial &other) = default;
 
     static constexpr Serial Infinite() { return Serial(std::numeric_limits<uint64_t>::max()); }
 
-    constexpr bool operator==(const Serial &other) const
-    {
-        return mValue != kInvalid && mValue == other.mValue;
-    }
-    constexpr bool operator!=(const Serial &other) const
-    {
-        return mValue == kInvalid || mValue != other.mValue;
-    }
+    constexpr bool operator==(const Serial &other) const { return mValue == other.mValue; }
+    constexpr bool operator!=(const Serial &other) const { return mValue != other.mValue; }
     constexpr bool operator>(const Serial &other) const { return mValue > other.mValue; }
     constexpr bool operator>=(const Serial &other) const { return mValue >= other.mValue; }
     constexpr bool operator<(const Serial &other) const { return mValue < other.mValue; }
@@ -90,7 +106,6 @@ class Serial final
 
     // Useful for serialization.
     constexpr uint64_t getValue() const { return mValue; }
-    constexpr bool valid() const { return mValue != kInvalid; }
 
   private:
     friend class AtomicSerialFactory;
@@ -98,7 +113,6 @@ class Serial final
     friend class AtomicQueueSerial;
     constexpr explicit Serial(uint64_t value) : mValue(value) {}
     uint64_t mValue;
-    static constexpr uint64_t kInvalid = 0;
 };
 
 // Defines class to track the queue serial that can be load/store from multiple threads atomically.
@@ -232,7 +246,7 @@ class QueueSerial final
         return mSerial <= serials[mIndex];
     }
 
-    constexpr bool valid() const { return mSerial.valid(); }
+    constexpr bool valid() const { return mIndex != kInvalidQueueSerialIndex; }
 
     SerialIndex getIndex() const { return mIndex; }
     Serial getSerial() const { return mSerial; }
