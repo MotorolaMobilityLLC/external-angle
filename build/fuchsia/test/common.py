@@ -19,21 +19,12 @@ DIR_SRC_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir, os.pardir, os.pardir))
 REPO_ALIAS = 'fuchsia.com'
 SDK_ROOT = os.path.join(DIR_SRC_ROOT, 'third_party', 'fuchsia-sdk', 'sdk')
-
 SDK_TOOLS_DIR = os.path.join(SDK_ROOT, 'tools', get_host_arch())
 _FFX_TOOL = os.path.join(SDK_TOOLS_DIR, 'ffx')
 
 # This global variable is used to set the environment variable
 # |FFX_ISOLATE_DIR| when running ffx commands in E2E testing scripts.
 _FFX_ISOLATE_DIR = None
-
-# TODO(crbug.com/1280705): Remove each entry when they are migrated to v2.
-_V1_PACKAGE_LIST = [
-    'chrome_v1',
-    'web_engine',
-    'web_engine_with_webui',
-    'web_runner',
-]
 
 
 def set_ffx_isolate_dir(isolate_dir: str) -> None:
@@ -174,6 +165,12 @@ def run_ffx_command(cmd: Iterable[str],
                               env=env,
                               **kwargs)
     except subprocess.CalledProcessError as cpe:
+        logging.error(
+            '%s failed with returncode %s.',
+            os.path.relpath(_FFX_TOOL) + subprocess.list2cmdline(ffx_cmd[1:]),
+            cpe.returncode)
+        if cpe.output:
+            logging.error('stdout of the command: %s', cpe.output)
         if suppress_repair or (cpe.output
                                and not _run_repair_command(cpe.output)):
             raise
@@ -250,14 +247,30 @@ def get_component_uri(package: str) -> str:
 def resolve_packages(packages: List[str], target_id: Optional[str]) -> None:
     """Ensure that all |packages| are installed on a device."""
 
+    ssh_prefix = get_ssh_prefix(get_ssh_address(target_id))
+    subprocess.run(ssh_prefix + ['--', 'pkgctl', 'gc'], check=False)
+
     for package in packages:
         resolve_cmd = [
             '--', 'pkgctl', 'resolve',
             'fuchsia-pkg://%s/%s' % (REPO_ALIAS, package)
         ]
-        subprocess.run(get_ssh_prefix(get_ssh_address(target_id)) +
-                       resolve_cmd,
-                       check=True)
+        retry_command(ssh_prefix + resolve_cmd)
+
+
+def retry_command(cmd: List[str], retries: int = 2,
+                  **kwargs) -> Optional[subprocess.CompletedProcess]:
+    """Helper function for retrying a subprocess.run command."""
+
+    for i in range(retries):
+        if i == retries - 1:
+            proc = subprocess.run(cmd, **kwargs, check=True)
+            return proc
+        proc = subprocess.run(cmd, **kwargs, check=False)
+        if proc.returncode == 0:
+            return proc
+        time.sleep(3)
+    return None
 
 
 def get_ssh_address(target_id: Optional[str]) -> str:
