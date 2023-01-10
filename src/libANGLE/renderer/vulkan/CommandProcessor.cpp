@@ -83,13 +83,10 @@ size_t GetBatchCountUpToSerials(std::vector<CommandBatch> &inFlightCommands,
     BitSetArrayT serialBitMaskToFinish;
     for (SerialIndex i = 0; i < serials.size(); i++)
     {
-        if (serials[i].valid())
+        ASSERT(serials[i] <= lastSubmittedSerials[i]);
+        if (serials[i] > lastCompletedSerials[i])
         {
-            ASSERT(serials[i] <= lastSubmittedSerials[i]);
-            if (serials[i] > lastCompletedSerials[i])
-            {
-                serialBitMaskToFinish.set(i);
-            }
+            serialBitMaskToFinish.set(i);
         }
     }
 
@@ -298,7 +295,6 @@ void CommandProcessorTask::initFlushAndQueueSubmit(
     bool hasProtectedContent,
     egl::ContextPriority priority,
     SecondaryCommandPools *commandPools,
-    GarbageList &&currentGarbage,
     SecondaryCommandBufferList &&commandBuffersToReset,
     const QueueSerial &submitQueueSerial)
 {
@@ -307,7 +303,6 @@ void CommandProcessorTask::initFlushAndQueueSubmit(
     mWaitSemaphoreStageMasks = waitSemaphoreStageMasks;
     mSemaphore               = semaphore;
     mCommandPools            = commandPools;
-    mGarbage                 = std::move(currentGarbage);
     mCommandBuffersToReset   = std::move(commandBuffersToReset);
     mPriority                = priority;
     mHasProtectedContent     = hasProtectedContent;
@@ -350,7 +345,6 @@ CommandProcessorTask &CommandProcessorTask::operator=(CommandProcessorTask &&rhs
     std::swap(mOneOffWaitSemaphoreStageMask, rhs.mOneOffWaitSemaphoreStageMask);
     std::swap(mOneOffFence, rhs.mOneOffFence);
     std::swap(mCommandPools, rhs.mCommandPools);
-    std::swap(mGarbage, rhs.mGarbage);
     std::swap(mCommandBuffersToReset, rhs.mCommandBuffersToReset);
     std::swap(mSubmitQueueSerial, rhs.mSubmitQueueSerial);
     std::swap(mPriority, rhs.mPriority);
@@ -538,10 +532,8 @@ angle::Result CommandProcessor::processTask(CommandProcessorTask *task)
             ANGLE_TRY(mCommandQueue.submitCommands(
                 this, task->hasProtectedContent(), task->getPriority(), task->getWaitSemaphores(),
                 task->getWaitSemaphoreStageMasks(), task->getSemaphore(),
-                std::move(task->getGarbage()), std::move(task->getCommandBuffersToReset()),
-                task->getCommandPools(), task->getSubmitQueueSerial()));
-
-            ASSERT(task->getGarbage().empty());
+                std::move(task->getCommandBuffersToReset()), task->getCommandPools(),
+                task->getSubmitQueueSerial()));
             break;
         }
         case CustomTask::OneOffQueueSubmit:
@@ -744,7 +736,6 @@ angle::Result CommandProcessor::submitCommands(
     const std::vector<VkSemaphore> &waitSemaphores,
     const std::vector<VkPipelineStageFlags> &waitSemaphoreStageMasks,
     const VkSemaphore signalSemaphore,
-    GarbageList &&currentGarbage,
     SecondaryCommandBufferList &&commandBuffersToReset,
     SecondaryCommandPools *commandPools,
     const QueueSerial &submitQueueSerial)
@@ -754,8 +745,7 @@ angle::Result CommandProcessor::submitCommands(
     CommandProcessorTask task;
     task.initFlushAndQueueSubmit(waitSemaphores, waitSemaphoreStageMasks, signalSemaphore,
                                  hasProtectedContent, priority, commandPools,
-                                 std::move(currentGarbage), std::move(commandBuffersToReset),
-                                 submitQueueSerial);
+                                 std::move(commandBuffersToReset), submitQueueSerial);
 
     queueCommand(std::move(task));
 
@@ -901,7 +891,6 @@ void CommandQueue::destroy(Context *context)
 
     // Assigns an infinite "last completed" serial to force garbage to delete.
     mLastCompletedSerials.fill(Serial::Infinite());
-    (void)clearAllGarbage(renderer);
 
     mPrimaryCommands.destroy(renderer->getDevice());
     mPrimaryCommandPool.destroy(renderer->getDevice());
@@ -915,7 +904,6 @@ void CommandQueue::destroy(Context *context)
     mFenceRecycler.destroy(context);
 
     ASSERT(mInFlightCommands.empty());
-    ASSERT(mGarbageQueue.empty());
 }
 
 angle::Result CommandQueue::init(Context *context, const DeviceQueueMap &queueMap)
@@ -1004,7 +992,8 @@ angle::Result CommandQueue::retireFinishedCommands(Context *context, size_t fini
 
     for (SerialIndex index = 0; index < lastCompletedQueueSerials.size(); index++)
     {
-        if (lastCompletedQueueSerials[index].valid())
+        // Set mLastCompletedSerials only if there is a lastCompletedQueueSerials in the index.
+        if (lastCompletedQueueSerials[index] != kZeroSerial)
         {
             mLastCompletedSerials.setQueueSerial(index, lastCompletedQueueSerials[index]);
         }
@@ -1024,24 +1013,6 @@ angle::Result CommandQueue::retireFinishedCommandsAndCleanupGarbage(Context *con
 
     ANGLE_TRY(retireFinishedCommands(context, finishedCount));
 
-    while (!mGarbageQueue.empty())
-    {
-        GarbageAndQueueSerial &garbageList = mGarbageQueue.front();
-        const QueueSerial &queueSerial     = garbageList.getQueueSerial();
-        if (queueSerial <= mLastCompletedSerials)
-        {
-            for (GarbageObject &garbage : garbageList.get())
-            {
-                garbage.destroy(renderer);
-            }
-            mGarbageQueue.pop();
-        }
-        else
-        {
-            break;
-        }
-    }
-
     // Now clean up RendererVk garbage
     renderer->cleanupGarbage();
 
@@ -1058,19 +1029,6 @@ void CommandQueue::releaseToCommandBatch(bool hasProtectedContent,
     batch->primaryCommands     = std::move(commandBuffer);
     batch->commandPools        = commandPools;
     batch->hasProtectedContent = hasProtectedContent;
-}
-
-void CommandQueue::clearAllGarbage(RendererVk *renderer)
-{
-    while (!mGarbageQueue.empty())
-    {
-        GarbageAndQueueSerial &garbageList = mGarbageQueue.front();
-        for (GarbageObject &garbage : garbageList.get())
-        {
-            garbage.destroy(renderer);
-        }
-        mGarbageQueue.pop();
-    }
 }
 
 void CommandQueue::handleDeviceLost(RendererVk *renderer)
@@ -1110,7 +1068,7 @@ bool CommandQueue::allInFlightCommandsAreAfterSerials(const Serials &serials)
     for (const CommandBatch &batch : mInFlightCommands)
     {
         if (batch.queueSerial.getIndex() < serials.size() &&
-            serials[batch.queueSerial.getIndex()].valid() &&
+            serials[batch.queueSerial.getIndex()] != kZeroSerial &&
             batch.queueSerial.getSerial() <= serials[batch.queueSerial.getIndex()])
         {
             return false;
@@ -1181,7 +1139,6 @@ angle::Result CommandQueue::submitCommands(
     const std::vector<VkSemaphore> &waitSemaphores,
     const std::vector<VkPipelineStageFlags> &waitSemaphoreStageMasks,
     const VkSemaphore signalSemaphore,
-    GarbageList &&currentGarbage,
     SecondaryCommandBufferList &&commandBuffersToReset,
     SecondaryCommandPools *commandPools,
     const QueueSerial &submitQueueSerial)
@@ -1231,11 +1188,6 @@ angle::Result CommandQueue::submitCommands(
     else
     {
         mLastSubmittedSerials.setQueueSerial(submitQueueSerial);
-    }
-
-    if (!currentGarbage.empty())
-    {
-        mGarbageQueue.emplace(std::move(currentGarbage), batch.queueSerial);
     }
 
     // Store the primary CommandBuffer and command pool used for secondary CommandBuffers
