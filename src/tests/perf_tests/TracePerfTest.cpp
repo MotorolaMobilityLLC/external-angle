@@ -1095,7 +1095,8 @@ TracePerfTest::TracePerfTest(std::unique_ptr<const TracePerfParams> params)
         }
     }
 
-    if (traceNameIs("hill_climb_racing") || traceNameIs("dead_trigger_2"))
+    if (traceNameIs("hill_climb_racing") || traceNameIs("dead_trigger_2") ||
+        traceNameIs("disney_mirrorverse") || traceNameIs("cut_the_rope"))
     {
         if (IsAndroid() && (IsPixel4() || IsPixel4XL()) &&
             mParams->driver == GLESDriverType::SystemEGL)
@@ -1463,6 +1464,58 @@ TracePerfTest::TracePerfTest(std::unique_ptr<const TracePerfParams> params)
     if (traceNameIs("diablo_immortal"))
     {
         addExtensionPrerequisite("GL_EXT_shader_framebuffer_fetch");
+    }
+
+    if (traceNameIs("mu_origin_3"))
+    {
+        addExtensionPrerequisite("GL_EXT_texture_buffer");
+        addExtensionPrerequisite("GL_EXT_shader_framebuffer_fetch");
+        addExtensionPrerequisite("GL_OES_EGL_image_external");
+    }
+
+    if (traceNameIs("catalyst_black"))
+    {
+        addExtensionPrerequisite("GL_EXT_shader_framebuffer_fetch");
+    }
+
+    if (traceNameIs("five_nights_at_freddys"))
+    {
+        if (IsWindows() && IsIntel() && mParams->isVulkan())
+        {
+            skipTest("http://anglebug.com/7929 Too slow on Win Intel Vulkan");
+        }
+    }
+
+    if (traceNameIs("pubg_mobile_launch"))
+    {
+        if (IsWindows() && IsIntel() && mParams->driver != GLESDriverType::AngleEGL)
+        {
+            skipTest("http://anglebug.com/7929 Too slow on Win Intel native");
+        }
+    }
+
+    if (traceNameIs("beach_buggy_racing"))
+    {
+        if (IsWindows() && IsIntel() && mParams->isVulkan())
+        {
+            skipTest("http://anglebug.com/7934 Flaky context lost on Win Intel Vulkan");
+        }
+    }
+
+    if (traceNameIs("aliexpress"))
+    {
+        if (IsWindows() && IsIntel() && mParams->driver != GLESDriverType::AngleEGL)
+        {
+            skipTest("http://anglebug.com/7934 Flaky failure on Win Intel native");
+        }
+    }
+
+    if (traceNameIs("final_fantasy"))
+    {
+        if (IsAndroid() && IsPixel6() && mParams->driver == GLESDriverType::SystemEGL)
+        {
+            skipTest("http://anglebug.com/7936 Crashes on Pixel 6 native");
+        }
     }
 
     // glDebugMessageControlKHR and glDebugMessageCallbackKHR crash on ARM GLES1.

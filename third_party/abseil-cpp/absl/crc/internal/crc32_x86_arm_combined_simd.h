@@ -25,8 +25,10 @@
 // We define a translation layer for both x86 and ARM for the ease of use and
 // most performance gains.
 
-// We need CRC (part of SSE 4.2) and PCLMULQDQ instructions.
-#if defined(__SSE4_2__) && defined(__PCLMUL__)
+// This implementation requires 64-bit CRC instructions (part of SSE 4.2) and
+// PCLMULQDQ instructions. 32-bit builds with SSE 4.2 do exist, so the
+// __x86_64__ condition is necessary.
+#if defined(__x86_64__) && defined(__SSE4_2__) && defined(__PCLMUL__)
 
 #include <x86intrin.h>
 #define ABSL_CRC_INTERNAL_HAVE_X86_SIMD
@@ -38,7 +40,8 @@
 #define ABSL_CRC_INTERNAL_HAVE_X86_SIMD
 
 #elif defined(__aarch64__) && defined(__LITTLE_ENDIAN__) && \
-    defined(__ARM_FEATURE_CRC32) && defined(__ARM_NEON)
+    defined(__ARM_FEATURE_CRC32) && defined(__ARM_NEON) &&  \
+    defined(__ARM_FEATURE_CRYPTO)
 
 #include <arm_acle.h>
 #include <arm_neon.h>
@@ -254,7 +257,7 @@ inline int64_t V128_Low64(const V128 l) {
 }
 
 inline V128 V128_ShiftLeft64(const V128 l, const V128 r) {
-  return vshlq_u64(l, r);
+  return vshlq_u64(l, vreinterpretq_s64_u64(r));
 }
 
 #endif
