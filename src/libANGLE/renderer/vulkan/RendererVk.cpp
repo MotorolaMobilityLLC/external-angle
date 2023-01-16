@@ -158,8 +158,6 @@ constexpr const char *kSkippedMessages[] = {
     "UNASSIGNED-CoreValidation-Shader-OutputNotConsumed",
     // http://anglebug.com/4883
     "UNASSIGNED-CoreValidation-Shader-InputNotProduced",
-    // http://anglebug.com/2796
-    "UNASSIGNED-CoreValidation-Shader-PointSizeMissing",
     // http://anglebug.com/4928
     "VUID-vkMapMemory-memory-00683",
     // http://anglebug.com/5027
@@ -169,9 +167,6 @@ constexpr const char *kSkippedMessages[] = {
     "VUID-vkCmdDrawIndexed-magFilter-04553",
     // http://anglebug.com/5309
     "VUID-VkImageViewCreateInfo-usage-02652",
-    // http://anglebug.com/5331
-    "VUID-VkSubpassDescriptionDepthStencilResolve-depthResolveMode-parameter",
-    "VUID-VkSubpassDescriptionDepthStencilResolve-stencilResolveMode-parameter",
     // http://issuetracker.google.com/175584609
     "VUID-vkCmdDraw-None-04584",
     "VUID-vkCmdDrawIndexed-None-04584",
@@ -199,8 +194,6 @@ constexpr const char *kSkippedMessages[] = {
     "VUID-vkCmdDrawIndexed-None-06538",
     // http://anglebug.com/7325
     "VUID-vkCmdBindVertexBuffers2-pStrides-06209",
-    // http://anglebug.com/7513
-    "VUID-VkGraphicsPipelineCreateInfo-pStages-06896",
     // http://anglebug.com/7685
     "UNASSIGNED-input-attachment-descriptor-not-in-subpass",
     "VUID-vkCmdDraw-None-02686",
@@ -240,77 +233,18 @@ constexpr vk::SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
         "write_barriers: 0, command: vkCmdEndRenderPass",
     },
     // These errors are caused by a feedback loop tests that don't produce correct Vulkan to begin
-    // with.  The message to check is made more specific (by checking the exact set/binding and part
-    // of seq_no) to reduce the chances of it suppressing a bug in other valid tests.
+    // with.
     // http://anglebug.com/6417
+    // http://anglebug.com/7070
     //
-    // From: Texture2DBaseMaxTestES3.Fuzz545ImmutableTexRenderFeedback/ES3_Vulkan
+    // Occassionally, this is due to VVL's lack of support for some extensions.  For example,
+    // syncval doesn't properly account for VK_EXT_fragment_shader_interlock, which gives
+    // synchronization guarantees without the need for an image barrier.
+    // https://github.com/KhronosGroup/Vulkan-ValidationLayers/issues/4387
     {
         "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
-        "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdBeginRenderPass, seq_no: 6",
-    },
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
-        "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdBeginRenderPass, seq_no: 7",
-    },
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
-        "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdDraw",
-    },
-    // From: FramebufferTest_ES3.FramebufferBindToNewLevelAfterMaxIncreaseShouldntCrash/ES3_Vulkan
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
-        "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdBeginRenderPass, seq_no: 10,",
-    },
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
-        "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdBeginRenderPass, seq_no: 2,",
-    },
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
-        "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdBeginRenderPass, seq_no: 9,",
-    },
-    // From: FramebufferTest_ES3.SampleFromAttachedTextureWithDifferentLOD/ES3_Vulkan
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
-        "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdBeginRenderPass, seq_no: 8,",
-    },
-    // With Vulkan secondary command buffers:
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "Recorded access info (recorded_usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, command: "
-        "vkCmdDraw, seq_no: 1, reset_no: 1). Access info (prior_usage: "
-        "SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, command: "
-        "vkCmdBeginRenderPass, seq_no:",
-    },
-    // From: TraceTest.vulkan_aztec_ruins
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
-        "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdBeginRenderPass, seq_no: 11",
+        "imageLayout: VK_IMAGE_LAYOUT_GENERAL",
+        "usage: SYNC_FRAGMENT_SHADER_SHADER_",
     },
     // http://anglebug.com/6551
     {
@@ -433,14 +367,6 @@ constexpr vk::SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
      "VK_IMAGE_LAYOUT_GENERAL). Access info (usage: SYNC_IMAGE_LAYOUT_TRANSITION, prior_usage: "
      "SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers:",
      true},
-    // http://anglebug.com/7070
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: VK_IMAGE_LAYOUT_GENERAL, "
-        "binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, write_barriers: 0, "
-        "command: vkCmdBeginRenderPass",
-    },
     // From: TraceTest.car_chase http://anglebug.com/7125
     {
         "SYNC-HAZARD-WRITE-AFTER-READ",
@@ -457,82 +383,32 @@ constexpr vk::SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
     {
         "SYNC-HAZARD-WRITE-AFTER-READ",
         "Access info (usage: SYNC_IMAGE_LAYOUT_TRANSITION, prior_usage: "
-        "SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, read_barriers: "
-        "VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT, command: vkCmdDrawIndexed",
+        "SYNC_FRAGMENT_SHADER_SHADER_",
     },
     // http://anglebug.com/7031
     {"SYNC-HAZARD-READ-AFTER-WRITE",
      "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: "
      "VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, binding #0, index 0. Access info (usage: "
-     "SYNC_COMPUTE_SHADER_SHADER_STORAGE_READ, prior_usage: SYNC_IMAGE_LAYOUT_TRANSITION, "
-     "write_barriers: "
-     "SYNC_VERTEX_ATTRIBUTE_INPUT_VERTEX_ATTRIBUTE_READ|SYNC_VERTEX_SHADER_SHADER_SAMPLED_READ|"
-     "SYNC_VERTEX_SHADER_SHADER_STORAGE_READ|SYNC_VERTEX_SHADER_UNIFORM_READ|SYNC_TESSELLATION_"
-     "CONTROL_SHADER_SHADER_SAMPLED_READ|SYNC_TESSELLATION_CONTROL_SHADER_SHADER_STORAGE_READ|"
-     "SYNC_TESSELLATION_CONTROL_SHADER_UNIFORM_READ|SYNC_TESSELLATION_EVALUATION_SHADER_SHADER_"
-     "SAMPLED_READ|SYNC_TESSELLATION_EVALUATION_SHADER_SHADER_STORAGE_READ|SYNC_TESSELLATION_EV"
-     "ALUATION_SHADER_UNIFORM_READ|SYNC_GEOMETRY_SHADER_SHADER_SAMPLED_READ|SYNC_GEOMETRY_SHADER"
-     "_SHADER_STORAGE_READ|SYNC_GEOMETRY_SHADER_UNIFORM_READ|SYNC_FRAGMENT_SHADER_SHADER_SAMPLED_"
-     "READ"
-     "|SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ|SYNC_FRAGMENT_SHADER_UNIFORM_READ, "
-     "command: vkCmdPipelineBarrier, seq_no: 4,",
-     "", false},
-    // On SwiftShader, http://anglebug.com/7031
-    {"SYNC-HAZARD-READ-AFTER-WRITE",
-     "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: "
-     "VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, binding #0, index 0. Access info (usage: "
-     "SYNC_COMPUTE_SHADER_SHADER_STORAGE_READ, prior_usage: SYNC_IMAGE_LAYOUT_TRANSITION, "
-     "write_barriers: "
-     "SYNC_FRAGMENT_SHADER_SHADER_SAMPLED_READ|SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ|SYNC_"
-     "FRAGMENT_SHADER_UNIFORM_READ, "
-     "command: vkCmdPipelineBarrier, seq_no: 3,",
+     "SYNC_COMPUTE_SHADER_SHADER_",
      "", false},
     // http://anglebug.com/7456
     {
         "SYNC-HAZARD-READ-AFTER-WRITE",
         "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, "
         "imageLayout: VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL",
-        "Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_IMAGE_LAYOUT_TRANSITION, "
-        "write_barriers: SYNC_VERTEX_SHADER_SHADER_SAMPLED_READ|"
-        "SYNC_VERTEX_SHADER_SHADER_STORAGE_READ|SYNC_VERTEX_SHADER_UNIFORM_READ, "
-        "command: vkCmdPipelineBarrier",
+        "Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_",
     },
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, "
-        "imageLayout: VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL",
-        "Access info (usage: SYNC_COMPUTE_SHADER_SHADER_STORAGE_READ, "
-        "prior_usage: SYNC_IMAGE_LAYOUT_TRANSITION, "
-        "write_barriers: SYNC_VERTEX_ATTRIBUTE_INPUT_VERTEX_ATTRIBUTE_READ|"
-        "SYNC_FRAGMENT_SHADER_SHADER_SAMPLED_READ|SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ|"
-        "SYNC_FRAGMENT_SHADER_UNIFORM_READ, "
-        "command: vkCmdPipelineBarrier",
-    },
-    // The validation layers don't properly account for VK_EXT_fragment_shader_interlock, which
-    // gives synchronization guarantees without the need for an image barrier. Suppress these
-    // syncval errors globally until it's fixed.
-    // https://github.com/KhronosGroup/Vulkan-ValidationLayers/issues/4387
-    {"SYNC-HAZARD-READ-AFTER-WRITE",
-     "type: VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, "
-     "imageLayout: VK_IMAGE_LAYOUT_GENERAL",
-     "Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-     "prior_usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_WRITE, "
-     "write_barriers: 0"},
     // From: TraceTest.life_is_strange http://anglebug.com/7711
     {"SYNC-HAZARD-WRITE-AFTER-READ",
      "vkCmdEndRenderPass: Hazard WRITE_AFTER_READ in subpass 0 for attachment 1 "
      "depth aspect during store with storeOp VK_ATTACHMENT_STORE_OP_DONT_CARE. "
      "Access info (usage: SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, "
-     "prior_usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-     "read_barriers: VK_PIPELINE_STAGE_2_NONE, command: vkCmdDrawIndexed,"},
+     "prior_usage: SYNC_FRAGMENT_SHADER_SHADER_"},
     // From: TraceTest.life_is_strange http://anglebug.com/7711
     {"SYNC-HAZARD-READ-AFTER-WRITE",
      "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, "
      "imageLayout: VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL",
-     "usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, "
-     "prior_usage: SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, "
-     "write_barriers: 0, command: vkCmdEndRenderPass"},
+     "usage: SYNC_FRAGMENT_SHADER_SHADER_"},
     // From: TraceTest.diablo_immortal http://anglebug.com/7837
     {"SYNC-HAZARD-WRITE-AFTER-WRITE", "vkCmdDrawIndexed: Hazard WRITE_AFTER_WRITE for VkImageView ",
      "Subpass #0, and pColorAttachments #0. Access info (usage: "
@@ -540,20 +416,14 @@ constexpr vk::SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
      "SYNC_IMAGE_LAYOUT_TRANSITION, write_barriers: 0, command: vkCmdEndRenderPass"},
     // From: TraceTest.diablo_immortal http://anglebug.com/7837
     {"SYNC-HAZARD-WRITE-AFTER-READ",
-     "vkCmdBeginRenderPass: Hazard WRITE_AFTER_READ in subpass 0 for attachment 1 aspect depth "
-     "during load with loadOp VK_ATTACHMENT_LOAD_OP_DONT_CARE. Access info (usage: "
+     "load with loadOp VK_ATTACHMENT_LOAD_OP_DONT_CARE. Access info (usage: "
      "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
-     "SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, read_barriers: "
-     "VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT|VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT|VK_"
-     "PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT|VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT, "
-     "command: vkCmdDraw"},
+     "SYNC_FRAGMENT_SHADER_SHADER_"},
     // From: TraceTest.catalyst_black http://anglebug.com/7924
     {"SYNC-HAZARD-WRITE-AFTER-READ",
-     "vkCmdEndRenderPass: Hazard WRITE_AFTER_READ in subpass 0 for attachment 1 depth aspect "
-     "during store with storeOp VK_ATTACHMENT_STORE_OP_STORE. Access info (usage: "
+     "store with storeOp VK_ATTACHMENT_STORE_OP_STORE. Access info (usage: "
      "SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
-     "SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, read_barriers: ",
-     "VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT, command: vkCmdDraw"},
+     "SYNC_FRAGMENT_SHADER_SHADER_"},
 };
 
 // Messages that shouldn't be generated if storeOp=NONE is supported, otherwise they are expected.
@@ -572,39 +442,19 @@ constexpr vk::SkippedSyncvalMessage kSkippedSyncvalMessagesWithoutStoreOpNone[] 
     {
         "SYNC-HAZARD-WRITE-AFTER-READ",
         "depth aspect during store with storeOp VK_ATTACHMENT_STORE_OP_STORE. Access info (usage: "
-        "SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
-        "SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, read_barriers: VK_PIPELINE_STAGE_2_NONE, "
-        "command: vkCmdDraw",
-        "",
+        "SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE",
+        "usage: SYNC_FRAGMENT_SHADER_SHADER_",
     },
     {
         "SYNC-HAZARD-WRITE-AFTER-READ",
         "stencil aspect during store with stencilStoreOp VK_ATTACHMENT_STORE_OP_STORE. Access info "
-        "(usage: SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
-        "SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, read_barriers: VK_PIPELINE_STAGE_2_NONE, "
-        "command: vkCmdDraw",
-        "",
+        "(usage: SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE",
+        "usage: SYNC_FRAGMENT_SHADER_SHADER_",
     },
     {
         "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: "
-        "VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL, binding ",
-        "Access info (usage: "
-        "SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, prior_usage: "
-        "SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, write_barriers: 0, command: "
-        "vkCmdEndRenderPass",
-    },
-    {
-        "SYNC-HAZARD-READ-AFTER-WRITE",
-        "type: VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, imageLayout: "
-        "VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL, binding ",
-        "Access info (usage: "
-        "SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, prior_usage: "
-        "SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, write_barriers: "
-        "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_READ|SYNC_EARLY_FRAGMENT_TESTS_DEPTH_"
-        "STENCIL_ATTACHMENT_WRITE|SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_READ|SYNC_LATE_"
-        "FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, command: "
-        "vkCmdEndRenderPass",
+        "imageLayout: VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL",
+        "usage: SYNC_FRAGMENT_SHADER_SHADER_",
     },
 };
 
@@ -620,38 +470,20 @@ constexpr vk::SkippedSyncvalMessage kSkippedSyncvalMessagesWithoutLoadStoreOpNon
         "Access info (usage: SYNC_IMAGE_LAYOUT_TRANSITION, prior_usage: "
         "SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, write_barriers: 0, command: "
         "vkCmdEndRenderPass",
-        "",
     },
     // http://anglebug.com/6411
-    {
-        "SYNC-HAZARD-WRITE-AFTER-WRITE",
-        "aspect depth during load with loadOp VK_ATTACHMENT_LOAD_OP_DONT_CARE. Access info (usage: "
-        "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
-        "SYNC_IMAGE_LAYOUT_TRANSITION, write_barriers: "
-        "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_READ|SYNC_LATE_FRAGMENT_TESTS_DEPTH_"
-        "STENCIL_ATTACHMENT_READ, command: vkCmdPipelineBarrier",
-        "",
-    },
-    {
-        "SYNC-HAZARD-WRITE-AFTER-WRITE",
-        "aspect stencil during load with loadOp VK_ATTACHMENT_LOAD_OP_DONT_CARE. Access info "
-        "(usage: "
-        "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
-        "SYNC_IMAGE_LAYOUT_TRANSITION, write_barriers: "
-        "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_READ|SYNC_LATE_FRAGMENT_TESTS_DEPTH_"
-        "STENCIL_ATTACHMENT_READ, command: vkCmdPipelineBarrier",
-        "",
-    },
     // http://anglebug.com/6584
     {
         "SYNC-HAZARD-WRITE-AFTER-WRITE",
         "aspect depth during load with loadOp VK_ATTACHMENT_LOAD_OP_DONT_CARE. Access info (usage: "
         "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
-        "SYNC_IMAGE_LAYOUT_TRANSITION, write_barriers: "
-        "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_READ|SYNC_LATE_FRAGMENT_TESTS_DEPTH_"
-        "STENCIL_ATTACHMENT_READ|SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_READ|SYNC_COLOR_"
-        "ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, command: vkCmdPipelineBarrier",
-        "",
+        "SYNC_IMAGE_LAYOUT_TRANSITION",
+    },
+    {
+        "SYNC-HAZARD-WRITE-AFTER-WRITE",
+        "aspect stencil during load with loadOp VK_ATTACHMENT_LOAD_OP_DONT_CARE. Access info "
+        "(usage: "
+        "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE",
     },
     // http://anglebug.com/5962
     {
@@ -659,23 +491,14 @@ constexpr vk::SkippedSyncvalMessage kSkippedSyncvalMessagesWithoutLoadStoreOpNon
         "aspect stencil during load with loadOp VK_ATTACHMENT_LOAD_OP_DONT_CARE. Access info "
         "(usage: "
         "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
-        "SYNC_IMAGE_LAYOUT_TRANSITION, write_barriers: "
-        "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_READ|SYNC_FRAGMENT_SHADER_SHADER_"
-        "SAMPLED_"
-        "READ|SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ|SYNC_FRAGMENT_SHADER_UNIFORM_READ|SYNC_LATE_"
-        "FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_READ, command: vkCmdPipelineBarrier",
-        "",
+        "SYNC_IMAGE_LAYOUT_TRANSITION",
     },
     {
         "SYNC-HAZARD-WRITE-AFTER-WRITE",
         "aspect stencil during load with loadOp VK_ATTACHMENT_LOAD_OP_DONT_CARE. Access info "
         "(usage: "
         "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: "
-        "SYNC_IMAGE_LAYOUT_TRANSITION, write_barriers: "
-        "SYNC_EARLY_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_READ|SYNC_LATE_FRAGMENT_TESTS_DEPTH_"
-        "STENCIL_ATTACHMENT_READ|SYNC_COLOR_ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_READ|SYNC_COLOR_"
-        "ATTACHMENT_OUTPUT_COLOR_ATTACHMENT_WRITE, command: vkCmdPipelineBarrier",
-        "",
+        "SYNC_IMAGE_LAYOUT_TRANSITION",
     },
 };
 
@@ -1276,10 +1099,14 @@ void checkForCurrentMemoryAllocations(RendererVk *renderer)
         {
             if (renderer->getActiveMemoryAllocationsSize(i) != 0)
             {
-                INFO() << "Currently allocated size for memory allocation type ("
-                       << vk::kMemoryAllocationTypeMessage[i]
-                       << "): " << renderer->getActiveMemoryAllocationsSize(i)
-                       << " | Count: " << renderer->getActiveMemoryAllocationsCount(i);
+                std::stringstream outStream;
+                outStream.imbue(std::locale(""));
+
+                outStream << "Currently allocated size for memory allocation type ("
+                          << vk::kMemoryAllocationTypeMessage[i]
+                          << "): " << renderer->getActiveMemoryAllocationsSize(i)
+                          << " | Count: " << renderer->getActiveMemoryAllocationsCount(i);
+                INFO() << outStream.str();
             }
         }
     }
@@ -1289,9 +1116,13 @@ void checkForCurrentMemoryAllocations(RendererVk *renderer)
         {
             if (renderer->getActiveMemoryAllocationsSize(i) != 0)
             {
-                INFO() << "Currently allocated size for memory allocation type ("
-                       << vk::kMemoryAllocationTypeMessage[i]
-                       << "): " << renderer->getActiveMemoryAllocationsSize(i);
+                std::stringstream outStream;
+                outStream.imbue(std::locale(""));
+
+                outStream << "Currently allocated size for memory allocation type ("
+                          << vk::kMemoryAllocationTypeMessage[i]
+                          << "): " << renderer->getActiveMemoryAllocationsSize(i);
+                INFO() << outStream.str();
             }
         }
     }
@@ -1307,8 +1138,13 @@ void logPendingMemoryAllocation(vk::MemoryAllocationType allocInfo, VkDeviceSize
 
     if (allocSize != 0)
     {
-        WARN() << "Pending allocation size for memory allocation type ("
-               << vk::kMemoryAllocationTypeMessage[ToUnderlying(allocInfo)] << "): " << allocSize;
+        std::stringstream outStream;
+        outStream.imbue(std::locale(""));
+
+        outStream << "Pending allocation size for memory allocation type ("
+                  << vk::kMemoryAllocationTypeMessage[ToUnderlying(allocInfo)]
+                  << "): " << allocSize;
+        WARN() << outStream.str();
     }
 }
 
@@ -1344,6 +1180,7 @@ void logMemoryHeapStats(RendererVk *renderer, vk::MemoryLogSeverity severity)
 
     // Log stream for the heap information.
     std::stringstream outStream;
+    outStream.imbue(std::locale(""));
 
     // VkPhysicalDeviceMemoryProperties2 enables the use of memory budget properties if supported.
     VkPhysicalDeviceMemoryProperties2KHR memoryProperties;
@@ -1364,31 +1201,32 @@ void logMemoryHeapStats(RendererVk *renderer, vk::MemoryLogSeverity severity)
     // Add memory heap information to the stream.
     outStream << "Memory heap info" << std::endl;
 
-    outStream << "* Available memory heaps:" << std::endl;
+    outStream << std::endl << "* Available memory heaps:" << std::endl;
     for (uint32_t i = 0; i < memoryProperties.memoryProperties.memoryHeapCount; i++)
     {
-        outStream << i << " | Size: " << memoryProperties.memoryProperties.memoryHeaps[i].size
-                  << " | Flags: " << memoryProperties.memoryProperties.memoryHeaps[i].flags
-                  << std::endl;
-    }
-
-    outStream << "* Available memory types:" << std::endl;
-    for (uint32_t i = 0; i < memoryProperties.memoryProperties.memoryTypeCount; i++)
-    {
-        outStream << i
-                  << " | Heap index: " << memoryProperties.memoryProperties.memoryTypes[i].heapIndex
-                  << " | Property flags: "
-                  << memoryProperties.memoryProperties.memoryTypes[i].propertyFlags << std::endl;
+        outStream << std::dec << i
+                  << " | Heap size: " << memoryProperties.memoryProperties.memoryHeaps[i].size
+                  << " | Flags: 0x" << std::hex
+                  << memoryProperties.memoryProperties.memoryHeaps[i].flags << std::endl;
     }
 
     if (renderer->getFeatures().supportsMemoryBudget.enabled)
     {
-        outStream << "* Available memory budget and usage:" << std::endl;
-        for (uint32_t i = 0; i < VK_MAX_MEMORY_HEAPS; i++)
+        outStream << std::endl << "* Available memory budget and usage per heap:" << std::endl;
+        for (uint32_t i = 0; i < memoryProperties.memoryProperties.memoryHeapCount; i++)
         {
-            outStream << i << " | Heap budget: " << memoryBudgetProperties.heapBudget[i]
+            outStream << std::dec << i << " | Heap budget: " << memoryBudgetProperties.heapBudget[i]
                       << " | Heap usage: " << memoryBudgetProperties.heapUsage[i] << std::endl;
         }
+    }
+
+    outStream << std::endl << "* Available memory types:" << std::endl;
+    for (uint32_t i = 0; i < memoryProperties.memoryProperties.memoryTypeCount; i++)
+    {
+        outStream << std::dec << i
+                  << " | Heap index: " << memoryProperties.memoryProperties.memoryTypes[i].heapIndex
+                  << " | Property flags: 0x" << std::hex
+                  << memoryProperties.memoryProperties.memoryTypes[i].propertyFlags << std::endl;
     }
 
     // Output the log stream based on the level of severity.
