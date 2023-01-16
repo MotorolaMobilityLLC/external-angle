@@ -1,5 +1,5 @@
 # ~~~
-# Copyright (c) 2022 LunarG, Inc.
+# Copyright (c) 2022-2023 LunarG, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,3 +42,4 @@ target_link_libraries(vk_layer PRIVATE Vulkan::Headers)
 # vk_sdk_platform.h
 add_executable(vk_sdk_platform vk_sdk_platform.c)
 target_link_libraries(vk_sdk_platform PRIVATE Vulkan::Headers)
+target_compile_definitions(vk_sdk_platform PRIVATE VK_SDK_PLATFORM_SUPRRESS_DEPRECATION_WARNING)
