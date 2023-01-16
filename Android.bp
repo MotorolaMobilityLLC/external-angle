@@ -5817,6 +5817,7 @@ cc_defaults {
         "third_party_abseil_cpp_absl_hash_city",
         "third_party_abseil_cpp_absl_hash_low_level_hash",
         "third_party_abseil_cpp_absl_meta_type_traits",
+        "third_party_abseil_cpp_absl_numeric_bits",
         "third_party_abseil_cpp_absl_numeric_int128",
         "third_party_abseil_cpp_absl_strings_strings",
         "third_party_abseil_cpp_absl_types_optional",
