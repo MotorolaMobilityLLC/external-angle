@@ -12,6 +12,7 @@
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
+#include <math.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -84,6 +85,7 @@ void UpdateCurrentProgram(GLuint program);
 extern uint8_t *gBinaryData;
 extern uint8_t *gReadBuffer;
 extern uint8_t *gClientArrays[];
+extern GLuint *gResourceIDBuffer;
 
 extern GLuint *gBufferMap;
 extern GLuint *gFenceNVMap;
@@ -108,6 +110,7 @@ extern GLsync *gSyncMap2;
 void InitializeReplay3(const char *binaryDataFileName,
                        size_t maxClientArraySize,
                        size_t readBufferSize,
+                       size_t resourceIDBufferSize,
                        GLuint contextId,
                        uint32_t maxBuffer,
                        uint32_t maxContext,
@@ -171,6 +174,7 @@ void UpdateClientBufferDataWithOffset(GLuint bufferID,
                                       const void *source,
                                       GLsizei size,
                                       GLsizei offset);
+void UpdateResourceIDBuffer(int resourceIndex, GLuint id);
 void UpdateBufferID(GLuint id, GLsizei readBufferOffset);
 void UpdateFenceNVID(GLuint id, GLsizei readBufferOffset);
 void UpdateFramebufferID(GLuint id, GLsizei readBufferOffset);
