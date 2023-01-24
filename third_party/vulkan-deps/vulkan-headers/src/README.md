@@ -23,7 +23,7 @@ Vulkan-Headers are shipped as part of the official [Vulkan-SDK](https://www.luna
 
 ## C/C++ Package Manager Support
 
-`Vulkan-Headers` are also supported by both conan & vcpkg.
+`Vulkan-Headers` are also supported by both [conan](https://conan.io/) & [vcpkg](https://learn.microsoft.com/en-us/vcpkg/).
 
 ## Version Tagging Scheme
 
