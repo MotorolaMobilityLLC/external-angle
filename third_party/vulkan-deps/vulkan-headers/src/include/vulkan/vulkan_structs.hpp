@@ -65613,6 +65613,106 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDevicePipelineExecutablePropertiesFeaturesKHR;
   };
 
+  struct PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT
+  {
+    using NativeType = VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 pipelineLibraryGroupHandles_ = {},
+                                                                               void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , pipelineLibraryGroupHandles( pipelineLibraryGroupHandles_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT( PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT( VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT( *reinterpret_cast<PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT &
+      operator=( PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT & operator=( VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT &
+                            setPipelineLibraryGroupHandles( VULKAN_HPP_NAMESPACE::Bool32 pipelineLibraryGroupHandles_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pipelineLibraryGroupHandles = pipelineLibraryGroupHandles_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT *>( this );
+    }
+
+    operator VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, pipelineLibraryGroupHandles );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pipelineLibraryGroupHandles == rhs.pipelineLibraryGroupHandles );
+#  endif
+    }
+
+    bool operator!=( PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                       = StructureType::ePhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT;
+    void *                              pNext                       = {};
+    VULKAN_HPP_NAMESPACE::Bool32        pipelineLibraryGroupHandles = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT>
+  {
+    using Type = PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT;
+  };
+
   struct PhysicalDevicePipelinePropertiesFeaturesEXT
   {
     using NativeType = VkPhysicalDevicePipelinePropertiesFeaturesEXT;
