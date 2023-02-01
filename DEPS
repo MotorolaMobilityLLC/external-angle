@@ -43,7 +43,7 @@ vars = {
   'checkout_angle_mesa': False,
 
   # Version of Chromium our Chromium-based DEPS are mirrored from.
-  'chromium_revision': '7a868f186276a80b53bff30783d265d9e460aa09',
+  'chromium_revision': 'f19a46134fe24a5a339fdcf06a995cd02468cd0d',
   # We never want to checkout chromium,
   # but need a dummy DEPS entry for the autoroller
   'dummy_checkout_chromium': False,
@@ -88,11 +88,11 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling catapult
   # and whatever else without interference from each other.
-  'catapult_revision': 'b7719ec23acb07501a5e0260f8ed1d4fa2348a1b',
+  'catapult_revision': '5a468ccd919e16a29bb3121e3c90f27bf8745942',
 
   # the commit queue can handle CLs rolling Fuchsia sdk
   # and whatever else without interference from each other.
-  'fuchsia_version': 'version:11.20230130.3.1',
+  'fuchsia_version': 'version:11.20230131.2.1',
 
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling luci-go
@@ -140,12 +140,12 @@ vars = {
 deps = {
 
   'build': {
-    'url': '{chromium_git}/chromium/src/build.git@2d1f8e221135b8fb6b1ede882be05b1a84705ec7',
+    'url': '{chromium_git}/chromium/src/build.git@e0df145ecb560e48381b6dccf3b9c8b31aa95bcd',
     'condition': 'not build_with_chromium',
   },
 
   'buildtools': {
-    'url': '{chromium_git}/chromium/src/buildtools.git@7a0617ed04531f5a76071e7f869233d4097a4785',
+    'url': '{chromium_git}/chromium/src/buildtools.git@295c6e5037e358904aef73a21409896d58547ba6',
     'condition': 'not build_with_chromium',
   },
 
@@ -177,7 +177,7 @@ deps = {
   },
 
   'buildtools/third_party/libc++/trunk': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@b93c72898263c373461b76568dd7315801bad0c6',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@59bae40d835ae4eabaddbef781f5e3b778dd7907',
     'condition': 'not build_with_chromium',
   },
 
@@ -203,7 +203,7 @@ deps = {
   },
 
   'testing': {
-    'url': '{chromium_git}/chromium/src/testing@35036644607cd7f7734d7728838270890a45a467',
+    'url': '{chromium_git}/chromium/src/testing@3eb5565c589f67ae3525a96c5744e939eab5ffd5',
     'condition': 'not build_with_chromium',
   },
 
@@ -243,7 +243,7 @@ deps = {
       'packages': [
           {
                'package': 'chromium/third_party/android_build_tools/bundletool',
-               'version': 'XIPSJgFHEHN1ogOJqWVktlbl8PTfLZdNf_G2h4GcnrYC',
+               'version': 'TpDdbF-PPgwL0iOVsdLM07L-DUp2DV3hgzCMmPd2_GUC',
           },
       ],
       'condition': 'checkout_android and not build_with_chromium',
@@ -380,7 +380,7 @@ deps = {
   },
 
   'third_party/depot_tools': {
-    'url': '{chromium_git}/chromium/tools/depot_tools.git@94b0eb1bb51bc76d90494df87e12d82847140b5a',
+    'url': '{chromium_git}/chromium/tools/depot_tools.git@3d072ab6fb49fd3d2116a41cee66d47c3d409299',
     'condition': 'not build_with_chromium',
   },
 
@@ -689,7 +689,7 @@ deps = {
   },
 
   'tools/mb': {
-    'url': '{chromium_git}/chromium/src/tools/mb@e7ecbaa022a234b604aa854e6270396af00e642a',
+    'url': '{chromium_git}/chromium/src/tools/mb@05c4d345e8db81de5ab433dfeb6b3032aaeccbda',
     'condition': 'not build_with_chromium',
   },
 
@@ -704,7 +704,7 @@ deps = {
   },
 
   'tools/perf': {
-    'url': '{chromium_git}/chromium/src/tools/perf@ad343821d4927b18caef625a26d69d1e8c43e1b0',
+    'url': '{chromium_git}/chromium/src/tools/perf@387eee2a818a29b58f74769e5680a2eafd74d241',
     'condition': 'not build_with_chromium',
   },
 
@@ -788,10 +788,30 @@ deps = {
       'dep_type': 'cipd',
       'condition': 'checkout_angle_restricted_traces',
   },
+  'src/tests/restricted_traces/2_3_4_player_mini_games': {
+      'packages': [
+        {
+            'package': 'angle/traces/2_3_4_player_mini_games',
+            'version': 'version:1',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
   'src/tests/restricted_traces/3d_pool_ball': {
       'packages': [
         {
             'package': 'angle/traces/3d_pool_ball',
+            'version': 'version:1',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/age_of_origins_z': {
+      'packages': [
+        {
+            'package': 'angle/traces/age_of_origins_z',
             'version': 'version:1',
         },
       ],
@@ -1083,6 +1103,16 @@ deps = {
         {
             'package': 'angle/traces/call_break_offline_card_game',
             'version': 'version:5',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/callbreak': {
+      'packages': [
+        {
+            'package': 'angle/traces/callbreak',
+            'version': 'version:1',
         },
       ],
       'dep_type': 'cipd',
@@ -2043,6 +2073,16 @@ deps = {
         {
             'package': 'angle/traces/one_punch_man',
             'version': 'version:5',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/piano_kids': {
+      'packages': [
+        {
+            'package': 'angle/traces/piano_kids',
+            'version': 'version:1',
         },
       ],
       'dep_type': 'cipd',
