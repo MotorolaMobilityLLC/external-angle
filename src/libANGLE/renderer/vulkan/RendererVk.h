@@ -221,8 +221,6 @@ class MemoryAllocationTracker : angle::NonCopyable
                                VkDeviceSize size,
                                uint32_t memoryTypeIndex);
 
-    std::locale getLocale() { return mLocale; }
-
   private:
     // Pointer to parent renderer object.
     RendererVk *const mRenderer;
@@ -255,9 +253,6 @@ class MemoryAllocationTracker : angle::NonCopyable
     uint64_t mMemoryAllocationID;
     using MemoryAllocInfoMap = angle::HashMap<vk::MemoryAllocInfoMapKey, vk::MemoryAllocationInfo>;
     angle::HashMap<angle::BacktraceInfo, MemoryAllocInfoMap> mMemoryAllocationRecord;
-
-    // Custom locale used for number formatting.
-    std::locale mLocale;
 };
 
 class RendererVk : angle::NonCopyable
@@ -936,10 +931,10 @@ class RendererVk : angle::NonCopyable
     OneOffCommandPool mOneOffCommandPool;
 
     // Synchronous Command Queue
-    vk::ThreadSafeCommandQueue mCommandQueue;
+    vk::CommandQueue mCommandQueue;
 
     // Async Command Queue
-    vk::ThreadSafeCommandProcessor mCommandProcessor;
+    vk::CommandProcessor mCommandProcessor;
 
     // Command buffer pool management.
     vk::CommandBufferRecycler<vk::OutsideRenderPassCommandBuffer,
