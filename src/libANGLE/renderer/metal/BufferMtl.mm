@@ -78,8 +78,11 @@ IndexRange IndexConversionBufferMtl::getRangeForConvertedBuffer(size_t count)
 }
 
 // UniformConversionBufferMtl implementation
-UniformConversionBufferMtl::UniformConversionBufferMtl(ContextMtl *context, size_t offsetIn)
+UniformConversionBufferMtl::UniformConversionBufferMtl(ContextMtl *context,
+                                                       std::pair<size_t, size_t> offsetIn,
+                                                       size_t uniformBufferBlockSize)
     : ConversionBufferMtl(context, 0, mtl::kUniformBufferSettingOffsetMinAlignment),
+      uniformBufferBlockSize(uniformBufferBlockSize),
       offset(offsetIn)
 {}
 
@@ -377,17 +380,21 @@ IndexConversionBufferMtl *BufferMtl::getIndexConversionBuffer(ContextMtl *contex
     return &mIndexConversionBuffers.back();
 }
 
-ConversionBufferMtl *BufferMtl::getUniformConversionBuffer(ContextMtl *context, size_t offset)
+ConversionBufferMtl *BufferMtl::getUniformConversionBuffer(ContextMtl *context,
+                                                           std::pair<size_t, size_t> offset,
+                                                           size_t stdSize)
 {
     for (UniformConversionBufferMtl &buffer : mUniformConversionBuffers)
     {
-        if (buffer.offset == offset)
+        if (buffer.offset.first == offset.first)
         {
-            return &buffer;
+            if (buffer.offset.second <= offset.second &&
+                (offset.second - buffer.offset.second) % buffer.uniformBufferBlockSize == 0)
+                return &buffer;
         }
     }
 
-    mUniformConversionBuffers.emplace_back(context, offset);
+    mUniformConversionBuffers.emplace_back(context, offset, stdSize);
     return &mUniformConversionBuffers.back();
 }
 
@@ -499,9 +506,20 @@ const std::vector<IndexRange> BufferMtl::getRestartIndicesFromClientData(
 
 namespace
 {
-MTLStorageMode getStorageModeForUsage(ContextMtl *contextMtl, gl::BufferUsage usage)
+
+bool useSharedMemory(ContextMtl *contextMtl, gl::BufferUsage usage)
 {
-    mtl::Buffer::AccessPattern access;
+    const angle::FeaturesMtl &features = contextMtl->getDisplay()->getFeatures();
+    if (features.alwaysUseManagedStorageModeForBuffers.enabled)
+    {
+        return false;
+    }
+
+    if (features.alwaysUseSharedStorageModeForBuffers.enabled)
+    {
+        return true;
+    }
+
     switch (usage)
     {
         case gl::BufferUsage::StaticCopy:
@@ -509,14 +527,12 @@ MTLStorageMode getStorageModeForUsage(ContextMtl *contextMtl, gl::BufferUsage us
         case gl::BufferUsage::StaticRead:
         case gl::BufferUsage::DynamicRead:
         case gl::BufferUsage::StreamRead:
-            access = mtl::Buffer::AccessPattern::FrequentCPU;
-            break;
+            return true;
         default:
-            access = mtl::Buffer::AccessPattern::FrequentGPU;
-            break;
+            return false;
     }
-    return mtl::Buffer::getStorageModeForAccessPattern(contextMtl, access);
 }
+
 }  // namespace
 
 angle::Result BufferMtl::setDataImpl(const gl::Context *context,
@@ -562,8 +578,8 @@ angle::Result BufferMtl::setDataImpl(const gl::Context *context,
     }
 
     // Get a new buffer
-    auto storageMode = getStorageModeForUsage(contextMtl, usage);
-    ANGLE_TRY(bufferManager.getBuffer(contextMtl, storageMode, adjustedSize, mBuffer));
+    bool useSharedMem = useSharedMemory(contextMtl, usage);
+    ANGLE_TRY(bufferManager.getBuffer(contextMtl, adjustedSize, useSharedMem, mBuffer));
 
 #ifndef NDEBUG
     ANGLE_MTL_OBJC_SCOPE
@@ -645,9 +661,9 @@ angle::Result BufferMtl::putDataInNewBufferAndStartUsingNewBuffer(ContextMtl *co
 
     mtl::BufferManager &bufferManager = contextMtl->getBufferManager();
     mtl::BufferRef oldBuffer          = mBuffer;
-    auto storageMode                  = getStorageModeForUsage(contextMtl, mUsage);
+    bool useSharedMem                 = useSharedMemory(contextMtl, mUsage);
 
-    ANGLE_TRY(bufferManager.getBuffer(contextMtl, storageMode, mGLSize, mBuffer));
+    ANGLE_TRY(bufferManager.getBuffer(contextMtl, mGLSize, useSharedMem, mBuffer));
     mBuffer->get().label = [NSString stringWithFormat:@"BufferMtl=%p(%lu)", this, ++mRevisionCount];
 
     uint8_t *ptr = mBuffer->mapWithOpt(contextMtl, false, true);
@@ -769,10 +785,10 @@ angle::Result BufferMtl::commitShadowCopy(ContextMtl *contextMtl)
 angle::Result BufferMtl::commitShadowCopy(ContextMtl *contextMtl, size_t size)
 {
     mtl::BufferManager &bufferManager = contextMtl->getBufferManager();
-    auto storageMode                  = getStorageModeForUsage(contextMtl, mUsage);
+    bool useSharedMem                 = useSharedMemory(contextMtl, mUsage);
 
     bufferManager.returnBuffer(contextMtl, mBuffer);
-    ANGLE_TRY(bufferManager.getBuffer(contextMtl, storageMode, mGLSize, mBuffer));
+    ANGLE_TRY(bufferManager.getBuffer(contextMtl, mGLSize, useSharedMem, mBuffer));
 
     if (size)
     {
