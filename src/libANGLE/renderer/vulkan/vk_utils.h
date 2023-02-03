@@ -271,6 +271,15 @@ class Context : angle::NonCopyable
 
 class RenderPassDesc;
 
+enum class CommandContent
+{
+    Unprotected = 0,
+    Protected   = 1,
+
+    InvalidEnum = 2,
+    EnumCount   = 2,
+};
+
 #if ANGLE_USE_CUSTOM_VULKAN_OUTSIDE_RENDER_PASS_CMD_BUFFERS
 using OutsideRenderPassCommandBuffer = priv::SecondaryCommandBuffer;
 #else
@@ -687,8 +696,9 @@ class BindingPointer final : angle::NonCopyable
 
     BindingPointer(BindingPointer &&other)
     {
-        set(other.mRefCounted);
-        other.reset();
+        // Just grab other's mRefCounted
+        mRefCounted       = other.mRefCounted;
+        other.mRefCounted = nullptr;
     }
 
     void set(RefCounted<T> *refCounted)
