@@ -203,6 +203,8 @@ constexpr const char *kSkippedMessages[] = {
     "VUID-vkCmdDrawIndexed-None-06887",
     // http://anglebug.com/7865
     "VUID-VkDescriptorImageInfo-imageView-06711",
+    // http://crbug.com/1412096
+    "VUID-VkImageCreateInfo-pNext-00990",
 };
 
 // Validation messages that should be ignored only when VK_EXT_primitive_topology_list_restart is
@@ -4094,8 +4096,11 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
         &mFeatures, supportsFragmentShaderPixelInterlock,
         mFragmentShaderInterlockFeatures.fragmentShaderPixelInterlock == VK_TRUE);
 
+    // Samsung Vulkan driver crashes in vkCmdClearAttachments() when imageless Framebuffer
+    // is used to begin Secondary Command Buffer before the corresponding vkCmdBeginRenderPass().
     ANGLE_FEATURE_CONDITION(&mFeatures, supportsImagelessFramebuffer,
-                            mImagelessFramebufferFeatures.imagelessFramebuffer == VK_TRUE);
+                            mImagelessFramebufferFeatures.imagelessFramebuffer == VK_TRUE &&
+                                (vk::RenderPassCommandBuffer::ExecutesInline() || !isSamsung));
 
     // The VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_EXT behavior is used by
     // ANGLE, which requires the robustBufferAccess feature to be available.
