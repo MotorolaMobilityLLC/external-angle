@@ -4034,6 +4034,7 @@ cc_defaults {
         "angle_common_library_cflags",
         "third_party_abseil_cpp_absl_base_config",
         "third_party_abseil_cpp_absl_base_core_headers",
+        "third_party_abseil_cpp_absl_base_dynamic_annotations",
         "third_party_abseil_cpp_absl_base_endian",
         "third_party_abseil_cpp_absl_base_prefetch",
         "third_party_abseil_cpp_absl_base_raw_logging_internal",
