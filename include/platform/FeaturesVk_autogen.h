@@ -61,6 +61,13 @@ struct FeaturesVk : FeatureSetBase
         "Enable uploading the previously defined mutable mipmap texture.", &members,
         "https://anglebug.com/7308"};
 
+    FeatureInfo useVmaForImageSuballocation = {
+        "useVmaForImageSuballocation",
+        FeatureCategory::VulkanFeatures,
+        "Utilize VMA for image memory suballocation.",
+        &members,
+    };
+
     FeatureInfo supportsMemoryBudget = {
         "supportsMemoryBudget",
         FeatureCategory::VulkanFeatures,
@@ -847,6 +854,11 @@ struct FeaturesVk : FeatureSetBase
         "forceWaitForSubmissionToCompleteForQueryResult", FeatureCategory::VulkanWorkarounds,
         "Force wait for submission to complete before calling getQueryResult(wait).", &members,
         "https://issuetracker.google.com/253522366"};
+
+    FeatureInfo asyncCommandBufferReset = {"asyncCommandBufferReset",
+                                           FeatureCategory::VulkanFeatures,
+                                           "Reset command buffer in async thread.", &members,
+                                           "https://issuetracker.google.com/255411748"};
 };
 
 inline FeaturesVk::FeaturesVk()  = default;
