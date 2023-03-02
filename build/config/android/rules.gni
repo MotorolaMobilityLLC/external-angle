@@ -3667,6 +3667,15 @@ if (enable_java_templates && is_android) {
       assert(!defined(invoker.bundle_target))
     }
 
+    # android_app_bundle's write_build_config expects module targets to be named
+    # according to java_target_patterns otherwise it ignores them when listed in
+    # possible_config_deps. See https://crbug.com/1418398.
+    if (filter_exclude([ target_name ], [ "*_bundle_module" ]) != []) {
+      assert(false,
+             "Invalid android_app_bundle_module target name ($target_name), " +
+                 "must end in _bundle_module.")
+    }
+
     # TODO(tiborg): We have several flags that are necessary for workarounds
     # that come from the fact that the resources get compiled in the bundle
     # module target, but bundle modules have to have certain flags in
@@ -5084,8 +5093,6 @@ if (enable_java_templates && is_android) {
       if (!_proguard_enabled) {
         _module_target_name = get_label_info(_module_target, "name")
         _dex_target = "${_module_target_name}__final_dex"
-        _rebased_module_build_config =
-            rebase_path(_module_build_config, root_build_dir)
         _dex_path = "$target_out_dir/$_module_target_name/$_module_target_name.mergeddex.jar"
         dex(_dex_target) {
           forward_variables_from(invoker,
