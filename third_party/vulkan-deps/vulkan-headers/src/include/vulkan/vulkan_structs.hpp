@@ -1,4 +1,4 @@
-// Copyright 2015-2022 The Khronos Group Inc.
+// Copyright 2015-2023 The Khronos Group Inc.
 //
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //
@@ -41469,6 +41469,111 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageViewSampleWeightCreateInfoQCOM;
   };
 
+  struct ImageViewSlicedCreateInfoEXT
+  {
+    using NativeType = VkImageViewSlicedCreateInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageViewSlicedCreateInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      ImageViewSlicedCreateInfoEXT( uint32_t sliceOffset_ = {}, uint32_t sliceCount_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , sliceOffset( sliceOffset_ )
+      , sliceCount( sliceCount_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ImageViewSlicedCreateInfoEXT( ImageViewSlicedCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageViewSlicedCreateInfoEXT( VkImageViewSlicedCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImageViewSlicedCreateInfoEXT( *reinterpret_cast<ImageViewSlicedCreateInfoEXT const *>( &rhs ) )
+    {
+    }
+
+    ImageViewSlicedCreateInfoEXT & operator=( ImageViewSlicedCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImageViewSlicedCreateInfoEXT & operator=( VkImageViewSlicedCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImageViewSlicedCreateInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ImageViewSlicedCreateInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImageViewSlicedCreateInfoEXT & setSliceOffset( uint32_t sliceOffset_ ) VULKAN_HPP_NOEXCEPT
+    {
+      sliceOffset = sliceOffset_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ImageViewSlicedCreateInfoEXT & setSliceCount( uint32_t sliceCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      sliceCount = sliceCount_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkImageViewSlicedCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImageViewSlicedCreateInfoEXT *>( this );
+    }
+
+    operator VkImageViewSlicedCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImageViewSlicedCreateInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, uint32_t const &, uint32_t const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, sliceOffset, sliceCount );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImageViewSlicedCreateInfoEXT const & ) const = default;
+#else
+    bool operator==( ImageViewSlicedCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( sliceOffset == rhs.sliceOffset ) && ( sliceCount == rhs.sliceCount );
+#  endif
+    }
+
+    bool operator!=( ImageViewSlicedCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType       = StructureType::eImageViewSlicedCreateInfoEXT;
+    const void *                        pNext       = {};
+    uint32_t                            sliceOffset = {};
+    uint32_t                            sliceCount  = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eImageViewSlicedCreateInfoEXT>
+  {
+    using Type = ImageViewSlicedCreateInfoEXT;
+  };
+
   struct ImageViewUsageCreateInfo
   {
     using NativeType = VkImageViewUsageCreateInfo;
@@ -47809,6 +47914,135 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::eMultiviewPerViewAttributesInfoNVX>
   {
     using Type = MultiviewPerViewAttributesInfoNVX;
+  };
+
+  struct MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM
+  {
+    using NativeType = VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM( uint32_t                             perViewRenderAreaCount_ = {},
+                                                                             const VULKAN_HPP_NAMESPACE::Rect2D * pPerViewRenderAreas_    = {},
+                                                                             const void *                         pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , perViewRenderAreaCount( perViewRenderAreaCount_ )
+      , pPerViewRenderAreas( pPerViewRenderAreas_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM( MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM( VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+      : MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM( *reinterpret_cast<MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const *>( &rhs ) )
+    {
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::Rect2D> const & perViewRenderAreas_, const void * pNext_ = nullptr )
+      : pNext( pNext_ ), perViewRenderAreaCount( static_cast<uint32_t>( perViewRenderAreas_.size() ) ), pPerViewRenderAreas( perViewRenderAreas_.data() )
+    {
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM &
+      operator=( MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM & operator=( VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM &
+                            setPerViewRenderAreaCount( uint32_t perViewRenderAreaCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      perViewRenderAreaCount = perViewRenderAreaCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM &
+                            setPPerViewRenderAreas( const VULKAN_HPP_NAMESPACE::Rect2D * pPerViewRenderAreas_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pPerViewRenderAreas = pPerViewRenderAreas_;
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM &
+      setPerViewRenderAreas( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::Rect2D> const & perViewRenderAreas_ ) VULKAN_HPP_NOEXCEPT
+    {
+      perViewRenderAreaCount = static_cast<uint32_t>( perViewRenderAreas_.size() );
+      pPerViewRenderAreas    = perViewRenderAreas_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM *>( this );
+    }
+
+    operator VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, uint32_t const &, const VULKAN_HPP_NAMESPACE::Rect2D * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, perViewRenderAreaCount, pPerViewRenderAreas );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const & ) const = default;
+#else
+    bool operator==( MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( perViewRenderAreaCount == rhs.perViewRenderAreaCount ) &&
+             ( pPerViewRenderAreas == rhs.pPerViewRenderAreas );
+#  endif
+    }
+
+    bool operator!=( MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType  sType                  = StructureType::eMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
+    const void *                         pNext                  = {};
+    uint32_t                             perViewRenderAreaCount = {};
+    const VULKAN_HPP_NAMESPACE::Rect2D * pPerViewRenderAreas    = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM>
+  {
+    using Type = MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
   };
 
   struct MutableDescriptorTypeListEXT
@@ -60362,6 +60596,104 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using PhysicalDeviceImageRobustnessFeaturesEXT = PhysicalDeviceImageRobustnessFeatures;
 
+  struct PhysicalDeviceImageSlicedViewOf3DFeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceImageSlicedViewOf3DFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceImageSlicedViewOf3DFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 imageSlicedViewOf3D_ = {},
+                                                                       void *                       pNext_               = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , imageSlicedViewOf3D( imageSlicedViewOf3D_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceImageSlicedViewOf3DFeaturesEXT( PhysicalDeviceImageSlicedViewOf3DFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceImageSlicedViewOf3DFeaturesEXT( VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceImageSlicedViewOf3DFeaturesEXT( *reinterpret_cast<PhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceImageSlicedViewOf3DFeaturesEXT & operator=( PhysicalDeviceImageSlicedViewOf3DFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceImageSlicedViewOf3DFeaturesEXT & operator=( VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceImageSlicedViewOf3DFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceImageSlicedViewOf3DFeaturesEXT &
+                            setImageSlicedViewOf3D( VULKAN_HPP_NAMESPACE::Bool32 imageSlicedViewOf3D_ ) VULKAN_HPP_NOEXCEPT
+    {
+      imageSlicedViewOf3D = imageSlicedViewOf3D_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, imageSlicedViewOf3D );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceImageSlicedViewOf3DFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceImageSlicedViewOf3DFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageSlicedViewOf3D == rhs.imageSlicedViewOf3D );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceImageSlicedViewOf3DFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType               = StructureType::ePhysicalDeviceImageSlicedViewOf3DFeaturesEXT;
+    void *                              pNext               = {};
+    VULKAN_HPP_NAMESPACE::Bool32        imageSlicedViewOf3D = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceImageSlicedViewOf3DFeaturesEXT>
+  {
+    using Type = PhysicalDeviceImageSlicedViewOf3DFeaturesEXT;
+  };
+
   struct PhysicalDeviceImageViewImageFormatInfoEXT
   {
     using NativeType = VkPhysicalDeviceImageViewImageFormatInfoEXT;
@@ -64196,6 +64528,106 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::ePhysicalDeviceMultiviewPerViewAttributesPropertiesNVX>
   {
     using Type = PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX;
+  };
+
+  struct PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM
+  {
+    using NativeType = VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM( VULKAN_HPP_NAMESPACE::Bool32 multiviewPerViewRenderAreas_ = {},
+                                                                                void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , multiviewPerViewRenderAreas( multiviewPerViewRenderAreas_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM( PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM( VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM( *reinterpret_cast<PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM &
+      operator=( PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM & operator=( VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM &
+                            setMultiviewPerViewRenderAreas( VULKAN_HPP_NAMESPACE::Bool32 multiviewPerViewRenderAreas_ ) VULKAN_HPP_NOEXCEPT
+    {
+      multiviewPerViewRenderAreas = multiviewPerViewRenderAreas_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM *>( this );
+    }
+
+    operator VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, multiviewPerViewRenderAreas );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( multiviewPerViewRenderAreas == rhs.multiviewPerViewRenderAreas );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                       = StructureType::ePhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM;
+    void *                              pNext                       = {};
+    VULKAN_HPP_NAMESPACE::Bool32        multiviewPerViewRenderAreas = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM>
+  {
+    using Type = PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM;
   };
 
   struct PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM
@@ -71017,6 +71449,95 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::ePhysicalDeviceShaderCorePropertiesAMD>
   {
     using Type = PhysicalDeviceShaderCorePropertiesAMD;
+  };
+
+  struct PhysicalDeviceShaderCorePropertiesARM
+  {
+    using NativeType = VkPhysicalDeviceShaderCorePropertiesARM;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceShaderCorePropertiesARM;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderCorePropertiesARM( uint32_t pixelRate_ = {},
+                                                                uint32_t texelRate_ = {},
+                                                                uint32_t fmaRate_   = {},
+                                                                void *   pNext_     = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , pixelRate( pixelRate_ )
+      , texelRate( texelRate_ )
+      , fmaRate( fmaRate_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderCorePropertiesARM( PhysicalDeviceShaderCorePropertiesARM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderCorePropertiesARM( VkPhysicalDeviceShaderCorePropertiesARM const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceShaderCorePropertiesARM( *reinterpret_cast<PhysicalDeviceShaderCorePropertiesARM const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceShaderCorePropertiesARM & operator=( PhysicalDeviceShaderCorePropertiesARM const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceShaderCorePropertiesARM & operator=( VkPhysicalDeviceShaderCorePropertiesARM const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderCorePropertiesARM const *>( &rhs );
+      return *this;
+    }
+
+    operator VkPhysicalDeviceShaderCorePropertiesARM const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderCorePropertiesARM *>( this );
+    }
+
+    operator VkPhysicalDeviceShaderCorePropertiesARM &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesARM *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, uint32_t const &, uint32_t const &, uint32_t const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, pixelRate, texelRate, fmaRate );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceShaderCorePropertiesARM const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceShaderCorePropertiesARM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pixelRate == rhs.pixelRate ) && ( texelRate == rhs.texelRate ) && ( fmaRate == rhs.fmaRate );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceShaderCorePropertiesARM const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType     = StructureType::ePhysicalDeviceShaderCorePropertiesARM;
+    void *                              pNext     = {};
+    uint32_t                            pixelRate = {};
+    uint32_t                            texelRate = {};
+    uint32_t                            fmaRate   = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceShaderCorePropertiesARM>
+  {
+    using Type = PhysicalDeviceShaderCorePropertiesARM;
   };
 
   struct PhysicalDeviceShaderDemoteToHelperInvocationFeatures
@@ -84863,6 +85384,102 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::eProtectedSubmitInfo>
   {
     using Type = ProtectedSubmitInfo;
+  };
+
+  struct QueryLowLatencySupportNV
+  {
+    using NativeType = VkQueryLowLatencySupportNV;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eQueryLowLatencySupportNV;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR QueryLowLatencySupportNV( void * pQueriedLowLatencyData_ = {}, const void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , pQueriedLowLatencyData( pQueriedLowLatencyData_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR QueryLowLatencySupportNV( QueryLowLatencySupportNV const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    QueryLowLatencySupportNV( VkQueryLowLatencySupportNV const & rhs ) VULKAN_HPP_NOEXCEPT
+      : QueryLowLatencySupportNV( *reinterpret_cast<QueryLowLatencySupportNV const *>( &rhs ) )
+    {
+    }
+
+    QueryLowLatencySupportNV & operator=( QueryLowLatencySupportNV const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    QueryLowLatencySupportNV & operator=( VkQueryLowLatencySupportNV const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::QueryLowLatencySupportNV const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 QueryLowLatencySupportNV & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 QueryLowLatencySupportNV & setPQueriedLowLatencyData( void * pQueriedLowLatencyData_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pQueriedLowLatencyData = pQueriedLowLatencyData_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkQueryLowLatencySupportNV const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkQueryLowLatencySupportNV *>( this );
+    }
+
+    operator VkQueryLowLatencySupportNV &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkQueryLowLatencySupportNV *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, const void * const &, void * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, pQueriedLowLatencyData );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( QueryLowLatencySupportNV const & ) const = default;
+#else
+    bool operator==( QueryLowLatencySupportNV const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( pQueriedLowLatencyData == rhs.pQueriedLowLatencyData );
+#  endif
+    }
+
+    bool operator!=( QueryLowLatencySupportNV const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                  = StructureType::eQueryLowLatencySupportNV;
+    const void *                        pNext                  = {};
+    void *                              pQueriedLowLatencyData = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eQueryLowLatencySupportNV>
+  {
+    using Type = QueryLowLatencySupportNV;
   };
 
   struct QueryPoolCreateInfo
