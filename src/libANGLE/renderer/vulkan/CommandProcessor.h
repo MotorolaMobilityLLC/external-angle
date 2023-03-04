@@ -402,10 +402,13 @@ class CommandQueue : angle::NonCopyable
                       const VkPresentInfoKHR &presentInfo,
                       SwapchainStatus *swapchainStatus);
 
-    // Check to see which batches have finished completion (forward progress for
-    // the last completed serial, for example for when the application busy waits on a query
-    // result). It would be nice if we didn't have to expose this for QueryVk::getResult.
-    angle::Result checkCompletedCommands(Context *context);
+    angle::Result checkCompletedCommands(Context *context, bool *anyCommandFinished)
+    {
+        std::lock_guard<std::mutex> lock(mMutex);
+        ANGLE_TRY(checkCompletedCommandsLocked(context));
+        *anyCommandFinished = !mFinishedCommandBatches.empty();
+        return angle::Result::Continue;
+    }
 
     void flushWaitSemaphores(ProtectionType protectionType,
                              std::vector<VkSemaphore> &&waitSemaphores,
@@ -437,12 +440,12 @@ class CommandQueue : angle::NonCopyable
     // finished
     angle::Result checkOneCommandBatch(Context *context, bool *finished);
     // Similar to checkOneCommandBatch, except we will wait for it to finish
-    angle::Result finishOneCommandBatch(Context *context, uint64_t timeout);
-    // Walk mInFlightCommands, check and update mLastCompletedSerials for all commands that are
-    // finished
-    angle::Result checkCompletedCommandsLocked(Context *context, bool *anyCommandFinished);
+    angle::Result finishOneCommandBatchAndCleanup(Context *context, uint64_t timeout);
     // Walk mFinishedCommands, reset and recycle all command buffers.
     angle::Result retireFinishedCommandsLocked(Context *context);
+    // Walk mInFlightCommands, check and update mLastCompletedSerials for all commands that are
+    // finished
+    angle::Result checkCompletedCommandsLocked(Context *context);
 
     angle::Result queueSubmit(Context *context,
                               std::unique_lock<std::mutex> &&dequeueLock,
@@ -453,9 +456,6 @@ class CommandQueue : angle::NonCopyable
                               const QueueSerial &submitQueueSerial);
 
     angle::Result ensurePrimaryCommandBufferValid(Context *context, ProtectionType protectionType);
-
-    // For validation only. Should only be called with ASSERT macro.
-    bool allInFlightCommandsAreAfterSerials(const Serials &serials);
 
     struct CommandsState
     {
