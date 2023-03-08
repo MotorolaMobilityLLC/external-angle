@@ -282,6 +282,11 @@ constexpr vk::SkippedSyncvalMessage kSkippedSyncvalMessages[] = {
     // being accessed. http://anglebug.com/6725
     {
         "SYNC-HAZARD-READ-AFTER-WRITE",
+        "vkCmdDraw: Hazard READ_AFTER_WRITE for VkBuffer",
+        "usage: SYNC_VERTEX_SHADER_SHADER_STORAGE_READ",
+    },
+    {
+        "SYNC-HAZARD-READ-AFTER-WRITE",
         "vkCmdDrawIndexed: Hazard READ_AFTER_WRITE for vertex",
         "usage: SYNC_VERTEX_ATTRIBUTE_INPUT_VERTEX_ATTRIBUTE_READ",
     },
@@ -1252,7 +1257,8 @@ angle::Result OneOffCommandPool::getCommandBuffer(vk::Context *context,
         {
             VkCommandPoolCreateInfo createInfo = {};
             createInfo.sType                   = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-            createInfo.flags                   = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+            createInfo.flags                   = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT |
+                               VK_COMMAND_POOL_CREATE_TRANSIENT_BIT;
             ASSERT(mProtectionType == vk::ProtectionType::Unprotected ||
                    mProtectionType == vk::ProtectionType::Protected);
             if (mProtectionType == vk::ProtectionType::Protected)
@@ -1741,10 +1747,7 @@ angle::Result RendererVk::initialize(DisplayVk *displayVk,
         ANGLE_VK_TRY(displayVk, vkCreateInstance(&instanceInfo, nullptr, &mInstance));
 #if defined(ANGLE_SHARED_LIBVULKAN)
         // Load volk if we are linking dynamically
-        if ((mInstance != VK_NULL_HANDLE) && (volkGetLoadedInstance() != mInstance))
-        {
-            volkLoadInstance(mInstance);
-        }
+        volkLoadInstance(mInstance);
 #endif  // defined(ANGLE_SHARED_LIBVULKAN)
 
         initInstanceExtensionEntryPoints();
@@ -4492,6 +4495,10 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     ANGLE_FEATURE_CONDITION(&mFeatures, forceWaitForSubmissionToCompleteForQueryResult,
                             isARM || (isNvidia && nvidiaVersion.major < 470u));
 
+    // Some ARM drivers may not free memory in "vkFreeCommandBuffers()" without
+    // VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT flag.
+    ANGLE_FEATURE_CONDITION(&mFeatures, useResetCommandBufferBitForSecondaryPools, isARM);
+
     ApplyFeatureOverrides(&mFeatures, displayVk->getState());
 
     // Disable async command queue when using Vulkan secondary command buffers temporarily to avoid
@@ -5141,7 +5148,6 @@ angle::Result RendererVk::submitCommands(vk::Context *context,
                                          vk::ProtectionType protectionType,
                                          egl::ContextPriority contextPriority,
                                          const vk::Semaphore *signalSemaphore,
-                                         vk::SecondaryCommandPools *commandPools,
                                          const QueueSerial &submitQueueSerial)
 {
     vk::SecondaryCommandBufferList commandBuffersToReset;
@@ -5157,13 +5163,13 @@ angle::Result RendererVk::submitCommands(vk::Context *context,
     {
         ANGLE_TRY(mCommandProcessor.enqueueSubmitCommands(
             context, protectionType, contextPriority, signalVkSemaphore,
-            std::move(commandBuffersToReset), commandPools, submitQueueSerial));
+            std::move(commandBuffersToReset), submitQueueSerial));
     }
     else
     {
         ANGLE_TRY(mCommandQueue.submitCommands(context, protectionType, contextPriority,
                                                signalVkSemaphore, std::move(commandBuffersToReset),
-                                               commandPools, submitQueueSerial));
+                                               submitQueueSerial));
     }
 
     ANGLE_TRY(mCommandQueue.postSubmitCheck(context));
