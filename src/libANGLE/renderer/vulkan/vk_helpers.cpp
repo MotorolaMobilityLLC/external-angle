@@ -5048,43 +5048,6 @@ ImageHelper::ImageHelper()
     resetCachedProperties();
 }
 
-ImageHelper::ImageHelper(ImageHelper &&other)
-    : Resource(std::move(other)),
-      mImage(std::move(other.mImage)),
-      mDeviceMemory(std::move(other.mDeviceMemory)),
-      mVmaAllocation(std::move(other.mVmaAllocation)),
-      mImageType(other.mImageType),
-      mTilingMode(other.mTilingMode),
-      mCreateFlags(other.mCreateFlags),
-      mUsage(other.mUsage),
-      mExtents(other.mExtents),
-      mRotatedAspectRatio(other.mRotatedAspectRatio),
-      mIntendedFormatID(other.mIntendedFormatID),
-      mActualFormatID(other.mActualFormatID),
-      mSamples(other.mSamples),
-      mImageSerial(other.mImageSerial),
-      mCurrentLayout(other.mCurrentLayout),
-      mCurrentQueueFamilyIndex(other.mCurrentQueueFamilyIndex),
-      mLastNonShaderReadOnlyLayout(other.mLastNonShaderReadOnlyLayout),
-      mCurrentShaderReadStageMask(other.mCurrentShaderReadStageMask),
-      mYcbcrConversionDesc(other.mYcbcrConversionDesc),
-      mFirstAllocatedLevel(other.mFirstAllocatedLevel),
-      mLayerCount(other.mLayerCount),
-      mLevelCount(other.mLevelCount),
-      mViewFormats(other.mViewFormats),
-      mSubresourceUpdates(std::move(other.mSubresourceUpdates)),
-      mTotalStagedBufferUpdateSize(other.mTotalStagedBufferUpdateSize),
-      mCurrentSingleClearValue(std::move(other.mCurrentSingleClearValue)),
-      mContentDefined(std::move(other.mContentDefined)),
-      mStencilContentDefined(std::move(other.mStencilContentDefined)),
-      mAllocationSize(std::move(other.mAllocationSize)),
-      mMemoryAllocationType(std::move(other.mMemoryAllocationType)),
-      mMemoryTypeIndex(std::move(other.mMemoryTypeIndex))
-{
-    ASSERT(this != &other);
-    other.resetCachedProperties();
-}
-
 ImageHelper::~ImageHelper()
 {
     ASSERT(!valid());
@@ -8317,12 +8280,19 @@ angle::Result ImageHelper::flushStagedUpdates(ContextVk *contextVk,
                     commandBuffer->copyBufferToImage(currentBuffer->getBuffer().getHandle(), mImage,
                                                      getCurrentLayout(contextVk), 1, copyRegion);
                 }
-                ANGLE_TRY(contextVk->onCopyUpdate(currentBuffer->getSize()));
+                bool commandBufferWasFlushed = false;
+                ANGLE_TRY(
+                    contextVk->onCopyUpdate(currentBuffer->getSize(), &commandBufferWasFlushed));
                 onWrite(updateMipLevelGL, 1, updateBaseLayer, updateLayerCount,
                         copyRegion->imageSubresource.aspectMask);
 
                 // Update total staging buffer size
                 mTotalStagedBufferUpdateSize -= bufferUpdate.bufferHelper->getSize();
+
+                if (commandBufferWasFlushed)
+                {
+                    ANGLE_TRY(contextVk->getOutsideRenderPassCommandBuffer({}, &commandBuffer));
+                }
             }
             else
             {
