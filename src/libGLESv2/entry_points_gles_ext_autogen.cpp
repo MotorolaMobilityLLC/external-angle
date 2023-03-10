@@ -4018,12 +4018,16 @@ void GL_APIENTRY GL_PixelLocalStorageBarrierANGLE()
 
 void GL_APIENTRY GL_GetFramebufferPixelLocalStorageParameterfvANGLE(GLint plane,
                                                                     GLenum pname,
+                                                                    GLsizei bufSize,
+                                                                    GLsizei *length,
                                                                     GLfloat *params)
 {
     Context *context = GetValidGlobalContext();
     EVENT(context, GLGetFramebufferPixelLocalStorageParameterfvANGLE,
-          "context = %d, plane = %d, pname = %s, params = 0x%016" PRIxPTR "", CID(context), plane,
-          GLenumToString(GLESEnum::PLSQueryFloat, pname), (uintptr_t)params);
+          "context = %d, plane = %d, pname = %s, bufSize = %d, length = 0x%016" PRIxPTR
+          ", params = 0x%016" PRIxPTR "",
+          CID(context), plane, GLenumToString(GLESEnum::PLSQueryFloat, pname), bufSize,
+          (uintptr_t)length, (uintptr_t)params);
 
     if (context)
     {
@@ -4032,13 +4036,14 @@ void GL_APIENTRY GL_GetFramebufferPixelLocalStorageParameterfvANGLE(GLint plane,
             (context->skipValidation() ||
              ValidateGetFramebufferPixelLocalStorageParameterfvANGLE(
                  context, angle::EntryPoint::GLGetFramebufferPixelLocalStorageParameterfvANGLE,
-                 plane, pname, params));
+                 plane, pname, bufSize, length, params));
         if (isCallValid)
         {
-            context->getFramebufferPixelLocalStorageParameterfv(plane, pname, params);
+            context->getFramebufferPixelLocalStorageParameterfv(plane, pname, bufSize, length,
+                                                                params);
         }
         ANGLE_CAPTURE_GL(GetFramebufferPixelLocalStorageParameterfvANGLE, isCallValid, context,
-                         plane, pname, params);
+                         plane, pname, bufSize, length, params);
     }
     else
     {
@@ -4048,12 +4053,16 @@ void GL_APIENTRY GL_GetFramebufferPixelLocalStorageParameterfvANGLE(GLint plane,
 
 void GL_APIENTRY GL_GetFramebufferPixelLocalStorageParameterivANGLE(GLint plane,
                                                                     GLenum pname,
+                                                                    GLsizei bufSize,
+                                                                    GLsizei *length,
                                                                     GLint *params)
 {
     Context *context = GetValidGlobalContext();
     EVENT(context, GLGetFramebufferPixelLocalStorageParameterivANGLE,
-          "context = %d, plane = %d, pname = %s, params = 0x%016" PRIxPTR "", CID(context), plane,
-          GLenumToString(GLESEnum::PLSQueryInt, pname), (uintptr_t)params);
+          "context = %d, plane = %d, pname = %s, bufSize = %d, length = 0x%016" PRIxPTR
+          ", params = 0x%016" PRIxPTR "",
+          CID(context), plane, GLenumToString(GLESEnum::PLSQueryInt, pname), bufSize,
+          (uintptr_t)length, (uintptr_t)params);
 
     if (context)
     {
@@ -4062,13 +4071,14 @@ void GL_APIENTRY GL_GetFramebufferPixelLocalStorageParameterivANGLE(GLint plane,
             (context->skipValidation() ||
              ValidateGetFramebufferPixelLocalStorageParameterivANGLE(
                  context, angle::EntryPoint::GLGetFramebufferPixelLocalStorageParameterivANGLE,
-                 plane, pname, params));
+                 plane, pname, bufSize, length, params));
         if (isCallValid)
         {
-            context->getFramebufferPixelLocalStorageParameteriv(plane, pname, params);
+            context->getFramebufferPixelLocalStorageParameteriv(plane, pname, bufSize, length,
+                                                                params);
         }
         ANGLE_CAPTURE_GL(GetFramebufferPixelLocalStorageParameterivANGLE, isCallValid, context,
-                         plane, pname, params);
+                         plane, pname, bufSize, length, params);
     }
     else
     {
@@ -4970,16 +4980,19 @@ void GL_APIENTRY GL_ClipControlEXT(GLenum origin, GLenum depth)
 
     if (context)
     {
+        ClipOrigin originPacked   = PackParam<ClipOrigin>(origin);
+        ClipDepthMode depthPacked = PackParam<ClipDepthMode>(depth);
         SCOPED_SHARE_CONTEXT_LOCK(context);
         bool isCallValid =
             (context->skipValidation() ||
              (ValidatePixelLocalStorageInactive(context, angle::EntryPoint::GLClipControlEXT) &&
-              ValidateClipControlEXT(context, angle::EntryPoint::GLClipControlEXT, origin, depth)));
+              ValidateClipControlEXT(context, angle::EntryPoint::GLClipControlEXT, originPacked,
+                                     depthPacked)));
         if (isCallValid)
         {
-            context->clipControl(origin, depth);
+            context->clipControl(originPacked, depthPacked);
         }
-        ANGLE_CAPTURE_GL(ClipControlEXT, isCallValid, context, origin, depth);
+        ANGLE_CAPTURE_GL(ClipControlEXT, isCallValid, context, originPacked, depthPacked);
     }
     else
     {
@@ -9119,6 +9132,8 @@ void GL_APIENTRY GL_TexBufferRangeEXT(GLenum target,
 // GL_EXT_texture_cube_map_array
 
 // GL_EXT_texture_filter_anisotropic
+
+// GL_EXT_texture_filter_minmax
 
 // GL_EXT_texture_format_BGRA8888
 

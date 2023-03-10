@@ -890,11 +890,15 @@ angle::CallCapture CaptureGetFramebufferPixelLocalStorageParameterfvANGLE(const 
                                                                           bool isCallValid,
                                                                           GLint plane,
                                                                           GLenum pname,
+                                                                          GLsizei bufSize,
+                                                                          GLsizei *length,
                                                                           GLfloat *params);
 angle::CallCapture CaptureGetFramebufferPixelLocalStorageParameterivANGLE(const State &glState,
                                                                           bool isCallValid,
                                                                           GLint plane,
                                                                           GLenum pname,
+                                                                          GLsizei bufSize,
+                                                                          GLsizei *length,
                                                                           GLint *params);
 
 // GL_ANGLE_stencil_texturing
@@ -1099,8 +1103,8 @@ angle::CallCapture CaptureBufferStorageEXT(const State &glState,
 // GL_EXT_clip_control
 angle::CallCapture CaptureClipControlEXT(const State &glState,
                                          bool isCallValid,
-                                         GLenum origin,
-                                         GLenum depth);
+                                         ClipOrigin originPacked,
+                                         ClipDepthMode depthPacked);
 
 // GL_EXT_clip_cull_distance
 
@@ -1942,6 +1946,8 @@ angle::CallCapture CaptureTexBufferRangeEXT(const State &glState,
 // GL_EXT_texture_cube_map_array
 
 // GL_EXT_texture_filter_anisotropic
+
+// GL_EXT_texture_filter_minmax
 
 // GL_EXT_texture_format_BGRA8888
 
@@ -4164,18 +4170,40 @@ void CaptureEndPixelLocalStorageANGLE_storeops(const State &glState,
                                                GLsizei n,
                                                const GLenum *storeops,
                                                angle::ParamCapture *paramCapture);
+void CaptureGetFramebufferPixelLocalStorageParameterfvANGLE_length(
+    const State &glState,
+    bool isCallValid,
+    GLint plane,
+    GLenum pname,
+    GLsizei bufSize,
+    GLsizei *length,
+    GLfloat *params,
+    angle::ParamCapture *paramCapture);
 void CaptureGetFramebufferPixelLocalStorageParameterfvANGLE_params(
     const State &glState,
     bool isCallValid,
     GLint plane,
     GLenum pname,
+    GLsizei bufSize,
+    GLsizei *length,
     GLfloat *params,
+    angle::ParamCapture *paramCapture);
+void CaptureGetFramebufferPixelLocalStorageParameterivANGLE_length(
+    const State &glState,
+    bool isCallValid,
+    GLint plane,
+    GLenum pname,
+    GLsizei bufSize,
+    GLsizei *length,
+    GLint *params,
     angle::ParamCapture *paramCapture);
 void CaptureGetFramebufferPixelLocalStorageParameterivANGLE_params(
     const State &glState,
     bool isCallValid,
     GLint plane,
     GLenum pname,
+    GLsizei bufSize,
+    GLsizei *length,
     GLint *params,
     angle::ParamCapture *paramCapture);
 void CaptureGetMultisamplefvANGLE_val(const State &glState,
