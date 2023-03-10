@@ -3816,16 +3816,22 @@ void GL_APIENTRY glPixelLocalStorageBarrierANGLE()
 
 void GL_APIENTRY glGetFramebufferPixelLocalStorageParameterfvANGLE(GLint plane,
                                                                    GLenum pname,
+                                                                   GLsizei bufSize,
+                                                                   GLsizei *length,
                                                                    GLfloat *params)
 {
-    return GL_GetFramebufferPixelLocalStorageParameterfvANGLE(plane, pname, params);
+    return GL_GetFramebufferPixelLocalStorageParameterfvANGLE(plane, pname, bufSize, length,
+                                                              params);
 }
 
 void GL_APIENTRY glGetFramebufferPixelLocalStorageParameterivANGLE(GLint plane,
                                                                    GLenum pname,
+                                                                   GLsizei bufSize,
+                                                                   GLsizei *length,
                                                                    GLint *params)
 {
-    return GL_GetFramebufferPixelLocalStorageParameterivANGLE(plane, pname, params);
+    return GL_GetFramebufferPixelLocalStorageParameterivANGLE(plane, pname, bufSize, length,
+                                                              params);
 }
 
 // GL_ANGLE_stencil_texturing
@@ -5009,6 +5015,8 @@ void GL_APIENTRY glTexBufferRangeEXT(GLenum target,
 // GL_EXT_texture_cube_map_array
 
 // GL_EXT_texture_filter_anisotropic
+
+// GL_EXT_texture_filter_minmax
 
 // GL_EXT_texture_format_BGRA8888
 
