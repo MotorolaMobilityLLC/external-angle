@@ -269,7 +269,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
     // isYFlipEnabledForDrawFBO indicates the rendered image is upside-down.
     ANGLE_INLINE bool isYFlipEnabledForDrawFBO() const
     {
-        return mState.getClipSpaceOrigin() == gl::ClipSpaceOrigin::UpperLeft
+        return mState.getClipOrigin() == gl::ClipOrigin::UpperLeft
                    ? !isViewportFlipEnabledForDrawFBO()
                    : isViewportFlipEnabledForDrawFBO();
     }
@@ -689,7 +689,7 @@ class ContextVk : public ContextImpl, public vk::Context, public MultisampleText
 
     // Keeping track of the buffer copy size. Used to determine when to submit the outside command
     // buffer.
-    angle::Result onCopyUpdate(VkDeviceSize size);
+    angle::Result onCopyUpdate(VkDeviceSize size, bool *commandBufferWasFlushedOut);
 
     // Implementation of MultisampleTextureInitializer
     angle::Result initializeMultisampleTextureToBlack(const gl::Context *context,

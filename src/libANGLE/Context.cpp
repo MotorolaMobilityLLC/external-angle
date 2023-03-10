@@ -2256,14 +2256,6 @@ void Context::getIntegervImpl(GLenum pname, GLint *params) const
             *params = mState.mCaps.textureBufferOffsetAlignment;
             break;
 
-        // GL_EXT_clip_control
-        case GL_CLIP_ORIGIN_EXT:
-            *params = mState.mClipControlOrigin;
-            break;
-        case GL_CLIP_DEPTH_MODE_EXT:
-            *params = mState.mClipControlDepth;
-            break;
-
         // ANGLE_shader_pixel_local_storage
         case GL_MAX_PIXEL_LOCAL_STORAGE_PLANES_ANGLE:
             *params = mState.mCaps.maxPixelLocalStoragePlanes;
@@ -3656,6 +3648,7 @@ Extensions Context::generateSupportedExtensions() const
         supportedExtensions.multiviewMultisampleANGLE    = false;
         supportedExtensions.copyTexture3dANGLE           = false;
         supportedExtensions.textureMultisampleANGLE      = false;
+        supportedExtensions.textureStencil8OES           = false;
         supportedExtensions.drawBuffersIndexedEXT        = false;
         supportedExtensions.drawBuffersIndexedOES        = false;
         supportedExtensions.EGLImageArrayEXT             = false;
@@ -5925,9 +5918,9 @@ void Context::depthRangef(GLfloat zNear, GLfloat zFar)
     mState.setDepthRange(clamp01(zNear), clamp01(zFar));
 }
 
-void Context::clipControl(GLenum origin, GLenum depth)
+void Context::clipControl(ClipOrigin originPacked, ClipDepthMode depthPacked)
 {
-    mState.setClipControl(origin, depth);
+    mState.setClipControl(originPacked, depthPacked);
 }
 
 void Context::disable(GLenum cap)
@@ -9357,7 +9350,11 @@ void Context::pixelLocalStorageBarrier()
     pls.barrier(this);
 }
 
-void Context::getFramebufferPixelLocalStorageParameterfv(GLint plane, GLenum pname, GLfloat *params)
+void Context::getFramebufferPixelLocalStorageParameterfv(GLint plane,
+                                                         GLenum pname,
+                                                         GLsizei bufSize,
+                                                         GLsizei *length,
+                                                         GLfloat *params)
 {
     Framebuffer *framebuffer = mState.getDrawFramebuffer();
     ASSERT(framebuffer);
@@ -9366,12 +9363,20 @@ void Context::getFramebufferPixelLocalStorageParameterfv(GLint plane, GLenum pna
     switch (pname)
     {
         case GL_PIXEL_LOCAL_CLEAR_VALUE_FLOAT_ANGLE:
+            if (length != nullptr)
+            {
+                *length = 4;
+            }
             pls.getPlane(plane).getClearValuef(params);
             break;
     }
 }
 
-void Context::getFramebufferPixelLocalStorageParameteriv(GLint plane, GLenum pname, GLint *params)
+void Context::getFramebufferPixelLocalStorageParameteriv(GLint plane,
+                                                         GLenum pname,
+                                                         GLsizei bufSize,
+                                                         GLsizei *length,
+                                                         GLint *params)
 {
     Framebuffer *framebuffer = mState.getDrawFramebuffer();
     ASSERT(framebuffer);
@@ -9384,13 +9389,25 @@ void Context::getFramebufferPixelLocalStorageParameteriv(GLint plane, GLenum pna
         case GL_PIXEL_LOCAL_TEXTURE_NAME_ANGLE:
         case GL_PIXEL_LOCAL_TEXTURE_LEVEL_ANGLE:
         case GL_PIXEL_LOCAL_TEXTURE_LAYER_ANGLE:
+            if (length != nullptr)
+            {
+                *length = 1;
+            }
             *params = pls.getPlane(plane).getIntegeri(this, pname);
             break;
         case GL_PIXEL_LOCAL_CLEAR_VALUE_INT_ANGLE:
+            if (length != nullptr)
+            {
+                *length = 4;
+            }
             pls.getPlane(plane).getClearValuei(params);
             break;
         case GL_PIXEL_LOCAL_CLEAR_VALUE_UNSIGNED_INT_ANGLE:
         {
+            if (length != nullptr)
+            {
+                *length = 4;
+            }
             GLuint valueui[4];
             pls.getPlane(plane).getClearValueui(valueui);
             memcpy(params, valueui, sizeof(valueui));
