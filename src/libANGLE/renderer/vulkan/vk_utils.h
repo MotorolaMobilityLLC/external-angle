@@ -238,6 +238,35 @@ class QueueSerialIndexAllocator final
     std::mutex mMutex;
 };
 
+class [[nodiscard]] ScopedQueueSerialIndex final : angle::NonCopyable
+{
+  public:
+    ScopedQueueSerialIndex() : mIndex(kInvalidQueueSerialIndex), mIndexAllocator(nullptr) {}
+    ~ScopedQueueSerialIndex()
+    {
+        if (mIndex != kInvalidQueueSerialIndex)
+        {
+            ASSERT(mIndexAllocator != nullptr);
+            mIndexAllocator->release(mIndex);
+        }
+    }
+
+    void init(SerialIndex index, QueueSerialIndexAllocator *indexAllocator)
+    {
+        ASSERT(mIndex == kInvalidQueueSerialIndex);
+        ASSERT(index != kInvalidQueueSerialIndex);
+        ASSERT(indexAllocator != nullptr);
+        mIndex          = index;
+        mIndexAllocator = indexAllocator;
+    }
+
+    SerialIndex get() const { return mIndex; }
+
+  private:
+    SerialIndex mIndex;
+    QueueSerialIndexAllocator *mIndexAllocator;
+};
+
 // Abstracts error handling. Implemented by both ContextVk for GL and DisplayVk for EGL errors.
 class Context : angle::NonCopyable
 {
@@ -1031,34 +1060,6 @@ angle::Result SetDebugUtilsObjectName(ContextVk *contextVk,
                                       uint64_t handle,
                                       const std::string &label);
 
-// Used to store memory allocation information for tracking purposes.
-struct MemoryAllocationInfo
-{
-    MemoryAllocationInfo() = default;
-    uint64_t id;
-    MemoryAllocationType allocType;
-    uint32_t memoryHeapIndex;
-    void *handle;
-    VkDeviceSize size;
-};
-
-class MemoryAllocInfoMapKey
-{
-  public:
-    MemoryAllocInfoMapKey() : handle(nullptr) {}
-    MemoryAllocInfoMapKey(void *handle) : handle(handle) {}
-
-    bool operator==(const MemoryAllocInfoMapKey &rhs) const
-    {
-        return reinterpret_cast<uint64_t>(handle) == reinterpret_cast<uint64_t>(rhs.handle);
-    }
-
-    size_t hash() const;
-
-  private:
-    void *handle;
-};
-
 }  // namespace vk
 
 #if !defined(ANGLE_SHARED_LIBVULKAN)
@@ -1290,16 +1291,6 @@ enum class RenderPassClosureReason
 };
 
 }  // namespace rx
-
-// Introduce std::hash for MemoryAllocInfoMapKey.
-namespace std
-{
-template <>
-struct hash<rx::vk::MemoryAllocInfoMapKey>
-{
-    size_t operator()(const rx::vk::MemoryAllocInfoMapKey &key) const { return key.hash(); }
-};
-}  // namespace std
 
 #define ANGLE_VK_TRY(context, command)                                                   \
     do                                                                                   \
