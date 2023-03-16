@@ -880,9 +880,10 @@ config("compiler") {
     # to compile dylibs on Android, such as for constructing unit test APKs.
     "-Cdefault-linker-libraries",
 
-    # Turn warnings into the "deny" lint level, which produce compiler errors.
-    # The equivalent of -Werror for clang/gcc.
-    "-Dwarnings",
+    # Require `unsafe` blocks even in `unsafe` fns. This is intended to become
+    # an error by default eventually; see
+    # https://github.com/rust-lang/rust/issues/71668
+    "-Dunsafe_op_in_unsafe_fn",
 
     # To make Rust .d files compatible with ninja
     "-Zdep-info-omit-d-target",
@@ -1733,6 +1734,15 @@ config("chromium_code") {
       cflags += [ "-Wextra" ]
     }
 
+    if (treat_warnings_as_errors) {
+      # Turn rustc warnings into the "deny" lint level, which produce compiler
+      # errors. The equivalent of -Werror for clang/gcc.
+      #
+      # Note we apply the actual lint flags in config("compiler"). All warnings
+      # are suppressed in third-party crates.
+      rustflags = [ "-Dwarnings" ]
+    }
+
     # In Chromium code, we define __STDC_foo_MACROS in order to get the
     # C99 macros on Mac and Linux.
     defines = [
@@ -1772,8 +1782,8 @@ config("chromium_code") {
     ]
 
     # TODO(thakis): Enable this more often, https://crbug.com/346399
-    # use_libfuzzer: https://crbug.com/1063180
-    if ((!is_nacl || is_nacl_saigo) && !use_libfuzzer) {
+    # use_fuzzing_engine_with_lpm: https://crbug.com/1063180
+    if ((!is_nacl || is_nacl_saigo) && !use_fuzzing_engine_with_lpm) {
       cflags += [ "-Wunreachable-code-aggressive" ]
     }
 
