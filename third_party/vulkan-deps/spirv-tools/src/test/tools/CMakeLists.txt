@@ -26,3 +26,4 @@ add_spvtools_unittest(
   DEFINES TESTING=1)
 
 add_subdirectory(opt)
+add_subdirectory(objdump)
