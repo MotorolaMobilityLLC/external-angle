@@ -78,6 +78,18 @@ bool IsVulkan11(uint32_t apiVersion)
     return apiVersion >= VK_API_VERSION_1_1;
 }
 
+bool IsVenus(uint32_t driverId, const char *deviceName)
+{
+    // Where driver id is available, check against Venus driver id:
+    if (driverId != 0)
+    {
+        return driverId == VK_DRIVER_ID_MESA_VENUS;
+    }
+
+    // Otherwise, look for Venus in the device name.
+    return strstr(deviceName, "Venus") != nullptr;
+}
+
 bool IsQualcommOpenSource(uint32_t vendorId, uint32_t driverId, const char *deviceName)
 {
     if (!IsQualcomm(vendorId))
@@ -3557,6 +3569,9 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     const bool isSwiftShader =
         IsSwiftshader(mPhysicalDeviceProperties.vendorID, mPhysicalDeviceProperties.deviceID);
 
+    // MESA Virtio-GPU Venus driver: https://docs.mesa3d.org/drivers/venus.html
+    const bool isVenus = IsVenus(mDriverProperties.driverID, mPhysicalDeviceProperties.deviceName);
+
     // Distinguish between the open source and proprietary Qualcomm drivers
     const bool isQualcommOpenSource =
         IsQualcommOpenSource(mPhysicalDeviceProperties.vendorID, mDriverProperties.driverID,
@@ -4015,9 +4030,10 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // Negative viewports are exposed in the Maintenance1 extension and in core Vulkan 1.1+.
     ANGLE_FEATURE_CONDITION(&mFeatures, supportsNegativeViewport, supportsNegativeViewport);
 
-    // Whether non-conformant configurations and extensions should be exposed.
+    // Whether non-conformant configurations and extensions should be exposed. Always disable for
+    // MESA Virtio-GPU Venus driver for production purpose.
     ANGLE_FEATURE_CONDITION(&mFeatures, exposeNonConformantExtensionsAndVersions,
-                            kExposeNonConformantExtensionsAndVersions);
+                            kExposeNonConformantExtensionsAndVersions && !isVenus);
 
     ANGLE_FEATURE_CONDITION(
         &mFeatures, supportsMemoryBudget,
@@ -4029,8 +4045,10 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
 
     // Testing shows that on ARM GPU, doing implicit flush at framebuffer boundary improves
     // performance. Most app traces shows frame time reduced and manhattan 3.1 offscreen score
-    // improves 7%.
-    ANGLE_FEATURE_CONDITION(&mFeatures, preferSubmitAtFBOBoundary, isARM || isSwiftShader);
+    // improves 7%. Disable for MESA Virtio-GPU Venus driver in virtualized environment where
+    // batching is preferred.
+    ANGLE_FEATURE_CONDITION(&mFeatures, preferSubmitAtFBOBoundary,
+                            (isARM || isSwiftShader) && !isVenus);
 
     // In order to support immutable samplers tied to external formats, we need to overallocate
     // descriptor counts for such immutable samplers
@@ -4114,9 +4132,13 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     //
     // - Intel
     //
+    // The above platforms are not excluded if behind MESA Virtio-GPU Venus driver since WSI is
+    // implemented with external memory there.
+    //
     // Without VK_GOOGLE_surfaceless_query, there is no way to automatically deduce this support.
-    ANGLE_FEATURE_CONDITION(&mFeatures, emulateAdvancedBlendEquations,
-                            !mFeatures.supportsBlendOperationAdvanced.enabled && !isIntel);
+    ANGLE_FEATURE_CONDITION(
+        &mFeatures, emulateAdvancedBlendEquations,
+        !mFeatures.supportsBlendOperationAdvanced.enabled && (isVenus || !isIntel));
 
     // Workaround for platforms that do not return 1.0f even when dividend and divisor have the same
     // value.
@@ -4336,6 +4358,14 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // Some ARM drivers may not free memory in "vkFreeCommandBuffers()" without
     // VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT flag.
     ANGLE_FEATURE_CONDITION(&mFeatures, useResetCommandBufferBitForSecondaryPools, isARM);
+
+    // Required to pass android.media.cts.DecodeAccuracyTest with MESA Virtio-GPU Venus driver in
+    // virtualized environment. https://issuetracker.google.com/246378938
+    ANGLE_FEATURE_CONDITION(&mFeatures, preferLinearFilterForYUV, isVenus);
+
+    // Required to pass android.media.codec.cts.EncodeDecodeTest with MESA Virtio-GPU Venus driver
+    // in virtualized environment. https://issuetracker.google.com/246218584
+    ANGLE_FEATURE_CONDITION(&mFeatures, mapUnspecifiedColorSpaceToPassThrough, isVenus);
 
     ApplyFeatureOverrides(&mFeatures, displayVk->getState());
 
@@ -4683,6 +4713,28 @@ angle::Result RendererVk::queueSubmitOneOff(vk::Context *context,
     return angle::Result::Continue;
 }
 
+angle::Result RendererVk::queueSubmitWaitSemaphore(vk::Context *context,
+                                                   egl::ContextPriority priority,
+                                                   const vk::Semaphore *waitSemaphore,
+                                                   VkPipelineStageFlags waitSemaphoreStageMasks,
+                                                   QueueSerial submitQueueSerial)
+{
+    if (isAsyncCommandQueueEnabled())
+    {
+        ANGLE_TRY(mCommandProcessor.enqueueSubmitOneOffCommands(
+            context, vk::ProtectionType::Unprotected, priority, VK_NULL_HANDLE, waitSemaphore,
+            waitSemaphoreStageMasks, nullptr, vk::SubmitPolicy::AllowDeferred, submitQueueSerial));
+    }
+    else
+    {
+        ANGLE_TRY(mCommandQueue.queueSubmitOneOff(
+            context, vk::ProtectionType::Unprotected, priority, VK_NULL_HANDLE, waitSemaphore,
+            waitSemaphoreStageMasks, nullptr, vk::SubmitPolicy::AllowDeferred, submitQueueSerial));
+    }
+
+    return angle::Result::Continue;
+}
+
 template <VkFormatFeatureFlags VkFormatProperties::*features>
 VkFormatFeatureFlags RendererVk::getFormatFeatureBits(angle::FormatID formatID,
                                                       const VkFormatFeatureFlags featureBits) const
@@ -5014,6 +5066,47 @@ angle::Result RendererVk::submitCommands(vk::Context *context,
     return angle::Result::Continue;
 }
 
+angle::Result RendererVk::submitPriorityDependency(vk::Context *context,
+                                                   vk::ProtectionTypes protectionTypes,
+                                                   egl::ContextPriority srcContextPriority,
+                                                   egl::ContextPriority dstContextPriority,
+                                                   SerialIndex index)
+{
+    vk::RendererScoped<vk::ReleasableResource<vk::Semaphore>> semaphore(this);
+    ANGLE_VK_TRY(context, semaphore.get().get().init(mDevice));
+
+    // First, submit already flushed commands / wait semaphores into the source Priority VkQueue.
+    // Commands that are in the Secondary Command Buffers will be flushed into the new VkQueue.
+
+    // Submit commands and attach Signal Semaphore.
+    ASSERT(protectionTypes.any());
+    while (protectionTypes.any())
+    {
+        vk::ProtectionType protectionType = protectionTypes.first();
+        protectionTypes.reset(protectionType);
+
+        QueueSerial queueSerial(index, generateQueueSerial(index));
+        // Submit semaphore only if this is the last submission (all into the same VkQueue).
+        const vk::Semaphore *signalSemaphore = nullptr;
+        if (protectionTypes.none())
+        {
+            // Update QueueSerial to collect semaphore using the latest possible queueSerial.
+            semaphore.get().setQueueSerial(queueSerial);
+            signalSemaphore = &semaphore.get().get();
+        }
+        ANGLE_TRY(submitCommands(context, protectionType, srcContextPriority, signalSemaphore,
+                                 queueSerial));
+    }
+
+    // Submit only Wait Semaphore into the destination Priority (VkQueue).
+    QueueSerial queueSerial(index, generateQueueSerial(index));
+    semaphore.get().setQueueSerial(queueSerial);
+    ANGLE_TRY(queueSubmitWaitSemaphore(context, dstContextPriority, &semaphore.get().get(),
+                                       VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, queueSerial));
+
+    return angle::Result::Continue;
+}
+
 void RendererVk::handleDeviceLost()
 {
     if (isAsyncCommandQueueEnabled())
@@ -5069,18 +5162,20 @@ angle::Result RendererVk::finish(vk::Context *context)
 
 angle::Result RendererVk::flushWaitSemaphores(
     vk::ProtectionType protectionType,
+    egl::ContextPriority priority,
     std::vector<VkSemaphore> &&waitSemaphores,
     std::vector<VkPipelineStageFlags> &&waitSemaphoreStageMasks)
 {
     ANGLE_TRACE_EVENT0("gpu.angle", "RendererVk::flushWaitSemaphores");
     if (isAsyncCommandQueueEnabled())
     {
-        ANGLE_TRY(mCommandProcessor.enqueueFlushWaitSemaphores(
-            protectionType, std::move(waitSemaphores), std::move(waitSemaphoreStageMasks)));
+        ANGLE_TRY(mCommandProcessor.enqueueFlushWaitSemaphores(protectionType, priority,
+                                                               std::move(waitSemaphores),
+                                                               std::move(waitSemaphoreStageMasks)));
     }
     else
     {
-        mCommandQueue.flushWaitSemaphores(protectionType, std::move(waitSemaphores),
+        mCommandQueue.flushWaitSemaphores(protectionType, priority, std::move(waitSemaphores),
                                           std::move(waitSemaphoreStageMasks));
     }
 
@@ -5090,19 +5185,20 @@ angle::Result RendererVk::flushWaitSemaphores(
 angle::Result RendererVk::flushRenderPassCommands(
     vk::Context *context,
     vk::ProtectionType protectionType,
+    egl::ContextPriority priority,
     const vk::RenderPass &renderPass,
     vk::RenderPassCommandBufferHelper **renderPassCommands)
 {
     ANGLE_TRACE_EVENT0("gpu.angle", "RendererVk::flushRenderPassCommands");
     if (isAsyncCommandQueueEnabled())
     {
-        ANGLE_TRY(mCommandProcessor.enqueueFlushRenderPassCommands(context, protectionType,
-                                                                   renderPass, renderPassCommands));
+        ANGLE_TRY(mCommandProcessor.enqueueFlushRenderPassCommands(
+            context, protectionType, priority, renderPass, renderPassCommands));
     }
     else
     {
-        ANGLE_TRY(mCommandQueue.flushRenderPassCommands(context, protectionType, renderPass,
-                                                        renderPassCommands));
+        ANGLE_TRY(mCommandQueue.flushRenderPassCommands(context, protectionType, priority,
+                                                        renderPass, renderPassCommands));
     }
 
     return angle::Result::Continue;
@@ -5111,17 +5207,19 @@ angle::Result RendererVk::flushRenderPassCommands(
 angle::Result RendererVk::flushOutsideRPCommands(
     vk::Context *context,
     vk::ProtectionType protectionType,
+    egl::ContextPriority priority,
     vk::OutsideRenderPassCommandBufferHelper **outsideRPCommands)
 {
     ANGLE_TRACE_EVENT0("gpu.angle", "RendererVk::flushOutsideRPCommands");
     if (isAsyncCommandQueueEnabled())
     {
-        ANGLE_TRY(mCommandProcessor.enqueueFlushOutsideRPCommands(context, protectionType,
+        ANGLE_TRY(mCommandProcessor.enqueueFlushOutsideRPCommands(context, protectionType, priority,
                                                                   outsideRPCommands));
     }
     else
     {
-        ANGLE_TRY(mCommandQueue.flushOutsideRPCommands(context, protectionType, outsideRPCommands));
+        ANGLE_TRY(mCommandQueue.flushOutsideRPCommands(context, protectionType, priority,
+                                                       outsideRPCommands));
     }
 
     return angle::Result::Continue;
