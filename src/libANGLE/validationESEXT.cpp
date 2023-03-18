@@ -1724,7 +1724,6 @@ bool ValidatePLSLoadOperation(const Context *context, angle::EntryPoint entryPoi
         case GL_LOAD_OP_CLEAR_ANGLE:
         case GL_LOAD_OP_LOAD_ANGLE:
         case GL_DONT_CARE:
-        case GL_LOAD_OP_DISABLE_ANGLE:
             return true;
         default:
             context->validationErrorF(entryPoint, GL_INVALID_ENUM, kPLSInvalidLoadOperation,
@@ -2015,13 +2014,8 @@ bool ValidateBeginPixelLocalStorageANGLE(const Context *context,
             return false;
         }
 
-        if (loadops[i] == GL_LOAD_OP_DISABLE_ANGLE)
-        {
-            continue;
-        }
-
-        // INVALID_OPERATION is generated if <loadops>[0..<n>-1] is not LOAD_OP_DISABLE_ANGLE, and
-        // the pixel local storage plane at that same index is is in a deinitialized state.
+        // INVALID_OPERATION is generated if a pixel local storage plane at index [0..<n>-1] is in a
+        // deinitialized state.
         if (pls == nullptr || pls->getPlane(i).isDeinitialized())
         {
             context->validationError(entryPoint, GL_INVALID_OPERATION,
@@ -2147,9 +2141,29 @@ bool ValidateGetFramebufferPixelLocalStorageParameterfvANGLE(const Context *cont
                                                              angle::EntryPoint entryPoint,
                                                              GLint plane,
                                                              GLenum pname,
-                                                             GLsizei bufSize,
-                                                             const GLsizei *length,
                                                              const GLfloat *params)
+{
+    return ValidateGetFramebufferPixelLocalStorageParameterfvRobustANGLE(
+        context, entryPoint, plane, pname, std::numeric_limits<GLsizei>::max(), nullptr, params);
+}
+
+bool ValidateGetFramebufferPixelLocalStorageParameterivANGLE(const Context *context,
+                                                             angle::EntryPoint entryPoint,
+                                                             GLint plane,
+                                                             GLenum pname,
+                                                             const GLint *params)
+{
+    return ValidateGetFramebufferPixelLocalStorageParameterivRobustANGLE(
+        context, entryPoint, plane, pname, std::numeric_limits<GLsizei>::max(), nullptr, params);
+}
+
+bool ValidateGetFramebufferPixelLocalStorageParameterfvRobustANGLE(const Context *context,
+                                                                   angle::EntryPoint entryPoint,
+                                                                   GLint plane,
+                                                                   GLenum pname,
+                                                                   GLsizei bufSize,
+                                                                   const GLsizei *length,
+                                                                   const GLfloat *params)
 {
     if (!ValidatePLSCommon(context, entryPoint, plane, PLSExpectedStatus::Any))
     {
@@ -2170,13 +2184,13 @@ bool ValidateGetFramebufferPixelLocalStorageParameterfvANGLE(const Context *cont
     return ValidatePLSQueryCommon(context, entryPoint, paramCount, bufSize, params);
 }
 
-bool ValidateGetFramebufferPixelLocalStorageParameterivANGLE(const Context *context,
-                                                             angle::EntryPoint entryPoint,
-                                                             GLint plane,
-                                                             GLenum pname,
-                                                             GLsizei bufSize,
-                                                             const GLsizei *length,
-                                                             const GLint *params)
+bool ValidateGetFramebufferPixelLocalStorageParameterivRobustANGLE(const Context *context,
+                                                                   angle::EntryPoint entryPoint,
+                                                                   GLint plane,
+                                                                   GLenum pname,
+                                                                   GLsizei bufSize,
+                                                                   const GLsizei *length,
+                                                                   const GLint *params)
 {
     if (!ValidatePLSCommon(context, entryPoint, plane, PLSExpectedStatus::Any))
     {

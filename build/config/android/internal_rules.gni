@@ -221,6 +221,10 @@ template("write_build_config") {
       _target_label,
     ]
 
+    if (defined(invoker.preferred_dep) && invoker.preferred_dep) {
+      args += [ "--preferred-dep" ]
+    }
+
     if (defined(invoker.aar_path)) {
       args += [
         "--aar-path",
@@ -1616,7 +1620,7 @@ if (enable_java_templates) {
           rebase_path(outputs[0], root_build_dir),
           "--min-api=$_min_sdk_version",
           "--r8-jar-path",
-          rebase_path(_r8_path, root_build_dir),
+          rebase_path(_d8_path, root_build_dir),
           "--custom-d8-jar-path",
           rebase_path(_custom_d8_path, root_build_dir),
 
@@ -2735,7 +2739,14 @@ if (enable_java_templates) {
         _args += [ "--best-compression" ]
       }
     }
-    if (defined(invoker.uncompress_dex) && invoker.uncompress_dex) {
+    if (defined(invoker.uncompress_dex)) {
+      _uncompress_dex = invoker.uncompress_dex
+    } else {
+      # Uncompressed dex support started on Android P.
+      _uncompress_dex = invoker.min_sdk_version >= 28
+    }
+
+    if (_uncompress_dex) {
       _args += [ "--uncompress-dex" ]
     }
     if (defined(invoker.library_always_compress)) {
@@ -3592,6 +3603,7 @@ if (enable_java_templates) {
                                "base_allowlist_rtxt_path",
                                "gradle_treat_as_prebuilt",
                                "input_jars_paths",
+                               "preferred_dep",
                                "low_classpath_priority",
                                "main_class",
                                "mergeable_android_manifests",
