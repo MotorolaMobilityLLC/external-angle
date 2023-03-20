@@ -46042,6 +46042,133 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = MemoryHostPointerPropertiesEXT;
   };
 
+  struct MemoryMapInfoKHR
+  {
+    using NativeType = VkMemoryMapInfoKHR;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryMapInfoKHR;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR MemoryMapInfoKHR( VULKAN_HPP_NAMESPACE::MemoryMapFlags flags_  = {},
+                                           VULKAN_HPP_NAMESPACE::DeviceMemory   memory_ = {},
+                                           VULKAN_HPP_NAMESPACE::DeviceSize     offset_ = {},
+                                           VULKAN_HPP_NAMESPACE::DeviceSize     size_   = {},
+                                           const void *                         pNext_  = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , flags( flags_ )
+      , memory( memory_ )
+      , offset( offset_ )
+      , size( size_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR MemoryMapInfoKHR( MemoryMapInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    MemoryMapInfoKHR( VkMemoryMapInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT : MemoryMapInfoKHR( *reinterpret_cast<MemoryMapInfoKHR const *>( &rhs ) ) {}
+
+    MemoryMapInfoKHR & operator=( MemoryMapInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    MemoryMapInfoKHR & operator=( VkMemoryMapInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::MemoryMapInfoKHR const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 MemoryMapInfoKHR & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 MemoryMapInfoKHR & setFlags( VULKAN_HPP_NAMESPACE::MemoryMapFlags flags_ ) VULKAN_HPP_NOEXCEPT
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 MemoryMapInfoKHR & setMemory( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ ) VULKAN_HPP_NOEXCEPT
+    {
+      memory = memory_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 MemoryMapInfoKHR & setOffset( VULKAN_HPP_NAMESPACE::DeviceSize offset_ ) VULKAN_HPP_NOEXCEPT
+    {
+      offset = offset_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 MemoryMapInfoKHR & setSize( VULKAN_HPP_NAMESPACE::DeviceSize size_ ) VULKAN_HPP_NOEXCEPT
+    {
+      size = size_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkMemoryMapInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkMemoryMapInfoKHR *>( this );
+    }
+
+    operator VkMemoryMapInfoKHR &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkMemoryMapInfoKHR *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::MemoryMapFlags const &,
+               VULKAN_HPP_NAMESPACE::DeviceMemory const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, flags, memory, offset, size );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( MemoryMapInfoKHR const & ) const = default;
+#else
+    bool operator==( MemoryMapInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( memory == rhs.memory ) && ( offset == rhs.offset ) &&
+             ( size == rhs.size );
+#  endif
+    }
+
+    bool operator!=( MemoryMapInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType  sType  = StructureType::eMemoryMapInfoKHR;
+    const void *                         pNext  = {};
+    VULKAN_HPP_NAMESPACE::MemoryMapFlags flags  = {};
+    VULKAN_HPP_NAMESPACE::DeviceMemory   memory = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize     offset = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize     size   = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eMemoryMapInfoKHR>
+  {
+    using Type = MemoryMapInfoKHR;
+  };
+
   struct MemoryOpaqueCaptureAddressAllocateInfo
   {
     using NativeType = VkMemoryOpaqueCaptureAddressAllocateInfo;
@@ -46457,6 +46584,112 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     VULKAN_HPP_NAMESPACE::MemoryPropertyFlags propertyFlags = {};
     uint32_t                                  heapIndex     = {};
+  };
+
+  struct MemoryUnmapInfoKHR
+  {
+    using NativeType = VkMemoryUnmapInfoKHR;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryUnmapInfoKHR;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR MemoryUnmapInfoKHR( VULKAN_HPP_NAMESPACE::MemoryUnmapFlagsKHR flags_  = {},
+                                             VULKAN_HPP_NAMESPACE::DeviceMemory        memory_ = {},
+                                             const void *                              pNext_  = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , flags( flags_ )
+      , memory( memory_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR MemoryUnmapInfoKHR( MemoryUnmapInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    MemoryUnmapInfoKHR( VkMemoryUnmapInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT : MemoryUnmapInfoKHR( *reinterpret_cast<MemoryUnmapInfoKHR const *>( &rhs ) ) {}
+
+    MemoryUnmapInfoKHR & operator=( MemoryUnmapInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    MemoryUnmapInfoKHR & operator=( VkMemoryUnmapInfoKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::MemoryUnmapInfoKHR const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 MemoryUnmapInfoKHR & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 MemoryUnmapInfoKHR & setFlags( VULKAN_HPP_NAMESPACE::MemoryUnmapFlagsKHR flags_ ) VULKAN_HPP_NOEXCEPT
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 MemoryUnmapInfoKHR & setMemory( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ ) VULKAN_HPP_NOEXCEPT
+    {
+      memory = memory_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkMemoryUnmapInfoKHR const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkMemoryUnmapInfoKHR *>( this );
+    }
+
+    operator VkMemoryUnmapInfoKHR &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkMemoryUnmapInfoKHR *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::MemoryUnmapFlagsKHR const &,
+               VULKAN_HPP_NAMESPACE::DeviceMemory const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, flags, memory );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( MemoryUnmapInfoKHR const & ) const = default;
+#else
+    bool operator==( MemoryUnmapInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( memory == rhs.memory );
+#  endif
+    }
+
+    bool operator!=( MemoryUnmapInfoKHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType       sType  = StructureType::eMemoryUnmapInfoKHR;
+    const void *                              pNext  = {};
+    VULKAN_HPP_NAMESPACE::MemoryUnmapFlagsKHR flags  = {};
+    VULKAN_HPP_NAMESPACE::DeviceMemory        memory = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eMemoryUnmapInfoKHR>
+  {
+    using Type = MemoryUnmapInfoKHR;
   };
 
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
