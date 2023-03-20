@@ -1199,8 +1199,8 @@ void ContextVk::onDestroy(const gl::Context *context)
     mOutsideRenderPassCommands->detachAllocator();
     mRenderPassCommands->detachAllocator();
 
-    mRenderer->recycleOutsideRenderPassCommandBufferHelper(device, &mOutsideRenderPassCommands);
-    mRenderer->recycleRenderPassCommandBufferHelper(device, &mRenderPassCommands);
+    mRenderer->recycleOutsideRenderPassCommandBufferHelper(&mOutsideRenderPassCommands);
+    mRenderer->recycleRenderPassCommandBufferHelper(&mRenderPassCommands);
 
     mVertexInputGraphicsPipelineCache.destroy(this);
     mFragmentOutputGraphicsPipelineCache.destroy(this);
@@ -3752,9 +3752,10 @@ void ContextVk::clearAllGarbage()
 
 void ContextVk::handleDeviceLost()
 {
-    (void)mOutsideRenderPassCommands->reset(this);
-    (void)mRenderPassCommands->reset(this);
-    mRenderer->notifyDeviceLost();
+    vk::SecondaryCommandBufferCollector collector;
+    (void)mOutsideRenderPassCommands->reset(this, &collector);
+    (void)mRenderPassCommands->reset(this, &collector);
+    collector.retireCommandBuffers();
 }
 
 angle::Result ContextVk::drawArrays(const gl::Context *context,
@@ -5538,6 +5539,8 @@ angle::Result ContextVk::syncState(const gl::Context *context,
                             break;
                         case gl::State::EXTENDED_DIRTY_BIT_CLIP_DISTANCES:
                             invalidateGraphicsDriverUniforms();
+                            break;
+                        case gl::State::EXTENDED_DIRTY_BIT_DEPTH_CLAMP_ENABLED:
                             break;
                         case gl::State::EXTENDED_DIRTY_BIT_MIPMAP_GENERATION_HINT:
                             break;
