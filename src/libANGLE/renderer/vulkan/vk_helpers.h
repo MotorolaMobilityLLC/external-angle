@@ -1095,7 +1095,7 @@ constexpr uint32_t kInfiniteCmdCount = 0xFFFFFFFF;
 class CommandBufferHelperCommon : angle::NonCopyable
 {
   public:
-    CommandPool *getCommandPool() { return mCommandPool; }
+    SecondaryCommandPool *getCommandPool() { return mCommandPool; }
 
     void bufferWrite(ContextVk *contextVk,
                      VkAccessFlags writeAccessType,
@@ -1145,7 +1145,7 @@ class CommandBufferHelperCommon : angle::NonCopyable
     CommandBufferHelperCommon();
     ~CommandBufferHelperCommon();
 
-    void initializeImpl(CommandPool *commandPool);
+    void initializeImpl(SecondaryCommandPool *commandPool);
 
     void resetImpl();
 
@@ -1177,7 +1177,7 @@ class CommandBufferHelperCommon : angle::NonCopyable
 
     // The command pool *CommandBufferHelper::mCommandBuffer is allocated from.  Only used with
     // Vulkan secondary command buffers (as opposed to ANGLE's SecondaryCommandBuffer).
-    CommandPool *mCommandPool;
+    SecondaryCommandPool *mCommandPool;
 
     // Whether the command buffers contains any draw/dispatch calls that possibly output data
     // through storage buffers and images.  This is used to determine whether glMemoryBarrier*
@@ -1192,15 +1192,17 @@ class CommandBufferHelperCommon : angle::NonCopyable
     QueueSerial mQueueSerial;
 };
 
+class SecondaryCommandBufferCollector;
+
 class OutsideRenderPassCommandBufferHelper final : public CommandBufferHelperCommon
 {
   public:
     OutsideRenderPassCommandBufferHelper();
     ~OutsideRenderPassCommandBufferHelper();
 
-    angle::Result initialize(Context *context, CommandPool *commandPool);
+    angle::Result initialize(Context *context, SecondaryCommandPool *commandPool);
 
-    angle::Result reset(Context *context);
+    angle::Result reset(Context *context, SecondaryCommandBufferCollector *commandBufferCollector);
 
     OutsideRenderPassCommandBuffer &getCommandBuffer() { return mCommandBuffer; }
 
@@ -1231,7 +1233,9 @@ class OutsideRenderPassCommandBufferHelper final : public CommandBufferHelperCom
                     ImageLayout imageLayout,
                     ImageHelper *image);
 
-    angle::Result flushToPrimary(Context *context, PrimaryCommandBuffer *primary);
+    angle::Result flushToPrimary(Context *context,
+                                 PrimaryCommandBuffer *primary,
+                                 SecondaryCommandBufferCollector *commandBufferCollector);
 
     void setGLMemoryBarrierIssued()
     {
@@ -1301,9 +1305,9 @@ class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
     RenderPassCommandBufferHelper();
     ~RenderPassCommandBufferHelper();
 
-    angle::Result initialize(Context *context, CommandPool *commandPool);
+    angle::Result initialize(Context *context, SecondaryCommandPool *commandPool);
 
-    angle::Result reset(Context *context);
+    angle::Result reset(Context *context, SecondaryCommandBufferCollector *commandBufferCollector);
 
     RenderPassCommandBuffer &getCommandBuffer()
     {
@@ -1356,7 +1360,8 @@ class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
 
     angle::Result flushToPrimary(Context *context,
                                  PrimaryCommandBuffer *primary,
-                                 const RenderPass *renderPass);
+                                 const RenderPass *renderPass,
+                                 SecondaryCommandBufferCollector *commandBufferCollector);
 
     bool started() const { return mRenderPassStarted; }
 
@@ -1553,7 +1558,7 @@ class RenderPassCommandBufferHelper final : public CommandBufferHelperCommon
 
 // The following class helps support both Vulkan and ANGLE secondary command buffers by
 // encapsulating their differences.
-template <typename CommandBufferT, typename CommandBufferHelperT>
+template <typename CommandBufferHelperT>
 class CommandBufferRecycler
 {
   public:
@@ -1563,24 +1568,35 @@ class CommandBufferRecycler
     void onDestroy();
 
     angle::Result getCommandBufferHelper(Context *context,
-                                         CommandPool *commandPool,
+                                         SecondaryCommandPool *commandPool,
                                          SecondaryCommandMemoryAllocator *commandsAllocator,
                                          CommandBufferHelperT **commandBufferHelperOut);
 
-    void recycleCommandBufferHelper(VkDevice device, CommandBufferHelperT **commandBuffer);
-
-    void resetCommandBuffer(CommandBufferT &&commandBuffer);
-
-    void releaseCommandBuffersToReset(std::vector<CommandBufferT> *vectorOut)
-    {
-        std::unique_lock<std::mutex> lock(mMutex);
-        (*vectorOut) = std::move(mSecondaryCommandBuffersToReset);
-    }
+    void recycleCommandBufferHelper(CommandBufferHelperT **commandBuffer);
 
   private:
     std::mutex mMutex;
     std::vector<CommandBufferHelperT *> mCommandBufferHelperFreeList;
-    std::vector<CommandBufferT> mSecondaryCommandBuffersToReset;
+};
+
+class SecondaryCommandBufferCollector final
+{
+  public:
+    SecondaryCommandBufferCollector()                                              = default;
+    SecondaryCommandBufferCollector(const SecondaryCommandBufferCollector &)       = delete;
+    SecondaryCommandBufferCollector(SecondaryCommandBufferCollector &&)            = default;
+    void operator=(const SecondaryCommandBufferCollector &)                        = delete;
+    SecondaryCommandBufferCollector &operator=(SecondaryCommandBufferCollector &&) = default;
+    ~SecondaryCommandBufferCollector() { ASSERT(empty()); }
+
+    void collectCommandBuffer(priv::SecondaryCommandBuffer &&commandBuffer);
+    void collectCommandBuffer(VulkanSecondaryCommandBuffer &&commandBuffer);
+    void retireCommandBuffers();
+
+    bool empty() const { return mCollectedCommandBuffers.empty(); }
+
+  private:
+    std::vector<VulkanSecondaryCommandBuffer> mCollectedCommandBuffers;
 };
 
 // Imagine an image going through a few layout transitions:
