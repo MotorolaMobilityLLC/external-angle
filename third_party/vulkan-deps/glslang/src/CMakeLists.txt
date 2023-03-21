@@ -30,17 +30,7 @@
 # LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-
-# increase to 3.1 once all major distributions
-# include a version of CMake >= 3.1
 cmake_minimum_required(VERSION 3.14.0)
-if (POLICY CMP0048)
-  cmake_policy(SET CMP0048 NEW)
-endif()
-if(POLICY CMP0054)
-  cmake_policy(SET CMP0054 NEW)
-endif()
-
 project(glslang)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -227,16 +217,10 @@ if(ENABLE_GLSLANG_JS)
     endif()
 endif()
 
-# Request C++11
-if(${CMAKE_VERSION} VERSION_LESS 3.1)
-    # CMake versions before 3.1 do not understand CMAKE_CXX_STANDARD
-    # remove this block once CMake >=3.1 has fixated in the ecosystem
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-else()
-    set(CMAKE_CXX_STANDARD 17)
-    set(CMAKE_CXX_STANDARD_REQUIRED ON)
-    set(CMAKE_CXX_EXTENSIONS OFF)
-endif()
+# Request C++17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 function(glslang_set_link_args TARGET)
     # For MinGW compiles, statically link against the GCC and C++ runtimes.
