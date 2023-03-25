@@ -136,6 +136,13 @@ bool IsAdreno5xx(const FunctionsGL *functions)
     return number != 0 && number >= 500 && number < 600;
 }
 
+bool IsMali(const FunctionsGL *functions)
+{
+    constexpr char Mali[]        = "Mali";
+    const char *nativeGLRenderer = GetString(functions, GL_RENDERER);
+    return angle::BeginsWith(nativeGLRenderer, Mali);
+}
+
 bool IsMaliT8xxOrOlder(const FunctionsGL *functions)
 {
     int number = getMaliTNumber(functions);
@@ -1482,6 +1489,9 @@ void GenerateCaps(const FunctionsGL *functions,
                                       functions->hasGLESExtension("GL_EXT_shader_texture_lod");
     extensions->fragDepthEXT = functions->standard == STANDARD_GL_DESKTOP ||
                                functions->hasGLESExtension("GL_EXT_frag_depth");
+    extensions->conservativeDepthEXT = functions->isAtLeastGL(gl::Version(4, 2)) ||
+                                       functions->hasGLExtension("GL_ARB_conservative_depth") ||
+                                       functions->hasGLESExtension("GL_EXT_conservative_depth");
     extensions->depthClampEXT = functions->isAtLeastGL(gl::Version(3, 2)) ||
                                 functions->hasGLExtension("GL_ARB_depth_clamp") ||
                                 functions->hasGLESExtension("GL_EXT_depth_clamp");
@@ -2510,6 +2520,9 @@ void InitializeFeatures(const FunctionsGL *functions, angle::FeaturesGL *feature
     // EXT_shader_pixel_local_storage
     ANGLE_FEATURE_CONDITION(features, supportsShaderPixelLocalStorageEXT,
                             functions->hasGLESExtension("GL_EXT_shader_pixel_local_storage"));
+
+    // https://crbug.com/1356053
+    ANGLE_FEATURE_CONDITION(features, bindFramebufferForTimerQueries, IsMali(functions));
 }
 
 void InitializeFrontendFeatures(const FunctionsGL *functions, angle::FrontendFeatures *features)
