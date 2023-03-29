@@ -3617,6 +3617,342 @@ namespace VULKAN_HPP_NAMESPACE
     uint32_t format           = {};
   };
 
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+  struct AccelerationStructureTrianglesDisplacementMicromapNV
+  {
+    using NativeType = VkAccelerationStructureTrianglesDisplacementMicromapNV;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eAccelerationStructureTrianglesDisplacementMicromapNV;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV(
+      VULKAN_HPP_NAMESPACE::Format                           displacementBiasAndScaleFormat_        = VULKAN_HPP_NAMESPACE::Format::eUndefined,
+      VULKAN_HPP_NAMESPACE::Format                           displacementVectorFormat_              = VULKAN_HPP_NAMESPACE::Format::eUndefined,
+      VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR      displacementBiasAndScaleBuffer_        = {},
+      VULKAN_HPP_NAMESPACE::DeviceSize                       displacementBiasAndScaleStride_        = {},
+      VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR      displacementVectorBuffer_              = {},
+      VULKAN_HPP_NAMESPACE::DeviceSize                       displacementVectorStride_              = {},
+      VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR      displacedMicromapPrimitiveFlags_       = {},
+      VULKAN_HPP_NAMESPACE::DeviceSize                       displacedMicromapPrimitiveFlagsStride_ = {},
+      VULKAN_HPP_NAMESPACE::IndexType                        indexType_                             = VULKAN_HPP_NAMESPACE::IndexType::eUint16,
+      VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR      indexBuffer_                           = {},
+      VULKAN_HPP_NAMESPACE::DeviceSize                       indexStride_                           = {},
+      uint32_t                                               baseTriangle_                          = {},
+      uint32_t                                               usageCountsCount_                      = {},
+      const VULKAN_HPP_NAMESPACE::MicromapUsageEXT *         pUsageCounts_                          = {},
+      const VULKAN_HPP_NAMESPACE::MicromapUsageEXT * const * ppUsageCounts_                         = {},
+      VULKAN_HPP_NAMESPACE::MicromapEXT                      micromap_                              = {},
+      void *                                                 pNext_                                 = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , displacementBiasAndScaleFormat( displacementBiasAndScaleFormat_ )
+      , displacementVectorFormat( displacementVectorFormat_ )
+      , displacementBiasAndScaleBuffer( displacementBiasAndScaleBuffer_ )
+      , displacementBiasAndScaleStride( displacementBiasAndScaleStride_ )
+      , displacementVectorBuffer( displacementVectorBuffer_ )
+      , displacementVectorStride( displacementVectorStride_ )
+      , displacedMicromapPrimitiveFlags( displacedMicromapPrimitiveFlags_ )
+      , displacedMicromapPrimitiveFlagsStride( displacedMicromapPrimitiveFlagsStride_ )
+      , indexType( indexType_ )
+      , indexBuffer( indexBuffer_ )
+      , indexStride( indexStride_ )
+      , baseTriangle( baseTriangle_ )
+      , usageCountsCount( usageCountsCount_ )
+      , pUsageCounts( pUsageCounts_ )
+      , ppUsageCounts( ppUsageCounts_ )
+      , micromap( micromap_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR_14
+      AccelerationStructureTrianglesDisplacementMicromapNV( AccelerationStructureTrianglesDisplacementMicromapNV const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    AccelerationStructureTrianglesDisplacementMicromapNV( VkAccelerationStructureTrianglesDisplacementMicromapNV const & rhs ) VULKAN_HPP_NOEXCEPT
+      : AccelerationStructureTrianglesDisplacementMicromapNV( *reinterpret_cast<AccelerationStructureTrianglesDisplacementMicromapNV const *>( &rhs ) )
+    {
+    }
+
+#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    AccelerationStructureTrianglesDisplacementMicromapNV(
+      VULKAN_HPP_NAMESPACE::Format                                                                                displacementBiasAndScaleFormat_,
+      VULKAN_HPP_NAMESPACE::Format                                                                                displacementVectorFormat_,
+      VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR                                                           displacementBiasAndScaleBuffer_,
+      VULKAN_HPP_NAMESPACE::DeviceSize                                                                            displacementBiasAndScaleStride_,
+      VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR                                                           displacementVectorBuffer_,
+      VULKAN_HPP_NAMESPACE::DeviceSize                                                                            displacementVectorStride_,
+      VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR                                                           displacedMicromapPrimitiveFlags_,
+      VULKAN_HPP_NAMESPACE::DeviceSize                                                                            displacedMicromapPrimitiveFlagsStride_,
+      VULKAN_HPP_NAMESPACE::IndexType                                                                             indexType_,
+      VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR                                                           indexBuffer_,
+      VULKAN_HPP_NAMESPACE::DeviceSize                                                                            indexStride_,
+      uint32_t                                                                                                    baseTriangle_,
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::MicromapUsageEXT> const &         usageCounts_,
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::MicromapUsageEXT * const> const & pUsageCounts_ = {},
+      VULKAN_HPP_NAMESPACE::MicromapEXT                                                                           micromap_     = {},
+      void *                                                                                                      pNext_        = nullptr )
+      : pNext( pNext_ )
+      , displacementBiasAndScaleFormat( displacementBiasAndScaleFormat_ )
+      , displacementVectorFormat( displacementVectorFormat_ )
+      , displacementBiasAndScaleBuffer( displacementBiasAndScaleBuffer_ )
+      , displacementBiasAndScaleStride( displacementBiasAndScaleStride_ )
+      , displacementVectorBuffer( displacementVectorBuffer_ )
+      , displacementVectorStride( displacementVectorStride_ )
+      , displacedMicromapPrimitiveFlags( displacedMicromapPrimitiveFlags_ )
+      , displacedMicromapPrimitiveFlagsStride( displacedMicromapPrimitiveFlagsStride_ )
+      , indexType( indexType_ )
+      , indexBuffer( indexBuffer_ )
+      , indexStride( indexStride_ )
+      , baseTriangle( baseTriangle_ )
+      , usageCountsCount( static_cast<uint32_t>( usageCounts_.size() ) )
+      , pUsageCounts( usageCounts_.data() )
+      , ppUsageCounts( pUsageCounts_.data() )
+      , micromap( micromap_ )
+    {
+#      ifdef VULKAN_HPP_NO_EXCEPTIONS
+      VULKAN_HPP_ASSERT( usageCounts_.empty() || pUsageCounts_.empty() || ( usageCounts_.size() == pUsageCounts_.size() ) );
+#      else
+      if ( !usageCounts_.empty() && !pUsageCounts_.empty() && ( usageCounts_.size() != pUsageCounts_.size() ) )
+      {
+        throw LogicError(
+          VULKAN_HPP_NAMESPACE_STRING
+          "::AccelerationStructureTrianglesDisplacementMicromapNV::AccelerationStructureTrianglesDisplacementMicromapNV: !usageCounts_.empty() && !pUsageCounts_.empty() && ( usageCounts_.size() != pUsageCounts_.size() )" );
+      }
+#      endif /*VULKAN_HPP_NO_EXCEPTIONS*/
+    }
+#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    AccelerationStructureTrianglesDisplacementMicromapNV &
+      operator=( AccelerationStructureTrianglesDisplacementMicromapNV const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    AccelerationStructureTrianglesDisplacementMicromapNV & operator=( VkAccelerationStructureTrianglesDisplacementMicromapNV const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::AccelerationStructureTrianglesDisplacementMicromapNV const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+                            setDisplacementBiasAndScaleFormat( VULKAN_HPP_NAMESPACE::Format displacementBiasAndScaleFormat_ ) VULKAN_HPP_NOEXCEPT
+    {
+      displacementBiasAndScaleFormat = displacementBiasAndScaleFormat_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+                            setDisplacementVectorFormat( VULKAN_HPP_NAMESPACE::Format displacementVectorFormat_ ) VULKAN_HPP_NOEXCEPT
+    {
+      displacementVectorFormat = displacementVectorFormat_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+      setDisplacementBiasAndScaleBuffer( VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR const & displacementBiasAndScaleBuffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      displacementBiasAndScaleBuffer = displacementBiasAndScaleBuffer_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+                            setDisplacementBiasAndScaleStride( VULKAN_HPP_NAMESPACE::DeviceSize displacementBiasAndScaleStride_ ) VULKAN_HPP_NOEXCEPT
+    {
+      displacementBiasAndScaleStride = displacementBiasAndScaleStride_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+      setDisplacementVectorBuffer( VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR const & displacementVectorBuffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      displacementVectorBuffer = displacementVectorBuffer_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+                            setDisplacementVectorStride( VULKAN_HPP_NAMESPACE::DeviceSize displacementVectorStride_ ) VULKAN_HPP_NOEXCEPT
+    {
+      displacementVectorStride = displacementVectorStride_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+      setDisplacedMicromapPrimitiveFlags( VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR const & displacedMicromapPrimitiveFlags_ ) VULKAN_HPP_NOEXCEPT
+    {
+      displacedMicromapPrimitiveFlags = displacedMicromapPrimitiveFlags_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+      setDisplacedMicromapPrimitiveFlagsStride( VULKAN_HPP_NAMESPACE::DeviceSize displacedMicromapPrimitiveFlagsStride_ ) VULKAN_HPP_NOEXCEPT
+    {
+      displacedMicromapPrimitiveFlagsStride = displacedMicromapPrimitiveFlagsStride_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+                            setIndexType( VULKAN_HPP_NAMESPACE::IndexType indexType_ ) VULKAN_HPP_NOEXCEPT
+    {
+      indexType = indexType_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+                            setIndexBuffer( VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR const & indexBuffer_ ) VULKAN_HPP_NOEXCEPT
+    {
+      indexBuffer = indexBuffer_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+                            setIndexStride( VULKAN_HPP_NAMESPACE::DeviceSize indexStride_ ) VULKAN_HPP_NOEXCEPT
+    {
+      indexStride = indexStride_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV & setBaseTriangle( uint32_t baseTriangle_ ) VULKAN_HPP_NOEXCEPT
+    {
+      baseTriangle = baseTriangle_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV & setUsageCountsCount( uint32_t usageCountsCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      usageCountsCount = usageCountsCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+                            setPUsageCounts( const VULKAN_HPP_NAMESPACE::MicromapUsageEXT * pUsageCounts_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pUsageCounts = pUsageCounts_;
+      return *this;
+    }
+
+#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    AccelerationStructureTrianglesDisplacementMicromapNV &
+      setUsageCounts( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::MicromapUsageEXT> const & usageCounts_ ) VULKAN_HPP_NOEXCEPT
+    {
+      usageCountsCount = static_cast<uint32_t>( usageCounts_.size() );
+      pUsageCounts     = usageCounts_.data();
+      return *this;
+    }
+#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+                            setPpUsageCounts( const VULKAN_HPP_NAMESPACE::MicromapUsageEXT * const * ppUsageCounts_ ) VULKAN_HPP_NOEXCEPT
+    {
+      ppUsageCounts = ppUsageCounts_;
+      return *this;
+    }
+
+#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    AccelerationStructureTrianglesDisplacementMicromapNV & setPUsageCounts(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::MicromapUsageEXT * const> const & pUsageCounts_ ) VULKAN_HPP_NOEXCEPT
+    {
+      usageCountsCount = static_cast<uint32_t>( pUsageCounts_.size() );
+      ppUsageCounts    = pUsageCounts_.data();
+      return *this;
+    }
+#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    VULKAN_HPP_CONSTEXPR_14 AccelerationStructureTrianglesDisplacementMicromapNV &
+                            setMicromap( VULKAN_HPP_NAMESPACE::MicromapEXT micromap_ ) VULKAN_HPP_NOEXCEPT
+    {
+      micromap = micromap_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkAccelerationStructureTrianglesDisplacementMicromapNV const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkAccelerationStructureTrianglesDisplacementMicromapNV *>( this );
+    }
+
+    operator VkAccelerationStructureTrianglesDisplacementMicromapNV &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkAccelerationStructureTrianglesDisplacementMicromapNV *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::Format const &,
+               VULKAN_HPP_NAMESPACE::Format const &,
+               VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               VULKAN_HPP_NAMESPACE::IndexType const &,
+               VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR const &,
+               VULKAN_HPP_NAMESPACE::DeviceSize const &,
+               uint32_t const &,
+               uint32_t const &,
+               const VULKAN_HPP_NAMESPACE::MicromapUsageEXT * const &,
+               const VULKAN_HPP_NAMESPACE::MicromapUsageEXT * const * const &,
+               VULKAN_HPP_NAMESPACE::MicromapEXT const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType,
+                       pNext,
+                       displacementBiasAndScaleFormat,
+                       displacementVectorFormat,
+                       displacementBiasAndScaleBuffer,
+                       displacementBiasAndScaleStride,
+                       displacementVectorBuffer,
+                       displacementVectorStride,
+                       displacedMicromapPrimitiveFlags,
+                       displacedMicromapPrimitiveFlagsStride,
+                       indexType,
+                       indexBuffer,
+                       indexStride,
+                       baseTriangle,
+                       usageCountsCount,
+                       pUsageCounts,
+                       ppUsageCounts,
+                       micromap );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                    sType = StructureType::eAccelerationStructureTrianglesDisplacementMicromapNV;
+    void *                                                 pNext = {};
+    VULKAN_HPP_NAMESPACE::Format                           displacementBiasAndScaleFormat        = VULKAN_HPP_NAMESPACE::Format::eUndefined;
+    VULKAN_HPP_NAMESPACE::Format                           displacementVectorFormat              = VULKAN_HPP_NAMESPACE::Format::eUndefined;
+    VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR      displacementBiasAndScaleBuffer        = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize                       displacementBiasAndScaleStride        = {};
+    VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR      displacementVectorBuffer              = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize                       displacementVectorStride              = {};
+    VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR      displacedMicromapPrimitiveFlags       = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize                       displacedMicromapPrimitiveFlagsStride = {};
+    VULKAN_HPP_NAMESPACE::IndexType                        indexType                             = VULKAN_HPP_NAMESPACE::IndexType::eUint16;
+    VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR      indexBuffer                           = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize                       indexStride                           = {};
+    uint32_t                                               baseTriangle                          = {};
+    uint32_t                                               usageCountsCount                      = {};
+    const VULKAN_HPP_NAMESPACE::MicromapUsageEXT *         pUsageCounts                          = {};
+    const VULKAN_HPP_NAMESPACE::MicromapUsageEXT * const * ppUsageCounts                         = {};
+    VULKAN_HPP_NAMESPACE::MicromapEXT                      micromap                              = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eAccelerationStructureTrianglesDisplacementMicromapNV>
+  {
+    using Type = AccelerationStructureTrianglesDisplacementMicromapNV;
+  };
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
   struct AccelerationStructureTrianglesOpacityMicromapEXT
   {
     using NativeType = VkAccelerationStructureTrianglesOpacityMicromapEXT;
@@ -55559,6 +55895,192 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = PhysicalDeviceDiscardRectanglePropertiesEXT;
   };
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+  struct PhysicalDeviceDisplacementMicromapFeaturesNV
+  {
+    using NativeType = VkPhysicalDeviceDisplacementMicromapFeaturesNV;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceDisplacementMicromapFeaturesNV;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceDisplacementMicromapFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 displacementMicromap_ = {},
+                                                                       void *                       pNext_                = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , displacementMicromap( displacementMicromap_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceDisplacementMicromapFeaturesNV( PhysicalDeviceDisplacementMicromapFeaturesNV const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceDisplacementMicromapFeaturesNV( VkPhysicalDeviceDisplacementMicromapFeaturesNV const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceDisplacementMicromapFeaturesNV( *reinterpret_cast<PhysicalDeviceDisplacementMicromapFeaturesNV const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceDisplacementMicromapFeaturesNV & operator=( PhysicalDeviceDisplacementMicromapFeaturesNV const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceDisplacementMicromapFeaturesNV & operator=( VkPhysicalDeviceDisplacementMicromapFeaturesNV const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceDisplacementMicromapFeaturesNV const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDisplacementMicromapFeaturesNV & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDisplacementMicromapFeaturesNV &
+                            setDisplacementMicromap( VULKAN_HPP_NAMESPACE::Bool32 displacementMicromap_ ) VULKAN_HPP_NOEXCEPT
+    {
+      displacementMicromap = displacementMicromap_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceDisplacementMicromapFeaturesNV const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceDisplacementMicromapFeaturesNV *>( this );
+    }
+
+    operator VkPhysicalDeviceDisplacementMicromapFeaturesNV &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceDisplacementMicromapFeaturesNV *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, displacementMicromap );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceDisplacementMicromapFeaturesNV const & ) const = default;
+#  else
+    bool operator==( PhysicalDeviceDisplacementMicromapFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( displacementMicromap == rhs.displacementMicromap );
+#    endif
+    }
+
+    bool operator!=( PhysicalDeviceDisplacementMicromapFeaturesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                = StructureType::ePhysicalDeviceDisplacementMicromapFeaturesNV;
+    void *                              pNext                = {};
+    VULKAN_HPP_NAMESPACE::Bool32        displacementMicromap = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceDisplacementMicromapFeaturesNV>
+  {
+    using Type = PhysicalDeviceDisplacementMicromapFeaturesNV;
+  };
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+  struct PhysicalDeviceDisplacementMicromapPropertiesNV
+  {
+    using NativeType = VkPhysicalDeviceDisplacementMicromapPropertiesNV;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceDisplacementMicromapPropertiesNV;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceDisplacementMicromapPropertiesNV( uint32_t maxDisplacementMicromapSubdivisionLevel_ = {},
+                                                                         void *   pNext_                                   = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , maxDisplacementMicromapSubdivisionLevel( maxDisplacementMicromapSubdivisionLevel_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR
+      PhysicalDeviceDisplacementMicromapPropertiesNV( PhysicalDeviceDisplacementMicromapPropertiesNV const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceDisplacementMicromapPropertiesNV( VkPhysicalDeviceDisplacementMicromapPropertiesNV const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceDisplacementMicromapPropertiesNV( *reinterpret_cast<PhysicalDeviceDisplacementMicromapPropertiesNV const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceDisplacementMicromapPropertiesNV & operator=( PhysicalDeviceDisplacementMicromapPropertiesNV const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceDisplacementMicromapPropertiesNV & operator=( VkPhysicalDeviceDisplacementMicromapPropertiesNV const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceDisplacementMicromapPropertiesNV const *>( &rhs );
+      return *this;
+    }
+
+    operator VkPhysicalDeviceDisplacementMicromapPropertiesNV const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceDisplacementMicromapPropertiesNV *>( this );
+    }
+
+    operator VkPhysicalDeviceDisplacementMicromapPropertiesNV &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceDisplacementMicromapPropertiesNV *>( this );
+    }
+
+#  if defined( VULKAN_HPP_USE_REFLECT )
+#    if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#    else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, uint32_t const &>
+#    endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, maxDisplacementMicromapSubdivisionLevel );
+    }
+#  endif
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceDisplacementMicromapPropertiesNV const & ) const = default;
+#  else
+    bool operator==( PhysicalDeviceDisplacementMicromapPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#    if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#    else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( maxDisplacementMicromapSubdivisionLevel == rhs.maxDisplacementMicromapSubdivisionLevel );
+#    endif
+    }
+
+    bool operator!=( PhysicalDeviceDisplacementMicromapPropertiesNV const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                                   = StructureType::ePhysicalDeviceDisplacementMicromapPropertiesNV;
+    void *                              pNext                                   = {};
+    uint32_t                            maxDisplacementMicromapSubdivisionLevel = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceDisplacementMicromapPropertiesNV>
+  {
+    using Type = PhysicalDeviceDisplacementMicromapPropertiesNV;
+  };
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   struct PhysicalDeviceDriverProperties
   {
