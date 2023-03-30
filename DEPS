@@ -1569,6 +1569,16 @@ deps = {
       'dep_type': 'cipd',
       'condition': 'checkout_angle_restricted_traces',
   },
+  'src/tests/restricted_traces/fishdom': {
+      'packages': [
+        {
+            'package': 'angle/traces/fishdom',
+            'version': 'version:1',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
   'src/tests/restricted_traces/five_nights_at_freddys': {
       'packages': [
         {
@@ -2853,6 +2863,16 @@ deps = {
       'packages': [
         {
             'package': 'angle/traces/uber',
+            'version': 'version:1',
+        },
+      ],
+      'dep_type': 'cipd',
+      'condition': 'checkout_angle_restricted_traces',
+  },
+  'src/tests/restricted_traces/vainglory': {
+      'packages': [
+        {
+            'package': 'angle/traces/vainglory',
             'version': 'version:1',
         },
       ],
