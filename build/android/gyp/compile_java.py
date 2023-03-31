@@ -21,6 +21,7 @@ from util import build_utils
 from util import md5_check
 from util import jar_info_utils
 from util import server_utils
+import action_helpers  # build_utils adds //build to sys.path.
 
 _JAVAC_EXTRACTOR = os.path.join(build_utils.DIR_SOURCE_ROOT, 'third_party',
                                 'android_prebuilts', 'build_tools', 'common',
@@ -252,7 +253,7 @@ def CreateJarFile(jar_path,
                   extra_classes_jar=None):
   """Zips files from compilation into a single jar."""
   logging.info('Start creating jar file: %s', jar_path)
-  with build_utils.AtomicOutput(jar_path) as f:
+  with action_helpers.atomic_output(jar_path) as f:
     with zipfile.ZipFile(f.name, 'w') as z:
       build_utils.ZipDir(z, classes_dir)
       if service_provider_configuration_dir:
@@ -398,7 +399,7 @@ class _InfoFileContext:
     entries = self._Collect()
 
     logging.info('Writing info file: %s', output_path)
-    with build_utils.AtomicOutput(output_path, mode='wb') as f:
+    with action_helpers.atomic_output(output_path, mode='wb') as f:
       jar_info_utils.WriteJarInfoFile(f, entries, self._srcjar_files)
     logging.info('Completed info file: %s', output_path)
 
@@ -458,48 +459,6 @@ def _OnStaleMd5(changes, options, javac_cmd, javac_args, java_files, kt_files):
                intermediates_out_dir=intermediates_out_dir,
                enable_partial_javac=True)
   logging.info('Completed all steps in _OnStaleMd5')
-
-
-def _DoRewriteAndroidSupport(source_file, contents, intermediates_out_dir):
-  source_path = pathlib.Path(source_file)
-  package_idx = -1
-  for index, part in enumerate(source_path.parts):
-    if part in ('org', 'com'):
-      # start of package
-      package_idx = index
-      break
-  else:
-    # if it is a weird package, at least strip ../../
-    if source_path.parts[0] == '..':
-      package_idx = 2
-  source_with_pkg_rel_path = pathlib.Path(*source_path.parts[package_idx:])
-  target_path = pathlib.Path(intermediates_out_dir, source_with_pkg_rel_path)
-  build_utils.MakeDirectory(target_path.parent)
-  output_lines = re.sub(r'android\.support\.test\.', 'androidx.test.', contents)
-  with open(target_path, 'w') as output:
-    output.write(output_lines)
-  return str(target_path)
-
-
-def MaybeRewriteAndroidSupport(java_files, intermediates_out_dir):
-  processed_files = []
-  for source_file in java_files:
-    # Only process test related files. Also, ignore /nojetify/ to allow for
-    # unjetified files to exist in the repo.
-    if not re.search(r'[Tt]est', source_file) or '/nojetify/' in source_file:
-      processed_files.append(source_file)
-      continue
-    with open(source_file) as f:
-      source_file_contents = f.read()
-      m = re.search(r'import\s+(static )?android\.support\.test.*',
-                    source_file_contents)
-      if not m:
-        processed_files.append(source_file)
-      else:
-        processed_files.append(
-            _DoRewriteAndroidSupport(source_file, source_file_contents,
-                                     intermediates_out_dir))
-  return processed_files
 
 
 def _RunCompiler(changes,
@@ -607,12 +566,6 @@ def _RunCompiler(changes,
       info_file_context.SubmitFiles(kt_files)
 
     if java_files:
-      input_modified_dir = os.path.join(intermediates_out_dir,
-                                        'input_rewritten')
-      # Rewrite instances of android.support.test to androidx.test. See
-      # https://crbug.com/1223832
-      java_files = MaybeRewriteAndroidSupport(java_files, input_modified_dir)
-
       # Don't include the output directory in the initial set of args since it
       # being in a temp dir makes it unstable (breaks md5 stamping).
       cmd = list(javac_cmd)
@@ -656,7 +609,7 @@ def _RunCompiler(changes,
 
 def _ParseOptions(argv):
   parser = optparse.OptionParser()
-  build_utils.AddDepfileOption(parser)
+  action_helpers.add_depfile_arg(parser)
 
   parser.add_option('--target-name', help='Fully qualified GN target name.')
   parser.add_option('--skip-build-server',
@@ -735,10 +688,10 @@ def _ParseOptions(argv):
   options, args = parser.parse_args(argv)
   build_utils.CheckOptions(options, parser, required=('jar_path', ))
 
-  options.classpath = build_utils.ParseGnList(options.classpath)
-  options.processorpath = build_utils.ParseGnList(options.processorpath)
-  options.java_srcjars = build_utils.ParseGnList(options.java_srcjars)
-  options.jar_info_exclude_globs = build_utils.ParseGnList(
+  options.classpath = action_helpers.parse_gn_list(options.classpath)
+  options.processorpath = action_helpers.parse_gn_list(options.processorpath)
+  options.java_srcjars = action_helpers.parse_gn_list(options.java_srcjars)
+  options.jar_info_exclude_globs = action_helpers.parse_gn_list(
       options.jar_info_exclude_globs)
 
   additional_jar_files = []
