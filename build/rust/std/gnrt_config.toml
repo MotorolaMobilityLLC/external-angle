@@ -10,6 +10,14 @@
 # during an x.py build, but we have to do it manually.
 rustflags = ['-Zforce-unstable-if-unmarked']
 
+# Override the GN output dir. We direct std targets to output directly to the
+# sysroot we'll use later. This must stay in sync with `local_rustc_sysroot` in
+# //build/rust/std/BUILD.gn
+output_dir = '$root_out_dir/local_rustc_sysroot/lib/rustlib/$rust_abi_target/lib/'
+
+# This target provides setup needed for building std.
+extra_gn_deps = ['//build/rust/std:std_build_deps']
+
 [crate.libc]
 # Requires:
 # * cfg(libc_align) for new enough rustc, which is normally provided by build.rs
@@ -37,3 +45,9 @@ env = ['STD_ENV_ARCH=$rust_target_arch']
 # Requires:
 # * CFG_DISABLE_UNSTABLE_FEATURES=0 to match how it's built by x.py.
 env = ['CFG_DISABLE_UNSTABLE_FEATURES=0']
+
+# test only depends on proc_macro as an internal detail of the Rust build, so
+# it's implicitly included with std/test. However, we list the std crates and
+# construct the sysroot explicitly. We don't need this, and we don't even want
+# it during cross-compiles (since we will only build host proc_macro crates).
+exclude_deps_in_gn = ['proc_macro']

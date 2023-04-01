@@ -3617,6 +3617,9 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
         isVulkan11Device() ||
         ExtensionFound(VK_KHR_MAINTENANCE1_EXTENSION_NAME, deviceExtensionNames);
 
+    ANGLE_FEATURE_CONDITION(&mFeatures, appendAliasedMemoryDecorationsToSsbo,
+                            isARM && (isVenus || armDriverVersion >= ARMDriverVersion(38, 1, 0)));
+
     ANGLE_FEATURE_CONDITION(
         &mFeatures, supportsSharedPresentableImageExtension,
         ExtensionFound(VK_KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION_NAME, deviceExtensionNames));
@@ -4184,6 +4187,10 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     // Avoid dynamic state for vertex input binding stride on buggy drivers.
     ANGLE_FEATURE_CONDITION(&mFeatures, forceStaticVertexStrideState,
                             mFeatures.supportsExtendedDynamicState.enabled && isARM);
+
+    // Avoid dynamic state for primitive restart on buggy drivers.
+    ANGLE_FEATURE_CONDITION(&mFeatures, forceStaticPrimitiveRestartState,
+                            mFeatures.supportsExtendedDynamicState2.enabled && isARM);
 
     // Support GL_QCOM_shading_rate extension
     ANGLE_FEATURE_CONDITION(&mFeatures, supportsFragmentShadingRate,
