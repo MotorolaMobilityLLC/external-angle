@@ -2511,6 +2511,7 @@ cc_library_static {
         "src/image_util/loadimage_astc.cpp",
         "src/image_util/loadimage_etc.cpp",
         "src/image_util/loadimage_paletted.cpp",
+        "src/image_util/storeimage_paletted.cpp",
     ],
     static_libs: [
         "angle_common",
