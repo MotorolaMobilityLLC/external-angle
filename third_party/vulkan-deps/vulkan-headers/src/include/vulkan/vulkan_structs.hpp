@@ -73573,6 +73573,190 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderModuleIdentifierPropertiesEXT;
   };
 
+  struct PhysicalDeviceShaderObjectFeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceShaderObjectFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceShaderObjectFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderObjectFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 shaderObject_ = {}, void * pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , shaderObject( shaderObject_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderObjectFeaturesEXT( PhysicalDeviceShaderObjectFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderObjectFeaturesEXT( VkPhysicalDeviceShaderObjectFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceShaderObjectFeaturesEXT( *reinterpret_cast<PhysicalDeviceShaderObjectFeaturesEXT const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceShaderObjectFeaturesEXT & operator=( PhysicalDeviceShaderObjectFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceShaderObjectFeaturesEXT & operator=( VkPhysicalDeviceShaderObjectFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderObjectFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderObjectFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderObjectFeaturesEXT & setShaderObject( VULKAN_HPP_NAMESPACE::Bool32 shaderObject_ ) VULKAN_HPP_NOEXCEPT
+    {
+      shaderObject = shaderObject_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceShaderObjectFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderObjectFeaturesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceShaderObjectFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderObjectFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, shaderObject );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceShaderObjectFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceShaderObjectFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderObject == rhs.shaderObject );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceShaderObjectFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType        = StructureType::ePhysicalDeviceShaderObjectFeaturesEXT;
+    void *                              pNext        = {};
+    VULKAN_HPP_NAMESPACE::Bool32        shaderObject = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceShaderObjectFeaturesEXT>
+  {
+    using Type = PhysicalDeviceShaderObjectFeaturesEXT;
+  };
+
+  struct PhysicalDeviceShaderObjectPropertiesEXT
+  {
+    using NativeType = VkPhysicalDeviceShaderObjectPropertiesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceShaderObjectPropertiesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderObjectPropertiesEXT( std::array<uint8_t, VK_UUID_SIZE> const & shaderBinaryUUID_    = {},
+                                                                     uint32_t                                  shaderBinaryVersion_ = {},
+                                                                     void *                                    pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , shaderBinaryUUID( shaderBinaryUUID_ )
+      , shaderBinaryVersion( shaderBinaryVersion_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderObjectPropertiesEXT( PhysicalDeviceShaderObjectPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderObjectPropertiesEXT( VkPhysicalDeviceShaderObjectPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceShaderObjectPropertiesEXT( *reinterpret_cast<PhysicalDeviceShaderObjectPropertiesEXT const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceShaderObjectPropertiesEXT & operator=( PhysicalDeviceShaderObjectPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceShaderObjectPropertiesEXT & operator=( VkPhysicalDeviceShaderObjectPropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderObjectPropertiesEXT const *>( &rhs );
+      return *this;
+    }
+
+    operator VkPhysicalDeviceShaderObjectPropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderObjectPropertiesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceShaderObjectPropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderObjectPropertiesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::
+      tuple<VULKAN_HPP_NAMESPACE::StructureType const &, void * const &, VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint8_t, VK_UUID_SIZE> const &, uint32_t const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, shaderBinaryUUID, shaderBinaryVersion );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceShaderObjectPropertiesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceShaderObjectPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderBinaryUUID == rhs.shaderBinaryUUID ) &&
+             ( shaderBinaryVersion == rhs.shaderBinaryVersion );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceShaderObjectPropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                         sType               = StructureType::ePhysicalDeviceShaderObjectPropertiesEXT;
+    void *                                                      pNext               = {};
+    VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint8_t, VK_UUID_SIZE> shaderBinaryUUID    = {};
+    uint32_t                                                    shaderBinaryVersion = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceShaderObjectPropertiesEXT>
+  {
+    using Type = PhysicalDeviceShaderObjectPropertiesEXT;
+  };
+
   struct PhysicalDeviceShaderSMBuiltinsFeaturesNV
   {
     using NativeType = VkPhysicalDeviceShaderSMBuiltinsFeaturesNV;
@@ -74057,6 +74241,226 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PhysicalDeviceShaderTerminateInvocationFeatures;
   };
   using PhysicalDeviceShaderTerminateInvocationFeaturesKHR = PhysicalDeviceShaderTerminateInvocationFeatures;
+
+  struct PhysicalDeviceShaderTileImageFeaturesEXT
+  {
+    using NativeType = VkPhysicalDeviceShaderTileImageFeaturesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceShaderTileImageFeaturesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderTileImageFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 shaderTileImageColorReadAccess_   = {},
+                                                                   VULKAN_HPP_NAMESPACE::Bool32 shaderTileImageDepthReadAccess_   = {},
+                                                                   VULKAN_HPP_NAMESPACE::Bool32 shaderTileImageStencilReadAccess_ = {},
+                                                                   void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , shaderTileImageColorReadAccess( shaderTileImageColorReadAccess_ )
+      , shaderTileImageDepthReadAccess( shaderTileImageDepthReadAccess_ )
+      , shaderTileImageStencilReadAccess( shaderTileImageStencilReadAccess_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderTileImageFeaturesEXT( PhysicalDeviceShaderTileImageFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderTileImageFeaturesEXT( VkPhysicalDeviceShaderTileImageFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceShaderTileImageFeaturesEXT( *reinterpret_cast<PhysicalDeviceShaderTileImageFeaturesEXT const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceShaderTileImageFeaturesEXT & operator=( PhysicalDeviceShaderTileImageFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceShaderTileImageFeaturesEXT & operator=( VkPhysicalDeviceShaderTileImageFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderTileImageFeaturesEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderTileImageFeaturesEXT & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderTileImageFeaturesEXT &
+                            setShaderTileImageColorReadAccess( VULKAN_HPP_NAMESPACE::Bool32 shaderTileImageColorReadAccess_ ) VULKAN_HPP_NOEXCEPT
+    {
+      shaderTileImageColorReadAccess = shaderTileImageColorReadAccess_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderTileImageFeaturesEXT &
+                            setShaderTileImageDepthReadAccess( VULKAN_HPP_NAMESPACE::Bool32 shaderTileImageDepthReadAccess_ ) VULKAN_HPP_NOEXCEPT
+    {
+      shaderTileImageDepthReadAccess = shaderTileImageDepthReadAccess_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceShaderTileImageFeaturesEXT &
+                            setShaderTileImageStencilReadAccess( VULKAN_HPP_NAMESPACE::Bool32 shaderTileImageStencilReadAccess_ ) VULKAN_HPP_NOEXCEPT
+    {
+      shaderTileImageStencilReadAccess = shaderTileImageStencilReadAccess_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkPhysicalDeviceShaderTileImageFeaturesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderTileImageFeaturesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceShaderTileImageFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderTileImageFeaturesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType, pNext, shaderTileImageColorReadAccess, shaderTileImageDepthReadAccess, shaderTileImageStencilReadAccess );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceShaderTileImageFeaturesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceShaderTileImageFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderTileImageColorReadAccess == rhs.shaderTileImageColorReadAccess ) &&
+             ( shaderTileImageDepthReadAccess == rhs.shaderTileImageDepthReadAccess ) &&
+             ( shaderTileImageStencilReadAccess == rhs.shaderTileImageStencilReadAccess );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceShaderTileImageFeaturesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                            = StructureType::ePhysicalDeviceShaderTileImageFeaturesEXT;
+    void *                              pNext                            = {};
+    VULKAN_HPP_NAMESPACE::Bool32        shaderTileImageColorReadAccess   = {};
+    VULKAN_HPP_NAMESPACE::Bool32        shaderTileImageDepthReadAccess   = {};
+    VULKAN_HPP_NAMESPACE::Bool32        shaderTileImageStencilReadAccess = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceShaderTileImageFeaturesEXT>
+  {
+    using Type = PhysicalDeviceShaderTileImageFeaturesEXT;
+  };
+
+  struct PhysicalDeviceShaderTileImagePropertiesEXT
+  {
+    using NativeType = VkPhysicalDeviceShaderTileImagePropertiesEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceShaderTileImagePropertiesEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderTileImagePropertiesEXT( VULKAN_HPP_NAMESPACE::Bool32 shaderTileImageCoherentReadAccelerated_           = {},
+                                                                     VULKAN_HPP_NAMESPACE::Bool32 shaderTileImageReadSampleFromPixelRateInvocation_ = {},
+                                                                     VULKAN_HPP_NAMESPACE::Bool32 shaderTileImageReadFromHelperInvocation_          = {},
+                                                                     void *                       pNext_ = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , shaderTileImageCoherentReadAccelerated( shaderTileImageCoherentReadAccelerated_ )
+      , shaderTileImageReadSampleFromPixelRateInvocation( shaderTileImageReadSampleFromPixelRateInvocation_ )
+      , shaderTileImageReadFromHelperInvocation( shaderTileImageReadFromHelperInvocation_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderTileImagePropertiesEXT( PhysicalDeviceShaderTileImagePropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    PhysicalDeviceShaderTileImagePropertiesEXT( VkPhysicalDeviceShaderTileImagePropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+      : PhysicalDeviceShaderTileImagePropertiesEXT( *reinterpret_cast<PhysicalDeviceShaderTileImagePropertiesEXT const *>( &rhs ) )
+    {
+    }
+
+    PhysicalDeviceShaderTileImagePropertiesEXT & operator=( PhysicalDeviceShaderTileImagePropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    PhysicalDeviceShaderTileImagePropertiesEXT & operator=( VkPhysicalDeviceShaderTileImagePropertiesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceShaderTileImagePropertiesEXT const *>( &rhs );
+      return *this;
+    }
+
+    operator VkPhysicalDeviceShaderTileImagePropertiesEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderTileImagePropertiesEXT *>( this );
+    }
+
+    operator VkPhysicalDeviceShaderTileImagePropertiesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderTileImagePropertiesEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               void * const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &,
+               VULKAN_HPP_NAMESPACE::Bool32 const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie(
+        sType, pNext, shaderTileImageCoherentReadAccelerated, shaderTileImageReadSampleFromPixelRateInvocation, shaderTileImageReadFromHelperInvocation );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( PhysicalDeviceShaderTileImagePropertiesEXT const & ) const = default;
+#else
+    bool operator==( PhysicalDeviceShaderTileImagePropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+#  if defined( VULKAN_HPP_USE_REFLECT )
+      return this->reflect() == rhs.reflect();
+#  else
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( shaderTileImageCoherentReadAccelerated == rhs.shaderTileImageCoherentReadAccelerated ) &&
+             ( shaderTileImageReadSampleFromPixelRateInvocation == rhs.shaderTileImageReadSampleFromPixelRateInvocation ) &&
+             ( shaderTileImageReadFromHelperInvocation == rhs.shaderTileImageReadFromHelperInvocation );
+#  endif
+    }
+
+    bool operator!=( PhysicalDeviceShaderTileImagePropertiesEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType                                            = StructureType::ePhysicalDeviceShaderTileImagePropertiesEXT;
+    void *                              pNext                                            = {};
+    VULKAN_HPP_NAMESPACE::Bool32        shaderTileImageCoherentReadAccelerated           = {};
+    VULKAN_HPP_NAMESPACE::Bool32        shaderTileImageReadSampleFromPixelRateInvocation = {};
+    VULKAN_HPP_NAMESPACE::Bool32        shaderTileImageReadFromHelperInvocation          = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceShaderTileImagePropertiesEXT>
+  {
+    using Type = PhysicalDeviceShaderTileImagePropertiesEXT;
+  };
 
   struct PhysicalDeviceShadingRateImageFeaturesNV
   {
@@ -83559,6 +83963,7 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = PipelineShaderStageRequiredSubgroupSizeCreateInfo;
   };
   using PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT = PipelineShaderStageRequiredSubgroupSizeCreateInfo;
+  using ShaderRequiredSubgroupSizeCreateInfoEXT              = PipelineShaderStageRequiredSubgroupSizeCreateInfo;
 
   struct PipelineTessellationDomainOriginStateCreateInfo
   {
@@ -94202,6 +94607,321 @@ namespace VULKAN_HPP_NAMESPACE
 
   public:
     uint32_t data = {};
+  };
+
+  struct ShaderCreateInfoEXT
+  {
+    using NativeType = VkShaderCreateInfoEXT;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eShaderCreateInfoEXT;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ShaderCreateInfoEXT( VULKAN_HPP_NAMESPACE::ShaderCreateFlagsEXT        flags_     = {},
+                                              VULKAN_HPP_NAMESPACE::ShaderStageFlagBits         stage_     = VULKAN_HPP_NAMESPACE::ShaderStageFlagBits::eVertex,
+                                              VULKAN_HPP_NAMESPACE::ShaderStageFlags            nextStage_ = {},
+                                              VULKAN_HPP_NAMESPACE::ShaderCodeTypeEXT           codeType_  = VULKAN_HPP_NAMESPACE::ShaderCodeTypeEXT::eBinary,
+                                              size_t                                            codeSize_  = {},
+                                              const void *                                      pCode_     = {},
+                                              const char *                                      pName_     = {},
+                                              uint32_t                                          setLayoutCount_         = {},
+                                              const VULKAN_HPP_NAMESPACE::DescriptorSetLayout * pSetLayouts_            = {},
+                                              uint32_t                                          pushConstantRangeCount_ = {},
+                                              const VULKAN_HPP_NAMESPACE::PushConstantRange *   pPushConstantRanges_    = {},
+                                              const VULKAN_HPP_NAMESPACE::SpecializationInfo *  pSpecializationInfo_    = {},
+                                              const void *                                      pNext_                  = nullptr ) VULKAN_HPP_NOEXCEPT
+      : pNext( pNext_ )
+      , flags( flags_ )
+      , stage( stage_ )
+      , nextStage( nextStage_ )
+      , codeType( codeType_ )
+      , codeSize( codeSize_ )
+      , pCode( pCode_ )
+      , pName( pName_ )
+      , setLayoutCount( setLayoutCount_ )
+      , pSetLayouts( pSetLayouts_ )
+      , pushConstantRangeCount( pushConstantRangeCount_ )
+      , pPushConstantRanges( pPushConstantRanges_ )
+      , pSpecializationInfo( pSpecializationInfo_ )
+    {
+    }
+
+    VULKAN_HPP_CONSTEXPR ShaderCreateInfoEXT( ShaderCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ShaderCreateInfoEXT( VkShaderCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT : ShaderCreateInfoEXT( *reinterpret_cast<ShaderCreateInfoEXT const *>( &rhs ) )
+    {
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    template <typename T>
+    ShaderCreateInfoEXT( VULKAN_HPP_NAMESPACE::ShaderCreateFlagsEXT                                                             flags_,
+                         VULKAN_HPP_NAMESPACE::ShaderStageFlagBits                                                              stage_,
+                         VULKAN_HPP_NAMESPACE::ShaderStageFlags                                                                 nextStage_,
+                         VULKAN_HPP_NAMESPACE::ShaderCodeTypeEXT                                                                codeType_,
+                         VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const T> const &                                         code_,
+                         const char *                                                                                           pName_               = {},
+                         VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::DescriptorSetLayout> const & setLayouts_          = {},
+                         VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::PushConstantRange> const &   pushConstantRanges_  = {},
+                         const VULKAN_HPP_NAMESPACE::SpecializationInfo *                                                       pSpecializationInfo_ = {},
+                         const void *                                                                                           pNext_               = nullptr )
+      : pNext( pNext_ )
+      , flags( flags_ )
+      , stage( stage_ )
+      , nextStage( nextStage_ )
+      , codeType( codeType_ )
+      , codeSize( code_.size() * sizeof( T ) )
+      , pCode( code_.data() )
+      , pName( pName_ )
+      , setLayoutCount( static_cast<uint32_t>( setLayouts_.size() ) )
+      , pSetLayouts( setLayouts_.data() )
+      , pushConstantRangeCount( static_cast<uint32_t>( pushConstantRanges_.size() ) )
+      , pPushConstantRanges( pushConstantRanges_.data() )
+      , pSpecializationInfo( pSpecializationInfo_ )
+    {
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    ShaderCreateInfoEXT & operator=( ShaderCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ShaderCreateInfoEXT & operator=( VkShaderCreateInfoEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ShaderCreateInfoEXT const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setFlags( VULKAN_HPP_NAMESPACE::ShaderCreateFlagsEXT flags_ ) VULKAN_HPP_NOEXCEPT
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setStage( VULKAN_HPP_NAMESPACE::ShaderStageFlagBits stage_ ) VULKAN_HPP_NOEXCEPT
+    {
+      stage = stage_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setNextStage( VULKAN_HPP_NAMESPACE::ShaderStageFlags nextStage_ ) VULKAN_HPP_NOEXCEPT
+    {
+      nextStage = nextStage_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setCodeType( VULKAN_HPP_NAMESPACE::ShaderCodeTypeEXT codeType_ ) VULKAN_HPP_NOEXCEPT
+    {
+      codeType = codeType_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setCodeSize( size_t codeSize_ ) VULKAN_HPP_NOEXCEPT
+    {
+      codeSize = codeSize_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setPCode( const void * pCode_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pCode = pCode_;
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    template <typename T>
+    ShaderCreateInfoEXT & setCode( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const T> const & code_ ) VULKAN_HPP_NOEXCEPT
+    {
+      codeSize = code_.size() * sizeof( T );
+      pCode    = code_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setPName( const char * pName_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pName = pName_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setSetLayoutCount( uint32_t setLayoutCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      setLayoutCount = setLayoutCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setPSetLayouts( const VULKAN_HPP_NAMESPACE::DescriptorSetLayout * pSetLayouts_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pSetLayouts = pSetLayouts_;
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    ShaderCreateInfoEXT &
+      setSetLayouts( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::DescriptorSetLayout> const & setLayouts_ ) VULKAN_HPP_NOEXCEPT
+    {
+      setLayoutCount = static_cast<uint32_t>( setLayouts_.size() );
+      pSetLayouts    = setLayouts_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT & setPushConstantRangeCount( uint32_t pushConstantRangeCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pushConstantRangeCount = pushConstantRangeCount_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT &
+                            setPPushConstantRanges( const VULKAN_HPP_NAMESPACE::PushConstantRange * pPushConstantRanges_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pPushConstantRanges = pPushConstantRanges_;
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    ShaderCreateInfoEXT & setPushConstantRanges(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const VULKAN_HPP_NAMESPACE::PushConstantRange> const & pushConstantRanges_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pushConstantRangeCount = static_cast<uint32_t>( pushConstantRanges_.size() );
+      pPushConstantRanges    = pushConstantRanges_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    VULKAN_HPP_CONSTEXPR_14 ShaderCreateInfoEXT &
+                            setPSpecializationInfo( const VULKAN_HPP_NAMESPACE::SpecializationInfo * pSpecializationInfo_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pSpecializationInfo = pSpecializationInfo_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkShaderCreateInfoEXT const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkShaderCreateInfoEXT *>( this );
+    }
+
+    operator VkShaderCreateInfoEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkShaderCreateInfoEXT *>( this );
+    }
+
+#if defined( VULKAN_HPP_USE_REFLECT )
+#  if 14 <= VULKAN_HPP_CPP_VERSION
+    auto
+#  else
+    std::tuple<VULKAN_HPP_NAMESPACE::StructureType const &,
+               const void * const &,
+               VULKAN_HPP_NAMESPACE::ShaderCreateFlagsEXT const &,
+               VULKAN_HPP_NAMESPACE::ShaderStageFlagBits const &,
+               VULKAN_HPP_NAMESPACE::ShaderStageFlags const &,
+               VULKAN_HPP_NAMESPACE::ShaderCodeTypeEXT const &,
+               size_t const &,
+               const void * const &,
+               const char * const &,
+               uint32_t const &,
+               const VULKAN_HPP_NAMESPACE::DescriptorSetLayout * const &,
+               uint32_t const &,
+               const VULKAN_HPP_NAMESPACE::PushConstantRange * const &,
+               const VULKAN_HPP_NAMESPACE::SpecializationInfo * const &>
+#  endif
+      reflect() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( sType,
+                       pNext,
+                       flags,
+                       stage,
+                       nextStage,
+                       codeType,
+                       codeSize,
+                       pCode,
+                       pName,
+                       setLayoutCount,
+                       pSetLayouts,
+                       pushConstantRangeCount,
+                       pPushConstantRanges,
+                       pSpecializationInfo );
+    }
+#endif
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    std::strong_ordering operator<=>( ShaderCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      if ( auto cmp = sType <=> rhs.sType; cmp != 0 )
+        return cmp;
+      if ( auto cmp = pNext <=> rhs.pNext; cmp != 0 )
+        return cmp;
+      if ( auto cmp = flags <=> rhs.flags; cmp != 0 )
+        return cmp;
+      if ( auto cmp = stage <=> rhs.stage; cmp != 0 )
+        return cmp;
+      if ( auto cmp = nextStage <=> rhs.nextStage; cmp != 0 )
+        return cmp;
+      if ( auto cmp = codeType <=> rhs.codeType; cmp != 0 )
+        return cmp;
+      if ( auto cmp = codeSize <=> rhs.codeSize; cmp != 0 )
+        return cmp;
+      if ( auto cmp = pCode <=> rhs.pCode; cmp != 0 )
+        return cmp;
+      if ( pName != rhs.pName )
+        if ( auto cmp = strcmp( pName, rhs.pName ); cmp != 0 )
+          return ( cmp < 0 ) ? std::strong_ordering::less : std::strong_ordering::greater;
+      if ( auto cmp = setLayoutCount <=> rhs.setLayoutCount; cmp != 0 )
+        return cmp;
+      if ( auto cmp = pSetLayouts <=> rhs.pSetLayouts; cmp != 0 )
+        return cmp;
+      if ( auto cmp = pushConstantRangeCount <=> rhs.pushConstantRangeCount; cmp != 0 )
+        return cmp;
+      if ( auto cmp = pPushConstantRanges <=> rhs.pPushConstantRanges; cmp != 0 )
+        return cmp;
+      if ( auto cmp = pSpecializationInfo <=> rhs.pSpecializationInfo; cmp != 0 )
+        return cmp;
+
+      return std::strong_ordering::equivalent;
+    }
+#endif
+
+    bool operator==( ShaderCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( flags == rhs.flags ) && ( stage == rhs.stage ) && ( nextStage == rhs.nextStage ) &&
+             ( codeType == rhs.codeType ) && ( codeSize == rhs.codeSize ) && ( pCode == rhs.pCode ) &&
+             ( ( pName == rhs.pName ) || ( strcmp( pName, rhs.pName ) == 0 ) ) && ( setLayoutCount == rhs.setLayoutCount ) &&
+             ( pSetLayouts == rhs.pSetLayouts ) && ( pushConstantRangeCount == rhs.pushConstantRangeCount ) &&
+             ( pPushConstantRanges == rhs.pPushConstantRanges ) && ( pSpecializationInfo == rhs.pSpecializationInfo );
+    }
+
+    bool operator!=( ShaderCreateInfoEXT const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType               sType                  = StructureType::eShaderCreateInfoEXT;
+    const void *                                      pNext                  = {};
+    VULKAN_HPP_NAMESPACE::ShaderCreateFlagsEXT        flags                  = {};
+    VULKAN_HPP_NAMESPACE::ShaderStageFlagBits         stage                  = VULKAN_HPP_NAMESPACE::ShaderStageFlagBits::eVertex;
+    VULKAN_HPP_NAMESPACE::ShaderStageFlags            nextStage              = {};
+    VULKAN_HPP_NAMESPACE::ShaderCodeTypeEXT           codeType               = VULKAN_HPP_NAMESPACE::ShaderCodeTypeEXT::eBinary;
+    size_t                                            codeSize               = {};
+    const void *                                      pCode                  = {};
+    const char *                                      pName                  = {};
+    uint32_t                                          setLayoutCount         = {};
+    const VULKAN_HPP_NAMESPACE::DescriptorSetLayout * pSetLayouts            = {};
+    uint32_t                                          pushConstantRangeCount = {};
+    const VULKAN_HPP_NAMESPACE::PushConstantRange *   pPushConstantRanges    = {};
+    const VULKAN_HPP_NAMESPACE::SpecializationInfo *  pSpecializationInfo    = {};
+  };
+
+  template <>
+  struct CppType<StructureType, StructureType::eShaderCreateInfoEXT>
+  {
+    using Type = ShaderCreateInfoEXT;
   };
 
   struct ShaderModuleCreateInfo
