@@ -9,6 +9,7 @@ import subprocess
 import unittest
 import unittest.mock as mock
 
+import common
 import flash_device
 
 _TEST_IMAGE_DIR = 'test/image/dir'
@@ -24,8 +25,6 @@ class FlashDeviceTest(unittest.TestCase):
         context_mock = mock.Mock()
         context_mock.__enter__ = mock.Mock(return_value=None)
         context_mock.__exit__ = mock.Mock(return_value=None)
-        config_patcher = mock.patch('flash_device.ScopedFfxConfig',
-                                    return_value=context_mock)
         ffx_mock = mock.Mock()
         ffx_mock.returncode = 0
         ffx_patcher = mock.patch('common.run_ffx_command',
@@ -36,12 +35,10 @@ class FlashDeviceTest(unittest.TestCase):
         swarming_patcher = mock.patch('flash_device.running_unattended',
                                       return_value=False)
         check_patcher = mock.patch('flash_device.check_ssh_config_file')
-        self._config_mock = config_patcher.start()
         self._ffx_mock = ffx_patcher.start()
         self._sdk_hash_mock = sdk_hash_patcher.start()
         self._check_patcher_mock = check_patcher.start()
         self._swarming_mock = swarming_patcher.start()
-        self.addCleanup(self._config_mock.stop)
         self.addCleanup(self._ffx_mock.stop)
         self.addCleanup(self._sdk_hash_mock.stop)
         self.addCleanup(self._check_patcher_mock.stop)
@@ -125,6 +122,7 @@ class FlashDeviceTest(unittest.TestCase):
         self._swarming_mock.return_value = True
         with mock.patch('os.path.exists', return_value=True), \
                 mock.patch('flash_device._add_exec_to_flash_binaries'), \
+                mock.patch('flash_device.boot_device') as mock_boot, \
                 mock.patch('flash_device.subprocess.run'):
             self._ffx_mock.return_value.stdout = \
                 '[{"title": "Build", "child": [{"value": "wrong.version"}, ' \
@@ -133,7 +131,10 @@ class FlashDeviceTest(unittest.TestCase):
                                 'check',
                                 None,
                                 should_pave=False)
-            self.assertEqual(self._ffx_mock.call_count, 4)
+            # Regular boot is to check the versions.
+            mock_boot.assert_called_once_with(mock.ANY,
+                                              common.BootMode.REGULAR)
+            self.assertEqual(self._ffx_mock.call_count, 3)
 
     def test_update_system_info_mismatch_adds_exec_to_flash_binaries(self
                                                                      ) -> None:
@@ -200,13 +201,16 @@ class FlashDeviceTest(unittest.TestCase):
 
         with mock.patch('time.sleep'), \
                 mock.patch('os.path.exists', return_value=True), \
+                mock.patch('flash_device.boot_device') as mock_boot, \
                 mock.patch('flash_device._add_exec_to_flash_binaries'):
             flash_device.update(_TEST_IMAGE_DIR,
                                 'update',
                                 None,
                                 'test_serial',
                                 should_pave=False)
-        self.assertEqual(self._ffx_mock.call_count, 4)
+            mock_boot.assert_called_once_with(mock.ANY,
+                                              common.BootMode.BOOTLOADER)
+        self.assertEqual(self._ffx_mock.call_count, 3)
 
     def test_reboot_failure(self) -> None:
         """Test update when |serial_num| is specified."""
@@ -214,7 +218,8 @@ class FlashDeviceTest(unittest.TestCase):
         with mock.patch('time.sleep'), \
                 mock.patch('os.path.exists', return_value=True), \
                 mock.patch('flash_device.running_unattended',
-                           return_value=True):
+                           return_value=True), \
+                mock.patch('flash_device.boot_device'):
             required, _ = flash_device.update_required('check',
                                                        _TEST_IMAGE_DIR, None)
             self.assertEqual(required, True)
@@ -226,11 +231,15 @@ class FlashDeviceTest(unittest.TestCase):
                 mock.patch('os.path.exists', return_value=True), \
                 mock.patch('flash_device.running_unattended',
                            return_value=True), \
+                mock.patch('flash_device.boot_device') as mock_boot, \
                 mock.patch('flash_device.pave') as mock_pave:
             flash_device.update(_TEST_IMAGE_DIR,
                                 'update',
                                 'some-target-id',
                                 should_pave=True)
+
+            mock_boot.assert_called_once_with('some-target-id',
+                                              common.BootMode.RECOVERY)
             mock_pave.assert_called_once_with(_TEST_IMAGE_DIR,
                                               'some-target-id')
 
@@ -257,13 +266,16 @@ class FlashDeviceTest(unittest.TestCase):
         with mock.patch('time.sleep'), \
              mock.patch('os.path.exists', return_value=True), \
              mock.patch('flash_device._add_exec_to_flash_binaries'), \
+             mock.patch('flash_device.boot_device') as mock_boot, \
              mock.patch('subprocess.run'):
             flash_device.update(_TEST_IMAGE_DIR,
                                 'update',
                                 None,
                                 'test_serial',
                                 should_pave=False)
-        self.assertEqual(self._ffx_mock.call_count, 3)
+            mock_boot.assert_called_once_with(mock.ANY,
+                                              common.BootMode.BOOTLOADER)
+        self.assertEqual(self._ffx_mock.call_count, 2)
 
     # pylint: disable=no-self-use
     def test_update_with_pave_timeout_defaults_to_flash(self) -> None:
@@ -273,6 +285,7 @@ class FlashDeviceTest(unittest.TestCase):
                 mock.patch('flash_device.running_unattended',
                            return_value=True), \
                 mock.patch('flash_device.pave') as mock_pave, \
+                mock.patch('flash_device.boot_device'), \
                 mock.patch('flash_device.flash') as mock_flash:
             mock_pave.side_effect = subprocess.TimeoutExpired(
                 cmd='/some/cmd',
