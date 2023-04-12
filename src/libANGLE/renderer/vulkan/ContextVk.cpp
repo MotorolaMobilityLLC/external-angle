@@ -3291,6 +3291,8 @@ void ContextVk::syncObjectPerfCounters(const angle::VulkanPerfCounters &commandQ
         commandQueuePerfCounters.commandQueueSubmitCallsPerFrame;
     mPerfCounters.vkQueueSubmitCallsTotal    = commandQueuePerfCounters.vkQueueSubmitCallsTotal;
     mPerfCounters.vkQueueSubmitCallsPerFrame = commandQueuePerfCounters.vkQueueSubmitCallsPerFrame;
+    mPerfCounters.commandQueueWaitSemaphoresTotal =
+        commandQueuePerfCounters.commandQueueWaitSemaphoresTotal;
 
     // Return current drawFramebuffer's cache stats
     mPerfCounters.framebufferCacheSize = mShareGroupVk->getFramebufferCache().getSize();
@@ -3598,7 +3600,7 @@ angle::Result ContextVk::synchronizeCpuGpuTime()
         // vkEvent's are externally synchronized, therefore need work to be submitted before calling
         // vkGetEventStatus
         ANGLE_TRY(mRenderer->queueSubmitOneOff(this, std::move(commandBuffer), getProtectionType(),
-                                               mContextPriority, nullptr, 0, nullptr,
+                                               mContextPriority, VK_NULL_HANDLE, 0, nullptr,
                                                vk::SubmitPolicy::EnsureSubmitted, &submitSerial));
 
         // Track it with the submitSerial.
@@ -5412,7 +5414,11 @@ angle::Result ContextVk::syncState(const gl::Context *context,
                 }
 
                 onRenderPassFinished(RenderPassClosureReason::FramebufferBindingChange);
-                if (getFeatures().preferSubmitAtFBOBoundary.enabled &&
+                // If we are switching from user FBO to system frame buffer, we always submit work
+                // first so that these FBO rendering will not have to wait for ANI semaphore (which
+                // draw to system frame buffer must wait for).
+                if ((getFeatures().preferSubmitAtFBOBoundary.enabled ||
+                     mState.getDrawFramebuffer()->isDefault()) &&
                     mRenderPassCommands->started())
                 {
                     // This will behave as if user called glFlush, but the actual flush will be
@@ -7175,7 +7181,7 @@ angle::Result ContextVk::getTimestamp(uint64_t *timestampOut)
 
     QueueSerial submitQueueSerial;
     ANGLE_TRY(mRenderer->queueSubmitOneOff(this, std::move(commandBuffer), getProtectionType(),
-                                           mContextPriority, nullptr, 0, nullptr,
+                                           mContextPriority, VK_NULL_HANDLE, 0, nullptr,
                                            vk::SubmitPolicy::AllowDeferred, &submitQueueSerial));
     // Track it with the submitSerial.
     timestampQuery.setQueueSerial(submitQueueSerial);
@@ -7875,15 +7881,12 @@ angle::Result ContextVk::onResourceAccess(const vk::CommandBufferAccess &access)
 {
     ANGLE_TRY(flushCommandBuffersIfNecessary(access));
 
-    vk::OutsideRenderPassCommandBuffer *commandBuffer =
-        &mOutsideRenderPassCommands->getCommandBuffer();
-
     for (const vk::CommandBufferImageAccess &imageAccess : access.getReadImages())
     {
         ASSERT(!isRenderPassStartedAndUsesImage(*imageAccess.image));
 
         imageAccess.image->recordReadBarrier(this, imageAccess.aspectFlags, imageAccess.imageLayout,
-                                             commandBuffer);
+                                             mOutsideRenderPassCommands);
         mOutsideRenderPassCommands->retainResource(imageAccess.image);
     }
 
@@ -7892,7 +7895,8 @@ angle::Result ContextVk::onResourceAccess(const vk::CommandBufferAccess &access)
         ASSERT(!isRenderPassStartedAndUsesImage(*imageWrite.access.image));
 
         imageWrite.access.image->recordWriteBarrier(this, imageWrite.access.aspectFlags,
-                                                    imageWrite.access.imageLayout, commandBuffer);
+                                                    imageWrite.access.imageLayout,
+                                                    mOutsideRenderPassCommands);
         mOutsideRenderPassCommands->retainResource(imageWrite.access.image);
         imageWrite.access.image->onWrite(imageWrite.levelStart, imageWrite.levelCount,
                                          imageWrite.layerStart, imageWrite.layerCount,
