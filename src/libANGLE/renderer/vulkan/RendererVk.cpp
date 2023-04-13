@@ -3736,7 +3736,7 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
         ExtensionFound(VK_KHR_MAINTENANCE1_EXTENSION_NAME, deviceExtensionNames);
 
     ANGLE_FEATURE_CONDITION(&mFeatures, appendAliasedMemoryDecorationsToSsbo,
-                            isARM && (isVenus || armDriverVersion >= ARMDriverVersion(38, 1, 0)));
+                            isARM && armDriverVersion >= ARMDriverVersion(38, 1, 0));
 
     ANGLE_FEATURE_CONDITION(
         &mFeatures, supportsSharedPresentableImageExtension,
@@ -4260,10 +4260,6 @@ void RendererVk::initFeatures(DisplayVk *displayVk,
     ANGLE_FEATURE_CONDITION(
         &mFeatures, emulateAdvancedBlendEquations,
         !mFeatures.supportsBlendOperationAdvanced.enabled && (isVenus || !isIntel));
-
-    // Workaround for platforms that do not return 1.0f even when dividend and divisor have the same
-    // value.
-    ANGLE_FEATURE_CONDITION(&mFeatures, precisionSafeDivision, isSamsung || isAMD || isVenus);
 
     // http://anglebug.com/6933
     // Android expects VkPresentRegionsKHR rectangles with a bottom-left origin, while spec
@@ -5260,15 +5256,6 @@ angle::Result RendererVk::waitForResourceUseToFinishWithUserTimeout(vk::Context 
         ANGLE_TRY(mCommandProcessor.waitForResourceUseToBeSubmitted(context, use));
     }
     return mCommandQueue.waitForResourceUseToFinishWithUserTimeout(context, use, timeout, result);
-}
-
-angle::Result RendererVk::finish(vk::Context *context)
-{
-    if (isAsyncCommandQueueEnabled())
-    {
-        ANGLE_TRY(mCommandProcessor.waitForAllWorkToBeSubmitted(context));
-    }
-    return mCommandQueue.waitIdle(context, getMaxFenceWaitTimeNs());
 }
 
 angle::Result RendererVk::flushWaitSemaphores(
