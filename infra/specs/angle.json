@@ -1592,7 +1592,7 @@
         "args": [
           "--log=debug",
           "interpret",
-          "among_us:dota_underlords:genshin_impact:manhattan_10:trex_200",
+          "among_us:cut_the_rope:dota_underlords:fishdom:genshin_impact:harry_potter_hogwarts_mystery:manhattan_10:trex_200",
           "-L=2",
           "--show-test-stdout"
         ],
@@ -2397,7 +2397,7 @@
         "args": [
           "--log=debug",
           "interpret",
-          "among_us:dota_underlords:genshin_impact:manhattan_10:trex_200",
+          "among_us:cut_the_rope:dota_underlords:fishdom:genshin_impact:harry_potter_hogwarts_mystery:manhattan_10:trex_200",
           "-L=2",
           "--show-test-stdout"
         ],
@@ -3701,9 +3701,9 @@
             {
               "cpu": "x86-64",
               "display_attached": "1",
-              "gpu": "1002:6821",
+              "gpu": "1002:67ef",
               "hidpi": "1",
-              "os": "Mac-12.1",
+              "os": "Mac-13.2.1",
               "pool": "chromium.tests.gpu"
             }
           ],
@@ -3728,9 +3728,9 @@
             {
               "cpu": "x86-64",
               "display_attached": "1",
-              "gpu": "1002:6821",
+              "gpu": "1002:67ef",
               "hidpi": "1",
-              "os": "Mac-12.1",
+              "os": "Mac-13.2.1",
               "pool": "chromium.tests.gpu"
             }
           ],
@@ -3756,9 +3756,9 @@
             {
               "cpu": "x86-64",
               "display_attached": "1",
-              "gpu": "1002:6821",
+              "gpu": "1002:67ef",
               "hidpi": "1",
-              "os": "Mac-12.1",
+              "os": "Mac-13.2.1",
               "pool": "chromium.tests.gpu"
             }
           ],
@@ -3783,9 +3783,9 @@
             {
               "cpu": "x86-64",
               "display_attached": "1",
-              "gpu": "1002:6821",
+              "gpu": "1002:67ef",
               "hidpi": "1",
-              "os": "Mac-12.1",
+              "os": "Mac-13.2.1",
               "pool": "chromium.tests.gpu"
             }
           ],
@@ -3811,9 +3811,9 @@
             {
               "cpu": "x86-64",
               "display_attached": "1",
-              "gpu": "1002:6821",
+              "gpu": "1002:67ef",
               "hidpi": "1",
-              "os": "Mac-12.1",
+              "os": "Mac-13.2.1",
               "pool": "chromium.tests.gpu"
             }
           ],
@@ -3840,9 +3840,9 @@
             {
               "cpu": "x86-64",
               "display_attached": "1",
-              "gpu": "1002:6821",
+              "gpu": "1002:67ef",
               "hidpi": "1",
-              "os": "Mac-12.1",
+              "os": "Mac-13.2.1",
               "pool": "chromium.tests.gpu"
             }
           ],
@@ -3868,9 +3868,9 @@
             {
               "cpu": "x86-64",
               "display_attached": "1",
-              "gpu": "1002:6821",
+              "gpu": "1002:67ef",
               "hidpi": "1",
-              "os": "Mac-12.1",
+              "os": "Mac-13.2.1",
               "pool": "chromium.tests.gpu"
             }
           ],
@@ -3892,9 +3892,9 @@
             {
               "cpu": "x86-64",
               "display_attached": "1",
-              "gpu": "1002:6821",
+              "gpu": "1002:67ef",
               "hidpi": "1",
-              "os": "Mac-12.1",
+              "os": "Mac-13.2.1",
               "pool": "chromium.tests.gpu"
             }
           ],
@@ -4585,7 +4585,7 @@
         "args": [
           "--log=debug",
           "interpret",
-          "among_us:dota_underlords:genshin_impact:manhattan_10:trex_200",
+          "among_us:cut_the_rope:dota_underlords:fishdom:genshin_impact:harry_potter_hogwarts_mystery:manhattan_10:trex_200",
           "-L=2",
           "--show-test-stdout"
         ],
@@ -5498,7 +5498,7 @@
         "args": [
           "--log=debug",
           "interpret",
-          "among_us:dota_underlords:genshin_impact:manhattan_10:trex_200",
+          "among_us:cut_the_rope:dota_underlords:fishdom:genshin_impact:harry_potter_hogwarts_mystery:manhattan_10:trex_200",
           "-L=2",
           "--show-test-stdout"
         ],
