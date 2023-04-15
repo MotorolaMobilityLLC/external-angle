@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.246",
-    "comment": "from git branch: github-main commit: ce847fd14cc3a81751329352ce505501c46ce35e",
-    "date": "2023-03-31 09:55:10Z"
+    "api version": "1.3.247",
+    "comment": "from git branch: github-main commit: 79d2478e22ad88e6206b5f15f2580ca8e9722709",
+    "date": "2023-04-13 09:57:38Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -11355,20 +11355,40 @@
     "VkShaderCreateInfoEXT": {
       "(VK_EXT_shader_object)": [
         {
+          "vuid": "VUID-VkShaderCreateInfoEXT-codeSize-08735",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>codeSize</code> <strong class=\"purple\">must</strong> be a multiple of 4"
+        },
+        {
+          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08736",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> point to valid SPIR-V code, formatted and packed as described by the <a href=\"#spirv-spec\">Khronos SPIR-V Specification</a>"
+        },
+        {
+          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08737",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> adhere to the validation rules described by the <a href=\"#spirvenv-module-validation\">Validation Rules within a Module</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+        },
+        {
+          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08738",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> declare the <code>Shader</code> capability for SPIR-V code"
+        },
+        {
+          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08739",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> not declare any capability that is not supported by the API, as described by the <a href=\"#spirvenv-module-validation\">Capabilities</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+        },
+        {
+          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08740",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, and <code>pCode</code> declares any of the capabilities listed in the <a href=\"#spirvenv-capabilities-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
+        },
+        {
+          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08741",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> not declare any SPIR-V extension that is not supported by the API, as described by the <a href=\"#spirvenv-extensions\">Extension</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+        },
+        {
+          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08742",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, and <code>pCode</code> declares any of the SPIR-V extensions listed in the <a href=\"#spirvenv-extensions-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
+        },
+        {
           "vuid": "VUID-VkShaderCreateInfoEXT-flags-08412",
           "text": " If <code>stage</code> is not <code>VK_SHADER_STAGE_TASK_BIT_EXT</code>, <code>VK_SHADER_STAGE_MESH_BIT_EXT</code>, <code>VK_SHADER_STAGE_VERTEX_BIT</code>, <code>VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT</code>, <code>VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</code>, <code>VK_SHADER_STAGE_GEOMETRY_BIT</code>, or <code>VK_SHADER_STAGE_FRAGMENT_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_SHADER_CREATE_LINK_STAGE_BIT_EXT</code>"
-        },
-        {
-          "vuid": "VUID-VkShaderCreateInfoEXT-flags-08413",
-          "text": " If <code>stage</code> is not <code>VK_SHADER_STAGE_COMPUTE_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> or <code>VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code>"
-        },
-        {
-          "vuid": "VUID-VkShaderCreateInfoEXT-flags-08416",
-          "text": " If <code>flags</code> includes both <code>VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> and <code>VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code>, the local workgroup size in the X dimension of the shader <strong class=\"purple\">must</strong> be a multiple of <a href=\"#limits-maxSubgroupSize\"><code>maxSubgroupSize</code></a>"
-        },
-        {
-          "vuid": "VUID-VkShaderCreateInfoEXT-flags-08417",
-          "text": " If <code>flags</code> includes <code>VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code> but not <code>VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> and no <a href=\"#VkShaderRequiredSubgroupSizeCreateInfoEXT\">VkShaderRequiredSubgroupSizeCreateInfoEXT</a> structure is included in the <code>pNext</code> chain, the local workgroup size in the X dimension of the shader <strong class=\"purple\">must</strong> be a multiple of <a href=\"#limits-subgroup-size\"><code>subgroupSize</code></a>"
         },
         {
           "vuid": "VUID-VkShaderCreateInfoEXT-stage-08418",
@@ -11388,11 +11408,11 @@
         },
         {
           "vuid": "VUID-VkShaderCreateInfoEXT-nextStage-08428",
-          "text": " If <code>stage</code> is <code>VK_SHADER_STAGE_VERTEX_BIT</code> and the <a href=\"#features-tessellationShader\"><code>tessellationShader</code></a> feature is not enabled, <code>nextStage</code> <strong class=\"purple\">must</strong> not include <code>VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\"><code>tessellationShader</code></a> feature is not enabled, <code>nextStage</code> <strong class=\"purple\">must</strong> not include <code>VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT</code> or <code>VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</code>"
         },
         {
           "vuid": "VUID-VkShaderCreateInfoEXT-nextStage-08429",
-          "text": " If <code>stage</code> is <code>VK_SHADER_STAGE_VERTEX_BIT</code> and the <a href=\"#features-geometryShader\"><code>geometryShader</code></a> feature is not enabled, <code>nextStage</code> <strong class=\"purple\">must</strong> not include <code>VK_SHADER_STAGE_GEOMETRY_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\"><code>geometryShader</code></a> feature is not enabled, <code>nextStage</code> <strong class=\"purple\">must</strong> not include <code>VK_SHADER_STAGE_GEOMETRY_BIT</code>"
         },
         {
           "vuid": "VUID-VkShaderCreateInfoEXT-nextStage-08430",
@@ -11403,10 +11423,6 @@
           "text": " If <code>stage</code> is <code>VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</code>, <code>nextStage</code> <strong class=\"purple\">must</strong> not include any bits other than <code>VK_SHADER_STAGE_GEOMETRY_BIT</code> and <code>VK_SHADER_STAGE_FRAGMENT_BIT</code>"
         },
         {
-          "vuid": "VUID-VkShaderCreateInfoEXT-nextStage-08432",
-          "text": " If <code>stage</code> is <code>VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</code> and the <a href=\"#features-geometryShader\"><code>geometryShader</code></a> feature is not enabled, <code>nextStage</code> <strong class=\"purple\">must</strong> not include <code>VK_SHADER_STAGE_GEOMETRY_BIT</code>"
-        },
-        {
           "vuid": "VUID-VkShaderCreateInfoEXT-nextStage-08433",
           "text": " If <code>stage</code> is <code>VK_SHADER_STAGE_GEOMETRY_BIT</code>, <code>nextStage</code> <strong class=\"purple\">must</strong> not include any bits other than <code>VK_SHADER_STAGE_FRAGMENT_BIT</code>"
         },
@@ -11415,40 +11431,8 @@
           "text": " If <code>stage</code> is <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> or <code>VK_SHADER_STAGE_COMPUTE_BIT</code>, <code>nextStage</code> <strong class=\"purple\">must</strong> be 0"
         },
         {
-          "vuid": "VUID-VkShaderCreateInfoEXT-codeSize-08439",
-          "text": " If <code>codeType</code> is <code>VK_SHADER_CODE_TYPE_SPIRV_EXT</code>, <code>codeSize</code> <strong class=\"purple\">must</strong> be a multiple of 4"
-        },
-        {
           "vuid": "VUID-VkShaderCreateInfoEXT-pName-08440",
           "text": " If <code>codeType</code> is <code>VK_SHADER_CODE_TYPE_SPIRV_EXT</code>, <code>pName</code> <strong class=\"purple\">must</strong> be the name of an <code>OpEntryPoint</code> in <code>pCode</code> with an execution model that matches <code>stage</code>"
-        },
-        {
-          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08441",
-          "text": " If <code>codeType</code> is <code>VK_SHADER_CODE_TYPE_SPIRV_EXT</code>, <code>pCode</code> <strong class=\"purple\">must</strong> point to valid SPIR-V code, formatted and packed as described by the <a href=\"#spirv-spec\">Khronos SPIR-V Specification</a>"
-        },
-        {
-          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08442",
-          "text": " If <code>codeType</code> is <code>VK_SHADER_CODE_TYPE_SPIRV_EXT</code>, <code>pCode</code> <strong class=\"purple\">must</strong> adhere to the validation rules described by the <a href=\"#spirvenv-module-validation\">Validation Rules within a Module</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
-        },
-        {
-          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08443",
-          "text": " If <code>codeType</code> is <code>VK_SHADER_CODE_TYPE_SPIRV_EXT</code>, <code>pCode</code> <strong class=\"purple\">must</strong> declare the <code>Shader</code> capability for SPIR-V code"
-        },
-        {
-          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08444",
-          "text": " If <code>codeType</code> is <code>VK_SHADER_CODE_TYPE_SPIRV_EXT</code>, <code>pCode</code> <strong class=\"purple\">must</strong> not declare any capability that is not supported by the API, as described by the <a href=\"#spirvenv-module-validation\">Capabilities</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
-        },
-        {
-          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08445",
-          "text": " If <code>codeType</code> is <code>VK_SHADER_CODE_TYPE_SPIRV_EXT</code>, and <code>pCode</code> declares any of the capabilities listed in the <a href=\"#spirvenv-capabilities-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
-        },
-        {
-          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08446",
-          "text": " If <code>codeType</code> is <code>VK_SHADER_CODE_TYPE_SPIRV_EXT</code>, <code>pCode</code> <strong class=\"purple\">must</strong> not declare any SPIR-V extension that is not supported by the API, as described by the <a href=\"#spirvenv-extensions\">Extension</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
-        },
-        {
-          "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08447",
-          "text": " If <code>codeType</code> is <code>VK_SHADER_CODE_TYPE_SPIRV_EXT</code>, and <code>pCode</code> declares any of the SPIR-V extensions listed in the <a href=\"#spirvenv-extensions-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
         },
         {
           "vuid": "VUID-VkShaderCreateInfoEXT-pCode-08448",
@@ -11568,11 +11552,25 @@
       "(VK_EXT_shader_object)+(VK_EXT_fragment_density_map)": [
         {
           "vuid": "VUID-VkShaderCreateInfoEXT-flags-08488",
-          "text": " If <code>stage</code> is not <code>VK_SHADER_STAGE_FRAGMENT_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not include VK_SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT"
+          "text": " If <code>stage</code> is not <code>VK_SHADER_STAGE_FRAGMENT_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT</code>"
         },
         {
           "vuid": "VUID-VkShaderCreateInfoEXT-flags-08489",
           "text": " If the <a href=\"#features-fragmentDensityMap\"><code>fragmentDensityMap</code></a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_shader_object)+(VK_VERSION_1_1,VK_EXT_subgroup_size_control)": [
+        {
+          "vuid": "VUID-VkShaderCreateInfoEXT-flags-08413",
+          "text": " If <code>stage</code> is not <code>VK_SHADER_STAGE_COMPUTE_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> or <code>VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkShaderCreateInfoEXT-flags-08416",
+          "text": " If <code>flags</code> includes both <code>VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> and <code>VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code>, the local workgroup size in the X dimension of the shader <strong class=\"purple\">must</strong> be a multiple of <a href=\"#limits-maxSubgroupSize\"><code>maxSubgroupSize</code></a>"
+        },
+        {
+          "vuid": "VUID-VkShaderCreateInfoEXT-flags-08417",
+          "text": " If <code>flags</code> includes <code>VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code> but not <code>VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> and no <a href=\"#VkShaderRequiredSubgroupSizeCreateInfoEXT\">VkShaderRequiredSubgroupSizeCreateInfoEXT</a> structure is included in the <code>pNext</code> chain, the local workgroup size in the X dimension of the shader <strong class=\"purple\">must</strong> be a multiple of <a href=\"#limits-subgroup-size\"><code>subgroupSize</code></a>"
         }
       ],
       "(VK_EXT_shader_object)+(VK_VERSION_1_1,VK_KHR_device_group)": [
@@ -11767,6 +11765,14 @@
           "text": " If <code>pStages</code> contains both <code>VK_SHADER_STAGE_MESH_BIT_EXT</code> and <code>VK_SHADER_STAGE_VERTEX_BIT</code>, and <code>pShaders</code> is not <code>NULL</code>, and the same index in <code>pShaders</code> as <code>VK_SHADER_STAGE_MESH_BIT_EXT</code> in <code>pStages</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the same index in <code>pShaders</code> as <code>VK_SHADER_STAGE_VERTEX_BIT</code> in <code>pStages</code> <strong class=\"purple\">must</strong> be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
         },
         {
+          "vuid": "VUID-vkCmdBindShadersEXT-pShaders-08490",
+          "text": " If the <a href=\"#features-taskShader\"><code>taskShader</code></a> feature is not enabled, and <code>pStages</code> contains <code>VK_SHADER_STAGE_TASK_BIT_EXT</code>, and <code>pShaders</code> is not <code>NULL</code>, the same index in <code>pShaders</code> <strong class=\"purple\">must</strong> be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdBindShadersEXT-pShaders-08491",
+          "text": " If the <a href=\"#features-meshShader\"><code>meshShader</code></a> feature is not enabled, and <code>pStages</code> contains <code>VK_SHADER_STAGE_MESH_BIT_EXT</code>, and <code>pShaders</code> is not <code>NULL</code>, the same index in <code>pShaders</code> <strong class=\"purple\">must</strong> be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
+        },
+        {
           "vuid": "VUID-vkCmdBindShadersEXT-pShaders-08478",
           "text": " If <code>pStages</code> contains <code>VK_SHADER_STAGE_MESH_BIT_EXT</code> or <code>VK_SHADER_STAGE_TASK_BIT_EXT</code>, the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
         }
@@ -11855,30 +11861,86 @@
       ]
     },
     "VkShaderModuleCreateInfo": {
+      "!(VK_NV_glsl_shader[]\n:prefixConditio)": [
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-codeSize-08735",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>codeSize</code> <strong class=\"purple\">must</strong> be a multiple of 4"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08736",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> point to valid SPIR-V code, formatted and packed as described by the <a href=\"#spirv-spec\">Khronos SPIR-V Specification</a>"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08737",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> adhere to the validation rules described by the <a href=\"#spirvenv-module-validation\">Validation Rules within a Module</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08738",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> declare the <code>Shader</code> capability for SPIR-V code"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08739",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> not declare any capability that is not supported by the API, as described by the <a href=\"#spirvenv-module-validation\">Capabilities</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08740",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, and <code>pCode</code> declares any of the capabilities listed in the <a href=\"#spirvenv-capabilities-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08741",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> not declare any SPIR-V extension that is not supported by the API, as described by the <a href=\"#spirvenv-extensions\">Extension</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08742",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, and <code>pCode</code> declares any of the SPIR-V extensions listed in the <a href=\"#spirvenv-extensions-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
+        }
+      ],
+      "(VK_NV_glsl_shader[]\n:prefixCondition: If pCode is a pointer to SPIR-V cod)": [
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-codeSize-08735",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>codeSize</code> <strong class=\"purple\">must</strong> be a multiple of 4"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08736",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> point to valid SPIR-V code, formatted and packed as described by the <a href=\"#spirv-spec\">Khronos SPIR-V Specification</a>"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08737",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> adhere to the validation rules described by the <a href=\"#spirvenv-module-validation\">Validation Rules within a Module</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08738",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> declare the <code>Shader</code> capability for SPIR-V code"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08739",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> not declare any capability that is not supported by the API, as described by the <a href=\"#spirvenv-module-validation\">Capabilities</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08740",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, and <code>pCode</code> declares any of the capabilities listed in the <a href=\"#spirvenv-capabilities-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08741",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, <code>pCode</code> <strong class=\"purple\">must</strong> not declare any SPIR-V extension that is not supported by the API, as described by the <a href=\"#spirvenv-extensions\">Extension</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-08742",
+          "text": " If pname:codeType is ename:VK_SHADER_CODE_TYPE_SPIRV_EXT, and <code>pCode</code> declares any of the SPIR-V extensions listed in the <a href=\"#spirvenv-extensions-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-07912",
+          "text": " If the <a href=\"#VK_NV_glsl_shader\">VK_NV_glsl_shader</a> extension is not enabled, <code>pCode</code> <strong class=\"purple\">must</strong> be a pointer to SPIR-V code"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01379",
+          "text": " If <code>pCode</code> is a pointer to GLSL code, it <strong class=\"purple\">must</strong> be valid GLSL code written to the <code>GL_KHR_vulkan_glsl</code> GLSL extension specification"
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkShaderModuleCreateInfo-codeSize-01085",
           "text": " <code>codeSize</code> <strong class=\"purple\">must</strong> be greater than 0"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01089",
-          "text": " <code>pCode</code> <strong class=\"purple\">must</strong> declare the <code>Shader</code> capability for SPIR-V code"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01090",
-          "text": " <code>pCode</code> <strong class=\"purple\">must</strong> not declare any capability that is not supported by the API, as described by the <a href=\"#spirvenv-module-validation\">Capabilities</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01091",
-          "text": " If <code>pCode</code> declares any of the capabilities listed in the <a href=\"#spirvenv-capabilities-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-04146",
-          "text": " <code>pCode</code> <strong class=\"purple\">must</strong> not declare any SPIR-V extension that is not supported by the API, as described by the <a href=\"#spirvenv-extensions\">Extension</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-04147",
-          "text": " If <code>pCode</code> declares any of the SPIR-V extensions listed in the <a href=\"#spirvenv-extensions-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
         },
         {
           "vuid": "VUID-VkShaderModuleCreateInfo-sType-sType",
@@ -11891,42 +11953,6 @@
         {
           "vuid": "VUID-VkShaderModuleCreateInfo-pCode-parameter",
           "text": " <code>pCode</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of \\(\\textrm{codeSize} \\over 4\\) <code>uint32_t</code> values"
-        }
-      ],
-      "!(VK_NV_glsl_shader)": [
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-codeSize-01086",
-          "text": " <code>codeSize</code> <strong class=\"purple\">must</strong> be a multiple of 4"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01087",
-          "text": " <code>pCode</code> <strong class=\"purple\">must</strong> point to valid SPIR-V code, formatted and packed as described by the <a href=\"#spirv-spec\">Khronos SPIR-V Specification</a>"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01088",
-          "text": " <code>pCode</code> <strong class=\"purple\">must</strong> adhere to the validation rules described by the <a href=\"#spirvenv-module-validation\">Validation Rules within a Module</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
-        }
-      ],
-      "(VK_NV_glsl_shader)": [
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-07912",
-          "text": " If the <a href=\"#VK_NV_glsl_shader\">VK_NV_glsl_shader</a> extension is not enabled, <code>pCode</code> <strong class=\"purple\">must</strong> be a pointer to SPIR-V code"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01376",
-          "text": " If <code>pCode</code> is a pointer to SPIR-V code, <code>codeSize</code> <strong class=\"purple\">must</strong> be a multiple of 4"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01377",
-          "text": " <code>pCode</code> <strong class=\"purple\">must</strong> point to either valid SPIR-V code, formatted and packed as described by the <a href=\"#spirv-spec\">Khronos SPIR-V Specification</a> or valid GLSL code which <strong class=\"purple\">must</strong> be written to the <code>GL_KHR_vulkan_glsl</code> extension specification"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01378",
-          "text": " If <code>pCode</code> is a pointer to SPIR-V code, that code <strong class=\"purple\">must</strong> adhere to the validation rules described by the <a href=\"#spirvenv-module-validation\">Validation Rules within a Module</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
-        },
-        {
-          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01379",
-          "text": " If <code>pCode</code> is a pointer to GLSL code, it <strong class=\"purple\">must</strong> be valid GLSL code written to the <code>GL_KHR_vulkan_glsl</code> GLSL extension specification"
         }
       ]
     },
@@ -12892,11 +12918,11 @@
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pStages-00736",
-          "text": " If the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a> and <code>pStages</code> includes tessellation shader stages, the <code>topology</code> member of <code>pInputAssembly</code> <strong class=\"purple\">must</strong> be <code>VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</code>"
+          "text": " If the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a> and <a href=\"#pipelines-graphics-subsets-vertex-input\">vertex input state</a> and <code>pStages</code> includes tessellation shader stages, the <code>topology</code> member of <code>pInputAssembly</code> <strong class=\"purple\">must</strong> be <code>VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</code>"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-topology-00737",
-          "text": " If the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a> and the <code>topology</code> member of <code>pInputAssembly</code> is <code>VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</code>, <code>pStages</code> <strong class=\"purple\">must</strong> include tessellation shader stages"
+          "text": " If the pipeline is being created with <a href=\"#pipelines-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a> and <a href=\"#pipelines-graphics-subsets-vertex-input\">vertex input state</a> and the <code>topology</code> member of <code>pInputAssembly</code> is <code>VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</code>, <code>pStages</code> <strong class=\"purple\">must</strong> include tessellation shader stages"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-Vertex-07722",
@@ -13413,6 +13439,10 @@
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-Input-07904",
           "text": " If the pipeline is being created with <a href=\"#pipelines-graphics-subsets-vertex-input\">vertex input state</a>, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription\">VkVertexInputAttributeDescription</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-Input-08733",
+          "text": " If the pipeline is being created with <a href=\"#pipelines-graphics-subsets-vertex-input\">vertex input state</a>, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription\">VkVertexInputAttributeDescription</a>"
         }
       ],
       "(VK_EXT_vertex_input_dynamic_state)": [
@@ -34066,7 +34096,7 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDraw-None-08622",
@@ -35301,6 +35331,10 @@
         {
           "vuid": "VUID-vkCmdDraw-Input-07939",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-Input-08734",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>"
         }
       ],
       "(VK_EXT_extended_dynamic_state2)": [
@@ -35620,7 +35654,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-08622",
@@ -36855,6 +36889,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-Input-07939",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-Input-08734",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>"
         }
       ],
       "(VK_EXT_extended_dynamic_state2)": [
@@ -37182,7 +37220,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-None-08622",
@@ -38417,6 +38455,10 @@
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-Input-07939",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-Input-08734",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_EXT_extended_dynamic_state2)": [
@@ -38756,7 +38798,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-08622",
@@ -39991,6 +40033,10 @@
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-Input-07939",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-Input-08734",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_EXT_extended_dynamic_state2)": [
@@ -40342,7 +40388,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-08622",
@@ -41561,6 +41607,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-Input-07939",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-Input-08734",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>"
         }
       ],
       "(VK_EXT_extended_dynamic_state2)": [
@@ -41950,7 +42000,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-None-08622",
@@ -43169,6 +43219,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-Input-07939",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-Input-08734",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_extended_dynamic_state2)": [
@@ -43540,7 +43594,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-08622",
@@ -44759,6 +44813,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-Input-07939",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-Input-08734",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>"
         }
       ],
       "(VK_EXT_extended_dynamic_state2)": [
@@ -45156,7 +45214,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-08622",
@@ -46375,6 +46433,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-Input-07939",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-Input-08734",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_extended_dynamic_state2)": [
@@ -46730,7 +46792,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-08622",
@@ -47949,6 +48011,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-Input-07939",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-Input-08734",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_EXT_extended_dynamic_state2)": [
@@ -48358,7 +48424,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-None-08622",
@@ -49884,7 +49950,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-08622",
@@ -51444,7 +51510,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-08622",
@@ -52974,7 +53040,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksEXT-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksEXT-None-08622",
@@ -54500,7 +54566,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectEXT-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectEXT-None-08622",
@@ -56088,7 +56154,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountEXT-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountEXT-None-08622",
@@ -57598,7 +57664,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawClusterHUAWEI-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawClusterHUAWEI-None-08622",
@@ -59108,7 +59174,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawClusterIndirectHUAWEI-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdDrawClusterIndirectHUAWEI-None-08622",
@@ -63404,7 +63470,7 @@
       "(VK_EXT_extended_dynamic_state3,VK_EXT_shader_object)+(VK_EXT_shader_object)+(VK_EXT_extended_dynamic_state3)": [
         {
           "vuid": "VUID-vkCmdSetAlphaToCoverageEnableEXT-None-08506",
-          "text": " Either the &lt;features-extendedDynamicState3AlphaToCoverageEnable, <code>extendedDynamicState3AlphaToCoverageEnable</code>&gt;&gt; feature or the <a href=\"#features-shaderObject\"><code>shaderObject</code></a> feature or both <strong class=\"purple\">must</strong> be enabled"
+          "text": " Either the <a href=\"#features-extendedDynamicState3AlphaToCoverageEnable\"><code>extendedDynamicState3AlphaToCoverageEnable</code></a> feature or the <a href=\"#features-shaderObject\"><code>shaderObject</code></a> feature or both <strong class=\"purple\">must</strong> be enabled"
         }
       ],
       "(VK_EXT_extended_dynamic_state3,VK_EXT_shader_object)+(VK_EXT_shader_object)+!(VK_EXT_extended_dynamic_state3)": [
@@ -67106,7 +67172,7 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-08621",
-          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to an <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
+          "text": " If a shader object is bound to the <code>VK_SHADER_STAGE_FRAGMENT_BIT</code> stage, and the most recent call to <a href=\"#vkCmdSetRasterizerDiscardEnable\">vkCmdSetRasterizerDiscardEnable</a> in the current command buffer set <code>rasterizerDiscardEnable</code> to <code>VK_FALSE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEnableEXT\">vkCmdSetColorBlendEnableEXT</a> in the current command buffer set any element of <code>pColorBlendEnables</code> to <code>VK_TRUE</code>, and the most recent call to <a href=\"#vkCmdSetColorBlendEquationEXT\">vkCmdSetColorBlendEquationEXT</a> in the current command buffer set the same element of <code>pColorBlendEquations</code> to a <code>VkColorBlendEquationEXT</code> structure with any <a href=\"#VkBlendFactor\">VkBlendFactor</a> member with a value of <code>VK_BLEND_FACTOR_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</code>, <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>, <a href=\"#vkCmdSetBlendConstants\">vkCmdSetBlendConstants</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-08622",
@@ -68325,6 +68391,10 @@
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-Input-07939",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> contain a location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>::<code>location</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-Input-08734",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then all variables with the <code>Input</code> storage class decorated with <code>Location</code> in the <code>Vertex</code> {ExecutionModel} <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> be the same numeric type as the matching location in <a href=\"#VkVertexInputAttributeDescription2EXT\">VkVertexInputAttributeDescription2EXT</a>"
         }
       ],
       "(VK_NV_device_generated_commands)+(VK_EXT_extended_dynamic_state2)": [
@@ -83088,111 +83158,111 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04635",
-          "text": " The <strong>Logical</strong> or <strong>PhysicalStorageBuffer64</strong> addressing model <strong class=\"purple\">must</strong> be selected"
+          "text": " The <code>Logical</code> or <code>PhysicalStorageBuffer64</code> addressing model <strong class=\"purple\">must</strong> be selected"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04636",
-          "text": " <strong>Scope</strong> for execution <strong class=\"purple\">must</strong> be limited to <strong>Workgroup</strong> or <strong>Subgroup</strong>"
+          "text": " <code>Scope</code> for execution <strong class=\"purple\">must</strong> be limited to <code>Workgroup</code> or <code>Subgroup</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04637",
-          "text": " If the <strong>Scope</strong> for execution is <strong>Workgroup</strong>, then it <strong class=\"purple\">must</strong> only be used in the task, mesh, tessellation control, or compute execution models"
+          "text": " If the <code>Scope</code> for execution is <code>Workgroup</code>, then it <strong class=\"purple\">must</strong> only be used in the task, mesh, tessellation control, or compute {ExecutionModel}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04638",
-          "text": " <strong>Scope</strong> for memory <strong class=\"purple\">must</strong> be limited to <strong>Device</strong>, <strong>QueueFamily</strong>, <strong>Workgroup</strong>, <strong>ShaderCallKHR</strong>, <strong>Subgroup</strong>, or <strong>Invocation</strong>"
+          "text": " <code>Scope</code> for memory <strong class=\"purple\">must</strong> be limited to <code>Device</code>, <code>QueueFamily</code>, <code>Workgroup</code>, <code>ShaderCallKHR</code>, <code>Subgroup</code>, or <code>Invocation</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-ExecutionModel-07320",
-          "text": " If the <code>ExecutionModel</code> is <strong>TessellationControl</strong>, and the <code>MemoryModel</code> is <strong>GLSL450</strong>, the <strong>Scope</strong> for memory <strong class=\"purple\">must</strong> not be <strong>Workgroup</strong>"
+          "text": " If the <code>ExecutionModel</code> is <code>TessellationControl</code>, and the <code>MemoryModel</code> is <code>GLSL450</code>, the <code>Scope</code> for memory <strong class=\"purple\">must</strong> not be <code>Workgroup</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-07321",
-          "text": " If the <strong>Scope</strong> for memory is <strong>Workgroup</strong>, then it <strong class=\"purple\">must</strong> only be used in the task, mesh, tessellation control, or compute execution models"
+          "text": " If the <code>Scope</code> for memory is <code>Workgroup</code>, then it <strong class=\"purple\">must</strong> only be used in the task, mesh, tessellation control, or compute {ExecutionModel}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04640",
-          "text": " If the <strong>Scope</strong> for memory is <strong>ShaderCallKHR</strong>, then it <strong class=\"purple\">must</strong> only be used in ray generation, intersection, closest hit, any-hit, miss, and callable execution models"
+          "text": " If the <code>Scope</code> for memory is <code>ShaderCallKHR</code>, then it <strong class=\"purple\">must</strong> only be used in ray generation, intersection, closest hit, any-hit, miss, and callable {ExecutionModel}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04641",
-          "text": " If the <strong>Scope</strong> for memory is <strong>Invocation</strong>, then memory semantics <strong class=\"purple\">must</strong> be <strong>None</strong>"
+          "text": " If the <code>Scope</code> for memory is <code>Invocation</code>, then memory semantics <strong class=\"purple\">must</strong> be <code>None</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04642",
-          "text": " <strong>Scope</strong> for <a href=\"#shaders-group-operations\">group operations</a> <strong class=\"purple\">must</strong> be limited to <strong>Subgroup</strong>"
+          "text": " <code>Scope</code> for <a href=\"#shaders-group-operations\">group operations</a> <strong class=\"purple\">must</strong> be limited to <code>Subgroup</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-SubgroupVoteKHR-07951",
-          "text": " If none of the <code>SubgroupVoteKHR</code>, <code>GroupNonUniform</code>, or <code>SubgroupBallotKHR</code> capabilities are declared, <strong>Scope</strong> for memory <strong class=\"purple\">must</strong> not be <strong>Subgroup</strong>"
+          "text": " If none of the <code>SubgroupVoteKHR</code>, <code>GroupNonUniform</code>, or <code>SubgroupBallotKHR</code> capabilities are declared, <code>Scope</code> for memory <strong class=\"purple\">must</strong> not be <code>Subgroup</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04643",
-          "text": " <strong>Storage Class</strong> <strong class=\"purple\">must</strong> be limited to <strong>UniformConstant</strong>, <strong>Input</strong>, <strong>Uniform</strong>, <strong>Output</strong>, <strong>Workgroup</strong>, <strong>Private</strong>, <strong>Function</strong>, <strong>PushConstant</strong>, <strong>Image</strong>, <strong>StorageBuffer</strong>, <strong>RayPayloadKHR</strong>, <strong>IncomingRayPayloadKHR</strong>, <strong>HitAttributeKHR</strong>, <strong>CallableDataKHR</strong>, <strong>IncomingCallableDataKHR</strong>, <strong>ShaderRecordBufferKHR</strong>, <strong>PhysicalStorageBuffer</strong>, or <strong>TileImageEXT</strong>"
+          "text": " {StorageClass} <strong class=\"purple\">must</strong> be limited to <code>UniformConstant</code>, <code>Input</code>, <code>Uniform</code>, <code>Output</code>, <code>Workgroup</code>, <code>Private</code>, <code>Function</code>, <code>PushConstant</code>, <code>Image</code>, <code>StorageBuffer</code>, <code>RayPayloadKHR</code>, <code>IncomingRayPayloadKHR</code>, <code>HitAttributeKHR</code>, <code>CallableDataKHR</code>, <code>IncomingCallableDataKHR</code>, <code>ShaderRecordBufferKHR</code>, <code>PhysicalStorageBuffer</code>, or <code>TileImageEXT</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04644",
-          "text": " If the <strong>Storage Class</strong> is <strong>Output</strong>, then it <strong class=\"purple\">must</strong> not be used in the <strong>GlCompute</strong>, <strong>RayGenerationKHR</strong>, <strong>IntersectionKHR</strong>, <strong>AnyHitKHR</strong>, <strong>ClosestHitKHR</strong>, <strong>MissKHR</strong>, or <strong>CallableKHR</strong> execution models"
+          "text": " If the {StorageClass} is <code>Output</code>, then it <strong class=\"purple\">must</strong> not be used in the <code>GlCompute</code>, <code>RayGenerationKHR</code>, <code>IntersectionKHR</code>, <code>AnyHitKHR</code>, <code>ClosestHitKHR</code>, <code>MissKHR</code>, or <code>CallableKHR</code> {ExecutionModel}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04645",
-          "text": " If the <strong>Storage Class</strong> is <strong>Workgroup</strong>, then it <strong class=\"purple\">must</strong> only be used in the task, mesh, or compute execution models"
+          "text": " If the {StorageClass} is <code>Workgroup</code>, then it <strong class=\"purple\">must</strong> only be used in the task, mesh, or compute {ExecutionModel}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-08720",
-          "text": " If the <strong>Storage Class</strong> is <strong>TileImageEXT</strong>, then it <strong class=\"purple\">must</strong> only be used in the fragment execution model"
+          "text": " If the {StorageClass} is <code>TileImageEXT</code>, then it <strong class=\"purple\">must</strong> only be used in the fragment execution model"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpAtomicStore-04730",
-          "text": " <code>OpAtomicStore</code> <strong class=\"purple\">must</strong> not use <strong>Acquire</strong>, <strong>AcquireRelease</strong>, or <strong>SequentiallyConsistent</strong> memory semantics"
+          "text": " <code>OpAtomicStore</code> <strong class=\"purple\">must</strong> not use <code>Acquire</code>, <code>AcquireRelease</code>, or <code>SequentiallyConsistent</code> memory semantics"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpAtomicLoad-04731",
-          "text": " <code>OpAtomicLoad</code> <strong class=\"purple\">must</strong> not use <strong>Release</strong>, <strong>AcquireRelease</strong>, or <strong>SequentiallyConsistent</strong> memory semantics"
+          "text": " <code>OpAtomicLoad</code> <strong class=\"purple\">must</strong> not use <code>Release</code>, <code>AcquireRelease</code>, or <code>SequentiallyConsistent</code> memory semantics"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpMemoryBarrier-04732",
-          "text": " <code>OpMemoryBarrier</code> <strong class=\"purple\">must</strong> use one of <strong>Acquire</strong>, <strong>Release</strong>, <strong>AcquireRelease</strong>, or <strong>SequentiallyConsistent</strong> memory semantics"
+          "text": " <code>OpMemoryBarrier</code> <strong class=\"purple\">must</strong> use one of <code>Acquire</code>, <code>Release</code>, <code>AcquireRelease</code>, or <code>SequentiallyConsistent</code> memory semantics"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpMemoryBarrier-04733",
-          "text": " <code>OpMemoryBarrier</code> <strong class=\"purple\">must</strong> include at least one storage class"
+          "text": " <code>OpMemoryBarrier</code> <strong class=\"purple\">must</strong> include at least one {StorageClass}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpControlBarrier-04650",
-          "text": " If the semantics for <code>OpControlBarrier</code> includes one of <strong>Acquire</strong>, <strong>Release</strong>, <strong>AcquireRelease</strong>, or <strong>SequentiallyConsistent</strong> memory semantics, then it <strong class=\"purple\">must</strong> include at least one storage class"
+          "text": " If the semantics for <code>OpControlBarrier</code> includes one of <code>Acquire</code>, <code>Release</code>, <code>AcquireRelease</code>, or <code>SequentiallyConsistent</code> memory semantics, then it <strong class=\"purple\">must</strong> include at least one {StorageClass}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpVariable-04651",
-          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand <strong class=\"purple\">must</strong> have <strong>Output</strong>, <strong>Private</strong>, <strong>Function</strong>, or <strong>Workgroup</strong> as its <strong>Storage Class</strong> operand"
+          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand <strong class=\"purple\">must</strong> have <code>Output</code>, <code>Private</code>, <code>Function</code>, or <code>Workgroup</code> as its {StorageClass} operand"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpVariable-04734",
-          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand and <strong>Workgroup</strong> as its <strong>Storage Class</strong> operand <strong class=\"purple\">must</strong> use <code>OpConstantNull</code> as the initializer"
+          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand and <code>Workgroup</code> as its {StorageClass} operand <strong class=\"purple\">must</strong> use <code>OpConstantNull</code> as the initializer"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpReadClockKHR-04652",
-          "text": " <strong>Scope</strong> for <code>OpReadClockKHR</code> <strong class=\"purple\">must</strong> be limited to <strong>Subgroup</strong> or <strong>Device</strong>"
+          "text": " <code>Scope</code> for <code>OpReadClockKHR</code> <strong class=\"purple\">must</strong> be limited to <code>Subgroup</code> or <code>Device</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OriginLowerLeft-04653",
-          "text": " The <code>OriginLowerLeft</code> execution mode <strong class=\"purple\">must</strong> not be used; fragment entry points <strong class=\"purple\">must</strong> declare <code>OriginUpperLeft</code>"
+          "text": " The <code>OriginLowerLeft</code> {ExecutionMode} <strong class=\"purple\">must</strong> not be used; fragment entry points <strong class=\"purple\">must</strong> declare <code>OriginUpperLeft</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-PixelCenterInteger-04654",
-          "text": " The <code>PixelCenterInteger</code> execution mode <strong class=\"purple\">must</strong> not be used (pixels are always centered at half-integer coordinates)"
+          "text": " The <code>PixelCenterInteger</code> {ExecutionMode} <strong class=\"purple\">must</strong> not be used (pixels are always centered at half-integer coordinates)"
         },
         {
           "vuid": "VUID-StandaloneSpirv-UniformConstant-04655",
-          "text": " Any variable in the <code>UniformConstant</code> storage class <strong class=\"purple\">must</strong> be typed as either <code>OpTypeImage</code>, <code>OpTypeSampler</code>, <code>OpTypeSampledImage</code>, <code>OpTypeAccelerationStructureKHR</code>, or an array of one of these types"
+          "text": " Any variable in the <code>UniformConstant</code> {StorageClass} <strong class=\"purple\">must</strong> be typed as either <code>OpTypeImage</code>, <code>OpTypeSampler</code>, <code>OpTypeSampledImage</code>, <code>OpTypeAccelerationStructureKHR</code>, or an array of one of these types"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Uniform-06807",
-          "text": " Any variable in the <code>Uniform</code> or <code>StorageBuffer</code> storage class <strong class=\"purple\">must</strong> be typed as <code>OpTypeStruct</code> or an array of this type"
+          "text": " Any variable in the <code>Uniform</code> or <code>StorageBuffer</code> {StorageClass} <strong class=\"purple\">must</strong> be typed as <code>OpTypeStruct</code> or an array of this type"
         },
         {
           "vuid": "VUID-StandaloneSpirv-PushConstant-06808",
-          "text": " Any variable in the <code>PushConstant</code> storage class <strong class=\"purple\">must</strong> be typed as <code>OpTypeStruct</code>"
+          "text": " Any variable in the <code>PushConstant</code> {StorageClass} <strong class=\"purple\">must</strong> be typed as <code>OpTypeStruct</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpTypeImage-04656",
@@ -83232,7 +83302,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-Uniform-06925",
-          "text": " Any variable in the <code>Uniform</code> storage class decorated as <code>Block</code> <strong class=\"purple\">must</strong> not be stored to or modified"
+          "text": " Any variable in the <code>Uniform</code> {StorageClass} decorated as <code>Block</code> <strong class=\"purple\">must</strong> not be stored to or modified"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Offset-04662",
@@ -83276,15 +83346,15 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-Location-04917",
-          "text": " The <code>Location</code> decorations <strong class=\"purple\">must</strong> be used on an <code>OpVariable</code> with a structure type that is not a block"
+          "text": " If a <a href=\"#interfaces-iointerfaces-user\">user-defined variables</a> points to a <code>Block</code> decorated <code>OpTypeStruct</code>, then the <code>OpVariable</code> <strong class=\"purple\">must</strong> have a <code>Location</code> decoration"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Location-04918",
-          "text": " The <code>Location</code> decorations <strong class=\"purple\">must</strong> not be used on the members of <code>OpVariable</code> with a structure type that is decorated with <code>Location</code>"
+          "text": " If a <a href=\"#interfaces-iointerfaces-user\">user-defined variable</a> has a <code>Location</code> decoration, and the variable points to a <code>OpTypeStruct</code>, then the members of that structure <strong class=\"purple\">must</strong> not have <code>Location</code> decorations"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Location-04919",
-          "text": " The <code>Location</code> decorations <strong class=\"purple\">must</strong> be used on each member of <code>OpVariable</code> with a structure type that is a block not decorated with <code>Location</code>"
+          "text": " If a <a href=\"#interfaces-iointerfaces-user\">user-defined variable</a> does not have a <code>Location</code> decoration, and the variable points to a <code>Block</code> decorated <code>OpTypeStruct</code>, then each member of the struct <strong class=\"purple\">must</strong> have a <code>Location</code> decoration"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Component-04920",
@@ -83316,7 +83386,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-Flat-04670",
-          "text": " The <code>Flat</code>, <code>NoPerspective</code>, <code>Sample</code>, and <code>Centroid</code> decorations <strong class=\"purple\">must</strong> only be used on variables with the <code>Output</code> or <code>Input</code> storage class"
+          "text": " The <code>Flat</code>, <code>NoPerspective</code>, <code>Sample</code>, and <code>Centroid</code> decorations <strong class=\"purple\">must</strong> only be used on variables with the <code>Output</code> or <code>Input</code> {StorageClass}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Flat-06201",
@@ -83328,11 +83398,11 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-PerVertexKHR-06777",
-          "text": " The <code>PerVertexKHR</code> decoration <strong class=\"purple\">must</strong> only be used on variables with the <code>Input</code> storage class in a fragment shader"
+          "text": " The <code>PerVertexKHR</code> decoration <strong class=\"purple\">must</strong> only be used on variables with the <code>Input</code> {StorageClass} in a fragment shader"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Flat-04744",
-          "text": " Any variable with integer or double-precision floating-point type and with <code>Input</code> storage class in a fragment shader, <strong class=\"purple\">must</strong> be decorated <code>Flat</code>"
+          "text": " Any variable with integer or double-precision floating-point type and with <code>Input</code> {StorageClass} in a fragment shader, <strong class=\"purple\">must</strong> be decorated <code>Flat</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-ViewportRelativeNV-04672",
@@ -83352,7 +83422,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-Invariant-04677",
-          "text": " Variables decorated with <code>Invariant</code> and variables with structure types that have any members decorated with <code>Invariant</code> <strong class=\"purple\">must</strong> be in the <code>Output</code> or <code>Input</code> storage class, <code>Invariant</code> used on an <code>Input</code> storage class variable or structure member has no effect"
+          "text": " Variables decorated with <code>Invariant</code> and variables with structure types that have any members decorated with <code>Invariant</code> <strong class=\"purple\">must</strong> be in the <code>Output</code> or <code>Input</code> {StorageClass}, <code>Invariant</code> used on an <code>Input</code> {StorageClass} variable or structure member has no effect"
         },
         {
           "vuid": "VUID-StandaloneSpirv-VulkanMemoryModel-04678",
@@ -83364,11 +83434,11 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpTypeRuntimeArray-04680",
-          "text": " <code>OpTypeRuntimeArray</code> <strong class=\"purple\">must</strong> only be used for the last member of a <code>Block</code>-decorated <code>OpTypeStruct</code> in <code>StorageBuffer</code> or <code>PhysicalStorageBuffer</code> storage classes; <code>BufferBlock</code>-decorated <code>OpTypeStruct</code> in <code>Uniform</code> storage class; the outermost dimension of an arrayed variable in the <code>StorageBuffer</code>, <code>Uniform</code>, or <code>UniformConstant</code> storage classes"
+          "text": " <code>OpTypeRuntimeArray</code> <strong class=\"purple\">must</strong> only be used for the last member of a <code>Block</code>-decorated <code>OpTypeStruct</code> in <code>StorageBuffer</code> or <code>PhysicalStorageBuffer</code> {StorageClass}; <code>BufferBlock</code>-decorated <code>OpTypeStruct</code> in <code>Uniform</code> {StorageClass}; the outermost dimension of an arrayed variable in the <code>StorageBuffer</code>, <code>Uniform</code>, or <code>UniformConstant</code> {StorageClass}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Function-04681",
-          "text": " A type <em>T</em> that is an array sized with a specialization constant <strong class=\"purple\">must</strong> neither be, nor be contained in, the type <em>T2</em> of a variable <em>V</em>, unless either: a) <em>T</em> is equal to <em>T2</em>, b) <em>V</em> is declared in the <code>Function</code>, or <code>Private</code> storage classes, c) <em>V</em> is a non-Block variable in the <code>Workgroup</code> storage class, or d) <em>V</em> is an interface variable with an additional level of arrayness, <a href=\"#interfaces-iointerfaces-matching\">as described in interface matching</a>, and <em>T</em> is the member type of the array type <em>T2</em>"
+          "text": " A type <em>T</em> that is an array sized with a specialization constant <strong class=\"purple\">must</strong> neither be, nor be contained in, the type <em>T2</em> of a variable <em>V</em>, unless either: a) <em>T</em> is equal to <em>T2</em>, b) <em>V</em> is declared in the <code>Function</code>, or <code>Private</code> {StorageClass}, c) <em>V</em> is a non-Block variable in the <code>Workgroup</code> {StorageClass}, or d) <em>V</em> is an interface variable with an additional level of arrayness, <a href=\"#interfaces-iointerfaces-matching\">as described in interface matching</a>, and <em>T</em> is the member type of the array type <em>T2</em>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpControlBarrier-04682",
@@ -83376,7 +83446,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-LocalSize-06426",
-          "text": " For each compute shader entry point, either a <code>LocalSize</code> or <code>LocalSizeId</code> execution mode, or an object decorated with the <code>WorkgroupSize</code> decoration <strong class=\"purple\">must</strong> be specified"
+          "text": " For each compute shader entry point, either a <code>LocalSize</code> or <code>LocalSizeId</code> {ExecutionMode}, or an object decorated with the <code>WorkgroupSize</code> decoration <strong class=\"purple\">must</strong> be specified"
         },
         {
           "vuid": "VUID-StandaloneSpirv-DerivativeGroupQuadsNV-04684",
@@ -83388,11 +83458,11 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpGroupNonUniformBallotBitCount-04685",
-          "text": " If <code>OpGroupNonUniformBallotBitCount</code> is used, the group operation <strong class=\"purple\">must</strong> be limited to <strong>Reduce</strong>, <strong>InclusiveScan</strong>, or <strong>ExclusiveScan</strong>"
+          "text": " If <code>OpGroupNonUniformBallotBitCount</code> is used, the group operation <strong class=\"purple\">must</strong> be limited to <code>Reduce</code>, <code>InclusiveScan</code>, or <code>ExclusiveScan</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04686",
-          "text": " The <em>Pointer</em> operand of all atomic instructions <strong class=\"purple\">must</strong> have a <strong>Storage Class</strong> limited to <strong>Uniform</strong>, <strong>Workgroup</strong>, <strong>Image</strong>, <strong>StorageBuffer</strong>, <strong>PhysicalStorageBuffer</strong>, or <strong>TaskPayloadWorkgroupEXT</strong>"
+          "text": " The <em>Pointer</em> operand of all atomic instructions <strong class=\"purple\">must</strong> have a {StorageClass} limited to <code>Uniform</code>, <code>Workgroup</code>, <code>Image</code>, <code>StorageBuffer</code>, <code>PhysicalStorageBuffer</code>, or <code>TaskPayloadWorkgroupEXT</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Offset-04687",
@@ -83436,55 +83506,55 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-RayPayloadKHR-04698",
-          "text": " <code>RayPayloadKHR</code> storage class <strong class=\"purple\">must</strong> only be used in ray generation, closest hit or miss shaders"
+          "text": " <code>RayPayloadKHR</code> {StorageClass} <strong class=\"purple\">must</strong> only be used in ray generation, closest hit or miss shaders"
         },
         {
           "vuid": "VUID-StandaloneSpirv-IncomingRayPayloadKHR-04699",
-          "text": " <code>IncomingRayPayloadKHR</code> storage class <strong class=\"purple\">must</strong> only be used in closest hit, any-hit, or miss shaders"
+          "text": " <code>IncomingRayPayloadKHR</code> {StorageClass} <strong class=\"purple\">must</strong> only be used in closest hit, any-hit, or miss shaders"
         },
         {
           "vuid": "VUID-StandaloneSpirv-IncomingRayPayloadKHR-04700",
-          "text": " There <strong class=\"purple\">must</strong> be at most one variable with the <code>IncomingRayPayloadKHR</code> storage class in the input interface of an entry point"
+          "text": " There <strong class=\"purple\">must</strong> be at most one variable with the <code>IncomingRayPayloadKHR</code> {StorageClass} in the input interface of an entry point"
         },
         {
           "vuid": "VUID-StandaloneSpirv-HitAttributeKHR-04701",
-          "text": " <code>HitAttributeKHR</code> storage class <strong class=\"purple\">must</strong> only be used in intersection, any-hit, or closest hit shaders"
+          "text": " <code>HitAttributeKHR</code> {StorageClass} <strong class=\"purple\">must</strong> only be used in intersection, any-hit, or closest hit shaders"
         },
         {
           "vuid": "VUID-StandaloneSpirv-HitAttributeKHR-04702",
-          "text": " There <strong class=\"purple\">must</strong> be at most one variable with the <code>HitAttributeKHR</code> storage class in the input interface of an entry point"
+          "text": " There <strong class=\"purple\">must</strong> be at most one variable with the <code>HitAttributeKHR</code> {StorageClass} in the input interface of an entry point"
         },
         {
           "vuid": "VUID-StandaloneSpirv-HitAttributeKHR-04703",
-          "text": " A variable with <code>HitAttributeKHR</code> storage class <strong class=\"purple\">must</strong> only be written to in an intersection shader"
+          "text": " A variable with <code>HitAttributeKHR</code> {StorageClass} <strong class=\"purple\">must</strong> only be written to in an intersection shader"
         },
         {
           "vuid": "VUID-StandaloneSpirv-CallableDataKHR-04704",
-          "text": " <code>CallableDataKHR</code> storage class <strong class=\"purple\">must</strong> only be used in ray generation, closest hit, miss, and callable shaders"
+          "text": " <code>CallableDataKHR</code> {StorageClass} <strong class=\"purple\">must</strong> only be used in ray generation, closest hit, miss, and callable shaders"
         },
         {
           "vuid": "VUID-StandaloneSpirv-IncomingCallableDataKHR-04705",
-          "text": " <code>IncomingCallableDataKHR</code> storage class <strong class=\"purple\">must</strong> only be used in callable shaders"
+          "text": " <code>IncomingCallableDataKHR</code> {StorageClass} <strong class=\"purple\">must</strong> only be used in callable shaders"
         },
         {
           "vuid": "VUID-StandaloneSpirv-IncomingCallableDataKHR-04706",
-          "text": " There <strong class=\"purple\">must</strong> be at most one variable with the <code>IncomingCallableDataKHR</code> storage class in the input interface of an entry point"
+          "text": " There <strong class=\"purple\">must</strong> be at most one variable with the <code>IncomingCallableDataKHR</code> {StorageClass} in the input interface of an entry point"
         },
         {
           "vuid": "VUID-StandaloneSpirv-ShaderRecordBufferKHR-07119",
-          "text": " <code>ShaderRecordBufferKHR</code> storage class <strong class=\"purple\">must</strong> only be used in ray generation, intersection, any-hit, closest hit, callable, or miss shaders"
+          "text": " <code>ShaderRecordBufferKHR</code> {StorageClass} <strong class=\"purple\">must</strong> only be used in ray generation, intersection, any-hit, closest hit, callable, or miss shaders"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Base-07650",
-          "text": " The <code>Base</code> operand of <code>OpPtrAccessChain</code> <strong class=\"purple\">must</strong> have a storage class of <strong>Workgroup</strong>, <strong>StorageBuffer</strong>, or <strong>PhysicalStorageBuffer</strong>"
+          "text": " The <code>Base</code> operand of <code>OpPtrAccessChain</code> <strong class=\"purple\">must</strong> have a storage class of <code>Workgroup</code>, <code>StorageBuffer</code>, or <code>PhysicalStorageBuffer</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Base-07651",
-          "text": " If the <code>Base</code> operand of <code>OpPtrAccessChain</code> has a <strong>Workgroup</strong> storage class, then the <code>VariablePointers</code> capability <strong class=\"purple\">must</strong> be declared"
+          "text": " If the <code>Base</code> operand of <code>OpPtrAccessChain</code> has a <code>Workgroup</code> {StorageClass}, then the <code>VariablePointers</code> capability <strong class=\"purple\">must</strong> be declared"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Base-07652",
-          "text": " If the <code>Base</code> operand of <code>OpPtrAccessChain</code> has a <strong>StorageBuffer</strong> storage class, then the <code>VariablePointers</code> or <code>VariablePointersStorageBuffer</code> capability <strong class=\"purple\">must</strong> be declared"
+          "text": " If the <code>Base</code> operand of <code>OpPtrAccessChain</code> has a <code>StorageBuffer</code> {StorageClass}, then the <code>VariablePointers</code> or <code>VariablePointersStorageBuffer</code> capability <strong class=\"purple\">must</strong> be declared"
         },
         {
           "vuid": "VUID-StandaloneSpirv-PhysicalStorageBuffer64-04708",
@@ -83500,19 +83570,19 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpTypeForwardPointer-04711",
-          "text": " <code>OpTypeForwardPointer</code> <strong class=\"purple\">must</strong> have a storage class of <code>PhysicalStorageBuffer</code>"
+          "text": " <code>OpTypeForwardPointer</code> <strong class=\"purple\">must</strong> have a {StorageClass} of <code>PhysicalStorageBuffer</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04745",
-          "text": " All block members in a variable with a storage class of <strong>PushConstant</strong> declared as an array <strong class=\"purple\">must</strong> only be accessed by dynamically uniform indices"
+          "text": " All block members in a variable with a {StorageClass} of <code>PushConstant</code> declared as an array <strong class=\"purple\">must</strong> only be accessed by dynamically uniform indices"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpVariable-06673",
-          "text": " There <strong class=\"purple\">must</strong> not be more than one <code>OpVariable</code> in the <code>PushConstant</code> storage class listed in the <code>Interface</code> for each <code>OpEntryPoint</code>"
+          "text": " There <strong class=\"purple\">must</strong> not be more than one <code>OpVariable</code> in the <code>PushConstant</code> {StorageClass} listed in the <code>Interface</code> for each <code>OpEntryPoint</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpEntryPoint-06674",
-          "text": " Each <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> not statically use more than one <code>OpVariable</code> in the <code>PushConstant</code> storage class"
+          "text": " Each <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> not statically use more than one <code>OpVariable</code> in the <code>PushConstant</code> {StorageClass}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpEntryPoint-08721",
@@ -83536,23 +83606,23 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-Uniform-06676",
-          "text": " Any variable in the <code>Uniform</code> storage class <strong class=\"purple\">must</strong> be decorated as <code>Block</code> or <code>BufferBlock</code>"
+          "text": " Any variable in the <code>Uniform</code> {StorageClass} <strong class=\"purple\">must</strong> be decorated as <code>Block</code> or <code>BufferBlock</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-UniformConstant-06677",
-          "text": " Any variable in the <code>UniformConstant</code>, <code>StorageBuffer</code>, or <code>Uniform</code> storage class <strong class=\"purple\">must</strong> be decorated with <code>DescriptorSet</code> and <code>Binding</code>"
+          "text": " Any variable in the <code>UniformConstant</code>, <code>StorageBuffer</code>, or <code>Uniform</code> {StorageClass} <strong class=\"purple\">must</strong> be decorated with <code>DescriptorSet</code> and <code>Binding</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-InputAttachmentIndex-06678",
-          "text": " Variables decorated with <code>InputAttachmentIndex</code> <strong class=\"purple\">must</strong> be in the <code>UniformConstant</code> storage class"
+          "text": " Variables decorated with <code>InputAttachmentIndex</code> <strong class=\"purple\">must</strong> be in the <code>UniformConstant</code> {StorageClass}"
         },
         {
           "vuid": "VUID-StandaloneSpirv-DescriptorSet-06491",
-          "text": " If a variable is decorated by <code>DescriptorSet</code> or <code>Binding</code>, the storage class <strong class=\"purple\">must</strong> correspond to an entry in <a href=\"#interfaces-resources-storage-class-correspondence\">Shader Resource and Storage Class Correspondence</a>"
+          "text": " If a variable is decorated by <code>DescriptorSet</code> or <code>Binding</code>, the {StorageClass} <strong class=\"purple\">must</strong> correspond to an entry in <a href=\"#interfaces-resources-storage-class-correspondence\">Shader Resource and Storage Class Correspondence</a>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Input-06778",
-          "text": " Variables with a storage class of <code>Input</code> in a fragment shader stage that are decorated with <code>PerVertexKHR</code> <strong class=\"purple\">must</strong> be declared as arrays"
+          "text": " Variables with a {StorageClass} of <code>Input</code> in a fragment shader stage that are decorated with <code>PerVertexKHR</code> <strong class=\"purple\">must</strong> be declared as arrays"
         },
         {
           "vuid": "VUID-StandaloneSpirv-MeshEXT-07102",
@@ -83580,7 +83650,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-MeshEXT-07111",
-          "text": " In mesh shaders using the <code>MeshEXT</code> {ExecutionModel} variables in workgroup or private storage class declared as or containing a composite type <strong class=\"purple\">must</strong> not be accessed by indices that depend on <code>ViewIndex</code>"
+          "text": " In mesh shaders using the <code>MeshEXT</code> {ExecutionModel} variables in workgroup or private {StorageClass} declared as or containing a composite type <strong class=\"purple\">must</strong> not be accessed by indices that depend on <code>ViewIndex</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-MeshEXT-07330",
@@ -83596,15 +83666,15 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-Input-07290",
-          "text": " Variables with a storage class of <code>Input</code> or <code>Output</code> and a type of <code>OpTypeBool</code> <strong class=\"purple\">must</strong> be decorated with the <code>BuiltIn</code> decoration"
+          "text": " Variables with a {StorageClass} of <code>Input</code> or <code>Output</code> and a type of <code>OpTypeBool</code> <strong class=\"purple\">must</strong> be decorated with the <code>BuiltIn</code> decoration"
         },
         {
           "vuid": "VUID-StandaloneSpirv-TileImageEXT-08723",
-          "text": " The tile image variable declarations <strong class=\"purple\">must</strong> obey the constraints on the <code>TileImageEXT</code> storage class and the <code>Location</code> decoration described in <a href=\"#interfaces-fragmenttileimage\">Fragment Tile Image Interface</a>"
+          "text": " The tile image variable declarations <strong class=\"purple\">must</strong> obey the constraints on the <code>TileImageEXT</code> {StorageClass} and the <code>Location</code> decoration described in <a href=\"#interfaces-fragmenttileimage\">Fragment Tile Image Interface</a>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-08724",
-          "text": " The <strong>TileImageEXT</strong> storage class <strong class=\"purple\">must</strong> only be used for declaring tile image variables."
+          "text": " The <code>TileImageEXT</code> {StorageClass} <strong class=\"purple\">must</strong> only be used for declaring tile image variables."
         }
       ]
     },
@@ -83612,11 +83682,11 @@
       "(VK_VERSION_1_2,VK_KHR_vulkan_memory_model)": [
         {
           "vuid": "VUID-RuntimeSpirv-vulkanMemoryModel-06265",
-          "text": " If <a href=\"#features-vulkanMemoryModel\"><code>vulkanMemoryModel</code></a> is enabled and <a href=\"#features-vulkanMemoryModelDeviceScope\"><code>vulkanMemoryModelDeviceScope</code></a> is not enabled, <strong>Device</strong> memory scope <strong class=\"purple\">must</strong> not be used"
+          "text": " If <a href=\"#features-vulkanMemoryModel\"><code>vulkanMemoryModel</code></a> is enabled and <a href=\"#features-vulkanMemoryModelDeviceScope\"><code>vulkanMemoryModelDeviceScope</code></a> is not enabled, <code>Device</code> memory scope <strong class=\"purple\">must</strong> not be used"
         },
         {
           "vuid": "VUID-RuntimeSpirv-vulkanMemoryModel-06266",
-          "text": " If <a href=\"#features-vulkanMemoryModel\"><code>vulkanMemoryModel</code></a> is not enabled, <strong>QueueFamily</strong> memory scope <strong class=\"purple\">must</strong> not be used"
+          "text": " If <a href=\"#features-vulkanMemoryModel\"><code>vulkanMemoryModel</code></a> is not enabled, <code>QueueFamily</code> memory scope <strong class=\"purple\">must</strong> not be used"
         }
       ],
       "(VK_KHR_shader_clock)": [
@@ -83688,7 +83758,7 @@
         },
         {
           "vuid": "VUID-RuntimeSpirv-DescriptorSet-06323",
-          "text": " <code>DescriptorSet</code> and <code>Binding</code> decorations <strong class=\"purple\">must</strong> obey the constraints on storage class, type, and descriptor type described in <a href=\"#interfaces-resources-setandbinding\">DescriptorSet and Binding Assignment</a>"
+          "text": " <code>DescriptorSet</code> and <code>Binding</code> decorations <strong class=\"purple\">must</strong> obey the constraints on {StorageClass}, type, and descriptor type described in <a href=\"#interfaces-resources-setandbinding\">DescriptorSet and Binding Assignment</a>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-NonWritable-06340",
@@ -83735,12 +83805,16 @@
           "text": " The product of <code>x</code> size, <code>y</code> size, and <code>z</code> size in <code>LocalSize</code> or <code>LocalSizeId</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxComputeWorkGroupInvocations</code>"
         },
         {
+          "vuid": "VUID-RuntimeSpirv-OpEntryPoint-08743",
+          "text": " Any <a href=\"#interfaces-iointerfaces-user\">user-defined variables</a> shared between the <code>OpEntryPoint</code> of two shader stages, and declared with <code>Input</code> as its {StorageClass} for the subsequent shader stage, <strong class=\"purple\">must</strong> have all <code>Location</code> slots and <code>Component</code> words declared in the preceding shader stage&#8217;s <code>OpEntryPoint</code> with <code>Output</code> as the {StorageClass}"
+        },
+        {
           "vuid": "VUID-RuntimeSpirv-OpEntryPoint-07754",
           "text": " Any <a href=\"#interfaces-iointerfaces-user\">user-defined variables</a> between the <code>OpEntryPoint</code> of two shader stages <strong class=\"purple\">must</strong> have the same type and width for each component"
         },
         {
           "vuid": "VUID-RuntimeSpirv-Workgroup-06530",
-          "text": " The sum of size in bytes for variables and <a href=\"#limits-maxComputeSharedMemorySize\">padding</a> in the <code>Workgroup</code> storage class in the <code>GLCompute</code> {ExecutionModel} <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-maxComputeSharedMemorySize\"><code>maxComputeSharedMemorySize</code></a>"
+          "text": " The sum of size in bytes for variables and <a href=\"#limits-maxComputeSharedMemorySize\">padding</a> in the <code>Workgroup</code> {StorageClass} in the <code>GLCompute</code> {ExecutionModel} <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-maxComputeSharedMemorySize\"><code>maxComputeSharedMemorySize</code></a>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-OpImage-06376",
@@ -83796,25 +83870,25 @@
       "(VK_KHR_shader_atomic_int64)": [
         {
           "vuid": "VUID-RuntimeSpirv-None-06278",
-          "text": " <a href=\"#features-shaderBufferInt64Atomics\"><code>shaderBufferInt64Atomics</code></a> <strong class=\"purple\">must</strong> be enabled for 64-bit integer atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>StorageBuffer</strong> or <strong>Uniform</strong>"
+          "text": " <a href=\"#features-shaderBufferInt64Atomics\"><code>shaderBufferInt64Atomics</code></a> <strong class=\"purple\">must</strong> be enabled for 64-bit integer atomic operations to be supported on a <em>Pointer</em> with a {StorageClass} of <code>StorageBuffer</code> or <code>Uniform</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-None-06279",
-          "text": " <a href=\"#features-shaderSharedInt64Atomics\"><code>shaderSharedInt64Atomics</code></a> <strong class=\"purple\">must</strong> be enabled for 64-bit integer atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Workgroup</strong>"
+          "text": " <a href=\"#features-shaderSharedInt64Atomics\"><code>shaderSharedInt64Atomics</code></a> <strong class=\"purple\">must</strong> be enabled for 64-bit integer atomic operations to be supported on a <em>Pointer</em> with a {StorageClass} of <code>Workgroup</code>"
         }
       ],
       "(VK_EXT_shader_atomic_float)+!(VK_EXT_shader_atomic_float2)": [
         {
           "vuid": "VUID-RuntimeSpirv-None-06280",
-          "text": " <a href=\"#features-shaderBufferFloat32Atomics\"><code>shaderBufferFloat32Atomics</code></a>, or <a href=\"#features-shaderBufferFloat32AtomicAdd\"><code>shaderBufferFloat32AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat64Atomics\"><code>shaderBufferFloat64Atomics</code></a>, or <a href=\"#features-shaderBufferFloat64AtomicAdd\"><code>shaderBufferFloat64AtomicAdd</code></a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>StorageBuffer</strong>"
+          "text": " <a href=\"#features-shaderBufferFloat32Atomics\"><code>shaderBufferFloat32Atomics</code></a>, or <a href=\"#features-shaderBufferFloat32AtomicAdd\"><code>shaderBufferFloat32AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat64Atomics\"><code>shaderBufferFloat64Atomics</code></a>, or <a href=\"#features-shaderBufferFloat64AtomicAdd\"><code>shaderBufferFloat64AtomicAdd</code></a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a {StorageClass} of <code>StorageBuffer</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-None-06281",
-          "text": " <a href=\"#features-shaderSharedFloat32Atomics\"><code>shaderSharedFloat32Atomics</code></a>, or <a href=\"#features-shaderSharedFloat32AtomicAdd\"><code>shaderSharedFloat32AtomicAdd</code></a>, or <a href=\"#features-shaderSharedFloat64Atomics\"><code>shaderSharedFloat64Atomics</code></a>, or <a href=\"#features-shaderSharedFloat64AtomicAdd\"><code>shaderSharedFloat64AtomicAdd</code></a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Workgroup</strong>"
+          "text": " <a href=\"#features-shaderSharedFloat32Atomics\"><code>shaderSharedFloat32Atomics</code></a>, or <a href=\"#features-shaderSharedFloat32AtomicAdd\"><code>shaderSharedFloat32AtomicAdd</code></a>, or <a href=\"#features-shaderSharedFloat64Atomics\"><code>shaderSharedFloat64Atomics</code></a>, or <a href=\"#features-shaderSharedFloat64AtomicAdd\"><code>shaderSharedFloat64AtomicAdd</code></a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a {StorageClass} of <code>Workgroup</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-None-06282",
-          "text": " <a href=\"#features-shaderImageFloat32Atomics\"><code>shaderImageFloat32Atomics</code></a> or <a href=\"#features-shaderImageFloat32AtomicAdd\"><code>shaderImageFloat32AtomicAdd</code></a> <strong class=\"purple\">must</strong> be enabled for 32-bit floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Image</strong>"
+          "text": " <a href=\"#features-shaderImageFloat32Atomics\"><code>shaderImageFloat32Atomics</code></a> or <a href=\"#features-shaderImageFloat32AtomicAdd\"><code>shaderImageFloat32AtomicAdd</code></a> <strong class=\"purple\">must</strong> be enabled for 32-bit floating-point atomic operations to be supported on a <em>Pointer</em> with a {StorageClass} of <code>Image</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-None-06283",
@@ -83832,15 +83906,15 @@
       "(VK_EXT_shader_atomic_float2)": [
         {
           "vuid": "VUID-RuntimeSpirv-None-06284",
-          "text": " <a href=\"#features-shaderBufferFloat32Atomics\"><code>shaderBufferFloat32Atomics</code></a>, or <a href=\"#features-shaderBufferFloat32AtomicAdd\"><code>shaderBufferFloat32AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat64Atomics\"><code>shaderBufferFloat64Atomics</code></a>, or <a href=\"#features-shaderBufferFloat64AtomicAdd\"><code>shaderBufferFloat64AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderBufferFloat16Atomics</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderBufferFloat16AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderBufferFloat16AtomicMinMax</code></a>, or <a href=\"#features-shaderBufferFloat32AtomicMinMax\"><code>shaderBufferFloat32AtomicMinMax</code></a>, or <a href=\"#features-shaderBufferFloat64AtomicMinMax\"><code>shaderBufferFloat64AtomicMinMax</code></a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>StorageBuffer</strong>"
+          "text": " <a href=\"#features-shaderBufferFloat32Atomics\"><code>shaderBufferFloat32Atomics</code></a>, or <a href=\"#features-shaderBufferFloat32AtomicAdd\"><code>shaderBufferFloat32AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat64Atomics\"><code>shaderBufferFloat64Atomics</code></a>, or <a href=\"#features-shaderBufferFloat64AtomicAdd\"><code>shaderBufferFloat64AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderBufferFloat16Atomics</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderBufferFloat16AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderBufferFloat16AtomicMinMax</code></a>, or <a href=\"#features-shaderBufferFloat32AtomicMinMax\"><code>shaderBufferFloat32AtomicMinMax</code></a>, or <a href=\"#features-shaderBufferFloat64AtomicMinMax\"><code>shaderBufferFloat64AtomicMinMax</code></a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a {StorageClass} of <code>StorageBuffer</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-None-06285",
-          "text": " <a href=\"#features-shaderSharedFloat32Atomics\"><code>shaderSharedFloat32Atomics</code></a>, or <a href=\"#features-shaderSharedFloat32AtomicAdd\"><code>shaderSharedFloat32AtomicAdd</code></a>, or <a href=\"#features-shaderSharedFloat64Atomics\"><code>shaderSharedFloat64Atomics</code></a>, or <a href=\"#features-shaderSharedFloat64AtomicAdd\"><code>shaderSharedFloat64AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderSharedFloat16Atomics</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderSharedFloat16AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderSharedFloat16AtomicMinMax</code></a>, or <a href=\"#features-shaderSharedFloat32AtomicMinMax\"><code>shaderSharedFloat32AtomicMinMax</code></a>, or <a href=\"#features-shaderSharedFloat64AtomicMinMax\"><code>shaderSharedFloat64AtomicMinMax</code></a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Workgroup</strong>"
+          "text": " <a href=\"#features-shaderSharedFloat32Atomics\"><code>shaderSharedFloat32Atomics</code></a>, or <a href=\"#features-shaderSharedFloat32AtomicAdd\"><code>shaderSharedFloat32AtomicAdd</code></a>, or <a href=\"#features-shaderSharedFloat64Atomics\"><code>shaderSharedFloat64Atomics</code></a>, or <a href=\"#features-shaderSharedFloat64AtomicAdd\"><code>shaderSharedFloat64AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderSharedFloat16Atomics</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderSharedFloat16AtomicAdd</code></a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\"><code>shaderSharedFloat16AtomicMinMax</code></a>, or <a href=\"#features-shaderSharedFloat32AtomicMinMax\"><code>shaderSharedFloat32AtomicMinMax</code></a>, or <a href=\"#features-shaderSharedFloat64AtomicMinMax\"><code>shaderSharedFloat64AtomicMinMax</code></a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a {StorageClass} of <code>Workgroup</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-None-06286",
-          "text": " <a href=\"#features-shaderImageFloat32Atomics\"><code>shaderImageFloat32Atomics</code></a>, or <a href=\"#features-shaderImageFloat32AtomicAdd\"><code>shaderImageFloat32AtomicAdd</code></a>, or <a href=\"#features-shaderImageFloat32AtomicMinMax\"><code>shaderImageFloat32AtomicMinMax</code></a> <strong class=\"purple\">must</strong> be enabled for 32-bit floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Image</strong>"
+          "text": " <a href=\"#features-shaderImageFloat32Atomics\"><code>shaderImageFloat32Atomics</code></a>, or <a href=\"#features-shaderImageFloat32AtomicAdd\"><code>shaderImageFloat32AtomicAdd</code></a>, or <a href=\"#features-shaderImageFloat32AtomicMinMax\"><code>shaderImageFloat32AtomicMinMax</code></a> <strong class=\"purple\">must</strong> be enabled for 32-bit floating-point atomic operations to be supported on a <em>Pointer</em> with a {StorageClass} of <code>Image</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-None-06287",
@@ -83862,25 +83936,25 @@
       "(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-RuntimeSpirv-None-06288",
-          "text": " <a href=\"#features-shaderImageInt64Atomics\"><code>shaderImageInt64Atomics</code></a> <strong class=\"purple\">must</strong> be enabled for 64-bit integer atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Image</strong>"
+          "text": " <a href=\"#features-shaderImageInt64Atomics\"><code>shaderImageInt64Atomics</code></a> <strong class=\"purple\">must</strong> be enabled for 64-bit integer atomic operations to be supported on a <em>Pointer</em> with a {StorageClass} of <code>Image</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_shader_float_controls)": [
         {
           "vuid": "VUID-RuntimeSpirv-denormBehaviorIndependence-06289",
-          "text": " If <a href=\"#features-denormBehaviorIndependence\"><code>denormBehaviorIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY</code>, then the entry point <strong class=\"purple\">must</strong> use the same denormals execution mode for both 16-bit and 64-bit floating-point types"
+          "text": " If <a href=\"#features-denormBehaviorIndependence\"><code>denormBehaviorIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY</code>, then the entry point <strong class=\"purple\">must</strong> use the same denormals {ExecutionMode} for both 16-bit and 64-bit floating-point types"
         },
         {
           "vuid": "VUID-RuntimeSpirv-denormBehaviorIndependence-06290",
-          "text": " If <a href=\"#features-denormBehaviorIndependence\"><code>denormBehaviorIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE</code>, then the entry point <strong class=\"purple\">must</strong> use the same denormals execution mode for all floating-point types"
+          "text": " If <a href=\"#features-denormBehaviorIndependence\"><code>denormBehaviorIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE</code>, then the entry point <strong class=\"purple\">must</strong> use the same denormals {ExecutionMode} for all floating-point types"
         },
         {
           "vuid": "VUID-RuntimeSpirv-roundingModeIndependence-06291",
-          "text": " If <a href=\"#features-roundingModeIndependence\"><code>roundingModeIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY</code>, then the entry point <strong class=\"purple\">must</strong> use the same rounding execution mode for both 16-bit and 64-bit floating-point types"
+          "text": " If <a href=\"#features-roundingModeIndependence\"><code>roundingModeIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY</code>, then the entry point <strong class=\"purple\">must</strong> use the same rounding {ExecutionMode} for both 16-bit and 64-bit floating-point types"
         },
         {
           "vuid": "VUID-RuntimeSpirv-roundingModeIndependence-06292",
-          "text": " If <a href=\"#features-roundingModeIndependence\"><code>roundingModeIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE</code>, then the entry point <strong class=\"purple\">must</strong> use the same rounding execution mode for all floating-point types"
+          "text": " If <a href=\"#features-roundingModeIndependence\"><code>roundingModeIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE</code>, then the entry point <strong class=\"purple\">must</strong> use the same rounding {ExecutionMode} for all floating-point types"
         },
         {
           "vuid": "VUID-RuntimeSpirv-shaderSignedZeroInfNanPreserveFloat16-06293",
@@ -83958,7 +84032,7 @@
         },
         {
           "vuid": "VUID-RuntimeSpirv-transformFeedbackStreamsLinesTriangles-06311",
-          "text": " If the geometry shader emits to more than one vertex stream and <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>::<code>transformFeedbackStreamsLinesTriangles</code> is <code>VK_FALSE</code>, then execution mode <strong class=\"purple\">must</strong> be <code>OutputPoints</code>"
+          "text": " If the geometry shader emits to more than one vertex stream and <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>::<code>transformFeedbackStreamsLinesTriangles</code> is <code>VK_FALSE</code>, then {ExecutionMode} <strong class=\"purple\">must</strong> be <code>OutputPoints</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-Stream-06312",
@@ -84114,33 +84188,33 @@
       "(VK_KHR_8bit_storage)": [
         {
           "vuid": "VUID-RuntimeSpirv-storageBuffer8BitAccess-06328",
-          "text": " If <a href=\"#features-storageBuffer8BitAccess\"><code>storageBuffer8BitAccess</code></a> is <code>VK_FALSE</code>, then objects containing an 8-bit integer element <strong class=\"purple\">must</strong> not have storage class of <strong>StorageBuffer</strong>, <strong>ShaderRecordBufferKHR</strong>, or <strong>PhysicalStorageBuffer</strong>"
+          "text": " If <a href=\"#features-storageBuffer8BitAccess\"><code>storageBuffer8BitAccess</code></a> is <code>VK_FALSE</code>, then objects containing an 8-bit integer element <strong class=\"purple\">must</strong> not have {StorageClass} of <code>StorageBuffer</code>, <code>ShaderRecordBufferKHR</code>, or <code>PhysicalStorageBuffer</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-uniformAndStorageBuffer8BitAccess-06329",
-          "text": " If <a href=\"#features-uniformAndStorageBuffer8BitAccess\"><code>uniformAndStorageBuffer8BitAccess</code></a> is <code>VK_FALSE</code>, then objects in the <strong>Uniform</strong> storage class with the <strong>Block</strong> decoration <strong class=\"purple\">must</strong> not have an 8-bit integer member"
+          "text": " If <a href=\"#features-uniformAndStorageBuffer8BitAccess\"><code>uniformAndStorageBuffer8BitAccess</code></a> is <code>VK_FALSE</code>, then objects in the <code>Uniform</code> {StorageClass} with the <code>Block</code> decoration <strong class=\"purple\">must</strong> not have an 8-bit integer member"
         },
         {
           "vuid": "VUID-RuntimeSpirv-storagePushConstant8-06330",
-          "text": " If <a href=\"#features-storagePushConstant8\"><code>storagePushConstant8</code></a> is <code>VK_FALSE</code>, then objects containing an 8-bit integer element <strong class=\"purple\">must</strong> not have storage class of <strong>PushConstant</strong>"
+          "text": " If <a href=\"#features-storagePushConstant8\"><code>storagePushConstant8</code></a> is <code>VK_FALSE</code>, then objects containing an 8-bit integer element <strong class=\"purple\">must</strong> not have {StorageClass} of <code>PushConstant</code>"
         }
       ],
       "(VK_KHR_16bit_storage)": [
         {
           "vuid": "VUID-RuntimeSpirv-storageBuffer16BitAccess-06331",
-          "text": " If <a href=\"#features-storageBuffer16BitAccess\"><code>storageBuffer16BitAccess</code></a> is <code>VK_FALSE</code>, then objects containing 16-bit integer or 16-bit floating-point elements <strong class=\"purple\">must</strong> not have storage class of <strong>StorageBuffer</strong>, <strong>ShaderRecordBufferKHR</strong>, or <strong>PhysicalStorageBuffer</strong>"
+          "text": " If <a href=\"#features-storageBuffer16BitAccess\"><code>storageBuffer16BitAccess</code></a> is <code>VK_FALSE</code>, then objects containing 16-bit integer or 16-bit floating-point elements <strong class=\"purple\">must</strong> not have {StorageClass} of <code>StorageBuffer</code>, <code>ShaderRecordBufferKHR</code>, or <code>PhysicalStorageBuffer</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-uniformAndStorageBuffer16BitAccess-06332",
-          "text": " If <a href=\"#features-uniformAndStorageBuffer16BitAccess\"><code>uniformAndStorageBuffer16BitAccess</code></a> is <code>VK_FALSE</code>, then objects in the <strong>Uniform</strong> storage class with the <strong>Block</strong> decoration <strong class=\"purple\">must</strong> not have 16-bit integer or 16-bit floating-point members"
+          "text": " If <a href=\"#features-uniformAndStorageBuffer16BitAccess\"><code>uniformAndStorageBuffer16BitAccess</code></a> is <code>VK_FALSE</code>, then objects in the <code>Uniform</code> {StorageClass} with the <code>Block</code> decoration <strong class=\"purple\">must</strong> not have 16-bit integer or 16-bit floating-point members"
         },
         {
           "vuid": "VUID-RuntimeSpirv-storagePushConstant16-06333",
-          "text": " If <a href=\"#features-storagePushConstant16\"><code>storagePushConstant16</code></a> is <code>VK_FALSE</code>, then objects containing 16-bit integer or 16-bit floating-point elements <strong class=\"purple\">must</strong> not have storage class of <strong>PushConstant</strong>"
+          "text": " If <a href=\"#features-storagePushConstant16\"><code>storagePushConstant16</code></a> is <code>VK_FALSE</code>, then objects containing 16-bit integer or 16-bit floating-point elements <strong class=\"purple\">must</strong> not have {StorageClass} of <code>PushConstant</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-storageInputOutput16-06334",
-          "text": " If <a href=\"#features-storageInputOutput16\"><code>storageInputOutput16</code></a> is <code>VK_FALSE</code>, then objects containing 16-bit integer or 16-bit floating-point elements <strong class=\"purple\">must</strong> not have storage class of <strong>Input</strong> or <strong>Output</strong>"
+          "text": " If <a href=\"#features-storageInputOutput16\"><code>storageInputOutput16</code></a> is <code>VK_FALSE</code>, then objects containing 16-bit integer or 16-bit floating-point elements <strong class=\"purple\">must</strong> not have {StorageClass} of <code>Input</code> or <code>Output</code>"
         }
       ],
       "(VK_VERSION_1_1)": [
@@ -84330,7 +84404,7 @@
       "!(VK_VERSION_1_3,VK_KHR_maintenance4)": [
         {
           "vuid": "VUID-RuntimeSpirv-LocalSizeId-06433",
-          "text": " The execution mode <code>LocalSizeId</code> <strong class=\"purple\">must</strong> not be used"
+          "text": " The {ExecutionMode} <code>LocalSizeId</code> <strong class=\"purple\">must</strong> not be used"
         },
         {
           "vuid": "VUID-RuntimeSpirv-OpTypeVector-06816",
@@ -84340,7 +84414,7 @@
       "(VK_VERSION_1_3,VK_KHR_maintenance4)": [
         {
           "vuid": "VUID-RuntimeSpirv-LocalSizeId-06434",
-          "text": " If execution mode <code>LocalSizeId</code> is used, <a href=\"#features-maintenance4\"><code>maintenance4</code></a> <strong class=\"purple\">must</strong> be enabled"
+          "text": " If {ExecutionMode} <code>LocalSizeId</code> is used, <a href=\"#features-maintenance4\"><code>maintenance4</code></a> <strong class=\"purple\">must</strong> be enabled"
         },
         {
           "vuid": "VUID-RuntimeSpirv-maintenance4-06817",
@@ -84350,13 +84424,13 @@
       "(VK_VERSION_1_3,VK_KHR_zero_initialize_workgroup_memory)": [
         {
           "vuid": "VUID-RuntimeSpirv-shaderZeroInitializeWorkgroupMemory-06372",
-          "text": " If <a href=\"#features-shaderZeroInitializeWorkgroupMemory\"><code>shaderZeroInitializeWorkgroupMemory</code></a> is not enabled, any <code>OpVariable</code> with <strong>Workgroup</strong> as its <strong>Storage Class</strong> <strong class=\"purple\">must</strong> not have an <code>Initializer</code> operand"
+          "text": " If <a href=\"#features-shaderZeroInitializeWorkgroupMemory\"><code>shaderZeroInitializeWorkgroupMemory</code></a> is not enabled, any <code>OpVariable</code> with <code>Workgroup</code> as its {StorageClass} <strong class=\"purple\">must</strong> not have an <code>Initializer</code> operand"
         }
       ],
       "!(VK_VERSION_1_3,VK_KHR_zero_initialize_workgroup_memory)": [
         {
           "vuid": "VUID-RuntimeSpirv-OpVariable-06373",
-          "text": " Any <code>OpVariable</code> with <strong>Workgroup</strong> as its <strong>Storage Class</strong> <strong class=\"purple\">must</strong> not have an <code>Initializer</code> operand"
+          "text": " Any <code>OpVariable</code> with <code>Workgroup</code> as its {StorageClass} <strong class=\"purple\">must</strong> not have an <code>Initializer</code> operand"
         }
       ],
       "(VK_QCOM_render_pass_shader_resolve)": [
@@ -84368,37 +84442,37 @@
       "(VK_KHR_shader_subgroup_uniform_control_flow)": [
         {
           "vuid": "VUID-RuntimeSpirv-SubgroupUniformControlFlowKHR-06379",
-          "text": " The execution mode <code>SubgroupUniformControlFlowKHR</code> <strong class=\"purple\">must</strong> not be applied to an entry point unless <a href=\"#features-shaderSubgroupUniformControlFlow\"><code>shaderSubgroupUniformControlFlow</code></a> is enabled and the corresponding shader stage bit is set in subgroup <a href=\"#limits-subgroup-supportedStages\"><code>supportedStages</code></a> and the entry point does not execute any <a href=\"#ray-tracing-repack\"><em>invocation repack instructions</em></a>"
+          "text": " The {ExecutionMode} <code>SubgroupUniformControlFlowKHR</code> <strong class=\"purple\">must</strong> not be applied to an entry point unless <a href=\"#features-shaderSubgroupUniformControlFlow\"><code>shaderSubgroupUniformControlFlow</code></a> is enabled and the corresponding shader stage bit is set in subgroup <a href=\"#limits-subgroup-supportedStages\"><code>supportedStages</code></a> and the entry point does not execute any <a href=\"#ray-tracing-repack\"><em>invocation repack instructions</em></a>"
         }
       ],
       "(VK_AMD_shader_early_and_late_fragment_tests)": [
         {
           "vuid": "VUID-RuntimeSpirv-shaderEarlyAndLateFragmentTests-06767",
-          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>EarlyAndLateFragmentTestsEXT</code> <code>Execution</code> <code>Mode</code> <strong class=\"purple\">must</strong> not be used"
+          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>EarlyAndLateFragmentTestsEXT</code> {ExecutionMode} <strong class=\"purple\">must</strong> not be used"
         },
         {
           "vuid": "VUID-RuntimeSpirv-shaderEarlyAndLateFragmentTests-06768",
-          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> feature is not enabled, the <code>StencilRefUnchangedFrontEXT</code> <code>Execution</code> <code>Mode</code> <strong class=\"purple\">must</strong> not be used"
+          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> feature is not enabled, the <code>StencilRefUnchangedFrontEXT</code> {ExecutionMode} <strong class=\"purple\">must</strong> not be used"
         },
         {
           "vuid": "VUID-RuntimeSpirv-shaderEarlyAndLateFragmentTests-06769",
-          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>StencilRefUnchangedBackEXT</code> <code>Execution</code> <code>Mode</code> <strong class=\"purple\">must</strong> not be used"
+          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>StencilRefUnchangedBackEXT</code> {ExecutionMode} <strong class=\"purple\">must</strong> not be used"
         },
         {
           "vuid": "VUID-RuntimeSpirv-shaderEarlyAndLateFragmentTests-06770",
-          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>StencilRefGreaterFrontEXT</code> <code>Execution</code> <code>Mode</code> <strong class=\"purple\">must</strong> not be used"
+          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>StencilRefGreaterFrontEXT</code> {ExecutionMode} <strong class=\"purple\">must</strong> not be used"
         },
         {
           "vuid": "VUID-RuntimeSpirv-shaderEarlyAndLateFragmentTests-06771",
-          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>StencilRefGreaterBackEXT</code> <code>Execution</code> <code>Mode</code> <strong class=\"purple\">must</strong> not be used"
+          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>StencilRefGreaterBackEXT</code> {ExecutionMode} <strong class=\"purple\">must</strong> not be used"
         },
         {
           "vuid": "VUID-RuntimeSpirv-shaderEarlyAndLateFragmentTests-06772",
-          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>StencilRefLessFrontEXT</code> <code>Execution</code> <code>Mode</code> <strong class=\"purple\">must</strong> not be used"
+          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>StencilRefLessFrontEXT</code> {ExecutionMode} <strong class=\"purple\">must</strong> not be used"
         },
         {
           "vuid": "VUID-RuntimeSpirv-shaderEarlyAndLateFragmentTests-06773",
-          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>StencilRefLessBackEXT</code> <code>Execution</code> <code>Mode</code> <strong class=\"purple\">must</strong> not be used"
+          "text": " If <a href=\"#features-shaderEarlyAndLateFragmentTests\"><code>shaderEarlyAndLateFragmentTests</code></a> is not enabled, the <code>StencilRefLessBackEXT</code> {ExecutionMode} <strong class=\"purple\">must</strong> not be used"
         }
       ],
       "(VK_QCOM_image_processing)": [
@@ -84408,7 +84482,7 @@
         },
         {
           "vuid": "VUID-RuntimeSpirv-OpImageWeightedSampleQCOM-06980",
-          "text": " If an <code>OpImageWeightedSampleQCOM</code> operation is used, then the <code>Weight</code> <code>Image</code> parameter <strong class=\"purple\">must</strong> be of storage class <code>UniformConstant</code> and type <code>OpTypeImage</code> with <code>Depth</code>=0, <code>Dim</code>=<code>2D</code>, <code>Arrayed</code>=1, <code>MS</code>=0, and <code>Sampled</code>=1"
+          "text": " If an <code>OpImageWeightedSampleQCOM</code> operation is used, then the <code>Weight</code> <code>Image</code> parameter <strong class=\"purple\">must</strong> be of {StorageClass} <code>UniformConstant</code> and type <code>OpTypeImage</code> with <code>Depth</code>=0, <code>Dim</code>=<code>2D</code>, <code>Arrayed</code>=1, <code>MS</code>=0, and <code>Sampled</code>=1"
         },
         {
           "vuid": "VUID-RuntimeSpirv-OpImageWeightedSampleQCOM-06981",
