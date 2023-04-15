@@ -322,9 +322,6 @@
 6447 MAC METAL : FramebufferTest_ES3.RenderAndInvalidateImmutableTextureWithSubImageWithBeyondMaxLevel/* = SKIP
 6447 MAC METAL : FramebufferTest_ES3.RenderSampleDepthTextureWithExcludedLevel/* = SKIP
 
-5087 MAC METAL INTEL : MultisampleTest.AlphaToSampleCoverage/* = SKIP
-5087 MAC METAL AMD : MultisampleTest.AlphaToSampleCoverage/* = SKIP
-
 5100 MAC METAL NVIDIA : OcclusionQueriesTest.ClearNotCounted/* = SKIP
 5100 MAC METAL NVIDIA : OcclusionQueriesTest.CopyNotCounted/* = SKIP
 5443 MAC METAL NVIDIA : OcclusionQueriesTestES3.BlitNotCounted/* = SKIP
@@ -809,7 +806,6 @@
 7994 IOS METAL : FramebufferTest_ES3.RenderAndInvalidateImmutableTextureWithBeyondMaxLevel/ES3_Metal = SKIP
 7994 IOS METAL : FramebufferTest_ES3.RenderAndInvalidateImmutableTextureWithSubImageWithBeyondMaxLevel/ES3_Metal = SKIP
 7994 IOS METAL : FramebufferTest_ES3.RenderSampleDepthTextureWithExcludedLevel/ES3_Metal = SKIP
-7994 IOS METAL : FramebufferTest_ES3.SurfaceDimensionsChangeAndFragCoord/ES3_Metal = SKIP
 7994 IOS METAL : GLSLTest.EmbeddedStructUniformArray/ES2_Metal = SKIP
 7994 IOS METAL : GLSLTest.EmbeddedStructUniformArray/ES3_Metal = SKIP
 7994 IOS METAL : KTXCompressedTextureTest.CompressedTexImageETC1/ES2_Metal = SKIP

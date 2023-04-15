@@ -25423,7 +25423,9 @@ namespace VULKAN_HPP_NAMESPACE
       std::array<uint8_t, VK_UUID_SIZE> const &                     pipelineCacheUUID_ = {},
       uint32_t                                                      applicationNameOffset_ = {},
       uint32_t                                                      applicationVersion_    = {},
-      uint32_t                                                      engineNameOffset_      = {} ) VULKAN_HPP_NOEXCEPT
+      uint32_t                                                      engineNameOffset_      = {},
+      uint32_t                                                      engineVersion_         = {},
+      uint32_t                                                      apiVersion_            = {} ) VULKAN_HPP_NOEXCEPT
       : headerSize( headerSize_ )
       , headerVersion( headerVersion_ )
       , vendorID( vendorID_ )
@@ -25433,6 +25435,8 @@ namespace VULKAN_HPP_NAMESPACE
       , applicationNameOffset( applicationNameOffset_ )
       , applicationVersion( applicationVersion_ )
       , engineNameOffset( engineNameOffset_ )
+      , engineVersion( engineVersion_ )
+      , apiVersion( apiVersion_ )
     {
     }
 
@@ -25508,6 +25512,18 @@ namespace VULKAN_HPP_NAMESPACE
       engineNameOffset = engineNameOffset_;
       return *this;
     }
+
+    VULKAN_HPP_CONSTEXPR_14 DeviceFaultVendorBinaryHeaderVersionOneEXT & setEngineVersion( uint32_t engineVersion_ ) VULKAN_HPP_NOEXCEPT
+    {
+      engineVersion = engineVersion_;
+      return *this;
+    }
+
+    VULKAN_HPP_CONSTEXPR_14 DeviceFaultVendorBinaryHeaderVersionOneEXT & setApiVersion( uint32_t apiVersion_ ) VULKAN_HPP_NOEXCEPT
+    {
+      apiVersion = apiVersion_;
+      return *this;
+    }
 #endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
     operator VkDeviceFaultVendorBinaryHeaderVersionOneEXT const &() const VULKAN_HPP_NOEXCEPT
@@ -25532,12 +25548,23 @@ namespace VULKAN_HPP_NAMESPACE
                VULKAN_HPP_NAMESPACE::ArrayWrapper1D<uint8_t, VK_UUID_SIZE> const &,
                uint32_t const &,
                uint32_t const &,
+               uint32_t const &,
+               uint32_t const &,
                uint32_t const &>
 #  endif
       reflect() const VULKAN_HPP_NOEXCEPT
     {
-      return std::tie(
-        headerSize, headerVersion, vendorID, deviceID, driverVersion, pipelineCacheUUID, applicationNameOffset, applicationVersion, engineNameOffset );
+      return std::tie( headerSize,
+                       headerVersion,
+                       vendorID,
+                       deviceID,
+                       driverVersion,
+                       pipelineCacheUUID,
+                       applicationNameOffset,
+                       applicationVersion,
+                       engineNameOffset,
+                       engineVersion,
+                       apiVersion );
     }
 #endif
 
@@ -25552,7 +25579,7 @@ namespace VULKAN_HPP_NAMESPACE
       return ( headerSize == rhs.headerSize ) && ( headerVersion == rhs.headerVersion ) && ( vendorID == rhs.vendorID ) && ( deviceID == rhs.deviceID ) &&
              ( driverVersion == rhs.driverVersion ) && ( pipelineCacheUUID == rhs.pipelineCacheUUID ) &&
              ( applicationNameOffset == rhs.applicationNameOffset ) && ( applicationVersion == rhs.applicationVersion ) &&
-             ( engineNameOffset == rhs.engineNameOffset );
+             ( engineNameOffset == rhs.engineNameOffset ) && ( engineVersion == rhs.engineVersion ) && ( apiVersion == rhs.apiVersion );
 #  endif
     }
 
@@ -25572,6 +25599,8 @@ namespace VULKAN_HPP_NAMESPACE
     uint32_t                                                      applicationNameOffset = {};
     uint32_t                                                      applicationVersion    = {};
     uint32_t                                                      engineNameOffset      = {};
+    uint32_t                                                      engineVersion         = {};
+    uint32_t                                                      apiVersion            = {};
   };
 
   struct DeviceGroupBindSparseInfo
