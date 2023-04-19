@@ -177,6 +177,8 @@ VkResult VerifyExtensionsPresent(const vk::ExtensionNameList &haystack,
 constexpr const char *kSkippedMessages[] = {
     // http://anglebug.com/2866
     "UNASSIGNED-CoreValidation-Shader-OutputNotConsumed",
+    // http://anglebug.com/4883
+    "UNASSIGNED-CoreValidation-Shader-InputNotProduced",
     // http://anglebug.com/4928
     "VUID-vkMapMemory-memory-00683",
     // http://anglebug.com/5027
@@ -195,6 +197,8 @@ constexpr const char *kSkippedMessages[] = {
     "VUID-vkCmdDrawIndexedIndirectCount-None-04584",
     // http://anglebug.com/5912
     "VUID-VkImageViewCreateInfo-pNext-01585",
+    // http://anglebug.com/6442
+    "UNASSIGNED-CoreValidation-Shader-InterfaceTypeMismatch",
     // http://anglebug.com/6514
     "vkEnumeratePhysicalDevices: One or more layers modified physical devices",
     // When using Vulkan secondary command buffers, the command buffer is begun with the current
@@ -5534,16 +5538,59 @@ VkResult ImageMemorySuballocator::allocateAndBindMemory(RendererVk *renderer,
                                                         Image *image,
                                                         VkMemoryPropertyFlags requiredFlags,
                                                         VkMemoryPropertyFlags preferredFlags,
+                                                        MemoryAllocationType memoryAllocationType,
                                                         Allocation *allocationOut,
+                                                        VkMemoryPropertyFlags *memoryFlagsOut,
                                                         uint32_t *memoryTypeIndexOut,
                                                         VkDeviceSize *sizeOut)
 {
     ASSERT(image && image->valid());
     ASSERT(allocationOut && !allocationOut->valid());
     const Allocator &allocator = renderer->getAllocator();
-    return vma::AllocateAndBindMemoryForImage(allocator.getHandle(), &image->mHandle, requiredFlags,
-                                              preferredFlags, &allocationOut->mHandle,
-                                              memoryTypeIndexOut, sizeOut);
+
+    VkResult result = vma::AllocateAndBindMemoryForImage(
+        allocator.getHandle(), &image->mHandle, requiredFlags, preferredFlags,
+        &allocationOut->mHandle, memoryTypeIndexOut, sizeOut);
+    if (result != VK_SUCCESS)
+    {
+        return result;
+    }
+
+    // We need to get the property flags of the allocated memory.
+    *memoryFlagsOut =
+        renderer->getMemoryProperties().getMemoryType(*memoryTypeIndexOut).propertyFlags;
+
+    renderer->onMemoryAlloc(memoryAllocationType, *sizeOut, *memoryTypeIndexOut,
+                            allocationOut->getHandle());
+    return VK_SUCCESS;
+}
+
+VkResult ImageMemorySuballocator::mapMemoryAndInitWithNonZeroValue(RendererVk *renderer,
+                                                                   Allocation *allocation,
+                                                                   VkDeviceSize size,
+                                                                   int value,
+                                                                   VkMemoryPropertyFlags flags)
+{
+    ASSERT(allocation && allocation->valid());
+    const Allocator &allocator = renderer->getAllocator();
+
+    void *mappedMemoryData;
+    VkResult result = vma::MapMemory(allocator.getHandle(), allocation->mHandle, &mappedMemoryData);
+    if (result != VK_SUCCESS)
+    {
+        return result;
+    }
+
+    memset(mappedMemoryData, value, static_cast<size_t>(size));
+    vma::UnmapMemory(allocator.getHandle(), allocation->mHandle);
+
+    // If the memory type is not host coherent, we perform an explicit flush.
+    if ((flags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT) == 0)
+    {
+        vma::FlushAllocation(allocator.getHandle(), allocation->mHandle, 0, VK_WHOLE_SIZE);
+    }
+
+    return VK_SUCCESS;
 }
 
 }  // namespace vk
