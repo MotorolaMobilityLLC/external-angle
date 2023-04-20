@@ -238,6 +238,17 @@ def ProcessJavacOutput(output, target_name):
 
   output = build_utils.FilterReflectiveAccessJavaWarnings(output)
 
+  # Warning currently cannot be silenced via javac flag.
+  if 'Unsafe is internal proprietary API' in output:
+    # Example:
+    # HiddenApiBypass.java:69: warning: Unsafe is internal proprietary API and
+    # may be removed in a future release
+    # import sun.misc.Unsafe;
+    #                 ^
+    output = re.sub(r'.*?Unsafe is internal proprietary API[\s\S]*?\^\n', '',
+                    output)
+    output = re.sub(r'\d+ warnings\n', '', output)
+
   lines = (l for l in output.split('\n') if ApplyFilters(l))
   lines = (Elaborate(l) for l in lines)
 
@@ -587,11 +598,18 @@ def _RunCompiler(changes,
 
       logging.debug('Build command %s', cmd)
       start = time.time()
-      build_utils.CheckOutput(cmd,
-                              print_stdout=options.chromium_code,
-                              stdout_filter=process_javac_output_partial,
-                              stderr_filter=process_javac_output_partial,
-                              fail_on_output=options.warnings_as_errors)
+      try:
+        build_utils.CheckOutput(cmd,
+                                print_stdout=options.chromium_code,
+                                stdout_filter=process_javac_output_partial,
+                                stderr_filter=process_javac_output_partial,
+                                fail_on_output=options.warnings_as_errors)
+      except build_utils.CalledProcessError as e:
+        # Do not output stacktrace as it takes up space on gerrit UI, forcing
+        # you to click though to find the actual compilation error. It's never
+        # interesting to see the Python stacktrace for a Java compilation error.
+        sys.stderr.write(e.output)
+        sys.exit(1)
       end = time.time() - start
       logging.info('Java compilation took %ss', end)
 
