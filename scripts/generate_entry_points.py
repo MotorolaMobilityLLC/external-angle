@@ -64,6 +64,7 @@ PLS_ALLOW_LIST = {
     "BufferData",
     "BufferSubData",
     "CheckFramebufferStatus",
+    "ClipControlEXT",
     "CullFace",
     "DepthFunc",
     "DepthMask",
@@ -90,6 +91,9 @@ PLS_ALLOW_LIST = {
     "UseProgram",
     "ValidateProgram",
     "Viewport",
+    "ProvokingVertexANGLE",
+    "FenceSync",
+    "FlushMappedBufferRange",
 }
 PLS_ALLOW_WILDCARDS = [
     "BlendEquationSeparatei*",
@@ -98,13 +102,22 @@ PLS_ALLOW_WILDCARDS = [
     "BlendFunci*",
     "ClearBuffer*",
     "ColorMaski*",
+    "DebugMessageCallback*",
+    "DebugMessageControl*",
+    "DebugMessageInsert*",
     "Disablei*",
     "DrawArrays*",
     "DrawElements*",
     "DrawRangeElements*",
     "Enablei*",
+    "Gen*",
     "Get*",
     "Is*",
+    "ObjectLabel*",
+    "ObjectPtrLabel*",
+    "PolygonOffset*",
+    "PopDebugGroup*",
+    "PushDebugGroup*",
     "SamplerParameter*",
     "TexParameter*",
     "Uniform*",
@@ -283,17 +296,18 @@ TEMPLATE_EGL_ENTRY_POINT_NO_RETURN = """\
 void EGLAPIENTRY EGL_{name}({params})
 {{
     {preamble}
-    ANGLE_SCOPED_GLOBAL_LOCK();
-    EGL_EVENT({name}, "{format_params}"{comma_if_needed}{pass_params});
-
     Thread *thread = egl::GetCurrentThread();
+    {{
+        ANGLE_SCOPED_GLOBAL_LOCK();
+        EGL_EVENT({name}, "{format_params}"{comma_if_needed}{pass_params});
 
-    {packed_gl_enum_conversions}
+        {packed_gl_enum_conversions}
 
-    ANGLE_EGL_VALIDATE_VOID(thread, {name}, {labeled_object}, {internal_params});
+        ANGLE_EGL_VALIDATE_VOID(thread, {name}, {labeled_object}, {internal_params});
 
-    {name}(thread{comma_if_needed}{internal_params});
-    ANGLE_CAPTURE_EGL({name}, true, {egl_capture_params});
+        {name}(thread{comma_if_needed}{internal_params});
+        ANGLE_CAPTURE_EGL({name}, true, {egl_capture_params});
+    }}
 }}
 """
 
@@ -308,17 +322,19 @@ TEMPLATE_EGL_ENTRY_POINT_WITH_RETURN = """\
 {return_type} EGLAPIENTRY EGL_{name}({params})
 {{
     {preamble}
-    ANGLE_SCOPED_GLOBAL_LOCK();
-    EGL_EVENT({name}, "{format_params}"{comma_if_needed}{pass_params});
-
     Thread *thread = egl::GetCurrentThread();
+    {return_type} returnValue;
+    {{
+        ANGLE_SCOPED_GLOBAL_LOCK();
+        EGL_EVENT({name}, "{format_params}"{comma_if_needed}{pass_params});
 
-    {packed_gl_enum_conversions}
+        {packed_gl_enum_conversions}
 
-    ANGLE_EGL_VALIDATE(thread, {name}, {labeled_object}, {return_type}{comma_if_needed}{internal_params});
+        ANGLE_EGL_VALIDATE(thread, {name}, {labeled_object}, {return_type}{comma_if_needed}{internal_params});
 
-    {return_type} returnValue = {name}(thread{comma_if_needed}{internal_params});
-    ANGLE_CAPTURE_EGL({name}, true, {egl_capture_params}, returnValue);
+        returnValue = {name}(thread{comma_if_needed}{internal_params});
+        ANGLE_CAPTURE_EGL({name}, true, {egl_capture_params}, returnValue);
+    }}
     return returnValue;
 }}
 """
