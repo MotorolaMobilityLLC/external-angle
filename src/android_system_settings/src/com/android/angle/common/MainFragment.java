@@ -215,13 +215,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
                   packageInfo.packageName.equals("com.android.chrome") ||
                   packageInfo.packageName.equals("com.google.android.gm") ||
                   packageInfo.packageName.equals("com.google.android.GoogleCamera") ||
-                  packageInfo.packageName.equals("com.google.android.GoogleCameraEng") ||
-                  packageInfo.packageName.equals("com.google.android.apps.chromecast.app") ||
-                  packageInfo.packageName.equals("com.google.android.apps.magazines") ||
                   packageInfo.packageName.equals("com.google.android.apps.maps") ||
                   packageInfo.packageName.equals("com.google.android.apps.messaging") ||
-                  packageInfo.packageName.equals("com.google.android.apps.photos") ||
-                  packageInfo.packageName.equals("com.google.android.apps.photosgo") ||
                   packageInfo.packageName.equals("com.google.android.videos") ||
                   packageInfo.packageName.equals("com.google.android.youtube")))
             {
