@@ -1,38 +1,25 @@
 {
-    "Rules": [
-        {
-            "Rule": "Default Rule (i.e. use native driver)",
-            "UseANGLE": true
-        },
-        {
-            "Rule": "Do not use ANGLE for application(s) currently known to have issues",
-            "UseANGLE": false,
-            "Applications": [
-                {
-                    "AppName": "com.google.android.GoogleCamera"
-                },
-                {
-                    "AppName": "com.google.android.videos"
-                },
-                {
-                    "AppName": "com.google.android.youtube"
-                },
-                {
-                    "AppName": "com.disney.disneyplus"
-                },
-                {
-                    "AppName": "com.hbo.hbonow"
-                },
-                {
-                    "AppName": "com.netflix.mediaclient"
-                },
-                {
-                    "AppName": "com.snapchat.android"
-                },
-                {
-                    "AppName": "com.ss.android.ugc.trill"
-                }
-            ]
-        }
-    ]
+   "Rules":[
+      {
+         "Rule":"Default Rule (i.e. use native driver)",
+         "UseANGLE":false
+      },
+      {
+         "Rule":"Supported application(s) (e.g. Maps on Google devices)",
+         "UseANGLE":true,
+         "Applications":[
+            {
+               "AppName":"com.android.angle"
+            },
+            {
+               "AppName":"com.google.android.angle"
+            }
+         ],
+         "Devices":[
+            {
+               "Manufacturer":"Google"
+            }
+         ]
+      }
+   ]
 }
