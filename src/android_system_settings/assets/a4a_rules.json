@@ -9,57 +9,6 @@
             "UseANGLE": false,
             "Applications": [
                 {
-                    "AppName": "android.media.codec.cts"
-                },
-                {
-                    "AppName": "com.adobe.lrmobile"
-                },
-                {
-                    "AppName": "com.adobe.lens.android"
-                },
-                {
-                    "AppName": "com.caddish_hedgehog.hedgecam2"
-                },
-                {
-                    "AppName": "com.camtwo.hd.camera.pro"
-                },
-                {
-                    "AppName": "com.clsoftware.mute"
-                },
-                {
-                    "AppName": "com.cyworld.camera"
-                },
-                {
-                    "AppName": "com.dama.camera2"
-                },
-                {
-                    "AppName": "com.dwsh.super16"
-                },
-                {
-                    "AppName": "com.filmicpro.alpha"
-                },
-                {
-                    "AppName": "com.fgnm.baconcamera"
-                },
-                {
-                    "AppName": "com.fimo.camera"
-                },
-                {
-                    "AppName": "com.flavionet.android.camera.pro"
-                },
-                {
-                    "AppName": "com.flavionet.android.camera.lite"
-                },
-                {
-                    "AppName": "com.footej.camera"
-                },
-                {
-                    "AppName": "com.footej.camera2"
-                },
-                {
-                    "AppName": "com.ginnypix.gudakpro"
-                },
-                {
                     "AppName": "com.google.android.apps.photos"
                 },
                 {
@@ -84,76 +33,13 @@
                     "AppName": "com.hbo.hbonow"
                 },
                 {
-                    "AppName": "com.intermedia.hd.camera.pro"
-                },
-                {
-                    "AppName": "com.intermedia.hd.camera.professional"
-                },
-                {
-                    "AppName": "com.joeware.android.gpulumera"
-                },
-                {
-                    "AppName": "com.lensesdev.manual.camera.pro"
-                },
-                {
-                    "AppName": "com.magix.camera_mx"
-                },
-                {
-                    "AppName": "com.marginz.snap"
-                },
-                {
-                    "AppName": "com.neaststudios.procapture"
-                },
-                {
                     "AppName": "com.netflix.mediaclient"
-                },
-                {
-                    "AppName": "com.niksoftware.snapseed"
-                },
-                {
-                    "AppName": "com.peace.SilentCamera"
-                },
-                {
-                    "AppName": "com.perracolabs.pixtica"
-                },
-                {
-                    "AppName": "com.riseupgames.proshot2"
-                },
-                {
-                    "AppName": "com.riseupgames.proshotevaluator"
-                },
-                {
-                    "AppName": "com.saychiz.remotecamera"
-                },
-                {
-                    "AppName": "com.sec.Android.app.camera"
                 },
                 {
                     "AppName": "com.snapchat.android"
                 },
                 {
-                    "AppName": "com.snapphotofilters.funnystickers"
-                },
-                {
                     "AppName": "com.ss.android.ugc.trill"
-                },
-                {
-                    "AppName": "com.vsco.cam"
-                },
-                {
-                    "AppName": "loorj.manualcam"
-                },
-                {
-                    "AppName": "net.sourceforge.opencamera"
-                },
-                {
-                    "AppName": "slide.camZoomFree"
-                },
-                {
-                    "AppName": "slide.cameraZoom"
-                },
-                {
-                    "AppName": "vStudio.Android.Camera360"
                 }
             ]
         }
