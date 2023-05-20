@@ -34,26 +34,6 @@ class GlobalSettings
     private List<PackageInfo> mInstalledPkgs         = new ArrayList<>();
     private List<String> mGlobalSettingsDriverPkgs   = new ArrayList<>();
     private List<String> mGlobalSettingsDriverValues = new ArrayList<>();
-    private List<String> mGlobalDeferlist            = new ArrayList<>();
-
-    /*
-     * Modes of applying the deferlist to the per-application switch (i.e. the
-     * "angle_gl_driver_selection_*" settings).  Most devices will not do anything
-     * (i.e. DEFERLIST_MODE_NA).  While a device is transitioning from using a legacy driver to
-     * using ANGLE, the following modes can be used to defer the use of ANGLE until bugs are fixed.
-     *
-     * NOTE: the set of modes can grow over time, as we identify new needs.
-     */
-    // ANGLE deferlist not applicable.  For devices where ANGLE is either: 1) not installed; 2) is
-    // not the system driver; 3) is the system driver and there is no legacy driver
-    private static final int DEFERLIST_MODE_NA = 0;
-    // ANGLE deferlist replaces the existing settings at first boot, and then doesn't change them
-    private static final int DEFERLIST_MODE_REPLACE = 1;
-    // ANGLE deferlist is merged into the existing settings at first boot, and then doesn't change
-    // them
-    private static final int DEFERLIST_MODE_MERGE = 2;
-
-    private static final int kDesiredDeferlistMode = DEFERLIST_MODE_REPLACE;
 
     GlobalSettings(Context context, List<PackageInfo> installedPkgs)
     {
@@ -80,7 +60,7 @@ class GlobalSettings
         Settings.Global.putString(contentResolver,
                 context.getString(R.string.global_settings_angle_debug_package), "");
 
-        // Skip angle_deferlist; not updatable via Developer Options
+        // Skip angle_allowlist; not updatable via Developer Options
     }
 
     Boolean getAllUseAngle()
@@ -128,56 +108,11 @@ class GlobalSettings
                 showAngleInUseDialog ? 1 : 0);
     }
 
-    static void updateAngleDeferlist(Context context, String packageNames, String driverNames)
+    static void updateAngleAllowlist(Context context, String packageNames)
     {
-        // Write the deferlist to a setting so that it survives reboots
         ContentResolver contentResolver = context.getContentResolver();
         Settings.Global.putString(contentResolver,
-                context.getString(R.string.global_settings_angle_deferlist), packageNames);
-
-        // Depending on the device's current and desired deferlist mode, potentially transition to
-        // the desired mode, which may involve changing the "angle_gl_driver_selection_*" settings,
-        // based on the deferlist packages coming from the packageNames and driverNames parameters.
-        int currentDeferlistMode = DEFERLIST_MODE_NA;
-        try
-        {
-            currentDeferlistMode = Settings.Global.getInt(
-                contentResolver,
-                context.getString(R.string.global_settings_angle_deferlist_mode));
-        }
-        catch (Settings.SettingNotFoundException e)
-        {
-            // This is likely a newly-flashed system, with a non-existent setting; assume NA
-            currentDeferlistMode = DEFERLIST_MODE_NA;
-        }
-        switch (kDesiredDeferlistMode)
-        {
-            case DEFERLIST_MODE_NA:
-                // Do nothing
-                break;
-            case DEFERLIST_MODE_REPLACE:
-                // Replace the existing per-application switch settings
-                if (currentDeferlistMode != kDesiredDeferlistMode)
-                {
-                    Settings.Global.putString(contentResolver,
-                        context.getString(R.string.global_settings_driver_selection_pkgs),
-                        packageNames);
-                    Settings.Global.putString(contentResolver,
-                        context.getString(R.string.global_settings_driver_selection_values),
-                        driverNames);
-                }
-                break;
-            case DEFERLIST_MODE_MERGE:
-                // TODO: implement this when needed (b/224558229)
-                break;
-            default:
-                // Do nothing
-                break;
-        }
-        // Set the device's current mode to the desired mode
-        Settings.Global.putInt(contentResolver,
-            context.getString(R.string.global_settings_angle_deferlist_mode),
-            kDesiredDeferlistMode);
+                context.getString(R.string.global_settings_angle_allowlist), packageNames);
     }
 
     void updatePkg(String pkgName, String driver)
@@ -250,8 +185,6 @@ class GlobalSettings
                 mContext.getString(R.string.global_settings_driver_selection_pkgs));
         mGlobalSettingsDriverValues = getGlobalSettingsString(
                 mContext.getString(R.string.global_settings_driver_selection_values));
-        mGlobalDeferlist = getGlobalSettingsString(
-                mContext.getString(R.string.global_settings_angle_deferlist));
     }
 
     private List<String> getGlobalSettingsString(String globalSetting)
@@ -301,7 +234,7 @@ class GlobalSettings
         for (String pkgName : globalSettingsDriverPkgs)
         {
             // Remove any uninstalled packages.
-            if (!isPkgInstalled(pkgName) && !isPkgInDeferlist(pkgName))
+            if (!isPkgInstalled(pkgName))
             {
                 removePkgFromGlobalSettings(pkgName);
             }
@@ -344,20 +277,6 @@ class GlobalSettings
         for (PackageInfo pkg : mInstalledPkgs)
         {
             if (pkg.packageName.equals(pkgName))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private Boolean isPkgInDeferlist(String pkgName)
-    {
-        List<String> globalSettingsDeferlist = new ArrayList<>(mGlobalDeferlist);
-        for (String pkg : globalSettingsDeferlist)
-        {
-            if (pkg.equals(pkgName))
             {
                 return true;
             }
