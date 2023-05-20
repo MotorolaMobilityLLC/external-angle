@@ -22,7 +22,6 @@ import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
@@ -42,11 +41,6 @@ public class Receiver extends BroadcastReceiver
     private static final String TAG              = "AngleReceiver";
     private static final String ANGLE_RULES_FILE = "a4a_rules.json";
 
-    // System properties related to ANGLE and legacy GLES graphics drivers.
-    private static final String PROPERTY_EGL_SYSTEM_DRIVER = "ro.hardware.egl";
-    private static final String PROPERTY_EGL_LEGACY_DRIVER = "ro.hardware.egl_legacy";
-    private static final String ANGLE_DRIVER_NAME = "angle";
-
     @Override
     public void onReceive(Context context, Intent intent)
     {
@@ -61,21 +55,14 @@ public class Receiver extends BroadcastReceiver
         }
         else
         {
-            // Process the deferlist only if both: 1) ANGLE is the system driver; 2) there is also a
-            // legacy driver:
-            final String eglSystemDriver = SystemProperties.get(PROPERTY_EGL_SYSTEM_DRIVER);
-            if (!eglSystemDriver.equals(ANGLE_DRIVER_NAME))
-            {
-                return;
-            }
-            final String eglLegacyDriver = SystemProperties.get(PROPERTY_EGL_LEGACY_DRIVER);
-            if (eglLegacyDriver.isEmpty() || eglSystemDriver.equals(eglLegacyDriver))
-            {
-                return;
-            }
+            String jsonStr      = loadRules(context);
+            String packageNames = parsePackageNames(jsonStr);
 
-            String jsonStr = loadRules(context);
-            parseDeferlist(context, jsonStr);
+            // Update the ANGLE allowlist
+            if (packageNames != null)
+            {
+                GlobalSettings.updateAngleAllowlist(context, packageNames);
+            }
 
             updateDeveloperOptionsWatcher(context);
         }
@@ -106,15 +93,11 @@ public class Receiver extends BroadcastReceiver
     }
 
     /*
-     * Parse the default deferlist from a json file, and convert it into the following
-     * comma-separated settings:
-     * - "angle_gl_driver_selection_pkgs"
-     * - "angle_gl_driver_selection_values"
+     * Extract all app package names from the json file and return them comma separated
      */
-    public void parseDeferlist(Context context, String rulesJSON)
+    private String parsePackageNames(String rulesJSON)
     {
         StringBuilder packageNames = new StringBuilder();
-        StringBuilder driverNames = new StringBuilder();
 
         try
         {
@@ -123,7 +106,7 @@ public class Receiver extends BroadcastReceiver
             if (rules == null)
             {
                 Log.e(TAG, "No Rules in " + ANGLE_RULES_FILE);
-                return;
+                return null;
             }
             for (int i = 0; i < rules.length(); i++)
             {
@@ -145,23 +128,20 @@ public class Receiver extends BroadcastReceiver
                     if (!packageNames.toString().isEmpty())
                     {
                         packageNames.append(",");
-                        driverNames.append(",");
                     }
                     packageNames.append(appName);
-                    driverNames.append("native");
                 }
             }
-            Log.v(TAG, "Parsed the following deferlist package names from " + ANGLE_RULES_FILE
-                  + ": " + packageNames);
+            Log.v(TAG, "Parsed the following package names from " + ANGLE_RULES_FILE + ": "
+                               + packageNames);
         }
         catch (JSONException je)
         {
-            Log.e(TAG, "Error when parsing angle deferlist JSON: ", je);
-            return;
+            Log.e(TAG, "Error when parsing angle JSON: ", je);
+            return null;
         }
 
-        GlobalSettings.updateAngleDeferlist(context, packageNames.toString(),
-            driverNames.toString());
+        return packageNames.toString();
     }
 
     static void updateAllUseAngle(Context context)
@@ -208,11 +188,6 @@ public class Receiver extends BroadcastReceiver
                 Log.v(TAG, "Developer Options enabled value changed: "
                                    + "developerOptionsEnabled = " + developerOptionsEnabled);
 
-                /*
-                 * NOTE: We DO NOT want to clear these when ANGLE is system driver
-                 *
-                 * TODO: We need to be able to query the service to known when to do this
-                 *
                 if (!developerOptionsEnabled)
                 {
                     // Reset the necessary settings to their defaults.
@@ -222,7 +197,6 @@ public class Receiver extends BroadcastReceiver
                     editor.apply();
                     GlobalSettings.clearAllGlobalSettings(context);
                 }
-                */
             }
         };
 

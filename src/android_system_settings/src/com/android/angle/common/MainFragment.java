@@ -209,32 +209,15 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
 
         for (PackageInfo packageInfo : pkgs)
         {
-            // We need to be able to see the following system applications until ANGLE supports YUV
-            // b/232149402
-            if (!(packageInfo.packageName.equals("com.google.android.calendar") ||
-                  packageInfo.packageName.equals("com.android.chrome") ||
-                  packageInfo.packageName.equals("com.google.android.gm") ||
-                  packageInfo.packageName.equals("com.google.android.GoogleCamera") ||
-                  packageInfo.packageName.equals("com.google.android.GoogleCameraEng") ||
-                  packageInfo.packageName.equals("com.google.android.apps.chromecast.app") ||
-                  packageInfo.packageName.equals("com.google.android.apps.magazines") ||
-                  packageInfo.packageName.equals("com.google.android.apps.maps") ||
-                  packageInfo.packageName.equals("com.google.android.apps.messaging") ||
-                  packageInfo.packageName.equals("com.google.android.apps.photos") ||
-                  packageInfo.packageName.equals("com.google.android.apps.photosgo") ||
-                  packageInfo.packageName.equals("com.google.android.videos") ||
-                  packageInfo.packageName.equals("com.google.android.youtube")))
+            if (packageInfo.applicationInfo.uid == Process.SYSTEM_UID)
             {
-                if (packageInfo.applicationInfo.uid == Process.SYSTEM_UID)
-                {
-                    continue;
-                }
+                continue;
+            }
 
-                // Filter out apps that are system apps
-                if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
-                {
-                    continue;
-                }
+            // Filter out apps that are system apps
+            if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
+            {
+                continue;
             }
 
             mInstalledPkgs.add(packageInfo);
