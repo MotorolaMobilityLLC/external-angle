@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="angle_general_title">"Geral"</string>
+  <string name="angle_in_use_toast_message">"Usando ANGLE"</string>
+  <string name="angle_preferences">"Preferências do ANGLE"</string>
+  <string name="angle_preferences_summary">"Modificar as configurações do ANGLE"</string>
+  <string name="keywords">"angle, abrirgl, gráficos"</string>
+  <string name="no_apps_installed_summary">"Nenhum aplicativo instalado que possa usar ANGLE"</string>
+  <string name="no_apps_installed_title">"Nenhum aplicativo disponível"</string>
+  <string name="select_opengl_driver_title">"Selecionar OpenGL Driver"</string>
+  <string name="show_angle_in_use_dialog_box">"Mostrar caixa de diálogo quando ANGLE for carregado"</string>
+  <string name="use_angle_for_all_apps">"Usar ANGLE para todos os aplicativos"</string>
+</resources>
